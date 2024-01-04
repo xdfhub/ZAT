@@ -1,0 +1,245 @@
+Version: 3.0
+Options: tsk
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\isr.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Resource.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\BootCode_User.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\ORAM_Arrangement.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\SACM_A1800_User.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\system.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\flash.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\System_2.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED_Drive.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Sleep.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\MC3416_I2C.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\AntiCrack.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\SPI_Flash_CE3.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\CheckSum_CE3400.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\TestBondingC.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\RomCodeOBJ_GPCE1_CE3.obj"
+Obj: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\ROM_ZAT001A_V_bin.res"
+Lib: "C:\Program Files (x86)\Generalplus\unSPIDE 4.0.6\library\CMacro\CMacro1232.lib"
+Output: "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\GPCE3400A_Demo.TSK"
+Define: TEXT in "IntISR.obj" with TEXT_IntISR 
+Define: TEXT in "A3400Pro_StepTable.obj" with TEXT_A3400Pro_StepTable 
+Define: TEXT in "SACM_A3400Pro_API.obj" with TEXT_SACM_A3400Pro_API 
+Define: TEXT in "SACM_A1800_API.obj" with TEXT_SACM_A1800_API 
+Define: TEXT in "SACM_A1800_Decode.obj" with TEXT_SACM_A1800_Decode 
+Define: CODE in "SACM_MS02_API.obj" with CODE_SACM_MS02_API 
+Define: CODE in "SACM_A1800_API.obj" with CODE_SACM_A1800_API 
+Define: CODE in "A3400Pro_Event.obj" with CODE_A3400Pro_Event 
+Define: CODE in "A1800_Event.obj" with CODE_A1800_Event 
+Define: CODE in "SACM_A1800_Decode.obj" with CODE_SACM_A1800_Decode 
+Define: CODE in "SACM_A3400Pro_API.obj" with CODE_SACM_A3400Pro_API 
+Define: CODE in "main.obj" with _CODE_SPI_SEC 
+Define: DATA in "main.obj" with _DATA_SPI_SEC 
+Define: CODE in "isr.obj" with _CODE_SPI_SEC 
+Define: DATA in "isr.obj" with _DATA_SPI_SEC 
+Define: CODE in "Resource.obj" with _CODE_SPI_SEC 
+Define: DATA in "Resource.obj" with _DATA_SPI_SEC 
+Define: CODE in "BootCode_User.obj" with _CODE_SPI_SEC 
+Define: DATA in "BootCode_User.obj" with _DATA_SPI_SEC 
+Define: CODE in "ORAM_Arrangement.obj" with _CODE_SPI_SEC 
+Define: DATA in "ORAM_Arrangement.obj" with _DATA_SPI_SEC 
+Define: CODE in "SACM_A1800_User.obj" with _CODE_SPI_SEC 
+Define: DATA in "SACM_A1800_User.obj" with _DATA_SPI_SEC 
+Define: CODE in "system.obj" with _CODE_SPI_SEC 
+Define: DATA in "system.obj" with _DATA_SPI_SEC 
+Define: CODE in "flash.obj" with _CODE_SPI_SEC 
+Define: DATA in "flash.obj" with _DATA_SPI_SEC 
+Define: CODE in "System_2.obj" with _CODE_SPI_SEC 
+Define: DATA in "System_2.obj" with _DATA_SPI_SEC 
+Define: CODE in "LED_Drive.obj" with _CODE_SPI_SEC 
+Define: DATA in "LED_Drive.obj" with _DATA_SPI_SEC 
+Define: CODE in "Play_Speech.obj" with _CODE_SPI_SEC 
+Define: DATA in "Play_Speech.obj" with _DATA_SPI_SEC 
+Define: CODE in "Key_server.obj" with _CODE_SPI_SEC 
+Define: DATA in "Key_server.obj" with _DATA_SPI_SEC 
+Define: CODE in "Sleep.obj" with _CODE_SPI_SEC 
+Define: DATA in "Sleep.obj" with _DATA_SPI_SEC 
+Define: CODE in "G_Sensor.obj" with _CODE_SPI_SEC 
+Define: DATA in "G_Sensor.obj" with _DATA_SPI_SEC 
+Define: CODE in "IIC_Master.obj" with _CODE_SPI_SEC 
+Define: DATA in "IIC_Master.obj" with _DATA_SPI_SEC 
+Define: CODE in "MC3416_I2C.obj" with _CODE_SPI_SEC 
+Define: DATA in "MC3416_I2C.obj" with _DATA_SPI_SEC 
+Define: CODE in "Algorithm.obj" with _CODE_SPI_SEC 
+Define: DATA in "Algorithm.obj" with _DATA_SPI_SEC 
+Define: CODE in "AntiCrack.obj" with _CODE_SPI_SEC 
+Define: DATA in "AntiCrack.obj" with _DATA_SPI_SEC 
+Define: CODE in "SPI_Flash_CE3.obj" with _CODE_SPI_SEC 
+Define: DATA in "SPI_Flash_CE3.obj" with _DATA_SPI_SEC 
+Define: CODE in "CheckSum_CE3400.obj" with _CODE_SPI_SEC 
+Define: DATA in "CheckSum_CE3400.obj" with _DATA_SPI_SEC 
+Define: CODE in "TestBondingC.obj" with _CODE_SPI_SEC 
+Define: DATA in "TestBondingC.obj" with _DATA_SPI_SEC 
+Define: CODE in "LED.obj" with _CODE_SPI_SEC 
+Define: DATA in "LED.obj" with _DATA_SPI_SEC 
+Locate: _CODE_SPI_SEC at 204800
+Locate: _DATA_SPI_SEC after _CODE_SPI_SEC
+Locate: ROMCODE_SPI_Data at 201940
+Locate: __sn_init_table at 20385B
+Locate: IRAM after __sn_init_table linkat #RAM
+Locate: IRam_Bank0 after __sn_init_table linkat #RAM
+Locate: SleepCode_RAMCode_SEC in "System_2.obj" at 208300 linkat 10
+;Align: SleepCode_RAMCode_SEC in "System_2.obj" with 0 
+Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
+;Align: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" with 0 
+;section has ORG setting:
+;Locate: OVERLAP_A3400Pro_BLOCK in "ORAM_Arrangement.obj" at 10 
+;Align: OVERLAP_A3400Pro_BLOCK in "ORAM_Arrangement.obj" with 0 
+;section has ORG setting:
+;Locate: OVERLAP_A1800_BLOCK in "ORAM_Arrangement.obj" at 2A 
+;Align: OVERLAP_A1800_BLOCK in "ORAM_Arrangement.obj" with 0 
+;section has ORG setting:
+;Locate: L_A1800_SendDAC_SEC in "SACM_A1800_User.obj" at 2050C0 
+;Align: L_A1800_SendDAC_SEC in "SACM_A1800_User.obj" with 0 
+;section has ORG setting:
+;Locate: A1800_LibCallback_SEC in "SACM_A1800_User.obj" at 201880 
+;Align: A1800_LibCallback_SEC in "SACM_A1800_User.obj" with 0 
+;section has ORG setting:
+;Locate: L_SW_MuteControl_SEC in "system.obj" at 205000 
+;Align: L_SW_MuteControl_SEC in "system.obj" with 0 
+;section has ORG setting:
+;Locate: RampUpDn_LibCallback_SEC in "system.obj" at 201920 
+;Align: RampUpDn_LibCallback_SEC in "system.obj" with 0 
+;Locate: IRAM in "main.obj" at 20387F  linkat 5E7 
+;Align: IRAM in "main.obj" with 0 
+;Locate: IRAM in "Play_Speech.obj" at 203899  linkat 601 
+;Align: IRAM in "Play_Speech.obj" with 0 
+;Locate: IRAM in "G_Sensor.obj" at 203909  linkat 671 
+;Align: IRAM in "G_Sensor.obj" with 0 
+;Locate: IRAM in "IIC_Master.obj" at 203879  linkat 5E1 
+;Align: IRAM in "IIC_Master.obj" with 0 
+;Locate: IRAM in "Algorithm.obj" at 2038A9  linkat 611 
+;Align: IRAM in "Algorithm.obj" with 0 
+;Locate: IRAM in "AntiCrack.obj" at 203878  linkat 5E0 
+;Align: IRAM in "AntiCrack.obj" with 0 
+;Locate: IRAM in "LED.obj" at 20388A  linkat 5F2 
+;Align: IRAM in "LED.obj" with 0 
+;Locate: RAM in "SACM_A1800_User.obj" at 599 
+;Align: RAM in "SACM_A1800_User.obj" with 0 
+;Locate: RAM in "system.obj" at 59C 
+;Align: RAM in "system.obj" with 0 
+;Locate: RAM in "System_2.obj" at 59F 
+;Align: RAM in "System_2.obj" with 0 
+;Locate: RAM in "Key_server.obj" at 5D5 
+;Align: RAM in "Key_server.obj" with 0 
+;Locate: RAM in "SPI_Flash_CE3.obj" at 5DB 
+;Align: RAM in "SPI_Flash_CE3.obj" with 0 
+;Locate: OVERLAP_A3400Pro_BLOCK in "ORAM_Arrangement.obj" at 10 
+;Locate: OVERLAP_A1800_BLOCK in "ORAM_Arrangement.obj" at 2A 
+;Locate: BootCode_SEC in "BootCode_User.obj" at 200100 
+;Align: BootCode_SEC in "BootCode_User.obj" with 0 
+;Locate: NB_DATA in "Play_Speech.obj" at 2043BA 
+;Align: NB_DATA in "Play_Speech.obj" with 0 
+;Locate: NB_DATA in "MC3416_I2C.obj" at 2043C6 
+;Align: NB_DATA in "MC3416_I2C.obj" with 0 
+;Locate: NB_DATA in "Algorithm.obj" at 20433E 
+;Align: NB_DATA in "Algorithm.obj" with 0 
+;Locate: NB_DATA in "AntiCrack.obj" at 20187E 
+;Align: NB_DATA in "AntiCrack.obj" with 0 
+;Locate: NB_DATA in "LED.obj" at 204393 
+;Align: NB_DATA in "LED.obj" with 0 
+;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 20B699 
+;Align: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" with 0 
+;Locate: CODE in "modu1" of "CMacro1232.lib"  at 203EE9 
+;Align: CODE in "modu1" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "divi2" of "CMacro1232.lib"  at 203C56 
+;Align: CODE in "divi2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "cvu1d4" of "CMacro1232.lib"  at 204066 
+;Align: CODE in "cvu1d4" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "gtsf2" of "CMacro1232.lib"  at 203E09 
+;Align: CODE in "gtsf2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "cvi2f2" of "CMacro1232.lib"  at 201800 
+;Align: CODE in "cvi2f2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "lthf2" of "CMacro1232.lib"  at 203E8A 
+;Align: CODE in "lthf2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "cvi2d4" of "CMacro1232.lib"  at 203F46 
+;Align: CODE in "cvi2d4" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "cvf2d4" of "CMacro1232.lib"  at 203F96 
+;Align: CODE in "cvf2d4" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "muld4" of "CMacro1232.lib"  at 203AC7 
+;Align: CODE in "muld4" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "ltsf2" of "CMacro1232.lib"  at 203D88 
+;Align: CODE in "ltsf2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "muliu2" of "CMacro1232.lib"  at 2040B1 
+;Align: CODE in "muliu2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__clz16" of "CMacro1232.lib"  at 201873 
+;Align: CODE in "__clz16" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__divi16_n" of "CMacro1232.lib"  at 2040CD 
+;Align: CODE in "__divi16_n" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "lshiu1" of "CMacro1232.lib"  at 2040D7 
+;Align: CODE in "lshiu1" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "rshu1" of "CMacro1232.lib"  at 2040DF 
+;Align: CODE in "rshu1" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__clz32" of "CMacro1232.lib"  at 204089 
+;Align: CODE in "__clz32" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__divi32_n" of "CMacro1232.lib"  at 2018F2 
+;Align: CODE in "__divi32_n" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "lshiu2" of "CMacro1232.lib"  at 2040C3 
+;Align: CODE in "lshiu2" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__rshu2_r" of "CMacro1232.lib"  at 20409D 
+;Align: CODE in "__rshu2_r" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "lshiu4" of "CMacro1232.lib"  at 20402D 
+;Align: CODE in "lshiu4" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__u2fd1bit" of "CMacro1232.lib"  at 201928 
+;Align: CODE in "__u2fd1bit" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__rshu4_r" of "CMacro1232.lib"  at 203FE4 
+;Align: CODE in "__rshu4_r" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "__mul_u32_u128" of "CMacro1232.lib"  at 203CF5 
+;Align: CODE in "__mul_u32_u128" of "CMacro1232.lib"  with 0 
+;Locate: CODE in "_GPTag" of "CMacro1232.lib"  at 2040E7 
+;Align: CODE in "_GPTag" of "CMacro1232.lib"  with 0 
+;Locate: _CODE_SPI_SEC in "Resource.obj" at 204800 
+;Align: _CODE_SPI_SEC in "Resource.obj" with 0 
+;Locate: _CODE_SPI_SEC in "SACM_A1800_User.obj" at 204804 
+;Align: _CODE_SPI_SEC in "SACM_A1800_User.obj" with 0 
+;Locate: _CODE_SPI_SEC in "Sleep.obj" at 204835 
+;Align: _CODE_SPI_SEC in "Sleep.obj" with 0 
+;Locate: _CODE_SPI_SEC in "BootCode_User.obj" at 204870 
+;Align: _CODE_SPI_SEC in "BootCode_User.obj" with 0 
+;Locate: _CODE_SPI_SEC in "AntiCrack.obj" at 2048B3 
+;Align: _CODE_SPI_SEC in "AntiCrack.obj" with 0 
+;Locate: _CODE_SPI_SEC in "TestBondingC.obj" at 2048F8 
+;Align: _CODE_SPI_SEC in "TestBondingC.obj" with 0 
+;Locate: _CODE_SPI_SEC in "LED_Drive.obj" at 20494D 
+;Align: _CODE_SPI_SEC in "LED_Drive.obj" with 0 
+;Locate: _CODE_SPI_SEC in "CheckSum_CE3400.obj" at 2049B3 
+;Align: _CODE_SPI_SEC in "CheckSum_CE3400.obj" with 0 
+;Locate: _CODE_SPI_SEC in "flash.obj" at 204A23 
+;Align: _CODE_SPI_SEC in "flash.obj" with 0 
+;Locate: _CODE_SPI_SEC in "SPI_Flash_CE3.obj" at 204AA5 
+;Align: _CODE_SPI_SEC in "SPI_Flash_CE3.obj" with 0 
+;Locate: _CODE_SPI_SEC in "Key_server.obj" at 204B29 
+;Align: _CODE_SPI_SEC in "Key_server.obj" with 0 
+;Locate: _CODE_SPI_SEC in "isr.obj" at 204BB4 
+;Align: _CODE_SPI_SEC in "isr.obj" with 0 
+;Locate: _CODE_SPI_SEC in "System_2.obj" at 204C7E 
+;Align: _CODE_SPI_SEC in "System_2.obj" with 0 
+;Locate: _CODE_SPI_SEC in "system.obj" at 204D61 
+;Align: _CODE_SPI_SEC in "system.obj" with 0 
+;Locate: _CODE_SPI_SEC in "main.obj" at 205168 
+;Align: _CODE_SPI_SEC in "main.obj" with 0 
+;Locate: _CODE_SPI_SEC in "IIC_Master.obj" at 2052D6 
+;Align: _CODE_SPI_SEC in "IIC_Master.obj" with 0 
+;Locate: _CODE_SPI_SEC in "LED.obj" at 2055FB 
+;Align: _CODE_SPI_SEC in "LED.obj" with 0 
+;Locate: _CODE_SPI_SEC in "MC3416_I2C.obj" at 20597C 
+;Align: _CODE_SPI_SEC in "MC3416_I2C.obj" with 0 
+;Locate: _CODE_SPI_SEC in "Play_Speech.obj" at 205DC2 
+;Align: _CODE_SPI_SEC in "Play_Speech.obj" with 0 
+;Locate: _CODE_SPI_SEC in "G_Sensor.obj" at 20640A 
+;Align: _CODE_SPI_SEC in "G_Sensor.obj" with 0 
+;Locate: _CODE_SPI_SEC in "Algorithm.obj" at 2083AC 
+;Align: _CODE_SPI_SEC in "Algorithm.obj" with 0 
+;Locate: ROMCODE_SPI_Data in "RomCodeOBJ_GPCE1_CE3.obj" at 201940 
+;Align: ROMCODE_SPI_Data in "RomCodeOBJ_GPCE1_CE3.obj" with 0 
+;Locate: __sn_init_table in "<internal obj.>" of "<internal lib.>"  at 20385B 
+;Align: __sn_init_table in "<internal obj.>" of "<internal lib.>"  with 0 

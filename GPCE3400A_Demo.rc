@@ -1,0 +1,19 @@
+# Begin Project
+# Begin SubItem "GPCE3100A_Demo  Resources"
+# Begin Group "SPI_Resources_Folder"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+SPECIFICFLAG=0
+# End Group
+# Begin Source File
+SOURCE=..\..\data\Link_data\ROM_ZAT001A_V.bin
+USEPARAM=FALSE
+PARAM=
+ID=RES_ROM_ZAT001A_V_BIN
+EXPORT=3
+SPECIFICFLAG=0
+# End Source File
+# End SubItem
+# End Project

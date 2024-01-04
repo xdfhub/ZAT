@@ -1,0 +1,229 @@
+#define AA_Silence_20ms          0   ////AA_Silence_20ms.a18 
+#define A_SFX_Bat                1   ////A_SFX_Bat.a18 
+#define A_SFX_Catch              2   ////A_SFX_Catch.a18 
+#define A_SFX_Cave               3   ////A_SFX_Cave.a18 
+#define A_SFX_Collection         4   ////A_SFX_Collection.a18 
+#define A_SFX_Dragon             5   ////A_SFX_Dragon.a18 
+#define A_SFX_Electric           6   ////A_SFX_Electric.a18 
+#define A_SFX_Fail               7   ////A_SFX_Fail.a18 
+#define A_SFX_Find               8   ////A_SFX_Find.a18 
+#define A_SFX_Flying             9   ////A_SFX_Flying.a18 
+#define A_SFX_Go                 10   ////A_SFX_Go.a18 
+#define A_SFX_Medal              11   ////A_SFX_Medal.a18 
+#define A_SFX_Mission            12   ////A_SFX_Mission.a18 
+#define A_SFX_MissionAchieved    13   ////A_SFX_MissionAchieved.a18 
+#define A_SFX_Mountain           14   ////A_SFX_Mountain.a18 
+#define A_SFX_Off                15   ////A_SFX_Off.a18 
+#define A_SFX_On                 16   ////A_SFX_On.a18 
+#define A_SFX_Plain              17   ////A_SFX_Plain.a18 
+#define A_SFX_Rock               18   ////A_SFX_Rock.a18 
+#define A_SFX_Rumble             19   ////A_SFX_Rumble.a18 
+#define A_SFX_Sonar              20   ////A_SFX_Sonar.a18 
+#define A_SFX_Sonar_1            21   ////A_SFX_Sonar_1.a18 
+#define A_SFX_Sonar_2            22   ////A_SFX_Sonar_2.a18 
+#define A_SFX_Sonar_3            23   ////A_SFX_Sonar_3.a18 
+#define A_SFX_Sonar_4            24   ////A_SFX_Sonar_4.a18 
+#define A_SFX_Sonar_Cave         25   ////A_SFX_Sonar_Cave.a18 
+#define A_SFX_Sonar_Island       26   ////A_SFX_Sonar_Island.a18 
+#define A_SFX_Sonar_Moonlit      27   ////A_SFX_Sonar_Moonlit.a18 
+#define A_SFX_Sonar_Mountain     28   ////A_SFX_Sonar_Mountain.a18 
+#define A_SFX_Sonar_Plain        29   ////A_SFX_Sonar_Plain.a18 
+#define A_SFX_Sonar_Special      30   ////A_SFX_Sonar_Special.a18 
+#define A_SFX_Special            31   ////A_SFX_Special.a18 
+#define A_SFX_System             32   ////A_SFX_System.a18 
+#define A_SFX_Yes                33   ////A_SFX_Yes.a18 
+#define A_VLPTMEN01_Power_BIG    34   ////A_VLPTMEN01_Power_BIG.a18 
+#define A_VLPTMEN01_Power_LEGEND01      35   ////A_VLPTMEN01_Power_LEGEND01.a18 
+#define A_VLPTMEN01_Power_LEGEND02      36   ////A_VLPTMEN01_Power_LEGEND02.a18 
+#define A_VLPTMEN01_Shake02      37   ////A_VLPTMEN01_Shake02.a18 
+#define A_VLPTMEN_And            38   ////A_VLPTMEN_And.a18 
+#define A_VLPTMEN_Catch01        39   ////A_VLPTMEN_Catch01.a18 
+#define A_VLPTMEN_Catch02        40   ////A_VLPTMEN_Catch02.a18 
+#define A_VLPTMEN_Catch03        41   ////A_VLPTMEN_Catch03.a18 
+#define A_VLPTMEN_Catch04        42   ////A_VLPTMEN_Catch04.a18 
+#define A_VLPTMEN_Cave01_02      43   ////A_VLPTMEN_Cave01_02.a18 
+#define A_VLPTMEN_Cave02_02      44   ////A_VLPTMEN_Cave02_02.a18 
+#define A_VLPTMEN_Cave03_02      45   ////A_VLPTMEN_Cave03_02.a18 
+#define A_VLPTMEN_Cave04_02      46   ////A_VLPTMEN_Cave04_02.a18 
+#define A_VLPTMEN_Cave_01        47   ////A_VLPTMEN_Cave_01.a18 
+#define A_VLPTMEN_Cave_02        48   ////A_VLPTMEN_Cave_02.a18 
+#define A_VLPTMEN_Collection01   49   ////A_VLPTMEN_Collection01.a18 
+#define A_VLPTMEN_Collection02   50   ////A_VLPTMEN_Collection02.a18 
+#define A_VLPTMEN_Crawl01        51   ////A_VLPTMEN_Crawl01.a18 
+#define A_VLPTMEN_Detect         52   ////A_VLPTMEN_Detect.a18 
+#define A_VLPTMEN_Detect01       53   ////A_VLPTMEN_Detect01.a18 
+#define A_VLPTMEN_Detect02       54   ////A_VLPTMEN_Detect02.a18 
+#define A_VLPTMEN_Detect03       55   ////A_VLPTMEN_Detect03.a18 
+#define A_VLPTMEN_E001           56   ////A_VLPTMEN_E001.a18 
+#define A_VLPTMEN_E004           57   ////A_VLPTMEN_E004.a18 
+#define A_VLPTMEN_E006           58   ////A_VLPTMEN_E006.a18 
+#define A_VLPTMEN_E007           59   ////A_VLPTMEN_E007.a18 
+#define A_VLPTMEN_E019           60   ////A_VLPTMEN_E019.a18 
+#define A_VLPTMEN_E025           61   ////A_VLPTMEN_E025.a18 
+#define A_VLPTMEN_E026           62   ////A_VLPTMEN_E026.a18 
+#define A_VLPTMEN_E041           63   ////A_VLPTMEN_E041.a18 
+#define A_VLPTMEN_Encour01       64   ////A_VLPTMEN_Encour01.a18 
+#define A_VLPTMEN_Encour02       65   ////A_VLPTMEN_Encour02.a18 
+#define A_VLPTMEN_Encour03       66   ////A_VLPTMEN_Encour03.a18 
+#define A_VLPTMEN_Encour04       67   ////A_VLPTMEN_Encour04.a18 
+#define A_VLPTMEN_Encour05       68   ////A_VLPTMEN_Encour05.a18 
+#define A_VLPTMEN_Encour06       69   ////A_VLPTMEN_Encour06.a18 
+#define A_VLPTMEN_Encour07       70   ////A_VLPTMEN_Encour07.a18 
+#define A_VLPTMEN_Encour08       71   ////A_VLPTMEN_Encour08.a18 
+#define A_VLPTMEN_End01          72   ////A_VLPTMEN_End01.a18 
+#define A_VLPTMEN_End02          73   ////A_VLPTMEN_End02.a18 
+#define A_VLPTMEN_End03          74   ////A_VLPTMEN_End03.a18 
+#define A_VLPTMEN_End04          75   ////A_VLPTMEN_End04.a18 
+#define A_VLPTMEN_End05          76   ////A_VLPTMEN_End05.a18 
+#define A_VLPTMEN_Fail09         77   ////A_VLPTMEN_Fail09.a18 
+#define A_VLPTMEN_Fail10         78   ////A_VLPTMEN_Fail10.a18 
+#define A_VLPTMEN_Fail_DOWN      79   ////A_VLPTMEN_Fail_DOWN.a18 
+#define A_VLPTMEN_Fail_IMMO      80   ////A_VLPTMEN_Fail_IMMO.a18 
+#define A_VLPTMEN_Fail_JUMP      81   ////A_VLPTMEN_Fail_JUMP.a18 
+#define A_VLPTMEN_Fail_JUMP3     82   ////A_VLPTMEN_Fail_JUMP3.a18 
+#define A_VLPTMEN_Fail_LEFT      83   ////A_VLPTMEN_Fail_LEFT.a18 
+#define A_VLPTMEN_Fail_RIGHT     84   ////A_VLPTMEN_Fail_RIGHT.a18 
+#define A_VLPTMEN_Fail_SPIN      85   ////A_VLPTMEN_Fail_SPIN.a18 
+#define A_VLPTMEN_Fail_TURNAROUND      86   ////A_VLPTMEN_Fail_TURNAROUND.a18 
+#define A_VLPTMEN_Fail_UP        87   ////A_VLPTMEN_Fail_UP.a18 
+#define A_VLPTMEN_FF             88   ////A_VLPTMEN_FF.a18 
+#define A_VLPTMEN_Flying01       89   ////A_VLPTMEN_Flying01.a18 
+#define A_VLPTMEN_FORWARD_01     90   ////A_VLPTMEN_FORWARD_01.a18 
+#define A_VLPTMEN_FORWARD_02     91   ////A_VLPTMEN_FORWARD_02.a18 
+#define A_VLPTMEN_Found          92   ////A_VLPTMEN_Found.a18 
+#define A_VLPTMEN_FP_Found01     93   ////A_VLPTMEN_FP_Found01.a18 
+#define A_VLPTMEN_FP_Found02     94   ////A_VLPTMEN_FP_Found02.a18 
+#define A_VLPTMEN_FP_Found03     95   ////A_VLPTMEN_FP_Found03.a18 
+#define A_VLPTMEN_Go01           96   ////A_VLPTMEN_Go01.a18 
+#define A_VLPTMEN_IMMO           97   ////A_VLPTMEN_IMMO.a18 
+#define A_VLPTMEN_Inbet01        98   ////A_VLPTMEN_Inbet01.a18 
+#define A_VLPTMEN_Intro01        99   ////A_VLPTMEN_Intro01.a18 
+#define A_VLPTMEN_Intro03        100   ////A_VLPTMEN_Intro03.a18 
+#define A_VLPTMEN_Intro05        101   ////A_VLPTMEN_Intro05.a18 
+#define A_VLPTMEN_Intro06        102   ////A_VLPTMEN_Intro06.a18 
+#define A_VLPTMEN_Intro07        103   ////A_VLPTMEN_Intro07.a18 
+#define A_VLPTMEN_Intro09        104   ////A_VLPTMEN_Intro09.a18 
+#define A_VLPTMEN_JUMP           105   ////A_VLPTMEN_JUMP.a18 
+#define A_VLPTMEN_Map01          106   ////A_VLPTMEN_Map01.a18 
+#define A_VLPTMEN_Map02          107   ////A_VLPTMEN_Map02.a18 
+#define A_VLPTMEN_Mid01          108   ////A_VLPTMEN_Mid01.a18 
+#define A_VLPTMEN_Mid02          109   ////A_VLPTMEN_Mid02.a18 
+#define A_VLPTMEN_Mid03          110   ////A_VLPTMEN_Mid03.a18 
+#define A_VLPTMEN_Mid06          111   ////A_VLPTMEN_Mid06.a18 
+#define A_VLPTMEN_Mid_BUG        112   ////A_VLPTMEN_Mid_BUG.a18 
+#define A_VLPTMEN_Mid_FAIRY      113   ////A_VLPTMEN_Mid_FAIRY.a18 
+#define A_VLPTMEN_Mid_FIGHT      114   ////A_VLPTMEN_Mid_FIGHT.a18 
+#define A_VLPTMEN_Mid_FIRE       115   ////A_VLPTMEN_Mid_FIRE.a18 
+#define A_VLPTMEN_Mid_FLY        116   ////A_VLPTMEN_Mid_FLY.a18 
+#define A_VLPTMEN_Mid_GHOST      117   ////A_VLPTMEN_Mid_GHOST.a18 
+#define A_VLPTMEN_Mid_GROUND     118   ////A_VLPTMEN_Mid_GROUND.a18 
+#define A_VLPTMEN_Mid_POISON     119   ////A_VLPTMEN_Mid_POISON.a18 
+#define A_VLPTMEN_Mid_ROCK       120   ////A_VLPTMEN_Mid_ROCK.a18 
+#define A_VLPTMEN_Mid_WATER      121   ////A_VLPTMEN_Mid_WATER.a18 
+#define A_VLPTMEN_Mountain01_02  122   ////A_VLPTMEN_Mountain01_02.a18 
+#define A_VLPTMEN_Mountain02_02  123   ////A_VLPTMEN_Mountain02_02.a18 
+#define A_VLPTMEN_Mountain03_02  124   ////A_VLPTMEN_Mountain03_02.a18 
+#define A_VLPTMEN_Mountain_01    125   ////A_VLPTMEN_Mountain_01.a18 
+#define A_VLPTMEN_Mountain_02    126   ////A_VLPTMEN_Mountain_02.a18 
+#define A_VLPTMEN_MZ01           127   ////A_VLPTMEN_MZ01.a18 
+#define A_VLPTMEN_MZ02           128   ////A_VLPTMEN_MZ02.a18 
+#define A_VLPTMEN_MZ03           129   ////A_VLPTMEN_MZ03.a18 
+#define A_VLPTMEN_MZ04           130   ////A_VLPTMEN_MZ04.a18 
+#define A_VLPTMEN_MZ05           131   ////A_VLPTMEN_MZ05.a18 
+#define A_VLPTMEN_MZ06           132   ////A_VLPTMEN_MZ06.a18 
+#define A_VLPTMEN_MZ_Comm_DOWN   133   ////A_VLPTMEN_MZ_Comm_DOWN.a18 
+#define A_VLPTMEN_MZ_Comm_LEFT   134   ////A_VLPTMEN_MZ_Comm_LEFT.a18 
+#define A_VLPTMEN_MZ_Comm_RIGHT  135   ////A_VLPTMEN_MZ_Comm_RIGHT.a18 
+#define A_VLPTMEN_MZ_Comm_UP     136   ////A_VLPTMEN_MZ_Comm_UP.a18 
+#define A_VLPTMEN_MZ_End         137   ////A_VLPTMEN_MZ_End.a18 
+#define A_VLPTMEN_MZ_Fail01      138   ////A_VLPTMEN_MZ_Fail01.a18 
+#define A_VLPTMEN_MZ_Fail02      139   ////A_VLPTMEN_MZ_Fail02.a18 
+#define A_VLPTMEN_MZ_Fail03      140   ////A_VLPTMEN_MZ_Fail03.a18 
+#define A_VLPTMEN_OK             141   ////A_VLPTMEN_OK.a18 
+#define A_VLPTMEN_Plain01_02     142   ////A_VLPTMEN_Plain01_02.a18 
+#define A_VLPTMEN_Plain02_02     143   ////A_VLPTMEN_Plain02_02.a18 
+#define A_VLPTMEN_Plain_01       144   ////A_VLPTMEN_Plain_01.a18 
+#define A_VLPTMEN_Plain_02       145   ////A_VLPTMEN_Plain_02.a18 
+#define A_VLPTMEN_Ready          146   ////A_VLPTMEN_Ready.a18 
+#define A_VLPTMEN_Reward_01      147   ////A_VLPTMEN_Reward_01.a18 
+#define A_VLPTMEN_Reward_02      148   ////A_VLPTMEN_Reward_02.a18 
+#define A_VLPTMEN_Reward_03      149   ////A_VLPTMEN_Reward_03.a18 
+#define A_VLPTMEN_Reward_04      150   ////A_VLPTMEN_Reward_04.a18 
+#define A_VLPTMEN_Reward_05      151   ////A_VLPTMEN_Reward_05.a18 
+#define A_VLPTMEN_Reward_06      152   ////A_VLPTMEN_Reward_06.a18 
+#define A_VLPTMEN_Reward_07      153   ////A_VLPTMEN_Reward_07.a18 
+#define A_VLPTMEN_Shake01        154   ////A_VLPTMEN_Shake01.a18 
+#define A_VLPTMEN_Silent01       155   ////A_VLPTMEN_Silent01.a18 
+#define A_VLPTMEN_Silent02       156   ////A_VLPTMEN_Silent02.a18 
+#define A_VLPTMEN_Silent03       157   ////A_VLPTMEN_Silent03.a18 
+#define A_VLPTMEN_Size_BACKWARD  158   ////A_VLPTMEN_Size_BACKWARD.a18 
+#define A_VLPTMEN_Size_FORWARD   159   ////A_VLPTMEN_Size_FORWARD.a18 
+#define A_VLPTMEN_Slow10         160   ////A_VLPTMEN_Slow10.a18 
+#define A_VLPTMEN_Slow20         161   ////A_VLPTMEN_Slow20.a18 
+#define A_VLPTMEN_Spe_E001_02    162   ////A_VLPTMEN_Spe_E001_02.a18 
+#define A_VLPTMEN_Spe_E002_02    163   ////A_VLPTMEN_Spe_E002_02.a18 
+#define A_VLPTMEN_Spe_E006_02    164   ////A_VLPTMEN_Spe_E006_02.a18 
+#define A_VLPTMEN_Spe_E007_02    165   ////A_VLPTMEN_Spe_E007_02.a18 
+#define A_VLPTMEN_Spe_E019_02    166   ////A_VLPTMEN_Spe_E019_02.a18 
+#define A_VLPTMEN_Spe_E025_02    167   ////A_VLPTMEN_Spe_E025_02.a18 
+#define A_VLPTMEN_Spe_E041_02    168   ////A_VLPTMEN_Spe_E041_02.a18 
+#define B_VLPTMEN_Mid_M1         169   ////B_VLPTMEN_Mid_M1.a18 
+#define B_VLPTMEN_Mid_M2         170   ////B_VLPTMEN_Mid_M2.a18 
+#define B_VLPTMEN_MZ01_UP        171   ////B_VLPTMEN_MZ01_UP.a18 
+#define B_VLPTMEN_MZ02_DOWN      172   ////B_VLPTMEN_MZ02_DOWN.a18 
+#define B_VLPTMEN_MZ03_RIGHT     173   ////B_VLPTMEN_MZ03_RIGHT.a18 
+#define B_VLPTMEN_MZ04_LEFT      174   ////B_VLPTMEN_MZ04_LEFT.a18 
+#define E_VLNUMENPTM001          175   ////E_VLNUMENPTM001.a18 
+#define E_VLNUMENPTM002          176   ////E_VLNUMENPTM002.a18 
+#define E_VLNUMENPTM003          177   ////E_VLNUMENPTM003.a18 
+#define E_VLNUMENPTM004          178   ////E_VLNUMENPTM004.a18 
+#define E_VLNUMENPTM005          179   ////E_VLNUMENPTM005.a18 
+#define E_VLNUMENPTM006          180   ////E_VLNUMENPTM006.a18 
+#define E_VLNUMENPTM007          181   ////E_VLNUMENPTM007.a18 
+#define E_VLNUMENPTM008          182   ////E_VLNUMENPTM008.a18 
+#define E_VLNUMENPTM009          183   ////E_VLNUMENPTM009.a18 
+#define E_VLNUMENPTM010          184   ////E_VLNUMENPTM010.a18 
+#define E_VLNUMENPTM011          185   ////E_VLNUMENPTM011.a18 
+#define E_VLNUMENPTM012          186   ////E_VLNUMENPTM012.a18 
+#define E_VLNUMENPTM013          187   ////E_VLNUMENPTM013.a18 
+#define E_VLNUMENPTM014          188   ////E_VLNUMENPTM014.a18 
+#define E_VLNUMENPTM015          189   ////E_VLNUMENPTM015.a18 
+#define E_VLNUMENPTM016          190   ////E_VLNUMENPTM016.a18 
+#define E_VLNUMENPTM017          191   ////E_VLNUMENPTM017.a18 
+#define E_VLNUMENPTM018          192   ////E_VLNUMENPTM018.a18 
+#define E_VLNUMENPTM019          193   ////E_VLNUMENPTM019.a18 
+#define E_VLNUMENPTM020          194   ////E_VLNUMENPTM020.a18 
+
+
+
+
+//#define A_VLPTMEN_Reward_02 0
+//#define A_VLPTMEN_Reward_03 0
+//#define A_VLPTMEN_Reward_04 0
+//#define A_VLPTMEN_Reward_05 0
+//#define A_VLPTMEN_Reward_06 0
+//#define A_VLPTMEN_Reward_07 0
+//
+//
+//#define A_VLPTMEN_FP_Found03 0
+//#define A_VLPTMEN_FP_Found01 0
+//#define A_VLPTMEN_FP_Found02     0
+//#define A_VLPTMEN_Encour08 0
+//#define A_VLPTMEN_Mid_M2 0
+//#define A_VLPTMEN_Reward_05 0
+//#define A_VLPTMEN_Fail09   0
+//#define A_VLPTMEN_Fail10 0
+
+
+
+
+
+
+
+
+
+
+
+#define E_VLPTMNUMEN00 B_VLPTMEN_MZ04_LEFT
+
+//#define A_VLPTMEN_Mid_BUG 0
