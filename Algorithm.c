@@ -1582,7 +1582,11 @@ unsigned int GameTimeout()
                               MoveSucessFlag =0;
 						   }
 						   else
+						   {
+						   	  PlayA1800_Elements(SFX_Off);
+						   	  delay_time(8);
 						      return  C_Off_Mode;
+						   }
                            
           return 0;
 }
@@ -10036,8 +10040,13 @@ unsigned  Step1()
     OtherSph_Random_Value[Serie_Wrong2]=0;
  
     PlaySFX_Flag =0;
-    PlayA1800_Elements(SFX_On);
     
+     Clean_LFX_Led();
+     Clean_Led_Color();
+    
+      
+    PlayA1800_Elements(SFX_On);
+     Mem0.Mission_Cur=18;
    
      return C_SelectMission;
 
@@ -11707,9 +11716,10 @@ unsigned int Mission()
        temp_TimeTatleCnt = TimeTatleCnt;
    for(;Mem0.X<11;Mem0.X++)
    {
+   	
+  
        Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
-       Clean_LFX_Led();
-       Clean_LFX_Led_Color();
+
        if(CheckIntro()==0)
 	       break;
 
@@ -11717,20 +11727,21 @@ unsigned int Mission()
 
        TimeTatleCnt = temp_TimeTatleCnt;
 	   
-		Set_Led_RGB(Red,Led1);
-	    Set_Led_RGB(Red,Led2);
-	    Set_Led_RGB(Red,Led3);
-	    Set_Led_RGB(Red,Led4);
-        Clean_LFX_Led();
+//		Set_Led_RGB(Red,Led1);
+//	    Set_Led_RGB(Red,Led2);
+//	    Set_Led_RGB(Red,Led3);
+//	    Set_Led_RGB(Red,Led4);
+//        Clean_LFX_Led();
    
 
    	    G_Sensor_Status=G_Shake;
-        Led_On(All_Led_data);
+//        Led_On(All_Led_data);
 		BlinkFlag_Data =All_Led_data;
 		 
 		 
-		if(WaitAction(10*16,0)==1)//Mov_Detected
+		if(WaitAction(6*16,0)==1)//Mov_Detected
 		   {
+		   	   PlayA1800_Elements(SFX_Start); 
                 Mem0.Y =0;
 				break;
 
@@ -11738,16 +11749,26 @@ unsigned int Mission()
 		   }
 		   
 		   BlinkFlag_Data =0;
-		   Light_all_off();	   
-    }
-  		   BlinkFlag_Data =0;
 		   Light_all_off();	  
+		   Clean_Led_Color();
+           Clean_LFX_Led();
+		    
+    }
+//  		   BlinkFlag_Data =0;
+//		   Light_all_off();	  
+//		   Clean_Led_Color();
 
    while (1)
    {   
 	 Mvmt = Get_Move_data(Mem0.Y);
-
-
+     temp_MoveText2_Right =0;
+     
+     
+       BlinkFlag_Data =0;
+	   Light_all_off();	  
+	   Clean_Led_Color();
+       Clean_LFX_Led();
+       
 	 if((Mvmt==0x0ff))
 			break;
 	 
@@ -11775,8 +11796,10 @@ unsigned int Mission()
 
 		// Get_MoveText_data(Mem0.Y,M_Text1);
 			Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text1]); 
+			BlinkFlag_Data=0;
+            Light_all_off();
 			Clean_LFX_Led();
-            Clean_LFX_Led_Color();
+            Clean_Led_Color();
 
 
 
@@ -11814,6 +11837,18 @@ unsigned int Mission()
 						// G_Sensor_Status = G_Shake;
 						// Movetime=24;//15*16;
 						
+						
+//						Set_Led_RGB(Red,Led1);
+//					    Set_Led_RGB(Red,Led2);
+//					    Set_Led_RGB(Red,Led3);
+//					    Set_Led_RGB(Red,Led4);
+//
+//                       Clean_LFX_Led();
+//		   
+//					   Led_On(All_Led_data);
+//					   BlinkFlag_Data =All_Led_data;
+						
+						
 						  temp = TimeOver;////返回结果
 						 TimeTatleCnt =0;
 						 while(TimeTatleCnt<15*16)
@@ -11823,17 +11858,12 @@ unsigned int Mission()
 //							   BlinkFlag_Data =0;
 //							   Light_all_off();		
 
-								Set_Led_RGB(Red,Led1);
-							    Set_Led_RGB(Red,Led2);
-							    Set_Led_RGB(Red,Led3);
-							    Set_Led_RGB(Red,Led4);
-
-                               Clean_LFX_Led();
-				   
-							   Led_On(All_Led_data);
-							   BlinkFlag_Data =All_Led_data;						 	 	 	  
+						 	 	 	  
 						 	 if(WaitAction(24,status)==1)
 						 	 {
+						 	 	status=2;
+						 	 	PlayA1800_ElementsInit(SFX_Shake);
+						 	 	
 						 	 	 if(TimeCnt1>=70)
 						 	 	    {
 						 	 	    	temp =1;//返回结果
@@ -11843,6 +11873,7 @@ unsigned int Mission()
 						 	else
 						 	    {
 						 	        //temp =0;////返回结果
+						 	        status=0;
 						 	        TimeCnt1 =0;
 						 	        //break;	
 						 	    }
@@ -11852,10 +11883,10 @@ unsigned int Mission()
 						 							 		 
 						
 					}
-					else
+					else  //跟MoveTexte2一致
 					{
 						
-						if(G_Sensor_Status == G_IMMO)
+/* 						if(G_Sensor_Status == G_IMMO)
 						{
 							Movetime = 3*16;
 							IMMO_Flag =1;
@@ -11883,19 +11914,16 @@ unsigned int Mission()
 						}
 						else
 						 {
-//						 	  temp = Get_Firstcnt_From_Play(G_Sensor_Status);
-//						 	  Led_On(Led_Data_Play[temp]);
-//						 	  BlinkFlag_Data= Led_Data_Play[temp];
     	        		       Led_On(LFX_Led[0]|LFX_Led[1]);//Led_On(BitMap[j]); 
 				     	       BlinkFlag_Data=LFX_Led[0]|LFX_Led[1];//BitMap[j++];//All_Led_data;
 						 	 
-						 }
+						 } */
 						
 							
 							IMMO_Flag =0;
-							Movetime=15*16;
+							Movetime=6*16;
 							
-						 temp = Mov_Detected(Movetime,status);
+						 temp = Mov_Detected(Movetime,0);
 						
 					}
                   

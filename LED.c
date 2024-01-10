@@ -18,7 +18,9 @@
 #define LED4_R (1<<11)
 #define LED4_G (1<<10)
 #define LED4_B (1<<9)
-#define C_PWM_Cnt_Max (255/5)
+
+#define C_NumHz  10//5
+#define C_PWM_Cnt_Max (255/C_NumHz)//(255/5)
 
 extern enum LED_Color;
 extern unsigned LED_Cnt;
@@ -28,15 +30,15 @@ extern  const unsigned BitMap[];
 //enum LED_Color{Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White};
 const Color_Table[9][3]=
 {
-	{255/5,0,0},	    //{255,0,0},	    //Red
-	{255/5,165/5,0},	//{255,165,0},	//Orange
-	{255/5,255/5,0},	//{255,255,0},	//Yellow
-	{0,255/5,0},	    //{0,255,0},	    //Green
-	{0,255/5,255/5},	//{0,255,255},	//Cyan
-	{0,0,255/5},	    //{0,0,255},	    //Blue
-	{128/5,0,128/5},	//{128,0,128},	//Purple
-	{128/5,128/5,128/5},  //{128,128,128},	//Grey
-	{255/5,255/5,255/5}   //{255,255,255}   //white			
+	{255/C_NumHz,0,0},	    //{255,0,0},	    //Red
+	{255/C_NumHz,165/C_NumHz,0},	//{255,165,0},	//Orange
+	{255/C_NumHz,255/C_NumHz,0},	//{255,255,0},	//Yellow
+	{0,255/C_NumHz,0},	    //{0,255,0},	    //Green
+	{0,255/C_NumHz,255/C_NumHz},	//{0,255,255},	//Cyan
+	{0,0,255/C_NumHz},	    //{0,0,255},	    //Blue
+	{128/C_NumHz,0,128/C_NumHz},	//{128,0,128},	//Purple
+	{128/C_NumHz,128/C_NumHz,128/C_NumHz},  //{128,128,128},	//Grey
+	{255/C_NumHz,255/C_NumHz,255/C_NumHz}   //{255,255,255}   //white			
 };
 
 
@@ -76,7 +78,7 @@ void Clean_LFX_Led()
 	
 	
 }
-void Clean_LFX_Led_Color()
+void Clean_Led_Color()
 {
 	
 	unsigned int i=0;

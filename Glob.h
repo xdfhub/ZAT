@@ -203,6 +203,9 @@
 #define G_Right  0x08
 #define G_Hit    0x10
 #define G_Back   0x20
+
+#define G_SixDir  0x3f////////
+
 #define G_Shake  0x40
 #define G_Jump   0x80
 #define G_Hit3   0x100
@@ -212,6 +215,8 @@
 #define G_TurnAround (G_Right|G_Left)
 #define G_SPIN       (G_TurnAround|0x400)
 #define G_BHIT   (G_IMMO|0x1000)
+
+
 
 
 //MOV   跟key位 区分开
@@ -249,10 +254,10 @@
 #define All_Led_data 0x000f
 
 
-#define LED_Hit   Led3
-#define LED_Left  Led4
-#define LED_Back  Led1
-#define LED_Right Led2
+#define LED_Hit   Led4
+#define LED_Left  Led1
+#define LED_Back  Led2
+#define LED_Right Led3
 
 
 #define LED_UP    LED_Hit
@@ -261,8 +266,8 @@
 //#define LED_Shake 0x10
 #define LED_Up_cnt    0
 #define LED_Down_cnt   1
-#define LED_Right_cnt  2
-#define LED_Left_cnt   3
+#define LED_Left_cnt   2
+#define LED_Right_cnt   3
 
 //#define IO_Motor 0x1000 //IOA12//   
 

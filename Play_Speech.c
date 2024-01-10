@@ -39,8 +39,14 @@ unsigned int Passing_Check =0;
 volatile unsigned int sp_offset =0;
 //unsigned int Serie_Envi =0;
 unsigned int Last_VL =0;
-unsigned int LFX_Led[2]={0};//闪哪些灯,LED1,LED2.... 根据要闪的灯来切换颜色 ，0:不切换颜色
-unsigned int LFX_Led_Color[2]={0};//闪灯颜色切换
+
+unsigned int LFX_Led[2]={0,0};//闪哪些灯,LED1,LED2.... 根据要闪的灯来切换颜色 ，0:不切换颜色
+unsigned int LFX_Led_Color[2]={0,0};//闪灯颜色切换
+//LFX_Led[0]:0,LFX_Led[1]:0  都为0，则无需切换颜色，直接闪灯
+//LFX_Led[1]:0     闪LFX_Led[0]所对应的LFX_Led_Color[0]的颜色
+//LFX_Led[1]:非0   LFX_Led[0]所对应的LFX_Led_Color[0]的颜色》LFX_Led[1]所对应的LFX_Led_Color[1]的颜色
+//                 LFX_Led[0]=LFX_Led[1]则可以实现相同灯闪不同颜色
+
 //union 
 //{
 //	unsigned long int address;
@@ -1167,12 +1173,16 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
       }
 
 
-     for(i=(Num-1);i>=0;i--)
+     for(i=0;i<Num;i++)
      {
      	
      	
-     	 if((buffer[i]!=9999)&&(buffer[i]>=0x1000))
+     	 if((buffer[i]<9997)&&(buffer[i]>=0x1000))//9997 pause0.5s
      	 {
+     	 	
+     	 	
+     	 	Clean_LFX_Led();
+            Clean_Led_Color();
      	 	
      	    BlinkFlag_Data=0;
      	    Light_all_off();
@@ -1186,9 +1196,9 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 		     	    
 		     	    temp1 = Get_Firstcnt_From_Play(temp);
 				    temp&=~BitMap[temp1];	
-				    LFX_Led_Color[j] = temp1;
+				    LFX_Led_Color[j%2] = temp1;
 				   
-					   if(G_Sensor_Status&0x6f) 
+					   if((G_Sensor_Status)&&((G_Sensor_Status&(~G_SixDir))==0)) 
 					   {
 						    led_temp = Get_Firstcnt_From_Play(G_Sensor_Status);// G_Sensor_Status为0，则指向UP LED
 						    LFX_Led[(j++)%2] =Led_Data_Play[led_temp];
@@ -1199,31 +1209,34 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 					    }				    				    				     	      
 		     	   }  
     	     
-		     	   	if(G_Sensor_Status == G_IMMO)
+//		     	   	if((G_Sensor_Status&G_IMMO) == G_IMMO)
+//						{
+//							
+////							BlinkFlag_Data =0;
+////							Light_all_off();	
+//
+//							Set_Led_RGB(Red,Led1);
+//						    Set_Led_RGB(Red,Led2);
+//						    Set_Led_RGB(Red,Led3);
+//						    Set_Led_RGB(Red,Led4);
+//
+//                            Clean_LFX_Led();
+//						   
+//						    Led_On(All_Led_data);
+//							BlinkFlag_Data =All_Led_data;
+//							
+//							
+//						}	
+					 if((G_Sensor_Status == G_SPIN)	||(G_Sensor_Status == G_TurnAround))
 						{
+						   if(LFX_Led[0])		
+							LFX_Led[0]=LED_Left|LED_Right;
 							
-//							BlinkFlag_Data =0;
-//							Light_all_off();	
-
-							Set_Led_RGB(Red,Led1);
-						    Set_Led_RGB(Red,Led2);
-						    Set_Led_RGB(Red,Led3);
-						    Set_Led_RGB(Red,Led4);
-
-                            Clean_LFX_Led();
-						   
-						    Led_On(All_Led_data);
-							BlinkFlag_Data =All_Led_data;
-							
-							
-						}	
-						else if((G_Sensor_Status == G_SPIN)	||(G_Sensor_Status == G_TurnAround))
-						{
-								
-							LFX_Led[0]=LED_Left;
-						    LFX_Led[1]=LED_Right;
-							LFX_Led_Color[1]= LFX_Led_Color[0];	
-                            Led_On(LED_Left|LED_Right);
+                           if(LFX_Led[1])		
+							LFX_Led[1]=LED_Left|LED_Right;							
+//						    LFX_Led[1]=LED_Right;
+//							LFX_Led_Color[1]= LFX_Led_Color[0];	
+                            Led_On(LFX_Led[0]|LFX_Led[1]);
 							BlinkFlag_Data =LED_Left|LED_Right;//All_Led_data;
 						}
 						else 
@@ -1256,7 +1269,14 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 	   {
 	 	   break;
 	    }
-		
+	  else if(temp== 9998)
+	  {
+	  	  delay_time(16);
+	  }   
+	  else if(temp== 9997)
+	  {
+	  	  delay_time(8);
+	  }  		
 //  	  if(FirstSPMaskflag)
 //  	  {
 //  	  	
@@ -1277,7 +1297,7 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 //  	  }
 //  	  else
 	      
-	      if(temp<0x1000) 
+	      else if(temp<0x1000) 
 	      {
 	      	if((i==0)&&(MoveText2_Right==1))
 	      		temp+=1;
@@ -1293,9 +1313,13 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
        	    break;
 		
 	}
-	
- 	    BlinkFlag_Data=0;
-        Light_all_off();
+
+
+	if(!((T_TableH>=T_Move1Text1)&&(T_TableH<=T_Move23Text2)))
+	{	
+	 	    BlinkFlag_Data=0;
+	        Light_all_off();
+	}
 } 
 
 

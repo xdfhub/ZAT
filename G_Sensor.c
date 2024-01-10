@@ -863,7 +863,7 @@ void  G_Sensor_Real()
 							    time_Min_Z =0;
 							    time_Max_Z =0;
 						
-								if(G_Sensor_Status&(G_UP|G_Down))
+								if(G_Sensor_Status&(G_Z_A|G_Z_M))
 								{
 									 TimeCnt_Total =0;
 									 G_Sensor_Status&=~0x2000;
@@ -983,7 +983,7 @@ void  G_Sensor_Real()
 		                 
 		                   		time_Min =0;
 							    time_Max =0;      
-							 if(G_Sensor_Status&(G_Back|G_Hit))
+							 if(G_Sensor_Status&(G_X_A|G_X_M))
 	                            {
 	                                 TimeCnt_Total =0;
 	                                 G_Sensor_Status&=~0x8000;
@@ -1103,7 +1103,7 @@ void  G_Sensor_Real()
 							            time_Max_Y =0;  
 										   
 										   		   
-										  if(G_Sensor_Status&(G_Right|G_Left))
+										  if(G_Sensor_Status&(G_Y_A|G_Y_M))
 											 {
 											     TimeCnt_Total =0;
 											      G_Sensor_Status&=~0x4000;
@@ -1366,7 +1366,7 @@ unsigned int G_Sensor_Check()
 
 				
 
-								       if(G_Sensor_Status&(G_UP|G_Down))
+								       if(G_Sensor_Status&(G_Z_A|G_Z_M))
 										  {
 			 
 										    //if((G_Sensor_Status&0x8000)==0)
@@ -1385,11 +1385,11 @@ unsigned int G_Sensor_Check()
 			  
 															     fakeflag =0;			 
 			 
-																 if((positionZ[1]>(V_Up>>1))&&(positionZ_Max>V_Up))
+																 if((positionZ[1]>(V_Z_A>>1))&&(positionZ_Max>V_Z_A))
 																//if((temp_long>(V_Up>>1))&&(positionZ_Max>V_Up))
 																	 {												 
 																		
-																		if(G_Sensor_Status&G_UP)
+																		if(G_Sensor_Status&G_Z_A)
 																		  {			 
 			 
 			 
@@ -1413,7 +1413,7 @@ unsigned int G_Sensor_Check()
 			 
 																		  
 																				  //PlayA1800_Elements(7);
-																				  G_Sensor_Status&=~G_UP;
+																				  G_Sensor_Status&=~G_Z_A;
 																			
 																				 return C_MovSucess;
 																				 
@@ -1450,11 +1450,11 @@ unsigned int G_Sensor_Check()
 															   else
 																 {
 			 	
-																   if((positionZ[1]<(V_Down>>1))&&(positionZ_Min<V_Down))
+																   if((positionZ[1]<(V_Z_M>>1))&&(positionZ_Min<V_Z_M))
 																  //if((temp_long<(V_Down>>1))&&(positionZ_Min<V_Down))
 																	 {
 																			 
-																		  if(G_Sensor_Status&G_Down)
+																		  if(G_Sensor_Status&G_Z_M)
 																		   {		 
 			 
 																				  if((stepflag_Z&0x03)==0x03)
@@ -1475,7 +1475,7 @@ unsigned int G_Sensor_Check()
 																	  if(fakeflag==0)
 																	   {
 			 		
-																			  G_Sensor_Status&=~G_Down;
+																			  G_Sensor_Status&=~G_Z_M;
 																			  return C_MovSucess;
 																	 																		   
 																				   
@@ -1522,7 +1522,7 @@ unsigned int G_Sensor_Check()
 
 
 
-			 if(G_Sensor_Status&(G_Hit|G_Back))
+			 if(G_Sensor_Status&(G_X_A|G_X_M))
 				{
 
 				   //if((G_Sensor_Status&0x8000)==0)
@@ -1536,10 +1536,10 @@ unsigned int G_Sensor_Check()
 
 						        fakeflag =0;
 
-                                if((positionX[1]>(V_Hit>>1))&&(positionX_Max>V_Hit))
+                                if((positionX[1]>(V_X_A>>1))&&(positionX_Max>V_X_A))
                                    	{
 																			   
-									   if(G_Sensor_Status&G_Hit)
+									   if(G_Sensor_Status&G_X_A)
 										 {
 
 
@@ -1561,15 +1561,10 @@ unsigned int G_Sensor_Check()
 										  if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
 											  {
 	  
-												  
-												  //PlayA1800_Elements(7);
+	                                            //PlayA1800_Elements(7);
 	  												
 												  G_Sensor_Status&=~G_SPIN;//G_TurnAround;
 												  return C_MovSucess;
-	  
-												  
-	  
-	  
 	  
 											  }
 
@@ -1577,7 +1572,7 @@ unsigned int G_Sensor_Check()
                                           else if(fakeflag==0)
                                           	{
 
-											   G_Sensor_Status&=~G_Hit;
+											   G_Sensor_Status&=~G_X_A;
 										   
 										        return C_MovSucess;
 
@@ -1612,10 +1607,10 @@ unsigned int G_Sensor_Check()
                               else
                               	{
 
-								  if((positionX[1]<(V_Back>>1))&&(positionX_Min<V_Back))
+								  if((positionX[1]<(V_X_M>>1))&&(positionX_Min<V_X_M))
 								  	{
 					                     	
-										 if(G_Sensor_Status&G_Back)
+										 if(G_Sensor_Status&G_X_M)
 										  {
 
 
@@ -1648,7 +1643,7 @@ unsigned int G_Sensor_Check()
 												 else if(fakeflag==0)
 												  {
 
-														 G_Sensor_Status&=~G_Back;
+														 G_Sensor_Status&=~G_X_M;
 												         return C_MovSucess;
 											
 															  
@@ -1690,7 +1685,7 @@ unsigned int G_Sensor_Check()
 						}
 				   }
 			
-					 if(G_Sensor_Status&(G_Right|G_Left))
+					 if(G_Sensor_Status&(G_Y_A|G_Y_M))
 					   	{
 						   //if((G_Sensor_Status&0x4000)==0)
 							{
@@ -1705,11 +1700,11 @@ unsigned int G_Sensor_Check()
                                        fakeflag =0;
 								  														
 
-                                       if((positionY[1]>(V_Left>>1))&&(positionY_Max>V_Left))	
+                                       if((positionY[1]>(V_Y_A>>1))&&(positionY_Max>V_Y_A))	
                                            	{
                                            	
 											   
-											   if(G_Sensor_Status&G_Left)
+											   if(G_Sensor_Status&G_Y_A)
 												  {
 
 
@@ -1731,7 +1726,7 @@ unsigned int G_Sensor_Check()
 													 if(fakeflag==0)
 													 	{
 															  										 
-													         G_Sensor_Status&=~G_Left;
+													         G_Sensor_Status&=~G_Y_A;
 
 															  return C_MovSucess;
 
@@ -1772,10 +1767,10 @@ unsigned int G_Sensor_Check()
                                       	{
 
 	
-										if((positionY[1]<(V_Right>>1))&&(positionY_Min<V_Right))
+										if((positionY[1]<(V_Y_M>>1))&&(positionY_Min<V_Y_M))
 										  	{									
 
-												 if(G_Sensor_Status&G_Right)
+												 if(G_Sensor_Status&G_Y_M)
 												   {
 
 
@@ -1800,7 +1795,7 @@ unsigned int G_Sensor_Check()
 												    if(fakeflag==0)
 													 	{
 													 	   //PlayA1800_Elements(7);
-													      G_Sensor_Status&=~G_Right;
+													      G_Sensor_Status&=~G_Y_M;
 
 														   return C_MovSucess;
 
@@ -1863,7 +1858,7 @@ unsigned int G_Sensor_Check()
 	          if(V_Sum_Z_Standy!=0)
 			          {
 
-								if((G_Sensor_Status&(G_UP|G_Down|G_Shake|G_Jump)))
+								if((G_Sensor_Status&(G_Z_A|G_Z_M|G_Shake|G_Jump)))
 									{
 
 		                                  if(((V_Sum_Z_Standy>Sum_Z)&&((V_Sum_Z_Standy-Sum_Z)>C_StartMove_Dif))||((V_Sum_Z_Standy<Sum_Z)&&((Sum_Z-V_Sum_Z_Standy)>C_StartMove_Dif)))//200
@@ -1909,7 +1904,7 @@ unsigned int G_Sensor_Check()
 
 
 					  
-								if((G_Sensor_Status&(G_Hit|G_Back)))//||(G_Next_Status&(G_Hit|G_Back|G_Shake|G_Jump)))
+								if((G_Sensor_Status&(G_X_A|G_X_M)))//||(G_Next_Status&(G_Hit|G_Back|G_Shake|G_Jump)))
 									{
 
 		                                  if(((V_Sum_X_Standy>Sum_X)&&((V_Sum_X_Standy-Sum_X)>C_StartMove_Dif))||((V_Sum_X_Standy<Sum_X)&&((Sum_X-V_Sum_X_Standy)>C_StartMove_Dif)))//200
@@ -1932,7 +1927,7 @@ unsigned int G_Sensor_Check()
 		                                  }
 									}
                                        
-							 if((G_Sensor_Status&(G_Right|G_Left)))//||(G_Next_Status&(G_Hit|G_Back)))//G_shake
+							 if((G_Sensor_Status&(G_Y_A|G_Y_M)))//||(G_Next_Status&(G_Hit|G_Back)))//G_shake
 							 	{
 
 
@@ -1983,7 +1978,7 @@ unsigned int G_Sensor_Check()
 }
 
 ///////////////////////////////////////////////////////////////////
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
+//µ¥¼ì²â¶¯×÷
 //////////////////////////////////////////////////////////////////
 unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 {
@@ -1991,11 +1986,11 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 	unsigned int temp =0;
 	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
 	
-    if(timeoutplay ==2)//catch
-	  {
-
-		   PlayA1800_ElementsInit(SFX_Hit3);
-	  }
+//    if(timeoutplay ==2)//catch
+//	  {
+//
+//		   PlayA1800_ElementsInit(SFX_Shake);
+//	  }
 	
 	
 	
@@ -2007,7 +2002,9 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 	       WatchdogClear();
 	       
 		   if(Get_Key(0,0))
-		   	{			       		   	 
+		   	{			   	   
+		   	    SACM_A1800_Stop();
+	            A1800_Flag = 0; 		       		   	 
 			 	 return 0;
 
 		   	}
@@ -2018,7 +2015,7 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 		     	if((SACM_A1800_Status() & 0x0001) == 0)
 		   	   {  
 		   		
-                     PlayA1800_ElementsInit(SFX_Hit3);
+                     PlayA1800_ElementsInit(SFX_Shake);
 				
 		   	   }
 		   	
@@ -2103,14 +2100,12 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 	unsigned int BlinkFlag_Data_temp =0;
     unsigned int Led_IO_temp =0;
 	
-	if(timeoutplay ==2)
-	  {
-//		if(Mission_Cur==0)
-//		   PlayA1800_ElementsInit(A_SFX05_Plain);
-//		 else if(Mission_Cur>0)
-		   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
-           DetectionFlag =1; 
-	  }
+//	if(timeoutplay ==2)
+//	  {
+//
+//		   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
+//           DetectionFlag =1; 
+//	  }
 
       
  	   TimeCnt=0;
@@ -2140,21 +2135,21 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 		          }
 	     
 
-           if(timeoutplay ==2)
-           {
-		   	if((SACM_A1800_Status() & 0x0001) == 0)
-		   	{
-		   		
-				//if(timeoutplay ==2)
-				  {
-					   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
-				  }
-
-				
-		   	}
-		   	
-		   	    SACM_A1800_ServiceLoop();
-           }
+//           if(timeoutplay ==2)
+//           {
+//		   	if((SACM_A1800_Status() & 0x0001) == 0)
+//		   	{
+//		   		
+//				//if(timeoutplay ==2)
+//				  {
+//					   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
+//				  }
+//
+//				
+//		   	}
+//		   	
+//		   	    SACM_A1800_ServiceLoop();
+//           }
 	       
 		    Get_Key(0,0);		   	
 		   	if(Key_Event)

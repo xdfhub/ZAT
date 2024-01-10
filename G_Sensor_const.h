@@ -17,14 +17,14 @@
 #define C_StartMove_Dif  1200 //400比基准差值 认为Move启动
 
 
-#define V_Hit    350000//32 X           //#define       360000//32  V_Right
-#define V_Back   -350000//28 X           //#define    -320000//28   V_Left
+#define V_X_A   300000//32 X           //#define       360000//32  V_Right
+#define V_X_M   -350000//28 X           //#define    -320000//28   V_Left
 
-#define V_Left    350000//28  Y           //#define    280000//25   V_Back
-#define V_Right     -250000//28 Y          //#define     -280000//26  V_Hit
+#define V_Y_A    350000//28  Y           //#define    280000//25   V_Hit
+#define V_Y_M   -250000//28 Y          //#define     -280000//26  V_Back
 
-#define V_Up     280000 //32    Z        //#define       360000//32
-#define V_Down   -300000//28 Z          //#define    -320000//28
+#define V_Z_A   280000 //32 Z           //#define       360000//32  V_Up
+#define V_Z_M   -300000//28 Z          //#define    -320000//28    V_Down
                                         //
 #define V_Position_Min  -280000//22     //#define V_Position_Min  -220000//20
 #define V_Position_Max   280000//25     //#define V_Position_Max   250000
@@ -38,5 +38,14 @@
 
 
 
+
+#define G_X_A   G_Right//值增加方向
+#define G_X_M   G_Left//值减少方向
+
+#define G_Y_A    G_Hit
+#define G_Y_M    G_Back
+
+#define G_Z_A   G_UP
+#define G_Z_M   G_Down
 
 #endif

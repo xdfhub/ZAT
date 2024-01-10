@@ -156,7 +156,7 @@ int main()
  */
 
 
-    gVolume =5;//
+    gVolume =7;//
 	gTemp = C_Off_Mode;//C_StartGame;//;
    	
      Get_Standy();
@@ -275,17 +275,18 @@ int main()
 			   {
 				   	  LongPressflag =0;
 				   	  
-				   	  PlayA1800_Elements(A_SFX_Off);
-				  	  gTemp  = C_Off_Mode;
+//				   	  PlayA1800_Elements(SFX_Off);
+//				  	  gTemp  = C_Off_Mode;
 				   	  
 			//	   	 if(Mission_Cur>=0)
 			//	   	      Mission_Success[Mission_Cur/16]|=BitMap[Mission_Cur%16];
 			//	   	 
-			//	   	  gTemp = C_Mission;
+			          Mem0.Mission_Cur++;	
+				   	  gTemp = C_SelectMission;
 				  }
 				   else	  
 				   {
-				   	  PlayA1800_Elements(A_SFX_Off);
+				   	  PlayA1800_Elements(SFX_Off);
 				  	  gTemp  = C_Off_Mode;
 				  	  
 				   }

@@ -4316,7 +4316,7 @@ LM233:
 	     R4 = (_time_Max_Z)       	// [68:864]  time_Max_Z
 	     DS:[R4] = R3             	// [70:864]  
 // 865  						
-// 866  								if(G_Sensor_Status&(G_UP|G_Down))
+// 866  								if(G_Sensor_Status&(G_Z_A|G_Z_M))
 
 LM234:
 	     .stabn 68,0,866,LM234-_G_Sensor_Real
@@ -5013,14 +5013,14 @@ LM278:
 	     DS = seg(_time_Max)      	// [67:985]  time_Max
 	     R4 = (_time_Max)         	// [68:985]  time_Max
 	     DS:[R4] = R3             	// [70:985]  
-// 986  							 if(G_Sensor_Status&(G_Back|G_Hit))
+// 986  							 if(G_Sensor_Status&(G_X_A|G_X_M))
 
 LM279:
 	     .stabn 68,0,986,LM279-_G_Sensor_Real
 	     DS = seg(_G_Sensor_Status)	// [72:986]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [73:986]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [75:986]  
-	     R4 = R4 & 48             	// [77:986]  
+	     R4 = R4 & 12             	// [77:986]  
 	     cmp R4, 0                	// [78:986]  
 	     je L_9_40                	// [79:986]  
 BB103_PU9:	// 0xba3
@@ -5735,14 +5735,14 @@ LM323:
 	     DS:[R4] = R3             	// [70:1103]  
 //1104  										   
 //1105  										   		   
-//1106  										  if(G_Sensor_Status&(G_Right|G_Left))
+//1106  										  if(G_Sensor_Status&(G_Y_A|G_Y_M))
 
 LM324:
 	     .stabn 68,0,1106,LM324-_G_Sensor_Real
 	     DS = seg(_G_Sensor_Status)	// [72:1106]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [73:1106]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [75:1106]  
-	     R4 = R4 & 12             	// [77:1106]  
+	     R4 = R4 & 48             	// [77:1106]  
 	     cmp R4, 0                	// [78:1106]  
 	     je L_9_57                	// [79:1106]  
 BB144_PU9:	// 0xd80
@@ -7191,7 +7191,7 @@ L_10_188:	// 0x10d6
 //1366  
 //1367  				
 //1368  
-//1369  								       if(G_Sensor_Status&(G_UP|G_Down))
+//1369  								       if(G_Sensor_Status&(G_Z_A|G_Z_M))
 
 LM405:
 	     .stabn 68,0,1369,LM405-_G_Sensor_Check
@@ -7261,7 +7261,7 @@ LM407:
 	     R4 = 0                   	// [0:1386]  
 	     [BP + 10] = R4           	// [1:1386]  fakeflag
 //1387  			 
-//1388  																 if((positionZ[1]>(V_Up>>1))&&(positionZ_Max>V_Up))
+//1388  																 if((positionZ[1]>(V_Z_A>>1))&&(positionZ_Max>V_Z_A))
 
 LM408:
 	     .stabn 68,0,1388,LM408-_G_Sensor_Check
@@ -7315,7 +7315,7 @@ L_10_206:	// 0x112a
 //1389  																//if((temp_long>(V_Up>>1))&&(positionZ_Max>V_Up))
 //1390  																	 {												 
 //1391  																		
-//1392  																		if(G_Sensor_Status&G_UP)
+//1392  																		if(G_Sensor_Status&G_Z_A)
 
 LM409:
 	     .stabn 68,0,1392,LM409-_G_Sensor_Check
@@ -7412,7 +7412,7 @@ BB94_PU10:	// 0x1159
 //1413  			 
 //1414  																		  
 //1415  																				  //PlayA1800_Elements(7);
-//1416  																				  G_Sensor_Status&=~G_UP;
+//1416  																				  G_Sensor_Status&=~G_Z_A;
 
 LM415:
 	     .stabn 68,0,1416,LM415-_G_Sensor_Check
@@ -7502,7 +7502,7 @@ L_10_205:	// 0x117e
 //1450  															   else
 //1451  																 {
 //1452  			 	
-//1453  																   if((positionZ[1]<(V_Down>>1))&&(positionZ_Min<V_Down))
+//1453  																   if((positionZ[1]<(V_Z_M>>1))&&(positionZ_Min<V_Z_M))
 
 LM424:
 	     .stabn 68,0,1453,LM424-_G_Sensor_Check
@@ -7556,7 +7556,7 @@ L_10_215:	// 0x11a6
 //1454  																  //if((temp_long<(V_Down>>1))&&(positionZ_Min<V_Down))
 //1455  																	 {
 //1456  																			 
-//1457  																		  if(G_Sensor_Status&G_Down)
+//1457  																		  if(G_Sensor_Status&G_Z_M)
 
 LM425:
 	     .stabn 68,0,1457,LM425-_G_Sensor_Check
@@ -7650,7 +7650,7 @@ BB115_PU10:	// 0x11d3
 // BB:115 cycle count: 21
 //1476  																	   {
 //1477  			 		
-//1478  																			  G_Sensor_Status&=~G_Down;
+//1478  																			  G_Sensor_Status&=~G_Z_M;
 
 LM431:
 	     .stabn 68,0,1478,LM431-_G_Sensor_Check
@@ -7737,14 +7737,14 @@ L_10_202:	// 0x11f6
 //1522  
 //1523  
 //1524  
-//1525  			 if(G_Sensor_Status&(G_Hit|G_Back))
+//1525  			 if(G_Sensor_Status&(G_X_A|G_X_M))
 
 LM439:
 	     .stabn 68,0,1525,LM439-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1525]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1525]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1525]  
-	     R4 = R4 & 48             	// [5:1525]  
+	     R4 = R4 & 12             	// [5:1525]  
 	     cmp R4, 0                	// [6:1525]  
 	     jne BB122_PU10           	// [7:1525]  
 BB302_PU10:	// 0x11fd
@@ -7807,7 +7807,7 @@ LM441:
 	     R4 = 0                   	// [0:1537]  
 	     [BP + 10] = R4           	// [1:1537]  fakeflag
 //1538  
-//1539                                  if((positionX[1]>(V_Hit>>1))&&(positionX_Max>V_Hit))
+//1539                                  if((positionX[1]>(V_X_A>>1))&&(positionX_Max>V_X_A))
 
 LM442:
 	     .stabn 68,0,1539,LM442-_G_Sensor_Check
@@ -7830,7 +7830,7 @@ BB126_PU10:	// 0x1231
 BB127_PU10:	// 0x1234
 // BB:127 cycle count: 8
 	     R4 = [BP + 45]           	// [0:1539]  lcl_spill_temp_158
-	     cmp R4, 43928            	// [2:1539]  
+	     cmp R4, 18928            	// [2:1539]  
 	     jbe BB308_PU10           	// [4:1539]  
 BB128_PU10:	// 0x1238
 // BB:128 cycle count: 14
@@ -7840,7 +7840,7 @@ BB128_PU10:	// 0x1238
 	     [BP + 47] = R4           	// [5:1539]  lcl_spill_temp_160
 	     R4 = DS:[R3]             	// [6:1539]  
 	     [BP + 48] = R4           	// [8:1539]  lcl_spill_temp_161
-	     cmp R4, 5                	// [9:1539]  
+	     cmp R4, 4                	// [9:1539]  
 	     jge BB129_PU10           	// [10:1539]  
 BB309_PU10:	// 0x1241
 // BB:309 cycle count: 3
@@ -7848,26 +7848,26 @@ BB309_PU10:	// 0x1241
 BB129_PU10:	// 0x1243
 // BB:129 cycle count: 7
 	     R4 = [BP + 48]           	// [0:1539]  lcl_spill_temp_161
-	     cmp R4, 5                	// [2:1539]  
+	     cmp R4, 4                	// [2:1539]  
 	     jne BB131_PU10           	// [3:1539]  
 BB130_PU10:	// 0x1246
 // BB:130 cycle count: 8
 	     R4 = [BP + 47]           	// [0:1539]  lcl_spill_temp_160
-	     cmp R4, 22320            	// [2:1539]  
+	     cmp R4, 37856            	// [2:1539]  
 	     jbe BB309_PU10           	// [4:1539]  
 BB131_PU10:	// 0x124a
 L_10_227:	// 0x124a
 // BB:131 cycle count: 11
 //1540                                     	{
 //1541  																			   
-//1542  									   if(G_Sensor_Status&G_Hit)
+//1542  									   if(G_Sensor_Status&G_X_A)
 
 LM443:
 	     .stabn 68,0,1542,LM443-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1542]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1542]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1542]  
-	     R4 = R4 & 16             	// [5:1542]  
+	     R4 = R4 & 8              	// [5:1542]  
 	     cmp R4, 0                	// [6:1542]  
 	     jne BB132_PU10           	// [7:1542]  
 BB310_PU10:	// 0x1251
@@ -7960,85 +7960,85 @@ LM448:
 	     jne L_10_234             	// [7:1561]  
 BB139_PU10:	// 0x127f
 // BB:139 cycle count: 21
+//1562  											  {
 //1563  	  
-//1564  												  
-//1565  												  //PlayA1800_Elements(7);
-//1566  	  												
-//1567  												  G_Sensor_Status&=~G_SPIN;//G_TurnAround;
+//1564  	                                            //PlayA1800_Elements(7);
+//1565  	  												
+//1566  												  G_Sensor_Status&=~G_SPIN;//G_TurnAround;
 
 LM449:
-	     .stabn 68,0,1567,LM449-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1567]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1567]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1567]  
-	     R3 = R4 & 64499          	// [5:1567]  
-	     DS = seg(_G_Sensor_Status)	// [7:1567]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1567]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1567]  
-//1568  												  return C_MovSucess;
+	     .stabn 68,0,1566,LM449-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1566]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1566]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1566]  
+	     R3 = R4 & 64499          	// [5:1566]  
+	     DS = seg(_G_Sensor_Status)	// [7:1566]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1566]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1566]  
+//1567  												  return C_MovSucess;
 
 LM450:
-	     .stabn 68,0,1568,LM450-_G_Sensor_Check
-	     R1 = 4096                	// [12:1568]  
-	     SP = SP + 110            	// [14:1568]  
-	     pop BP, PC from [SP]     	// [16:1568]  
+	     .stabn 68,0,1567,LM450-_G_Sensor_Check
+	     R1 = 4096                	// [12:1567]  
+	     SP = SP + 110            	// [14:1567]  
+	     pop BP, PC from [SP]     	// [16:1567]  
 L_10_234:	// 0x128e
 // BB:140 cycle count: 7
-//1573  	  
-//1574  											  }
-//1575  
-//1576  
-//1577                                            else if(fakeflag==0)
+//1568  	  
+//1569  											  }
+//1570  
+//1571  
+//1572                                            else if(fakeflag==0)
 
 LM451:
-	     .stabn 68,0,1577,LM451-_G_Sensor_Check
-	     R4 = [BP + 10]           	// [0:1577]  fakeflag
-	     cmp R4, 0                	// [2:1577]  
-	     jne L_10_236             	// [3:1577]  
+	     .stabn 68,0,1572,LM451-_G_Sensor_Check
+	     R4 = [BP + 10]           	// [0:1572]  fakeflag
+	     cmp R4, 0                	// [2:1572]  
+	     jne L_10_236             	// [3:1572]  
 BB141_PU10:	// 0x1291
 // BB:141 cycle count: 21
-//1578                                            	{
-//1579  
-//1580  											   G_Sensor_Status&=~G_Hit;
+//1573                                            	{
+//1574  
+//1575  											   G_Sensor_Status&=~G_X_A;
 
 LM452:
-	     .stabn 68,0,1580,LM452-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1580]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1580]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1580]  
-	     R3 = R4 & 65519          	// [5:1580]  
-	     DS = seg(_G_Sensor_Status)	// [7:1580]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1580]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1580]  
-//1581  										   
-//1582  										        return C_MovSucess;
+	     .stabn 68,0,1575,LM452-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1575]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1575]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1575]  
+	     R3 = R4 & 65527          	// [5:1575]  
+	     DS = seg(_G_Sensor_Status)	// [7:1575]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1575]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1575]  
+//1576  										   
+//1577  										        return C_MovSucess;
 
 LM453:
-	     .stabn 68,0,1582,LM453-_G_Sensor_Check
-	     R1 = 4096                	// [12:1582]  
-	     SP = SP + 110            	// [14:1582]  
-	     pop BP, PC from [SP]     	// [16:1582]  
+	     .stabn 68,0,1577,LM453-_G_Sensor_Check
+	     R1 = 4096                	// [12:1577]  
+	     SP = SP + 110            	// [14:1577]  
+	     pop BP, PC from [SP]     	// [16:1577]  
 L_10_236:	// 0x12a0
 // BB:142 cycle count: 3
-//1583  
-//1584                                            	}
-//1585                                            else
-//1586                                            {
-//1587  										  	 R_Position_init();
+//1578  
+//1579                                            	}
+//1580                                            else
+//1581                                            {
+//1582  										  	 R_Position_init();
 
 LM454:
-	     .stabn 68,0,1587,LM454-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1587]  R_Position_init
+	     .stabn 68,0,1582,LM454-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1582]  R_Position_init
 BB143_PU10:	// 0x12a2
 // BB:143 cycle count: 6
-//1588  										  	 TimeCnt_Total =0;
+//1583  										  	 TimeCnt_Total =0;
 
 LM455:
-	     .stabn 68,0,1588,LM455-_G_Sensor_Check
-	     R3 = 0                   	// [0:1588]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1588]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1588]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1588]  
+	     .stabn 68,0,1583,LM455-_G_Sensor_Check
+	     R3 = 0                   	// [0:1583]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1583]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1583]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1583]  
 L_10_235:	// 0x12a7
 L_10_233:	// 0x12a7
 // BB:144 cycle count: 4
@@ -8048,36 +8048,36 @@ LM456:
 	     jmp L_10_228             	// [0:1561]  
 L_10_229:	// 0x12a8
 // BB:145 cycle count: 3
-//1593  									   	}
-//1594  									   else
-//1595  									   	{		
-//1596  											 
-//1597                                               R_Position_init();
+//1588  									   	}
+//1589  									   else
+//1590  									   	{		
+//1591  											 
+//1592                                               R_Position_init();
 
 LM457:
-	     .stabn 68,0,1597,LM457-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1597]  R_Position_init
+	     .stabn 68,0,1592,LM457-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1592]  R_Position_init
 BB146_PU10:	// 0x12aa
 // BB:146 cycle count: 15
-//1598                                               TimeCnt_Total =0;
+//1593                                               TimeCnt_Total =0;
 
 LM458:
-	     .stabn 68,0,1598,LM458-_G_Sensor_Check
-	     R3 = 0                   	// [0:1598]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1598]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1598]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1598]  
-//1601  										     velocityx[0]=0;
-//1602  											 velocityx[1]=0;
-//1603  
-//1604  											#endif
-//1605  											 return C_MovFail;
+	     .stabn 68,0,1593,LM458-_G_Sensor_Check
+	     R3 = 0                   	// [0:1593]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1593]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1593]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1593]  
+//1596  										     velocityx[0]=0;
+//1597  											 velocityx[1]=0;
+//1598  
+//1599  											#endif
+//1600  											 return C_MovFail;
 
 LM459:
-	     .stabn 68,0,1605,LM459-_G_Sensor_Check
-	     R1 = 8192                	// [6:1605]  
-	     SP = SP + 110            	// [8:1605]  
-	     pop BP, PC from [SP]     	// [10:1605]  
+	     .stabn 68,0,1600,LM459-_G_Sensor_Check
+	     R1 = 8192                	// [6:1600]  
+	     SP = SP + 110            	// [8:1600]  
+	     pop BP, PC from [SP]     	// [10:1600]  
 L_10_228:	// 0x12b4
 // BB:147 cycle count: 3
 
@@ -8086,316 +8086,316 @@ LM460:
 	     goto L_10_225            	// [0:1542]  
 L_10_226:	// 0x12b6
 // BB:148 cycle count: 15
-//1611                              	
-//1612                                else
-//1613                                	{
-//1614  
-//1615  								  if((positionX[1]<(V_Back>>1))&&(positionX_Min<V_Back))
+//1606                              	
+//1607                                else
+//1608                                	{
+//1609  
+//1610  								  if((positionX[1]<(V_X_M>>1))&&(positionX_Min<V_X_M))
 
 LM461:
-	     .stabn 68,0,1615,LM461-_G_Sensor_Check
-	     DS = seg(_positionX+2)   	// [0:1615]  positionX+2
-	     R3 = (_positionX+2)      	// [1:1615]  positionX+2
-	     R4 = DS:[R3++]           	// [3:1615]  
-	     [BP + 51] = R4           	// [5:1615]  lcl_spill_temp_164
-	     R4 = DS:[R3]             	// [6:1615]  
-	     [BP + 52] = R4           	// [8:1615]  lcl_spill_temp_165
-	     cmp R4, 65533            	// [9:1615]  
-	     jle BB149_PU10           	// [11:1615]  
+	     .stabn 68,0,1610,LM461-_G_Sensor_Check
+	     DS = seg(_positionX+2)   	// [0:1610]  positionX+2
+	     R3 = (_positionX+2)      	// [1:1610]  positionX+2
+	     R4 = DS:[R3++]           	// [3:1610]  
+	     [BP + 51] = R4           	// [5:1610]  lcl_spill_temp_164
+	     R4 = DS:[R3]             	// [6:1610]  
+	     [BP + 52] = R4           	// [8:1610]  lcl_spill_temp_165
+	     cmp R4, 65533            	// [9:1610]  
+	     jle BB149_PU10           	// [11:1610]  
 BB305_PU10:	// 0x12c0
 // BB:305 cycle count: 3
 	     goto L_10_237            	// [0:0]  
 BB149_PU10:	// 0x12c2
 // BB:149 cycle count: 8
-	     R4 = [BP + 52]           	// [0:1615]  lcl_spill_temp_165
-	     cmp R4, 65533            	// [2:1615]  
-	     jne BB151_PU10           	// [4:1615]  
+	     R4 = [BP + 52]           	// [0:1610]  lcl_spill_temp_165
+	     cmp R4, 65533            	// [2:1610]  
+	     jne BB151_PU10           	// [4:1610]  
 BB150_PU10:	// 0x12c6
 // BB:150 cycle count: 8
-	     R4 = [BP + 51]           	// [0:1615]  lcl_spill_temp_164
-	     cmp R4, 21608            	// [2:1615]  
-	     jae BB305_PU10           	// [4:1615]  
+	     R4 = [BP + 51]           	// [0:1610]  lcl_spill_temp_164
+	     cmp R4, 21608            	// [2:1610]  
+	     jae BB305_PU10           	// [4:1610]  
 BB151_PU10:	// 0x12ca
 // BB:151 cycle count: 15
-	     DS = seg(_positionX_Min) 	// [0:1615]  positionX_Min
-	     R3 = (_positionX_Min)    	// [1:1615]  positionX_Min
-	     R4 = DS:[R3++]           	// [3:1615]  
-	     [BP + 53] = R4           	// [5:1615]  lcl_spill_temp_166
-	     R4 = DS:[R3]             	// [6:1615]  
-	     [BP + 54] = R4           	// [8:1615]  lcl_spill_temp_167
-	     cmp R4, 65530            	// [9:1615]  
-	     jle BB152_PU10           	// [11:1615]  
+	     DS = seg(_positionX_Min) 	// [0:1610]  positionX_Min
+	     R3 = (_positionX_Min)    	// [1:1610]  positionX_Min
+	     R4 = DS:[R3++]           	// [3:1610]  
+	     [BP + 53] = R4           	// [5:1610]  lcl_spill_temp_166
+	     R4 = DS:[R3]             	// [6:1610]  
+	     [BP + 54] = R4           	// [8:1610]  lcl_spill_temp_167
+	     cmp R4, 65530            	// [9:1610]  
+	     jle BB152_PU10           	// [11:1610]  
 BB306_PU10:	// 0x12d4
 // BB:306 cycle count: 3
 	     goto L_10_237            	// [0:0]  
 BB152_PU10:	// 0x12d6
 // BB:152 cycle count: 8
-	     R4 = [BP + 54]           	// [0:1615]  lcl_spill_temp_167
-	     cmp R4, 65530            	// [2:1615]  
-	     jne BB154_PU10           	// [4:1615]  
+	     R4 = [BP + 54]           	// [0:1610]  lcl_spill_temp_167
+	     cmp R4, 65530            	// [2:1610]  
+	     jne BB154_PU10           	// [4:1610]  
 BB153_PU10:	// 0x12da
 // BB:153 cycle count: 8
-	     R4 = [BP + 53]           	// [0:1615]  lcl_spill_temp_166
-	     cmp R4, 43216            	// [2:1615]  
-	     jae BB306_PU10           	// [4:1615]  
+	     R4 = [BP + 53]           	// [0:1610]  lcl_spill_temp_166
+	     cmp R4, 43216            	// [2:1610]  
+	     jae BB306_PU10           	// [4:1610]  
 BB154_PU10:	// 0x12de
 L_10_238:	// 0x12de
 // BB:154 cycle count: 11
-//1616  								  	{
-//1617  					                     	
-//1618  										 if(G_Sensor_Status&G_Back)
+//1611  								  	{
+//1612  					                     	
+//1613  										 if(G_Sensor_Status&G_X_M)
 
 LM462:
-	     .stabn 68,0,1618,LM462-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1618]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1618]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1618]  
-	     R4 = R4 & 32             	// [5:1618]  
-	     cmp R4, 0                	// [6:1618]  
-	     jne BB155_PU10           	// [7:1618]  
+	     .stabn 68,0,1613,LM462-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1613]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1613]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1613]  
+	     R4 = R4 & 4              	// [5:1613]  
+	     cmp R4, 0                	// [6:1613]  
+	     jne BB155_PU10           	// [7:1613]  
 BB307_PU10:	// 0x12e5
 // BB:307 cycle count: 3
 	     goto L_10_240            	// [0:0]  
 BB155_PU10:	// 0x12e7
 // BB:155 cycle count: 11
-//1619  										  {
-//1620  
-//1621  
-//1622  												 if((stepflag&0x03)==0x03)
+//1614  										  {
+//1615  
+//1616  
+//1617  												 if((stepflag&0x03)==0x03)
 
 LM463:
-	     .stabn 68,0,1622,LM463-_G_Sensor_Check
-	     DS = seg(_stepflag)      	// [0:1622]  stepflag
-	     R4 = (_stepflag)         	// [1:1622]  stepflag
-	     R4 = DS:[R4]             	// [3:1622]  
-	     R4 = R4 & 3              	// [5:1622]  
-	     cmp R4, 3                	// [6:1622]  
-	     jne L_10_241             	// [7:1622]  
+	     .stabn 68,0,1617,LM463-_G_Sensor_Check
+	     DS = seg(_stepflag)      	// [0:1617]  stepflag
+	     R4 = (_stepflag)         	// [1:1617]  stepflag
+	     R4 = DS:[R4]             	// [3:1617]  
+	     R4 = R4 & 3              	// [5:1617]  
+	     cmp R4, 3                	// [6:1617]  
+	     jne L_10_241             	// [7:1617]  
 BB156_PU10:	// 0x12ee
 // BB:156 cycle count: 15
-//1623  												 {
-//1624  												 
-//1625  												 
-//1626  												   if(MAX_time_Max>MAX_time_Min )
+//1618  												 {
+//1619  												 
+//1620  												 
+//1621  												   if(MAX_time_Max>MAX_time_Min )
 
 LM464:
-	     .stabn 68,0,1626,LM464-_G_Sensor_Check
-	     DS = seg(_MAX_time_Max)  	// [0:1626]  MAX_time_Max
-	     R4 = (_MAX_time_Max)     	// [1:1626]  MAX_time_Max
-	     R3 = DS:[R4]             	// [3:1626]  
-	     DS = seg(_MAX_time_Min)  	// [5:1626]  MAX_time_Min
-	     R4 = (_MAX_time_Min)     	// [6:1626]  MAX_time_Min
-	     R4 = DS:[R4]             	// [8:1626]  
-	     cmp R3, R4               	// [10:1626]  
-	     jbe L_10_242             	// [11:1626]  
+	     .stabn 68,0,1621,LM464-_G_Sensor_Check
+	     DS = seg(_MAX_time_Max)  	// [0:1621]  MAX_time_Max
+	     R4 = (_MAX_time_Max)     	// [1:1621]  MAX_time_Max
+	     R3 = DS:[R4]             	// [3:1621]  
+	     DS = seg(_MAX_time_Min)  	// [5:1621]  MAX_time_Min
+	     R4 = (_MAX_time_Min)     	// [6:1621]  MAX_time_Min
+	     R4 = DS:[R4]             	// [8:1621]  
+	     cmp R3, R4               	// [10:1621]  
+	     jbe L_10_242             	// [11:1621]  
 BB157_PU10:	// 0x12f8
 // BB:157 cycle count: 14
-//1627  													 {
-//1628  														  
-//1629  														if(positionX_Max>V_Position_Max)
+//1622  													 {
+//1623  														  
+//1624  														if(positionX_Max>V_Position_Max)
 
 LM465:
-	     .stabn 68,0,1629,LM465-_G_Sensor_Check
-	     DS = seg(_positionX_Max) 	// [0:1629]  positionX_Max
-	     R3 = (_positionX_Max)    	// [1:1629]  positionX_Max
-	     R4 = DS:[R3++]           	// [3:1629]  
-	     [BP + 55] = R4           	// [5:1629]  lcl_spill_temp_168
-	     R4 = DS:[R3]             	// [6:1629]  
-	     [BP + 56] = R4           	// [8:1629]  lcl_spill_temp_169
-	     cmp R4, 4                	// [9:1629]  
-	     jl L_10_243              	// [10:1629]  
+	     .stabn 68,0,1624,LM465-_G_Sensor_Check
+	     DS = seg(_positionX_Max) 	// [0:1624]  positionX_Max
+	     R3 = (_positionX_Max)    	// [1:1624]  positionX_Max
+	     R4 = DS:[R3++]           	// [3:1624]  
+	     [BP + 55] = R4           	// [5:1624]  lcl_spill_temp_168
+	     R4 = DS:[R3]             	// [6:1624]  
+	     [BP + 56] = R4           	// [8:1624]  lcl_spill_temp_169
+	     cmp R4, 4                	// [9:1624]  
+	     jl L_10_243              	// [10:1624]  
 BB158_PU10:	// 0x1301
 // BB:158 cycle count: 7
-	     R4 = [BP + 56]           	// [0:1629]  lcl_spill_temp_169
-	     cmp R4, 4                	// [2:1629]  
-	     jne BB160_PU10           	// [3:1629]  
+	     R4 = [BP + 56]           	// [0:1624]  lcl_spill_temp_169
+	     cmp R4, 4                	// [2:1624]  
+	     jne BB160_PU10           	// [3:1624]  
 BB159_PU10:	// 0x1304
 // BB:159 cycle count: 8
-	     R4 = [BP + 55]           	// [0:1629]  lcl_spill_temp_168
-	     cmp R4, 17856            	// [2:1629]  
-	     jbe L_10_243             	// [4:1629]  
+	     R4 = [BP + 55]           	// [0:1624]  lcl_spill_temp_168
+	     cmp R4, 17856            	// [2:1624]  
+	     jbe L_10_243             	// [4:1624]  
 BB160_PU10:	// 0x1308
 // BB:160 cycle count: 2
-//1630  															fakeflag =1;
+//1625  															fakeflag =1;
 
 LM466:
-	     .stabn 68,0,1630,LM466-_G_Sensor_Check
-	     R4 = 1                   	// [0:1630]  
-	     [BP + 10] = R4           	// [1:1630]  fakeflag
+	     .stabn 68,0,1625,LM466-_G_Sensor_Check
+	     R4 = 1                   	// [0:1625]  
+	     [BP + 10] = R4           	// [1:1625]  fakeflag
 L_10_243:	// 0x130a
 L_10_242:	// 0x130a
 L_10_241:	// 0x130a
 // BB:161 cycle count: 11
-//1632  													 }
-//1633  												 
-//1634  												 }
-//1635  
-//1636  												 if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
+//1627  													 }
+//1628  												 
+//1629  												 }
+//1630  
+//1631  												 if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
 
 LM467:
-	     .stabn 68,0,1636,LM467-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1636]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1636]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1636]  
-	     R4 = R4 & 12             	// [5:1636]  
-	     cmp R4, 12               	// [6:1636]  
-	     jne L_10_245             	// [7:1636]  
+	     .stabn 68,0,1631,LM467-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1631]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1631]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1631]  
+	     R4 = R4 & 12             	// [5:1631]  
+	     cmp R4, 12               	// [6:1631]  
+	     jne L_10_245             	// [7:1631]  
 BB162_PU10:	// 0x1311
 // BB:162 cycle count: 21
-//1637  												   {
-//1638  												 
-//1639  													   
-//1640  													   G_Sensor_Status&=~G_SPIN;//G_TurnAround;
+//1632  												   {
+//1633  												 
+//1634  													   
+//1635  													   G_Sensor_Status&=~G_SPIN;//G_TurnAround;
 
 LM468:
-	     .stabn 68,0,1640,LM468-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1640]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1640]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1640]  
-	     R3 = R4 & 64499          	// [5:1640]  
-	     DS = seg(_G_Sensor_Status)	// [7:1640]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1640]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1640]  
-//1641  													   return C_MovSucess;
+	     .stabn 68,0,1635,LM468-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1635]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1635]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1635]  
+	     R3 = R4 & 64499          	// [5:1635]  
+	     DS = seg(_G_Sensor_Status)	// [7:1635]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1635]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1635]  
+//1636  													   return C_MovSucess;
 
 LM469:
-	     .stabn 68,0,1641,LM469-_G_Sensor_Check
-	     R1 = 4096                	// [12:1641]  
-	     SP = SP + 110            	// [14:1641]  
-	     pop BP, PC from [SP]     	// [16:1641]  
+	     .stabn 68,0,1636,LM469-_G_Sensor_Check
+	     R1 = 4096                	// [12:1636]  
+	     SP = SP + 110            	// [14:1636]  
+	     pop BP, PC from [SP]     	// [16:1636]  
 L_10_245:	// 0x1320
 // BB:163 cycle count: 7
-//1644  												 
-//1645  												 
-//1646  												   }
-//1647  											 															  
-//1648  												 else if(fakeflag==0)
+//1639  												 
+//1640  												 
+//1641  												   }
+//1642  											 															  
+//1643  												 else if(fakeflag==0)
 
 LM470:
-	     .stabn 68,0,1648,LM470-_G_Sensor_Check
-	     R4 = [BP + 10]           	// [0:1648]  fakeflag
-	     cmp R4, 0                	// [2:1648]  
-	     jne L_10_247             	// [3:1648]  
+	     .stabn 68,0,1643,LM470-_G_Sensor_Check
+	     R4 = [BP + 10]           	// [0:1643]  fakeflag
+	     cmp R4, 0                	// [2:1643]  
+	     jne L_10_247             	// [3:1643]  
 BB164_PU10:	// 0x1323
 // BB:164 cycle count: 21
-//1649  												  {
-//1650  
-//1651  														 G_Sensor_Status&=~G_Back;
+//1644  												  {
+//1645  
+//1646  														 G_Sensor_Status&=~G_X_M;
 
 LM471:
-	     .stabn 68,0,1651,LM471-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1651]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1651]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1651]  
-	     R3 = R4 & 65503          	// [5:1651]  
-	     DS = seg(_G_Sensor_Status)	// [7:1651]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1651]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1651]  
-//1652  												         return C_MovSucess;
+	     .stabn 68,0,1646,LM471-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1646]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1646]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1646]  
+	     R3 = R4 & 65531          	// [5:1646]  
+	     DS = seg(_G_Sensor_Status)	// [7:1646]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1646]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1646]  
+//1647  												         return C_MovSucess;
 
 LM472:
-	     .stabn 68,0,1652,LM472-_G_Sensor_Check
-	     R1 = 4096                	// [12:1652]  
-	     SP = SP + 110            	// [14:1652]  
-	     pop BP, PC from [SP]     	// [16:1652]  
+	     .stabn 68,0,1647,LM472-_G_Sensor_Check
+	     R1 = 4096                	// [12:1647]  
+	     SP = SP + 110            	// [14:1647]  
+	     pop BP, PC from [SP]     	// [16:1647]  
 L_10_247:	// 0x1332
 // BB:165 cycle count: 3
-//1654  															  
-//1655  													}
-//1656  													else
-//1657  													  {
-//1658  														  	  R_Position_init();
+//1649  															  
+//1650  													}
+//1651  													else
+//1652  													  {
+//1653  														  	  R_Position_init();
 
 LM473:
-	     .stabn 68,0,1658,LM473-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1658]  R_Position_init
+	     .stabn 68,0,1653,LM473-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1653]  R_Position_init
 BB166_PU10:	// 0x1334
 // BB:166 cycle count: 6
-//1659  														  	   TimeCnt_Total =0;
+//1654  														  	   TimeCnt_Total =0;
 
 LM474:
-	     .stabn 68,0,1659,LM474-_G_Sensor_Check
-	     R3 = 0                   	// [0:1659]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1659]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1659]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1659]  
+	     .stabn 68,0,1654,LM474-_G_Sensor_Check
+	     R3 = 0                   	// [0:1654]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1654]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1654]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1654]  
 L_10_246:	// 0x1339
 L_10_244:	// 0x1339
 // BB:167 cycle count: 4
 
 LM475:
-	     .stabn 68,0,1636,LM475-_G_Sensor_Check
-	     jmp L_10_239             	// [0:1636]  
+	     .stabn 68,0,1631,LM475-_G_Sensor_Check
+	     jmp L_10_239             	// [0:1631]  
 L_10_240:	// 0x133a
 // BB:168 cycle count: 3
-//1665  													 	{
-//1666  
-//1667  	
-//1668  															 
-//1669  															 R_Position_init();
+//1660  													 	{
+//1661  
+//1662  	
+//1663  															 
+//1664  															 R_Position_init();
 
 LM476:
-	     .stabn 68,0,1669,LM476-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1669]  R_Position_init
+	     .stabn 68,0,1664,LM476-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1664]  R_Position_init
 BB169_PU10:	// 0x133c
 // BB:169 cycle count: 15
-//1670  															  TimeCnt_Total =0;
+//1665  															  TimeCnt_Total =0;
 
 LM477:
-	     .stabn 68,0,1670,LM477-_G_Sensor_Check
-	     R3 = 0                   	// [0:1670]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1670]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1670]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1670]  
-//1673  															#if Clean_Velocity  
-//1674  															  velocityx[0]=0;
-//1675  															  velocityx[1]=0;
-//1676                                                              #endif
-//1677  															  return C_MovFail;
+	     .stabn 68,0,1665,LM477-_G_Sensor_Check
+	     R3 = 0                   	// [0:1665]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1665]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1665]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1665]  
+//1668  															#if Clean_Velocity  
+//1669  															  velocityx[0]=0;
+//1670  															  velocityx[1]=0;
+//1671                                                              #endif
+//1672  															  return C_MovFail;
 
 LM478:
-	     .stabn 68,0,1677,LM478-_G_Sensor_Check
-	     R1 = 8192                	// [6:1677]  
-	     SP = SP + 110            	// [8:1677]  
-	     pop BP, PC from [SP]     	// [10:1677]  
+	     .stabn 68,0,1672,LM478-_G_Sensor_Check
+	     R1 = 8192                	// [6:1672]  
+	     SP = SP + 110            	// [8:1672]  
+	     pop BP, PC from [SP]     	// [10:1672]  
 L_10_239:	// 0x1346
 L_10_237:	// 0x1346
 L_10_225:	// 0x1346
 L_10_224:	// 0x1346
 L_10_223:	// 0x1346
 // BB:170 cycle count: 11
-//1689  						  }
-//1690  						}
-//1691  				   }
-//1692  			
-//1693  					 if(G_Sensor_Status&(G_Right|G_Left))
+//1684  						  }
+//1685  						}
+//1686  				   }
+//1687  			
+//1688  					 if(G_Sensor_Status&(G_Y_A|G_Y_M))
 
 LM479:
-	     .stabn 68,0,1693,LM479-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1693]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1693]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1693]  
-	     R4 = R4 & 12             	// [5:1693]  
-	     cmp R4, 0                	// [6:1693]  
-	     jne BB171_PU10           	// [7:1693]  
+	     .stabn 68,0,1688,LM479-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1688]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1688]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1688]  
+	     R4 = R4 & 48             	// [5:1688]  
+	     cmp R4, 0                	// [6:1688]  
+	     jne BB171_PU10           	// [7:1688]  
 BB292_PU10:	// 0x134d
 // BB:292 cycle count: 3
 	     goto L_10_248            	// [0:0]  
 BB171_PU10:	// 0x134f
 // BB:171 cycle count: 10
-//1698  //							   if ((temp_long <=500)&&(temp_long >= -500))
-//1699  //								   TimeCnt_Total =0;
-//1700  
-//1701  
-//1702  					        if((TimeCnt_Total>512*0.5))//0.5  (Y_cnt>6)&&
+//1693  //							   if ((temp_long <=500)&&(temp_long >= -500))
+//1694  //								   TimeCnt_Total =0;
+//1695  
+//1696  
+//1697  					        if((TimeCnt_Total>512*0.5))//0.5  (Y_cnt>6)&&
 
 LM480:
-	     .stabn 68,0,1702,LM480-_G_Sensor_Check
-	     DS = seg(_TimeCnt_Total) 	// [0:1702]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [1:1702]  TimeCnt_Total
-	     R4 = DS:[R4]             	// [3:1702]  
-	     push R4 to [SP]          	// [5:1702]  
-	     call __cvu1d4            	// [7:1702]  _cvu1d4
+	     .stabn 68,0,1697,LM480-_G_Sensor_Check
+	     DS = seg(_TimeCnt_Total) 	// [0:1697]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [1:1697]  TimeCnt_Total
+	     R4 = DS:[R4]             	// [3:1697]  
+	     push R4 to [SP]          	// [5:1697]  
+	     call __cvu1d4            	// [7:1697]  _cvu1d4
 BB172_PU10:	// 0x1356
 // BB:172 cycle count: 38
 	     SP = SP + 1              	// [0:0]  
@@ -8429,506 +8429,506 @@ BB293_PU10:	// 0x1372
 	     goto L_10_249            	// [0:0]  
 BB174_PU10:	// 0x1374
 // BB:174 cycle count: 16
-//1703  								{
-//1704  
-//1705                                         fakeflag =0;
+//1698  								{
+//1699  
+//1700                                         fakeflag =0;
 
 LM481:
-	     .stabn 68,0,1705,LM481-_G_Sensor_Check
-	     R4 = 0                   	// [0:1705]  
-	     [BP + 10] = R4           	// [1:1705]  fakeflag
-//1706  								  														
-//1707  
-//1708                                         if((positionY[1]>(V_Left>>1))&&(positionY_Max>V_Left))	
+	     .stabn 68,0,1700,LM481-_G_Sensor_Check
+	     R4 = 0                   	// [0:1700]  
+	     [BP + 10] = R4           	// [1:1700]  fakeflag
+//1701  								  														
+//1702  
+//1703                                         if((positionY[1]>(V_Y_A>>1))&&(positionY_Max>V_Y_A))	
 
 LM482:
-	     .stabn 68,0,1708,LM482-_G_Sensor_Check
-	     DS = seg(_positionY+2)   	// [2:1708]  positionY+2
-	     R3 = (_positionY+2)      	// [3:1708]  positionY+2
-	     R4 = DS:[R3++]           	// [5:1708]  
-	     [BP + 57] = R4           	// [7:1708]  lcl_spill_temp_170
-	     R4 = DS:[R3]             	// [8:1708]  
-	     [BP + 58] = R4           	// [10:1708]  lcl_spill_temp_171
-	     cmp R4, 2                	// [11:1708]  
-	     jge BB175_PU10           	// [12:1708]  
+	     .stabn 68,0,1703,LM482-_G_Sensor_Check
+	     DS = seg(_positionY+2)   	// [2:1703]  positionY+2
+	     R3 = (_positionY+2)      	// [3:1703]  positionY+2
+	     R4 = DS:[R3++]           	// [5:1703]  
+	     [BP + 57] = R4           	// [7:1703]  lcl_spill_temp_170
+	     R4 = DS:[R3]             	// [8:1703]  
+	     [BP + 58] = R4           	// [10:1703]  lcl_spill_temp_171
+	     cmp R4, 2                	// [11:1703]  
+	     jge BB175_PU10           	// [12:1703]  
 BB300_PU10:	// 0x137f
 // BB:300 cycle count: 3
 	     goto L_10_251            	// [0:0]  
 BB175_PU10:	// 0x1381
 // BB:175 cycle count: 7
-	     R4 = [BP + 58]           	// [0:1708]  lcl_spill_temp_171
-	     cmp R4, 2                	// [2:1708]  
-	     jne BB177_PU10           	// [3:1708]  
+	     R4 = [BP + 58]           	// [0:1703]  lcl_spill_temp_171
+	     cmp R4, 2                	// [2:1703]  
+	     jne BB177_PU10           	// [3:1703]  
 BB176_PU10:	// 0x1384
 // BB:176 cycle count: 8
-	     R4 = [BP + 57]           	// [0:1708]  lcl_spill_temp_170
-	     cmp R4, 43928            	// [2:1708]  
-	     jbe BB300_PU10           	// [4:1708]  
+	     R4 = [BP + 57]           	// [0:1703]  lcl_spill_temp_170
+	     cmp R4, 43928            	// [2:1703]  
+	     jbe BB300_PU10           	// [4:1703]  
 BB177_PU10:	// 0x1388
 // BB:177 cycle count: 14
-	     DS = seg(_positionY_Max) 	// [0:1708]  positionY_Max
-	     R3 = (_positionY_Max)    	// [1:1708]  positionY_Max
-	     R4 = DS:[R3++]           	// [3:1708]  
-	     [BP + 59] = R4           	// [5:1708]  lcl_spill_temp_172
-	     R4 = DS:[R3]             	// [6:1708]  
-	     [BP + 60] = R4           	// [8:1708]  lcl_spill_temp_173
-	     cmp R4, 5                	// [9:1708]  
-	     jge BB178_PU10           	// [10:1708]  
+	     DS = seg(_positionY_Max) 	// [0:1703]  positionY_Max
+	     R3 = (_positionY_Max)    	// [1:1703]  positionY_Max
+	     R4 = DS:[R3++]           	// [3:1703]  
+	     [BP + 59] = R4           	// [5:1703]  lcl_spill_temp_172
+	     R4 = DS:[R3]             	// [6:1703]  
+	     [BP + 60] = R4           	// [8:1703]  lcl_spill_temp_173
+	     cmp R4, 5                	// [9:1703]  
+	     jge BB178_PU10           	// [10:1703]  
 BB301_PU10:	// 0x1391
 // BB:301 cycle count: 3
 	     goto L_10_251            	// [0:0]  
 BB178_PU10:	// 0x1393
 // BB:178 cycle count: 7
-	     R4 = [BP + 60]           	// [0:1708]  lcl_spill_temp_173
-	     cmp R4, 5                	// [2:1708]  
-	     jne BB180_PU10           	// [3:1708]  
+	     R4 = [BP + 60]           	// [0:1703]  lcl_spill_temp_173
+	     cmp R4, 5                	// [2:1703]  
+	     jne BB180_PU10           	// [3:1703]  
 BB179_PU10:	// 0x1396
 // BB:179 cycle count: 8
-	     R4 = [BP + 59]           	// [0:1708]  lcl_spill_temp_172
-	     cmp R4, 22320            	// [2:1708]  
-	     jbe BB301_PU10           	// [4:1708]  
+	     R4 = [BP + 59]           	// [0:1703]  lcl_spill_temp_172
+	     cmp R4, 22320            	// [2:1703]  
+	     jbe BB301_PU10           	// [4:1703]  
 BB180_PU10:	// 0x139a
 L_10_252:	// 0x139a
 // BB:180 cycle count: 11
-//1709                                             	{
-//1710                                             	
-//1711  											   
-//1712  											   if(G_Sensor_Status&G_Left)
+//1704                                             	{
+//1705                                             	
+//1706  											   
+//1707  											   if(G_Sensor_Status&G_Y_A)
 
 LM483:
-	     .stabn 68,0,1712,LM483-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1712]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1712]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1712]  
-	     R4 = R4 & 4              	// [5:1712]  
-	     cmp R4, 0                	// [6:1712]  
-	     je L_10_254              	// [7:1712]  
+	     .stabn 68,0,1707,LM483-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1707]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1707]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1707]  
+	     R4 = R4 & 16             	// [5:1707]  
+	     cmp R4, 0                	// [6:1707]  
+	     je L_10_254              	// [7:1707]  
 BB181_PU10:	// 0x13a1
 // BB:181 cycle count: 11
-//1713  												  {
-//1714  
-//1715  
-//1716  													  if((stepflag_Y&0x03)==0x03)
+//1708  												  {
+//1709  
+//1710  
+//1711  													  if((stepflag_Y&0x03)==0x03)
 
 LM484:
-	     .stabn 68,0,1716,LM484-_G_Sensor_Check
-	     DS = seg(_stepflag_Y)    	// [0:1716]  stepflag_Y
-	     R4 = (_stepflag_Y)       	// [1:1716]  stepflag_Y
-	     R4 = DS:[R4]             	// [3:1716]  
-	     R4 = R4 & 3              	// [5:1716]  
-	     cmp R4, 3                	// [6:1716]  
-	     jne L_10_255             	// [7:1716]  
+	     .stabn 68,0,1711,LM484-_G_Sensor_Check
+	     DS = seg(_stepflag_Y)    	// [0:1711]  stepflag_Y
+	     R4 = (_stepflag_Y)       	// [1:1711]  stepflag_Y
+	     R4 = DS:[R4]             	// [3:1711]  
+	     R4 = R4 & 3              	// [5:1711]  
+	     cmp R4, 3                	// [6:1711]  
+	     jne L_10_255             	// [7:1711]  
 BB182_PU10:	// 0x13a8
 // BB:182 cycle count: 15
-//1717  													  {
-//1718  													  
-//1719  													  
-//1720  														if(MAX_time_Min_Y>MAX_time_Max_Y)
+//1712  													  {
+//1713  													  
+//1714  													  
+//1715  														if(MAX_time_Min_Y>MAX_time_Max_Y)
 
 LM485:
-	     .stabn 68,0,1720,LM485-_G_Sensor_Check
-	     DS = seg(_MAX_time_Max_Y)	// [0:1720]  MAX_time_Max_Y
-	     R4 = (_MAX_time_Max_Y)   	// [1:1720]  MAX_time_Max_Y
-	     R3 = DS:[R4]             	// [3:1720]  
-	     DS = seg(_MAX_time_Min_Y)	// [5:1720]  MAX_time_Min_Y
-	     R4 = (_MAX_time_Min_Y)   	// [6:1720]  MAX_time_Min_Y
-	     R4 = DS:[R4]             	// [8:1720]  
-	     cmp R3, R4               	// [10:1720]  
-	     jae L_10_256             	// [11:1720]  
+	     .stabn 68,0,1715,LM485-_G_Sensor_Check
+	     DS = seg(_MAX_time_Max_Y)	// [0:1715]  MAX_time_Max_Y
+	     R4 = (_MAX_time_Max_Y)   	// [1:1715]  MAX_time_Max_Y
+	     R3 = DS:[R4]             	// [3:1715]  
+	     DS = seg(_MAX_time_Min_Y)	// [5:1715]  MAX_time_Min_Y
+	     R4 = (_MAX_time_Min_Y)   	// [6:1715]  MAX_time_Min_Y
+	     R4 = DS:[R4]             	// [8:1715]  
+	     cmp R3, R4               	// [10:1715]  
+	     jae L_10_256             	// [11:1715]  
 BB183_PU10:	// 0x13b2
 // BB:183 cycle count: 15
-//1721  														  {
-//1722  															   
-//1723  															 if(positionX_Min<V_Position_Min_Y)
+//1716  														  {
+//1717  															   
+//1718  															 if(positionX_Min<V_Position_Min_Y)
 
 LM486:
-	     .stabn 68,0,1723,LM486-_G_Sensor_Check
-	     DS = seg(_positionX_Min) 	// [0:1723]  positionX_Min
-	     R3 = (_positionX_Min)    	// [1:1723]  positionX_Min
-	     R4 = DS:[R3++]           	// [3:1723]  
-	     [BP + 61] = R4           	// [5:1723]  lcl_spill_temp_174
-	     R4 = DS:[R3]             	// [6:1723]  
-	     [BP + 62] = R4           	// [8:1723]  lcl_spill_temp_175
-	     cmp R4, 65533            	// [9:1723]  
-	     jg L_10_257              	// [11:1723]  
+	     .stabn 68,0,1718,LM486-_G_Sensor_Check
+	     DS = seg(_positionX_Min) 	// [0:1718]  positionX_Min
+	     R3 = (_positionX_Min)    	// [1:1718]  positionX_Min
+	     R4 = DS:[R3++]           	// [3:1718]  
+	     [BP + 61] = R4           	// [5:1718]  lcl_spill_temp_174
+	     R4 = DS:[R3]             	// [6:1718]  
+	     [BP + 62] = R4           	// [8:1718]  lcl_spill_temp_175
+	     cmp R4, 65533            	// [9:1718]  
+	     jg L_10_257              	// [11:1718]  
 BB184_PU10:	// 0x13bc
 // BB:184 cycle count: 8
-	     R4 = [BP + 62]           	// [0:1723]  lcl_spill_temp_175
-	     cmp R4, 65533            	// [2:1723]  
-	     jne BB186_PU10           	// [4:1723]  
+	     R4 = [BP + 62]           	// [0:1718]  lcl_spill_temp_175
+	     cmp R4, 65533            	// [2:1718]  
+	     jne BB186_PU10           	// [4:1718]  
 BB185_PU10:	// 0x13c0
 // BB:185 cycle count: 8
-	     R4 = [BP + 61]           	// [0:1723]  lcl_spill_temp_174
-	     cmp R4, 16608            	// [2:1723]  
-	     jae L_10_257             	// [4:1723]  
+	     R4 = [BP + 61]           	// [0:1718]  lcl_spill_temp_174
+	     cmp R4, 16608            	// [2:1718]  
+	     jae L_10_257             	// [4:1718]  
 BB186_PU10:	// 0x13c4
 // BB:186 cycle count: 2
-//1724  																 fakeflag =1;
+//1719  																 fakeflag =1;
 
 LM487:
-	     .stabn 68,0,1724,LM487-_G_Sensor_Check
-	     R4 = 1                   	// [0:1724]  
-	     [BP + 10] = R4           	// [1:1724]  fakeflag
+	     .stabn 68,0,1719,LM487-_G_Sensor_Check
+	     R4 = 1                   	// [0:1719]  
+	     [BP + 10] = R4           	// [1:1719]  fakeflag
 L_10_257:	// 0x13c6
 L_10_256:	// 0x13c6
 L_10_255:	// 0x13c6
 // BB:187 cycle count: 7
-//1727  													  
-//1728  													  }
-//1729  
-//1730  				
-//1731  													 if(fakeflag==0)
+//1722  													  
+//1723  													  }
+//1724  
+//1725  				
+//1726  													 if(fakeflag==0)
 
 LM488:
-	     .stabn 68,0,1731,LM488-_G_Sensor_Check
-	     R4 = [BP + 10]           	// [0:1731]  fakeflag
-	     cmp R4, 0                	// [2:1731]  
-	     jne L_10_259             	// [3:1731]  
+	     .stabn 68,0,1726,LM488-_G_Sensor_Check
+	     R4 = [BP + 10]           	// [0:1726]  fakeflag
+	     cmp R4, 0                	// [2:1726]  
+	     jne L_10_259             	// [3:1726]  
 BB188_PU10:	// 0x13c9
 // BB:188 cycle count: 21
-//1732  													 	{
-//1733  															  										 
-//1734  													         G_Sensor_Status&=~G_Left;
+//1727  													 	{
+//1728  															  										 
+//1729  													         G_Sensor_Status&=~G_Y_A;
 
 LM489:
-	     .stabn 68,0,1734,LM489-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1734]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1734]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1734]  
-	     R3 = R4 & 65531          	// [5:1734]  
-	     DS = seg(_G_Sensor_Status)	// [7:1734]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1734]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1734]  
-//1735  
-//1736  															  return C_MovSucess;
+	     .stabn 68,0,1729,LM489-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1729]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1729]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1729]  
+	     R3 = R4 & 65519          	// [5:1729]  
+	     DS = seg(_G_Sensor_Status)	// [7:1729]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1729]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1729]  
+//1730  
+//1731  															  return C_MovSucess;
 
 LM490:
-	     .stabn 68,0,1736,LM490-_G_Sensor_Check
-	     R1 = 4096                	// [12:1736]  
-	     SP = SP + 110            	// [14:1736]  
-	     pop BP, PC from [SP]     	// [16:1736]  
+	     .stabn 68,0,1731,LM490-_G_Sensor_Check
+	     R1 = 4096                	// [12:1731]  
+	     SP = SP + 110            	// [14:1731]  
+	     pop BP, PC from [SP]     	// [16:1731]  
 L_10_259:	// 0x13d8
 // BB:189 cycle count: 3
-//1738  
-//1739  													 	}
-//1740  													 else
-//1741  													 {
-//1742  													 	 R_Position_init();
+//1733  
+//1734  													 	}
+//1735  													 else
+//1736  													 {
+//1737  													 	 R_Position_init();
 
 LM491:
-	     .stabn 68,0,1742,LM491-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1742]  R_Position_init
+	     .stabn 68,0,1737,LM491-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1737]  R_Position_init
 BB190_PU10:	// 0x13da
 // BB:190 cycle count: 6
-//1743  													 	  TimeCnt_Total =0;
+//1738  													 	  TimeCnt_Total =0;
 
 LM492:
-	     .stabn 68,0,1743,LM492-_G_Sensor_Check
-	     R3 = 0                   	// [0:1743]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1743]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1743]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1743]  
+	     .stabn 68,0,1738,LM492-_G_Sensor_Check
+	     R3 = 0                   	// [0:1738]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1738]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1738]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1738]  
 L_10_258:	// 0x13df
 // BB:191 cycle count: 4
 
 LM493:
-	     .stabn 68,0,1731,LM493-_G_Sensor_Check
-	     jmp L_10_253             	// [0:1731]  
+	     .stabn 68,0,1726,LM493-_G_Sensor_Check
+	     jmp L_10_253             	// [0:1726]  
 L_10_254:	// 0x13e0
 // BB:192 cycle count: 3
-//1749  											    else
-//1750  											    	{
-//1751  																			   
-//1752  														 
-//1753  														R_Position_init();
+//1744  											    else
+//1745  											    	{
+//1746  																			   
+//1747  														 
+//1748  														R_Position_init();
 
 LM494:
-	     .stabn 68,0,1753,LM494-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1753]  R_Position_init
+	     .stabn 68,0,1748,LM494-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1748]  R_Position_init
 BB193_PU10:	// 0x13e2
 // BB:193 cycle count: 15
-//1754  														 TimeCnt_Total =0;
+//1749  														 TimeCnt_Total =0;
 
 LM495:
-	     .stabn 68,0,1754,LM495-_G_Sensor_Check
-	     R3 = 0                   	// [0:1754]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1754]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1754]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1754]  
-//1758  														velocityy[0]=0;
-//1759  														velocityy[1]=0;
-//1760                                                       #endif
-//1761  														
-//1762                                                          return C_MovFail;
+	     .stabn 68,0,1749,LM495-_G_Sensor_Check
+	     R3 = 0                   	// [0:1749]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1749]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1749]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1749]  
+//1753  														velocityy[0]=0;
+//1754  														velocityy[1]=0;
+//1755                                                       #endif
+//1756  														
+//1757                                                          return C_MovFail;
 
 LM496:
-	     .stabn 68,0,1762,LM496-_G_Sensor_Check
-	     R1 = 8192                	// [6:1762]  
-	     SP = SP + 110            	// [8:1762]  
-	     pop BP, PC from [SP]     	// [10:1762]  
+	     .stabn 68,0,1757,LM496-_G_Sensor_Check
+	     R1 = 8192                	// [6:1757]  
+	     SP = SP + 110            	// [8:1757]  
+	     pop BP, PC from [SP]     	// [10:1757]  
 L_10_253:	// 0x13ec
 // BB:194 cycle count: 3
 
 LM497:
-	     .stabn 68,0,1712,LM497-_G_Sensor_Check
-	     goto L_10_250            	// [0:1712]  
+	     .stabn 68,0,1707,LM497-_G_Sensor_Check
+	     goto L_10_250            	// [0:1707]  
 L_10_251:	// 0x13ee
 // BB:195 cycle count: 19
-//1771                                        else
-//1772                                        	{
-//1773  
-//1774  	
-//1775  										if((positionY[1]<(V_Right>>1))&&(positionY_Min<V_Right))
+//1766                                        else
+//1767                                        	{
+//1768  
+//1769  	
+//1770  										if((positionY[1]<(V_Y_M>>1))&&(positionY_Min<V_Y_M))
 
 LM498:
-	     .stabn 68,0,1775,LM498-_G_Sensor_Check
-	     DS = seg(_positionY+2)   	// [0:1775]  positionY+2
-	     R3 = (_positionY+2)      	// [1:1775]  positionY+2
-	     R4 = DS:[R3++]           	// [3:1775]  
-	     [BP + 63] = R4           	// [5:1775]  lcl_spill_temp_176
-	     R4 = DS:[R3]             	// [6:1775]  
-	     BP = BP + 64             	// [8:1775]  
-	     [BP + 0] = R4            	// [10:1775]  lcl_spill_temp_177
-	     BP = BP - 64             	// [11:1775]  
-	     cmp R4, 65534            	// [13:1775]  
-	     jle BB196_PU10           	// [15:1775]  
+	     .stabn 68,0,1770,LM498-_G_Sensor_Check
+	     DS = seg(_positionY+2)   	// [0:1770]  positionY+2
+	     R3 = (_positionY+2)      	// [1:1770]  positionY+2
+	     R4 = DS:[R3++]           	// [3:1770]  
+	     [BP + 63] = R4           	// [5:1770]  lcl_spill_temp_176
+	     R4 = DS:[R3]             	// [6:1770]  
+	     BP = BP + 64             	// [8:1770]  
+	     [BP + 0] = R4            	// [10:1770]  lcl_spill_temp_177
+	     BP = BP - 64             	// [11:1770]  
+	     cmp R4, 65534            	// [13:1770]  
+	     jle BB196_PU10           	// [15:1770]  
 BB295_PU10:	// 0x13fc
 // BB:295 cycle count: 3
 	     goto L_10_260            	// [0:0]  
 BB196_PU10:	// 0x13fe
 // BB:196 cycle count: 12
-	     BP = BP + 64             	// [0:1775]  
-	     R4 = [BP + 0]            	// [2:1775]  lcl_spill_temp_177
-	     BP = BP - 64             	// [4:1775]  
-	     cmp R4, 65534            	// [6:1775]  
-	     jne BB198_PU10           	// [8:1775]  
+	     BP = BP + 64             	// [0:1770]  
+	     R4 = [BP + 0]            	// [2:1770]  lcl_spill_temp_177
+	     BP = BP - 64             	// [4:1770]  
+	     cmp R4, 65534            	// [6:1770]  
+	     jne BB198_PU10           	// [8:1770]  
 BB197_PU10:	// 0x1406
 // BB:197 cycle count: 8
-	     R4 = [BP + 63]           	// [0:1775]  lcl_spill_temp_176
-	     cmp R4, 6072             	// [2:1775]  
-	     jb BB198_PU10            	// [4:1775]  
+	     R4 = [BP + 63]           	// [0:1770]  lcl_spill_temp_176
+	     cmp R4, 6072             	// [2:1770]  
+	     jb BB198_PU10            	// [4:1770]  
 BB296_PU10:	// 0x140a
 // BB:296 cycle count: 3
 	     goto L_10_260            	// [0:0]  
 BB198_PU10:	// 0x140c
 // BB:198 cycle count: 19
-	     DS = seg(_positionY_Min) 	// [0:1775]  positionY_Min
-	     R3 = (_positionY_Min)    	// [1:1775]  positionY_Min
-	     R4 = DS:[R3++]           	// [3:1775]  
-	     BP = BP + 65             	// [5:1775]  
-	     [BP + 0] = R4            	// [7:1775]  lcl_spill_temp_178
-	     R4 = DS:[R3]             	// [8:1775]  
-	     [BP + 1] = R4            	// [10:1775]  lcl_spill_temp_179
-	     BP = BP - 65             	// [11:1775]  
-	     cmp R4, 65532            	// [13:1775]  
-	     jle BB199_PU10           	// [15:1775]  
+	     DS = seg(_positionY_Min) 	// [0:1770]  positionY_Min
+	     R3 = (_positionY_Min)    	// [1:1770]  positionY_Min
+	     R4 = DS:[R3++]           	// [3:1770]  
+	     BP = BP + 65             	// [5:1770]  
+	     [BP + 0] = R4            	// [7:1770]  lcl_spill_temp_178
+	     R4 = DS:[R3]             	// [8:1770]  
+	     [BP + 1] = R4            	// [10:1770]  lcl_spill_temp_179
+	     BP = BP - 65             	// [11:1770]  
+	     cmp R4, 65532            	// [13:1770]  
+	     jle BB199_PU10           	// [15:1770]  
 BB297_PU10:	// 0x141a
 // BB:297 cycle count: 3
 	     goto L_10_260            	// [0:0]  
 BB199_PU10:	// 0x141c
 // BB:199 cycle count: 12
-	     BP = BP + 66             	// [0:1775]  
-	     R4 = [BP + 0]            	// [2:1775]  lcl_spill_temp_179
-	     BP = BP - 66             	// [4:1775]  
-	     cmp R4, 65532            	// [6:1775]  
-	     jne BB201_PU10           	// [8:1775]  
+	     BP = BP + 66             	// [0:1770]  
+	     R4 = [BP + 0]            	// [2:1770]  lcl_spill_temp_179
+	     BP = BP - 66             	// [4:1770]  
+	     cmp R4, 65532            	// [6:1770]  
+	     jne BB201_PU10           	// [8:1770]  
 BB200_PU10:	// 0x1424
 // BB:200 cycle count: 12
-	     BP = BP + 65             	// [0:1775]  
-	     R4 = [BP + 0]            	// [2:1775]  lcl_spill_temp_178
-	     BP = BP - 65             	// [4:1775]  
-	     cmp R4, 12144            	// [6:1775]  
-	     jb BB201_PU10            	// [8:1775]  
+	     BP = BP + 65             	// [0:1770]  
+	     R4 = [BP + 0]            	// [2:1770]  lcl_spill_temp_178
+	     BP = BP - 65             	// [4:1770]  
+	     cmp R4, 12144            	// [6:1770]  
+	     jb BB201_PU10            	// [8:1770]  
 BB298_PU10:	// 0x142c
 // BB:298 cycle count: 3
 	     goto L_10_260            	// [0:0]  
 BB201_PU10:	// 0x142e
 L_10_261:	// 0x142e
 // BB:201 cycle count: 11
-//1776  										  	{									
-//1777  
-//1778  												 if(G_Sensor_Status&G_Right)
+//1771  										  	{									
+//1772  
+//1773  												 if(G_Sensor_Status&G_Y_M)
 
 LM499:
-	     .stabn 68,0,1778,LM499-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1778]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1778]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1778]  
-	     R4 = R4 & 8              	// [5:1778]  
-	     cmp R4, 0                	// [6:1778]  
-	     jne BB202_PU10           	// [7:1778]  
+	     .stabn 68,0,1773,LM499-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1773]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1773]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1773]  
+	     R4 = R4 & 32             	// [5:1773]  
+	     cmp R4, 0                	// [6:1773]  
+	     jne BB202_PU10           	// [7:1773]  
 BB299_PU10:	// 0x1435
 // BB:299 cycle count: 3
 	     goto L_10_263            	// [0:0]  
 BB202_PU10:	// 0x1437
 // BB:202 cycle count: 11
-//1779  												   {
-//1780  
-//1781  
-//1782  													   if((stepflag_Y&0x03)==0x03)
+//1774  												   {
+//1775  
+//1776  
+//1777  													   if((stepflag_Y&0x03)==0x03)
 
 LM500:
-	     .stabn 68,0,1782,LM500-_G_Sensor_Check
-	     DS = seg(_stepflag_Y)    	// [0:1782]  stepflag_Y
-	     R4 = (_stepflag_Y)       	// [1:1782]  stepflag_Y
-	     R4 = DS:[R4]             	// [3:1782]  
-	     R4 = R4 & 3              	// [5:1782]  
-	     cmp R4, 3                	// [6:1782]  
-	     jne L_10_264             	// [7:1782]  
+	     .stabn 68,0,1777,LM500-_G_Sensor_Check
+	     DS = seg(_stepflag_Y)    	// [0:1777]  stepflag_Y
+	     R4 = (_stepflag_Y)       	// [1:1777]  stepflag_Y
+	     R4 = DS:[R4]             	// [3:1777]  
+	     R4 = R4 & 3              	// [5:1777]  
+	     cmp R4, 3                	// [6:1777]  
+	     jne L_10_264             	// [7:1777]  
 BB203_PU10:	// 0x143e
 // BB:203 cycle count: 15
-//1783  														   {
-//1784  														   
-//1785  														   
-//1786  															 if(MAX_time_Max_Y>MAX_time_Min_Y )
+//1778  														   {
+//1779  														   
+//1780  														   
+//1781  															 if(MAX_time_Max_Y>MAX_time_Min_Y )
 
 LM501:
-	     .stabn 68,0,1786,LM501-_G_Sensor_Check
-	     DS = seg(_MAX_time_Max_Y)	// [0:1786]  MAX_time_Max_Y
-	     R4 = (_MAX_time_Max_Y)   	// [1:1786]  MAX_time_Max_Y
-	     R3 = DS:[R4]             	// [3:1786]  
-	     DS = seg(_MAX_time_Min_Y)	// [5:1786]  MAX_time_Min_Y
-	     R4 = (_MAX_time_Min_Y)   	// [6:1786]  MAX_time_Min_Y
-	     R4 = DS:[R4]             	// [8:1786]  
-	     cmp R3, R4               	// [10:1786]  
-	     jbe L_10_265             	// [11:1786]  
+	     .stabn 68,0,1781,LM501-_G_Sensor_Check
+	     DS = seg(_MAX_time_Max_Y)	// [0:1781]  MAX_time_Max_Y
+	     R4 = (_MAX_time_Max_Y)   	// [1:1781]  MAX_time_Max_Y
+	     R3 = DS:[R4]             	// [3:1781]  
+	     DS = seg(_MAX_time_Min_Y)	// [5:1781]  MAX_time_Min_Y
+	     R4 = (_MAX_time_Min_Y)   	// [6:1781]  MAX_time_Min_Y
+	     R4 = DS:[R4]             	// [8:1781]  
+	     cmp R3, R4               	// [10:1781]  
+	     jbe L_10_265             	// [11:1781]  
 BB204_PU10:	// 0x1448
 // BB:204 cycle count: 18
-//1787  															   {
-//1788  																	
-//1789  																  if(positionY_Max>V_Position_Max_Y)
+//1782  															   {
+//1783  																	
+//1784  																  if(positionY_Max>V_Position_Max_Y)
 
 LM502:
-	     .stabn 68,0,1789,LM502-_G_Sensor_Check
-	     DS = seg(_positionY_Max) 	// [0:1789]  positionY_Max
-	     R3 = (_positionY_Max)    	// [1:1789]  positionY_Max
-	     R4 = DS:[R3++]           	// [3:1789]  
-	     BP = BP + 67             	// [5:1789]  
-	     [BP + 0] = R4            	// [7:1789]  lcl_spill_temp_180
-	     R4 = DS:[R3]             	// [8:1789]  
-	     [BP + 1] = R4            	// [10:1789]  lcl_spill_temp_181
-	     BP = BP - 67             	// [11:1789]  
-	     cmp R4, 4                	// [13:1789]  
-	     jl L_10_266              	// [14:1789]  
+	     .stabn 68,0,1784,LM502-_G_Sensor_Check
+	     DS = seg(_positionY_Max) 	// [0:1784]  positionY_Max
+	     R3 = (_positionY_Max)    	// [1:1784]  positionY_Max
+	     R4 = DS:[R3++]           	// [3:1784]  
+	     BP = BP + 67             	// [5:1784]  
+	     [BP + 0] = R4            	// [7:1784]  lcl_spill_temp_180
+	     R4 = DS:[R3]             	// [8:1784]  
+	     [BP + 1] = R4            	// [10:1784]  lcl_spill_temp_181
+	     BP = BP - 67             	// [11:1784]  
+	     cmp R4, 4                	// [13:1784]  
+	     jl L_10_266              	// [14:1784]  
 BB205_PU10:	// 0x1455
 // BB:205 cycle count: 11
-	     BP = BP + 68             	// [0:1789]  
-	     R4 = [BP + 0]            	// [2:1789]  lcl_spill_temp_181
-	     BP = BP - 68             	// [4:1789]  
-	     cmp R4, 4                	// [6:1789]  
-	     jne BB207_PU10           	// [7:1789]  
+	     BP = BP + 68             	// [0:1784]  
+	     R4 = [BP + 0]            	// [2:1784]  lcl_spill_temp_181
+	     BP = BP - 68             	// [4:1784]  
+	     cmp R4, 4                	// [6:1784]  
+	     jne BB207_PU10           	// [7:1784]  
 BB206_PU10:	// 0x145c
 // BB:206 cycle count: 12
-	     BP = BP + 67             	// [0:1789]  
-	     R4 = [BP + 0]            	// [2:1789]  lcl_spill_temp_180
-	     BP = BP - 67             	// [4:1789]  
-	     cmp R4, 17856            	// [6:1789]  
-	     jbe L_10_266             	// [8:1789]  
+	     BP = BP + 67             	// [0:1784]  
+	     R4 = [BP + 0]            	// [2:1784]  lcl_spill_temp_180
+	     BP = BP - 67             	// [4:1784]  
+	     cmp R4, 17856            	// [6:1784]  
+	     jbe L_10_266             	// [8:1784]  
 BB207_PU10:	// 0x1464
 // BB:207 cycle count: 2
-//1790  																	  fakeflag =1;
+//1785  																	  fakeflag =1;
 
 LM503:
-	     .stabn 68,0,1790,LM503-_G_Sensor_Check
-	     R4 = 1                   	// [0:1790]  
-	     [BP + 10] = R4           	// [1:1790]  fakeflag
+	     .stabn 68,0,1785,LM503-_G_Sensor_Check
+	     R4 = 1                   	// [0:1785]  
+	     [BP + 10] = R4           	// [1:1785]  fakeflag
 L_10_266:	// 0x1466
 L_10_265:	// 0x1466
 L_10_264:	// 0x1466
 // BB:208 cycle count: 7
-//1796  
-//1797  
-//1798  												 
-//1799  
-//1800  												    if(fakeflag==0)
+//1791  
+//1792  
+//1793  												 
+//1794  
+//1795  												    if(fakeflag==0)
 
 LM504:
-	     .stabn 68,0,1800,LM504-_G_Sensor_Check
-	     R4 = [BP + 10]           	// [0:1800]  fakeflag
-	     cmp R4, 0                	// [2:1800]  
-	     jne L_10_268             	// [3:1800]  
+	     .stabn 68,0,1795,LM504-_G_Sensor_Check
+	     R4 = [BP + 10]           	// [0:1795]  fakeflag
+	     cmp R4, 0                	// [2:1795]  
+	     jne L_10_268             	// [3:1795]  
 BB209_PU10:	// 0x1469
 // BB:209 cycle count: 21
-//1801  													 	{
-//1802  													 	   //PlayA1800_Elements(7);
-//1803  													      G_Sensor_Status&=~G_Right;
+//1796  													 	{
+//1797  													 	   //PlayA1800_Elements(7);
+//1798  													      G_Sensor_Status&=~G_Y_M;
 
 LM505:
-	     .stabn 68,0,1803,LM505-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1803]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1803]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1803]  
-	     R3 = R4 & 65527          	// [5:1803]  
-	     DS = seg(_G_Sensor_Status)	// [7:1803]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1803]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1803]  
-//1804  
-//1805  														   return C_MovSucess;
+	     .stabn 68,0,1798,LM505-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1798]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1798]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1798]  
+	     R3 = R4 & 65503          	// [5:1798]  
+	     DS = seg(_G_Sensor_Status)	// [7:1798]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1798]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1798]  
+//1799  
+//1800  														   return C_MovSucess;
 
 LM506:
-	     .stabn 68,0,1805,LM506-_G_Sensor_Check
-	     R1 = 4096                	// [12:1805]  
-	     SP = SP + 110            	// [14:1805]  
-	     pop BP, PC from [SP]     	// [16:1805]  
+	     .stabn 68,0,1800,LM506-_G_Sensor_Check
+	     R1 = 4096                	// [12:1800]  
+	     SP = SP + 110            	// [14:1800]  
+	     pop BP, PC from [SP]     	// [16:1800]  
 L_10_268:	// 0x1478
 // BB:210 cycle count: 3
-//1807  																
-//1808  													 	}
-//1809                                                       else
-//1810                                                       {
-//1811  													 	 R_Position_init();
+//1802  																
+//1803  													 	}
+//1804                                                       else
+//1805                                                       {
+//1806  													 	 R_Position_init();
 
 LM507:
-	     .stabn 68,0,1811,LM507-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1811]  R_Position_init
+	     .stabn 68,0,1806,LM507-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1806]  R_Position_init
 BB211_PU10:	// 0x147a
 // BB:211 cycle count: 6
-//1812  													 	 TimeCnt_Total =0;
+//1807  													 	 TimeCnt_Total =0;
 
 LM508:
-	     .stabn 68,0,1812,LM508-_G_Sensor_Check
-	     R3 = 0                   	// [0:1812]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1812]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1812]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1812]  
+	     .stabn 68,0,1807,LM508-_G_Sensor_Check
+	     R3 = 0                   	// [0:1807]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1807]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1807]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1807]  
 L_10_267:	// 0x147f
 // BB:212 cycle count: 4
 
 LM509:
-	     .stabn 68,0,1800,LM509-_G_Sensor_Check
-	     jmp L_10_262             	// [0:1800]  
+	     .stabn 68,0,1795,LM509-_G_Sensor_Check
+	     jmp L_10_262             	// [0:1795]  
 L_10_263:	// 0x1480
 // BB:213 cycle count: 3
-//1821  																			  
-//1822  												
-//1823  
-//1824  
-//1825  												   R_Position_init();
+//1816  																			  
+//1817  												
+//1818  
+//1819  
+//1820  												   R_Position_init();
 
 LM510:
-	     .stabn 68,0,1825,LM510-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1825]  R_Position_init
+	     .stabn 68,0,1820,LM510-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1820]  R_Position_init
 BB214_PU10:	// 0x1482
 // BB:214 cycle count: 15
-//1826  												    TimeCnt_Total =0;
+//1821  												    TimeCnt_Total =0;
 
 LM511:
-	     .stabn 68,0,1826,LM511-_G_Sensor_Check
-	     R3 = 0                   	// [0:1826]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1826]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1826]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1826]  
-//1830  													velocityy[0]=0;
-//1831  												    velocityy[1]=0;
-//1832  												#endif
-//1833  
-//1834  												    return C_MovFail;
+	     .stabn 68,0,1821,LM511-_G_Sensor_Check
+	     R3 = 0                   	// [0:1821]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1821]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1821]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1821]  
+//1825  													velocityy[0]=0;
+//1826  												    velocityy[1]=0;
+//1827  												#endif
+//1828  
+//1829  												    return C_MovFail;
 
 LM512:
-	     .stabn 68,0,1834,LM512-_G_Sensor_Check
-	     R1 = 8192                	// [6:1834]  
-	     SP = SP + 110            	// [8:1834]  
-	     pop BP, PC from [SP]     	// [10:1834]  
+	     .stabn 68,0,1829,LM512-_G_Sensor_Check
+	     R1 = 8192                	// [6:1829]  
+	     SP = SP + 110            	// [8:1829]  
+	     pop BP, PC from [SP]     	// [10:1829]  
 L_10_262:	// 0x148c
 L_10_260:	// 0x148c
 L_10_250:	// 0x148c
@@ -8937,1029 +8937,1029 @@ L_10_248:	// 0x148c
 // BB:215 cycle count: 3
 
 LM513:
-	     .stabn 68,0,1693,LM513-_G_Sensor_Check
-	     goto L_10_172            	// [0:1693]  
+	     .stabn 68,0,1688,LM513-_G_Sensor_Check
+	     goto L_10_172            	// [0:1688]  
 L_10_173:	// 0x148e
 // BB:216 cycle count: 17
-//1859  	    else
-//1860  		     {	 
-//1861  							 
-//1862  							 
-//1863  	          if(V_Sum_Z_Standy!=0)
+//1854  	    else
+//1855  		     {	 
+//1856  							 
+//1857  							 
+//1858  	          if(V_Sum_Z_Standy!=0)
 
 LM514:
-	     .stabn 68,0,1863,LM514-_G_Sensor_Check
-	     DS = seg(_V_Sum_Z_Standy)	// [0:1863]  V_Sum_Z_Standy
-	     R3 = (_V_Sum_Z_Standy)   	// [1:1863]  V_Sum_Z_Standy
-	     R4 = DS:[R3++]           	// [3:1863]  
-	     BP = BP + 69             	// [5:1863]  
-	     [BP + 0] = R4            	// [7:1863]  lcl_spill_temp_182
-	     BP = BP - 69             	// [8:1863]  
-	     R4 = DS:[R3]             	// [10:1863]  
-	     cmp R4, 0                	// [12:1863]  
-	     jne BB218_PU10           	// [13:1863]  
+	     .stabn 68,0,1858,LM514-_G_Sensor_Check
+	     DS = seg(_V_Sum_Z_Standy)	// [0:1858]  V_Sum_Z_Standy
+	     R3 = (_V_Sum_Z_Standy)   	// [1:1858]  V_Sum_Z_Standy
+	     R4 = DS:[R3++]           	// [3:1858]  
+	     BP = BP + 69             	// [5:1858]  
+	     [BP + 0] = R4            	// [7:1858]  lcl_spill_temp_182
+	     BP = BP - 69             	// [8:1858]  
+	     R4 = DS:[R3]             	// [10:1858]  
+	     cmp R4, 0                	// [12:1858]  
+	     jne BB218_PU10           	// [13:1858]  
 BB217_PU10:	// 0x149a
 // BB:217 cycle count: 11
-	     BP = BP + 69             	// [0:1863]  
-	     R4 = [BP + 0]            	// [2:1863]  lcl_spill_temp_182
-	     BP = BP - 69             	// [4:1863]  
-	     cmp R4, 0                	// [6:1863]  
-	     jne BB218_PU10           	// [7:1863]  
+	     BP = BP + 69             	// [0:1858]  
+	     R4 = [BP + 0]            	// [2:1858]  lcl_spill_temp_182
+	     BP = BP - 69             	// [4:1858]  
+	     cmp R4, 0                	// [6:1858]  
+	     jne BB218_PU10           	// [7:1858]  
 BB270_PU10:	// 0x14a1
 // BB:270 cycle count: 3
 	     goto L_10_269            	// [0:0]  
 BB218_PU10:	// 0x14a3
 // BB:218 cycle count: 12
-//1864  			          {
-//1865  
-//1866  								if((G_Sensor_Status&(G_UP|G_Down|G_Shake|G_Jump)))
+//1859  			          {
+//1860  
+//1861  								if((G_Sensor_Status&(G_Z_A|G_Z_M|G_Shake|G_Jump)))
 
 LM515:
-	     .stabn 68,0,1866,LM515-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1866]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1866]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1866]  
-	     R4 = R4 & 195            	// [5:1866]  
-	     cmp R4, 0                	// [7:1866]  
-	     jne BB219_PU10           	// [8:1866]  
+	     .stabn 68,0,1861,LM515-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1861]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1861]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1861]  
+	     R4 = R4 & 195            	// [5:1861]  
+	     cmp R4, 0                	// [7:1861]  
+	     jne BB219_PU10           	// [8:1861]  
 BB284_PU10:	// 0x14ab
 // BB:284 cycle count: 3
 	     goto L_10_270            	// [0:0]  
 BB219_PU10:	// 0x14ad
 // BB:219 cycle count: 27
-//1867  									{
-//1868  
-//1869  		                                  if(((V_Sum_Z_Standy>Sum_Z)&&((V_Sum_Z_Standy-Sum_Z)>C_StartMove_Dif))||((V_Sum_Z_Standy<Sum_Z)&&((Sum_Z-V_Sum_Z_Standy)>C_StartMove_Dif)))//200
+//1862  									{
+//1863  
+//1864  		                                  if(((V_Sum_Z_Standy>Sum_Z)&&((V_Sum_Z_Standy-Sum_Z)>C_StartMove_Dif))||((V_Sum_Z_Standy<Sum_Z)&&((Sum_Z-V_Sum_Z_Standy)>C_StartMove_Dif)))//200
 
 LM516:
-	     .stabn 68,0,1869,LM516-_G_Sensor_Check
-	     DS = seg(_Sum_Z)         	// [0:1869]  Sum_Z
-	     R3 = (_Sum_Z)            	// [1:1869]  Sum_Z
-	     R4 = DS:[R3++]           	// [3:1869]  
-	     BP = BP + 70             	// [5:1869]  
-	     [BP + 0] = R4            	// [7:1869]  lcl_spill_temp_183
-	     R2 = DS:[R3]             	// [8:1869]  
-	     [BP + 1] = R2            	// [10:1869]  lcl_spill_temp_184
-	     DS = seg(_V_Sum_Z_Standy)	// [11:1869]  V_Sum_Z_Standy
-	     R3 = (_V_Sum_Z_Standy)   	// [12:1869]  V_Sum_Z_Standy
-	     R4 = DS:[R3++]           	// [14:1869]  
-	     [BP + 2] = R4            	// [16:1869]  lcl_spill_temp_185
-	     R4 = DS:[R3]             	// [17:1869]  
-	     [BP + 3] = R4            	// [19:1869]  lcl_spill_temp_186
-	     BP = BP - 70             	// [20:1869]  
-	     cmp R2, R4               	// [22:1869]  
-	     jg L_10_273              	// [23:1869]  
+	     .stabn 68,0,1864,LM516-_G_Sensor_Check
+	     DS = seg(_Sum_Z)         	// [0:1864]  Sum_Z
+	     R3 = (_Sum_Z)            	// [1:1864]  Sum_Z
+	     R4 = DS:[R3++]           	// [3:1864]  
+	     BP = BP + 70             	// [5:1864]  
+	     [BP + 0] = R4            	// [7:1864]  lcl_spill_temp_183
+	     R2 = DS:[R3]             	// [8:1864]  
+	     [BP + 1] = R2            	// [10:1864]  lcl_spill_temp_184
+	     DS = seg(_V_Sum_Z_Standy)	// [11:1864]  V_Sum_Z_Standy
+	     R3 = (_V_Sum_Z_Standy)   	// [12:1864]  V_Sum_Z_Standy
+	     R4 = DS:[R3++]           	// [14:1864]  
+	     [BP + 2] = R4            	// [16:1864]  lcl_spill_temp_185
+	     R4 = DS:[R3]             	// [17:1864]  
+	     [BP + 3] = R4            	// [19:1864]  lcl_spill_temp_186
+	     BP = BP - 70             	// [20:1864]  
+	     cmp R2, R4               	// [22:1864]  
+	     jg L_10_273              	// [23:1864]  
 BB220_PU10:	// 0x14c1
 // BB:220 cycle count: 13
-	     BP = BP + 71             	// [0:1869]  
-	     R3 = [BP + 0]            	// [2:1869]  lcl_spill_temp_184
-	     R4 = [BP + 2]            	// [4:1869]  lcl_spill_temp_186
-	     BP = BP - 71             	// [6:1869]  
-	     cmp R3, R4               	// [8:1869]  
-	     jne BB222_PU10           	// [9:1869]  
+	     BP = BP + 71             	// [0:1864]  
+	     R3 = [BP + 0]            	// [2:1864]  lcl_spill_temp_184
+	     R4 = [BP + 2]            	// [4:1864]  lcl_spill_temp_186
+	     BP = BP - 71             	// [6:1864]  
+	     cmp R3, R4               	// [8:1864]  
+	     jne BB222_PU10           	// [9:1864]  
 BB221_PU10:	// 0x14c9
 // BB:221 cycle count: 13
-	     BP = BP + 70             	// [0:1869]  
-	     R3 = [BP + 0]            	// [2:1869]  lcl_spill_temp_183
-	     R4 = [BP + 2]            	// [4:1869]  lcl_spill_temp_185
-	     BP = BP - 70             	// [6:1869]  
-	     cmp R3, R4               	// [8:1869]  
-	     jae L_10_273             	// [9:1869]  
+	     BP = BP + 70             	// [0:1864]  
+	     R3 = [BP + 0]            	// [2:1864]  lcl_spill_temp_183
+	     R4 = [BP + 2]            	// [4:1864]  lcl_spill_temp_185
+	     BP = BP - 70             	// [6:1864]  
+	     cmp R3, R4               	// [8:1864]  
+	     jae L_10_273             	// [9:1864]  
 BB222_PU10:	// 0x14d1
 // BB:222 cycle count: 25
-	     DS = seg(_V_Sum_Z_Standy)	// [0:1869]  V_Sum_Z_Standy
-	     R4 = (_V_Sum_Z_Standy)   	// [1:1869]  V_Sum_Z_Standy
-	     R3 = DS:[R4++]           	// [3:1869]  
-	     R4 = DS:[R4]             	// [5:1869]  
-	     DS = seg(_Sum_Z)         	// [7:1869]  Sum_Z
-	     R2 = (_Sum_Z)            	// [8:1869]  Sum_Z
-	     R3 = R3 - DS:[R2++]      	// [10:1869]  
-	     R4 = R4 - DS:[R2--], Carry	// [12:1869]  
-	     BP = BP + 74             	// [14:1869]  
-	     [BP + 1] = R4            	// [16:1869]  lcl_spill_temp_188
-	     [BP + 0] = R3            	// [17:1869]  lcl_spill_temp_187
-	     BP = BP - 74             	// [18:1869]  
-	     cmp R4, 0                	// [20:1869]  
-	     jle BB223_PU10           	// [21:1869]  
+	     DS = seg(_V_Sum_Z_Standy)	// [0:1864]  V_Sum_Z_Standy
+	     R4 = (_V_Sum_Z_Standy)   	// [1:1864]  V_Sum_Z_Standy
+	     R3 = DS:[R4++]           	// [3:1864]  
+	     R4 = DS:[R4]             	// [5:1864]  
+	     DS = seg(_Sum_Z)         	// [7:1864]  Sum_Z
+	     R2 = (_Sum_Z)            	// [8:1864]  Sum_Z
+	     R3 = R3 - DS:[R2++]      	// [10:1864]  
+	     R4 = R4 - DS:[R2--], Carry	// [12:1864]  
+	     BP = BP + 74             	// [14:1864]  
+	     [BP + 1] = R4            	// [16:1864]  lcl_spill_temp_188
+	     [BP + 0] = R3            	// [17:1864]  lcl_spill_temp_187
+	     BP = BP - 74             	// [18:1864]  
+	     cmp R4, 0                	// [20:1864]  
+	     jle BB223_PU10           	// [21:1864]  
 BB289_PU10:	// 0x14e3
 // BB:289 cycle count: 3
 	     goto L_10_272            	// [0:0]  
 BB223_PU10:	// 0x14e5
 // BB:223 cycle count: 11
-	     BP = BP + 75             	// [0:1869]  
-	     R4 = [BP + 0]            	// [2:1869]  lcl_spill_temp_188
-	     BP = BP - 75             	// [4:1869]  
-	     cmp R4, 0                	// [6:1869]  
-	     jne BB225_PU10           	// [7:1869]  
+	     BP = BP + 75             	// [0:1864]  
+	     R4 = [BP + 0]            	// [2:1864]  lcl_spill_temp_188
+	     BP = BP - 75             	// [4:1864]  
+	     cmp R4, 0                	// [6:1864]  
+	     jne BB225_PU10           	// [7:1864]  
 BB224_PU10:	// 0x14ec
 // BB:224 cycle count: 12
-	     BP = BP + 74             	// [0:1869]  
-	     R4 = [BP + 0]            	// [2:1869]  lcl_spill_temp_187
-	     BP = BP - 74             	// [4:1869]  
-	     cmp R4, 1200             	// [6:1869]  
-	     jbe BB225_PU10           	// [8:1869]  
+	     BP = BP + 74             	// [0:1864]  
+	     R4 = [BP + 0]            	// [2:1864]  lcl_spill_temp_187
+	     BP = BP - 74             	// [4:1864]  
+	     cmp R4, 1200             	// [6:1864]  
+	     jbe BB225_PU10           	// [8:1864]  
 BB290_PU10:	// 0x14f4
 // BB:290 cycle count: 3
 	     goto L_10_272            	// [0:0]  
 BB225_PU10:	// 0x14f6
 L_10_273:	// 0x14f6
 // BB:225 cycle count: 27
-	     DS = seg(_Sum_Z)         	// [0:1869]  Sum_Z
-	     R3 = (_Sum_Z)            	// [1:1869]  Sum_Z
-	     R4 = DS:[R3++]           	// [3:1869]  
-	     BP = BP + 76             	// [5:1869]  
-	     [BP + 0] = R4            	// [7:1869]  lcl_spill_temp_189
-	     R2 = DS:[R3]             	// [8:1869]  
-	     [BP + 1] = R2            	// [10:1869]  lcl_spill_temp_190
-	     DS = seg(_V_Sum_Z_Standy)	// [11:1869]  V_Sum_Z_Standy
-	     R3 = (_V_Sum_Z_Standy)   	// [12:1869]  V_Sum_Z_Standy
-	     R4 = DS:[R3++]           	// [14:1869]  
-	     [BP + 2] = R4            	// [16:1869]  lcl_spill_temp_191
-	     R4 = DS:[R3]             	// [17:1869]  
-	     [BP + 3] = R4            	// [19:1869]  lcl_spill_temp_192
-	     BP = BP - 76             	// [20:1869]  
-	     cmp R2, R4               	// [22:1869]  
-	     jge BB226_PU10           	// [23:1869]  
+	     DS = seg(_Sum_Z)         	// [0:1864]  Sum_Z
+	     R3 = (_Sum_Z)            	// [1:1864]  Sum_Z
+	     R4 = DS:[R3++]           	// [3:1864]  
+	     BP = BP + 76             	// [5:1864]  
+	     [BP + 0] = R4            	// [7:1864]  lcl_spill_temp_189
+	     R2 = DS:[R3]             	// [8:1864]  
+	     [BP + 1] = R2            	// [10:1864]  lcl_spill_temp_190
+	     DS = seg(_V_Sum_Z_Standy)	// [11:1864]  V_Sum_Z_Standy
+	     R3 = (_V_Sum_Z_Standy)   	// [12:1864]  V_Sum_Z_Standy
+	     R4 = DS:[R3++]           	// [14:1864]  
+	     [BP + 2] = R4            	// [16:1864]  lcl_spill_temp_191
+	     R4 = DS:[R3]             	// [17:1864]  
+	     [BP + 3] = R4            	// [19:1864]  lcl_spill_temp_192
+	     BP = BP - 76             	// [20:1864]  
+	     cmp R2, R4               	// [22:1864]  
+	     jge BB226_PU10           	// [23:1864]  
 BB285_PU10:	// 0x150a
 // BB:285 cycle count: 3
 	     goto L_10_271            	// [0:0]  
 BB226_PU10:	// 0x150c
 // BB:226 cycle count: 13
-	     BP = BP + 77             	// [0:1869]  
-	     R3 = [BP + 0]            	// [2:1869]  lcl_spill_temp_190
-	     R4 = [BP + 2]            	// [4:1869]  lcl_spill_temp_192
-	     BP = BP - 77             	// [6:1869]  
-	     cmp R3, R4               	// [8:1869]  
-	     jne BB228_PU10           	// [9:1869]  
+	     BP = BP + 77             	// [0:1864]  
+	     R3 = [BP + 0]            	// [2:1864]  lcl_spill_temp_190
+	     R4 = [BP + 2]            	// [4:1864]  lcl_spill_temp_192
+	     BP = BP - 77             	// [6:1864]  
+	     cmp R3, R4               	// [8:1864]  
+	     jne BB228_PU10           	// [9:1864]  
 BB227_PU10:	// 0x1514
 // BB:227 cycle count: 13
-	     BP = BP + 76             	// [0:1869]  
-	     R3 = [BP + 0]            	// [2:1869]  lcl_spill_temp_189
-	     R4 = [BP + 2]            	// [4:1869]  lcl_spill_temp_191
-	     BP = BP - 76             	// [6:1869]  
-	     cmp R3, R4               	// [8:1869]  
-	     ja BB228_PU10            	// [9:1869]  
+	     BP = BP + 76             	// [0:1864]  
+	     R3 = [BP + 0]            	// [2:1864]  lcl_spill_temp_189
+	     R4 = [BP + 2]            	// [4:1864]  lcl_spill_temp_191
+	     BP = BP - 76             	// [6:1864]  
+	     cmp R3, R4               	// [8:1864]  
+	     ja BB228_PU10            	// [9:1864]  
 BB286_PU10:	// 0x151c
 // BB:286 cycle count: 3
 	     goto L_10_271            	// [0:0]  
 BB228_PU10:	// 0x151e
 // BB:228 cycle count: 25
-	     DS = seg(_Sum_Z)         	// [0:1869]  Sum_Z
-	     R4 = (_Sum_Z)            	// [1:1869]  Sum_Z
-	     R3 = DS:[R4++]           	// [3:1869]  
-	     R4 = DS:[R4]             	// [5:1869]  
-	     DS = seg(_V_Sum_Z_Standy)	// [7:1869]  V_Sum_Z_Standy
-	     R2 = (_V_Sum_Z_Standy)   	// [8:1869]  V_Sum_Z_Standy
-	     R3 = R3 - DS:[R2++]      	// [10:1869]  
-	     R4 = R4 - DS:[R2--], Carry	// [12:1869]  
-	     BP = BP + 80             	// [14:1869]  
-	     [BP + 1] = R4            	// [16:1869]  lcl_spill_temp_194
-	     [BP + 0] = R3            	// [17:1869]  lcl_spill_temp_193
-	     BP = BP - 80             	// [18:1869]  
-	     cmp R4, 0                	// [20:1869]  
-	     jge BB229_PU10           	// [21:1869]  
+	     DS = seg(_Sum_Z)         	// [0:1864]  Sum_Z
+	     R4 = (_Sum_Z)            	// [1:1864]  Sum_Z
+	     R3 = DS:[R4++]           	// [3:1864]  
+	     R4 = DS:[R4]             	// [5:1864]  
+	     DS = seg(_V_Sum_Z_Standy)	// [7:1864]  V_Sum_Z_Standy
+	     R2 = (_V_Sum_Z_Standy)   	// [8:1864]  V_Sum_Z_Standy
+	     R3 = R3 - DS:[R2++]      	// [10:1864]  
+	     R4 = R4 - DS:[R2--], Carry	// [12:1864]  
+	     BP = BP + 80             	// [14:1864]  
+	     [BP + 1] = R4            	// [16:1864]  lcl_spill_temp_194
+	     [BP + 0] = R3            	// [17:1864]  lcl_spill_temp_193
+	     BP = BP - 80             	// [18:1864]  
+	     cmp R4, 0                	// [20:1864]  
+	     jge BB229_PU10           	// [21:1864]  
 BB287_PU10:	// 0x1530
 // BB:287 cycle count: 3
 	     goto L_10_271            	// [0:0]  
 BB229_PU10:	// 0x1532
 // BB:229 cycle count: 11
-	     BP = BP + 81             	// [0:1869]  
-	     R4 = [BP + 0]            	// [2:1869]  lcl_spill_temp_194
-	     BP = BP - 81             	// [4:1869]  
-	     cmp R4, 0                	// [6:1869]  
-	     jne BB231_PU10           	// [7:1869]  
+	     BP = BP + 81             	// [0:1864]  
+	     R4 = [BP + 0]            	// [2:1864]  lcl_spill_temp_194
+	     BP = BP - 81             	// [4:1864]  
+	     cmp R4, 0                	// [6:1864]  
+	     jne BB231_PU10           	// [7:1864]  
 BB230_PU10:	// 0x1539
 // BB:230 cycle count: 12
-	     BP = BP + 80             	// [0:1869]  
-	     R4 = [BP + 0]            	// [2:1869]  lcl_spill_temp_193
-	     BP = BP - 80             	// [4:1869]  
-	     cmp R4, 1200             	// [6:1869]  
-	     ja BB231_PU10            	// [8:1869]  
+	     BP = BP + 80             	// [0:1864]  
+	     R4 = [BP + 0]            	// [2:1864]  lcl_spill_temp_193
+	     BP = BP - 80             	// [4:1864]  
+	     cmp R4, 1200             	// [6:1864]  
+	     ja BB231_PU10            	// [8:1864]  
 BB288_PU10:	// 0x1541
 // BB:288 cycle count: 3
 	     goto L_10_271            	// [0:0]  
 BB231_PU10:	// 0x1543
 L_10_272:	// 0x1543
 // BB:231 cycle count: 18
-//1870  		                                  {  
-//1871  										  	     G_Sensor_Status |=0x2000;
+//1865  		                                  {  
+//1866  										  	     G_Sensor_Status |=0x2000;
 
 LM517:
-	     .stabn 68,0,1871,LM517-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1871]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1871]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1871]  
-	     R3 = R4 | 8192           	// [5:1871]  
-	     DS = seg(_G_Sensor_Status)	// [7:1871]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1871]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1871]  
-//1872  										  	   //  Standy_X_cnt =0;
-//1873  										  	     
-//1874  										  	  for(X_cnt =0;X_cnt<150;X_cnt++)   
+	     .stabn 68,0,1866,LM517-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1866]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1866]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1866]  
+	     R3 = R4 | 8192           	// [5:1866]  
+	     DS = seg(_G_Sensor_Status)	// [7:1866]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1866]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1866]  
+//1867  										  	   //  Standy_X_cnt =0;
+//1868  										  	     
+//1869  										  	  for(X_cnt =0;X_cnt<150;X_cnt++)   
 
 LM518:
-	     .stabn 68,0,1874,LM518-_G_Sensor_Check
-	     R3 = 0                   	// [12:1874]  
-	     DS = seg(VX_cnt_13_1)    	// [13:1874]  X_cnt
-	     R4 = (VX_cnt_13_1)       	// [14:1874]  X_cnt
-	     DS:[R4] = R3             	// [16:1874]  
+	     .stabn 68,0,1869,LM518-_G_Sensor_Check
+	     R3 = 0                   	// [12:1869]  
+	     DS = seg(VX_cnt_13_1)    	// [13:1869]  X_cnt
+	     R4 = (VX_cnt_13_1)       	// [14:1869]  X_cnt
+	     DS:[R4] = R3             	// [16:1869]  
 L_10_274:	// 0x1552
 // BB:232 cycle count: 11
-	     DS = seg(VX_cnt_13_1)    	// [0:1874]  X_cnt
-	     R4 = (VX_cnt_13_1)       	// [1:1874]  X_cnt
-	     R4 = DS:[R4]             	// [3:1874]  
-	     cmp R4, 149              	// [5:1874]  
-	     ja L_10_275              	// [7:1874]  
+	     DS = seg(VX_cnt_13_1)    	// [0:1869]  X_cnt
+	     R4 = (VX_cnt_13_1)       	// [1:1869]  X_cnt
+	     R4 = DS:[R4]             	// [3:1869]  
+	     cmp R4, 149              	// [5:1869]  
+	     ja L_10_275              	// [7:1869]  
 BB233_PU10:	// 0x1559
 // BB:233 cycle count: 21
-//1875  										  	     G_value[X_cnt]=0;							 	  	 
+//1870  										  	     G_value[X_cnt]=0;							 	  	 
 
 LM519:
-	     .stabn 68,0,1875,LM519-_G_Sensor_Check
-	     R3 = (_G_value)          	// [0:1875]  G_value
-	     R4 = seg(_G_value)       	// [2:1875]  G_value
-	     DS = seg(VX_cnt_13_1)    	// [3:1875]  X_cnt
-	     R2 = (VX_cnt_13_1)       	// [4:1875]  X_cnt
-	     R2 = DS:[R2]             	// [6:1875]  
-	     R1 = 0                   	// [8:1875]  
-	     test R2, R2 lsl 4        	// [9:1875]  
-	     R1 = R1 rol 1            	// [10:1875]  
-	     R2 = R2 lsl 1            	// [11:1875]  
-	     R3 = R3 + R2             	// [12:1875]  
-	     R4 = R4 + R1, Carry      	// [13:1875]  
-	     DS = R4                  	// [14:1875]  
-	     R4 = 0                   	// [15:1875]  
-	     DS:[R3++] = R4           	// [16:1875]  
-	     R4 = 0                   	// [18:1875]  
-	     DS:[R3] = R4             	// [19:1875]  
+	     .stabn 68,0,1870,LM519-_G_Sensor_Check
+	     R3 = (_G_value)          	// [0:1870]  G_value
+	     R4 = seg(_G_value)       	// [2:1870]  G_value
+	     DS = seg(VX_cnt_13_1)    	// [3:1870]  X_cnt
+	     R2 = (VX_cnt_13_1)       	// [4:1870]  X_cnt
+	     R2 = DS:[R2]             	// [6:1870]  
+	     R1 = 0                   	// [8:1870]  
+	     test R2, R2 lsl 4        	// [9:1870]  
+	     R1 = R1 rol 1            	// [10:1870]  
+	     R2 = R2 lsl 1            	// [11:1870]  
+	     R3 = R3 + R2             	// [12:1870]  
+	     R4 = R4 + R1, Carry      	// [13:1870]  
+	     DS = R4                  	// [14:1870]  
+	     R4 = 0                   	// [15:1870]  
+	     DS:[R3++] = R4           	// [16:1870]  
+	     R4 = 0                   	// [18:1870]  
+	     DS:[R3] = R4             	// [19:1870]  
 Lt_10_3:	// 0x156b
 // BB:234 cycle count: 15
 
 LM520:
-	     .stabn 68,0,1874,LM520-_G_Sensor_Check
-	     DS = seg(VX_cnt_13_1)    	// [0:1874]  X_cnt
-	     R4 = (VX_cnt_13_1)       	// [1:1874]  X_cnt
-	     R4 = DS:[R4]             	// [3:1874]  
-	     R4 = R4 + 1              	// [5:1874]  
-	     DS = seg(VX_cnt_13_1)    	// [6:1874]  X_cnt
-	     R3 = (VX_cnt_13_1)       	// [7:1874]  X_cnt
-	     DS:[R3] = R4             	// [9:1874]  
-	     jmp L_10_274             	// [11:1874]  
+	     .stabn 68,0,1869,LM520-_G_Sensor_Check
+	     DS = seg(VX_cnt_13_1)    	// [0:1869]  X_cnt
+	     R4 = (VX_cnt_13_1)       	// [1:1869]  X_cnt
+	     R4 = DS:[R4]             	// [3:1869]  
+	     R4 = R4 + 1              	// [5:1869]  
+	     DS = seg(VX_cnt_13_1)    	// [6:1869]  X_cnt
+	     R3 = (VX_cnt_13_1)       	// [7:1869]  X_cnt
+	     DS:[R3] = R4             	// [9:1869]  
+	     jmp L_10_274             	// [11:1869]  
 L_10_275:	// 0x1575
 // BB:235 cycle count: 110
-//1876  					  	     
-//1877  					  	                         G_value[0]=Sum_Z;//V_Sum_X_Standy;
+//1871  					  	     
+//1872  					  	                         G_value[0]=Sum_Z;//V_Sum_X_Standy;
 
 LM521:
-	     .stabn 68,0,1877,LM521-_G_Sensor_Check
-	     DS = seg(_Sum_Z)         	// [0:1877]  Sum_Z
-	     R4 = (_Sum_Z)            	// [1:1877]  Sum_Z
-	     R2 = DS:[R4++]           	// [3:1877]  
-	     R3 = DS:[R4]             	// [5:1877]  
-	     DS = seg(_G_value)       	// [7:1877]  G_value
-	     R4 = (_G_value)          	// [8:1877]  G_value
-	     DS:[R4++] = R2           	// [10:1877]  
-	     DS:[R4] = R3             	// [12:1877]  
-//1878  										  	      X_cnt =1;
+	     .stabn 68,0,1872,LM521-_G_Sensor_Check
+	     DS = seg(_Sum_Z)         	// [0:1872]  Sum_Z
+	     R4 = (_Sum_Z)            	// [1:1872]  Sum_Z
+	     R2 = DS:[R4++]           	// [3:1872]  
+	     R3 = DS:[R4]             	// [5:1872]  
+	     DS = seg(_G_value)       	// [7:1872]  G_value
+	     R4 = (_G_value)          	// [8:1872]  G_value
+	     DS:[R4++] = R2           	// [10:1872]  
+	     DS:[R4] = R3             	// [12:1872]  
+//1873  										  	      X_cnt =1;
 
 LM522:
-	     .stabn 68,0,1878,LM522-_G_Sensor_Check
-	     R3 = 1                   	// [14:1878]  
-	     DS = seg(VX_cnt_13_1)    	// [15:1878]  X_cnt
-	     R4 = (VX_cnt_13_1)       	// [16:1878]  X_cnt
-	     DS:[R4] = R3             	// [18:1878]  
-//1879  										  	     
-//1880  												  velocityz[1]=0;
+	     .stabn 68,0,1873,LM522-_G_Sensor_Check
+	     R3 = 1                   	// [14:1873]  
+	     DS = seg(VX_cnt_13_1)    	// [15:1873]  X_cnt
+	     R4 = (VX_cnt_13_1)       	// [16:1873]  X_cnt
+	     DS:[R4] = R3             	// [18:1873]  
+//1874  										  	     
+//1875  												  velocityz[1]=0;
 
 LM523:
-	     .stabn 68,0,1880,LM523-_G_Sensor_Check
-	     R2 = 0                   	// [20:1880]  
-	     R3 = 0                   	// [21:1880]  
-	     DS = seg(_velocityz+2)   	// [22:1880]  velocityz+2
-	     R4 = (_velocityz+2)      	// [23:1880]  velocityz+2
-	     DS:[R4++] = R2           	// [25:1880]  
-	     DS:[R4] = R3             	// [27:1880]  
-//1881  												  velocityz[0]=0;
+	     .stabn 68,0,1875,LM523-_G_Sensor_Check
+	     R2 = 0                   	// [20:1875]  
+	     R3 = 0                   	// [21:1875]  
+	     DS = seg(_velocityz+2)   	// [22:1875]  velocityz+2
+	     R4 = (_velocityz+2)      	// [23:1875]  velocityz+2
+	     DS:[R4++] = R2           	// [25:1875]  
+	     DS:[R4] = R3             	// [27:1875]  
+//1876  												  velocityz[0]=0;
 
 LM524:
-	     .stabn 68,0,1881,LM524-_G_Sensor_Check
-	     R2 = 0                   	// [29:1881]  
-	     R3 = 0                   	// [30:1881]  
-	     DS = seg(_velocityz)     	// [31:1881]  velocityz
-	     R4 = (_velocityz)        	// [32:1881]  velocityz
-	     DS:[R4++] = R2           	// [34:1881]  
-	     DS:[R4] = R3             	// [36:1881]  
-//1882  												  positionZ[0] =0;
+	     .stabn 68,0,1876,LM524-_G_Sensor_Check
+	     R2 = 0                   	// [29:1876]  
+	     R3 = 0                   	// [30:1876]  
+	     DS = seg(_velocityz)     	// [31:1876]  velocityz
+	     R4 = (_velocityz)        	// [32:1876]  velocityz
+	     DS:[R4++] = R2           	// [34:1876]  
+	     DS:[R4] = R3             	// [36:1876]  
+//1877  												  positionZ[0] =0;
 
 LM525:
-	     .stabn 68,0,1882,LM525-_G_Sensor_Check
-	     R2 = 0                   	// [38:1882]  
-	     R3 = 0                   	// [39:1882]  
-	     DS = seg(_positionZ)     	// [40:1882]  positionZ
-	     R4 = (_positionZ)        	// [41:1882]  positionZ
-	     DS:[R4++] = R2           	// [43:1882]  
-	     DS:[R4] = R3             	// [45:1882]  
-//1883  												  positionZ[1] =0;   
+	     .stabn 68,0,1877,LM525-_G_Sensor_Check
+	     R2 = 0                   	// [38:1877]  
+	     R3 = 0                   	// [39:1877]  
+	     DS = seg(_positionZ)     	// [40:1877]  positionZ
+	     R4 = (_positionZ)        	// [41:1877]  positionZ
+	     DS:[R4++] = R2           	// [43:1877]  
+	     DS:[R4] = R3             	// [45:1877]  
+//1878  												  positionZ[1] =0;   
 
 LM526:
-	     .stabn 68,0,1883,LM526-_G_Sensor_Check
-	     R2 = 0                   	// [47:1883]  
-	     R3 = 0                   	// [48:1883]  
-	     DS = seg(_positionZ+2)   	// [49:1883]  positionZ+2
-	     R4 = (_positionZ+2)      	// [50:1883]  positionZ+2
-	     DS:[R4++] = R2           	// [52:1883]  
-	     DS:[R4] = R3             	// [54:1883]  
-//1884  
-//1885  
-//1886  				                                 //Time_Maxinit();   
-//1887  										        time_Max_Z  =0;
+	     .stabn 68,0,1878,LM526-_G_Sensor_Check
+	     R2 = 0                   	// [47:1878]  
+	     R3 = 0                   	// [48:1878]  
+	     DS = seg(_positionZ+2)   	// [49:1878]  positionZ+2
+	     R4 = (_positionZ+2)      	// [50:1878]  positionZ+2
+	     DS:[R4++] = R2           	// [52:1878]  
+	     DS:[R4] = R3             	// [54:1878]  
+//1879  
+//1880  
+//1881  				                                 //Time_Maxinit();   
+//1882  										        time_Max_Z  =0;
 
 LM527:
-	     .stabn 68,0,1887,LM527-_G_Sensor_Check
-	     R3 = 0                   	// [56:1887]  
-	     DS = seg(_time_Max_Z)    	// [57:1887]  time_Max_Z
-	     R4 = (_time_Max_Z)       	// [58:1887]  time_Max_Z
-	     DS:[R4] = R3             	// [60:1887]  
-//1888  												time_Min_Z  =0;
+	     .stabn 68,0,1882,LM527-_G_Sensor_Check
+	     R3 = 0                   	// [56:1882]  
+	     DS = seg(_time_Max_Z)    	// [57:1882]  time_Max_Z
+	     R4 = (_time_Max_Z)       	// [58:1882]  time_Max_Z
+	     DS:[R4] = R3             	// [60:1882]  
+//1883  												time_Min_Z  =0;
 
 LM528:
-	     .stabn 68,0,1888,LM528-_G_Sensor_Check
-	     R3 = 0                   	// [62:1888]  
-	     DS = seg(_time_Min_Z)    	// [63:1888]  time_Min_Z
-	     R4 = (_time_Min_Z)       	// [64:1888]  time_Min_Z
-	     DS:[R4] = R3             	// [66:1888]  
-//1889  												MAX_time_Max_Z=0;
+	     .stabn 68,0,1883,LM528-_G_Sensor_Check
+	     R3 = 0                   	// [62:1883]  
+	     DS = seg(_time_Min_Z)    	// [63:1883]  time_Min_Z
+	     R4 = (_time_Min_Z)       	// [64:1883]  time_Min_Z
+	     DS:[R4] = R3             	// [66:1883]  
+//1884  												MAX_time_Max_Z=0;
 
 LM529:
-	     .stabn 68,0,1889,LM529-_G_Sensor_Check
-	     R3 = 0                   	// [68:1889]  
-	     DS = seg(_MAX_time_Max_Z)	// [69:1889]  MAX_time_Max_Z
-	     R4 = (_MAX_time_Max_Z)   	// [70:1889]  MAX_time_Max_Z
-	     DS:[R4] = R3             	// [72:1889]  
-//1890  												MAX_time_Min_Z =0; 
+	     .stabn 68,0,1884,LM529-_G_Sensor_Check
+	     R3 = 0                   	// [68:1884]  
+	     DS = seg(_MAX_time_Max_Z)	// [69:1884]  MAX_time_Max_Z
+	     R4 = (_MAX_time_Max_Z)   	// [70:1884]  MAX_time_Max_Z
+	     DS:[R4] = R3             	// [72:1884]  
+//1885  												MAX_time_Min_Z =0; 
 
 LM530:
-	     .stabn 68,0,1890,LM530-_G_Sensor_Check
-	     R3 = 0                   	// [74:1890]  
-	     DS = seg(_MAX_time_Min_Z)	// [75:1890]  MAX_time_Min_Z
-	     R4 = (_MAX_time_Min_Z)   	// [76:1890]  MAX_time_Min_Z
-	     DS:[R4] = R3             	// [78:1890]  
-//1891  										        
-//1892  										        TimeCnt_Total =0;
+	     .stabn 68,0,1885,LM530-_G_Sensor_Check
+	     R3 = 0                   	// [74:1885]  
+	     DS = seg(_MAX_time_Min_Z)	// [75:1885]  MAX_time_Min_Z
+	     R4 = (_MAX_time_Min_Z)   	// [76:1885]  MAX_time_Min_Z
+	     DS:[R4] = R3             	// [78:1885]  
+//1886  										        
+//1887  										        TimeCnt_Total =0;
 
 LM531:
-	     .stabn 68,0,1892,LM531-_G_Sensor_Check
-	     R3 = 0                   	// [80:1892]  
-	     DS = seg(_TimeCnt_Total) 	// [81:1892]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [82:1892]  TimeCnt_Total
-	     DS:[R4] = R3             	// [84:1892]  
-//1893  
-//1894  												// R_Position_init();
-//1895  									            stepflag_Z =0;
+	     .stabn 68,0,1887,LM531-_G_Sensor_Check
+	     R3 = 0                   	// [80:1887]  
+	     DS = seg(_TimeCnt_Total) 	// [81:1887]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [82:1887]  TimeCnt_Total
+	     DS:[R4] = R3             	// [84:1887]  
+//1888  
+//1889  												// R_Position_init();
+//1890  									            stepflag_Z =0;
 
 LM532:
-	     .stabn 68,0,1895,LM532-_G_Sensor_Check
-	     R3 = 0                   	// [86:1895]  
-	     DS = seg(_stepflag_Z)    	// [87:1895]  stepflag_Z
-	     R4 = (_stepflag_Z)       	// [88:1895]  stepflag_Z
-	     DS:[R4] = R3             	// [90:1895]  
-//1896  												positionZ_Min =0;
+	     .stabn 68,0,1890,LM532-_G_Sensor_Check
+	     R3 = 0                   	// [86:1890]  
+	     DS = seg(_stepflag_Z)    	// [87:1890]  stepflag_Z
+	     R4 = (_stepflag_Z)       	// [88:1890]  stepflag_Z
+	     DS:[R4] = R3             	// [90:1890]  
+//1891  												positionZ_Min =0;
 
 LM533:
-	     .stabn 68,0,1896,LM533-_G_Sensor_Check
-	     R2 = 0                   	// [92:1896]  
-	     R3 = 0                   	// [93:1896]  
-	     DS = seg(_positionZ_Min) 	// [94:1896]  positionZ_Min
-	     R4 = (_positionZ_Min)    	// [95:1896]  positionZ_Min
-	     DS:[R4++] = R2           	// [97:1896]  
-	     DS:[R4] = R3             	// [99:1896]  
-//1897  												positionZ_Max =0;
+	     .stabn 68,0,1891,LM533-_G_Sensor_Check
+	     R2 = 0                   	// [92:1891]  
+	     R3 = 0                   	// [93:1891]  
+	     DS = seg(_positionZ_Min) 	// [94:1891]  positionZ_Min
+	     R4 = (_positionZ_Min)    	// [95:1891]  positionZ_Min
+	     DS:[R4++] = R2           	// [97:1891]  
+	     DS:[R4] = R3             	// [99:1891]  
+//1892  												positionZ_Max =0;
 
 LM534:
-	     .stabn 68,0,1897,LM534-_G_Sensor_Check
-	     R2 = 0                   	// [101:1897]  
-	     R3 = 0                   	// [102:1897]  
-	     DS = seg(_positionZ_Max) 	// [103:1897]  positionZ_Max
-	     R4 = (_positionZ_Max)    	// [104:1897]  positionZ_Max
-	     DS:[R4++] = R2           	// [106:1897]  
-	     DS:[R4] = R3             	// [108:1897]  
+	     .stabn 68,0,1892,LM534-_G_Sensor_Check
+	     R2 = 0                   	// [101:1892]  
+	     R3 = 0                   	// [102:1892]  
+	     DS = seg(_positionZ_Max) 	// [103:1892]  positionZ_Max
+	     R4 = (_positionZ_Max)    	// [104:1892]  positionZ_Max
+	     DS:[R4++] = R2           	// [106:1892]  
+	     DS:[R4] = R3             	// [108:1892]  
 L_10_271:	// 0x15cc
 L_10_270:	// 0x15cc
 // BB:236 cycle count: 11
-//1908  
-//1909  
-//1910  
-//1911  					  
-//1912  								if((G_Sensor_Status&(G_Hit|G_Back)))//||(G_Next_Status&(G_Hit|G_Back|G_Shake|G_Jump)))
+//1903  
+//1904  
+//1905  
+//1906  					  
+//1907  								if((G_Sensor_Status&(G_X_A|G_X_M)))//||(G_Next_Status&(G_Hit|G_Back|G_Shake|G_Jump)))
 
 LM535:
-	     .stabn 68,0,1912,LM535-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1912]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1912]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1912]  
-	     R4 = R4 & 48             	// [5:1912]  
-	     cmp R4, 0                	// [6:1912]  
-	     jne BB237_PU10           	// [7:1912]  
+	     .stabn 68,0,1907,LM535-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1907]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1907]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1907]  
+	     R4 = R4 & 12             	// [5:1907]  
+	     cmp R4, 0                	// [6:1907]  
+	     jne BB237_PU10           	// [7:1907]  
 BB278_PU10:	// 0x15d3
 // BB:278 cycle count: 3
 	     goto L_10_276            	// [0:0]  
 BB237_PU10:	// 0x15d5
 // BB:237 cycle count: 27
-//1913  									{
-//1914  
-//1915  		                                  if(((V_Sum_X_Standy>Sum_X)&&((V_Sum_X_Standy-Sum_X)>C_StartMove_Dif))||((V_Sum_X_Standy<Sum_X)&&((Sum_X-V_Sum_X_Standy)>C_StartMove_Dif)))//200
+//1908  									{
+//1909  
+//1910  		                                  if(((V_Sum_X_Standy>Sum_X)&&((V_Sum_X_Standy-Sum_X)>C_StartMove_Dif))||((V_Sum_X_Standy<Sum_X)&&((Sum_X-V_Sum_X_Standy)>C_StartMove_Dif)))//200
 
 LM536:
-	     .stabn 68,0,1915,LM536-_G_Sensor_Check
-	     DS = seg(_Sum_X)         	// [0:1915]  Sum_X
-	     R3 = (_Sum_X)            	// [1:1915]  Sum_X
-	     R4 = DS:[R3++]           	// [3:1915]  
-	     BP = BP + 82             	// [5:1915]  
-	     [BP + 0] = R4            	// [7:1915]  lcl_spill_temp_195
-	     R2 = DS:[R3]             	// [8:1915]  
-	     [BP + 1] = R2            	// [10:1915]  lcl_spill_temp_196
-	     DS = seg(_V_Sum_X_Standy)	// [11:1915]  V_Sum_X_Standy
-	     R3 = (_V_Sum_X_Standy)   	// [12:1915]  V_Sum_X_Standy
-	     R4 = DS:[R3++]           	// [14:1915]  
-	     [BP + 2] = R4            	// [16:1915]  lcl_spill_temp_197
-	     R4 = DS:[R3]             	// [17:1915]  
-	     [BP + 3] = R4            	// [19:1915]  lcl_spill_temp_198
-	     BP = BP - 82             	// [20:1915]  
-	     cmp R2, R4               	// [22:1915]  
-	     jg L_10_279              	// [23:1915]  
+	     .stabn 68,0,1910,LM536-_G_Sensor_Check
+	     DS = seg(_Sum_X)         	// [0:1910]  Sum_X
+	     R3 = (_Sum_X)            	// [1:1910]  Sum_X
+	     R4 = DS:[R3++]           	// [3:1910]  
+	     BP = BP + 82             	// [5:1910]  
+	     [BP + 0] = R4            	// [7:1910]  lcl_spill_temp_195
+	     R2 = DS:[R3]             	// [8:1910]  
+	     [BP + 1] = R2            	// [10:1910]  lcl_spill_temp_196
+	     DS = seg(_V_Sum_X_Standy)	// [11:1910]  V_Sum_X_Standy
+	     R3 = (_V_Sum_X_Standy)   	// [12:1910]  V_Sum_X_Standy
+	     R4 = DS:[R3++]           	// [14:1910]  
+	     [BP + 2] = R4            	// [16:1910]  lcl_spill_temp_197
+	     R4 = DS:[R3]             	// [17:1910]  
+	     [BP + 3] = R4            	// [19:1910]  lcl_spill_temp_198
+	     BP = BP - 82             	// [20:1910]  
+	     cmp R2, R4               	// [22:1910]  
+	     jg L_10_279              	// [23:1910]  
 BB238_PU10:	// 0x15e9
 // BB:238 cycle count: 13
-	     BP = BP + 83             	// [0:1915]  
-	     R3 = [BP + 0]            	// [2:1915]  lcl_spill_temp_196
-	     R4 = [BP + 2]            	// [4:1915]  lcl_spill_temp_198
-	     BP = BP - 83             	// [6:1915]  
-	     cmp R3, R4               	// [8:1915]  
-	     jne BB240_PU10           	// [9:1915]  
+	     BP = BP + 83             	// [0:1910]  
+	     R3 = [BP + 0]            	// [2:1910]  lcl_spill_temp_196
+	     R4 = [BP + 2]            	// [4:1910]  lcl_spill_temp_198
+	     BP = BP - 83             	// [6:1910]  
+	     cmp R3, R4               	// [8:1910]  
+	     jne BB240_PU10           	// [9:1910]  
 BB239_PU10:	// 0x15f1
 // BB:239 cycle count: 13
-	     BP = BP + 82             	// [0:1915]  
-	     R3 = [BP + 0]            	// [2:1915]  lcl_spill_temp_195
-	     R4 = [BP + 2]            	// [4:1915]  lcl_spill_temp_197
-	     BP = BP - 82             	// [6:1915]  
-	     cmp R3, R4               	// [8:1915]  
-	     jae L_10_279             	// [9:1915]  
+	     BP = BP + 82             	// [0:1910]  
+	     R3 = [BP + 0]            	// [2:1910]  lcl_spill_temp_195
+	     R4 = [BP + 2]            	// [4:1910]  lcl_spill_temp_197
+	     BP = BP - 82             	// [6:1910]  
+	     cmp R3, R4               	// [8:1910]  
+	     jae L_10_279             	// [9:1910]  
 BB240_PU10:	// 0x15f9
 // BB:240 cycle count: 25
-	     DS = seg(_V_Sum_X_Standy)	// [0:1915]  V_Sum_X_Standy
-	     R4 = (_V_Sum_X_Standy)   	// [1:1915]  V_Sum_X_Standy
-	     R3 = DS:[R4++]           	// [3:1915]  
-	     R4 = DS:[R4]             	// [5:1915]  
-	     DS = seg(_Sum_X)         	// [7:1915]  Sum_X
-	     R2 = (_Sum_X)            	// [8:1915]  Sum_X
-	     R3 = R3 - DS:[R2++]      	// [10:1915]  
-	     R4 = R4 - DS:[R2--], Carry	// [12:1915]  
-	     BP = BP + 86             	// [14:1915]  
-	     [BP + 1] = R4            	// [16:1915]  lcl_spill_temp_200
-	     [BP + 0] = R3            	// [17:1915]  lcl_spill_temp_199
-	     BP = BP - 86             	// [18:1915]  
-	     cmp R4, 0                	// [20:1915]  
-	     jle BB241_PU10           	// [21:1915]  
+	     DS = seg(_V_Sum_X_Standy)	// [0:1910]  V_Sum_X_Standy
+	     R4 = (_V_Sum_X_Standy)   	// [1:1910]  V_Sum_X_Standy
+	     R3 = DS:[R4++]           	// [3:1910]  
+	     R4 = DS:[R4]             	// [5:1910]  
+	     DS = seg(_Sum_X)         	// [7:1910]  Sum_X
+	     R2 = (_Sum_X)            	// [8:1910]  Sum_X
+	     R3 = R3 - DS:[R2++]      	// [10:1910]  
+	     R4 = R4 - DS:[R2--], Carry	// [12:1910]  
+	     BP = BP + 86             	// [14:1910]  
+	     [BP + 1] = R4            	// [16:1910]  lcl_spill_temp_200
+	     [BP + 0] = R3            	// [17:1910]  lcl_spill_temp_199
+	     BP = BP - 86             	// [18:1910]  
+	     cmp R4, 0                	// [20:1910]  
+	     jle BB241_PU10           	// [21:1910]  
 BB282_PU10:	// 0x160b
 // BB:282 cycle count: 3
 	     goto L_10_278            	// [0:0]  
 BB241_PU10:	// 0x160d
 // BB:241 cycle count: 11
-	     BP = BP + 87             	// [0:1915]  
-	     R4 = [BP + 0]            	// [2:1915]  lcl_spill_temp_200
-	     BP = BP - 87             	// [4:1915]  
-	     cmp R4, 0                	// [6:1915]  
-	     jne BB243_PU10           	// [7:1915]  
+	     BP = BP + 87             	// [0:1910]  
+	     R4 = [BP + 0]            	// [2:1910]  lcl_spill_temp_200
+	     BP = BP - 87             	// [4:1910]  
+	     cmp R4, 0                	// [6:1910]  
+	     jne BB243_PU10           	// [7:1910]  
 BB242_PU10:	// 0x1614
 // BB:242 cycle count: 12
-	     BP = BP + 86             	// [0:1915]  
-	     R4 = [BP + 0]            	// [2:1915]  lcl_spill_temp_199
-	     BP = BP - 86             	// [4:1915]  
-	     cmp R4, 1200             	// [6:1915]  
-	     jbe BB243_PU10           	// [8:1915]  
+	     BP = BP + 86             	// [0:1910]  
+	     R4 = [BP + 0]            	// [2:1910]  lcl_spill_temp_199
+	     BP = BP - 86             	// [4:1910]  
+	     cmp R4, 1200             	// [6:1910]  
+	     jbe BB243_PU10           	// [8:1910]  
 BB283_PU10:	// 0x161c
 // BB:283 cycle count: 3
 	     goto L_10_278            	// [0:0]  
 BB243_PU10:	// 0x161e
 L_10_279:	// 0x161e
 // BB:243 cycle count: 27
-	     DS = seg(_Sum_X)         	// [0:1915]  Sum_X
-	     R3 = (_Sum_X)            	// [1:1915]  Sum_X
-	     R4 = DS:[R3++]           	// [3:1915]  
-	     BP = BP + 88             	// [5:1915]  
-	     [BP + 0] = R4            	// [7:1915]  lcl_spill_temp_201
-	     R2 = DS:[R3]             	// [8:1915]  
-	     [BP + 1] = R2            	// [10:1915]  lcl_spill_temp_202
-	     DS = seg(_V_Sum_X_Standy)	// [11:1915]  V_Sum_X_Standy
-	     R3 = (_V_Sum_X_Standy)   	// [12:1915]  V_Sum_X_Standy
-	     R4 = DS:[R3++]           	// [14:1915]  
-	     [BP + 2] = R4            	// [16:1915]  lcl_spill_temp_203
-	     R4 = DS:[R3]             	// [17:1915]  
-	     [BP + 3] = R4            	// [19:1915]  lcl_spill_temp_204
-	     BP = BP - 88             	// [20:1915]  
-	     cmp R2, R4               	// [22:1915]  
-	     jge BB244_PU10           	// [23:1915]  
+	     DS = seg(_Sum_X)         	// [0:1910]  Sum_X
+	     R3 = (_Sum_X)            	// [1:1910]  Sum_X
+	     R4 = DS:[R3++]           	// [3:1910]  
+	     BP = BP + 88             	// [5:1910]  
+	     [BP + 0] = R4            	// [7:1910]  lcl_spill_temp_201
+	     R2 = DS:[R3]             	// [8:1910]  
+	     [BP + 1] = R2            	// [10:1910]  lcl_spill_temp_202
+	     DS = seg(_V_Sum_X_Standy)	// [11:1910]  V_Sum_X_Standy
+	     R3 = (_V_Sum_X_Standy)   	// [12:1910]  V_Sum_X_Standy
+	     R4 = DS:[R3++]           	// [14:1910]  
+	     [BP + 2] = R4            	// [16:1910]  lcl_spill_temp_203
+	     R4 = DS:[R3]             	// [17:1910]  
+	     [BP + 3] = R4            	// [19:1910]  lcl_spill_temp_204
+	     BP = BP - 88             	// [20:1910]  
+	     cmp R2, R4               	// [22:1910]  
+	     jge BB244_PU10           	// [23:1910]  
 BB279_PU10:	// 0x1632
 // BB:279 cycle count: 3
 	     goto L_10_277            	// [0:0]  
 BB244_PU10:	// 0x1634
 // BB:244 cycle count: 13
-	     BP = BP + 89             	// [0:1915]  
-	     R3 = [BP + 0]            	// [2:1915]  lcl_spill_temp_202
-	     R4 = [BP + 2]            	// [4:1915]  lcl_spill_temp_204
-	     BP = BP - 89             	// [6:1915]  
-	     cmp R3, R4               	// [8:1915]  
-	     jne BB246_PU10           	// [9:1915]  
+	     BP = BP + 89             	// [0:1910]  
+	     R3 = [BP + 0]            	// [2:1910]  lcl_spill_temp_202
+	     R4 = [BP + 2]            	// [4:1910]  lcl_spill_temp_204
+	     BP = BP - 89             	// [6:1910]  
+	     cmp R3, R4               	// [8:1910]  
+	     jne BB246_PU10           	// [9:1910]  
 BB245_PU10:	// 0x163c
 // BB:245 cycle count: 13
-	     BP = BP + 88             	// [0:1915]  
-	     R3 = [BP + 0]            	// [2:1915]  lcl_spill_temp_201
-	     R4 = [BP + 2]            	// [4:1915]  lcl_spill_temp_203
-	     BP = BP - 88             	// [6:1915]  
-	     cmp R3, R4               	// [8:1915]  
-	     ja BB246_PU10            	// [9:1915]  
+	     BP = BP + 88             	// [0:1910]  
+	     R3 = [BP + 0]            	// [2:1910]  lcl_spill_temp_201
+	     R4 = [BP + 2]            	// [4:1910]  lcl_spill_temp_203
+	     BP = BP - 88             	// [6:1910]  
+	     cmp R3, R4               	// [8:1910]  
+	     ja BB246_PU10            	// [9:1910]  
 BB280_PU10:	// 0x1644
 // BB:280 cycle count: 3
 	     goto L_10_277            	// [0:0]  
 BB246_PU10:	// 0x1646
 // BB:246 cycle count: 25
-	     DS = seg(_Sum_X)         	// [0:1915]  Sum_X
-	     R4 = (_Sum_X)            	// [1:1915]  Sum_X
-	     R3 = DS:[R4++]           	// [3:1915]  
-	     R4 = DS:[R4]             	// [5:1915]  
-	     DS = seg(_V_Sum_X_Standy)	// [7:1915]  V_Sum_X_Standy
-	     R2 = (_V_Sum_X_Standy)   	// [8:1915]  V_Sum_X_Standy
-	     R3 = R3 - DS:[R2++]      	// [10:1915]  
-	     R4 = R4 - DS:[R2--], Carry	// [12:1915]  
-	     BP = BP + 92             	// [14:1915]  
-	     [BP + 1] = R4            	// [16:1915]  lcl_spill_temp_206
-	     [BP + 0] = R3            	// [17:1915]  lcl_spill_temp_205
-	     BP = BP - 92             	// [18:1915]  
-	     cmp R4, 0                	// [20:1915]  
-	     jge BB247_PU10           	// [21:1915]  
+	     DS = seg(_Sum_X)         	// [0:1910]  Sum_X
+	     R4 = (_Sum_X)            	// [1:1910]  Sum_X
+	     R3 = DS:[R4++]           	// [3:1910]  
+	     R4 = DS:[R4]             	// [5:1910]  
+	     DS = seg(_V_Sum_X_Standy)	// [7:1910]  V_Sum_X_Standy
+	     R2 = (_V_Sum_X_Standy)   	// [8:1910]  V_Sum_X_Standy
+	     R3 = R3 - DS:[R2++]      	// [10:1910]  
+	     R4 = R4 - DS:[R2--], Carry	// [12:1910]  
+	     BP = BP + 92             	// [14:1910]  
+	     [BP + 1] = R4            	// [16:1910]  lcl_spill_temp_206
+	     [BP + 0] = R3            	// [17:1910]  lcl_spill_temp_205
+	     BP = BP - 92             	// [18:1910]  
+	     cmp R4, 0                	// [20:1910]  
+	     jge BB247_PU10           	// [21:1910]  
 BB281_PU10:	// 0x1658
 // BB:281 cycle count: 3
 	     goto L_10_277            	// [0:0]  
 BB247_PU10:	// 0x165a
 // BB:247 cycle count: 11
-	     BP = BP + 93             	// [0:1915]  
-	     R4 = [BP + 0]            	// [2:1915]  lcl_spill_temp_206
-	     BP = BP - 93             	// [4:1915]  
-	     cmp R4, 0                	// [6:1915]  
-	     jne BB249_PU10           	// [7:1915]  
+	     BP = BP + 93             	// [0:1910]  
+	     R4 = [BP + 0]            	// [2:1910]  lcl_spill_temp_206
+	     BP = BP - 93             	// [4:1910]  
+	     cmp R4, 0                	// [6:1910]  
+	     jne BB249_PU10           	// [7:1910]  
 BB248_PU10:	// 0x1661
 // BB:248 cycle count: 12
-	     BP = BP + 92             	// [0:1915]  
-	     R4 = [BP + 0]            	// [2:1915]  lcl_spill_temp_205
-	     BP = BP - 92             	// [4:1915]  
-	     cmp R4, 1200             	// [6:1915]  
-	     jbe L_10_277             	// [8:1915]  
+	     BP = BP + 92             	// [0:1910]  
+	     R4 = [BP + 0]            	// [2:1910]  lcl_spill_temp_205
+	     BP = BP - 92             	// [4:1910]  
+	     cmp R4, 1200             	// [6:1910]  
+	     jbe L_10_277             	// [8:1910]  
 BB249_PU10:	// 0x1669
 L_10_278:	// 0x1669
 // BB:249 cycle count: 57
-//1916  		                                  {  
-//1917  										  	     G_Sensor_Status |=0x8000;
+//1911  		                                  {  
+//1912  										  	     G_Sensor_Status |=0x8000;
 
 LM537:
-	     .stabn 68,0,1917,LM537-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1917]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1917]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1917]  
-	     R3 = R4 | 32768          	// [5:1917]  
-	     DS = seg(_G_Sensor_Status)	// [7:1917]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1917]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1917]  
-//1918  										  	   //  Standy_X_cnt =0;
-//1919  										  	     
-//1920  										  	     
-//1921  												  velocityx[1]=0;
+	     .stabn 68,0,1912,LM537-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1912]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1912]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1912]  
+	     R3 = R4 | 32768          	// [5:1912]  
+	     DS = seg(_G_Sensor_Status)	// [7:1912]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1912]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1912]  
+//1913  										  	   //  Standy_X_cnt =0;
+//1914  										  	     
+//1915  										  	     
+//1916  												  velocityx[1]=0;
 
 LM538:
-	     .stabn 68,0,1921,LM538-_G_Sensor_Check
-	     R2 = 0                   	// [12:1921]  
-	     R3 = 0                   	// [13:1921]  
-	     DS = seg(_velocityx+2)   	// [14:1921]  velocityx+2
-	     R4 = (_velocityx+2)      	// [15:1921]  velocityx+2
-	     DS:[R4++] = R2           	// [17:1921]  
-	     DS:[R4] = R3             	// [19:1921]  
-//1922  												  velocityx[0]=0;
+	     .stabn 68,0,1916,LM538-_G_Sensor_Check
+	     R2 = 0                   	// [12:1916]  
+	     R3 = 0                   	// [13:1916]  
+	     DS = seg(_velocityx+2)   	// [14:1916]  velocityx+2
+	     R4 = (_velocityx+2)      	// [15:1916]  velocityx+2
+	     DS:[R4++] = R2           	// [17:1916]  
+	     DS:[R4] = R3             	// [19:1916]  
+//1917  												  velocityx[0]=0;
 
 LM539:
-	     .stabn 68,0,1922,LM539-_G_Sensor_Check
-	     R2 = 0                   	// [21:1922]  
-	     R3 = 0                   	// [22:1922]  
-	     DS = seg(_velocityx)     	// [23:1922]  velocityx
-	     R4 = (_velocityx)        	// [24:1922]  velocityx
-	     DS:[R4++] = R2           	// [26:1922]  
-	     DS:[R4] = R3             	// [28:1922]  
-//1923  												  positionX[0] =0;
+	     .stabn 68,0,1917,LM539-_G_Sensor_Check
+	     R2 = 0                   	// [21:1917]  
+	     R3 = 0                   	// [22:1917]  
+	     DS = seg(_velocityx)     	// [23:1917]  velocityx
+	     R4 = (_velocityx)        	// [24:1917]  velocityx
+	     DS:[R4++] = R2           	// [26:1917]  
+	     DS:[R4] = R3             	// [28:1917]  
+//1918  												  positionX[0] =0;
 
 LM540:
-	     .stabn 68,0,1923,LM540-_G_Sensor_Check
-	     R2 = 0                   	// [30:1923]  
-	     R3 = 0                   	// [31:1923]  
-	     DS = seg(_positionX)     	// [32:1923]  positionX
-	     R4 = (_positionX)        	// [33:1923]  positionX
-	     DS:[R4++] = R2           	// [35:1923]  
-	     DS:[R4] = R3             	// [37:1923]  
-//1924  												  positionX[1] =0;   
+	     .stabn 68,0,1918,LM540-_G_Sensor_Check
+	     R2 = 0                   	// [30:1918]  
+	     R3 = 0                   	// [31:1918]  
+	     DS = seg(_positionX)     	// [32:1918]  positionX
+	     R4 = (_positionX)        	// [33:1918]  positionX
+	     DS:[R4++] = R2           	// [35:1918]  
+	     DS:[R4] = R3             	// [37:1918]  
+//1919  												  positionX[1] =0;   
 
 LM541:
-	     .stabn 68,0,1924,LM541-_G_Sensor_Check
-	     R2 = 0                   	// [39:1924]  
-	     R3 = 0                   	// [40:1924]  
-	     DS = seg(_positionX+2)   	// [41:1924]  positionX+2
-	     R4 = (_positionX+2)      	// [42:1924]  positionX+2
-	     DS:[R4++] = R2           	// [44:1924]  
-	     DS:[R4] = R3             	// [46:1924]  
-//1925  
-//1926                                                   stepflag=0;
+	     .stabn 68,0,1919,LM541-_G_Sensor_Check
+	     R2 = 0                   	// [39:1919]  
+	     R3 = 0                   	// [40:1919]  
+	     DS = seg(_positionX+2)   	// [41:1919]  positionX+2
+	     R4 = (_positionX+2)      	// [42:1919]  positionX+2
+	     DS:[R4++] = R2           	// [44:1919]  
+	     DS:[R4] = R3             	// [46:1919]  
+//1920  
+//1921                                                   stepflag=0;
 
 LM542:
-	     .stabn 68,0,1926,LM542-_G_Sensor_Check
-	     R3 = 0                   	// [48:1926]  
-	     DS = seg(_stepflag)      	// [49:1926]  stepflag
-	     R4 = (_stepflag)         	// [50:1926]  stepflag
-	     DS:[R4] = R3             	// [52:1926]  
-//1927  				                                 Time_Maxinit();    
+	     .stabn 68,0,1921,LM542-_G_Sensor_Check
+	     R3 = 0                   	// [48:1921]  
+	     DS = seg(_stepflag)      	// [49:1921]  stepflag
+	     R4 = (_stepflag)         	// [50:1921]  stepflag
+	     DS:[R4] = R3             	// [52:1921]  
+//1922  				                                 Time_Maxinit();    
 
 LM543:
-	     .stabn 68,0,1927,LM543-_G_Sensor_Check
-	     call _Time_Maxinit       	// [54:1927]  Time_Maxinit
+	     .stabn 68,0,1922,LM543-_G_Sensor_Check
+	     call _Time_Maxinit       	// [54:1922]  Time_Maxinit
 BB250_PU10:	// 0x1696
 // BB:250 cycle count: 3
-//1928  
-//1929  												 R_Position_init();
+//1923  
+//1924  												 R_Position_init();
 
 LM544:
-	     .stabn 68,0,1929,LM544-_G_Sensor_Check
-	     call _R_Position_init    	// [0:1929]  R_Position_init
+	     .stabn 68,0,1924,LM544-_G_Sensor_Check
+	     call _R_Position_init    	// [0:1924]  R_Position_init
 BB251_PU10:	// 0x1698
 // BB:251 cycle count: 6
-//1930  												 TimeCnt_Total =0;
+//1925  												 TimeCnt_Total =0;
 
 LM545:
-	     .stabn 68,0,1930,LM545-_G_Sensor_Check
-	     R3 = 0                   	// [0:1930]  
-	     DS = seg(_TimeCnt_Total) 	// [1:1930]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [2:1930]  TimeCnt_Total
-	     DS:[R4] = R3             	// [4:1930]  
+	     .stabn 68,0,1925,LM545-_G_Sensor_Check
+	     R3 = 0                   	// [0:1925]  
+	     DS = seg(_TimeCnt_Total) 	// [1:1925]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [2:1925]  TimeCnt_Total
+	     DS:[R4] = R3             	// [4:1925]  
 L_10_277:	// 0x169d
 L_10_276:	// 0x169d
 // BB:252 cycle count: 11
-//1931  
-//1932  		                                  }
-//1933  									}
-//1934                                         
-//1935  							 if((G_Sensor_Status&(G_Right|G_Left)))//||(G_Next_Status&(G_Hit|G_Back)))//G_shake
+//1926  
+//1927  		                                  }
+//1928  									}
+//1929                                         
+//1930  							 if((G_Sensor_Status&(G_Y_A|G_Y_M)))//||(G_Next_Status&(G_Hit|G_Back)))//G_shake
 
 LM546:
-	     .stabn 68,0,1935,LM546-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1935]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1935]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1935]  
-	     R4 = R4 & 12             	// [5:1935]  
-	     cmp R4, 0                	// [6:1935]  
-	     jne BB253_PU10           	// [7:1935]  
+	     .stabn 68,0,1930,LM546-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1930]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1930]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1930]  
+	     R4 = R4 & 48             	// [5:1930]  
+	     cmp R4, 0                	// [6:1930]  
+	     jne BB253_PU10           	// [7:1930]  
 BB271_PU10:	// 0x16a4
 // BB:271 cycle count: 3
 	     goto L_10_280            	// [0:0]  
 BB253_PU10:	// 0x16a6
 // BB:253 cycle count: 27
-//1936  							 	{
-//1937  
-//1938  
-//1939  								     if(((V_Sum_Y_Standy>Sum_Y)&&((V_Sum_Y_Standy-Sum_Y)>C_StartMove_Dif))||((V_Sum_Y_Standy<Sum_Y)&&((Sum_Y-V_Sum_Y_Standy)>C_StartMove_Dif)))//100
+//1931  							 	{
+//1932  
+//1933  
+//1934  								     if(((V_Sum_Y_Standy>Sum_Y)&&((V_Sum_Y_Standy-Sum_Y)>C_StartMove_Dif))||((V_Sum_Y_Standy<Sum_Y)&&((Sum_Y-V_Sum_Y_Standy)>C_StartMove_Dif)))//100
 
 LM547:
-	     .stabn 68,0,1939,LM547-_G_Sensor_Check
-	     DS = seg(_Sum_Y)         	// [0:1939]  Sum_Y
-	     R3 = (_Sum_Y)            	// [1:1939]  Sum_Y
-	     R4 = DS:[R3++]           	// [3:1939]  
-	     BP = BP + 94             	// [5:1939]  
-	     [BP + 0] = R4            	// [7:1939]  lcl_spill_temp_207
-	     R2 = DS:[R3]             	// [8:1939]  
-	     [BP + 1] = R2            	// [10:1939]  lcl_spill_temp_208
-	     DS = seg(_V_Sum_Y_Standy)	// [11:1939]  V_Sum_Y_Standy
-	     R3 = (_V_Sum_Y_Standy)   	// [12:1939]  V_Sum_Y_Standy
-	     R4 = DS:[R3++]           	// [14:1939]  
-	     [BP + 2] = R4            	// [16:1939]  lcl_spill_temp_209
-	     R4 = DS:[R3]             	// [17:1939]  
-	     [BP + 3] = R4            	// [19:1939]  lcl_spill_temp_210
-	     BP = BP - 94             	// [20:1939]  
-	     cmp R2, R4               	// [22:1939]  
-	     jg L_10_283              	// [23:1939]  
+	     .stabn 68,0,1934,LM547-_G_Sensor_Check
+	     DS = seg(_Sum_Y)         	// [0:1934]  Sum_Y
+	     R3 = (_Sum_Y)            	// [1:1934]  Sum_Y
+	     R4 = DS:[R3++]           	// [3:1934]  
+	     BP = BP + 94             	// [5:1934]  
+	     [BP + 0] = R4            	// [7:1934]  lcl_spill_temp_207
+	     R2 = DS:[R3]             	// [8:1934]  
+	     [BP + 1] = R2            	// [10:1934]  lcl_spill_temp_208
+	     DS = seg(_V_Sum_Y_Standy)	// [11:1934]  V_Sum_Y_Standy
+	     R3 = (_V_Sum_Y_Standy)   	// [12:1934]  V_Sum_Y_Standy
+	     R4 = DS:[R3++]           	// [14:1934]  
+	     [BP + 2] = R4            	// [16:1934]  lcl_spill_temp_209
+	     R4 = DS:[R3]             	// [17:1934]  
+	     [BP + 3] = R4            	// [19:1934]  lcl_spill_temp_210
+	     BP = BP - 94             	// [20:1934]  
+	     cmp R2, R4               	// [22:1934]  
+	     jg L_10_283              	// [23:1934]  
 BB254_PU10:	// 0x16ba
 // BB:254 cycle count: 13
-	     BP = BP + 95             	// [0:1939]  
-	     R3 = [BP + 0]            	// [2:1939]  lcl_spill_temp_208
-	     R4 = [BP + 2]            	// [4:1939]  lcl_spill_temp_210
-	     BP = BP - 95             	// [6:1939]  
-	     cmp R3, R4               	// [8:1939]  
-	     jne BB256_PU10           	// [9:1939]  
+	     BP = BP + 95             	// [0:1934]  
+	     R3 = [BP + 0]            	// [2:1934]  lcl_spill_temp_208
+	     R4 = [BP + 2]            	// [4:1934]  lcl_spill_temp_210
+	     BP = BP - 95             	// [6:1934]  
+	     cmp R3, R4               	// [8:1934]  
+	     jne BB256_PU10           	// [9:1934]  
 BB255_PU10:	// 0x16c2
 // BB:255 cycle count: 13
-	     BP = BP + 94             	// [0:1939]  
-	     R3 = [BP + 0]            	// [2:1939]  lcl_spill_temp_207
-	     R4 = [BP + 2]            	// [4:1939]  lcl_spill_temp_209
-	     BP = BP - 94             	// [6:1939]  
-	     cmp R3, R4               	// [8:1939]  
-	     jae L_10_283             	// [9:1939]  
+	     BP = BP + 94             	// [0:1934]  
+	     R3 = [BP + 0]            	// [2:1934]  lcl_spill_temp_207
+	     R4 = [BP + 2]            	// [4:1934]  lcl_spill_temp_209
+	     BP = BP - 94             	// [6:1934]  
+	     cmp R3, R4               	// [8:1934]  
+	     jae L_10_283             	// [9:1934]  
 BB256_PU10:	// 0x16ca
 // BB:256 cycle count: 25
-	     DS = seg(_V_Sum_Y_Standy)	// [0:1939]  V_Sum_Y_Standy
-	     R4 = (_V_Sum_Y_Standy)   	// [1:1939]  V_Sum_Y_Standy
-	     R3 = DS:[R4++]           	// [3:1939]  
-	     R4 = DS:[R4]             	// [5:1939]  
-	     DS = seg(_Sum_Y)         	// [7:1939]  Sum_Y
-	     R2 = (_Sum_Y)            	// [8:1939]  Sum_Y
-	     R3 = R3 - DS:[R2++]      	// [10:1939]  
-	     R4 = R4 - DS:[R2--], Carry	// [12:1939]  
-	     BP = BP + 98             	// [14:1939]  
-	     [BP + 1] = R4            	// [16:1939]  lcl_spill_temp_212
-	     [BP + 0] = R3            	// [17:1939]  lcl_spill_temp_211
-	     BP = BP - 98             	// [18:1939]  
-	     cmp R4, 0                	// [20:1939]  
-	     jle BB257_PU10           	// [21:1939]  
+	     DS = seg(_V_Sum_Y_Standy)	// [0:1934]  V_Sum_Y_Standy
+	     R4 = (_V_Sum_Y_Standy)   	// [1:1934]  V_Sum_Y_Standy
+	     R3 = DS:[R4++]           	// [3:1934]  
+	     R4 = DS:[R4]             	// [5:1934]  
+	     DS = seg(_Sum_Y)         	// [7:1934]  Sum_Y
+	     R2 = (_Sum_Y)            	// [8:1934]  Sum_Y
+	     R3 = R3 - DS:[R2++]      	// [10:1934]  
+	     R4 = R4 - DS:[R2--], Carry	// [12:1934]  
+	     BP = BP + 98             	// [14:1934]  
+	     [BP + 1] = R4            	// [16:1934]  lcl_spill_temp_212
+	     [BP + 0] = R3            	// [17:1934]  lcl_spill_temp_211
+	     BP = BP - 98             	// [18:1934]  
+	     cmp R4, 0                	// [20:1934]  
+	     jle BB257_PU10           	// [21:1934]  
 BB276_PU10:	// 0x16dc
 // BB:276 cycle count: 3
 	     goto L_10_282            	// [0:0]  
 BB257_PU10:	// 0x16de
 // BB:257 cycle count: 11
-	     BP = BP + 99             	// [0:1939]  
-	     R4 = [BP + 0]            	// [2:1939]  lcl_spill_temp_212
-	     BP = BP - 99             	// [4:1939]  
-	     cmp R4, 0                	// [6:1939]  
-	     jne BB259_PU10           	// [7:1939]  
+	     BP = BP + 99             	// [0:1934]  
+	     R4 = [BP + 0]            	// [2:1934]  lcl_spill_temp_212
+	     BP = BP - 99             	// [4:1934]  
+	     cmp R4, 0                	// [6:1934]  
+	     jne BB259_PU10           	// [7:1934]  
 BB258_PU10:	// 0x16e5
 // BB:258 cycle count: 12
-	     BP = BP + 98             	// [0:1939]  
-	     R4 = [BP + 0]            	// [2:1939]  lcl_spill_temp_211
-	     BP = BP - 98             	// [4:1939]  
-	     cmp R4, 1200             	// [6:1939]  
-	     jbe BB259_PU10           	// [8:1939]  
+	     BP = BP + 98             	// [0:1934]  
+	     R4 = [BP + 0]            	// [2:1934]  lcl_spill_temp_211
+	     BP = BP - 98             	// [4:1934]  
+	     cmp R4, 1200             	// [6:1934]  
+	     jbe BB259_PU10           	// [8:1934]  
 BB277_PU10:	// 0x16ed
 // BB:277 cycle count: 3
 	     goto L_10_282            	// [0:0]  
 BB259_PU10:	// 0x16ef
 L_10_283:	// 0x16ef
 // BB:259 cycle count: 27
-	     DS = seg(_Sum_Y)         	// [0:1939]  Sum_Y
-	     R3 = (_Sum_Y)            	// [1:1939]  Sum_Y
-	     R4 = DS:[R3++]           	// [3:1939]  
-	     BP = BP + 100            	// [5:1939]  
-	     [BP + 0] = R4            	// [7:1939]  lcl_spill_temp_213
-	     R2 = DS:[R3]             	// [8:1939]  
-	     [BP + 1] = R2            	// [10:1939]  lcl_spill_temp_214
-	     DS = seg(_V_Sum_Y_Standy)	// [11:1939]  V_Sum_Y_Standy
-	     R3 = (_V_Sum_Y_Standy)   	// [12:1939]  V_Sum_Y_Standy
-	     R4 = DS:[R3++]           	// [14:1939]  
-	     [BP + 2] = R4            	// [16:1939]  lcl_spill_temp_215
-	     R4 = DS:[R3]             	// [17:1939]  
-	     [BP + 3] = R4            	// [19:1939]  lcl_spill_temp_216
-	     BP = BP - 100            	// [20:1939]  
-	     cmp R2, R4               	// [22:1939]  
-	     jge BB260_PU10           	// [23:1939]  
+	     DS = seg(_Sum_Y)         	// [0:1934]  Sum_Y
+	     R3 = (_Sum_Y)            	// [1:1934]  Sum_Y
+	     R4 = DS:[R3++]           	// [3:1934]  
+	     BP = BP + 100            	// [5:1934]  
+	     [BP + 0] = R4            	// [7:1934]  lcl_spill_temp_213
+	     R2 = DS:[R3]             	// [8:1934]  
+	     [BP + 1] = R2            	// [10:1934]  lcl_spill_temp_214
+	     DS = seg(_V_Sum_Y_Standy)	// [11:1934]  V_Sum_Y_Standy
+	     R3 = (_V_Sum_Y_Standy)   	// [12:1934]  V_Sum_Y_Standy
+	     R4 = DS:[R3++]           	// [14:1934]  
+	     [BP + 2] = R4            	// [16:1934]  lcl_spill_temp_215
+	     R4 = DS:[R3]             	// [17:1934]  
+	     [BP + 3] = R4            	// [19:1934]  lcl_spill_temp_216
+	     BP = BP - 100            	// [20:1934]  
+	     cmp R2, R4               	// [22:1934]  
+	     jge BB260_PU10           	// [23:1934]  
 BB272_PU10:	// 0x1703
 // BB:272 cycle count: 3
 	     goto L_10_281            	// [0:0]  
 BB260_PU10:	// 0x1705
 // BB:260 cycle count: 13
-	     BP = BP + 101            	// [0:1939]  
-	     R3 = [BP + 0]            	// [2:1939]  lcl_spill_temp_214
-	     R4 = [BP + 2]            	// [4:1939]  lcl_spill_temp_216
-	     BP = BP - 101            	// [6:1939]  
-	     cmp R3, R4               	// [8:1939]  
-	     jne BB262_PU10           	// [9:1939]  
+	     BP = BP + 101            	// [0:1934]  
+	     R3 = [BP + 0]            	// [2:1934]  lcl_spill_temp_214
+	     R4 = [BP + 2]            	// [4:1934]  lcl_spill_temp_216
+	     BP = BP - 101            	// [6:1934]  
+	     cmp R3, R4               	// [8:1934]  
+	     jne BB262_PU10           	// [9:1934]  
 BB261_PU10:	// 0x170d
 // BB:261 cycle count: 13
-	     BP = BP + 100            	// [0:1939]  
-	     R3 = [BP + 0]            	// [2:1939]  lcl_spill_temp_213
-	     R4 = [BP + 2]            	// [4:1939]  lcl_spill_temp_215
-	     BP = BP - 100            	// [6:1939]  
-	     cmp R3, R4               	// [8:1939]  
-	     ja BB262_PU10            	// [9:1939]  
+	     BP = BP + 100            	// [0:1934]  
+	     R3 = [BP + 0]            	// [2:1934]  lcl_spill_temp_213
+	     R4 = [BP + 2]            	// [4:1934]  lcl_spill_temp_215
+	     BP = BP - 100            	// [6:1934]  
+	     cmp R3, R4               	// [8:1934]  
+	     ja BB262_PU10            	// [9:1934]  
 BB273_PU10:	// 0x1715
 // BB:273 cycle count: 3
 	     goto L_10_281            	// [0:0]  
 BB262_PU10:	// 0x1717
 // BB:262 cycle count: 25
-	     DS = seg(_Sum_Y)         	// [0:1939]  Sum_Y
-	     R4 = (_Sum_Y)            	// [1:1939]  Sum_Y
-	     R3 = DS:[R4++]           	// [3:1939]  
-	     R4 = DS:[R4]             	// [5:1939]  
-	     DS = seg(_V_Sum_Y_Standy)	// [7:1939]  V_Sum_Y_Standy
-	     R2 = (_V_Sum_Y_Standy)   	// [8:1939]  V_Sum_Y_Standy
-	     R3 = R3 - DS:[R2++]      	// [10:1939]  
-	     R4 = R4 - DS:[R2--], Carry	// [12:1939]  
-	     BP = BP + 104            	// [14:1939]  
-	     [BP + 1] = R4            	// [16:1939]  lcl_spill_temp_218
-	     [BP + 0] = R3            	// [17:1939]  lcl_spill_temp_217
-	     BP = BP - 104            	// [18:1939]  
-	     cmp R4, 0                	// [20:1939]  
-	     jge BB263_PU10           	// [21:1939]  
+	     DS = seg(_Sum_Y)         	// [0:1934]  Sum_Y
+	     R4 = (_Sum_Y)            	// [1:1934]  Sum_Y
+	     R3 = DS:[R4++]           	// [3:1934]  
+	     R4 = DS:[R4]             	// [5:1934]  
+	     DS = seg(_V_Sum_Y_Standy)	// [7:1934]  V_Sum_Y_Standy
+	     R2 = (_V_Sum_Y_Standy)   	// [8:1934]  V_Sum_Y_Standy
+	     R3 = R3 - DS:[R2++]      	// [10:1934]  
+	     R4 = R4 - DS:[R2--], Carry	// [12:1934]  
+	     BP = BP + 104            	// [14:1934]  
+	     [BP + 1] = R4            	// [16:1934]  lcl_spill_temp_218
+	     [BP + 0] = R3            	// [17:1934]  lcl_spill_temp_217
+	     BP = BP - 104            	// [18:1934]  
+	     cmp R4, 0                	// [20:1934]  
+	     jge BB263_PU10           	// [21:1934]  
 BB274_PU10:	// 0x1729
 // BB:274 cycle count: 3
 	     goto L_10_281            	// [0:0]  
 BB263_PU10:	// 0x172b
 // BB:263 cycle count: 11
-	     BP = BP + 105            	// [0:1939]  
-	     R4 = [BP + 0]            	// [2:1939]  lcl_spill_temp_218
-	     BP = BP - 105            	// [4:1939]  
-	     cmp R4, 0                	// [6:1939]  
-	     jne BB265_PU10           	// [7:1939]  
+	     BP = BP + 105            	// [0:1934]  
+	     R4 = [BP + 0]            	// [2:1934]  lcl_spill_temp_218
+	     BP = BP - 105            	// [4:1934]  
+	     cmp R4, 0                	// [6:1934]  
+	     jne BB265_PU10           	// [7:1934]  
 BB264_PU10:	// 0x1732
 // BB:264 cycle count: 12
-	     BP = BP + 104            	// [0:1939]  
-	     R4 = [BP + 0]            	// [2:1939]  lcl_spill_temp_217
-	     BP = BP - 104            	// [4:1939]  
-	     cmp R4, 1200             	// [6:1939]  
-	     ja BB265_PU10            	// [8:1939]  
+	     BP = BP + 104            	// [0:1934]  
+	     R4 = [BP + 0]            	// [2:1934]  lcl_spill_temp_217
+	     BP = BP - 104            	// [4:1934]  
+	     cmp R4, 1200             	// [6:1934]  
+	     ja BB265_PU10            	// [8:1934]  
 BB275_PU10:	// 0x173a
 // BB:275 cycle count: 3
 	     goto L_10_281            	// [0:0]  
 BB265_PU10:	// 0x173c
 L_10_282:	// 0x173c
 // BB:265 cycle count: 102
-//1940  								     {   
-//1941  									  	     G_Sensor_Status |=0x4000;
+//1935  								     {   
+//1936  									  	     G_Sensor_Status |=0x4000;
 
 LM548:
-	     .stabn 68,0,1941,LM548-_G_Sensor_Check
-	     DS = seg(_G_Sensor_Status)	// [0:1941]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1941]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1941]  
-	     R3 = R4 | 16384          	// [5:1941]  
-	     DS = seg(_G_Sensor_Status)	// [7:1941]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1941]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1941]  
-//1943  
-//1944  									  	 
-//1945  									  	      //Y_cnt =1;
-//1946  									  	      
-//1947  											  velocityy[1]=0;
+	     .stabn 68,0,1936,LM548-_G_Sensor_Check
+	     DS = seg(_G_Sensor_Status)	// [0:1936]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:1936]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:1936]  
+	     R3 = R4 | 16384          	// [5:1936]  
+	     DS = seg(_G_Sensor_Status)	// [7:1936]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1936]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:1936]  
+//1938  
+//1939  									  	 
+//1940  									  	      //Y_cnt =1;
+//1941  									  	      
+//1942  											  velocityy[1]=0;
 
 LM549:
-	     .stabn 68,0,1947,LM549-_G_Sensor_Check
-	     R2 = 0                   	// [12:1947]  
-	     R3 = 0                   	// [13:1947]  
-	     DS = seg(_velocityy+2)   	// [14:1947]  velocityy+2
-	     R4 = (_velocityy+2)      	// [15:1947]  velocityy+2
-	     DS:[R4++] = R2           	// [17:1947]  
-	     DS:[R4] = R3             	// [19:1947]  
-//1948  											  velocityy[0]=0;
+	     .stabn 68,0,1942,LM549-_G_Sensor_Check
+	     R2 = 0                   	// [12:1942]  
+	     R3 = 0                   	// [13:1942]  
+	     DS = seg(_velocityy+2)   	// [14:1942]  velocityy+2
+	     R4 = (_velocityy+2)      	// [15:1942]  velocityy+2
+	     DS:[R4++] = R2           	// [17:1942]  
+	     DS:[R4] = R3             	// [19:1942]  
+//1943  											  velocityy[0]=0;
 
 LM550:
-	     .stabn 68,0,1948,LM550-_G_Sensor_Check
-	     R2 = 0                   	// [21:1948]  
-	     R3 = 0                   	// [22:1948]  
-	     DS = seg(_velocityy)     	// [23:1948]  velocityy
-	     R4 = (_velocityy)        	// [24:1948]  velocityy
-	     DS:[R4++] = R2           	// [26:1948]  
-	     DS:[R4] = R3             	// [28:1948]  
-//1949  											  positionY[0] =0;
+	     .stabn 68,0,1943,LM550-_G_Sensor_Check
+	     R2 = 0                   	// [21:1943]  
+	     R3 = 0                   	// [22:1943]  
+	     DS = seg(_velocityy)     	// [23:1943]  velocityy
+	     R4 = (_velocityy)        	// [24:1943]  velocityy
+	     DS:[R4++] = R2           	// [26:1943]  
+	     DS:[R4] = R3             	// [28:1943]  
+//1944  											  positionY[0] =0;
 
 LM551:
-	     .stabn 68,0,1949,LM551-_G_Sensor_Check
-	     R2 = 0                   	// [30:1949]  
-	     R3 = 0                   	// [31:1949]  
-	     DS = seg(_positionY)     	// [32:1949]  positionY
-	     R4 = (_positionY)        	// [33:1949]  positionY
-	     DS:[R4++] = R2           	// [35:1949]  
-	     DS:[R4] = R3             	// [37:1949]  
-//1950  											  positionY[1] =0;   		  	
+	     .stabn 68,0,1944,LM551-_G_Sensor_Check
+	     R2 = 0                   	// [30:1944]  
+	     R3 = 0                   	// [31:1944]  
+	     DS = seg(_positionY)     	// [32:1944]  positionY
+	     R4 = (_positionY)        	// [33:1944]  positionY
+	     DS:[R4++] = R2           	// [35:1944]  
+	     DS:[R4] = R3             	// [37:1944]  
+//1945  											  positionY[1] =0;   		  	
 
 LM552:
-	     .stabn 68,0,1950,LM552-_G_Sensor_Check
-	     R2 = 0                   	// [39:1950]  
-	     R3 = 0                   	// [40:1950]  
-	     DS = seg(_positionY+2)   	// [41:1950]  positionY+2
-	     R4 = (_positionY+2)      	// [42:1950]  positionY+2
-	     DS:[R4++] = R2           	// [44:1950]  
-	     DS:[R4] = R3             	// [46:1950]  
-//1951  
-//1952  
-//1953  											  //Time_Maxinit();  
-//1954  											    time_Max_Y =0;
+	     .stabn 68,0,1945,LM552-_G_Sensor_Check
+	     R2 = 0                   	// [39:1945]  
+	     R3 = 0                   	// [40:1945]  
+	     DS = seg(_positionY+2)   	// [41:1945]  positionY+2
+	     R4 = (_positionY+2)      	// [42:1945]  positionY+2
+	     DS:[R4++] = R2           	// [44:1945]  
+	     DS:[R4] = R3             	// [46:1945]  
+//1946  
+//1947  
+//1948  											  //Time_Maxinit();  
+//1949  											    time_Max_Y =0;
 
 LM553:
-	     .stabn 68,0,1954,LM553-_G_Sensor_Check
-	     R3 = 0                   	// [48:1954]  
-	     DS = seg(_time_Max_Y)    	// [49:1954]  time_Max_Y
-	     R4 = (_time_Max_Y)       	// [50:1954]  time_Max_Y
-	     DS:[R4] = R3             	// [52:1954]  
-//1955  												time_Min_Y =0;
+	     .stabn 68,0,1949,LM553-_G_Sensor_Check
+	     R3 = 0                   	// [48:1949]  
+	     DS = seg(_time_Max_Y)    	// [49:1949]  time_Max_Y
+	     R4 = (_time_Max_Y)       	// [50:1949]  time_Max_Y
+	     DS:[R4] = R3             	// [52:1949]  
+//1950  												time_Min_Y =0;
 
 LM554:
-	     .stabn 68,0,1955,LM554-_G_Sensor_Check
-	     R3 = 0                   	// [54:1955]  
-	     DS = seg(_time_Min_Y)    	// [55:1955]  time_Min_Y
-	     R4 = (_time_Min_Y)       	// [56:1955]  time_Min_Y
-	     DS:[R4] = R3             	// [58:1955]  
-//1956  												MAX_time_Max_Y =0;
+	     .stabn 68,0,1950,LM554-_G_Sensor_Check
+	     R3 = 0                   	// [54:1950]  
+	     DS = seg(_time_Min_Y)    	// [55:1950]  time_Min_Y
+	     R4 = (_time_Min_Y)       	// [56:1950]  time_Min_Y
+	     DS:[R4] = R3             	// [58:1950]  
+//1951  												MAX_time_Max_Y =0;
 
 LM555:
-	     .stabn 68,0,1956,LM555-_G_Sensor_Check
-	     R3 = 0                   	// [60:1956]  
-	     DS = seg(_MAX_time_Max_Y)	// [61:1956]  MAX_time_Max_Y
-	     R4 = (_MAX_time_Max_Y)   	// [62:1956]  MAX_time_Max_Y
-	     DS:[R4] = R3             	// [64:1956]  
-//1957  												MAX_time_Min_Y =0;
+	     .stabn 68,0,1951,LM555-_G_Sensor_Check
+	     R3 = 0                   	// [60:1951]  
+	     DS = seg(_MAX_time_Max_Y)	// [61:1951]  MAX_time_Max_Y
+	     R4 = (_MAX_time_Max_Y)   	// [62:1951]  MAX_time_Max_Y
+	     DS:[R4] = R3             	// [64:1951]  
+//1952  												MAX_time_Min_Y =0;
 
 LM556:
-	     .stabn 68,0,1957,LM556-_G_Sensor_Check
-	     R3 = 0                   	// [66:1957]  
-	     DS = seg(_MAX_time_Min_Y)	// [67:1957]  MAX_time_Min_Y
-	     R4 = (_MAX_time_Min_Y)   	// [68:1957]  MAX_time_Min_Y
-	     DS:[R4] = R3             	// [70:1957]  
-//1958  												TimeCnt_Total =0;
+	     .stabn 68,0,1952,LM556-_G_Sensor_Check
+	     R3 = 0                   	// [66:1952]  
+	     DS = seg(_MAX_time_Min_Y)	// [67:1952]  MAX_time_Min_Y
+	     R4 = (_MAX_time_Min_Y)   	// [68:1952]  MAX_time_Min_Y
+	     DS:[R4] = R3             	// [70:1952]  
+//1953  												TimeCnt_Total =0;
 
 LM557:
-	     .stabn 68,0,1958,LM557-_G_Sensor_Check
-	     R3 = 0                   	// [72:1958]  
-	     DS = seg(_TimeCnt_Total) 	// [73:1958]  TimeCnt_Total
-	     R4 = (_TimeCnt_Total)    	// [74:1958]  TimeCnt_Total
-	     DS:[R4] = R3             	// [76:1958]  
-//1959  
-//1960  											  //R_Position_init();
-//1961  											  stepflag_Y =0;
+	     .stabn 68,0,1953,LM557-_G_Sensor_Check
+	     R3 = 0                   	// [72:1953]  
+	     DS = seg(_TimeCnt_Total) 	// [73:1953]  TimeCnt_Total
+	     R4 = (_TimeCnt_Total)    	// [74:1953]  TimeCnt_Total
+	     DS:[R4] = R3             	// [76:1953]  
+//1954  
+//1955  											  //R_Position_init();
+//1956  											  stepflag_Y =0;
 
 LM558:
-	     .stabn 68,0,1961,LM558-_G_Sensor_Check
-	     R3 = 0                   	// [78:1961]  
-	     DS = seg(_stepflag_Y)    	// [79:1961]  stepflag_Y
-	     R4 = (_stepflag_Y)       	// [80:1961]  stepflag_Y
-	     DS:[R4] = R3             	// [82:1961]  
-//1962  											   positionY_Min =0;
+	     .stabn 68,0,1956,LM558-_G_Sensor_Check
+	     R3 = 0                   	// [78:1956]  
+	     DS = seg(_stepflag_Y)    	// [79:1956]  stepflag_Y
+	     R4 = (_stepflag_Y)       	// [80:1956]  stepflag_Y
+	     DS:[R4] = R3             	// [82:1956]  
+//1957  											   positionY_Min =0;
 
 LM559:
-	     .stabn 68,0,1962,LM559-_G_Sensor_Check
-	     R2 = 0                   	// [84:1962]  
-	     R3 = 0                   	// [85:1962]  
-	     DS = seg(_positionY_Min) 	// [86:1962]  positionY_Min
-	     R4 = (_positionY_Min)    	// [87:1962]  positionY_Min
-	     DS:[R4++] = R2           	// [89:1962]  
-	     DS:[R4] = R3             	// [91:1962]  
-//1963  											   positionY_Max =0;
+	     .stabn 68,0,1957,LM559-_G_Sensor_Check
+	     R2 = 0                   	// [84:1957]  
+	     R3 = 0                   	// [85:1957]  
+	     DS = seg(_positionY_Min) 	// [86:1957]  positionY_Min
+	     R4 = (_positionY_Min)    	// [87:1957]  positionY_Min
+	     DS:[R4++] = R2           	// [89:1957]  
+	     DS:[R4] = R3             	// [91:1957]  
+//1958  											   positionY_Max =0;
 
 LM560:
-	     .stabn 68,0,1963,LM560-_G_Sensor_Check
-	     R2 = 0                   	// [93:1963]  
-	     R3 = 0                   	// [94:1963]  
-	     DS = seg(_positionY_Max) 	// [95:1963]  positionY_Max
-	     R4 = (_positionY_Max)    	// [96:1963]  positionY_Max
-	     DS:[R4++] = R2           	// [98:1963]  
-	     DS:[R4] = R3             	// [100:1963]  
+	     .stabn 68,0,1958,LM560-_G_Sensor_Check
+	     R2 = 0                   	// [93:1958]  
+	     R3 = 0                   	// [94:1958]  
+	     DS = seg(_positionY_Max) 	// [95:1958]  positionY_Max
+	     R4 = (_positionY_Max)    	// [96:1958]  positionY_Max
+	     DS:[R4++] = R2           	// [98:1958]  
+	     DS:[R4] = R3             	// [100:1958]  
 L_10_281:	// 0x178e
 L_10_280:	// 0x178e
 L_10_269:	// 0x178e
 L_10_172:	// 0x178e
 // BB:266 cycle count: 27
-//1972  
-//1973  
-//1974  					  
-//1975  
-//1976  								Sum_X = 0;
+//1967  
+//1968  
+//1969  					  
+//1970  
+//1971  								Sum_X = 0;
 
 LM561:
-	     .stabn 68,0,1976,LM561-_G_Sensor_Check
-	     R2 = 0                   	// [0:1976]  
-	     R3 = 0                   	// [1:1976]  
-	     DS = seg(_Sum_X)         	// [2:1976]  Sum_X
-	     R4 = (_Sum_X)            	// [3:1976]  Sum_X
-	     DS:[R4++] = R2           	// [5:1976]  
-	     DS:[R4] = R3             	// [7:1976]  
-//1977  		                     	Sum_Y = 0; 
+	     .stabn 68,0,1971,LM561-_G_Sensor_Check
+	     R2 = 0                   	// [0:1971]  
+	     R3 = 0                   	// [1:1971]  
+	     DS = seg(_Sum_X)         	// [2:1971]  Sum_X
+	     R4 = (_Sum_X)            	// [3:1971]  Sum_X
+	     DS:[R4++] = R2           	// [5:1971]  
+	     DS:[R4] = R3             	// [7:1971]  
+//1972  		                     	Sum_Y = 0; 
 
 LM562:
-	     .stabn 68,0,1977,LM562-_G_Sensor_Check
-	     R2 = 0                   	// [9:1977]  
-	     R3 = 0                   	// [10:1977]  
-	     DS = seg(_Sum_Y)         	// [11:1977]  Sum_Y
-	     R4 = (_Sum_Y)            	// [12:1977]  Sum_Y
-	     DS:[R4++] = R2           	// [14:1977]  
-	     DS:[R4] = R3             	// [16:1977]  
-//1978  								Sum_Z = 0; 
+	     .stabn 68,0,1972,LM562-_G_Sensor_Check
+	     R2 = 0                   	// [9:1972]  
+	     R3 = 0                   	// [10:1972]  
+	     DS = seg(_Sum_Y)         	// [11:1972]  Sum_Y
+	     R4 = (_Sum_Y)            	// [12:1972]  Sum_Y
+	     DS:[R4++] = R2           	// [14:1972]  
+	     DS:[R4] = R3             	// [16:1972]  
+//1973  								Sum_Z = 0; 
 
 LM563:
-	     .stabn 68,0,1978,LM563-_G_Sensor_Check
-	     R2 = 0                   	// [18:1978]  
-	     R3 = 0                   	// [19:1978]  
-	     DS = seg(_Sum_Z)         	// [20:1978]  Sum_Z
-	     R4 = (_Sum_Z)            	// [21:1978]  Sum_Z
-	     DS:[R4++] = R2           	// [23:1978]  
-	     DS:[R4] = R3             	// [25:1978]  
+	     .stabn 68,0,1973,LM563-_G_Sensor_Check
+	     R2 = 0                   	// [18:1973]  
+	     R3 = 0                   	// [19:1973]  
+	     DS = seg(_Sum_Z)         	// [20:1973]  Sum_Z
+	     R4 = (_Sum_Z)            	// [21:1973]  Sum_Z
+	     DS:[R4++] = R2           	// [23:1973]  
+	     DS:[R4] = R3             	// [25:1973]  
 L_10_171:	// 0x17a3
 // BB:267 cycle count: 8
-//1979  					
-//1980       }
-//1981       
-//1982       return 0;
+//1974  					
+//1975       }
+//1976       
+//1977       return 0;
 
 LM564:
-	     .stabn 68,0,1982,LM564-_G_Sensor_Check
-	     R1 = 0                   	// [0:1982]  
-	     SP = SP + 110            	// [1:1982]  
-	     pop BP, PC from [SP]     	// [3:1982]  
+	     .stabn 68,0,1977,LM564-_G_Sensor_Check
+	     R1 = 0                   	// [0:1977]  
+	     SP = SP + 110            	// [1:1977]  
+	     pop BP, PC from [SP]     	// [3:1977]  
 LBE4:
 	.endp	
 	     .stabn 192,0,0,LBB4-_G_Sensor_Check
@@ -9996,423 +9996,412 @@ _WaitAction: .proc
 	// temp_G_Sensor_Status = 1
 	// old_frame_pointer = 2
 	// return_address = 3
-//1985  ///////////////////////////////////////////////////////////////////
-//1986  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
-//1987  //////////////////////////////////////////////////////////////////
-//1988  unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
-//1989  {
+//1980  ///////////////////////////////////////////////////////////////////
+//1981  //µ¥¼ì²â¶¯×÷
+//1982  //////////////////////////////////////////////////////////////////
+//1983  unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
+//1984  {
 
 LM565:
-	     .stabn 68,0,1989,LM565-_WaitAction
+	     .stabn 68,0,1984,LM565-_WaitAction
 BB1_PU11:	// 0x17a7
-// BB:1 cycle count: 22
-	     push BP to [SP]          	// [0:1989]  
-	     SP = SP - 2              	// [2:1989]  
-	     BP = SP + 1              	// [3:1989]  
+// BB:1 cycle count: 21
+	     push BP to [SP]          	// [0:1984]  
+	     SP = SP - 2              	// [2:1984]  
+	     BP = SP + 1              	// [3:1984]  
 LBB5:
-//1990  	
-//1991  	unsigned int temp =0;
+//1985  	
+//1986  	unsigned int temp =0;
 
 LM566:
-	     .stabn 68,0,1991,LM566-_WaitAction
-	     R4 = 0                   	// [5:1991]  
-	     [BP + 0] = R4            	// [6:1991]  temp
-//1992  	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
+	     .stabn 68,0,1986,LM566-_WaitAction
+	     R4 = 0                   	// [5:1986]  
+	     [BP + 0] = R4            	// [6:1986]  temp
+//1987  	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
 
 LM567:
-	     .stabn 68,0,1992,LM567-_WaitAction
-	     DS = seg(_G_Sensor_Status)	// [7:1992]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1992]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [10:1992]  
-	     R4 = R4 & 4479           	// [12:1992]  
-	     [BP + 1] = R4            	// [14:1992]  temp_G_Sensor_Status
-//1993  	
-//1994      if(timeoutplay ==2)//catch
+	     .stabn 68,0,1987,LM567-_WaitAction
+	     DS = seg(_G_Sensor_Status)	// [7:1987]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:1987]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [10:1987]  
+	     R4 = R4 & 4479           	// [12:1987]  
+	     [BP + 1] = R4            	// [14:1987]  temp_G_Sensor_Status
+//1993  //	  }
+//1994  	
+//1995  	
+//1996  	
+//1997  	 TimeCnt=0;
 
 LM568:
-	     .stabn 68,0,1994,LM568-_WaitAction
-	     R4 = [BP + 6]            	// [15:1994]  timeoutplay
-	     cmp R4, 2                	// [17:1994]  
-	     jne L_11_25              	// [18:1994]  
-BB2_PU11:	// 0x17b7
-// BB:2 cycle count: 9
-//1995  	  {
-//1996  
-//1997  		   PlayA1800_ElementsInit(SFX_Hit3);
+	     .stabn 68,0,1997,LM568-_WaitAction
+	     R3 = 0                   	// [15:1997]  
+	     DS = seg(_TimeCnt)       	// [16:1997]  TimeCnt
+	     R4 = (_TimeCnt)          	// [17:1997]  TimeCnt
+	     DS:[R4] = R3             	// [19:1997]  
+L_11_23:	// 0x17b9
+// BB:2 cycle count: 12
+//1998  		 	
+//1999      while(TimeCnt<Time_T)
 
 LM569:
-	     .stabn 68,0,1997,LM569-_WaitAction
-	     SP = SP - 1              	// [0:1997]  
-	     R3 = 10                  	// [1:1997]  
-	     R4 = SP + 1              	// [2:1997]  
-	     [R4] = R3                	// [4:1997]  
-	     call _PlayA1800_ElementsInit	// [6:1997]  PlayA1800_ElementsInit
-BB3_PU11:	// 0x17be
-// BB:3 cycle count: 1
-	     SP = SP + 1              	// [0:1997]  
-L_11_25:	// 0x17bf
-// BB:4 cycle count: 6
-//1998  	  }
-//1999  	
-//2000  	
-//2001  	
-//2002  	 TimeCnt=0;
+	     .stabn 68,0,1999,LM569-_WaitAction
+	     R3 = [BP + 5]            	// [0:1999]  Time_T
+	     DS = seg(_TimeCnt)       	// [2:1999]  TimeCnt
+	     R4 = (_TimeCnt)          	// [3:1999]  TimeCnt
+	     R4 = DS:[R4]             	// [5:1999]  
+	     cmp R3, R4               	// [7:1999]  
+	     ja BB3_PU11              	// [8:1999]  
+BB34_PU11:	// 0x17c0
+// BB:34 cycle count: 3
+	     goto L_11_24             	// [0:0]  
+BB3_PU11:	// 0x17c2
+// BB:3 cycle count: 3
+//2000      	{
+//2001  
+//2002  	       WatchdogClear();
 
 LM570:
 	     .stabn 68,0,2002,LM570-_WaitAction
-	     R3 = 0                   	// [0:2002]  
-	     DS = seg(_TimeCnt)       	// [1:2002]  TimeCnt
-	     R4 = (_TimeCnt)          	// [2:2002]  TimeCnt
-	     DS:[R4] = R3             	// [4:2002]  
-L_11_26:	// 0x17c4
-// BB:5 cycle count: 12
-//2003  		 	
-//2004      while(TimeCnt<Time_T)
+	     call _WatchdogClear      	// [0:2002]  WatchdogClear
+BB4_PU11:	// 0x17c4
+// BB:4 cycle count: 14
+//2003  	       
+//2004  		   if(Get_Key(0,0))
 
 LM571:
 	     .stabn 68,0,2004,LM571-_WaitAction
-	     R3 = [BP + 5]            	// [0:2004]  Time_T
-	     DS = seg(_TimeCnt)       	// [2:2004]  TimeCnt
-	     R4 = (_TimeCnt)          	// [3:2004]  TimeCnt
-	     R4 = DS:[R4]             	// [5:2004]  
-	     cmp R3, R4               	// [7:2004]  
-	     ja BB6_PU11              	// [8:2004]  
-BB36_PU11:	// 0x17cb
-// BB:36 cycle count: 3
-	     goto L_11_27             	// [0:0]  
-BB6_PU11:	// 0x17cd
+	     SP = SP - 2              	// [0:2004]  
+	     R3 = 0                   	// [1:2004]  
+	     R4 = SP + 1              	// [2:2004]  
+	     [R4] = R3                	// [4:2004]  
+	     R3 = 0                   	// [6:2004]  
+	     R4 = SP + 2              	// [7:2004]  
+	     [R4] = R3                	// [9:2004]  
+	     call _Get_Key            	// [11:2004]  Get_Key
+BB5_PU11:	// 0x17cf
+// BB:5 cycle count: 6
+	     SP = SP + 2              	// [0:2004]  
+	     cmp R1, 0                	// [1:2004]  
+	     je L_11_25               	// [2:2004]  
+BB6_PU11:	// 0x17d2
 // BB:6 cycle count: 3
-//2005      	{
-//2006  
-//2007  	       WatchdogClear();
+//2005  		   	{			   	   
+//2006  		   	    SACM_A1800_Stop();
 
 LM572:
-	     .stabn 68,0,2007,LM572-_WaitAction
-	     call _WatchdogClear      	// [0:2007]  WatchdogClear
-BB7_PU11:	// 0x17cf
-// BB:7 cycle count: 14
-//2008  	       
-//2009  		   if(Get_Key(0,0))
+	     .stabn 68,0,2006,LM572-_WaitAction
+	     call _SACM_A1800_Stop    	// [0:2006]  SACM_A1800_Stop
+BB7_PU11:	// 0x17d4
+// BB:7 cycle count: 13
+//2007  	            A1800_Flag = 0; 		       		   	 
 
 LM573:
-	     .stabn 68,0,2009,LM573-_WaitAction
-	     SP = SP - 2              	// [0:2009]  
-	     R3 = 0                   	// [1:2009]  
-	     R4 = SP + 1              	// [2:2009]  
-	     [R4] = R3                	// [4:2009]  
-	     R3 = 0                   	// [6:2009]  
-	     R4 = SP + 2              	// [7:2009]  
-	     [R4] = R3                	// [9:2009]  
-	     call _Get_Key            	// [11:2009]  Get_Key
-BB8_PU11:	// 0x17da
-// BB:8 cycle count: 6
-	     SP = SP + 2              	// [0:2009]  
-	     cmp R1, 0                	// [1:2009]  
-	     je L_11_28               	// [2:2009]  
-BB9_PU11:	// 0x17dd
-// BB:9 cycle count: 7
-//2010  		   	{			       		   	 
-//2011  			 	 return 0;
+	     .stabn 68,0,2007,LM573-_WaitAction
+	     R3 = 0                   	// [0:2007]  
+	     DS = seg(_A1800_Flag)    	// [1:2007]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:2007]  A1800_Flag
+	     DS:[R4] = R3             	// [4:2007]  
+//2008  			 	 return 0;
 
 LM574:
-	     .stabn 68,0,2011,LM574-_WaitAction
-	     R1 = 0                   	// [0:2011]  
-	     SP = SP + 2              	// [1:2011]  
-	     pop BP, PC from [SP]     	// [2:2011]  
-L_11_28:	// 0x17e0
-// BB:10 cycle count: 7
-//2012  
-//2013  		   	}
-//2014  		   	
-//2015  		   	
-//2016         if(timeoutplay ==2)
+	     .stabn 68,0,2008,LM574-_WaitAction
+	     R1 = 0                   	// [6:2008]  
+	     SP = SP + 2              	// [7:2008]  
+	     pop BP, PC from [SP]     	// [8:2008]  
+L_11_25:	// 0x17dc
+// BB:8 cycle count: 7
+//2009  
+//2010  		   	}
+//2011  		   	
+//2012  		   	
+//2013         if(timeoutplay ==2)
 
 LM575:
-	     .stabn 68,0,2016,LM575-_WaitAction
-	     R4 = [BP + 6]            	// [0:2016]  timeoutplay
-	     cmp R4, 2                	// [2:2016]  
-	     jne L_11_29              	// [3:2016]  
-BB11_PU11:	// 0x17e3
-// BB:11 cycle count: 3
-//2017             {
-//2018  		     	if((SACM_A1800_Status() & 0x0001) == 0)
+	     .stabn 68,0,2013,LM575-_WaitAction
+	     R4 = [BP + 6]            	// [0:2013]  timeoutplay
+	     cmp R4, 2                	// [2:2013]  
+	     jne L_11_26              	// [3:2013]  
+BB9_PU11:	// 0x17df
+// BB:9 cycle count: 3
+//2014             {
+//2015  		     	if((SACM_A1800_Status() & 0x0001) == 0)
 
 LM576:
-	     .stabn 68,0,2018,LM576-_WaitAction
-	     call _SACM_A1800_Status  	// [0:2018]  SACM_A1800_Status
-BB12_PU11:	// 0x17e5
-// BB:12 cycle count: 7
-	     R4 = R1 & 1              	// [0:2018]  
-	     cmp R4, 0                	// [2:2018]  
-	     jne L_11_30              	// [3:2018]  
-BB13_PU11:	// 0x17e9
-// BB:13 cycle count: 9
-//2019  		   	   {  
-//2020  		   		
-//2021                       PlayA1800_ElementsInit(SFX_Hit3);
+	     .stabn 68,0,2015,LM576-_WaitAction
+	     call _SACM_A1800_Status  	// [0:2015]  SACM_A1800_Status
+BB10_PU11:	// 0x17e1
+// BB:10 cycle count: 7
+	     R4 = R1 & 1              	// [0:2015]  
+	     cmp R4, 0                	// [2:2015]  
+	     jne L_11_27              	// [3:2015]  
+BB11_PU11:	// 0x17e5
+// BB:11 cycle count: 9
+//2016  		   	   {  
+//2017  		   		
+//2018                       PlayA1800_ElementsInit(SFX_Shake);
 
 LM577:
-	     .stabn 68,0,2021,LM577-_WaitAction
-	     SP = SP - 1              	// [0:2021]  
-	     R3 = 10                  	// [1:2021]  
-	     R4 = SP + 1              	// [2:2021]  
-	     [R4] = R3                	// [4:2021]  
-	     call _PlayA1800_ElementsInit	// [6:2021]  PlayA1800_ElementsInit
-BB14_PU11:	// 0x17f0
-// BB:14 cycle count: 1
-	     SP = SP + 1              	// [0:2021]  
-L_11_30:	// 0x17f1
-L_11_29:	// 0x17f1
-// BB:15 cycle count: 10
-//2023  		   	   }
-//2024  		   	
-//2025  		   	   // SACM_A1800_ServiceLoop();
-//2026             }	   	
-//2027  	         if(A1800_Flag )//catch
+	     .stabn 68,0,2018,LM577-_WaitAction
+	     SP = SP - 1              	// [0:2018]  
+	     R3 = 16                  	// [1:2018]  
+	     R4 = SP + 1              	// [2:2018]  
+	     [R4] = R3                	// [4:2018]  
+	     call _PlayA1800_ElementsInit	// [6:2018]  PlayA1800_ElementsInit
+BB12_PU11:	// 0x17ec
+// BB:12 cycle count: 1
+	     SP = SP + 1              	// [0:2018]  
+L_11_27:	// 0x17ed
+L_11_26:	// 0x17ed
+// BB:13 cycle count: 10
+//2020  		   	   }
+//2021  		   	
+//2022  		   	   // SACM_A1800_ServiceLoop();
+//2023             }	   	
+//2024  	         if(A1800_Flag )//catch
 
 LM578:
-	     .stabn 68,0,2027,LM578-_WaitAction
-	     DS = seg(_A1800_Flag)    	// [0:2027]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [1:2027]  A1800_Flag
-	     R4 = DS:[R4]             	// [3:2027]  
-	     cmp R4, 0                	// [5:2027]  
-	     je L_11_31               	// [6:2027]  
-BB16_PU11:	// 0x17f7
-// BB:16 cycle count: 3
-//2028                {   	
-//2029  		   	    SACM_A1800_ServiceLoop();
+	     .stabn 68,0,2024,LM578-_WaitAction
+	     DS = seg(_A1800_Flag)    	// [0:2024]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [1:2024]  A1800_Flag
+	     R4 = DS:[R4]             	// [3:2024]  
+	     cmp R4, 0                	// [5:2024]  
+	     je L_11_28               	// [6:2024]  
+BB14_PU11:	// 0x17f3
+// BB:14 cycle count: 3
+//2025                {   	
+//2026  		   	    SACM_A1800_ServiceLoop();
 
 LM579:
-	     .stabn 68,0,2029,LM579-_WaitAction
-	     call _SACM_A1800_ServiceLoop	// [0:2029]  SACM_A1800_ServiceLoop
-L_11_31:	// 0x17f9
-// BB:17 cycle count: 10
-//2030                }		   	
-//2031  		   	
-//2032  		   	
-//2033  
-//2034  		   if(HZ_1K_flag>=C_HZ_Num)
+	     .stabn 68,0,2026,LM579-_WaitAction
+	     call _SACM_A1800_ServiceLoop	// [0:2026]  SACM_A1800_ServiceLoop
+L_11_28:	// 0x17f5
+// BB:15 cycle count: 10
+//2027                }		   	
+//2028  		   	
+//2029  		   	
+//2030  
+//2031  		   if(HZ_1K_flag>=C_HZ_Num)
 
 LM580:
-	     .stabn 68,0,2034,LM580-_WaitAction
-	     DS = seg(_HZ_1K_flag)    	// [0:2034]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [1:2034]  HZ_1K_flag
-	     R4 = DS:[R4]             	// [3:2034]  
-	     cmp R4, 2                	// [5:2034]  
-	     ja BB18_PU11             	// [6:2034]  
-BB37_PU11:	// 0x17ff
-// BB:37 cycle count: 3
-	     goto L_11_32             	// [0:0]  
-BB18_PU11:	// 0x1801
-// BB:18 cycle count: 9
-//2035  			{
-//2036  			    HZ_1K_flag=0;//HZ_64_flag =0;
+	     .stabn 68,0,2031,LM580-_WaitAction
+	     DS = seg(_HZ_1K_flag)    	// [0:2031]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [1:2031]  HZ_1K_flag
+	     R4 = DS:[R4]             	// [3:2031]  
+	     cmp R4, 2                	// [5:2031]  
+	     ja BB16_PU11             	// [6:2031]  
+BB35_PU11:	// 0x17fb
+// BB:35 cycle count: 3
+	     goto L_11_29             	// [0:0]  
+BB16_PU11:	// 0x17fd
+// BB:16 cycle count: 9
+//2032  			{
+//2033  			    HZ_1K_flag=0;//HZ_64_flag =0;
 
 LM581:
-	     .stabn 68,0,2036,LM581-_WaitAction
-	     R3 = 0                   	// [0:2036]  
-	     DS = seg(_HZ_1K_flag)    	// [1:2036]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [2:2036]  HZ_1K_flag
-	     DS:[R4] = R3             	// [4:2036]  
-//2037  			    sensor_read_xyz();
+	     .stabn 68,0,2033,LM581-_WaitAction
+	     R3 = 0                   	// [0:2033]  
+	     DS = seg(_HZ_1K_flag)    	// [1:2033]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [2:2033]  HZ_1K_flag
+	     DS:[R4] = R3             	// [4:2033]  
+//2034  			    sensor_read_xyz();
 
 LM582:
-	     .stabn 68,0,2037,LM582-_WaitAction
-	     call _sensor_read_xyz    	// [6:2037]  sensor_read_xyz
-BB19_PU11:	// 0x1808
-// BB:19 cycle count: 3
-//2038  				temp = G_Sensor_Check();
+	     .stabn 68,0,2034,LM582-_WaitAction
+	     call _sensor_read_xyz    	// [6:2034]  sensor_read_xyz
+BB17_PU11:	// 0x1804
+// BB:17 cycle count: 3
+//2035  				temp = G_Sensor_Check();
 
 LM583:
-	     .stabn 68,0,2038,LM583-_WaitAction
-	     call _G_Sensor_Check     	// [0:2038]  G_Sensor_Check
-BB20_PU11:	// 0x180a
-// BB:20 cycle count: 9
-	     [BP + 0] = R1            	// [0:2038]  temp
-//2039  			    if(temp==C_MovSucess)
+	     .stabn 68,0,2035,LM583-_WaitAction
+	     call _G_Sensor_Check     	// [0:2035]  G_Sensor_Check
+BB18_PU11:	// 0x1806
+// BB:18 cycle count: 9
+	     [BP + 0] = R1            	// [0:2035]  temp
+//2036  			    if(temp==C_MovSucess)
 
 LM584:
-	     .stabn 68,0,2039,LM584-_WaitAction
-	     R4 = [BP + 0]            	// [1:2039]  temp
-	     cmp R4, 4096             	// [3:2039]  
-	     jne L_11_34              	// [5:2039]  
-BB21_PU11:	// 0x180f
-// BB:21 cycle count: 22
-//2040  			    {   
-//2041  			    	G_Sensor_Status&=~0xE000;//20210722  
+	     .stabn 68,0,2036,LM584-_WaitAction
+	     R4 = [BP + 0]            	// [1:2036]  temp
+	     cmp R4, 4096             	// [3:2036]  
+	     jne L_11_31              	// [5:2036]  
+BB19_PU11:	// 0x180b
+// BB:19 cycle count: 22
+//2037  			    {   
+//2038  			    	G_Sensor_Status&=~0xE000;//20210722  
 
 LM585:
-	     .stabn 68,0,2041,LM585-_WaitAction
-	     DS = seg(_G_Sensor_Status)	// [0:2041]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:2041]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:2041]  
-	     R3 = R4 & 8191           	// [5:2041]  
-	     DS = seg(_G_Sensor_Status)	// [7:2041]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:2041]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:2041]  
-//2042  //                    stepflag_Y =0;
-//2043  //                    stepflag =0;
-//2044                      
-//2045  	                  if(A1800_Flag)
+	     .stabn 68,0,2038,LM585-_WaitAction
+	     DS = seg(_G_Sensor_Status)	// [0:2038]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:2038]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:2038]  
+	     R3 = R4 & 8191           	// [5:2038]  
+	     DS = seg(_G_Sensor_Status)	// [7:2038]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:2038]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:2038]  
+//2039  //                    stepflag_Y =0;
+//2040  //                    stepflag =0;
+//2041                      
+//2042  	                  if(A1800_Flag)
 
 LM586:
-	     .stabn 68,0,2045,LM586-_WaitAction
-	     DS = seg(_A1800_Flag)    	// [12:2045]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [13:2045]  A1800_Flag
-	     R4 = DS:[R4]             	// [15:2045]  
-	     cmp R4, 0                	// [17:2045]  
-	     je L_11_35               	// [18:2045]  
-BB22_PU11:	// 0x181f
-// BB:22 cycle count: 3
-//2046  	                  {  
-//2047  	                     SACM_A1800_Stop();
+	     .stabn 68,0,2042,LM586-_WaitAction
+	     DS = seg(_A1800_Flag)    	// [12:2042]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [13:2042]  A1800_Flag
+	     R4 = DS:[R4]             	// [15:2042]  
+	     cmp R4, 0                	// [17:2042]  
+	     je L_11_32               	// [18:2042]  
+BB20_PU11:	// 0x181b
+// BB:20 cycle count: 3
+//2043  	                  {  
+//2044  	                     SACM_A1800_Stop();
 
 LM587:
-	     .stabn 68,0,2047,LM587-_WaitAction
-	     call _SACM_A1800_Stop    	// [0:2047]  SACM_A1800_Stop
-BB23_PU11:	// 0x1821
-// BB:23 cycle count: 6
-//2048  		                 A1800_Flag = 0;  		
+	     .stabn 68,0,2044,LM587-_WaitAction
+	     call _SACM_A1800_Stop    	// [0:2044]  SACM_A1800_Stop
+BB21_PU11:	// 0x181d
+// BB:21 cycle count: 6
+//2045  		                 A1800_Flag = 0;  		
 
 LM588:
-	     .stabn 68,0,2048,LM588-_WaitAction
-	     R3 = 0                   	// [0:2048]  
-	     DS = seg(_A1800_Flag)    	// [1:2048]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:2048]  A1800_Flag
-	     DS:[R4] = R3             	// [4:2048]  
-L_11_35:	// 0x1826
-// BB:24 cycle count: 8
-//2049  	                  }	
-//2050  	                  
-//2051  	           	 if	(temp_G_Sensor_Status == G_IMMO)    
+	     .stabn 68,0,2045,LM588-_WaitAction
+	     R3 = 0                   	// [0:2045]  
+	     DS = seg(_A1800_Flag)    	// [1:2045]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:2045]  A1800_Flag
+	     DS:[R4] = R3             	// [4:2045]  
+L_11_32:	// 0x1822
+// BB:22 cycle count: 8
+//2046  	                  }	
+//2047  	                  
+//2048  	           	 if	(temp_G_Sensor_Status == G_IMMO)    
 
 LM589:
-	     .stabn 68,0,2051,LM589-_WaitAction
-	     R4 = [BP + 1]            	// [0:2051]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2051]  
-	     jne L_11_37              	// [4:2051]  
-BB25_PU11:	// 0x182a
-// BB:25 cycle count: 9
-//2052  	                 {
-//2053  	                	 PlayA1800_Elements(SFX_No);
+	     .stabn 68,0,2048,LM589-_WaitAction
+	     R4 = [BP + 1]            	// [0:2048]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2048]  
+	     jne L_11_34              	// [4:2048]  
+BB23_PU11:	// 0x1826
+// BB:23 cycle count: 9
+//2049  	                 {
+//2050  	                	 PlayA1800_Elements(SFX_No);
 
 LM590:
-	     .stabn 68,0,2053,LM590-_WaitAction
-	     SP = SP - 1              	// [0:2053]  
-	     R3 = 12                  	// [1:2053]  
-	     R4 = SP + 1              	// [2:2053]  
-	     [R4] = R3                	// [4:2053]  
-	     call _PlayA1800_Elements 	// [6:2053]  PlayA1800_Elements
-BB26_PU11:	// 0x1831
-// BB:26 cycle count: 11
-	     SP = SP + 1              	// [0:2053]  
-//2054  	                	 TimeCnt=0;
+	     .stabn 68,0,2050,LM590-_WaitAction
+	     SP = SP - 1              	// [0:2050]  
+	     R3 = 12                  	// [1:2050]  
+	     R4 = SP + 1              	// [2:2050]  
+	     [R4] = R3                	// [4:2050]  
+	     call _PlayA1800_Elements 	// [6:2050]  PlayA1800_Elements
+BB24_PU11:	// 0x182d
+// BB:24 cycle count: 11
+	     SP = SP + 1              	// [0:2050]  
+//2051  	                	 TimeCnt=0;
 
 LM591:
-	     .stabn 68,0,2054,LM591-_WaitAction
-	     R3 = 0                   	// [1:2054]  
-	     DS = seg(_TimeCnt)       	// [2:2054]  TimeCnt
-	     R4 = (_TimeCnt)          	// [3:2054]  TimeCnt
-	     DS:[R4] = R3             	// [5:2054]  
-	     jmp L_11_36              	// [7:2054]  
-L_11_37:	// 0x1838
-// BB:27 cycle count: 7
-//2055  	                	
-//2056  
-//2057  	                 }
-//2058  	             else             	
-//2059  					return 1;
+	     .stabn 68,0,2051,LM591-_WaitAction
+	     R3 = 0                   	// [1:2051]  
+	     DS = seg(_TimeCnt)       	// [2:2051]  TimeCnt
+	     R4 = (_TimeCnt)          	// [3:2051]  TimeCnt
+	     DS:[R4] = R3             	// [5:2051]  
+	     jmp L_11_33              	// [7:2051]  
+L_11_34:	// 0x1834
+// BB:25 cycle count: 7
+//2052  	                	
+//2053  
+//2054  	                 }
+//2055  	             else             	
+//2056  					return 1;
 
 LM592:
-	     .stabn 68,0,2059,LM592-_WaitAction
-	     R1 = 1                   	// [0:2059]  
-	     SP = SP + 2              	// [1:2059]  
-	     pop BP, PC from [SP]     	// [2:2059]  
-L_11_36:	// 0x183b
-// BB:28 cycle count: 4
+	     .stabn 68,0,2056,LM592-_WaitAction
+	     R1 = 1                   	// [0:2056]  
+	     SP = SP + 2              	// [1:2056]  
+	     pop BP, PC from [SP]     	// [2:2056]  
+L_11_33:	// 0x1837
+// BB:26 cycle count: 4
 
 LM593:
-	     .stabn 68,0,2051,LM593-_WaitAction
-	     jmp L_11_33              	// [0:2051]  
-L_11_34:	// 0x183c
-// BB:29 cycle count: 8
-//2060  					
-//2061  			    }
-//2062  			   else if(temp==C_MovFail)
+	     .stabn 68,0,2048,LM593-_WaitAction
+	     jmp L_11_30              	// [0:2048]  
+L_11_31:	// 0x1838
+// BB:27 cycle count: 8
+//2057  					
+//2058  			    }
+//2059  			   else if(temp==C_MovFail)
 
 LM594:
-	     .stabn 68,0,2062,LM594-_WaitAction
-	     R4 = [BP + 0]            	// [0:2062]  temp
-	     cmp R4, 8192             	// [2:2062]  
-	     jne L_11_38              	// [4:2062]  
-BB30_PU11:	// 0x1840
-// BB:30 cycle count: 19
-//2068  //	                	    G_Sensor_Status&=~0xE000;//20210722 	
-//2069  //	                	     MoveSucessFlag=0;
-//2070  //	                		return 1;
-//2071  //	                	}
-//2072                     G_Sensor_Status&=~0xE000;//20210722 
+	     .stabn 68,0,2059,LM594-_WaitAction
+	     R4 = [BP + 0]            	// [0:2059]  temp
+	     cmp R4, 8192             	// [2:2059]  
+	     jne L_11_35              	// [4:2059]  
+BB28_PU11:	// 0x183c
+// BB:28 cycle count: 19
+//2065  //	                	    G_Sensor_Status&=~0xE000;//20210722 	
+//2066  //	                	     MoveSucessFlag=0;
+//2067  //	                		return 1;
+//2068  //	                	}
+//2069                     G_Sensor_Status&=~0xE000;//20210722 
 
 LM595:
-	     .stabn 68,0,2072,LM595-_WaitAction
-	     DS = seg(_G_Sensor_Status)	// [0:2072]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:2072]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:2072]  
-	     R3 = R4 & 8191           	// [5:2072]  
-	     DS = seg(_G_Sensor_Status)	// [7:2072]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:2072]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:2072]  
-//2073                     return 0;	
+	     .stabn 68,0,2069,LM595-_WaitAction
+	     DS = seg(_G_Sensor_Status)	// [0:2069]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:2069]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:2069]  
+	     R3 = R4 & 8191           	// [5:2069]  
+	     DS = seg(_G_Sensor_Status)	// [7:2069]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:2069]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:2069]  
+//2070                     return 0;	
 
 LM596:
-	     .stabn 68,0,2073,LM596-_WaitAction
-	     R1 = 0                   	// [12:2073]  
-	     SP = SP + 2              	// [13:2073]  
-	     pop BP, PC from [SP]     	// [14:2073]  
-L_11_38:	// 0x184d
-L_11_33:	// 0x184d
-L_11_32:	// 0x184d
-// BB:31 cycle count: 3
+	     .stabn 68,0,2070,LM596-_WaitAction
+	     R1 = 0                   	// [12:2070]  
+	     SP = SP + 2              	// [13:2070]  
+	     pop BP, PC from [SP]     	// [14:2070]  
+L_11_35:	// 0x1849
+L_11_30:	// 0x1849
+L_11_29:	// 0x1849
+// BB:29 cycle count: 3
 
 LM597:
-	     .stabn 68,0,2034,LM597-_WaitAction
-	     goto L_11_26             	// [0:2034]  
-L_11_27:	// 0x184f
-// BB:32 cycle count: 8
-//2079  			}
-//2080  			
-//2081      	}
-//2082      	
-//2083      	 if	(temp_G_Sensor_Status == G_IMMO)  
+	     .stabn 68,0,2031,LM597-_WaitAction
+	     goto L_11_23             	// [0:2031]  
+L_11_24:	// 0x184b
+// BB:30 cycle count: 8
+//2076  			}
+//2077  			
+//2078      	}
+//2079      	
+//2080      	 if	(temp_G_Sensor_Status == G_IMMO)  
 
 LM598:
-	     .stabn 68,0,2083,LM598-_WaitAction
-	     R4 = [BP + 1]            	// [0:2083]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2083]  
-	     jne L_11_40              	// [4:2083]  
-BB33_PU11:	// 0x1853
-// BB:33 cycle count: 7
-//2084  	         return 1;
+	     .stabn 68,0,2080,LM598-_WaitAction
+	     R4 = [BP + 1]            	// [0:2080]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2080]  
+	     jne L_11_37              	// [4:2080]  
+BB31_PU11:	// 0x184f
+// BB:31 cycle count: 7
+//2081  	         return 1;
 
 LM599:
-	     .stabn 68,0,2084,LM599-_WaitAction
-	     R1 = 1                   	// [0:2084]  
-	     SP = SP + 2              	// [1:2084]  
-	     pop BP, PC from [SP]     	// [2:2084]  
-L_11_40:	// 0x1856
-// BB:34 cycle count: 7
-//2085  	    else
-//2086  	        return 0;	
+	     .stabn 68,0,2081,LM599-_WaitAction
+	     R1 = 1                   	// [0:2081]  
+	     SP = SP + 2              	// [1:2081]  
+	     pop BP, PC from [SP]     	// [2:2081]  
+L_11_37:	// 0x1852
+// BB:32 cycle count: 7
+//2082  	    else
+//2083  	        return 0;	
 
 LM600:
-	     .stabn 68,0,2086,LM600-_WaitAction
-	     R1 = 0                   	// [0:2086]  
-	     SP = SP + 2              	// [1:2086]  
-	     pop BP, PC from [SP]     	// [2:2086]  
-L_11_39:	// 0x1859
-// BB:35 cycle count: 6
-	     SP = SP + 2              	// [0:2086]  
-	     pop BP, PC from [SP]     	// [1:2086]  
+	     .stabn 68,0,2083,LM600-_WaitAction
+	     R1 = 0                   	// [0:2083]  
+	     SP = SP + 2              	// [1:2083]  
+	     pop BP, PC from [SP]     	// [2:2083]  
+L_11_36:	// 0x1855
+// BB:33 cycle count: 6
+	     SP = SP + 2              	// [0:2083]  
+	     pop BP, PC from [SP]     	// [1:2083]  
 LBE5:
 	.endp	
 	     .stabs "Time_T:p4",160,0,0,5
@@ -10437,503 +10426,409 @@ _Mov_Detected: .proc
 	// Led_IO_temp = 4
 	// old_frame_pointer = 5
 	// return_address = 6
-//2094  
-//2095  
-//2096  
-//2097  unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
-//2098  {
+//2091  
+//2092  
+//2093  
+//2094  unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
+//2095  {
 
 LM601:
-	     .stabn 68,0,2098,LM601-_Mov_Detected
-BB1_PU12:	// 0x185b
-// BB:1 cycle count: 28
-	     push BP to [SP]          	// [0:2098]  
-	     SP = SP - 5              	// [2:2098]  
-	     BP = SP + 1              	// [3:2098]  
+	     .stabn 68,0,2095,LM601-_Mov_Detected
+BB1_PU12:	// 0x1857
+// BB:1 cycle count: 33
+	     push BP to [SP]          	// [0:2095]  
+	     SP = SP - 5              	// [2:2095]  
+	     BP = SP + 1              	// [3:2095]  
 LBB6:
-//2099      unsigned int temp =0;
+//2096      unsigned int temp =0;
 
 LM602:
-	     .stabn 68,0,2099,LM602-_Mov_Detected
-	     R4 = 0                   	// [5:2099]  
-	     [BP + 0] = R4            	// [6:2099]  temp
-//2100  	unsigned int temp_timecnt =0;
+	     .stabn 68,0,2096,LM602-_Mov_Detected
+	     R4 = 0                   	// [5:2096]  
+	     [BP + 0] = R4            	// [6:2096]  temp
+//2097  	unsigned int temp_timecnt =0;
 
 LM603:
-	     .stabn 68,0,2100,LM603-_Mov_Detected
-	     R4 = 0                   	// [7:2100]  
-	     [BP + 1] = R4            	// [8:2100]  temp_timecnt
-//2101  	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
+	     .stabn 68,0,2097,LM603-_Mov_Detected
+	     R4 = 0                   	// [7:2097]  
+	     [BP + 1] = R4            	// [8:2097]  temp_timecnt
+//2098  	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
 
 LM604:
-	     .stabn 68,0,2101,LM604-_Mov_Detected
-	     DS = seg(_G_Sensor_Status)	// [9:2101]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [10:2101]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [12:2101]  
-	     R4 = R4 & 4479           	// [14:2101]  
-	     [BP + 2] = R4            	// [16:2101]  temp_G_Sensor_Status
-//2102  	
-//2103  	unsigned int BlinkFlag_Data_temp =0;
+	     .stabn 68,0,2098,LM604-_Mov_Detected
+	     DS = seg(_G_Sensor_Status)	// [9:2098]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [10:2098]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [12:2098]  
+	     R4 = R4 & 4479           	// [14:2098]  
+	     [BP + 2] = R4            	// [16:2098]  temp_G_Sensor_Status
+//2099  	
+//2100  	unsigned int BlinkFlag_Data_temp =0;
 
 LM605:
-	     .stabn 68,0,2103,LM605-_Mov_Detected
-	     R4 = 0                   	// [17:2103]  
-	     [BP + 3] = R4            	// [18:2103]  BlinkFlag_Data_temp
-//2104      unsigned int Led_IO_temp =0;
+	     .stabn 68,0,2100,LM605-_Mov_Detected
+	     R4 = 0                   	// [17:2100]  
+	     [BP + 3] = R4            	// [18:2100]  BlinkFlag_Data_temp
+//2101      unsigned int Led_IO_temp =0;
 
 LM606:
-	     .stabn 68,0,2104,LM606-_Mov_Detected
-	     R4 = 0                   	// [19:2104]  
-	     [BP + 4] = R4            	// [20:2104]  Led_IO_temp
-//2105  	
-//2106  	if(timeoutplay ==2)
+	     .stabn 68,0,2101,LM606-_Mov_Detected
+	     R4 = 0                   	// [19:2101]  
+	     [BP + 4] = R4            	// [20:2101]  Led_IO_temp
+//2107  //           DetectionFlag =1; 
+//2108  //	  }
+//2109  
+//2110        
+//2111   	   TimeCnt=0;
 
 LM607:
-	     .stabn 68,0,2106,LM607-_Mov_Detected
-	     R4 = [BP + 9]            	// [21:2106]  timeoutplay
-	     cmp R4, 2                	// [23:2106]  
-	     jne L_12_26              	// [24:2106]  
-BB2_PU12:	// 0x1871
-// BB:2 cycle count: 14
-//2107  	  {
-//2108  //		if(Mission_Cur==0)
-//2109  //		   PlayA1800_ElementsInit(A_SFX05_Plain);
-//2110  //		 else if(Mission_Cur>0)
-//2111  		   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
+	     .stabn 68,0,2111,LM607-_Mov_Detected
+	     R3 = 0                   	// [21:2111]  
+	     DS = seg(_TimeCnt)       	// [22:2111]  TimeCnt
+	     R4 = (_TimeCnt)          	// [23:2111]  TimeCnt
+	     DS:[R4] = R3             	// [25:2111]  
+//2112         TimeCnt1 =0;
 
 LM608:
-	     .stabn 68,0,2111,LM608-_Mov_Detected
-	     SP = SP - 1              	// [0:2111]  
-	     DS = seg(_R_Envi)        	// [1:2111]  R_Envi
-	     R4 = (_R_Envi)           	// [2:2111]  R_Envi
-	     R4 = DS:[R4]             	// [4:2111]  
-	     R4 = R4 + 1              	// [6:2111]  
-	     R3 = SP + 1              	// [7:2111]  
-	     [R3] = R4                	// [9:2111]  
-	     call _PlayA1800_ElementsInit	// [11:2111]  PlayA1800_ElementsInit
-BB3_PU12:	// 0x187c
-// BB:3 cycle count: 7
-	     SP = SP + 1              	// [0:2111]  
-//2112             DetectionFlag =1; 
+	     .stabn 68,0,2112,LM608-_Mov_Detected
+	     R3 = 0                   	// [27:2112]  
+	     DS = seg(_TimeCnt1)      	// [28:2112]  TimeCnt1
+	     R4 = (_TimeCnt1)         	// [29:2112]  TimeCnt1
+	     DS:[R4] = R3             	// [31:2112]  
+L_12_20:	// 0x1874
+// BB:2 cycle count: 12
+//2113  		 
+//2114  		 	
+//2115         while(TimeCnt<Time_T)
 
 LM609:
-	     .stabn 68,0,2112,LM609-_Mov_Detected
-	     R3 = 1                   	// [1:2112]  
-	     DS = seg(_DetectionFlag) 	// [2:2112]  DetectionFlag
-	     R4 = (_DetectionFlag)    	// [3:2112]  DetectionFlag
-	     DS:[R4] = R3             	// [5:2112]  
-L_12_26:	// 0x1882
-// BB:4 cycle count: 12
-//2113  	  }
-//2114  
-//2115        
-//2116   	   TimeCnt=0;
+	     .stabn 68,0,2115,LM609-_Mov_Detected
+	     R3 = [BP + 8]            	// [0:2115]  Time_T
+	     DS = seg(_TimeCnt)       	// [2:2115]  TimeCnt
+	     R4 = (_TimeCnt)          	// [3:2115]  TimeCnt
+	     R4 = DS:[R4]             	// [5:2115]  
+	     cmp R3, R4               	// [7:2115]  
+	     ja BB3_PU12              	// [8:2115]  
+BB27_PU12:	// 0x187b
+// BB:27 cycle count: 3
+	     goto L_12_21             	// [0:0]  
+BB3_PU12:	// 0x187d
+// BB:3 cycle count: 3
+//2116         {
+//2117  
+//2118  	       WatchdogClear();
 
 LM610:
-	     .stabn 68,0,2116,LM610-_Mov_Detected
-	     R3 = 0                   	// [0:2116]  
-	     DS = seg(_TimeCnt)       	// [1:2116]  TimeCnt
-	     R4 = (_TimeCnt)          	// [2:2116]  TimeCnt
-	     DS:[R4] = R3             	// [4:2116]  
-//2117         TimeCnt1 =0;
+	     .stabn 68,0,2118,LM610-_Mov_Detected
+	     call _WatchdogClear      	// [0:2118]  WatchdogClear
+BB4_PU12:	// 0x187f
+// BB:4 cycle count: 10
+//2119  	     
+//2120  	     
+//2121  	           if(MoveSucessFlag)		          
 
 LM611:
-	     .stabn 68,0,2117,LM611-_Mov_Detected
-	     R3 = 0                   	// [6:2117]  
-	     DS = seg(_TimeCnt1)      	// [7:2117]  TimeCnt1
-	     R4 = (_TimeCnt1)         	// [8:2117]  TimeCnt1
-	     DS:[R4] = R3             	// [10:2117]  
-L_12_27:	// 0x188c
-// BB:5 cycle count: 12
-//2118  		 
-//2119  		 	
-//2120         while(TimeCnt<Time_T)
+	     .stabn 68,0,2121,LM611-_Mov_Detected
+	     DS = seg(_MoveSucessFlag)	// [0:2121]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [1:2121]  MoveSucessFlag
+	     R4 = DS:[R4]             	// [3:2121]  
+	     cmp R4, 0                	// [5:2121]  
+	     je L_12_22               	// [6:2121]  
+BB5_PU12:	// 0x1885
+// BB:5 cycle count: 31
+//2122  		          {
+//2123  		          	     MoveSucessFlag=0;
 
 LM612:
-	     .stabn 68,0,2120,LM612-_Mov_Detected
-	     R3 = [BP + 8]            	// [0:2120]  Time_T
-	     DS = seg(_TimeCnt)       	// [2:2120]  TimeCnt
-	     R4 = (_TimeCnt)          	// [3:2120]  TimeCnt
-	     R4 = DS:[R4]             	// [5:2120]  
-	     cmp R3, R4               	// [7:2120]  
-	     ja BB6_PU12              	// [8:2120]  
-BB36_PU12:	// 0x1893
-// BB:36 cycle count: 3
-	     goto L_12_28             	// [0:0]  
-BB6_PU12:	// 0x1895
-// BB:6 cycle count: 3
-//2121         {
-//2122  
-//2123  	       WatchdogClear();
+	     .stabn 68,0,2123,LM612-_Mov_Detected
+	     R3 = 0                   	// [0:2123]  
+	     DS = seg(_MoveSucessFlag)	// [1:2123]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [2:2123]  MoveSucessFlag
+	     DS:[R4] = R3             	// [4:2123]  
+//2124  			             FailV =0;
 
 LM613:
-	     .stabn 68,0,2123,LM613-_Mov_Detected
-	     call _WatchdogClear      	// [0:2123]  WatchdogClear
-BB7_PU12:	// 0x1897
-// BB:7 cycle count: 10
-//2124  	     
-//2125  	     
-//2126  	           if(MoveSucessFlag)		          
+	     .stabn 68,0,2124,LM613-_Mov_Detected
+	     R3 = 0                   	// [6:2124]  
+	     DS = seg(_FailV)         	// [7:2124]  FailV
+	     R4 = (_FailV)            	// [8:2124]  FailV
+	     DS:[R4] = R3             	// [10:2124]  
+//2125  				          
+//2126  				        //SACM_A1800_Stop();
+//2127  		                //A1800_Flag = 0; 
+//2128  		                
+//2129  		                G_Sensor_Status&=~0xE000;//20210722
 
 LM614:
-	     .stabn 68,0,2126,LM614-_Mov_Detected
-	     DS = seg(_MoveSucessFlag)	// [0:2126]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [1:2126]  MoveSucessFlag
-	     R4 = DS:[R4]             	// [3:2126]  
-	     cmp R4, 0                	// [5:2126]  
-	     je L_12_29               	// [6:2126]  
-BB8_PU12:	// 0x189d
-// BB:8 cycle count: 31
-//2127  		          {
-//2128  		          	     MoveSucessFlag=0;
+	     .stabn 68,0,2129,LM614-_Mov_Detected
+	     DS = seg(_G_Sensor_Status)	// [12:2129]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [13:2129]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [15:2129]  
+	     R3 = R4 & 8191           	// [17:2129]  
+	     DS = seg(_G_Sensor_Status)	// [19:2129]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [20:2129]  G_Sensor_Status
+	     DS:[R4] = R3             	// [22:2129]  
+//2130  //                        stepflag_Y =0;
+//2131  //                        stepflag =0;
+//2132                          
+//2133  						return 1;	
 
 LM615:
-	     .stabn 68,0,2128,LM615-_Mov_Detected
-	     R3 = 0                   	// [0:2128]  
-	     DS = seg(_MoveSucessFlag)	// [1:2128]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [2:2128]  MoveSucessFlag
-	     DS:[R4] = R3             	// [4:2128]  
-//2129  			             FailV =0;
+	     .stabn 68,0,2133,LM615-_Mov_Detected
+	     R1 = 1                   	// [24:2133]  
+	     SP = SP + 5              	// [25:2133]  
+	     pop BP, PC from [SP]     	// [26:2133]  
+L_12_22:	// 0x189c
+// BB:6 cycle count: 14
+//2150  //		   	
+//2151  //		   	    SACM_A1800_ServiceLoop();
+//2152  //           }
+//2153  	       
+//2154  		    Get_Key(0,0);		   	
 
 LM616:
-	     .stabn 68,0,2129,LM616-_Mov_Detected
-	     R3 = 0                   	// [6:2129]  
-	     DS = seg(_FailV)         	// [7:2129]  FailV
-	     R4 = (_FailV)            	// [8:2129]  FailV
-	     DS:[R4] = R3             	// [10:2129]  
-//2130  				          
-//2131  				        //SACM_A1800_Stop();
-//2132  		                //A1800_Flag = 0; 
-//2133  		                
-//2134  		                G_Sensor_Status&=~0xE000;//20210722
+	     .stabn 68,0,2154,LM616-_Mov_Detected
+	     SP = SP - 2              	// [0:2154]  
+	     R3 = 0                   	// [1:2154]  
+	     R4 = SP + 1              	// [2:2154]  
+	     [R4] = R3                	// [4:2154]  
+	     R3 = 0                   	// [6:2154]  
+	     R4 = SP + 2              	// [7:2154]  
+	     [R4] = R3                	// [9:2154]  
+	     call _Get_Key            	// [11:2154]  Get_Key
+BB7_PU12:	// 0x18a7
+// BB:7 cycle count: 11
+	     SP = SP + 2              	// [0:2154]  
+//2155  		   	if(Key_Event)
 
 LM617:
-	     .stabn 68,0,2134,LM617-_Mov_Detected
-	     DS = seg(_G_Sensor_Status)	// [12:2134]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [13:2134]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [15:2134]  
-	     R3 = R4 & 8191           	// [17:2134]  
-	     DS = seg(_G_Sensor_Status)	// [19:2134]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [20:2134]  G_Sensor_Status
-	     DS:[R4] = R3             	// [22:2134]  
-//2135  //                        stepflag_Y =0;
-//2136  //                        stepflag =0;
-//2137                          
-//2138  						return 1;	
+	     .stabn 68,0,2155,LM617-_Mov_Detected
+	     DS = seg(_Key_Event)     	// [1:2155]  Key_Event
+	     R4 = (_Key_Event)        	// [2:2155]  Key_Event
+	     R4 = DS:[R4]             	// [4:2155]  
+	     cmp R4, 0                	// [6:2155]  
+	     je L_12_23               	// [7:2155]  
+BB8_PU12:	// 0x18ae
+// BB:8 cycle count: 3
+//2156  		   	{			       
+//2157  		   	    SACM_A1800_Stop();
 
 LM618:
-	     .stabn 68,0,2138,LM618-_Mov_Detected
-	     R1 = 1                   	// [24:2138]  
-	     SP = SP + 5              	// [25:2138]  
-	     pop BP, PC from [SP]     	// [26:2138]  
-L_12_29:	// 0x18b4
-// BB:9 cycle count: 7
-//2139  		          	
-//2140  		          }
-//2141  	     
-//2142  
-//2143             if(timeoutplay ==2)
+	     .stabn 68,0,2157,LM618-_Mov_Detected
+	     call _SACM_A1800_Stop    	// [0:2157]  SACM_A1800_Stop
+BB9_PU12:	// 0x18b0
+// BB:9 cycle count: 13
+//2158  	            A1800_Flag = 0;  		   	 
 
 LM619:
-	     .stabn 68,0,2143,LM619-_Mov_Detected
-	     R4 = [BP + 9]            	// [0:2143]  timeoutplay
-	     cmp R4, 2                	// [2:2143]  
-	     jne L_12_30              	// [3:2143]  
-BB10_PU12:	// 0x18b7
-// BB:10 cycle count: 3
-//2144             {
-//2145  		   	if((SACM_A1800_Status() & 0x0001) == 0)
+	     .stabn 68,0,2158,LM619-_Mov_Detected
+	     R3 = 0                   	// [0:2158]  
+	     DS = seg(_A1800_Flag)    	// [1:2158]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:2158]  A1800_Flag
+	     DS:[R4] = R3             	// [4:2158]  
+//2159  			 	 return 0;
 
 LM620:
-	     .stabn 68,0,2145,LM620-_Mov_Detected
-	     call _SACM_A1800_Status  	// [0:2145]  SACM_A1800_Status
-BB11_PU12:	// 0x18b9
-// BB:11 cycle count: 7
-	     R4 = R1 & 1              	// [0:2145]  
-	     cmp R4, 0                	// [2:2145]  
-	     jne L_12_31              	// [3:2145]  
-BB12_PU12:	// 0x18bd
-// BB:12 cycle count: 14
-//2146  		   	{
-//2147  		   		
-//2148  				//if(timeoutplay ==2)
-//2149  				  {
-//2150  					   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
+	     .stabn 68,0,2159,LM620-_Mov_Detected
+	     R1 = 0                   	// [6:2159]  
+	     SP = SP + 5              	// [7:2159]  
+	     pop BP, PC from [SP]     	// [8:2159]  
+L_12_23:	// 0x18b8
+// BB:10 cycle count: 10
+//2160  
+//2161  		   	}
+//2162  
+//2163  		   if(HZ_1K_flag>=C_HZ_Num)
 
 LM621:
-	     .stabn 68,0,2150,LM621-_Mov_Detected
-	     SP = SP - 1              	// [0:2150]  
-	     DS = seg(_R_Envi)        	// [1:2150]  R_Envi
-	     R4 = (_R_Envi)           	// [2:2150]  R_Envi
-	     R4 = DS:[R4]             	// [4:2150]  
-	     R4 = R4 + 1              	// [6:2150]  
-	     R3 = SP + 1              	// [7:2150]  
-	     [R3] = R4                	// [9:2150]  
-	     call _PlayA1800_ElementsInit	// [11:2150]  PlayA1800_ElementsInit
-BB13_PU12:	// 0x18c8
-// BB:13 cycle count: 1
-	     SP = SP + 1              	// [0:2150]  
-L_12_31:	// 0x18c9
-// BB:14 cycle count: 3
-//2152  
-//2153  				
-//2154  		   	}
-//2155  		   	
-//2156  		   	    SACM_A1800_ServiceLoop();
+	     .stabn 68,0,2163,LM621-_Mov_Detected
+	     DS = seg(_HZ_1K_flag)    	// [0:2163]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [1:2163]  HZ_1K_flag
+	     R4 = DS:[R4]             	// [3:2163]  
+	     cmp R4, 2                	// [5:2163]  
+	     jbe L_12_24              	// [6:2163]  
+BB11_PU12:	// 0x18be
+// BB:11 cycle count: 9
+//2164  			{
+//2165  			    HZ_1K_flag=0;//HZ_64_flag =0;
 
 LM622:
-	     .stabn 68,0,2156,LM622-_Mov_Detected
-	     call _SACM_A1800_ServiceLoop	// [0:2156]  SACM_A1800_ServiceLoop
-L_12_30:	// 0x18cb
-// BB:15 cycle count: 14
-//2157             }
-//2158  	       
-//2159  		    Get_Key(0,0);		   	
+	     .stabn 68,0,2165,LM622-_Mov_Detected
+	     R3 = 0                   	// [0:2165]  
+	     DS = seg(_HZ_1K_flag)    	// [1:2165]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [2:2165]  HZ_1K_flag
+	     DS:[R4] = R3             	// [4:2165]  
+//2166  			    sensor_read_xyz();
 
 LM623:
-	     .stabn 68,0,2159,LM623-_Mov_Detected
-	     SP = SP - 2              	// [0:2159]  
-	     R3 = 0                   	// [1:2159]  
-	     R4 = SP + 1              	// [2:2159]  
-	     [R4] = R3                	// [4:2159]  
-	     R3 = 0                   	// [6:2159]  
-	     R4 = SP + 2              	// [7:2159]  
-	     [R4] = R3                	// [9:2159]  
-	     call _Get_Key            	// [11:2159]  Get_Key
-BB16_PU12:	// 0x18d6
-// BB:16 cycle count: 11
-	     SP = SP + 2              	// [0:2159]  
-//2160  		   	if(Key_Event)
+	     .stabn 68,0,2166,LM623-_Mov_Detected
+	     call _sensor_read_xyz    	// [6:2166]  sensor_read_xyz
+BB12_PU12:	// 0x18c5
+// BB:12 cycle count: 3
+//2167  				temp = G_Sensor_Check();
 
 LM624:
-	     .stabn 68,0,2160,LM624-_Mov_Detected
-	     DS = seg(_Key_Event)     	// [1:2160]  Key_Event
-	     R4 = (_Key_Event)        	// [2:2160]  Key_Event
-	     R4 = DS:[R4]             	// [4:2160]  
-	     cmp R4, 0                	// [6:2160]  
-	     je L_12_32               	// [7:2160]  
-BB17_PU12:	// 0x18dd
-// BB:17 cycle count: 3
-//2161  		   	{			       
-//2162  		   	    SACM_A1800_Stop();
+	     .stabn 68,0,2167,LM624-_Mov_Detected
+	     call _G_Sensor_Check     	// [0:2167]  G_Sensor_Check
+BB13_PU12:	// 0x18c7
+// BB:13 cycle count: 9
+	     [BP + 0] = R1            	// [0:2167]  temp
+//2168  				
+//2169  				if(temp==C_MovSucess)
 
 LM625:
-	     .stabn 68,0,2162,LM625-_Mov_Detected
-	     call _SACM_A1800_Stop    	// [0:2162]  SACM_A1800_Stop
-BB18_PU12:	// 0x18df
-// BB:18 cycle count: 13
-//2163  	            A1800_Flag = 0;  		   	 
+	     .stabn 68,0,2169,LM625-_Mov_Detected
+	     R4 = [BP + 0]            	// [1:2169]  temp
+	     cmp R4, 4096             	// [3:2169]  
+	     jne L_12_25              	// [5:2169]  
+BB14_PU12:	// 0x18cc
+// BB:14 cycle count: 12
+//2170  				{
+//2171  				   G_Sensor_Status&=~0xE000;//20210722  
 
 LM626:
-	     .stabn 68,0,2163,LM626-_Mov_Detected
-	     R3 = 0                   	// [0:2163]  
-	     DS = seg(_A1800_Flag)    	// [1:2163]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:2163]  A1800_Flag
-	     DS:[R4] = R3             	// [4:2163]  
-//2164  			 	 return 0;
+	     .stabn 68,0,2171,LM626-_Mov_Detected
+	     DS = seg(_G_Sensor_Status)	// [0:2171]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:2171]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:2171]  
+	     R3 = R4 & 8191           	// [5:2171]  
+	     DS = seg(_G_Sensor_Status)	// [7:2171]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:2171]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:2171]  
+L_12_25:	// 0x18d6
+// BB:15 cycle count: 8
+//2172                     //stepflag_Y =0;
+//2173                     //stepflag =0;				   
+//2174  				   
+//2175  				}
+//2176  				if((temp==C_MovSucess)&&(temp_G_Sensor_Status == G_IMMO))
 
 LM627:
-	     .stabn 68,0,2164,LM627-_Mov_Detected
-	     R1 = 0                   	// [6:2164]  
-	     SP = SP + 5              	// [7:2164]  
-	     pop BP, PC from [SP]     	// [8:2164]  
-L_12_32:	// 0x18e7
-// BB:19 cycle count: 10
-//2165  
-//2166  		   	}
-//2167  
-//2168  		   if(HZ_1K_flag>=C_HZ_Num)
+	     .stabn 68,0,2176,LM627-_Mov_Detected
+	     R4 = [BP + 0]            	// [0:2176]  temp
+	     cmp R4, 4096             	// [2:2176]  
+	     jne L_12_26              	// [4:2176]  
+BB16_PU12:	// 0x18da
+// BB:16 cycle count: 8
+	     R4 = [BP + 2]            	// [0:2176]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2176]  
+	     jne L_12_26              	// [4:2176]  
+L_12_27:	// 0x18de
+// BB:17 cycle count: 3
+//2177  				            temp=C_MovFail;
 
 LM628:
-	     .stabn 68,0,2168,LM628-_Mov_Detected
-	     DS = seg(_HZ_1K_flag)    	// [0:2168]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [1:2168]  HZ_1K_flag
-	     R4 = DS:[R4]             	// [3:2168]  
-	     cmp R4, 2                	// [5:2168]  
-	     jbe L_12_33              	// [6:2168]  
-BB20_PU12:	// 0x18ed
-// BB:20 cycle count: 9
-//2169  			{
-//2170  			    HZ_1K_flag=0;//HZ_64_flag =0;
+	     .stabn 68,0,2177,LM628-_Mov_Detected
+	     R4 = 8192                	// [0:2177]  
+	     [BP + 0] = R4            	// [2:2177]  temp
+L_12_26:	// 0x18e1
+// BB:18 cycle count: 8
+//2178  				
+//2179  			    if(temp==C_MovSucess)
 
 LM629:
-	     .stabn 68,0,2170,LM629-_Mov_Detected
-	     R3 = 0                   	// [0:2170]  
-	     DS = seg(_HZ_1K_flag)    	// [1:2170]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [2:2170]  HZ_1K_flag
-	     DS:[R4] = R3             	// [4:2170]  
-//2171  			    sensor_read_xyz();
+	     .stabn 68,0,2179,LM629-_Mov_Detected
+	     R4 = [BP + 0]            	// [0:2179]  temp
+	     cmp R4, 4096             	// [2:2179]  
+	     jne L_12_29              	// [4:2179]  
+BB19_PU12:	// 0x18e5
+// BB:19 cycle count: 13
+//2180  			    {
+//2181  			      	//if(temp_G_Sensor_Status != G_IMMO)	
+//2182  			              FailV =0;
 
 LM630:
-	     .stabn 68,0,2171,LM630-_Mov_Detected
-	     call _sensor_read_xyz    	// [6:2171]  sensor_read_xyz
-BB21_PU12:	// 0x18f4
-// BB:21 cycle count: 3
-//2172  				temp = G_Sensor_Check();
+	     .stabn 68,0,2182,LM630-_Mov_Detected
+	     R3 = 0                   	// [0:2182]  
+	     DS = seg(_FailV)         	// [1:2182]  FailV
+	     R4 = (_FailV)            	// [2:2182]  FailV
+	     DS:[R4] = R3             	// [4:2182]  
+//2184  			       // SACM_A1800_Stop();
+//2185  	               // A1800_Flag = 0;    
+//2186  	                
+//2187  	               
+//2188  					return 1;
 
 LM631:
-	     .stabn 68,0,2172,LM631-_Mov_Detected
-	     call _G_Sensor_Check     	// [0:2172]  G_Sensor_Check
-BB22_PU12:	// 0x18f6
-// BB:22 cycle count: 9
-	     [BP + 0] = R1            	// [0:2172]  temp
-//2173  				
-//2174  				if(temp==C_MovSucess)
+	     .stabn 68,0,2188,LM631-_Mov_Detected
+	     R1 = 1                   	// [6:2188]  
+	     SP = SP + 5              	// [7:2188]  
+	     pop BP, PC from [SP]     	// [8:2188]  
+L_12_29:	// 0x18ed
+// BB:20 cycle count: 8
+//2189  					
+//2190  			    }
+//2191  			    else if(temp==C_MovFail)
 
 LM632:
-	     .stabn 68,0,2174,LM632-_Mov_Detected
-	     R4 = [BP + 0]            	// [1:2174]  temp
-	     cmp R4, 4096             	// [3:2174]  
-	     jne L_12_34              	// [5:2174]  
-BB23_PU12:	// 0x18fb
-// BB:23 cycle count: 12
-//2175  				{
-//2176  				   G_Sensor_Status&=~0xE000;//20210722  
+	     .stabn 68,0,2191,LM632-_Mov_Detected
+	     R4 = [BP + 0]            	// [0:2191]  temp
+	     cmp R4, 8192             	// [2:2191]  
+	     jne L_12_30              	// [4:2191]  
+BB21_PU12:	// 0x18f1
+// BB:21 cycle count: 13
+//2193  			       	 // OFF_Timeoutcnt =0;
+//2194  			         // temp_timecnt = TimeCnt;				  
+//2195                       // TimeCnt =temp_timecnt;
+//2196  					 // if(temp_G_Sensor_Status == G_IMMO)
+//2197  					    TimeCnt=0;
 
 LM633:
-	     .stabn 68,0,2176,LM633-_Mov_Detected
-	     DS = seg(_G_Sensor_Status)	// [0:2176]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:2176]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:2176]  
-	     R3 = R4 & 8191           	// [5:2176]  
-	     DS = seg(_G_Sensor_Status)	// [7:2176]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:2176]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:2176]  
-L_12_34:	// 0x1905
-// BB:24 cycle count: 8
-//2177                     //stepflag_Y =0;
-//2178                     //stepflag =0;				   
-//2179  				   
-//2180  				}
-//2181  				if((temp==C_MovSucess)&&(temp_G_Sensor_Status == G_IMMO))
+	     .stabn 68,0,2197,LM633-_Mov_Detected
+	     R3 = 0                   	// [0:2197]  
+	     DS = seg(_TimeCnt)       	// [1:2197]  TimeCnt
+	     R4 = (_TimeCnt)          	// [2:2197]  TimeCnt
+	     DS:[R4] = R3             	// [4:2197]  
+//2198  					    return 0;
 
 LM634:
-	     .stabn 68,0,2181,LM634-_Mov_Detected
-	     R4 = [BP + 0]            	// [0:2181]  temp
-	     cmp R4, 4096             	// [2:2181]  
-	     jne L_12_35              	// [4:2181]  
-BB25_PU12:	// 0x1909
-// BB:25 cycle count: 8
-	     R4 = [BP + 2]            	// [0:2181]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2181]  
-	     jne L_12_35              	// [4:2181]  
-L_12_36:	// 0x190d
-// BB:26 cycle count: 3
-//2182  				            temp=C_MovFail;
+	     .stabn 68,0,2198,LM634-_Mov_Detected
+	     R1 = 0                   	// [6:2198]  
+	     SP = SP + 5              	// [7:2198]  
+	     pop BP, PC from [SP]     	// [8:2198]  
+L_12_30:	// 0x18f9
+L_12_28:	// 0x18f9
+L_12_24:	// 0x18f9
+// BB:22 cycle count: 3
 
 LM635:
-	     .stabn 68,0,2182,LM635-_Mov_Detected
-	     R4 = 8192                	// [0:2182]  
-	     [BP + 0] = R4            	// [2:2182]  temp
-L_12_35:	// 0x1910
-// BB:27 cycle count: 8
-//2183  				
-//2184  			    if(temp==C_MovSucess)
+	     .stabn 68,0,2163,LM635-_Mov_Detected
+	     goto L_12_20             	// [0:2163]  
+L_12_21:	// 0x18fb
+// BB:23 cycle count: 8
+//2201  			                      												   
+//2202  			}
+//2203      	}
+//2204  					
+//2205      	 if	(temp_G_Sensor_Status == G_IMMO)  
 
 LM636:
-	     .stabn 68,0,2184,LM636-_Mov_Detected
-	     R4 = [BP + 0]            	// [0:2184]  temp
-	     cmp R4, 4096             	// [2:2184]  
-	     jne L_12_38              	// [4:2184]  
-BB28_PU12:	// 0x1914
-// BB:28 cycle count: 13
-//2185  			    {
-//2186  			      	//if(temp_G_Sensor_Status != G_IMMO)	
-//2187  			              FailV =0;
+	     .stabn 68,0,2205,LM636-_Mov_Detected
+	     R4 = [BP + 2]            	// [0:2205]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2205]  
+	     jne L_12_32              	// [4:2205]  
+BB24_PU12:	// 0x18ff
+// BB:24 cycle count: 7
+//2206  	         return 1;
 
 LM637:
-	     .stabn 68,0,2187,LM637-_Mov_Detected
-	     R3 = 0                   	// [0:2187]  
-	     DS = seg(_FailV)         	// [1:2187]  FailV
-	     R4 = (_FailV)            	// [2:2187]  FailV
-	     DS:[R4] = R3             	// [4:2187]  
-//2189  			       // SACM_A1800_Stop();
-//2190  	               // A1800_Flag = 0;    
-//2191  	                
-//2192  	               
-//2193  					return 1;
+	     .stabn 68,0,2206,LM637-_Mov_Detected
+	     R1 = 1                   	// [0:2206]  
+	     SP = SP + 5              	// [1:2206]  
+	     pop BP, PC from [SP]     	// [2:2206]  
+L_12_32:	// 0x1902
+// BB:25 cycle count: 8
+//2207  	    else
+//2208  	        return TimeOver;
 
 LM638:
-	     .stabn 68,0,2193,LM638-_Mov_Detected
-	     R1 = 1                   	// [6:2193]  
-	     SP = SP + 5              	// [7:2193]  
-	     pop BP, PC from [SP]     	// [8:2193]  
-L_12_38:	// 0x191c
-// BB:29 cycle count: 8
-//2194  					
-//2195  			    }
-//2196  			    else if(temp==C_MovFail)
-
-LM639:
-	     .stabn 68,0,2196,LM639-_Mov_Detected
-	     R4 = [BP + 0]            	// [0:2196]  temp
-	     cmp R4, 8192             	// [2:2196]  
-	     jne L_12_39              	// [4:2196]  
-BB30_PU12:	// 0x1920
-// BB:30 cycle count: 13
-//2198  			       	 // OFF_Timeoutcnt =0;
-//2199  			         // temp_timecnt = TimeCnt;				  
-//2200                       // TimeCnt =temp_timecnt;
-//2201  					 // if(temp_G_Sensor_Status == G_IMMO)
-//2202  					    TimeCnt=0;
-
-LM640:
-	     .stabn 68,0,2202,LM640-_Mov_Detected
-	     R3 = 0                   	// [0:2202]  
-	     DS = seg(_TimeCnt)       	// [1:2202]  TimeCnt
-	     R4 = (_TimeCnt)          	// [2:2202]  TimeCnt
-	     DS:[R4] = R3             	// [4:2202]  
-//2203  					    return 0;
-
-LM641:
-	     .stabn 68,0,2203,LM641-_Mov_Detected
-	     R1 = 0                   	// [6:2203]  
-	     SP = SP + 5              	// [7:2203]  
-	     pop BP, PC from [SP]     	// [8:2203]  
-L_12_39:	// 0x1928
-L_12_37:	// 0x1928
-L_12_33:	// 0x1928
-// BB:31 cycle count: 3
-
-LM642:
-	     .stabn 68,0,2168,LM642-_Mov_Detected
-	     goto L_12_27             	// [0:2168]  
-L_12_28:	// 0x192a
-// BB:32 cycle count: 8
-//2206  			                      												   
-//2207  			}
-//2208      	}
-//2209  					
-//2210      	 if	(temp_G_Sensor_Status == G_IMMO)  
-
-LM643:
-	     .stabn 68,0,2210,LM643-_Mov_Detected
-	     R4 = [BP + 2]            	// [0:2210]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2210]  
-	     jne L_12_41              	// [4:2210]  
-BB33_PU12:	// 0x192e
-// BB:33 cycle count: 7
-//2211  	         return 1;
-
-LM644:
-	     .stabn 68,0,2211,LM644-_Mov_Detected
-	     R1 = 1                   	// [0:2211]  
-	     SP = SP + 5              	// [1:2211]  
-	     pop BP, PC from [SP]     	// [2:2211]  
-L_12_41:	// 0x1931
-// BB:34 cycle count: 8
-//2212  	    else
-//2213  	        return TimeOver;
-
-LM645:
-	     .stabn 68,0,2213,LM645-_Mov_Detected
-	     R1 = - 4087              	// [0:2213]  
-	     SP = SP + 5              	// [2:2213]  
-	     pop BP, PC from [SP]     	// [3:2213]  
-L_12_40:	// 0x1935
-// BB:35 cycle count: 6
-	     SP = SP + 5              	// [0:2213]  
-	     pop BP, PC from [SP]     	// [1:2213]  
+	     .stabn 68,0,2208,LM638-_Mov_Detected
+	     R1 = - 4087              	// [0:2208]  
+	     SP = SP + 5              	// [2:2208]  
+	     pop BP, PC from [SP]     	// [3:2208]  
+L_12_31:	// 0x1906
+// BB:26 cycle count: 6
+	     SP = SP + 5              	// [0:2208]  
+	     pop BP, PC from [SP]     	// [1:2208]  
 LBE6:
 	.endp	
 	     .stabs "Time_T:p4",160,0,0,8
@@ -10988,16 +10883,14 @@ _accelerationz:	// 0x1b5
 .external _ACC_Y
 .external _ACC_Z
 .external _TimeCnt_Total
-.external _PlayA1800_ElementsInit
 .external _TimeCnt
 .external _Get_Key
-.external _SACM_A1800_Status
-.external _A1800_Flag
-.external _SACM_A1800_ServiceLoop
 .external _SACM_A1800_Stop
+.external _A1800_Flag
+.external _SACM_A1800_Status
+.external _PlayA1800_ElementsInit
+.external _SACM_A1800_ServiceLoop
 .external _PlayA1800_Elements
-.external _R_Envi
-.external _DetectionFlag
 .external _TimeCnt1
 .external _MoveSucessFlag
 .external _Key_Event

@@ -48,7 +48,7 @@ IsGenRes=1
 IsInitGlobal=1
 IsGenList=0
 CurIsa=ISA20
-IsWall=1
+IsWall=0
 POINTER=1
 IsPage0RAM=0
 
