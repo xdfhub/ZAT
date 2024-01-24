@@ -58,7 +58,7 @@ typedef  struct
 }Mem_data;
 
 
-typedef enum {Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White}LED_Color;
+typedef enum {Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White,Color_NULL}LED_Color;
 
 
 

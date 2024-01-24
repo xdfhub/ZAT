@@ -19,7 +19,7 @@
 .define P_IO_Key_Data   P_IOB_Data
 
 .DEFINE C_DebounceCnt	0x00a  //0x02 16hz 
-.Define C_LongDebounceCnt   1300//3s
+.Define C_LongDebounceCnt   500//1300//1s
 
 
 

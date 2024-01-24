@@ -137,9 +137,9 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Locate: OVERLAP_A1800_BLOCK in "ORAM_Arrangement.obj" at 2A 
 ;Locate: BootCode_SEC in "BootCode_User.obj" at 200100 
 ;Align: BootCode_SEC in "BootCode_User.obj" with 0 
-;Locate: NB_DATA in "Play_Speech.obj" at 2043BA 
+;Locate: NB_DATA in "Play_Speech.obj" at 2043BD 
 ;Align: NB_DATA in "Play_Speech.obj" with 0 
-;Locate: NB_DATA in "MC3416_I2C.obj" at 2043C6 
+;Locate: NB_DATA in "MC3416_I2C.obj" at 2043C9 
 ;Align: NB_DATA in "MC3416_I2C.obj" with 0 
 ;Locate: NB_DATA in "Algorithm.obj" at 20433E 
 ;Align: NB_DATA in "Algorithm.obj" with 0 
@@ -147,7 +147,7 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: NB_DATA in "AntiCrack.obj" with 0 
 ;Locate: NB_DATA in "LED.obj" at 204393 
 ;Align: NB_DATA in "LED.obj" with 0 
-;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 20B5E5 
+;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 20B549 
 ;Align: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" with 0 
 ;Locate: CODE in "modu1" of "CMacro1232.lib"  at 203EE9 
 ;Align: CODE in "modu1" of "CMacro1232.lib"  with 0 
@@ -227,19 +227,19 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: _CODE_SPI_SEC in "isr.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "System_2.obj" at 204C7E 
 ;Align: _CODE_SPI_SEC in "System_2.obj" with 0 
-;Locate: _CODE_SPI_SEC in "system.obj" at 204D61 
+;Locate: _CODE_SPI_SEC in "system.obj" at 204D65 
 ;Align: _CODE_SPI_SEC in "system.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "main.obj" at 205168 
 ;Align: _CODE_SPI_SEC in "main.obj" with 0 
-;Locate: _CODE_SPI_SEC in "IIC_Master.obj" at 2052D7 
+;Locate: _CODE_SPI_SEC in "IIC_Master.obj" at 2052F3 
 ;Align: _CODE_SPI_SEC in "IIC_Master.obj" with 0 
-;Locate: _CODE_SPI_SEC in "LED.obj" at 2055FC 
+;Locate: _CODE_SPI_SEC in "LED.obj" at 205618 
 ;Align: _CODE_SPI_SEC in "LED.obj" with 0 
-;Locate: _CODE_SPI_SEC in "MC3416_I2C.obj" at 20597D 
+;Locate: _CODE_SPI_SEC in "MC3416_I2C.obj" at 2059B2 
 ;Align: _CODE_SPI_SEC in "MC3416_I2C.obj" with 0 
-;Locate: _CODE_SPI_SEC in "Play_Speech.obj" at 205DC3 
+;Locate: _CODE_SPI_SEC in "Play_Speech.obj" at 205DF8 
 ;Align: _CODE_SPI_SEC in "Play_Speech.obj" with 0 
-;Locate: _CODE_SPI_SEC in "G_Sensor.obj" at 20640A 
+;Locate: _CODE_SPI_SEC in "G_Sensor.obj" at 206431 
 ;Align: _CODE_SPI_SEC in "G_Sensor.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "Algorithm.obj" at 2083AC 
 ;Align: _CODE_SPI_SEC in "Algorithm.obj" with 0 

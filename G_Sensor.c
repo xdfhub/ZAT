@@ -1413,7 +1413,7 @@ unsigned int G_Sensor_Check()
 			 
 																		  
 																				  //PlayA1800_Elements(7);
-																				  G_Sensor_Status&=~G_Z_A;
+																				  G_Sensor_Status&=~G_Anymove;
 																			
 																				 return C_MovSucess;
 																				 
@@ -1475,7 +1475,7 @@ unsigned int G_Sensor_Check()
 																	  if(fakeflag==0)
 																	   {
 			 		
-																			  G_Sensor_Status&=~G_Z_M;
+																			  G_Sensor_Status&=~G_Anymove;
 																			  return C_MovSucess;
 																	 																		   
 																				   
@@ -1572,7 +1572,7 @@ unsigned int G_Sensor_Check()
                                           else if(fakeflag==0)
                                           	{
 
-											   G_Sensor_Status&=~G_X_A;
+											   G_Sensor_Status&=~G_Anymove;
 										   
 										        return C_MovSucess;
 
@@ -1643,7 +1643,7 @@ unsigned int G_Sensor_Check()
 												 else if(fakeflag==0)
 												  {
 
-														 G_Sensor_Status&=~G_X_M;
+														 G_Sensor_Status&=~G_Anymove;
 												         return C_MovSucess;
 											
 															  
@@ -1726,7 +1726,7 @@ unsigned int G_Sensor_Check()
 													 if(fakeflag==0)
 													 	{
 															  										 
-													         G_Sensor_Status&=~G_Y_A;
+													         G_Sensor_Status&=~G_Anymove;
 
 															  return C_MovSucess;
 
@@ -1795,7 +1795,7 @@ unsigned int G_Sensor_Check()
 												    if(fakeflag==0)
 													 	{
 													 	   //PlayA1800_Elements(7);
-													      G_Sensor_Status&=~G_Y_M;
+													      G_Sensor_Status&=~G_Anymove;
 
 														   return C_MovSucess;
 

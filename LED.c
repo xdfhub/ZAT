@@ -27,9 +27,11 @@ extern unsigned LED_Cnt;
 extern  const unsigned BitMap[];
 //unsigned  int ChangeColorFlag =0;
 
+#define C_Color_NULL 9
 //enum LED_Color{Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White};
-const Color_Table[9][3]=
+const Color_Table[10][3]=
 {
+
 	{255/C_NumHz,0,0},	    //{255,0,0},	    //Red
 	{255/C_NumHz,165/C_NumHz,0},	//{255,165,0},	//Orange
 	{255/C_NumHz,255/C_NumHz,0},	//{255,255,0},	//Yellow
@@ -38,7 +40,8 @@ const Color_Table[9][3]=
 	{0,0,255/C_NumHz},	    //{0,0,255},	    //Blue
 	{128/C_NumHz,0,128/C_NumHz},	//{128,0,128},	//Purple
 	{128/C_NumHz,128/C_NumHz,128/C_NumHz},  //{128,128,128},	//Grey
-	{255/C_NumHz,255/C_NumHz,255/C_NumHz}   //{255,255,255}   //white			
+	{255/C_NumHz,255/C_NumHz,255/C_NumHz},   //{255,255,255}   //white	
+	{0,0,0}//нчи╚	   C_Color_NULL  		
 };
 
 
@@ -78,6 +81,20 @@ void Clean_LFX_Led()
 	
 	
 }
+
+void Clean_LFX_Color()
+{
+	
+	unsigned int i=0;
+	
+	while(i<2)
+	{
+	   LFX_Led_Color[i++]=C_Color_NULL;
+	}
+	
+	
+}
+
 void Clean_Led_Color()
 {
 	

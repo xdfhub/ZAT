@@ -1756,6 +1756,25 @@ unsigned Get_Firstcnt_From_Play(unsigned temp_Player)
 }
 
 
+
+unsigned Get_Firstcolor_From_Play(unsigned temp_Player)
+{
+	
+	unsigned i = 0;
+	while(i<C_Player_Num)//C_Player_Num <16
+	{
+		 if (BitMap[i]&temp_Player) //Registered_Play_Status
+		    {
+		     return i;//
+		    }
+		   i++;
+	}
+	return 0;//Go_Rest();
+
+}
+
+
+
 unsigned Get_FirstBit_From_Play(unsigned temp_Player)
 {
 	
@@ -8292,7 +8311,7 @@ void  ButtonisPressed()
 unsigned int Get_Key(Countdown_E,G_checkflag)
 {
   unsigned int temp;
-//  unsigned int FiveSec_cnt_temp;
+  unsigned int FiveSec_cnt_temp;
   unsigned int key_temp =0;
  
   do
@@ -8414,7 +8433,7 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 		
 	    	  if((TwoKeyflag))//(PlayQuestionflag )||
 	    	 	 {
-	    	 		 if(TimeCnt_Key<C_1S)//TwokeyCntl
+	    	 		 if(TimeCnt_Key<=C_1S)//TwokeyCntl
 	    	 		 	 {
 	    	 		 	 	  if(temp == TwoKey_temp)
 	    	 		 	 	  	{
@@ -8435,33 +8454,25 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 											TwoKey_cnt++;//Collection();//Pause_Process();
 											temp =0;//ï¿½Þ°ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦!!!!!!!!!!!!
 											
-											if(TwoKey_cnt>2)//4ï¿½ï¿½
+											if(TwoKey_cnt>=2)//3´Î
 											{
 											     TwoKey_cnt=0;
 											     TwoKey_temp =0;
 											     key_temp =0;
 											     Resumeflag =0;
 											     Key_TrueFlase_Buffer =0; 
-											    if((Mem0.MissionZ_flag==1)&&(MCollection&0x001))
-											    {  
-											      
-												   Key_Event =0x88;
-												   return Key_Event;
-											    }
-                                               else
-                                               	{
+//
+////													if(A1800_Flag)
+////													{  
+////													   SP_RampUpDAC1_Other();
+////													   
+////													   SACM_A1800_Resume();    
+////													}
+//													                                                       
+//                                                  Key_Event = 0x88;	//M++
+//		                                          return Key_Event; 
 
-													if(A1800_Flag)
-													{  
-													   SP_RampUpDAC1_Other();
-													   
-													   SACM_A1800_Resume();    
-													}
-													                                                       
-                                                  Key_Event = 1;	//OFF 
-		                                          return Key_Event; 
-
-                                                }
+                                                
 
                                                 
 												
@@ -8471,15 +8482,15 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 									}
 								   else if(temp == Key_False)
 								   {
-								   	  if(TwoKeyflag==Key_False)	
-								   	   {
-									   	   	  CheaterFlag =1;//xiang 20180517
-									   	   	  Key_TrueFlase_Buffer =0;//20160215
-
-											  TwoKey_temp =0;//20160323
-									   	     return 0xffff;	   	 
-								   	   	
-								   	   }
+//								   	  if(TwoKeyflag==Key_False)	
+//								   	   {
+//									   	   	  CheaterFlag =1;//xiang 20180517
+//									   	   	  Key_TrueFlase_Buffer =0;//20160215
+//
+//											  TwoKey_temp =0;//20160323
+//									   	     return 0xffff;	   	 
+//								   	   	
+//								   	   }
 								   	
 								   	
 								   }
@@ -8606,14 +8617,16 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 			   if(temp&(Key_True|Key_False))//if(Key_TrueFlase_Buffer) 
 			   	{
 
-                   	  if(A1800_Flag)
-                   	  {  
-                            SACM_A1800_Pause();    
-					        DAC1_Data_Temp = (*P_AUDIO_CH1_Data)&0xfffc;
-					        SP_RampDnDAC1();
-					        Resumeflag =1;
-                   	  }
-				       
+//                   	  if(A1800_Flag)
+//                   	  {  
+//                            SACM_A1800_Pause();    
+//					        DAC1_Data_Temp = (*P_AUDIO_CH1_Data)&0xfffc;
+//					        SP_RampDnDAC1();
+//					        Resumeflag =1;
+//                   	  }
+
+
+
 
 			   	}
 			    else
@@ -8639,77 +8652,73 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
                  	{
                  	   
 
-					  if(MCollection &0x0001)
-					  	{
-
-						   	 Key_Event = Key_TrueFlase_Buffer;//20160215 xiang
-						  	 Key_TrueFlase_Buffer =0;   
-							 TwoKey_temp =0;
-							 Resumeflag =0;
-	                         return Key_Event;
-					  	}
-
-					  else
-					  	
-					  {
 					  	 Key_Event = 0;//Key_TrueFlase_Buffer;//20160215 xiang
 					  	 Key_TrueFlase_Buffer =0;   
 						 TwoKey_temp =0;
 						 Resumeflag =0;
-						 ButtonisPressed();
-						 
-						 
-				 	     return Key_Event;
-					  }
-				 	      
-				 	     Key_TrueFlase_Buffer =0;
+////						 ButtonisPressed();
+//						 						 
+//				 	     return Key_Event;
+
+                        temp =0;
+                        FiveSec_cnt_temp = FiveSec_cnt;
+                        
+					   if(Pause_Process())
+					   {
+					   	
+					   	   FiveSec_cnt = FiveSec_cnt_temp;
+					   	   return 0xffff;
+					   }
+					   
+                       FiveSec_cnt = FiveSec_cnt_temp;
+	
                  	}
 
         	}
 
 
-		 if(TwoKey_cnt==1)
+		 if(TwoKey_cnt==1)//2´Î
 		 	{
 
-                 if(TimeCnt_Key>=C_1s_Pause)
-                 	{
-
-						TwoKey_temp =0;//20160323
-						TwoKey_cnt=0;
-						
-					    temp =A1800_Flag; 	
-					    Key_Event =0;
-	                    Resumeflag =0;
-					    Key_TrueFlase_Buffer =0; 
-					    if(MCollection==0)
-					    {
-//							Collection();//Pause_Process();
-//							
-//							if(temp)
-//	                          return 0xffff;
-//	                        else 
-//	                          return 0;
-					    }
-					    else
-                       	{
-
-							if(A1800_Flag)
-							{  
-							   SP_RampUpDAC1_Other();
-							   
-							   SACM_A1800_Resume();    
-							}
-							                                                       
-//                          Key_Event = 1;	//OFF 
-//                          return Key_Event; 
-
-                        }  
-					    
-                 	}
+//                 if(TimeCnt_Key>=C_1s_Pause)
+//                 	{
+//
+//						TwoKey_temp =0;//20160323
+//						TwoKey_cnt=0;
+//						
+//					    temp =A1800_Flag; 	
+//					    Key_Event =0;
+//	                    Resumeflag =0;
+//					    Key_TrueFlase_Buffer =0; 
+//					    if(MCollection==0)
+//					    {
+////							Collection();//Pause_Process();
+////							
+////							if(temp)
+////	                          return 0xffff;
+////	                        else 
+////	                          return 0;
+//					    }
+//					    else
+//                       	{
+//
+//							if(A1800_Flag)
+//							{  
+//							   SP_RampUpDAC1_Other();
+//							   
+//							   SACM_A1800_Resume();    
+//							}
+//							                                                       
+////                          Key_Event = 1;	//OFF 
+////                          return Key_Event; 
+//
+//                        }  
+//					    
+//                 	}
 
 
 		 	}
-          else  if(TwoKey_cnt==2)// 3ï¿½ï¿½
+          else  if(TwoKey_cnt==2)// 3´Î
            {
            	      if(TimeCnt_Key>=C_1s_Pause)
            	      {
@@ -10006,7 +10015,7 @@ unsigned  Step1()
 
    	Sleepflag =0;
     Resumeflag =0;
-    TwoKeyflag=0;
+    TwoKeyflag=Key_True|Key_False;
     
    	BlinkFlag_Data = 0;//xiang 20150226
    	CheaterFlag =0;
@@ -10042,6 +10051,7 @@ unsigned  Step1()
     PlaySFX_Flag =0;
     
      Clean_LFX_Led();
+     Clean_LFX_Color();
      Clean_Led_Color();
     
       
@@ -11760,15 +11770,18 @@ unsigned int Mission()
 
    while (1)
    {   
-	 Mvmt = Get_Move_data(Mem0.Y);
-     temp_MoveText2_Right =0;
-     
-     
+
        BlinkFlag_Data =0;
 	   Light_all_off();	  
 	   Clean_Led_Color();
        Clean_LFX_Led();
-       
+       G_Sensor_Status =0;
+      if(Mem0.Y>22) 
+          break;
+          	
+  	  Mvmt = Get_Move_data(Mem0.Y);
+      temp_MoveText2_Right =0;     
+      
 	 if((Mvmt==0x0ff))
 			break;
 	 
@@ -11970,7 +11983,7 @@ unsigned int Mission()
 								Motor_On();
 								delay_time(8);
 								Motor_Off();							 
-                                PlayA1800_Other(Serie_Wrong);
+//                                PlayA1800_Other(Serie_Wrong);
 
 
 						  }

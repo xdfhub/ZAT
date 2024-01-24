@@ -1176,7 +1176,7 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 	     	     while(temp!=0)
 	     	     { 
 		     	    
-		     	    temp1 = Get_Firstcnt_From_Play(temp);
+		     	    temp1 = Get_Firstcolor_From_Play(temp);
 				    temp&=~BitMap[temp1];	
 				    LFX_Led_Color[j] = temp1;				     	      
 		     	   }  

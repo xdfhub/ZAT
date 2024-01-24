@@ -39,7 +39,7 @@ Ltext0:
 .stabs "complex long double:t17=r1;8;0;",128,0,0,0
 .stabs "void:t18=18",128,0,0,0
 .stabs " :T19=eRed:0,Orange:1,Yellow:2,Green:3,Cyan:4,Blue:5,\\",128,0,0,0
-.stabs "Purple:6,Grey:7,White:8,;",128,0,0,0
+.stabs "Purple:6,Grey:7,White:8,Color_NULL:9,;",128,0,0,0
 .stabs "uint16:t20=4",128,0,0,0
 .stabs "u16:t21=20",128,0,0,0
 .stabs "uint32:t22=5",128,0,0,0

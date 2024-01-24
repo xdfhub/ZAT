@@ -205,6 +205,7 @@
 #define G_Back   0x20
 
 #define G_SixDir  0x3f////////
+#define G_Anymove  G_SixDir
 
 #define G_Shake  0x40
 #define G_Jump   0x80
@@ -382,12 +383,12 @@
 #define C_2S	2*16
 #define C_3S	3*16
 #define C_5S	5*16
-#define C_1S	10
+#define C_1S	14
 
 #define C_Pass_cell 5//0.3S
 #define C_Pass_longtime 40//C_3S
 
-#define C_1s_Pause   12
+#define C_1s_Pause   14
 
 #define C_Halfs   8
 

@@ -410,46 +410,6 @@ ID=
 EXPORT=3
 SPECIFICFLAG=0
 # End Source File
-# Begin Source File
-SOURCE=..\Include\System.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=996474972
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\SACM.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1145372764
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\A3400Pro.inc
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1869348956
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\MS02.inc
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1869348956
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\datatype.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1650786396
-SPECIFICFLAG=0
-# End Source File
 # End Group
 # End SubItem
 #Name End GPCE3400A-Debug
@@ -855,46 +815,6 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\System.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=996474972
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\SACM.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1145372764
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\A3400Pro.inc
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1869348956
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\MS02.inc
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1869348956
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\datatype.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1650786396
 SPECIFICFLAG=0
 # End Source File
 # End Group

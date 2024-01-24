@@ -39,7 +39,7 @@ Ltext0:
 .stabs "complex long double:t17=r1;8;0;",128,0,0,0
 .stabs "void:t18=18",128,0,0,0
 .stabs " :T19=eRed:0,Orange:1,Yellow:2,Green:3,Cyan:4,Blue:5,\\",128,0,0,0
-.stabs "Purple:6,Grey:7,White:8,;",128,0,0,0
+.stabs "Purple:6,Grey:7,White:8,Color_NULL:9,;",128,0,0,0
 .code
 	     .stabs "Get_Standy:F18",36,0,0,_Get_Standy
 
@@ -7412,14 +7412,14 @@ BB94_PU10:	// 0x1159
 //1413  			 
 //1414  																		  
 //1415  																				  //PlayA1800_Elements(7);
-//1416  																				  G_Sensor_Status&=~G_Z_A;
+//1416  																				  G_Sensor_Status&=~G_Anymove;
 
 LM415:
 	     .stabn 68,0,1416,LM415-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1416]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1416]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1416]  
-	     R3 = R4 & 65534          	// [5:1416]  
+	     R3 = R4 & 65472          	// [5:1416]  
 	     DS = seg(_G_Sensor_Status)	// [7:1416]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:1416]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:1416]  
@@ -7650,14 +7650,14 @@ BB115_PU10:	// 0x11d3
 // BB:115 cycle count: 21
 //1476  																	   {
 //1477  			 		
-//1478  																			  G_Sensor_Status&=~G_Z_M;
+//1478  																			  G_Sensor_Status&=~G_Anymove;
 
 LM431:
 	     .stabn 68,0,1478,LM431-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1478]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1478]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1478]  
-	     R3 = R4 & 65533          	// [5:1478]  
+	     R3 = R4 & 65472          	// [5:1478]  
 	     DS = seg(_G_Sensor_Status)	// [7:1478]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:1478]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:1478]  
@@ -7999,14 +7999,14 @@ BB141_PU10:	// 0x1291
 // BB:141 cycle count: 21
 //1573                                            	{
 //1574  
-//1575  											   G_Sensor_Status&=~G_X_A;
+//1575  											   G_Sensor_Status&=~G_Anymove;
 
 LM452:
 	     .stabn 68,0,1575,LM452-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1575]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1575]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1575]  
-	     R3 = R4 & 65527          	// [5:1575]  
+	     R3 = R4 & 65472          	// [5:1575]  
 	     DS = seg(_G_Sensor_Status)	// [7:1575]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:1575]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:1575]  
@@ -8280,14 +8280,14 @@ BB164_PU10:	// 0x1323
 // BB:164 cycle count: 21
 //1644  												  {
 //1645  
-//1646  														 G_Sensor_Status&=~G_X_M;
+//1646  														 G_Sensor_Status&=~G_Anymove;
 
 LM471:
 	     .stabn 68,0,1646,LM471-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1646]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1646]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1646]  
-	     R3 = R4 & 65531          	// [5:1646]  
+	     R3 = R4 & 65472          	// [5:1646]  
 	     DS = seg(_G_Sensor_Status)	// [7:1646]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:1646]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:1646]  
@@ -8588,14 +8588,14 @@ BB188_PU10:	// 0x13c9
 // BB:188 cycle count: 21
 //1727  													 	{
 //1728  															  										 
-//1729  													         G_Sensor_Status&=~G_Y_A;
+//1729  													         G_Sensor_Status&=~G_Anymove;
 
 LM489:
 	     .stabn 68,0,1729,LM489-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1729]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1729]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1729]  
-	     R3 = R4 & 65519          	// [5:1729]  
+	     R3 = R4 & 65472          	// [5:1729]  
 	     DS = seg(_G_Sensor_Status)	// [7:1729]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:1729]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:1729]  
@@ -8851,14 +8851,14 @@ BB209_PU10:	// 0x1469
 // BB:209 cycle count: 21
 //1796  													 	{
 //1797  													 	   //PlayA1800_Elements(7);
-//1798  													      G_Sensor_Status&=~G_Y_M;
+//1798  													      G_Sensor_Status&=~G_Anymove;
 
 LM505:
 	     .stabn 68,0,1798,LM505-_G_Sensor_Check
 	     DS = seg(_G_Sensor_Status)	// [0:1798]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [1:1798]  G_Sensor_Status
 	     R4 = DS:[R4]             	// [3:1798]  
-	     R3 = R4 & 65503          	// [5:1798]  
+	     R3 = R4 & 65472          	// [5:1798]  
 	     DS = seg(_G_Sensor_Status)	// [7:1798]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:1798]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:1798]  

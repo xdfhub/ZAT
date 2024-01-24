@@ -212,7 +212,7 @@ int main()
 			case C_Mission:		
 							    			    
 			       gTemp = Mission();		
-			       	       
+			       gTemp = C_Off_Mode;	       
 				   break;
 			case C_MissinZer0:
 			
@@ -254,7 +254,7 @@ int main()
 		
 	  if(Key_Event)
 	  {
-	  	
+	  	 Resumeflag =0;
 //	  	 if(Key_Event== C_Mission)//if(Key_Event == 0x66)//MODE CHANGE
 //           {
 //           	  Key_Event =0;
@@ -265,12 +265,18 @@ int main()
 //           	  Key_Event =0;
 //           	  gTemp  = C_MissinZer0;
 //           } 
-                
-	    if(Key_Event!=0x88)
+      
+        if(Key_Event==0x88)
+        {
+            Key_Event =0;	
+           Mem0.Mission_Cur++;	
+		   gTemp = C_SelectMission;
+        }               
+	   else // if(Key_Event!=0x88)
 	     {
-	  	
+	  	    
 		  	  Key_Event =0;
-		  	  Resumeflag =0;
+		  	 
 			   if(LongPressflag)
 			   {
 				   	  LongPressflag =0;
@@ -281,8 +287,12 @@ int main()
 			//	   	 if(Mission_Cur>=0)
 			//	   	      Mission_Success[Mission_Cur/16]|=BitMap[Mission_Cur%16];
 			//	   	 
-			          Mem0.Mission_Cur++;	
-				   	  gTemp = C_SelectMission;
+//			          Mem0.Mission_Cur++;	
+//				   	  gTemp = C_SelectMission;
+
+
+				   	  PlayA1800_Elements(SFX_Off);
+				  	  gTemp  = C_Off_Mode;
 				  }
 				   else	  
 				   {

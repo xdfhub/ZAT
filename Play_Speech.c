@@ -43,7 +43,7 @@ unsigned int Last_VL =0;
 unsigned int LFX_Led[2]={0,0};//闪哪些灯,LED1,LED2.... 根据要闪的灯来切换颜色 ，0:不切换颜色
 unsigned int LFX_Led_Color[2]={0,0};//闪灯颜色切换
 //LFX_Led[0]:0,LFX_Led[1]:0  都为0，则无需切换颜色，直接闪灯
-//LFX_Led[1]:0     闪LFX_Led[0]所对应的LFX_Led_Color[0]的颜色
+//LFX_Led[1]:非0     闪LFX_Led[0]所对应的LFX_Led_Color[0]的颜色
 //LFX_Led[1]:非0   LFX_Led[0]所对应的LFX_Led_Color[0]的颜色》LFX_Led[1]所对应的LFX_Led_Color[1]的颜色
 //                 LFX_Led[0]=LFX_Led[1]则可以实现相同灯闪不同颜色
 
@@ -134,6 +134,7 @@ extern unsigned int temp_FiveSec_cnt;
 
 extern unsigned int PlayScoresFlag;
 extern unsigned int Key_buffer_First_temp;
+extern unsigned int LongPressflag;
 
 //extern const Pass_Step[];
 
@@ -391,11 +392,11 @@ unsigned int Pause_Process()
 					
                    	    Key_Event =0;
                    	    Resumeflag =0; //第一次按下已暂停声音
-//                   	  if(A1800_Flag)
-//                   	  {  
-//                           SACM_A1800_Pause();    
-//					       DAC1_Data_Temp = (*(volatile unsigned int *)(P_AUDIO_CH1_Data))&0xfffc;
-//                   	  }
+                   	  if(A1800_Flag)
+                   	  {  
+                           SACM_A1800_Pause();    
+					       DAC1_Data_Temp = (*(volatile unsigned int *)(P_AUDIO_CH1_Data))&0xfffc;
+                   	  }
 					    
 					    Play_Con_temp = Play_Con;
 					    Play_Con =0;
@@ -408,6 +409,16 @@ unsigned int Pause_Process()
 						 while(1)
 						 	{
 			                             WatchdogClear();
+			                             
+			                             
+			                        	 if(LongPressflag)
+										  {
+										  	Key_TrueFlase_Buffer =0;  
+									        Key_Event = LongPressflag;	//20160215 xiang
+											 return Key_Event;
+										  	
+										  	
+										  }	     
 
 			                              if(Sleepflag) 
 			                              {                                	 	
@@ -426,7 +437,7 @@ unsigned int Pause_Process()
 										                  if(Key&Key_TrueFlase_Buffer)
 										                  	{											 	       
 														 	    Key_TrueFlase_Buffer =0;  
-																TimeCnt_Key =1;
+																TimeCnt_Key =0;
 																
 																 out_pauseflag =1;
 																 
@@ -434,64 +445,64 @@ unsigned int Pause_Process()
 													             break;
 										                  	}
 
-
-														  if(Key&Key_True_False_Temp)
-														  	{
-			                                                   Key_True_False_Temp =0;
-															   TimeCnt_Key =0;
-
-														  	}
+//
+//														  if(Key&Key_True_False_Temp)
+//														  	{
+//			                                                   Key_True_False_Temp =0;
+//															   TimeCnt_Key =0;
+//
+//														  	}
 										
 										        	}
 				  	                             
 				  	                              Key =0;	 
 
-												 if(TimeCnt_Key<C_1s_Pause)
-												 	{
-			                                           if((Key_TrueFlase_Buffer + temp) == (Key_True+Key_False))
-			                                           	{
-
-			                                                  temp =0;
-			                                                  out_pauseflag =1;
-															  break;
-
-
-			                                           	}
-
-
-												 	}
-			                                  if(temp&(Key_True|Key_False))
+//												 if(TimeCnt_Key<C_1s_Pause)
+//												 	{
+//			                                           if((Key_TrueFlase_Buffer + temp) == (Key_True+Key_False))
+//			                                           	{
+//
+//			                                                  temp =0;
+//			                                                  out_pauseflag =1;
+//															  break;
+//
+//
+//			                                           	}
+//
+//
+//												 	}
+			                                  if(temp&(Key_True|Key_False))//有按下
 			                                  	{
 			                                      Key_TrueFlase_Buffer = temp;
 												  TimeCnt_Key =0;
 
 			                                  	}
-											  else if(temp&(Key_Blue|Key_Orange|Key_Pink|Key_Purple|Key_Yellow))							
-											  	{
-
-												        Key_Buffer&=~temp;
-			                                            out_pauseflag =1;
-														break;
-
-											  	}
+//											  else if(temp&(Key_Blue|Key_Orange|Key_Pink|Key_Purple|Key_Yellow))							
+//											  	{
+//
+//												        Key_Buffer&=~temp;
+//			                                            out_pauseflag =1;
+//														break;
+//
+//											  	}
 			                                  
 												
 
 										  	}
 
 
-								            if(Key_TrueFlase_Buffer)
-								        	{
-
-								                 if(TimeCnt_Key>=C_1s_Pause)
-								                 	{
-								                 		Pressflag&=~Key_TrueFlase_Buffer;//抬起无效
-								                 	   out_pauseflag =1;
-													   break;
-
-								                 	}
-
-								        	}
+//								            if(Key_TrueFlase_Buffer)
+//								        	{
+//
+//								                 if(TimeCnt_Key>=C_1s_Pause)
+//								                 	{
+//								                 		Pressflag&=~Key_TrueFlase_Buffer;//抬起无效
+//								                 	   out_pauseflag =1;
+//													   break;
+//
+//								                 	}
+//
+//								        	}
 
 //										   if((Key_True_False_Temp)&&(TimeCnt_Key>=C_2S))
 //										   	{
@@ -1182,6 +1193,7 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
      	 	
      	 	
      	 	Clean_LFX_Led();
+     	 	Clean_LFX_Color();
             Clean_Led_Color();
      	 	
      	    BlinkFlag_Data=0;
@@ -1194,13 +1206,17 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 	     	     while(temp!=0)
 	     	     { 
 		     	    
-		     	    temp1 = Get_Firstcnt_From_Play(temp);
+		     	    temp1 = Get_Firstcolor_From_Play(temp);
 				    temp&=~BitMap[temp1];	
 				    LFX_Led_Color[j%2] = temp1;
 				   
-					   if((G_Sensor_Status)&&((G_Sensor_Status&(~G_SixDir))==0)) 
+				     if(G_Sensor_Status==G_SixDir)
+				       {
+				       	    LFX_Led[(j++)%2] =All_Led_data;//
+				       }
+					   else if((G_Sensor_Status)&&((G_Sensor_Status&(~G_SixDir))==0)) 
 					   {
-						    led_temp = Get_Firstcnt_From_Play(G_Sensor_Status);// G_Sensor_Status为0，则指向UP LED
+						    led_temp = Get_Firstcolor_From_Play(G_Sensor_Status);// G_Sensor_Status为0，则指向UP LED
 						    LFX_Led[(j++)%2] =Led_Data_Play[led_temp];
 					   }	
 					    else

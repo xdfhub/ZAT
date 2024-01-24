@@ -795,10 +795,12 @@ F_GotoSleep:
 //	jnz ?L_WakeupIODelay
 ////
 
-  //  r3 =0x027f////  给Wakeup_IO_Temp 初始值
+    r5 =20////  给Wakeup_IO_Temp 初始值
+    
+L_CheckWakeupIOSet:    
 	r4 = 0
-	r2 = 0x4000
-?L_CheckWakeupIO:
+	r2 = 0xf000//4000
+L_CheckWakeupIO:
 	r1 = C_Watchdog_Clear
 	[P_Watchdog_Clear] = r1
 	
@@ -831,14 +833,17 @@ F_GotoSleep:
 	
 	r2-= 1
 	jz ?L_CheckIO
-	jmp ?L_CheckWakeupIO
+	jmp L_CheckWakeupIO
 
 ?L_CheckIO:
-	cmp r4,0x1500
-	ja  wakeupsucess
+	cmp r4,0xa000//1500
+	ja  cmptime //wakeupsucess
 	pc = L_Sleep
 	
-	
+cmptime:
+      r5-=1
+ 	jz  ?wakeupsucess
+	jmp L_CheckWakeupIOSet    	
 //?L_ReWait1:
 //	r3 = C_Watchdog_Clear
 //	[P_Watchdog_Clear] = r3
@@ -853,7 +858,7 @@ F_GotoSleep:
 //	jnz ?L_WaitKeyRelease1
 	
 //	call _SP_RampUpDAC1
-wakeupsucess:	 	
+?wakeupsucess:	 	
 retf
 .endp
 

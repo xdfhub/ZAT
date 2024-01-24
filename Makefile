@@ -1,6 +1,6 @@
 #####################################################################
 #																	 
-#	Created by u'nSP IDE V4.0.6		15:42:37	01/08/24
+#	Created by u'nSP IDE V4.0.6		17:38:43	01/23/24
 #
 #####################################################################
 
@@ -121,7 +121,7 @@ OBJFILES	= \
 "$(OUTDIR)\ROM_ZAT001A_V_bin.res": "D:\Prj_GPCE3400\ZAT001A\data\Link_data\ROM_ZAT001A_V.bin"
 	$(RESC) "D:\Prj_GPCE3400\ZAT001A\data\Link_data\ROM_ZAT001A_V.bin" "$(OUTDIR)\ROM_ZAT001A_V_bin.res" RES_ROM_ZAT001A_V_BIN 
 
-"$(OUTDIR)\main.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\main.c" ".\GPCE1_CE3.h" ".\Glob.h" ".\voice_A18.h" ".\datatype.h" ".\Enable.h" ".\Color.h" ".\GPCE1_CE3_BODY.h" ".\Table.h" "..\Include\System.h" "..\Include\SACM.h" 
+"$(OUTDIR)\main.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\main.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\main.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/main.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\main.asm" 
@@ -129,34 +129,34 @@ OBJFILES	= \
 "$(OUTDIR)\main.obj": "$(OUTDIR)\main.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\main.obj" "$(OUTDIR)\main.asm" 
 
-"$(OUTDIR)\isr.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\isr.asm" ".\GPCE1_CE3.inc" ".\Enable.inc" ".\GPCE1_CE3_BODY.inc" "..\Include\A1800.inc" "..\Include\A3400Pro.inc" "..\Include\MS02.inc" 
+"$(OUTDIR)\isr.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\isr.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\isr.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\isr.asm" 
 
 "$(OUTDIR)\Resource.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Resource.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\Resource.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Resource.asm" 
 
-"$(OUTDIR)\BootCode_User.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\BootCode_User.asm" "GPCE1_CE3.inc" 
+"$(OUTDIR)\BootCode_User.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\BootCode_User.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\BootCode_User.obj" "D:\Prj_GPCE3400\ZAT001A\soft\Include\BootCode_User.asm" 
 
-"$(OUTDIR)\ORAM_Arrangement.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\ORAM_Arrangement.asm" "GPCE1_CE3.inc" 
+"$(OUTDIR)\ORAM_Arrangement.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\ORAM_Arrangement.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\ORAM_Arrangement.obj" "D:\Prj_GPCE3400\ZAT001A\soft\Include\ORAM_Arrangement.asm" 
 
-"$(OUTDIR)\SACM_A1800_User.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\SACM_A1800_User.asm" "D:\Prj_GPCE3400\ZAT001A\soft\Include\A1800.inc" "GPCE1_CE3.inc" 
+"$(OUTDIR)\SACM_A1800_User.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\SACM_A1800_User.asm" "D:\Prj_GPCE3400\ZAT001A\soft\Include\A1800.inc" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\SACM_A1800_User.obj" "D:\Prj_GPCE3400\ZAT001A\soft\Include\SACM_A1800_User.asm" 
 
-"$(OUTDIR)\system.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\system.asm" "GPCE1_CE3.inc" 
+"$(OUTDIR)\system.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\system.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\system.obj" "D:\Prj_GPCE3400\ZAT001A\soft\Include\system.asm" 
 
-"$(OUTDIR)\flash.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\flash.asm" ".\GPCE1_CE3.inc" ".\GPCE1_CE3_BODY.inc" 
+"$(OUTDIR)\flash.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\flash.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\flash.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\flash.asm" 
 
-"$(OUTDIR)\System_2.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\System_2.asm" ".\GPCE1_CE3.inc" ".\GPCE1_CE3_BODY.inc" 
+"$(OUTDIR)\System_2.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\System_2.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\System_2.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\System_2.asm" 
 
-"$(OUTDIR)\LED_Drive.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\LED_Drive.asm" ".\GPCE1_CE3.inc" ".\Enable.inc" ".\GPCE1_CE3_BODY.inc" 
+"$(OUTDIR)\LED_Drive.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\LED_Drive.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\LED_Drive.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\LED_Drive.asm" 
 
-"$(OUTDIR)\Play_Speech.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Play_Speech.c" ".\Glob.h" ".\voice_A18.h" ".\GPCE1_CE3.h" ".\datatype.h" ".\Color.h" ".\Table.h" ".\GPCE1_CE3_BODY.h" "..\Include\SACM.h" 
+"$(OUTDIR)\Play_Speech.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Play_Speech.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\Play_Speech.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/Play_Speech.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\Play_Speech.asm" 
@@ -164,10 +164,10 @@ OBJFILES	= \
 "$(OUTDIR)\Play_Speech.obj": "$(OUTDIR)\Play_Speech.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\Play_Speech.obj" "$(OUTDIR)\Play_Speech.asm" 
 
-"$(OUTDIR)\Key_server.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Key_server.asm" ".\GPCE1_CE3.inc" ".\GPCE1_CE3_BODY.inc" 
+"$(OUTDIR)\Key_server.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Key_server.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\Key_server.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Key_server.asm" 
 
-"$(OUTDIR)\Sleep.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Sleep.c" ".\Glob.h" ".\GPCE1_CE3.h" ".\Table.h" ".\Color.h" ".\GPCE1_CE3_BODY.h" 
+"$(OUTDIR)\Sleep.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Sleep.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\Sleep.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/Sleep.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\Sleep.asm" 
@@ -175,7 +175,7 @@ OBJFILES	= \
 "$(OUTDIR)\Sleep.obj": "$(OUTDIR)\Sleep.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\Sleep.obj" "$(OUTDIR)\Sleep.asm" 
 
-"$(OUTDIR)\G_Sensor.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\G_Sensor.c" ".\G_sensor.h" ".\Glob.h" ".\voice_A18.h" ".\GPCE1_CE3.h" ".\datatype.h" ".\G_Sensor_const.h" ".\Enable.h" ".\Table.h" ".\Color.h" ".\GPCE1_CE3_BODY.h" 
+"$(OUTDIR)\G_Sensor.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\G_Sensor.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\G_Sensor.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/G_Sensor.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\G_Sensor.asm" 
@@ -199,7 +199,7 @@ OBJFILES	= \
 "$(OUTDIR)\MC3416_I2C.obj": "$(OUTDIR)\MC3416_I2C.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\MC3416_I2C.obj" "$(OUTDIR)\MC3416_I2C.asm" 
 
-"$(OUTDIR)\Algorithm.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Algorithm.c" ".\Glob.h" ".\voice_A18.h" ".\GPCE1_CE3.h" ".\datatype.h" ".\G_Sensor_const.h" ".\Table.h" ".\Color.h" ".\GPCE1_CE3_BODY.h" 
+"$(OUTDIR)\Algorithm.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Algorithm.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\Algorithm.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/Algorithm.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\Algorithm.asm" 
@@ -207,7 +207,7 @@ OBJFILES	= \
 "$(OUTDIR)\Algorithm.obj": "$(OUTDIR)\Algorithm.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\Algorithm.obj" "$(OUTDIR)\Algorithm.asm" 
 
-"$(OUTDIR)\AntiCrack.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\AntiCrack\AntiCrack.c" ".\AntiCrack\AntiCrack.h" "GPCE1_CE3.h" "Glob.h" "..\Include\datatype.h" 
+"$(OUTDIR)\AntiCrack.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\AntiCrack\AntiCrack.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\AntiCrack.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/AntiCrack/AntiCrack.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\AntiCrack.asm" 
@@ -215,13 +215,13 @@ OBJFILES	= \
 "$(OUTDIR)\AntiCrack.obj": "$(OUTDIR)\AntiCrack.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\AntiCrack.obj" "$(OUTDIR)\AntiCrack.asm" 
 
-"$(OUTDIR)\SPI_Flash_CE3.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\SPI_Flash_CE3.asm" "GPCE1_CE3.inc" 
+"$(OUTDIR)\SPI_Flash_CE3.obj": "D:\Prj_GPCE3400\ZAT001A\soft\Include\SPI_Flash_CE3.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\SPI_Flash_CE3.obj" "D:\Prj_GPCE3400\ZAT001A\soft\Include\SPI_Flash_CE3.asm" 
 
-"$(OUTDIR)\CheckSum_CE3400.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\TestModel\CheckSum_CE3400.asm" "GPCE1_CE3.inc" 
+"$(OUTDIR)\CheckSum_CE3400.obj": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\TestModel\CheckSum_CE3400.asm" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\CheckSum_CE3400.obj" "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\TestModel\CheckSum_CE3400.asm" 
 
-"$(OUTDIR)\TestBondingC.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\TestModel\TestBondingC.c" ".\TestModel\TestBondingC.h" "GPCE1_CE3.h" 
+"$(OUTDIR)\TestBondingC.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\TestModel\TestBondingC.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\TestBondingC.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/TestModel/TestBondingC.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\TestBondingC.asm" 
@@ -229,7 +229,7 @@ OBJFILES	= \
 "$(OUTDIR)\TestBondingC.obj": "$(OUTDIR)\TestBondingC.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\TestBondingC.obj" "$(OUTDIR)\TestBondingC.asm" 
 
-"$(OUTDIR)\LED.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\LED.c" ".\GPCE1_CE3.h" ".\datatype.h" ".\Color.h" ".\Enable.h" ".\GPCE1_CE3_BODY.h" 
+"$(OUTDIR)\LED.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\LED.c" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\LED.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/LED.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\LED.asm" 
