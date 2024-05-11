@@ -38,14 +38,27 @@
 
 
 
+//right hand
+/*
+#define G_X_A   G_Hit//G_Right//值增加方向
+#define G_X_M   G_Back//G_Left//值减少方向
 
-#define G_X_A   G_Right//值增加方向
-#define G_X_M   G_Left//值减少方向
-
-#define G_Y_A    G_Hit
-#define G_Y_M    G_Back
+#define G_Y_A    G_Left//G_Hit
+#define G_Y_M    G_Right//G_Back
 
 #define G_Z_A   G_UP
-#define G_Z_M   G_Down
+#define G_Z_M   G_Down*/
+
+
+///////////////////////////////////////////////////////////
+
+extern unsigned int  G_X_A;//G_Right//值增加方向
+extern unsigned int  G_X_M;//G_Left//值减少方向
+
+extern unsigned int  G_Y_A;//G_Hit
+extern unsigned int  G_Y_M;//G_Back
+
+extern unsigned int   G_Z_A;
+extern unsigned int   G_Z_M;
 
 #endif

@@ -167,7 +167,7 @@ _IO_init:.proc
 	[P_IOA_Dir] = R1;
 
 	
-	r1 = 0x0F//0x0000 20130701 xiang
+	r1 = 0x1F//0x0000 20130701 xiang
 	[P_IOB_Buffer] = r1
 		
 	r1 = 0x000 //0x0010  20130701 xiang
@@ -222,7 +222,7 @@ _IO_init_Wakeup:.proc
     [P_IOB_Dir] = R1;
     [P_IOB_Attrib] = R1;
 		
-	r1 = 0x00f//0x0000 20130701 xiang
+	r1 = 0x01f//0x0000 20130701 xiang
 
 	[P_IOB_Buffer] = r1
 	

@@ -3,33 +3,18 @@
 #include "Color.h"
 #include "Enable.h"
 
-#define LED1_R (1<<2)
-#define LED1_G (1<<1)
-#define LED1_B (1)
-
-#define LED2_R (1<<5)
-#define LED2_G (1<<4)
-#define LED2_B (1<<3)
-
-#define LED3_R (1<<8)
-#define LED3_G (1<<7)
-#define LED3_B (1<<6)
-
-#define LED4_R (1<<11)
-#define LED4_G (1<<10)
-#define LED4_B (1<<9)
 
 #define C_NumHz  10//5
 #define C_PWM_Cnt_Max (255/C_NumHz)//(255/5)
 
-extern enum LED_Color;
+//extern enum LED_Color;
 extern unsigned LED_Cnt;
 extern  const unsigned BitMap[];
 //unsigned  int ChangeColorFlag =0;
 
-#define C_Color_NULL 9
-//enum LED_Color{Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White};
-const Color_Table[10][3]=
+#define C_Color_NULL 22
+//enum LED_Color{Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White,Pink};
+const Color_Table[23][3]=
 {
 
 	{255/C_NumHz,0,0},	    //{255,0,0},	    //Red
@@ -41,6 +26,19 @@ const Color_Table[10][3]=
 	{128/C_NumHz,0,128/C_NumHz},	//{128,0,128},	//Purple
 	{128/C_NumHz,128/C_NumHz,128/C_NumHz},  //{128,128,128},	//Grey
 	{255/C_NumHz,255/C_NumHz,255/C_NumHz},   //{255,255,255}   //white	
+	{255/C_NumHz,192/C_NumHz,203/C_NumHz},   //{255,255,255}   //pink
+	{220/C_NumHz,20/C_NumHz,60/C_NumHz}, 
+	{0/C_NumHz,100/C_NumHz,0/C_NumHz}, 
+	{47/C_NumHz,79/C_NumHz,79/C_NumHz}, 
+	{119/C_NumHz,136/C_NumHz,153/C_NumHz}, 
+	{75/C_NumHz,0/C_NumHz,130/C_NumHz}, 
+	{25/C_NumHz,25/C_NumHz,112/C_NumHz}, 
+	{222/C_NumHz,184/C_NumHz,135/C_NumHz}, 
+	{95/C_NumHz,158/C_NumHz,160/C_NumHz}, 
+	{0/C_NumHz,0/C_NumHz,205/C_NumHz}, 
+	{72/C_NumHz,61/C_NumHz,139/C_NumHz}, 
+	{139/C_NumHz,69/C_NumHz,19/C_NumHz}, 
+	{85/C_NumHz,107/C_NumHz,47/C_NumHz}, 
 	{0,0,0}//нчи╚	   C_Color_NULL  		
 };
 
@@ -105,7 +103,7 @@ void Clean_Led_Color()
 	   LED1_RGB[i]	=0;
 	   LED2_RGB[i]	=0;
 	   LED3_RGB[i]	=0;
-	   LED4_RGB[i++]	=0;
+	   LED4_RGB[i++] =0;
 	}
 	
 	

@@ -52,13 +52,27 @@ typedef  struct
 	unsigned int firstFlag_23b ;//=0;
 	unsigned int Mode ;//=0;
 	unsigned int MissionZ_flag;
-	unsigned int X;
-	unsigned int Y;
-	unsigned int Z;
+	unsigned int X;//不用写入flash
+	unsigned int Y;//不用写入flash
+	unsigned int Z;//不用写入flash
 }Mem_data;
 
 
-typedef enum {Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White,Color_NULL}LED_Color;
+typedef enum {Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White,Pink,
+Crimsom            ,
+DarkGreen          ,
+DarkSlateGrey      ,
+LightSlateGrey     ,
+Indigo             ,
+MidnightBlue       ,
+BrulyWood          ,
+CadetBlue          ,
+MediumBlue         ,
+DarkSlateBlue      ,
+SaddleBrow         ,
+OliveDrab       ,   
+
+Color_NULL}LED_Color;
 
 
 

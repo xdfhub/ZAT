@@ -26,17 +26,17 @@
 
 
 
-#define T_Mem_data_H  0x3f
+#define T_Mem_data_H  0x7f
 #define T_Mem_data_L  0xC000
 
 
-#define T_MissionSucess_H  0x3f
+#define T_MissionSucess_H  0x7f
 #define T_MissionSucess_L  0xd000
 
-#define T_PokLQInColl_H  0x3f
+#define T_PokLQInColl_H  0x7f
 #define T_PokLQInColl_L  0xe000
 
-#define T_PokCatch_H  0x3f
+#define T_PokCatch_H  0x7f
 #define T_PokCatch_L  0xf000
 
 
@@ -220,9 +220,12 @@
 
 
 
-//MOV   跟key位 区分开
+//MOV   跟key位 区分开??
 #define C_MovSucess 0x1000
 #define C_MovFail   0x2000
+#define TimeOver    0x8000//
+
+#define C_MovSucessStatus 0x1fff//包含C_MovSucess 或各动作
 
 
 //movetext
@@ -243,7 +246,7 @@
 #define Key_Purple 0x08//purple
 #define Key_Yellow 0//0x10//blue
 #define Key_True   0x01
-#define Key_False  0x40
+#define Key_False  0x10
 
 //#define Key_Pause  0x80
 
@@ -254,15 +257,15 @@
 
 #define All_Led_data 0x000f
 
-
-#define LED_Hit   Led4
-#define LED_Left  Led1
-#define LED_Back  Led2
-#define LED_Right Led3
-
-
-#define LED_UP    LED_Hit
-#define LED_Down  LED_Back
+//////right hand
+//#define LED_Hit   Led3
+//#define LED_Left  Led4
+//#define LED_Back  Led1
+//#define LED_Right Led2
+//
+//
+//#define LED_UP    LED_Hit
+//#define LED_Down  LED_Back
 
 //#define LED_Shake 0x10
 #define LED_Up_cnt    0
@@ -347,7 +350,7 @@
 #define C_SelectQuestion_Round3        0xF007  
 #define C_KeyOFF				       			  0xF008  	   
 
-#define TimeOver       0xf009
+
 
 
 #define C_Demo_Mode    0xf010

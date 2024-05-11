@@ -9,9 +9,9 @@
 #define T_Serie_MovAccessible           3000
 
 
-#define T_Mission_name                   4000
-#define T_Intro1                         4050
-#define T_Intro2                         4250
+#define T_Mission_name                   1000
+#define T_Intro1                         1100
+#define T_Intro2                         1400
 #define T_Intro3                         4450
 #define T_Intro4                         4650
 #define T_Intro5                         4850
@@ -65,17 +65,23 @@
 #define T_Move21Text2                     14450
 #define T_Move22Text1                     14650
 #define T_Move22Text2                     14850
-#define T_Move23Text1                     15250
-#define T_Move23Text2                     15450
-
-
+#define T_Move23Text1                     15050
+#define T_Move23Text2                     15250
+#define T_Move_Data                       15450
+#define T_End1                            17450
+#define T_End2                            18450
+#define T_End3                            19450
+#define T_End4                            20450
+#define T_End5                            21450
+#define T_End6                            22450
+#define T_End7                            23450
 
 //#define C_T_EndMission                 4500
 //#define C_T_Inbetween                  8500
-#define C_T_IntroM                     12500
+//#define C_T_IntroM                     12500
 //#define C_T_Caught                     16500
 //#define C_T_Found                      20500
-#define  C_T_FunFact                   24500
+//#define  C_T_FunFact                   24500
 //#define C_T_Special                    28500
 
 

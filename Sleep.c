@@ -96,7 +96,7 @@ void Goto_Sleep()
 //    GetMode();
     
      Test_Assembly(); 
-     TestBonding();
+    // TestBonding();
      Time_init();
     
    

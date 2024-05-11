@@ -1646,12 +1646,9 @@ LME11:
 	// Program Unit: IIC_MasterReadXYZAcc
 .public	_IIC_MasterReadXYZAcc
 _IIC_MasterReadXYZAcc: .proc	
-	     .stabn 0xa6,0,0,3
-	// databyte = 0
-	// databyte_status = 1
-	// databyte_Instr = 2
-	// old_frame_pointer = 3
-	// return_address = 4
+	     .stabn 0xa6,0,0,0
+	// old_frame_pointer = 0
+	// return_address = 1
 // 343  
 // 344  
 // 345  uint8 SR_Data=0;		//SR数据。
@@ -1661,78 +1658,59 @@ _IIC_MasterReadXYZAcc: .proc
 LM125:
 	     .stabn 68,0,347,LM125-_IIC_MasterReadXYZAcc
 BB1_PU11:	// 0x305
-// BB:1 cycle count: 23
+// BB:1 cycle count: 16
 	     push BP to [SP]          	// [0:347]  
-	     SP = SP - 3              	// [2:347]  
-	     BP = SP + 1              	// [3:347]  
-LBB8:
-// 348  	uint8 databyte=0,databyte_status=0,databyte_Instr=0; //读到的数据
-
-LM126:
-	     .stabn 68,0,348,LM126-_IIC_MasterReadXYZAcc
-	     R4 = 0                   	// [5:348]  
-	     [BP + 0] = R4            	// [6:348]  databyte
-	     R4 = 0                   	// [7:348]  
-	     [BP + 1] = R4            	// [8:348]  databyte_status
-	     R4 = 0                   	// [9:348]  
-	     [BP + 2] = R4            	// [10:348]  databyte_Instr
+	     BP = SP + 1              	// [2:347]  
 // 352  //		return 0;
 // 353  //	}
 // 354  //	R_ReadG_Flag=0;	//reset
 // 355  	
 // 356  	if(*pP_IIC_Data&INT)	//没有产生中断。
 
-LM127:
-	     .stabn 68,0,356,LM127-_IIC_MasterReadXYZAcc
-	     R3 = 12292               	// [11:356]  
-	     R4 = 0                   	// [13:356]  
-	     DS = R4                  	// [14:356]  
-	     R4 = DS:[R3]             	// [15:356]  
-	     R4 = R4 & 4              	// [17:356]  
-	     cmp R4, 0                	// [18:356]  
-	     je L_11_1                	// [19:356]  
-BB2_PU11:	// 0x317
-// BB:2 cycle count: 7
+LM126:
+	     .stabn 68,0,356,LM126-_IIC_MasterReadXYZAcc
+	     R3 = 12292               	// [4:356]  
+	     R4 = 0                   	// [6:356]  
+	     DS = R4                  	// [7:356]  
+	     R4 = DS:[R3]             	// [8:356]  
+	     R4 = R4 & 4              	// [10:356]  
+	     cmp R4, 0                	// [11:356]  
+	     je L_11_1                	// [12:356]  
+BB2_PU11:	// 0x310
+// BB:2 cycle count: 6
 // 357  	{
 // 358  		return 0;
 
-LM128:
-	     .stabn 68,0,358,LM128-_IIC_MasterReadXYZAcc
+LM127:
+	     .stabn 68,0,358,LM127-_IIC_MasterReadXYZAcc
 	     R1 = 0                   	// [0:358]  
-	     SP = SP + 3              	// [1:358]  
-	     pop BP, PC from [SP]     	// [2:358]  
-L_11_1:	// 0x31a
+	     pop BP, PC from [SP]     	// [1:358]  
+L_11_1:	// 0x312
 // BB:3 cycle count: 9
 // 359  	}
 // 360      msleep(20);
 
-LM129:
-	     .stabn 68,0,360,LM129-_IIC_MasterReadXYZAcc
+LM128:
+	     .stabn 68,0,360,LM128-_IIC_MasterReadXYZAcc
 	     SP = SP - 1              	// [0:360]  
 	     R3 = 20                  	// [1:360]  
 	     R4 = SP + 1              	// [2:360]  
 	     [R4] = R3                	// [4:360]  
 	     call _Delay3xus          	// [6:360]  Delay3xus
-BB4_PU11:	// 0x321
+BB4_PU11:	// 0x319
 // BB:4 cycle count: 7
-	     SP = SP + 4              	// [0:360]  
+	     SP = SP + 1              	// [0:360]  
 // 367      
 // 368  //    if(G_Sensor_Status&G_shake) 
 // 369  //        return 1;
 // 370  //    else */
 // 371         return 	0;
 
-LM130:
-	     .stabn 68,0,371,LM130-_IIC_MasterReadXYZAcc
+LM129:
+	     .stabn 68,0,371,LM129-_IIC_MasterReadXYZAcc
 	     R1 = 0                   	// [1:371]  
 	     pop BP, PC from [SP]     	// [2:371]  
-LBE8:
 	.endp	
-	     .stabn 192,0,0,LBB8-_IIC_MasterReadXYZAcc
-	     .stabs "databyte:11",128,0,0,0
-	     .stabs "databyte_status:11",128,0,0,1
-	     .stabs "databyte_Instr:11",128,0,0,2
-	     .stabn 224,0,0,LBE8-_IIC_MasterReadXYZAcc
 LME12:
 	     .stabf LME12-_IIC_MasterReadXYZAcc
 .external _WatchdogClear

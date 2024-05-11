@@ -139,8 +139,9 @@ unsigned int DetectionFlag;
 unsigned int MCollection =0;
 unsigned int OFF_Timeoutcnt =0;
 unsigned int MoveText2_Right =0;
+typedef enum {A_Right,A_Left}Arm_T;
 
-
+Arm_T Arm=A_Right;
 extern unsigned int  Pass_Key_temp;
 extern unsigned TimeCnt;
 extern unsigned gRejectLevel;
@@ -200,6 +201,17 @@ extern unsigned int  LED4_RGB[];
 
 extern unsigned int  LFX_Led[];
 
+
+//extern unsigned int  LED_Hit;
+//extern unsigned int LED_Left;
+//extern unsigned int LED_Back;
+//extern unsigned int LED_Right;
+//
+//
+//extern unsigned int  LED_UP;//LED_Hit;
+//extern unsigned int  LED_Down;//LED_Back;
+
+
 void Ask_Question();
 unsigned Select_Question_Sub3();
 void Add_NA_Question(int);
@@ -243,7 +255,10 @@ typedef void (*Fun)(void);
 //};
 
 
-const unsigned int Led_Data_Play[6]={LED_UP,LED_Down,LED_Left,LED_Right,LED_Hit,LED_Back};
+unsigned int Led_Data_Play[6]={
+//LED_UP,LED_Down,LED_Left,LED_Right,LED_Hit,LED_Back
+0,0,0,0,0,0
+};
 
 
 const unsigned BitMap[] = { 0x0001,0x0002,0x0004,0x0008,0x0010,0x0020,0x0040,0x0080,
@@ -310,13 +325,14 @@ T_Move23Text1,T_Move23Text2
 	
 };
 
-const End_Table[6]={
+const End_Table[7]={
 T_End1,
 T_End2,	
 T_End3,	
 T_End4,	
 T_End5,	
 T_End6,	
+T_End7,	
 };
 
 #ifdef C_debug
@@ -1560,7 +1576,7 @@ unsigned int GameTimeout()
                            MoveOnflag =1;
                            G_Sensor_Status=G_BHIT;
                            
-					       PlayA1800_Elements(A_VLMHTEN_Silent);
+					       PlayA1800_Elements(A_VLMHTEN_TimeOut1);//A_VLMHTEN_Silent
 	 
 	                        temp = Mov_Detected(10*16,0);
 							if(temp==1)//Mov_Detected
@@ -1570,7 +1586,7 @@ unsigned int GameTimeout()
 							   }
 						    else
 						       {  	   
-	                               PlayA1800_Elements(A_VLMHTEN_Bye);
+	                               PlayA1800_Elements(A_VLMHTEN_TimeOut2);
 							   
 							   
 						        }
@@ -2398,7 +2414,7 @@ unsigned int  SelectPokemon(unsigned int Randomflag)
 //ï¿½ï¿½ï¿½ï¿½Wrong MOV in (Mov_Detected)  + timeout in Detection
 
 
-********************************************************************************/
+********************************************************************************
 unsigned int Detection(unsigned int Time_T,unsigned int timeoutplay)
 {
 //      unsigned int temp;
@@ -2409,34 +2425,6 @@ unsigned int Detection(unsigned int Time_T,unsigned int timeoutplay)
       unsigned int Led_IO_temp =0;
       
       
- 
-//          BlinkFlag_Data =0;
-//		  Light_all_off();
-//
-//              temp= G_Sensor_Status&0x0f;
-//              if(temp== G_TurnAround)
-//				{
-//				  //PlayA1800_Other(Serie_Up+4);
-//				  BlinkFlag_Data=Led_Data_Play[LED_Right_cnt]|Led_Data_Play[LED_Left_cnt];//Led_ON_Some(Led_Data_Play[LED_Right_cnt]|Led_Data_Play[LED_Left_cnt]);
-//				}
-//	
-//			else
-//				{
-//				 temp = Get_Firstcnt_From_Play(G_Sensor_Status)%5;		
-//				 
-//				 
-//				 if(temp<4)
-//				    BlinkFlag_Data = Led_Data_Play[temp];//Led_ON_Some(Led_Data_Play[temp]);
-//				 else
-//				   {
-//				   	 BlinkFlag_Data = All_Led_data;
-//				   	
-//				   }
-//			    }
-
-
-
-
    while(1)
    	{
 
@@ -2570,60 +2558,7 @@ unsigned int Detection(unsigned int Time_T,unsigned int timeoutplay)
        		              
        		              BlinkFlag_Data =0;
 			              Light_all_off();
-			              
-			              
-/* 			          	 if((FailV2 ==1)&&(FailV==2))
-		  					{
-		  					 
-			  						 Motor_On();//*P_IOB_Buffer|=IO_Motor;
-			  						 delay_time(6); 							
-			  						 Motor_Off();//*P_IOB_Buffer&=~IO_Motor;
-			  					 
-			  						PlayA1800_Other(Serie_Worng3);
-			  						PlayA1800_Elements(Last_VL_Det);
-			  						
-		  					   
-		  					}
-
-
-                           else
-                           	{
-			        
-			              
-			              
-			              
-					             
-		       					  Motor_On();//*P_IOB_Buffer|=IO_Motor;
-								  delay_time(6);							   
-								  Motor_Off();//*P_IOB_Buffer&=~IO_Motor;
-								  
-								  
-			                   MoveOnflag =1;	
-		       				 if(timeoutplay==3)//Envi Mov
-								{
-
-
-
-								  	PlayA1800_Elements(Last_VL_Det);
-		//						  	FirstSPMaskflag =1;
-		//						  	Play_Seq(sp_offset,T_Serie_EnviMov);
-		//						  	FirstSPMaskflag =0;
-								
-
-								}
-		                       else
-		       	                 {
-		     												   	  		
-				                       PlayA1800_Other(Serie_Wrong);
-		       	                 	   PlaySerie_Mov(G_Sensor_Status,0);
-		       	                 	
-		       	                 }
-		       	                 
-		       	               MoveOnflag =0;	  
-       		  	         }
-       	                 
-                       FailV++; */
-                       
+			                             
                        
                        PlayA1800_Elements(Last_VL_Det);
                        timeoutcnt++;
@@ -2642,34 +2577,8 @@ unsigned int Detection(unsigned int Time_T,unsigned int timeoutplay)
        		
        	}
        		
-       		
-       		
-       		
-       		
-       		
-  /*                PlayA1800_Elements(A_VLPTMEN_Slow10);
-				 
-				 PlaySerie_Mov(G_Sensor_Status&0x00ff);
-
-
-		        if(Mov_Detected(10*16,1)==1)
-		     	{					
-		              PlayA1800_Elements(A_SFX_Yes);
-		              BlinkFlag_Data =0;
-					  Light_all_off();
-					  return 1;
-
-
-		     	}
-			   else
-			   	{
-
-                   PlayA1800_Elements(A_SFX_Fail);
-				   PlayA1800_Elements(A_VLPTMEN_Slow20);
-				   //PlayA1800_Elements(A_VLPTMEN_Mid06);
-
-
-			   	} */
+       		 		
+ 
 
        	}
 
@@ -2679,7 +2588,7 @@ unsigned int Detection(unsigned int Time_T,unsigned int timeoutplay)
 
 
 /**************************************************************************
-*******************************************************************************/
+*******************************************************************************
 
 unsigned check_sameMove(unsigned int temp_serie)
 {
@@ -2767,7 +2676,8 @@ unsigned check_sameMove(unsigned int temp_serie)
 
 
 
-
+/*******************************************************************
+***********************************************************************
 ///////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 unsigned int ENVI_MOV()
@@ -3031,7 +2941,8 @@ unsigned int ENVI_MOV()
 
 
 
-
+/************************************************************************
+*************************************************************************
 
 unsigned int  Search()
 {
@@ -3123,91 +3034,6 @@ unsigned int  Search()
    }
 
 
-/////////////////////////////////////////////////////////////////////////////Walk   
-     
-
-
-//	  Speed_pok = GetSpeed(gQuestionIdx); 
-
-
-/*  
-   // G_Sensor_Status=G_Right<<(*P_TimerB_CNTR%2);
-   
-   temp = *P_TimerB_CNTR%3;
-   
-   if(temp ==2)
-      G_Sensor_Status = G_TurnAround;
-  else
-      G_Sensor_Status=G_Right<<(temp);
-   
-  
-    PlaySerie_Mov(G_Sensor_Status);
-
-
-
-  while(1)
-  	{
-
-     	     WatchdogClear();
-	       
-		   if(Get_Key(0))
-			 	 return 0;
-
-
-     if(Detection()==1)
-    	{
-		   SpeedVar++;
-
-            if(SpeedVar>=Speed_pok)
-				break;
-            
-           delay_time(1*16);
-          // G_Sensor_Status=G_Right<<(*P_TimerB_CNTR%2);
-  
-		     temp = *P_TimerB_CNTR%3;
-		   
-		   if(temp ==2)
-		      G_Sensor_Status = G_TurnAround;
-		  else
-		     G_Sensor_Status=G_Right<<(temp);
-     
-     
-           PlayA1800_Other(Serie_Speed+SpeedVar%2);
-           PlaySerie_Mov(G_Sensor_Status);
-    	}
-       else
-       {
-       	
-       	    G_Sensor_Status =0;
-            return 0;
-         
-       }
-
-  	}
-
-
-      FiveSec_En=1;	  
-	  FiveSec_cnt=0;
-	  Time_Countdownflag= 3*16;
-	 while(FiveSec_cnt<Time_Countdownflag)
-	 {
-	 	   WatchdogClear();
-	       
-		   if(Get_Key(0))
-		   {
-		   	
-		   	     FiveSec_En =0;
-			 	 return 0;
-			 	 
-		   }
-		   
-         PlayA1800_Elements(A_SFX_Sonar_3);
-      
-	 }
-	 
-	 FiveSec_En =0;
-
-*/
    BlinkFlag_Data=0;
    Light_all_off();
    
@@ -3608,7 +3434,8 @@ unsigned int  Search()
 
 	return 1;
 }
-
+/************************************************************************
+*************************************************************************
 unsigned int   Catch()
 {
     unsigned int temp;
@@ -4026,9 +3853,6 @@ unsigned int   Catch()
 	  return 1;
 
 }
-
-
-
 
 
 /***********************************************
@@ -7998,7 +7822,7 @@ void Cheater_F()
 
 
 /*****************************************************
-************************************************************/
+************************************************************
 void Play_All_Collection()
 {
    	unsigned i = 0;
@@ -8232,7 +8056,7 @@ void Collection()
 	 MCollection =0;
 }
 /********************************************************
-***************************************************/
+***************************************************
 void  ButtonisPressed()
 {
 	
@@ -8346,7 +8170,7 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
    	    {
    	       if((SACM_A1800_Status() & 0x0001) == 0)
 		   	{
-			   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);		
+//			   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);		
 		   	}
    	    }
    	  
@@ -8461,16 +8285,16 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 											     key_temp =0;
 											     Resumeflag =0;
 											     Key_TrueFlase_Buffer =0; 
-//
-////													if(A1800_Flag)
-////													{  
-////													   SP_RampUpDAC1_Other();
-////													   
-////													   SACM_A1800_Resume();    
-////													}
-//													                                                       
-//                                                  Key_Event = 0x88;	//M++
-//		                                          return Key_Event; 
+
+//													if(A1800_Flag)
+//													{  
+//													   SP_RampUpDAC1_Other();
+//													   
+//													   SACM_A1800_Resume();    
+//													}
+													                                                       
+                                                  Key_Event = 0x88;	//M++
+		                                          return Key_Event; 
 
                                                 
 
@@ -8512,23 +8336,30 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
           	}
 
 
-             if((TwoKeyflag))
+             if((TwoKeyflag&temp))
              	{
-	               if(temp&(Key_True|Key_False))
+	              // if(temp&(Key_True))//Key_False
 	             	{
-	                    Key_TrueFlase_Buffer = temp;				
+	                    Key_TrueFlase_Buffer = temp;
+	                    temp=0;				
 	             	}
 
              	}
-			else  if(temp)//collectionï¿½ï¿½
+			  if(temp)//collectionï¿½ï¿½
 				{
-                       
-
-					   	  Key_Event = temp;//Key_TrueFlase_Buffer;//20160215 xiang
-					  	  Key_TrueFlase_Buffer =0;   
-						 TwoKey_temp =0;
-						 Resumeflag =0;
-                         return Key_Event;
+                     
+                   if((temp&Key_False))//&&(A1800_Flag==0))                      
+                   {
+                   }
+                   else
+                   {  
+			
+						Key_Event = temp;//Key_TrueFlase_Buffer;//20160215 xiang
+						Key_TrueFlase_Buffer =0;   
+						TwoKey_temp =0;
+						Resumeflag =0;
+						return Key_Event;
+                   }
 
 				}
 					
@@ -8614,8 +8445,16 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 		      	 
 		      	 	 
 
-			   if(temp&(Key_True|Key_False))//if(Key_TrueFlase_Buffer) 
+			   if(temp&(Key_False))//if(Key_TrueFlase_Buffer)  Key_True|
 			   	{
+
+
+							
+						Key_Event = temp;//Key_TrueFlase_Buffer;//20160215 xiang
+						Key_TrueFlase_Buffer =0;   
+						TwoKey_temp =0;
+						Resumeflag =0;
+						return Key_Event;
 
 //                   	  if(A1800_Flag)
 //                   	  {  
@@ -8720,7 +8559,7 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 		 	}
           else  if(TwoKey_cnt==2)// 3´Î
            {
-           	      if(TimeCnt_Key>=C_1s_Pause)
+           	    /*   if(TimeCnt_Key>=C_1s_Pause)
            	      {
            	      	    TwoKey_temp =0;//20160323
 						TwoKey_cnt=0;
@@ -8745,20 +8584,8 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 		                        //else 
 		                         // return 0;
                          	}
-//                            else
-//                               {
-//
-//									if(A1800_Flag)
-//									{  
-//									   SP_RampUpDAC1_Other();
-//									   
-//									   SACM_A1800_Resume();    
-//									}
-//
-//
-//
-//                                   } 	
-           	      }
+
+           	      } */
            	
            	
            }
@@ -9823,15 +9650,38 @@ void Rest_Randm()
 		OtherSph_Random_Value[i]=0;
 		i++;
 	}
-
+//		 LED_Hit =  Led3;
+//		 LED_Left = Led4;
+//		 LED_Back =  Led1;
+//		 LED_Right= Led2;
+//		 LED_UP   = Led3;//LED_Hit;
+//		 LED_Down = Led1;//LED_Back;
 	
+ 	Arm = A_Right;//³õÊ¼ÎªÓÒÊÖ
+	G_X_A  = G_Hit;//G_Right//ÖµÔö¼Ó·½Ïò
+	G_X_M  = G_Back;//G_Left//Öµ¼õÉÙ·½Ïò
+	
+	G_Y_A  = G_Left;//G_Hit
+	G_Y_M  =  G_Right;//G_Back
+	
+	G_Z_A =  G_UP;
+	G_Z_M   = G_Down;
+	
+	
+    //Led_Data_Play[6]={LED_UP,LED_Down,LED_Left,LED_Right,LED_Hit,LED_Back};
+	   Led_Data_Play[0]= Led3;//LED_UP;
+	   Led_Data_Play[1]= Led1;//LED_Down;
+	   Led_Data_Play[2]= Led4;//LED_Left;
+	   Led_Data_Play[3]= Led2;//LED_Right;
+	   Led_Data_Play[4]= Led3;//LED_Hit;
+	   Led_Data_Play[5]= Led1;//LED_Back; 
 	
 	
 }
 
 
 /******************************************************************
-*****************************************************************/
+*****************************************************************
 void Play_SerieAcomplished()
 {
 	
@@ -9849,7 +9699,7 @@ void Play_SerieAcomplished()
 
 
 /******************************************************************
-*****************************************************************/
+*****************************************************************
 void Encourage_F()
 {
 
@@ -9921,7 +9771,7 @@ void Encourage_F()
 
 
 /******************************************************************
-*****************************************************************/
+*****************************************************************
 
 void ModeChange()
 {
@@ -10015,7 +9865,7 @@ unsigned  Step1()
 
    	Sleepflag =0;
     Resumeflag =0;
-    TwoKeyflag=Key_True|Key_False;
+    TwoKeyflag=Key_True;
     
    	BlinkFlag_Data = 0;//xiang 20150226
    	CheaterFlag =0;
@@ -10056,7 +9906,7 @@ unsigned  Step1()
     
       
     PlayA1800_Elements(SFX_On);
-     Mem0.Mission_Cur=18;
+//     Mem0.Mission_Cur=18;
    
      return C_SelectMission;
 
@@ -10162,7 +10012,7 @@ void Environment()
 
 
 /******************************************************************
-*********************************************************************/
+*********************************************************************
 void play_Inbetween()
 {
 
@@ -10250,7 +10100,7 @@ void play_Inbetween()
 }
 
 /*******************************************************************
-*******************************************************************/
+*******************************************************************
 
 void Remaining()
 {
@@ -10390,25 +10240,7 @@ unsigned int Inmission()
                    	   
                    	   
                    }
-/*   
-				if(Mem0.Mission_Cur !=3)
-					{
-					   sucessflag =1;
-					   //break;
-					}
-				else
-					{
 
-	                   if(CheckPok_InCollection(1))
-	                   	{
-
-						   sucessflag =1;
-					   	  // break;
-
-	                   	}
-
-
-					}*/
 	        	}
 	
 
@@ -10465,7 +10297,7 @@ unsigned int Inmission()
 
 
 /*******************************************************************
-*******************************************************************/
+*******************************************************************
 void Mission_step2()
 {
 
@@ -10837,62 +10669,6 @@ unsigned int  END_Mission(unsigned sucessflag)
                       Remaining();
 
 
-
-/* 			 temp =GetMission_Type(Mem0.Mission_Cur);
-			
-			if(temp==Specific)
-			  {
-				  play_Inbetween();
-			
-			  }
-			else
-			  {
-			
-			
-					 if(Mem0.Mission_Cur ==0)
-					 {
-					 //	PlayA1800_Elements(A_VLPTMEN_Escape03b);
-						PlayA1800_Elements(B_VLPTMEN_Mid_M1);
-						
-					 }
-					 else if(Mem0.Mission_Cur ==8)
-					  {
-			
-						  PlayA1800_Elements(E_VLNUMENPTM000+(3-Get_PokecatchInMisson()));
-						  PlayA1800_Elements(B_VLPTMEN_Mid_M2);
-			
-					  }
-			
-					 else
-					  {
-						   PlayA1800_Elements(E_VLNUMENPTM000+CheckPok_InCollectiORNocatch(0));
-						   PlayA1800_Elements(B_VLPTMEN_Mid_M3);
-						   
-						   if(temp<10)
-							  PlayA1800_Elements(A_VLPTMEN_Mid_BUG+temp);
-			
-						   //play_Inbetween();
-			
-			
-					  }
-
-				} */
-
-
-		/*	       
-			      if(Mem0.Mission_Cur ==(Mission_Num-1))
-			      {
-			      	   if(CheckPok_InCollection())
-			      	   {
-			      	   	  Key_Event =1;//off
-			      	   	  Rest_MissionSuccess_InCollection();
-			      	   	  Rest_LQA();
-		//	      	   	  R_Envi = C_Special;
-			      	   	  Mem0.Mission_Cur =0;
-			      	   }
-			      	
-			      	
-			      }*/
 	    	}
    	     }
 
@@ -10906,7 +10682,7 @@ unsigned int  END_Mission(unsigned sucessflag)
 }
 
 /*******************************************************************
-*******************************************************************/
+*******************************************************************
 
 
 void MAP()
@@ -10939,7 +10715,7 @@ void MAP()
 
 
 /*******************************************************************
-*******************************************************************/
+*******************************************************************
 void Medals()
 {
      unsigned int temp;
@@ -11247,7 +11023,7 @@ void Medals()
 
 /*******************************************************************
 MissionZero
-**********************************************************************/
+**********************************************************************
 unsigned int MissinZer0()
 {
 
@@ -11636,19 +11412,31 @@ unsigned int MissinZer0()
 	  }
 	
 }
-
+/***********************************************************************
+*************************************************************************/
 unsigned int CheckIntro()
 {
    unsigned long Addr;
+   
+   unsigned int num =3;
+   unsigned int  T_TableH=0;
 
+      
    if(Mem0.X>=10)
      return 0;
 
-     Addr = Mem0.Mission_Cur * 3 * 2 + Intro_Table[Mem0.X+1] ;//Table; Num
+      T_TableH = Intro_Table[Mem0.X+1];
+       
+      if((T_TableH==T_Intro2)||(T_TableH==T_Intro1))
+           num =4;
+
+
+     Addr = Mem0.Mission_Cur * num * 2 +T_TableH;// Intro_Table[Mem0.X+1] ;//Table; Num
 
      return SPI_ReadAWord_Big(Addr);
 	
 }
+
 
 
 /*******************************************************************
@@ -11679,6 +11467,7 @@ unsigned int Mission()
 
     BlinkFlag_Data =0;
     Light_all_off();
+	
 
 	
    if(Mem0.Mission_Cur>=30)
@@ -11692,6 +11481,7 @@ unsigned int Mission()
           SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
             __asm("INT FIQ,IRQ");  
    	
+   	  PlayA1800_Elements(SFX_Off);
       return C_Off_Mode;
       
    }
@@ -11711,7 +11501,9 @@ unsigned int Mission()
 	      WatchdogClear();
 	       
 		    if(Get_Key(0,0))
+		    {
 			 	  return C_Off_Mode;
+		    }
 				 	  
 
       if(TimeTatleCnt==0)
@@ -11726,10 +11518,66 @@ unsigned int Mission()
        temp_TimeTatleCnt = TimeTatleCnt;
    for(;Mem0.X<11;Mem0.X++)
    {
-   	
-  
-       Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
+   	    
+       if((Mem0.Mission_Cur ==0)&&(Mem0.X==3))//SetArm
+       {
+       	   //SetArm();
+       	   
+       	   while(1)
+       	   {
+       	     Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
+       	     
+       	     G_Sensor_Status =G_UP| G_Down;
+       	     temp = WaitAction(5*16,0);
+       	     if(temp==G_UP)//Mov_Detected
+       	        {
+       	             Arm= A_Right;	
+       	             PlayA1800_Elements(SFX_Start); 
+       	             break;
+       	        }
+       	      else  if(temp==G_Down)
+       	        {
+       	        	 Arm= A_Left;	  
+       	        	 
+                    G_X_A  = G_Back;//G_Hit;////ÖµÔö¼Ó·½Ïò
+                    G_X_M  = G_Hit;//G_Back;////Öµ¼õÉÙ·½Ïò
 
+					G_Y_A  = G_Right;//G_Left;//G_Hit
+					G_Y_M  = G_Left;// G_Right;//G_Back
+					
+					G_Z_A =  G_UP;
+					G_Z_M   = G_Down;
+					
+//					LED_Hit =  Led1;
+//					LED_Left = Led2;
+//					LED_Back =  Led3;
+//					LED_Right= Led4;
+//					
+//					
+//					LED_UP   = LED_Hit;//LED_Hit;
+//					LED_Down = LED_Back;//LED_Back;					
+					
+                   Led_Data_Play[0]= Led1;//LED_UP;
+                   Led_Data_Play[1]= Led3;//LED_Down;
+                   Led_Data_Play[2]= Led2;//LED_Left;
+                   Led_Data_Play[3]= Led4;//LED_Right;
+                   Led_Data_Play[4]= Led1;//LED_Hit;
+                   Led_Data_Play[5]= Led3;//LED_Back; 
+                   
+                    PlayA1800_Elements(SFX_Start); 
+                    break;     	        	 
+       	        	 
+       	        }
+       	      else	
+       	        {
+       	        	 //Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
+       	        }   
+       	      G_Sensor_Status =0;  
+       	   }
+       }
+      else
+          Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
+          
        if(CheckIntro()==0)
 	       break;
 
@@ -11749,7 +11597,7 @@ unsigned int Mission()
 		BlinkFlag_Data =All_Led_data;
 		 
 		 
-		if(WaitAction(6*16,0)==1)//Mov_Detected
+		if(WaitAction(6*16,0)==C_MovSucess)//Mov_Detected
 		   {
 		   	   PlayA1800_Elements(SFX_Start); 
                 Mem0.Y =0;
@@ -11872,7 +11720,7 @@ unsigned int Mission()
 //							   Light_all_off();		
 
 						 	 	 	  
-						 	 if(WaitAction(24,status)==1)
+						 	 if(WaitAction(24,status)==C_MovSucess)
 						 	 {
 						 	 	status=2;
 						 	 	PlayA1800_ElementsInit(SFX_Shake);
@@ -11941,7 +11789,7 @@ unsigned int Mission()
 					}
                   
                    G_Sensor_Status&=~G_BHIT; 
-                   if( temp==1)
+                   if( temp&C_MovSucessStatus)
 				   {
 					   timeovercnt =0;
 				       PlayA1800_Elements(SFX_Good);
@@ -12001,7 +11849,7 @@ unsigned int Mission()
        Mem0.Y++;
     }
 	
-      while(Mem0.Z<6)     
+      while(Mem0.Z<7)     
 	  {
        Play_Seq(Mem0.Mission_Cur,End_Table[Mem0.Z]); 
        Mem0.Z++;
@@ -12015,9 +11863,17 @@ unsigned int Mission()
    	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
       SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
         __asm("INT FIQ,IRQ");  
-            
+   
+   if(Mem0.Mission_Cur>=30)
+   {
+   	    PlayA1800_Elements(SFX_Off);
+   	     return C_Off_Mode;
+   } 
+  else
+  {          
       delay_time(2*16);
      return C_SelectMission;
+   }
 /* 
 	if(CheckPokeCatchEquMission()==1)
 	{
@@ -13200,7 +13056,8 @@ go_on_sleep_sw:
 //}
 
 
-
+/*******************************************************************
+***********************************************************************
 void PlaySerie_Wrong2(unsigned int temp_Sensor_Status)
 {
     unsigned int temp;
@@ -13363,10 +13220,10 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
 {
 	unsigned i;
 	unsigned int Nb_InCollection=0;
-//	unsigned k;
-//	unsigned int entertesting =0;
+	unsigned key_step=0;
+	unsigned int temp =0;
 
-	if(*P_IOB_Data&0x0001)
+	if(*P_IOB_Data&0x0011)
 	{
 		return 0;
 	}
@@ -13374,7 +13231,7 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
 	i = 0xb00;
 	while(i)
 	{
-		if(*P_IOB_Data&0x0001)
+		if(*P_IOB_Data&0x0011)
 		{
 			return 0;
 		}
@@ -13386,29 +13243,7 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
 		Delay_Xms_PowerOn(10);
 	}	
 	
-	
-	
-//	i = 0x3000;
-//	while(i)
-//	{
-//		if(*P_IOA_Data&0x0001)
-//		{
-//			i--;
-//		}
-//		else
-//		{
-//			i=0x3000;
-//		}
-//		System_ServiceLoop();
-//	}	
-//	System_Initial();			// System initial
-	
-//     *P_INT_Ctrl&=~C_IRQ7_16Hz;//ï¿½ï¿½É¨ï¿½ï¿½ switch
-//     *P_INT_Status = 0xffff;
-	
-    // Rest_MissionSuccess_InCollection();
-    // Rest_Pokecatch_Pok();
-     
+/* 
      	i = 0;///////////////!!!!!!!!!!!!!!!!!!
 		while(i<C_MissionRAM)
 		{
@@ -13462,18 +13297,62 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
           
           
           Nb_InCollection =Get_InCollection_Pok();	
-          
-          Time_init();
-          Key_Scan_Init_Wakeup();
-	      i=Play_Seq_Test(Nb_InCollection,C_SerieNumPokemon);
-	      
-	      if(i==1)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+         */
+            
+      
+          PlayA1800_Elements(669);
+	     // i=Play_Seq_Test(Nb_InCollection,C_SerieNumPokemon);
+	     
+	        Time_init();
+            Key_Scan_Init_Wakeup();
+	while(1)
+	{	
+		WatchdogClear();
+			
+		if(Key)
+		{
+
+		   temp = Pressflag&Key;
+
+		   Key =0;
+           Pressflag=0;
+            
+		  	 	 if(temp == Key_True)
+				 	{
+	                     PlayA1800_Elements(SFX_Shake);
+				 	      key_step |=0x01;
+		  	 	 	}
+		  	 	 if(temp == Key_False)
+				 	{
+                           PlayA1800_Elements(SFX_Off);
+				 	       key_step |=0x02;
+				 	     
+				 
+		  	 	 	}
+		  	 	 	
+		  	   if((key_step&0x03)==0x03)	 	
+		  	       break;
+		  	       
+		  	 	 TimeCnt=0;
+	
+         }
+
+
+ 
+	   if(TimeCnt>16*30)
+ 		  return;	
+	
+    }
+	     
+	     
+	     
+	     // if(i==1)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	      {
 	      	   Key_Event =0;
 	      	   Key_Scan_Init_Wakeup();
 	      	   TwoKeyflag =0;
 	      	   
-	      	   PlayA1800_Elements(484);//ï¿½æ±¾ï¿½ï¿½
+	      	  // PlayA1800_Elements(484);//ï¿½æ±¾ï¿½ï¿½
 	      	   
 			//	IIC_MasterInit();
 			   // G_Sensor_Init();
@@ -13481,11 +13360,12 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
 			    Get_Standy(); 
 	      	   G_Sensor_Status=G_Shake;
                
-			if(WaitAction(60*16,0)==1)//Mov_Detected
+			if(WaitAction(60*16,0)==C_MovSucess)//Mov_Detected
 			  {
 	              //BlinkFlag_Data =0;
 	              //Light_all_off();
-	              Led_ON_Some(All_Led_data);
+	              //Led_ON_Some(All_Led_data);
+	              Led_OFF_Some(LED1_R|LED2_R|LED3_R|LED4_R);//µÍÍÆ
 	              
 				  Motor_On();//*P_IOB_Buffer|=IO_Motor;
 				  delay_time(6);
@@ -13497,14 +13377,18 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
 				 __asm("INT OFF");
 	      	     *(P_INT_Ctrl) =0;
 	      	     *(P_INT2_Ctrl) =0;
-                  CheckSum_SPIFlash();	   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ò»Ö±beepbeepï¿½ï¿½
+                 //CheckSum_SPIFlash();	   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ò»Ö±beepbeepï¿½ï¿½
 	      	      Time_init();
+	      	      
+	      	     __asm("IRQ ON");  
+	      	     delay_time(16*4);//Ê±¼ä´úÌæchecksum
+	      	      
 			  }
 			      Key_Event =0;
 	        	  TwoKeyflag =1;
 	        	  Light_all_off();	      	
-	      	      PlayA1800_Elements(A_SFX_Off);
-	      	      Sleeping();
+//	      	      PlayA1800_Elements(A_SFX_Off);
+	      	     // Sleeping();
 	      	
 	      }
           

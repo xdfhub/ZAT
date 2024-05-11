@@ -345,7 +345,7 @@ int ACC_Z=0;	//Z轴的加速数据。
 uint8 SR_Data=0;		//SR数据。
 uint8 IIC_MasterReadXYZAcc()
 {
-	uint8 databyte=0,databyte_status=0,databyte_Instr=0; //读到的数据
+//	uint8 databyte=0,databyte_status=0,databyte_Instr=0; //读到的数据
 	
 //	if(R_ReadG_Flag==0)//判断是否可以读Gdata
 //	{

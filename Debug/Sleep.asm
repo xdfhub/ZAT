@@ -211,20 +211,14 @@ LM13:
 	     call _Test_Assembly      	// [1:98]  Test_Assembly
 BB8_PU1:	// 0x36
 // BB:8 cycle count: 3
-//  99       TestBonding();
-
-LM14:
-	     .stabn 68,0,99,LM14-_Goto_Sleep
-	     call _TestBonding        	// [0:99]  TestBonding
-BB9_PU1:	// 0x38
-// BB:9 cycle count: 3
+//  99      // TestBonding();
 // 100       Time_init();
 
-LM15:
-	     .stabn 68,0,100,LM15-_Goto_Sleep
+LM14:
+	     .stabn 68,0,100,LM14-_Goto_Sleep
 	     call _Time_init          	// [0:100]  Time_init
-BB10_PU1:	// 0x3a
-// BB:10 cycle count: 5
+BB9_PU1:	// 0x38
+// BB:9 cycle count: 5
 	     pop BP, PC from [SP]     	// [0:100]  
 	.endp	
 LME2:
@@ -235,5 +229,4 @@ LME2:
 .external _IO_init
 .external _IIC_MasterInit
 .external _Test_Assembly
-.external _TestBonding
 .external _Time_init

@@ -335,7 +335,7 @@ F_SPI_ReadNWords_LH:
      pop r2 from [SP]
      pop r1 from [SP]	
     
-	  call F_AutoModeReadNWords//低8位在前，高8位灾后
+	  call F_AutoModeReadNWords//低8位在前，高8位在后
 	
 	
 	pop R1, R5 from [SP];

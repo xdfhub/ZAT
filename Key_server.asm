@@ -23,8 +23,8 @@
 
 
 
-.define IO_BuffMask   0x01//0x034//
-.define IO_Buffinit   0x01
+.define IO_BuffMask   0x011//0x034//
+.define IO_Buffinit   0x011
 
 
 
@@ -119,7 +119,7 @@ _Key_Scan_ServiceLoop: .proc
            
        
        r1 = [_Pressflag]
-       test r1,(1) //只有Ubbie 检查长按
+       test r1,(1) //只有 检查长按
        jz Jmp_Out
             
        r2 = [_Key_Debounce] 

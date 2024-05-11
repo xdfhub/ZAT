@@ -127,6 +127,19 @@ unsigned int MoveOnflag =0;
 unsigned int T_wavecnt =0;
 unsigned int T_wavecnt_Y =0;
 unsigned int T_wavecnt_Z =0;
+
+//right Hand
+unsigned int  G_X_A  = G_Hit;//G_Right//值增加方向
+unsigned int  G_X_M  = G_Back;//G_Left//值减少方向
+
+unsigned int  G_Y_A  = G_Left;//G_Hit
+unsigned int  G_Y_M  =  G_Right;//G_Back
+
+unsigned int   G_Z_A =  G_UP;
+unsigned int   G_Z_M   = G_Down;
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
@@ -775,9 +788,9 @@ void  G_Sensor_Real()
 							 
 						     time_Min_Z=0;
 						     
-				     #if FUNC_UART_Debug_EN	 
-				       UART_Send_A_Information_With_Data("positionZ_Max",positionZ_Max,1);		
-				     #endif
+					     #if FUNC_UART_Debug_EN	 
+					       UART_Send_A_Information_With_Data("positionZ_Max",positionZ_Max,1);		
+					     #endif
 						     
 						     
 						     
@@ -805,8 +818,7 @@ void  G_Sensor_Real()
                            //temp = positionZ[1]-positionZ_Staty;
 
 						
-					 	 if(positionZ[1]<positionZ_Min)//positionX_Min
-					 	 
+					 	 if(positionZ[1]<positionZ_Min)//positionX_Min					 	 
 					 	  {
 	                	      positionZ_Min = positionZ[1];
 	                	      
@@ -819,9 +831,9 @@ void  G_Sensor_Real()
 						      time_Max_Z=0;
 						      
 						      
-				  #if FUNC_UART_Debug_EN	 
-				       UART_Send_A_Information_With_Data("positionZ_Min",positionZ_Min,1);		
-				     #endif
+							  #if FUNC_UART_Debug_EN	 
+							       UART_Send_A_Information_With_Data("positionZ_Min",positionZ_Min,1);		
+							     #endif
 						      
 					 	  }						   
 						   
@@ -831,14 +843,14 @@ void  G_Sensor_Real()
 						   	   if(stepflag_Z==0)
 						   	        T_wavecnt_Z=0;
 						   	
-						    stepflag_Z|=0x02;
-						    
-							 if(stepflag_Z&0x04)
-                                 stepflag_Z|=0x08;
-							 
-							if(stepflag_Z&0x10)
-                                 stepflag_Z|=0x20;
-						   }					    
+							    stepflag_Z|=0x02;
+							    
+								 if(stepflag_Z&0x04)
+	                                 stepflag_Z|=0x08;
+								 
+								if(stepflag_Z&0x10)
+	                                 stepflag_Z|=0x20;
+						   }										    
 						    
 
 					 	}
@@ -1415,7 +1427,7 @@ unsigned int G_Sensor_Check()
 																				  //PlayA1800_Elements(7);
 																				  G_Sensor_Status&=~G_Anymove;
 																			
-																				 return C_MovSucess;
+																				 return G_Z_A;//C_MovSucess;
 																				 
 																			 }
 																		   else
@@ -1476,7 +1488,7 @@ unsigned int G_Sensor_Check()
 																	   {
 			 		
 																			  G_Sensor_Status&=~G_Anymove;
-																			  return C_MovSucess;
+																			  return G_Z_M;//C_MovSucess;
 																	 																		   
 																				   
 																		}
@@ -1557,19 +1569,7 @@ unsigned int G_Sensor_Check()
 												 }
 											 
 											 }
-
-										  if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
-											  {
-	  
-	                                            //PlayA1800_Elements(7);
-	  												
-												  G_Sensor_Status&=~G_SPIN;//G_TurnAround;
-												  return C_MovSucess;
-	  
-											  }
-
-
-                                          else if(fakeflag==0)
+                                          if(fakeflag==0)
                                           	{
 
 											   G_Sensor_Status&=~G_Anymove;
@@ -1628,19 +1628,8 @@ unsigned int G_Sensor_Check()
 												 
 												 }
 
-												 if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
-												   {
-												 
-													   
-													   G_Sensor_Status&=~G_SPIN;//G_TurnAround;
-													   return C_MovSucess;
-												 
-												 
-												 
-												 
-												   }
 											 															  
-												 else if(fakeflag==0)
+												 if(fakeflag==0)
 												  {
 
 														 G_Sensor_Status&=~G_Anymove;
@@ -1722,8 +1711,16 @@ unsigned int G_Sensor_Check()
 													  
 													  }
 
-				
-													 if(fakeflag==0)
+	                                			if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
+												  {
+		  
+		                                            //PlayA1800_Elements(7);
+		  												
+													  G_Sensor_Status&=~G_SPIN;//G_TurnAround;
+													  return C_MovSucess;
+		  
+												  }					
+												else if(fakeflag==0)
 													 	{
 															  										 
 													         G_Sensor_Status&=~G_Anymove;
@@ -1789,10 +1786,16 @@ unsigned int G_Sensor_Check()
 														   }
 
 
-
-												 
-
-												    if(fakeflag==0)
+										        if((G_Sensor_Status&G_TurnAround)==G_TurnAround)
+													   {
+			  
+			                                            //PlayA1800_Elements(7);
+			  												
+														  G_Sensor_Status&=~G_SPIN;//G_TurnAround;
+														  return C_MovSucess;
+			  
+													  }
+												  else  if(fakeflag==0)
 													 	{
 													 	   //PlayA1800_Elements(7);
 													      G_Sensor_Status&=~G_Anymove;
@@ -2033,7 +2036,7 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 			    HZ_1K_flag=0;//HZ_64_flag =0;
 			    sensor_read_xyz();
 				temp = G_Sensor_Check();
-			    if(temp==C_MovSucess)
+			    if(temp&C_MovSucessStatus)//C_MovSucess
 			    {   
 			    	G_Sensor_Status&=~0xE000;//20210722  
 //                    stepflag_Y =0;
@@ -2053,7 +2056,7 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 
 	                 }
 	             else             	
-					return 1;
+					return temp;
 					
 			    }
 			   else if(temp==C_MovFail)
@@ -2078,7 +2081,7 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
     	}
     	
     	 if	(temp_G_Sensor_Status == G_IMMO)  
-	         return 1;
+	         return C_MovSucess;
 	    else
 	        return 0;	
     	
@@ -2129,8 +2132,10 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 		                G_Sensor_Status&=~0xE000;//20210722
 //                        stepflag_Y =0;
 //                        stepflag =0;
-                        
-						return 1;	
+                     if(temp_G_Sensor_Status == G_IMMO)
+                         return 0;
+                      else    
+					  	 return C_MovSucess;	
 		          	
 		          }
 	     
@@ -2166,17 +2171,17 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 			    sensor_read_xyz();
 				temp = G_Sensor_Check();
 				
-				if(temp==C_MovSucess)
+				if(temp&C_MovSucessStatus)//C_MovSucess
 				{
 				   G_Sensor_Status&=~0xE000;//20210722  
                    //stepflag_Y =0;
                    //stepflag =0;				   
 				   
 				}
-				if((temp==C_MovSucess)&&(temp_G_Sensor_Status == G_IMMO))
+				if((temp&C_MovSucessStatus)&&(temp_G_Sensor_Status == G_IMMO))
 				            temp=C_MovFail;
 				
-			    if(temp==C_MovSucess)
+			    if(temp&C_MovSucessStatus )//==C_MovSucess
 			    {
 			      	//if(temp_G_Sensor_Status != G_IMMO)	
 			              FailV =0;
@@ -2185,7 +2190,7 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 	               // A1800_Flag = 0;    
 	                
 	               
-					return 1;
+					return temp;//1
 					
 			    }
 			    else if(temp==C_MovFail)
@@ -2203,7 +2208,7 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
     	}
 					
     	 if	(temp_G_Sensor_Status == G_IMMO)  
-	         return 1;
+	         return C_MovSucess;
 	    else
 	        return TimeOver;
 

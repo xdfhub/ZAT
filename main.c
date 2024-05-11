@@ -68,7 +68,7 @@ extern unsigned int  LED1_RGB[];
 extern unsigned int  LED2_RGB[];
 extern unsigned int  LED3_RGB[];
 extern unsigned int  LED4_RGB[];
-extern enum LED_Color;
+//extern enum LED_Color;
 extern void USER_A3400Pro_SetStartAddr(int Idx);
 extern void USER_A1800_SetStartAddr(int Idx);
 //extern void USER_MS02_SetStartAddr(int Idx);
@@ -85,7 +85,7 @@ volatile unsigned int Switch_Mode_Pre =0;
 volatile unsigned int IO_Buffer =0;
 volatile unsigned TimeCnt = 0;
 
-volatile unsigned TimeCnt_Testingmode = 0;
+//volatile unsigned TimeCnt_Testingmode = 0;
 volatile unsigned int R_DebounceCnt =0;
 //unsigned TimeCnt_Total = 0;
 unsigned gTemp = 0;
@@ -144,12 +144,7 @@ int main()
 #endif
 
 
-
-
 /*       
-
-  
-    
 
      if((C_Demo_Mode == gTemp)||(gTemp ==0))//
      	gTemp = C_Finish;
@@ -163,20 +158,6 @@ int main()
      
      delay_time(5);
    	 PlayA1800_Elements(0);
-
-    
-
-//      	Set_Led_RGB(Orange,LED1_RGB);//enum LED_Color)
-//      	Set_Led_RGB(Grey,LED2_RGB);
-//      	Set_Led_RGB(Purple,LED3_RGB);
-//      	Set_Led_RGB(Yellow,LED4_RGB);
-//      
-//    	BlinkFlag_Data=0x05;
-//        Led_On(LedAll);
-//		delay_time(5*16);
-//		BlinkFlag_Data =0;
-//		Light_all_off();
-    
 	
 	while(1)
 	{
@@ -190,9 +171,9 @@ int main()
 		switch (gTemp)
 		{
 			
-			case C_ModeChange:
-			     gTemp =ModeChange();
-			     break;
+//			case C_ModeChange:
+//			     gTemp =ModeChange();
+//			     break;
 			     
 			case C_StartGame:			      			      			           
 			case C_Step1:
@@ -212,11 +193,11 @@ int main()
 			case C_Mission:		
 							    			    
 			       gTemp = Mission();		
-			       gTemp = C_Off_Mode;	       
+//			       gTemp = C_Off_Mode;	       
 				   break;
 			case C_MissinZer0:
 			
-			        gTemp = MissinZer0();
+			      //  gTemp = MissinZer0();
 			       break;	   
 			case  C_Off_Mode:
 			
@@ -224,9 +205,9 @@ int main()
    	              gTemp  = C_Step1;
 			        break;	
 			        	   
-			case C_Inmission:			
-			     gTemp  =  Inmission();	  
-			     break; 
+//			case C_Inmission:			
+//			     gTemp  =  Inmission();	  
+//			     break; 
 			
 			 case C_GameTimeout:
 			       gTemp  = GameTimeout();
@@ -254,45 +235,23 @@ int main()
 		
 	  if(Key_Event)
 	  {
-	  	 Resumeflag =0;
-//	  	 if(Key_Event== C_Mission)//if(Key_Event == 0x66)//MODE CHANGE
-//           {
-//           	  Key_Event =0;
-//           	  gTemp  = C_Mission;
-//           }
-//       	 else if(Key_Event== C_MissinZer0)//if(Key_Event == 0x66)//MODE CHANGE
-//           {
-//           	  Key_Event =0;
-//           	  gTemp  = C_MissinZer0;
-//           } 
-      
+	  	 Resumeflag =0;   
         if(Key_Event==0x88)
-        {
+         {
             Key_Event =0;	
            Mem0.Mission_Cur++;	
 		   gTemp = C_SelectMission;
-        }               
-	   else // if(Key_Event!=0x88)
-	     {
+         }               
+	    else // if(Key_Event!=0x88)
+	      {
 	  	    
 		  	  Key_Event =0;
 		  	 
 			   if(LongPressflag)
 			   {
-				   	  LongPressflag =0;
-				   	  
-//				   	  PlayA1800_Elements(SFX_Off);
-//				  	  gTemp  = C_Off_Mode;
-				   	  
-			//	   	 if(Mission_Cur>=0)
-			//	   	      Mission_Success[Mission_Cur/16]|=BitMap[Mission_Cur%16];
-			//	   	 
-//			          Mem0.Mission_Cur++;	
-//				   	  gTemp = C_SelectMission;
-
-
-				   	  PlayA1800_Elements(SFX_Off);
-				  	  gTemp  = C_Off_Mode;
+				   	   LongPressflag =0;
+                       PlayA1800_Elements(SFX_Off);
+				  	   gTemp  = C_Off_Mode;
 				  }
 				   else	  
 				   {
