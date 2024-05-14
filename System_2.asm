@@ -101,7 +101,7 @@
 .var _DAC1_RampDnFlag
 .var _DAC2_RampDnFlag
 //.var R_SleepKeyDebounce
-_OtherSph_Random_Value: .dw 52 dup(?)//21
+_OtherSph_Random_Value: .dw 5 dup(?)//21
 //_gQ_E_Buffer:			.dw 100 dup(?)
 //_VAL_LowestIndex:		.dw 100 dup(?)
 

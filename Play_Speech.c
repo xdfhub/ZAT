@@ -174,7 +174,7 @@ unsigned Set_RandomVL_Index(unsigned SphIndex)
 {
 	unsigned temp1,temp2;
 	unsigned long Addr;
-	if ((SphIndex>=0)&&(SphIndex<52))
+	if ((SphIndex>=0)&&(SphIndex<5))
 	{
 //	     if(Mem0.Mode == Classic_M)		
 //            Addr = SphIndex * 4 + C_TableOtherSpeechAddr;
@@ -261,10 +261,10 @@ unsigned int  PlayA1800_Other(unsigned SpeechIndex)
    	   //Play_Seq(temp1,T_Serie_EnviMov);
 //   	   Serie_Envi=temp2;
 
-     if(Mem0.Mode ==Classic_M)
+ //    if(Mem0.Mode ==Classic_M)
    	    Addr = temp1 * 4 * 2 + T_Serie_EnviMov; 
-   	  else
-   	     Addr = temp1 * 4 * 2 + T_Serie_EnviMovAccessible; 
+//   	  else
+//   	     Addr = temp1 * 4 * 2 + T_Serie_EnviMovAccessible; 
    	     
    	   Addr+=3*2;//最后一个word
    	   temp2 = SPI_ReadAWord_Big(Addr);
@@ -1158,7 +1158,7 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 //	 
     if((T_TableH>=T_Intro1)&&(T_TableH<=T_Intro11))
     {
-       if((T_TableH==T_Intro2)||(T_TableH==T_Intro1))
+       if((T_TableH==T_Intro2)||(T_TableH==T_Intro1)||(T_TableH==T_Intro4))
            Num =4;
        else
            Num =3;

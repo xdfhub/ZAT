@@ -296,7 +296,7 @@ SPECIFICFLAG=0
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=1767964764
+EXPORT=1650786396
 SPECIFICFLAG=0
 # Begin Source File
 SOURCE=..\Include\A1800.inc
@@ -395,7 +395,7 @@ EXPORT=3
 SPECIFICFLAG=0
 # End Source File
 # Begin Source File
-SOURCE=datatype.h
+SOURCE=Enable.inc
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -403,7 +403,7 @@ EXPORT=3
 SPECIFICFLAG=0
 # End Source File
 # Begin Source File
-SOURCE=Enable.inc
+SOURCE=datatype.h
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -415,7 +415,7 @@ SOURCE=..\Include\System.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=1650786396
+EXPORT=996474972
 SPECIFICFLAG=0
 # End Source File
 # Begin Source File
@@ -439,15 +439,7 @@ SOURCE=..\Include\MS02.inc
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=1346437212
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\datatype.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1869348956
+EXPORT=191365212
 SPECIFICFLAG=0
 # End Source File
 # End Group
@@ -743,7 +735,7 @@ SPECIFICFLAG=0
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=1767964764
+EXPORT=1650786396
 SPECIFICFLAG=0
 # Begin Source File
 SOURCE=..\Include\A1800.inc
@@ -842,7 +834,7 @@ EXPORT=3
 SPECIFICFLAG=0
 # End Source File
 # Begin Source File
-SOURCE=datatype.h
+SOURCE=Enable.inc
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -850,7 +842,7 @@ EXPORT=3
 SPECIFICFLAG=0
 # End Source File
 # Begin Source File
-SOURCE=Enable.inc
+SOURCE=datatype.h
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -862,7 +854,7 @@ SOURCE=..\Include\System.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=1650786396
+EXPORT=996474972
 SPECIFICFLAG=0
 # End Source File
 # Begin Source File
@@ -886,15 +878,7 @@ SOURCE=..\Include\MS02.inc
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=1346437212
-SPECIFICFLAG=0
-# End Source File
-# Begin Source File
-SOURCE=..\Include\datatype.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=1869348956
+EXPORT=191365212
 SPECIFICFLAG=0
 # End Source File
 # End Group

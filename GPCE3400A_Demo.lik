@@ -109,19 +109,19 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;section has ORG setting:
 ;Locate: RampUpDn_LibCallback_SEC in "system.obj" at 201920 
 ;Align: RampUpDn_LibCallback_SEC in "system.obj" with 0 
-;Locate: IRAM in "main.obj" at 20387F  linkat 5E7 
+;Locate: IRAM in "main.obj" at 20387F  linkat 5B8 
 ;Align: IRAM in "main.obj" with 0 
-;Locate: IRAM in "Play_Speech.obj" at 203898  linkat 600 
+;Locate: IRAM in "Play_Speech.obj" at 203898  linkat 5D1 
 ;Align: IRAM in "Play_Speech.obj" with 0 
-;Locate: IRAM in "G_Sensor.obj" at 20390F  linkat 677 
+;Locate: IRAM in "G_Sensor.obj" at 20390F  linkat 648 
 ;Align: IRAM in "G_Sensor.obj" with 0 
-;Locate: IRAM in "IIC_Master.obj" at 203879  linkat 5E1 
+;Locate: IRAM in "IIC_Master.obj" at 203879  linkat 5B2 
 ;Align: IRAM in "IIC_Master.obj" with 0 
-;Locate: IRAM in "Algorithm.obj" at 2038A8  linkat 610 
+;Locate: IRAM in "Algorithm.obj" at 2038A8  linkat 5E1 
 ;Align: IRAM in "Algorithm.obj" with 0 
-;Locate: IRAM in "AntiCrack.obj" at 203878  linkat 5E0 
+;Locate: IRAM in "AntiCrack.obj" at 203878  linkat 5B1 
 ;Align: IRAM in "AntiCrack.obj" with 0 
-;Locate: IRAM in "LED.obj" at 203889  linkat 5F1 
+;Locate: IRAM in "LED.obj" at 203889  linkat 5C2 
 ;Align: IRAM in "LED.obj" with 0 
 ;Locate: RAM in "SACM_A1800_User.obj" at 599 
 ;Align: RAM in "SACM_A1800_User.obj" with 0 
@@ -129,9 +129,9 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: RAM in "system.obj" with 0 
 ;Locate: RAM in "System_2.obj" at 59F 
 ;Align: RAM in "System_2.obj" with 0 
-;Locate: RAM in "Key_server.obj" at 5D5 
+;Locate: RAM in "Key_server.obj" at 5A6 
 ;Align: RAM in "Key_server.obj" with 0 
-;Locate: RAM in "SPI_Flash_CE3.obj" at 5DB 
+;Locate: RAM in "SPI_Flash_CE3.obj" at 5AC 
 ;Align: RAM in "SPI_Flash_CE3.obj" with 0 
 ;Locate: OVERLAP_A3400Pro_BLOCK in "ORAM_Arrangement.obj" at 10 
 ;Locate: OVERLAP_A1800_BLOCK in "ORAM_Arrangement.obj" at 2A 
@@ -239,7 +239,7 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: _CODE_SPI_SEC in "MC3416_I2C.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "Play_Speech.obj" at 205C65 
 ;Align: _CODE_SPI_SEC in "Play_Speech.obj" with 0 
-;Locate: _CODE_SPI_SEC in "Algorithm.obj" at 20647E 
+;Locate: _CODE_SPI_SEC in "Algorithm.obj" at 206474 
 ;Align: _CODE_SPI_SEC in "Algorithm.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "G_Sensor.obj" at 2083AC 
 ;Align: _CODE_SPI_SEC in "G_Sensor.obj" with 0 

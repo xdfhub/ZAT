@@ -7897,7 +7897,7 @@ BB126_PU10:	// 0x1260
 BB127_PU10:	// 0x1263
 // BB:127 cycle count: 8
 	     R4 = [BP + 45]           	// [0:1551]  lcl_spill_temp_158
-	     cmp R4, 18928            	// [2:1551]  
+	     cmp R4, 8928             	// [2:1551]  
 	     jbe BB308_PU10           	// [4:1551]  
 BB128_PU10:	// 0x1267
 // BB:128 cycle count: 14
@@ -7920,7 +7920,7 @@ BB129_PU10:	// 0x1272
 BB130_PU10:	// 0x1275
 // BB:130 cycle count: 8
 	     R4 = [BP + 47]           	// [0:1551]  lcl_spill_temp_160
-	     cmp R4, 37856            	// [2:1551]  
+	     cmp R4, 17856            	// [2:1551]  
 	     jbe BB309_PU10           	// [4:1551]  
 BB131_PU10:	// 0x1279
 L_10_227:	// 0x1279
@@ -7986,17 +7986,17 @@ LM446:
 	     [BP + 49] = R4           	// [5:1566]  lcl_spill_temp_162
 	     R4 = DS:[R3]             	// [6:1566]  
 	     [BP + 50] = R4           	// [8:1566]  lcl_spill_temp_163
-	     cmp R4, 65531            	// [9:1566]  
+	     cmp R4, 65532            	// [9:1566]  
 	     jg L_10_232              	// [11:1566]  
 BB135_PU10:	// 0x129e
 // BB:135 cycle count: 8
 	     R4 = [BP + 50]           	// [0:1566]  lcl_spill_temp_163
-	     cmp R4, 65531            	// [2:1566]  
+	     cmp R4, 65532            	// [2:1566]  
 	     jne BB137_PU10           	// [4:1566]  
 BB136_PU10:	// 0x12a2
 // BB:136 cycle count: 8
 	     R4 = [BP + 49]           	// [0:1566]  lcl_spill_temp_162
-	     cmp R4, 47680            	// [2:1566]  
+	     cmp R4, 42144            	// [2:1566]  
 	     jae L_10_232             	// [4:1566]  
 BB137_PU10:	// 0x12a6
 // BB:137 cycle count: 2
@@ -8138,7 +8138,7 @@ BB147_PU10:	// 0x12dc
 BB148_PU10:	// 0x12e0
 // BB:148 cycle count: 8
 	     R4 = [BP + 51]           	// [0:1610]  lcl_spill_temp_164
-	     cmp R4, 21608            	// [2:1610]  
+	     cmp R4, 46608            	// [2:1610]  
 	     jae BB306_PU10           	// [4:1610]  
 BB149_PU10:	// 0x12e4
 // BB:149 cycle count: 15
@@ -8148,7 +8148,7 @@ BB149_PU10:	// 0x12e4
 	     [BP + 53] = R4           	// [5:1610]  lcl_spill_temp_166
 	     R4 = DS:[R3]             	// [6:1610]  
 	     [BP + 54] = R4           	// [8:1610]  lcl_spill_temp_167
-	     cmp R4, 65530            	// [9:1610]  
+	     cmp R4, 65531            	// [9:1610]  
 	     jle BB150_PU10           	// [11:1610]  
 BB307_PU10:	// 0x12ee
 // BB:307 cycle count: 3
@@ -8156,12 +8156,12 @@ BB307_PU10:	// 0x12ee
 BB150_PU10:	// 0x12f0
 // BB:150 cycle count: 8
 	     R4 = [BP + 54]           	// [0:1610]  lcl_spill_temp_167
-	     cmp R4, 65530            	// [2:1610]  
+	     cmp R4, 65531            	// [2:1610]  
 	     jne BB152_PU10           	// [4:1610]  
 BB151_PU10:	// 0x12f4
 // BB:151 cycle count: 8
 	     R4 = [BP + 53]           	// [0:1610]  lcl_spill_temp_166
-	     cmp R4, 43216            	// [2:1610]  
+	     cmp R4, 27680            	// [2:1610]  
 	     jae BB307_PU10           	// [4:1610]  
 BB152_PU10:	// 0x12f8
 L_10_236:	// 0x12f8
@@ -8226,17 +8226,17 @@ LM462:
 	     [BP + 55] = R4           	// [5:1624]  lcl_spill_temp_168
 	     R4 = DS:[R3]             	// [6:1624]  
 	     [BP + 56] = R4           	// [8:1624]  lcl_spill_temp_169
-	     cmp R4, 4                	// [9:1624]  
+	     cmp R4, 3                	// [9:1624]  
 	     jl L_10_241              	// [10:1624]  
 BB156_PU10:	// 0x131c
 // BB:156 cycle count: 7
 	     R4 = [BP + 56]           	// [0:1624]  lcl_spill_temp_169
-	     cmp R4, 4                	// [2:1624]  
+	     cmp R4, 3                	// [2:1624]  
 	     jne BB158_PU10           	// [3:1624]  
 BB157_PU10:	// 0x131f
 // BB:157 cycle count: 8
 	     R4 = [BP + 55]           	// [0:1624]  lcl_spill_temp_168
-	     cmp R4, 17856            	// [2:1624]  
+	     cmp R4, 23392            	// [2:1624]  
 	     jbe L_10_241             	// [4:1624]  
 BB158_PU10:	// 0x1323
 // BB:158 cycle count: 2
@@ -8451,7 +8451,7 @@ BB171_PU10:	// 0x138d
 BB172_PU10:	// 0x1390
 // BB:172 cycle count: 8
 	     R4 = [BP + 57]           	// [0:1692]  lcl_spill_temp_170
-	     cmp R4, 43928            	// [2:1692]  
+	     cmp R4, 8928             	// [2:1692]  
 	     jbe BB300_PU10           	// [4:1692]  
 BB173_PU10:	// 0x1394
 // BB:173 cycle count: 14
@@ -8461,7 +8461,7 @@ BB173_PU10:	// 0x1394
 	     [BP + 59] = R4           	// [5:1692]  lcl_spill_temp_172
 	     R4 = DS:[R3]             	// [6:1692]  
 	     [BP + 60] = R4           	// [8:1692]  lcl_spill_temp_173
-	     cmp R4, 5                	// [9:1692]  
+	     cmp R4, 4                	// [9:1692]  
 	     jge BB174_PU10           	// [10:1692]  
 BB301_PU10:	// 0x139d
 // BB:301 cycle count: 3
@@ -8469,12 +8469,12 @@ BB301_PU10:	// 0x139d
 BB174_PU10:	// 0x139f
 // BB:174 cycle count: 7
 	     R4 = [BP + 60]           	// [0:1692]  lcl_spill_temp_173
-	     cmp R4, 5                	// [2:1692]  
+	     cmp R4, 4                	// [2:1692]  
 	     jne BB176_PU10           	// [3:1692]  
 BB175_PU10:	// 0x13a2
 // BB:175 cycle count: 8
 	     R4 = [BP + 59]           	// [0:1692]  lcl_spill_temp_172
-	     cmp R4, 22320            	// [2:1692]  
+	     cmp R4, 17856            	// [2:1692]  
 	     jbe BB301_PU10           	// [4:1692]  
 BB176_PU10:	// 0x13a6
 L_10_248:	// 0x13a6
@@ -8843,21 +8843,21 @@ LM499:
 	     R4 = DS:[R3]             	// [8:1781]  
 	     [BP + 1] = R4            	// [10:1781]  lcl_spill_temp_181
 	     BP = BP - 67             	// [11:1781]  
-	     cmp R4, 4                	// [13:1781]  
+	     cmp R4, 3                	// [13:1781]  
 	     jl L_10_264              	// [14:1781]  
 BB203_PU10:	// 0x147f
 // BB:203 cycle count: 11
 	     BP = BP + 68             	// [0:1781]  
 	     R4 = [BP + 0]            	// [2:1781]  lcl_spill_temp_181
 	     BP = BP - 68             	// [4:1781]  
-	     cmp R4, 4                	// [6:1781]  
+	     cmp R4, 3                	// [6:1781]  
 	     jne BB205_PU10           	// [7:1781]  
 BB204_PU10:	// 0x1486
 // BB:204 cycle count: 12
 	     BP = BP + 67             	// [0:1781]  
 	     R4 = [BP + 0]            	// [2:1781]  lcl_spill_temp_180
 	     BP = BP - 67             	// [4:1781]  
-	     cmp R4, 17856            	// [6:1781]  
+	     cmp R4, 23392            	// [6:1781]  
 	     jbe L_10_264             	// [8:1781]  
 BB205_PU10:	// 0x148e
 // BB:205 cycle count: 2

@@ -54,45 +54,45 @@ _GetSpeed: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 495  //	return SPI_ReadAByte(Addr);
-// 496  //}
-// 497  
-// 498  unsigned GetSpeed(unsigned lQuestionIdx)
-// 499  {
+// 496  //	return SPI_ReadAByte(Addr);
+// 497  //}
+// 498  
+// 499  unsigned GetSpeed(unsigned lQuestionIdx)
+// 500  {
 
 LM1:
-	     .stabn 68,0,499,LM1-_GetSpeed
+	     .stabn 68,0,500,LM1-_GetSpeed
 BB1_PU0:	// 0x0
 // BB:1 cycle count: 26
-	     push BP to [SP]          	// [0:499]  
-	     SP = SP - 2              	// [2:499]  
-	     BP = SP + 1              	// [3:499]  
+	     push BP to [SP]          	// [0:500]  
+	     SP = SP - 2              	// [2:500]  
+	     BP = SP + 1              	// [3:500]  
 LBB2:
-// 500  	unsigned long Addr;
-// 501  	Addr = lQuestionIdx + C_SpeedAddr;
+// 501  	unsigned long Addr;
+// 502  	Addr = lQuestionIdx + C_SpeedAddr;
 
 LM2:
-	     .stabn 68,0,501,LM2-_GetSpeed
-	     R4 = [BP + 5]            	// [5:501]  lQuestionIdx
-	     R4 = R4 + 32500          	// [7:501]  
-	     R3 = 0                   	// [9:501]  
-	     [BP + 0] = R4            	// [10:501]  Addr
-	     [BP + 1] = R3            	// [11:501]  Addr+1
-// 502  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,502,LM2-_GetSpeed
+	     R4 = [BP + 5]            	// [5:502]  lQuestionIdx
+	     R4 = R4 + 32500          	// [7:502]  
+	     R3 = 0                   	// [9:502]  
+	     [BP + 0] = R4            	// [10:502]  Addr
+	     [BP + 1] = R3            	// [11:502]  Addr+1
+// 503  	return SPI_ReadAByte(Addr);
 
 LM3:
-	     .stabn 68,0,502,LM3-_GetSpeed
-	     SP = SP - 2              	// [12:502]  
-	     R2 = [BP + 0]            	// [13:502]  Addr
-	     R3 = [BP + 1]            	// [15:502]  Addr+1
-	     R4 = SP + 1              	// [17:502]  
-	     [R4++] = R2              	// [19:502]  
-	     [R4] = R3                	// [21:502]  
-	     call _SPI_ReadAByte      	// [23:502]  SPI_ReadAByte
+	     .stabn 68,0,503,LM3-_GetSpeed
+	     SP = SP - 2              	// [12:503]  
+	     R2 = [BP + 0]            	// [13:503]  Addr
+	     R3 = [BP + 1]            	// [15:503]  Addr+1
+	     R4 = SP + 1              	// [17:503]  
+	     [R4++] = R2              	// [19:503]  
+	     [R4] = R3                	// [21:503]  
+	     call _SPI_ReadAByte      	// [23:503]  SPI_ReadAByte
 BB2_PU0:	// 0x13
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:502]  
-	     pop BP, PC from [SP]     	// [1:502]  
+	     SP = SP + 4              	// [0:503]  
+	     pop BP, PC from [SP]     	// [1:503]  
 LBE2:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -144,8 +144,11 @@ _gQuestionIdx:	// 0x7
 	.dw	65535
 	// end of initialization for gQuestionIdx
 	     .stabs "Mem0:G21=s8Mission_Cur:4,0,16;Mission_Pok_Same:4,16,16;\\",128,0,0,0
-.stabs "firstFlag_23b:4,32,16;Mode:4,48,16;MissionZ_flag:4,64,16;\\",128,0,0,0
-.stabs "X:4,80,16;Y:4,96,16;Z:4,112,16;;",32,0,0,_Mem0
+.stabs "firstFlag_23b:22=s1:23=u1BitCTL:4,0,16;BitCTL_f:24=s1TokenText:4,0,1;\\",128,0,0,0
+.stabs "OSC_AUDIO:4,1,1;OSC_CORE:4,2,1;EXT_CLK:4,3,1;RESERVED0:4,4,1;\\",128,0,0,0
+.stabs "TEST_EN:4,5,1;RESERVED1:4,6,10;;,0,16;;,0,16;;,32,16;\\",128,0,0,0
+.stabs "Arm_Mode:4,48,16;MissionZ_flag:4,64,16;X:4,80,16;Y:4,96,16;\\",128,0,0,0
+.stabs "Z:4,112,16;;",32,0,0,_Mem0
 .public	_Mem0
 _Mem0:	// 0x2b
 	.dw	0
@@ -372,12 +375,12 @@ _OFF_Timeoutcnt:	// 0x5d
 _MoveText2_Right:	// 0x5e
 	.dw	0
 	// end of initialization for MoveText2_Right
-	     .stabs "Arm:G20",32,0,0,_Arm
-.public	_Arm
-_Arm:	// 0x5f
+	     .stabs "TokenMission:G4",32,0,0,_TokenMission
+.public	_TokenMission
+_TokenMission:	// 0x5f
 	.dw	0
-	// end of initialization for Arm
-	     .stabs "Led_Data_Play:G22=ar3;0;5;4",32,0,0,_Led_Data_Play
+	// end of initialization for TokenMission
+	     .stabs "Led_Data_Play:G25=ar3;0;5;4",32,0,0,_Led_Data_Play
 .public	_Led_Data_Play
 _Led_Data_Play:	// 0x60
 	.dw	0
@@ -394,7 +397,7 @@ _PassFlag:	// 0x66
 	// end of initialization for PassFlag
 
 .nb_data
-	     .stabs "BitMap:G23=ar3;0;-1;4",32,0,0,_BitMap
+	     .stabs "BitMap:G26=ar3;0;-1;4",32,0,0,_BitMap
 .public	_BitMap
 _BitMap:	// 0x0
 	.dw	1
@@ -414,14 +417,14 @@ _BitMap:	// 0x0
 	.dw	16384
 	.dw	32768
 	// end of initialization for BitMap
-	     .stabs "Intro_Table:G24=ar3;0;10;1",32,0,0,_Intro_Table
+	     .stabs "Intro_Table:G27=ar3;0;10;1",32,0,0,_Intro_Table
 .public	_Intro_Table
 _Intro_Table:	// 0x10
 	.dw	1100
 	.dw	1400
-	.dw	4450
-	.dw	4650
-	.dw	4850
+	.dw	1800
+	.dw	2200
+	.dw	2600
 	.dw	5050
 	.dw	5250
 	.dw	5450
@@ -429,7 +432,7 @@ _Intro_Table:	// 0x10
 	.dw	5850
 	.dw	6050
 	// end of initialization for Intro_Table
-	     .stabs "Movetext_Table:G25=ar3;0;22;26=ar3;0;1;1",32,0,0,_Movetext_Table
+	     .stabs "Movetext_Table:G28=ar3;0;22;29=ar3;0;1;1",32,0,0,_Movetext_Table
 .public	_Movetext_Table
 _Movetext_Table:	// 0x1b
 	.dw	7550
@@ -479,7 +482,7 @@ _Movetext_Table:	// 0x1b
 	.dw	25200
 	.dw	25600
 	// end of initialization for Movetext_Table
-	     .stabs "End_Table:G27=ar3;0;6;1",32,0,0,_End_Table
+	     .stabs "End_Table:G30=ar3;0;6;1",32,0,0,_End_Table
 .public	_End_Table
 _End_Table:	// 0x49
 	.dw	29000
@@ -500,45 +503,45 @@ _GetWalk: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 503  }
-// 504  
-// 505  unsigned GetWalk(unsigned lQuestionIdx)
-// 506  {
+// 504  }
+// 505  
+// 506  unsigned GetWalk(unsigned lQuestionIdx)
+// 507  {
 
 LM4:
-	     .stabn 68,0,506,LM4-_GetWalk
+	     .stabn 68,0,507,LM4-_GetWalk
 BB1_PU1:	// 0x15
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:506]  
-	     SP = SP - 2              	// [2:506]  
-	     BP = SP + 1              	// [3:506]  
+	     push BP to [SP]          	// [0:507]  
+	     SP = SP - 2              	// [2:507]  
+	     BP = SP + 1              	// [3:507]  
 LBB3:
-// 507  	unsigned long Addr;
-// 508  	Addr = lQuestionIdx + C_TableWalkAddr;
+// 508  	unsigned long Addr;
+// 509  	Addr = lQuestionIdx + C_TableWalkAddr;
 
 LM5:
-	     .stabn 68,0,508,LM5-_GetWalk
-	     R3 = [BP + 5]            	// [5:508]  lQuestionIdx
-	     R4 = 0                   	// [7:508]  
-	     R3 = R3 + 33500          	// [8:508]  
-	     R4 = R4 + 0, Carry       	// [10:508]  
-	     [BP + 0] = R3            	// [11:508]  Addr
-	     [BP + 1] = R4            	// [12:508]  Addr+1
-// 509  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,509,LM5-_GetWalk
+	     R3 = [BP + 5]            	// [5:509]  lQuestionIdx
+	     R4 = 0                   	// [7:509]  
+	     R3 = R3 + 33500          	// [8:509]  
+	     R4 = R4 + 0, Carry       	// [10:509]  
+	     [BP + 0] = R3            	// [11:509]  Addr
+	     [BP + 1] = R4            	// [12:509]  Addr+1
+// 510  	return SPI_ReadAByte(Addr);
 
 LM6:
-	     .stabn 68,0,509,LM6-_GetWalk
-	     SP = SP - 2              	// [13:509]  
-	     R2 = [BP + 0]            	// [14:509]  Addr
-	     R3 = [BP + 1]            	// [16:509]  Addr+1
-	     R4 = SP + 1              	// [18:509]  
-	     [R4++] = R2              	// [20:509]  
-	     [R4] = R3                	// [22:509]  
-	     call _SPI_ReadAByte      	// [24:509]  SPI_ReadAByte
+	     .stabn 68,0,510,LM6-_GetWalk
+	     SP = SP - 2              	// [13:510]  
+	     R2 = [BP + 0]            	// [14:510]  Addr
+	     R3 = [BP + 1]            	// [16:510]  Addr+1
+	     R4 = SP + 1              	// [18:510]  
+	     [R4++] = R2              	// [20:510]  
+	     [R4] = R3                	// [22:510]  
+	     call _SPI_ReadAByte      	// [24:510]  SPI_ReadAByte
 BB2_PU1:	// 0x29
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:509]  
-	     pop BP, PC from [SP]     	// [1:509]  
+	     SP = SP + 4              	// [0:510]  
+	     pop BP, PC from [SP]     	// [1:510]  
 LBE3:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -557,44 +560,44 @@ _GetSize: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 510  }
-// 511  unsigned GetSize(unsigned lQuestionIdx)
-// 512  {
+// 511  }
+// 512  unsigned GetSize(unsigned lQuestionIdx)
+// 513  {
 
 LM7:
-	     .stabn 68,0,512,LM7-_GetSize
+	     .stabn 68,0,513,LM7-_GetSize
 BB1_PU2:	// 0x2b
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:512]  
-	     SP = SP - 2              	// [2:512]  
-	     BP = SP + 1              	// [3:512]  
+	     push BP to [SP]          	// [0:513]  
+	     SP = SP - 2              	// [2:513]  
+	     BP = SP + 1              	// [3:513]  
 LBB4:
-// 513  	unsigned long Addr;
-// 514  	Addr = lQuestionIdx + C_TableSizeAddr;
+// 514  	unsigned long Addr;
+// 515  	Addr = lQuestionIdx + C_TableSizeAddr;
 
 LM8:
-	     .stabn 68,0,514,LM8-_GetSize
-	     R3 = [BP + 5]            	// [5:514]  lQuestionIdx
-	     R4 = 0                   	// [7:514]  
-	     R3 = R3 + 34500          	// [8:514]  
-	     R4 = R4 + 0, Carry       	// [10:514]  
-	     [BP + 0] = R3            	// [11:514]  Addr
-	     [BP + 1] = R4            	// [12:514]  Addr+1
-// 515  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,515,LM8-_GetSize
+	     R3 = [BP + 5]            	// [5:515]  lQuestionIdx
+	     R4 = 0                   	// [7:515]  
+	     R3 = R3 + 34500          	// [8:515]  
+	     R4 = R4 + 0, Carry       	// [10:515]  
+	     [BP + 0] = R3            	// [11:515]  Addr
+	     [BP + 1] = R4            	// [12:515]  Addr+1
+// 516  	return SPI_ReadAByte(Addr);
 
 LM9:
-	     .stabn 68,0,515,LM9-_GetSize
-	     SP = SP - 2              	// [13:515]  
-	     R2 = [BP + 0]            	// [14:515]  Addr
-	     R3 = [BP + 1]            	// [16:515]  Addr+1
-	     R4 = SP + 1              	// [18:515]  
-	     [R4++] = R2              	// [20:515]  
-	     [R4] = R3                	// [22:515]  
-	     call _SPI_ReadAByte      	// [24:515]  SPI_ReadAByte
+	     .stabn 68,0,516,LM9-_GetSize
+	     SP = SP - 2              	// [13:516]  
+	     R2 = [BP + 0]            	// [14:516]  Addr
+	     R3 = [BP + 1]            	// [16:516]  Addr+1
+	     R4 = SP + 1              	// [18:516]  
+	     [R4++] = R2              	// [20:516]  
+	     [R4] = R3                	// [22:516]  
+	     call _SPI_ReadAByte      	// [24:516]  SPI_ReadAByte
 BB2_PU2:	// 0x3f
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:515]  
-	     pop BP, PC from [SP]     	// [1:515]  
+	     SP = SP + 4              	// [0:516]  
+	     pop BP, PC from [SP]     	// [1:516]  
 LBE4:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -613,44 +616,44 @@ _GetSpecial: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 516  }
-// 517  unsigned GetSpecial(unsigned lQuestionIdx)
-// 518  {
+// 517  }
+// 518  unsigned GetSpecial(unsigned lQuestionIdx)
+// 519  {
 
 LM10:
-	     .stabn 68,0,518,LM10-_GetSpecial
+	     .stabn 68,0,519,LM10-_GetSpecial
 BB1_PU3:	// 0x41
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:518]  
-	     SP = SP - 2              	// [2:518]  
-	     BP = SP + 1              	// [3:518]  
+	     push BP to [SP]          	// [0:519]  
+	     SP = SP - 2              	// [2:519]  
+	     BP = SP + 1              	// [3:519]  
 LBB5:
-// 519  	unsigned long Addr;
-// 520  	Addr = lQuestionIdx + C_MoveSpecialAddr;
+// 520  	unsigned long Addr;
+// 521  	Addr = lQuestionIdx + C_MoveSpecialAddr;
 
 LM11:
-	     .stabn 68,0,520,LM11-_GetSpecial
-	     R3 = [BP + 5]            	// [5:520]  lQuestionIdx
-	     R4 = 0                   	// [7:520]  
-	     R3 = R3 + 35500          	// [8:520]  
-	     R4 = R4 + 0, Carry       	// [10:520]  
-	     [BP + 0] = R3            	// [11:520]  Addr
-	     [BP + 1] = R4            	// [12:520]  Addr+1
-// 521  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,521,LM11-_GetSpecial
+	     R3 = [BP + 5]            	// [5:521]  lQuestionIdx
+	     R4 = 0                   	// [7:521]  
+	     R3 = R3 + 35500          	// [8:521]  
+	     R4 = R4 + 0, Carry       	// [10:521]  
+	     [BP + 0] = R3            	// [11:521]  Addr
+	     [BP + 1] = R4            	// [12:521]  Addr+1
+// 522  	return SPI_ReadAByte(Addr);
 
 LM12:
-	     .stabn 68,0,521,LM12-_GetSpecial
-	     SP = SP - 2              	// [13:521]  
-	     R2 = [BP + 0]            	// [14:521]  Addr
-	     R3 = [BP + 1]            	// [16:521]  Addr+1
-	     R4 = SP + 1              	// [18:521]  
-	     [R4++] = R2              	// [20:521]  
-	     [R4] = R3                	// [22:521]  
-	     call _SPI_ReadAByte      	// [24:521]  SPI_ReadAByte
+	     .stabn 68,0,522,LM12-_GetSpecial
+	     SP = SP - 2              	// [13:522]  
+	     R2 = [BP + 0]            	// [14:522]  Addr
+	     R3 = [BP + 1]            	// [16:522]  Addr+1
+	     R4 = SP + 1              	// [18:522]  
+	     [R4++] = R2              	// [20:522]  
+	     [R4] = R3                	// [22:522]  
+	     call _SPI_ReadAByte      	// [24:522]  SPI_ReadAByte
 BB2_PU3:	// 0x55
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:521]  
-	     pop BP, PC from [SP]     	// [1:521]  
+	     SP = SP + 4              	// [0:522]  
+	     pop BP, PC from [SP]     	// [1:522]  
 LBE5:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -669,44 +672,44 @@ _GetPower: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 522  }
-// 523  unsigned GetPower(unsigned lQuestionIdx)
-// 524  {
+// 523  }
+// 524  unsigned GetPower(unsigned lQuestionIdx)
+// 525  {
 
 LM13:
-	     .stabn 68,0,524,LM13-_GetPower
+	     .stabn 68,0,525,LM13-_GetPower
 BB1_PU4:	// 0x57
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:524]  
-	     SP = SP - 2              	// [2:524]  
-	     BP = SP + 1              	// [3:524]  
+	     push BP to [SP]          	// [0:525]  
+	     SP = SP - 2              	// [2:525]  
+	     BP = SP + 1              	// [3:525]  
 LBB6:
-// 525  	unsigned long Addr;
-// 526  	Addr = lQuestionIdx + C_TablePowerAddr;
+// 526  	unsigned long Addr;
+// 527  	Addr = lQuestionIdx + C_TablePowerAddr;
 
 LM14:
-	     .stabn 68,0,526,LM14-_GetPower
-	     R3 = [BP + 5]            	// [5:526]  lQuestionIdx
-	     R4 = 0                   	// [7:526]  
-	     R3 = R3 + 36500          	// [8:526]  
-	     R4 = R4 + 0, Carry       	// [10:526]  
-	     [BP + 0] = R3            	// [11:526]  Addr
-	     [BP + 1] = R4            	// [12:526]  Addr+1
-// 527  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,527,LM14-_GetPower
+	     R3 = [BP + 5]            	// [5:527]  lQuestionIdx
+	     R4 = 0                   	// [7:527]  
+	     R3 = R3 + 36500          	// [8:527]  
+	     R4 = R4 + 0, Carry       	// [10:527]  
+	     [BP + 0] = R3            	// [11:527]  Addr
+	     [BP + 1] = R4            	// [12:527]  Addr+1
+// 528  	return SPI_ReadAByte(Addr);
 
 LM15:
-	     .stabn 68,0,527,LM15-_GetPower
-	     SP = SP - 2              	// [13:527]  
-	     R2 = [BP + 0]            	// [14:527]  Addr
-	     R3 = [BP + 1]            	// [16:527]  Addr+1
-	     R4 = SP + 1              	// [18:527]  
-	     [R4++] = R2              	// [20:527]  
-	     [R4] = R3                	// [22:527]  
-	     call _SPI_ReadAByte      	// [24:527]  SPI_ReadAByte
+	     .stabn 68,0,528,LM15-_GetPower
+	     SP = SP - 2              	// [13:528]  
+	     R2 = [BP + 0]            	// [14:528]  Addr
+	     R3 = [BP + 1]            	// [16:528]  Addr+1
+	     R4 = SP + 1              	// [18:528]  
+	     [R4++] = R2              	// [20:528]  
+	     [R4] = R3                	// [22:528]  
+	     call _SPI_ReadAByte      	// [24:528]  SPI_ReadAByte
 BB2_PU4:	// 0x6b
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:527]  
-	     pop BP, PC from [SP]     	// [1:527]  
+	     SP = SP + 4              	// [0:528]  
+	     pop BP, PC from [SP]     	// [1:528]  
 LBE6:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -725,44 +728,44 @@ _GetEnvir: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 528  }
-// 529  unsigned GetEnvir(unsigned lQuestionIdx)
-// 530  {
+// 529  }
+// 530  unsigned GetEnvir(unsigned lQuestionIdx)
+// 531  {
 
 LM16:
-	     .stabn 68,0,530,LM16-_GetEnvir
+	     .stabn 68,0,531,LM16-_GetEnvir
 BB1_PU5:	// 0x6d
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:530]  
-	     SP = SP - 2              	// [2:530]  
-	     BP = SP + 1              	// [3:530]  
+	     push BP to [SP]          	// [0:531]  
+	     SP = SP - 2              	// [2:531]  
+	     BP = SP + 1              	// [3:531]  
 LBB7:
-// 531  	unsigned long Addr;
-// 532  	Addr = lQuestionIdx + C_MissionEnvirAddr;
+// 532  	unsigned long Addr;
+// 533  	Addr = lQuestionIdx + C_MissionEnvirAddr;
 
 LM17:
-	     .stabn 68,0,532,LM17-_GetEnvir
-	     R3 = [BP + 5]            	// [5:532]  lQuestionIdx
-	     R4 = 0                   	// [7:532]  
-	     R3 = R3 + 37500          	// [8:532]  
-	     R4 = R4 + 0, Carry       	// [10:532]  
-	     [BP + 0] = R3            	// [11:532]  Addr
-	     [BP + 1] = R4            	// [12:532]  Addr+1
-// 533  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,533,LM17-_GetEnvir
+	     R3 = [BP + 5]            	// [5:533]  lQuestionIdx
+	     R4 = 0                   	// [7:533]  
+	     R3 = R3 + 37500          	// [8:533]  
+	     R4 = R4 + 0, Carry       	// [10:533]  
+	     [BP + 0] = R3            	// [11:533]  Addr
+	     [BP + 1] = R4            	// [12:533]  Addr+1
+// 534  	return SPI_ReadAByte(Addr);
 
 LM18:
-	     .stabn 68,0,533,LM18-_GetEnvir
-	     SP = SP - 2              	// [13:533]  
-	     R2 = [BP + 0]            	// [14:533]  Addr
-	     R3 = [BP + 1]            	// [16:533]  Addr+1
-	     R4 = SP + 1              	// [18:533]  
-	     [R4++] = R2              	// [20:533]  
-	     [R4] = R3                	// [22:533]  
-	     call _SPI_ReadAByte      	// [24:533]  SPI_ReadAByte
+	     .stabn 68,0,534,LM18-_GetEnvir
+	     SP = SP - 2              	// [13:534]  
+	     R2 = [BP + 0]            	// [14:534]  Addr
+	     R3 = [BP + 1]            	// [16:534]  Addr+1
+	     R4 = SP + 1              	// [18:534]  
+	     [R4++] = R2              	// [20:534]  
+	     [R4] = R3                	// [22:534]  
+	     call _SPI_ReadAByte      	// [24:534]  SPI_ReadAByte
 BB2_PU5:	// 0x81
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:533]  
-	     pop BP, PC from [SP]     	// [1:533]  
+	     SP = SP + 4              	// [0:534]  
+	     pop BP, PC from [SP]     	// [1:534]  
 LBE7:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -781,45 +784,45 @@ _GetMission_Type: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 534  }
-// 535  
-// 536  unsigned GetMission_Type(unsigned lQuestionIdx)
-// 537  {
+// 535  }
+// 536  
+// 537  unsigned GetMission_Type(unsigned lQuestionIdx)
+// 538  {
 
 LM19:
-	     .stabn 68,0,537,LM19-_GetMission_Type
+	     .stabn 68,0,538,LM19-_GetMission_Type
 BB1_PU6:	// 0x83
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:537]  
-	     SP = SP - 2              	// [2:537]  
-	     BP = SP + 1              	// [3:537]  
+	     push BP to [SP]          	// [0:538]  
+	     SP = SP - 2              	// [2:538]  
+	     BP = SP + 1              	// [3:538]  
 LBB8:
-// 538  	unsigned long Addr;
-// 539  	Addr = lQuestionIdx + C_Mission_TypeAddr;
+// 539  	unsigned long Addr;
+// 540  	Addr = lQuestionIdx + C_Mission_TypeAddr;
 
 LM20:
-	     .stabn 68,0,539,LM20-_GetMission_Type
-	     R3 = [BP + 5]            	// [5:539]  lQuestionIdx
-	     R4 = 0                   	// [7:539]  
-	     R3 = R3 + 42500          	// [8:539]  
-	     R4 = R4 + 0, Carry       	// [10:539]  
-	     [BP + 0] = R3            	// [11:539]  Addr
-	     [BP + 1] = R4            	// [12:539]  Addr+1
-// 540  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,540,LM20-_GetMission_Type
+	     R3 = [BP + 5]            	// [5:540]  lQuestionIdx
+	     R4 = 0                   	// [7:540]  
+	     R3 = R3 + 42500          	// [8:540]  
+	     R4 = R4 + 0, Carry       	// [10:540]  
+	     [BP + 0] = R3            	// [11:540]  Addr
+	     [BP + 1] = R4            	// [12:540]  Addr+1
+// 541  	return SPI_ReadAByte(Addr);
 
 LM21:
-	     .stabn 68,0,540,LM21-_GetMission_Type
-	     SP = SP - 2              	// [13:540]  
-	     R2 = [BP + 0]            	// [14:540]  Addr
-	     R3 = [BP + 1]            	// [16:540]  Addr+1
-	     R4 = SP + 1              	// [18:540]  
-	     [R4++] = R2              	// [20:540]  
-	     [R4] = R3                	// [22:540]  
-	     call _SPI_ReadAByte      	// [24:540]  SPI_ReadAByte
+	     .stabn 68,0,541,LM21-_GetMission_Type
+	     SP = SP - 2              	// [13:541]  
+	     R2 = [BP + 0]            	// [14:541]  Addr
+	     R3 = [BP + 1]            	// [16:541]  Addr+1
+	     R4 = SP + 1              	// [18:541]  
+	     [R4++] = R2              	// [20:541]  
+	     [R4] = R3                	// [22:541]  
+	     call _SPI_ReadAByte      	// [24:541]  SPI_ReadAByte
 BB2_PU6:	// 0x97
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:540]  
-	     pop BP, PC from [SP]     	// [1:540]  
+	     SP = SP + 4              	// [0:541]  
+	     pop BP, PC from [SP]     	// [1:541]  
 LBE8:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -838,46 +841,46 @@ _GetElement_SP: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 541  }
-// 542  
-// 543  unsigned GetElement_SP(unsigned ElementsIdx)
-// 544  {
+// 542  }
+// 543  
+// 544  unsigned GetElement_SP(unsigned ElementsIdx)
+// 545  {
 
 LM22:
-	     .stabn 68,0,544,LM22-_GetElement_SP
+	     .stabn 68,0,545,LM22-_GetElement_SP
 BB1_PU7:	// 0x99
 // BB:1 cycle count: 28
-	     push BP to [SP]          	// [0:544]  
-	     SP = SP - 2              	// [2:544]  
-	     BP = SP + 1              	// [3:544]  
+	     push BP to [SP]          	// [0:545]  
+	     SP = SP - 2              	// [2:545]  
+	     BP = SP + 1              	// [3:545]  
 LBB9:
-// 545  	unsigned long Addr;
-// 546  	Addr = ElementsIdx*2 + C_Element_SP ;
+// 546  	unsigned long Addr;
+// 547  	Addr = ElementsIdx*2 + C_Element_SP ;
 
 LM23:
-	     .stabn 68,0,546,LM23-_GetElement_SP
-	     R4 = [BP + 5]            	// [5:546]  ElementsIdx
-	     R3 = R4 lsl 1            	// [7:546]  
-	     R4 = 0                   	// [8:546]  
-	     R3 = R3 + 47400          	// [9:546]  
-	     R4 = R4 + 0, Carry       	// [11:546]  
-	     [BP + 0] = R3            	// [12:546]  Addr
-	     [BP + 1] = R4            	// [13:546]  Addr+1
-// 547  	return SPI_ReadAWord_Big(Addr);
+	     .stabn 68,0,547,LM23-_GetElement_SP
+	     R4 = [BP + 5]            	// [5:547]  ElementsIdx
+	     R3 = R4 lsl 1            	// [7:547]  
+	     R4 = 0                   	// [8:547]  
+	     R3 = R3 + 47400          	// [9:547]  
+	     R4 = R4 + 0, Carry       	// [11:547]  
+	     [BP + 0] = R3            	// [12:547]  Addr
+	     [BP + 1] = R4            	// [13:547]  Addr+1
+// 548  	return SPI_ReadAWord_Big(Addr);
 
 LM24:
-	     .stabn 68,0,547,LM24-_GetElement_SP
-	     SP = SP - 2              	// [14:547]  
-	     R2 = [BP + 0]            	// [15:547]  Addr
-	     R3 = [BP + 1]            	// [17:547]  Addr+1
-	     R4 = SP + 1              	// [19:547]  
-	     [R4++] = R2              	// [21:547]  
-	     [R4] = R3                	// [23:547]  
-	     call _SPI_ReadAWord_Big  	// [25:547]  SPI_ReadAWord_Big
+	     .stabn 68,0,548,LM24-_GetElement_SP
+	     SP = SP - 2              	// [14:548]  
+	     R2 = [BP + 0]            	// [15:548]  Addr
+	     R3 = [BP + 1]            	// [17:548]  Addr+1
+	     R4 = SP + 1              	// [19:548]  
+	     [R4++] = R2              	// [21:548]  
+	     [R4] = R3                	// [23:548]  
+	     call _SPI_ReadAWord_Big  	// [25:548]  SPI_ReadAWord_Big
 BB2_PU7:	// 0xae
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:547]  
-	     pop BP, PC from [SP]     	// [1:547]  
+	     SP = SP + 4              	// [0:548]  
+	     pop BP, PC from [SP]     	// [1:548]  
 LBE9:
 	.endp	
 	     .stabs "ElementsIdx:p4",160,0,0,5
@@ -896,46 +899,46 @@ _GetEnvir_Pok: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 551  
 // 552  
 // 553  
-// 554  unsigned GetEnvir_Pok(unsigned lQuestionIdx)
-// 555  {
+// 554  
+// 555  unsigned GetEnvir_Pok(unsigned lQuestionIdx)
+// 556  {
 
 LM25:
-	     .stabn 68,0,555,LM25-_GetEnvir_Pok
+	     .stabn 68,0,556,LM25-_GetEnvir_Pok
 BB1_PU8:	// 0xb0
 // BB:1 cycle count: 27
-	     push BP to [SP]          	// [0:555]  
-	     SP = SP - 2              	// [2:555]  
-	     BP = SP + 1              	// [3:555]  
+	     push BP to [SP]          	// [0:556]  
+	     SP = SP - 2              	// [2:556]  
+	     BP = SP + 1              	// [3:556]  
 LBB10:
-// 556  	unsigned long Addr;
-// 557  	Addr = lQuestionIdx + C_PokEnvirAddr;
+// 557  	unsigned long Addr;
+// 558  	Addr = lQuestionIdx + C_PokEnvirAddr;
 
 LM26:
-	     .stabn 68,0,557,LM26-_GetEnvir_Pok
-	     R3 = [BP + 5]            	// [5:557]  lQuestionIdx
-	     R4 = 0                   	// [7:557]  
-	     R3 = R3 + 49400          	// [8:557]  
-	     R4 = R4 + 0, Carry       	// [10:557]  
-	     [BP + 0] = R3            	// [11:557]  Addr
-	     [BP + 1] = R4            	// [12:557]  Addr+1
-// 558  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,558,LM26-_GetEnvir_Pok
+	     R3 = [BP + 5]            	// [5:558]  lQuestionIdx
+	     R4 = 0                   	// [7:558]  
+	     R3 = R3 + 49400          	// [8:558]  
+	     R4 = R4 + 0, Carry       	// [10:558]  
+	     [BP + 0] = R3            	// [11:558]  Addr
+	     [BP + 1] = R4            	// [12:558]  Addr+1
+// 559  	return SPI_ReadAByte(Addr);
 
 LM27:
-	     .stabn 68,0,558,LM27-_GetEnvir_Pok
-	     SP = SP - 2              	// [13:558]  
-	     R2 = [BP + 0]            	// [14:558]  Addr
-	     R3 = [BP + 1]            	// [16:558]  Addr+1
-	     R4 = SP + 1              	// [18:558]  
-	     [R4++] = R2              	// [20:558]  
-	     [R4] = R3                	// [22:558]  
-	     call _SPI_ReadAByte      	// [24:558]  SPI_ReadAByte
+	     .stabn 68,0,559,LM27-_GetEnvir_Pok
+	     SP = SP - 2              	// [13:559]  
+	     R2 = [BP + 0]            	// [14:559]  Addr
+	     R3 = [BP + 1]            	// [16:559]  Addr+1
+	     R4 = SP + 1              	// [18:559]  
+	     [R4++] = R2              	// [20:559]  
+	     [R4] = R3                	// [22:559]  
+	     call _SPI_ReadAByte      	// [24:559]  SPI_ReadAByte
 BB2_PU8:	// 0xc4
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:558]  
-	     pop BP, PC from [SP]     	// [1:558]  
+	     SP = SP + 4              	// [0:559]  
+	     pop BP, PC from [SP]     	// [1:559]  
 LBE10:
 	.endp	
 	     .stabs "lQuestionIdx:p4",160,0,0,5
@@ -954,45 +957,45 @@ _GetMission_name: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 559  }
-// 560  
+// 560  }
 // 561  
-// 562  unsigned GetMission_name(unsigned ElementsIdx)
-// 563  {
+// 562  
+// 563  unsigned GetMission_name(unsigned ElementsIdx)
+// 564  {
 
 LM28:
-	     .stabn 68,0,563,LM28-_GetMission_name
+	     .stabn 68,0,564,LM28-_GetMission_name
 BB1_PU9:	// 0xc6
 // BB:1 cycle count: 26
-	     push BP to [SP]          	// [0:563]  
-	     SP = SP - 2              	// [2:563]  
-	     BP = SP + 1              	// [3:563]  
+	     push BP to [SP]          	// [0:564]  
+	     SP = SP - 2              	// [2:564]  
+	     BP = SP + 1              	// [3:564]  
 LBB11:
-// 564  	unsigned long Addr;
-// 565  	Addr = ElementsIdx + T_Mission_name;
+// 565  	unsigned long Addr;
+// 566  	Addr = ElementsIdx + T_Mission_name;
 
 LM29:
-	     .stabn 68,0,565,LM29-_GetMission_name
-	     R4 = [BP + 5]            	// [5:565]  ElementsIdx
-	     R4 = R4 + 1000           	// [7:565]  
-	     R3 = 0                   	// [9:565]  
-	     [BP + 0] = R4            	// [10:565]  Addr
-	     [BP + 1] = R3            	// [11:565]  Addr+1
-// 566  	return SPI_ReadAByte(Addr);
+	     .stabn 68,0,566,LM29-_GetMission_name
+	     R4 = [BP + 5]            	// [5:566]  ElementsIdx
+	     R4 = R4 + 1000           	// [7:566]  
+	     R3 = 0                   	// [9:566]  
+	     [BP + 0] = R4            	// [10:566]  Addr
+	     [BP + 1] = R3            	// [11:566]  Addr+1
+// 567  	return SPI_ReadAByte(Addr);
 
 LM30:
-	     .stabn 68,0,566,LM30-_GetMission_name
-	     SP = SP - 2              	// [12:566]  
-	     R2 = [BP + 0]            	// [13:566]  Addr
-	     R3 = [BP + 1]            	// [15:566]  Addr+1
-	     R4 = SP + 1              	// [17:566]  
-	     [R4++] = R2              	// [19:566]  
-	     [R4] = R3                	// [21:566]  
-	     call _SPI_ReadAByte      	// [23:566]  SPI_ReadAByte
+	     .stabn 68,0,567,LM30-_GetMission_name
+	     SP = SP - 2              	// [12:567]  
+	     R2 = [BP + 0]            	// [13:567]  Addr
+	     R3 = [BP + 1]            	// [15:567]  Addr+1
+	     R4 = SP + 1              	// [17:567]  
+	     [R4++] = R2              	// [19:567]  
+	     [R4] = R3                	// [21:567]  
+	     call _SPI_ReadAByte      	// [23:567]  SPI_ReadAByte
 BB2_PU9:	// 0xd9
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:566]  
-	     pop BP, PC from [SP]     	// [1:566]  
+	     SP = SP + 4              	// [0:567]  
+	     pop BP, PC from [SP]     	// [1:567]  
 LBE11:
 	.endp	
 	     .stabs "ElementsIdx:p4",160,0,0,5
@@ -1011,53 +1014,53 @@ _Get_Move_data: .proc
 	// Addr = 0
 	// old_frame_pointer = 2
 	// return_address = 3
-// 567  }
-// 568  
-// 569  unsigned int Get_Move_data(unsigned int Move_cnt)
-// 570  {
+// 568  }
+// 569  
+// 570  unsigned int Get_Move_data(unsigned int Move_cnt)
+// 571  {
 
 LM31:
-	     .stabn 68,0,570,LM31-_Get_Move_data
+	     .stabn 68,0,571,LM31-_Get_Move_data
 BB1_PU10:	// 0xdb
 // BB:1 cycle count: 35
-	     push BP to [SP]          	// [0:570]  
-	     SP = SP - 2              	// [2:570]  
-	     BP = SP + 1              	// [3:570]  
+	     push BP to [SP]          	// [0:571]  
+	     SP = SP - 2              	// [2:571]  
+	     BP = SP + 1              	// [3:571]  
 LBB12:
-// 571  
 // 572  
-// 573  	unsigned long Addr;
-// 574      Addr = Mem0.Mission_Cur *R_MoveNum*2 + Move_cnt*2 + T_Move_Data;
+// 573  
+// 574  	unsigned long Addr;
+// 575      Addr = Mem0.Mission_Cur *R_MoveNum*2 + Move_cnt*2 + T_Move_Data;
 
 LM32:
-	     .stabn 68,0,574,LM32-_Get_Move_data
-	     DS = seg(_Mem0)          	// [5:574]  Mem0
-	     R4 = (_Mem0)             	// [6:574]  Mem0
-	     R3 = DS:[R4]             	// [8:574]  
-	     R4 = 23                  	// [10:574]  
-	     MR = R3 * R4, uu         	// [11:574]  
-	     R4 = R3                  	// [12:574]  
-	     R4 = R4 + [BP + 5]       	// [13:574]  Move_cnt
-	     R4 = R4 lsl 1            	// [15:574]  
-	     R4 = R4 + 26000          	// [16:574]  
-	     R3 = 0                   	// [18:574]  
-	     [BP + 0] = R4            	// [19:574]  Addr
-	     [BP + 1] = R3            	// [20:574]  Addr+1
-// 575  	return SPI_ReadAWord_Big(Addr);
+	     .stabn 68,0,575,LM32-_Get_Move_data
+	     DS = seg(_Mem0)          	// [5:575]  Mem0
+	     R4 = (_Mem0)             	// [6:575]  Mem0
+	     R3 = DS:[R4]             	// [8:575]  
+	     R4 = 23                  	// [10:575]  
+	     MR = R3 * R4, uu         	// [11:575]  
+	     R4 = R3                  	// [12:575]  
+	     R4 = R4 + [BP + 5]       	// [13:575]  Move_cnt
+	     R4 = R4 lsl 1            	// [15:575]  
+	     R4 = R4 + 26000          	// [16:575]  
+	     R3 = 0                   	// [18:575]  
+	     [BP + 0] = R4            	// [19:575]  Addr
+	     [BP + 1] = R3            	// [20:575]  Addr+1
+// 576  	return SPI_ReadAWord_Big(Addr);
 
 LM33:
-	     .stabn 68,0,575,LM33-_Get_Move_data
-	     SP = SP - 2              	// [21:575]  
-	     R2 = [BP + 0]            	// [22:575]  Addr
-	     R3 = [BP + 1]            	// [24:575]  Addr+1
-	     R4 = SP + 1              	// [26:575]  
-	     [R4++] = R2              	// [28:575]  
-	     [R4] = R3                	// [30:575]  
-	     call _SPI_ReadAWord_Big  	// [32:575]  SPI_ReadAWord_Big
+	     .stabn 68,0,576,LM33-_Get_Move_data
+	     SP = SP - 2              	// [21:576]  
+	     R2 = [BP + 0]            	// [22:576]  Addr
+	     R3 = [BP + 1]            	// [24:576]  Addr+1
+	     R4 = SP + 1              	// [26:576]  
+	     [R4++] = R2              	// [28:576]  
+	     [R4] = R3                	// [30:576]  
+	     call _SPI_ReadAWord_Big  	// [32:576]  SPI_ReadAWord_Big
 BB2_PU10:	// 0xf6
 // BB:2 cycle count: 6
-	     SP = SP + 4              	// [0:575]  
-	     pop BP, PC from [SP]     	// [1:575]  
+	     SP = SP + 4              	// [0:576]  
+	     pop BP, PC from [SP]     	// [1:576]  
 LBE12:
 	.endp	
 	     .stabs "Move_cnt:p4",160,0,0,5
@@ -1077,65 +1080,65 @@ _Get_MoveText_data: .proc
 	// old_frame_pointer = 3
 	// return_address = 4
 	// lra_spill_temp_0 = 2
-// 577  
-// 578  }
-// 579  
-// 580  unsigned int Get_MoveText_data(unsigned int Move_cnt,unsigned int text_cnt)
-// 581  {
+// 578  
+// 579  }
+// 580  
+// 581  unsigned int Get_MoveText_data(unsigned int Move_cnt,unsigned int text_cnt)
+// 582  {
 
 LM34:
-	     .stabn 68,0,581,LM34-_Get_MoveText_data
+	     .stabn 68,0,582,LM34-_Get_MoveText_data
 BB1_PU11:	// 0xf8
 // BB:1 cycle count: 51
-	     push BP to [SP]          	// [0:581]  
-	     SP = SP - 3              	// [2:581]  
-	     BP = SP + 1              	// [3:581]  
+	     push BP to [SP]          	// [0:582]  
+	     SP = SP - 3              	// [2:582]  
+	     BP = SP + 1              	// [3:582]  
 LBB13:
-// 582        unsigned long Addr;
-// 583             Addr=   Mem0.Mission_Cur*3+ Movetext_Table[Move_cnt][text_cnt];
+// 583        unsigned long Addr;
+// 584             Addr=   Mem0.Mission_Cur*3+ Movetext_Table[Move_cnt][text_cnt];
 
 LM35:
-	     .stabn 68,0,583,LM35-_Get_MoveText_data
-	     R4 = [BP + 7]            	// [5:583]  text_cnt
-	     [BP + 2] = R4            	// [7:583]  lra_spill_temp_0
-	     R3 = (_Movetext_Table)   	// [8:583]  Movetext_Table
-	     R4 = seg(_Movetext_Table)	// [10:583]  Movetext_Table
-	     R2 = [BP + 6]            	// [11:583]  Move_cnt
-	     R1 = 0                   	// [13:583]  
-	     test R2, R2 lsl 4        	// [14:583]  
-	     R1 = R1 rol 1            	// [15:583]  
-	     R2 = R2 lsl 1            	// [16:583]  
-	     R3 = R3 + R2             	// [17:583]  
-	     R4 = R4 + R1, Carry      	// [18:583]  
-	     R2 = [BP + 2]            	// [19:583]  lra_spill_temp_0
-	     R1 = 0                   	// [21:583]  
-	     R2 = R2 + R3             	// [22:583]  
-	     R1 = R1 + R4, Carry      	// [23:583]  
-	     DS = R1                  	// [24:583]  
-	     R4 = DS:[R2]             	// [25:583]  
-	     DS = seg(_Mem0)          	// [27:583]  Mem0
-	     R3 = (_Mem0)             	// [28:583]  Mem0
-	     R3 = DS:[R3]             	// [30:583]  
-	     R3 = R3 + R3 lsl 1       	// [32:583]  
-	     R4 = R4 + R3             	// [33:583]  
-	     R3 = 0                   	// [34:583]  
-	     [BP + 0] = R4            	// [35:583]  Addr
-	     [BP + 1] = R3            	// [36:583]  Addr+1
-// 584          return SPI_ReadAWord_Big(Addr);
+	     .stabn 68,0,584,LM35-_Get_MoveText_data
+	     R4 = [BP + 7]            	// [5:584]  text_cnt
+	     [BP + 2] = R4            	// [7:584]  lra_spill_temp_0
+	     R3 = (_Movetext_Table)   	// [8:584]  Movetext_Table
+	     R4 = seg(_Movetext_Table)	// [10:584]  Movetext_Table
+	     R2 = [BP + 6]            	// [11:584]  Move_cnt
+	     R1 = 0                   	// [13:584]  
+	     test R2, R2 lsl 4        	// [14:584]  
+	     R1 = R1 rol 1            	// [15:584]  
+	     R2 = R2 lsl 1            	// [16:584]  
+	     R3 = R3 + R2             	// [17:584]  
+	     R4 = R4 + R1, Carry      	// [18:584]  
+	     R2 = [BP + 2]            	// [19:584]  lra_spill_temp_0
+	     R1 = 0                   	// [21:584]  
+	     R2 = R2 + R3             	// [22:584]  
+	     R1 = R1 + R4, Carry      	// [23:584]  
+	     DS = R1                  	// [24:584]  
+	     R4 = DS:[R2]             	// [25:584]  
+	     DS = seg(_Mem0)          	// [27:584]  Mem0
+	     R3 = (_Mem0)             	// [28:584]  Mem0
+	     R3 = DS:[R3]             	// [30:584]  
+	     R3 = R3 + R3 lsl 1       	// [32:584]  
+	     R4 = R4 + R3             	// [33:584]  
+	     R3 = 0                   	// [34:584]  
+	     [BP + 0] = R4            	// [35:584]  Addr
+	     [BP + 1] = R3            	// [36:584]  Addr+1
+// 585          return SPI_ReadAWord_Big(Addr);
 
 LM36:
-	     .stabn 68,0,584,LM36-_Get_MoveText_data
-	     SP = SP - 2              	// [37:584]  
-	     R2 = [BP + 0]            	// [38:584]  Addr
-	     R3 = [BP + 1]            	// [40:584]  Addr+1
-	     R4 = SP + 1              	// [42:584]  
-	     [R4++] = R2              	// [44:584]  
-	     [R4] = R3                	// [46:584]  
-	     call _SPI_ReadAWord_Big  	// [48:584]  SPI_ReadAWord_Big
+	     .stabn 68,0,585,LM36-_Get_MoveText_data
+	     SP = SP - 2              	// [37:585]  
+	     R2 = [BP + 0]            	// [38:585]  Addr
+	     R3 = [BP + 1]            	// [40:585]  Addr+1
+	     R4 = SP + 1              	// [42:585]  
+	     [R4++] = R2              	// [44:585]  
+	     [R4] = R3                	// [46:585]  
+	     call _SPI_ReadAWord_Big  	// [48:585]  SPI_ReadAWord_Big
 BB2_PU11:	// 0x120
 // BB:2 cycle count: 6
-	     SP = SP + 5              	// [0:584]  
-	     pop BP, PC from [SP]     	// [1:584]  
+	     SP = SP + 5              	// [0:585]  
+	     pop BP, PC from [SP]     	// [1:585]  
 LBE13:
 	.endp	
 	     .stabs "Move_cnt:p4",160,0,0,6
@@ -1154,52 +1157,52 @@ _delay_time: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-// 663  
-// 664  /*************************************************************
-// 665  **************************************************************/
-// 666  void delay_time(unsigned T_cnt)
-// 667  {
+// 664  
+// 665  /*************************************************************
+// 666  **************************************************************/
+// 667  void delay_time(unsigned T_cnt)
+// 668  {
 
 LM37:
-	     .stabn 68,0,667,LM37-_delay_time
+	     .stabn 68,0,668,LM37-_delay_time
 BB1_PU12:	// 0x122
 // BB:1 cycle count: 31
-	     push BP to [SP]          	// [0:667]  
-	     BP = SP + 1              	// [2:667]  
-// 668  
-// 669  	TimeCnt =1;
+	     push BP to [SP]          	// [0:668]  
+	     BP = SP + 1              	// [2:668]  
+// 669  
+// 670  	TimeCnt =1;
 
 LM38:
-	     .stabn 68,0,669,LM38-_delay_time
-	     R3 = 1                   	// [4:669]  
-	     DS = seg(_TimeCnt)       	// [5:669]  TimeCnt
-	     R4 = (_TimeCnt)          	// [6:669]  TimeCnt
-	     DS:[R4] = R3             	// [8:669]  
-// 670  	Time_Countdown = T_cnt;
+	     .stabn 68,0,670,LM38-_delay_time
+	     R3 = 1                   	// [4:670]  
+	     DS = seg(_TimeCnt)       	// [5:670]  TimeCnt
+	     R4 = (_TimeCnt)          	// [6:670]  TimeCnt
+	     DS:[R4] = R3             	// [8:670]  
+// 671  	Time_Countdown = T_cnt;
 
 LM39:
-	     .stabn 68,0,670,LM39-_delay_time
-	     R3 = [BP + 3]            	// [10:670]  T_cnt
-	     DS = seg(_Time_Countdown)	// [12:670]  Time_Countdown
-	     R4 = (_Time_Countdown)   	// [13:670]  Time_Countdown
-	     DS:[R4] = R3             	// [15:670]  
-// 671  
-// 672  	Get_Key(1,0);
+	     .stabn 68,0,671,LM39-_delay_time
+	     R3 = [BP + 3]            	// [10:671]  T_cnt
+	     DS = seg(_Time_Countdown)	// [12:671]  Time_Countdown
+	     R4 = (_Time_Countdown)   	// [13:671]  Time_Countdown
+	     DS:[R4] = R3             	// [15:671]  
+// 672  
+// 673  	Get_Key(1,0);
 
 LM40:
-	     .stabn 68,0,672,LM40-_delay_time
-	     SP = SP - 2              	// [17:672]  
-	     R3 = 1                   	// [18:672]  
-	     R4 = SP + 1              	// [19:672]  
-	     [R4] = R3                	// [21:672]  
-	     R3 = 0                   	// [23:672]  
-	     R4 = SP + 2              	// [24:672]  
-	     [R4] = R3                	// [26:672]  
-	     call _Get_Key            	// [28:672]  Get_Key
+	     .stabn 68,0,673,LM40-_delay_time
+	     SP = SP - 2              	// [17:673]  
+	     R3 = 1                   	// [18:673]  
+	     R4 = SP + 1              	// [19:673]  
+	     [R4] = R3                	// [21:673]  
+	     R3 = 0                   	// [23:673]  
+	     R4 = SP + 2              	// [24:673]  
+	     [R4] = R3                	// [26:673]  
+	     call _Get_Key            	// [28:673]  Get_Key
 BB2_PU12:	// 0x13a
 // BB:2 cycle count: 6
-	     SP = SP + 2              	// [0:672]  
-	     pop BP, PC from [SP]     	// [1:672]  
+	     SP = SP + 2              	// [0:673]  
+	     pop BP, PC from [SP]     	// [1:673]  
 	.endp	
 	     .stabs "T_cnt:p4",160,0,0,3
 LME13:
@@ -1213,59 +1216,59 @@ _Demo: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-// 679  
-// 680  /*******************************************************
-// 681  ************************************************************/
-// 682  void Demo()
-// 683  {
+// 680  
+// 681  /*******************************************************
+// 682  ************************************************************/
+// 683  void Demo()
+// 684  {
 
 LM41:
-	     .stabn 68,0,683,LM41-_Demo
+	     .stabn 68,0,684,LM41-_Demo
 BB1_PU13:	// 0x13c
 // BB:1 cycle count: 19
-	     push BP to [SP]          	// [0:683]  
-	     BP = SP + 1              	// [2:683]  
-// 687  //	  unsigned int Demo_points = 0;
-// 688  //	  unsigned int LQ_Demo = 0x07;
-// 689  	  
-// 690  //	    Qn =0;
-// 691          PassFlag =0;//xiang 20150727
+	     push BP to [SP]          	// [0:684]  
+	     BP = SP + 1              	// [2:684]  
+// 688  //	  unsigned int Demo_points = 0;
+// 689  //	  unsigned int LQ_Demo = 0x07;
+// 690  	  
+// 691  //	    Qn =0;
+// 692          PassFlag =0;//xiang 20150727
 
 LM42:
-	     .stabn 68,0,691,LM42-_Demo
-	     R3 = 0                   	// [4:691]  
-	     DS = seg(_PassFlag)      	// [5:691]  PassFlag
-	     R4 = (_PassFlag)         	// [6:691]  PassFlag
-	     DS:[R4] = R3             	// [8:691]  
-// 703  //	    Question_Answer=0;
-// 704  
-// 705  //		PlayScoresFlag =1;//���ñ�����
-// 706  
-// 707  	    BlinkFlag_Data =0;
+	     .stabn 68,0,692,LM42-_Demo
+	     R3 = 0                   	// [4:692]  
+	     DS = seg(_PassFlag)      	// [5:692]  PassFlag
+	     R4 = (_PassFlag)         	// [6:692]  PassFlag
+	     DS:[R4] = R3             	// [8:692]  
+// 704  //	    Question_Answer=0;
+// 705  
+// 706  //		PlayScoresFlag =1;//���ñ�����
+// 707  
+// 708  	    BlinkFlag_Data =0;
 
 LM43:
-	     .stabn 68,0,707,LM43-_Demo
-	     R3 = 0                   	// [10:707]  
-	     DS = seg(_BlinkFlag_Data)	// [11:707]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [12:707]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [14:707]  
-// 708  		Light_all_off();
+	     .stabn 68,0,708,LM43-_Demo
+	     R3 = 0                   	// [10:708]  
+	     DS = seg(_BlinkFlag_Data)	// [11:708]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [12:708]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [14:708]  
+// 709  		Light_all_off();
 
 LM44:
-	     .stabn 68,0,708,LM44-_Demo
-	     call _Light_all_off      	// [16:708]  Light_all_off
+	     .stabn 68,0,709,LM44-_Demo
+	     call _Light_all_off      	// [16:709]  Light_all_off
 BB2_PU13:	// 0x14b
 // BB:2 cycle count: 12
-// 709  
-// 710  	   Eventflag = E_Demo;
+// 710  
+// 711  	   Eventflag = E_Demo;
 
 LM45:
-	     .stabn 68,0,710,LM45-_Demo
-	     R3 = 255                 	// [0:710]  
-	     DS = seg(_Eventflag)     	// [2:710]  Eventflag
-	     R4 = (_Eventflag)        	// [3:710]  Eventflag
-	     DS:[R4] = R3             	// [5:710]  
-	     pop BP, PC from [SP]     	// [7:710]  
+	     .stabn 68,0,711,LM45-_Demo
+	     R3 = 255                 	// [0:711]  
+	     DS = seg(_Eventflag)     	// [2:711]  Eventflag
+	     R4 = (_Eventflag)        	// [3:711]  Eventflag
+	     DS:[R4] = R3             	// [5:711]  
+	     pop BP, PC from [SP]     	// [7:711]  
 	.endp	
 LME14:
 	     .stabf LME14-_Demo
@@ -1278,36 +1281,36 @@ _Led_ON_Some: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-// 721  
-// 722  /***************************************************************
-// 723  *************************************************************/
-// 724  void  Led_ON_Some(unsigned int data)
-// 725  {
+// 722  
+// 723  /***************************************************************
+// 724  *************************************************************/
+// 725  void  Led_ON_Some(unsigned int data)
+// 726  {
 
 LM46:
-	     .stabn 68,0,725,LM46-_Led_ON_Some
+	     .stabn 68,0,726,LM46-_Led_ON_Some
 BB1_PU14:	// 0x152
 // BB:1 cycle count: 23
-	     push BP to [SP]          	// [0:725]  
-	     BP = SP + 1              	// [2:725]  
-// 726  //         #ifdef C_GPCE2064  
-// 727  //         		   *(P_IOB_Buffer)|=data&0x0f;
-// 728  //         		   *(P_IOA_Buffer)|=data&LED_Yellow;
-// 729  //         #else
-// 730           		   *(P_IOA_Buffer)|=data;
+	     push BP to [SP]          	// [0:726]  
+	     BP = SP + 1              	// [2:726]  
+// 727  //         #ifdef C_GPCE2064  
+// 728  //         		   *(P_IOB_Buffer)|=data&0x0f;
+// 729  //         		   *(P_IOA_Buffer)|=data&LED_Yellow;
+// 730  //         #else
+// 731           		   *(P_IOA_Buffer)|=data;
 
 LM47:
-	     .stabn 68,0,730,LM47-_Led_ON_Some
-	     R3 = 12289               	// [4:730]  
-	     R4 = 0                   	// [6:730]  
-	     DS = R4                  	// [7:730]  
-	     R4 = DS:[R3]             	// [8:730]  
-	     R4 = R4 | [BP + 3]       	// [10:730]  data
-	     R2 = 12289               	// [12:730]  
-	     R3 = 0                   	// [14:730]  
-	     DS = R3                  	// [15:730]  
-	     DS:[R2] = R4             	// [16:730]  
-	     pop BP, PC from [SP]     	// [18:730]  
+	     .stabn 68,0,731,LM47-_Led_ON_Some
+	     R3 = 12289               	// [4:731]  
+	     R4 = 0                   	// [6:731]  
+	     DS = R4                  	// [7:731]  
+	     R4 = DS:[R3]             	// [8:731]  
+	     R4 = R4 | [BP + 3]       	// [10:731]  data
+	     R2 = 12289               	// [12:731]  
+	     R3 = 0                   	// [14:731]  
+	     DS = R3                  	// [15:731]  
+	     DS:[R2] = R4             	// [16:731]  
+	     pop BP, PC from [SP]     	// [18:731]  
 	.endp	
 	     .stabs "data:p4",160,0,0,3
 LME15:
@@ -1321,38 +1324,38 @@ _Led_OFF_Some: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-// 736  
-// 737  /***************************************************************
-// 738  *************************************************************/
-// 739  void  Led_OFF_Some(unsigned int data)
-// 740  {
+// 737  
+// 738  /***************************************************************
+// 739  *************************************************************/
+// 740  void  Led_OFF_Some(unsigned int data)
+// 741  {
 
 LM48:
-	     .stabn 68,0,740,LM48-_Led_OFF_Some
+	     .stabn 68,0,741,LM48-_Led_OFF_Some
 BB1_PU15:	// 0x161
 // BB:1 cycle count: 26
-	     push BP to [SP]          	// [0:740]  
-	     BP = SP + 1              	// [2:740]  
-// 741  //         #ifdef C_GPCE2064  
-// 742  //         		   *(P_IOB_Buffer)&=~(data&0x0f);
-// 743  //         		   *(P_IOA_Buffer)&=~(data&LED_Yellow);
-// 744  //         #else
-// 745           		   *(P_IOA_Buffer)&=~data;
+	     push BP to [SP]          	// [0:741]  
+	     BP = SP + 1              	// [2:741]  
+// 742  //         #ifdef C_GPCE2064  
+// 743  //         		   *(P_IOB_Buffer)&=~(data&0x0f);
+// 744  //         		   *(P_IOA_Buffer)&=~(data&LED_Yellow);
+// 745  //         #else
+// 746           		   *(P_IOA_Buffer)&=~data;
 
 LM49:
-	     .stabn 68,0,745,LM49-_Led_OFF_Some
-	     R3 = 12289               	// [4:745]  
-	     R4 = 0                   	// [6:745]  
-	     DS = R4                  	// [7:745]  
-	     R4 = DS:[R3]             	// [8:745]  
-	     R3 = [BP + 3]            	// [10:745]  data
-	     R3 = R3 ^ 65535          	// [12:745]  
-	     R4 = R4 & R3             	// [14:745]  
-	     R2 = 12289               	// [15:745]  
-	     R3 = 0                   	// [17:745]  
-	     DS = R3                  	// [18:745]  
-	     DS:[R2] = R4             	// [19:745]  
-	     pop BP, PC from [SP]     	// [21:745]  
+	     .stabn 68,0,746,LM49-_Led_OFF_Some
+	     R3 = 12289               	// [4:746]  
+	     R4 = 0                   	// [6:746]  
+	     DS = R4                  	// [7:746]  
+	     R4 = DS:[R3]             	// [8:746]  
+	     R3 = [BP + 3]            	// [10:746]  data
+	     R3 = R3 ^ 65535          	// [12:746]  
+	     R4 = R4 & R3             	// [14:746]  
+	     R2 = 12289               	// [15:746]  
+	     R3 = 0                   	// [17:746]  
+	     DS = R3                  	// [18:746]  
+	     DS:[R2] = R4             	// [19:746]  
+	     pop BP, PC from [SP]     	// [21:746]  
 	.endp	
 	     .stabs "data:p4",160,0,0,3
 LME16:
@@ -1369,99 +1372,99 @@ _Get_LQA: .proc
 	// old_frame_pointer = 3
 	// return_address = 4
 	// lra_spill_temp_1 = 2
-// 751  //==================================================
-// 752  //
-// 753  //==================================================
-// 754   unsigned Get_LQA(void)
-// 755  {
+// 752  //==================================================
+// 753  //
+// 754  //==================================================
+// 755   unsigned Get_LQA(void)
+// 756  {
 
 LM50:
-	     .stabn 68,0,755,LM50-_Get_LQA
+	     .stabn 68,0,756,LM50-_Get_LQA
 BB1_PU16:	// 0x173
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:755]  
-	     SP = SP - 3              	// [2:755]  
-	     BP = SP + 1              	// [3:755]  
+	     push BP to [SP]          	// [0:756]  
+	     SP = SP - 3              	// [2:756]  
+	     BP = SP + 1              	// [3:756]  
 LBB14:
-// 756  	unsigned temp = 0;
+// 757  	unsigned temp = 0;
 
 LM51:
-	     .stabn 68,0,756,LM51-_Get_LQA
-	     R4 = 0                   	// [5:756]  
-	     [BP + 0] = R4            	// [6:756]  temp
-// 757  	unsigned i = 0;
+	     .stabn 68,0,757,LM51-_Get_LQA
+	     R4 = 0                   	// [5:757]  
+	     [BP + 0] = R4            	// [6:757]  temp
+// 758  	unsigned i = 0;
 
 LM52:
-	     .stabn 68,0,757,LM52-_Get_LQA
-	     R4 = 0                   	// [7:757]  
-	     [BP + 1] = R4            	// [8:757]  i
+	     .stabn 68,0,758,LM52-_Get_LQA
+	     R4 = 0                   	// [7:758]  
+	     [BP + 1] = R4            	// [8:758]  i
 L_16_1:	// 0x17b
 // BB:2 cycle count: 12
-// 758  	while(i<R_QuestionNum)
+// 759  	while(i<R_QuestionNum)
 
 LM53:
-	     .stabn 68,0,758,LM53-_Get_LQA
-	     R3 = [BP + 1]            	// [0:758]  i
-	     DS = seg(_R_QuestionNum) 	// [2:758]  R_QuestionNum
-	     R4 = (_R_QuestionNum)    	// [3:758]  R_QuestionNum
-	     R4 = DS:[R4]             	// [5:758]  
-	     cmp R3, R4               	// [7:758]  
-	     jae L_16_2               	// [8:758]  
+	     .stabn 68,0,759,LM53-_Get_LQA
+	     R3 = [BP + 1]            	// [0:759]  i
+	     DS = seg(_R_QuestionNum) 	// [2:759]  R_QuestionNum
+	     R4 = (_R_QuestionNum)    	// [3:759]  R_QuestionNum
+	     R4 = DS:[R4]             	// [5:759]  
+	     cmp R3, R4               	// [7:759]  
+	     jae L_16_2               	// [8:759]  
 BB3_PU16:	// 0x182
 // BB:3 cycle count: 33
-// 759  	{
-// 760  		 if (BitMap[i%16]&Pokenm_LQ[i/16]) temp+=1;
+// 760  	{
+// 761  		 if (BitMap[i%16]&Pokenm_LQ[i/16]) temp+=1;
 
 LM54:
-	     .stabn 68,0,760,LM54-_Get_LQA
-	     R4 = [BP + 1]            	// [0:760]  i
-	     R4 = R4 & 15             	// [2:760]  
-	     R3 = 0                   	// [3:760]  
-	     R1 = (_BitMap)           	// [4:760]  BitMap
-	     R2 = seg(_BitMap)        	// [6:760]  BitMap
-	     R4 = R4 + R1             	// [7:760]  
-	     R3 = R3 + R2, Carry      	// [8:760]  
-	     DS = R3                  	// [9:760]  
-	     R4 = DS:[R4]             	// [10:760]  
-	     [BP + 2] = R4            	// [12:760]  lra_spill_temp_1
-	     R4 = [BP + 1]            	// [13:760]  i
-	     R4 = R4 lsr 4            	// [15:760]  
-	     R3 = 0                   	// [16:760]  
-	     R1 = (_Pokenm_LQ)        	// [17:760]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [19:760]  Pokenm_LQ
-	     R4 = R4 + R1             	// [20:760]  
-	     R3 = R3 + R2, Carry      	// [21:760]  
-	     DS = R3                  	// [22:760]  
-	     R3 = DS:[R4]             	// [23:760]  
-	     R4 = [BP + 2]            	// [25:760]  lra_spill_temp_1
-	     R4 = R4 & R3             	// [27:760]  
-	     cmp R4, 0                	// [28:760]  
-	     je L_16_3                	// [29:760]  
+	     .stabn 68,0,761,LM54-_Get_LQA
+	     R4 = [BP + 1]            	// [0:761]  i
+	     R4 = R4 & 15             	// [2:761]  
+	     R3 = 0                   	// [3:761]  
+	     R1 = (_BitMap)           	// [4:761]  BitMap
+	     R2 = seg(_BitMap)        	// [6:761]  BitMap
+	     R4 = R4 + R1             	// [7:761]  
+	     R3 = R3 + R2, Carry      	// [8:761]  
+	     DS = R3                  	// [9:761]  
+	     R4 = DS:[R4]             	// [10:761]  
+	     [BP + 2] = R4            	// [12:761]  lra_spill_temp_1
+	     R4 = [BP + 1]            	// [13:761]  i
+	     R4 = R4 lsr 4            	// [15:761]  
+	     R3 = 0                   	// [16:761]  
+	     R1 = (_Pokenm_LQ)        	// [17:761]  Pokenm_LQ
+	     R2 = seg(_Pokenm_LQ)     	// [19:761]  Pokenm_LQ
+	     R4 = R4 + R1             	// [20:761]  
+	     R3 = R3 + R2, Carry      	// [21:761]  
+	     DS = R3                  	// [22:761]  
+	     R3 = DS:[R4]             	// [23:761]  
+	     R4 = [BP + 2]            	// [25:761]  lra_spill_temp_1
+	     R4 = R4 & R3             	// [27:761]  
+	     cmp R4, 0                	// [28:761]  
+	     je L_16_3                	// [29:761]  
 BB4_PU16:	// 0x19b
 // BB:4 cycle count: 4
-	     R4 = [BP + 0]            	// [0:760]  temp
-	     R4 = R4 + 1              	// [2:760]  
-	     [BP + 0] = R4            	// [3:760]  temp
+	     R4 = [BP + 0]            	// [0:761]  temp
+	     R4 = R4 + 1              	// [2:761]  
+	     [BP + 0] = R4            	// [3:761]  temp
 L_16_3:	// 0x19e
 // BB:5 cycle count: 8
-// 761  		 i++;
+// 762  		 i++;
 
 LM55:
-	     .stabn 68,0,761,LM55-_Get_LQA
-	     R4 = [BP + 1]            	// [0:761]  i
-	     R4 = R4 + 1              	// [2:761]  
-	     [BP + 1] = R4            	// [3:761]  i
-	     jmp L_16_1               	// [4:761]  
+	     .stabn 68,0,762,LM55-_Get_LQA
+	     R4 = [BP + 1]            	// [0:762]  i
+	     R4 = R4 + 1              	// [2:762]  
+	     [BP + 1] = R4            	// [3:762]  i
+	     jmp L_16_1               	// [4:762]  
 L_16_2:	// 0x1a2
 // BB:6 cycle count: 8
-// 762  	}
-// 763  	return temp;
+// 763  	}
+// 764  	return temp;
 
 LM56:
-	     .stabn 68,0,763,LM56-_Get_LQA
-	     R1 = [BP + 0]            	// [0:763]  temp
-	     SP = SP + 3              	// [2:763]  
-	     pop BP, PC from [SP]     	// [3:763]  
+	     .stabn 68,0,764,LM56-_Get_LQA
+	     R1 = [BP + 0]            	// [0:764]  temp
+	     SP = SP + 3              	// [2:764]  
+	     pop BP, PC from [SP]     	// [3:764]  
 LBE14:
 	.endp	
 	     .stabn 192,0,0,LBB14-_Get_LQA
@@ -1482,99 +1485,99 @@ _Get_InCollection_Pok: .proc
 	// old_frame_pointer = 3
 	// return_address = 4
 	// lra_spill_temp_2 = 2
-// 776  //}
-// 777  
+// 777  //}
 // 778  
-// 779  unsigned Get_InCollection_Pok(void)
-// 780  {
+// 779  
+// 780  unsigned Get_InCollection_Pok(void)
+// 781  {
 
 LM57:
-	     .stabn 68,0,780,LM57-_Get_InCollection_Pok
+	     .stabn 68,0,781,LM57-_Get_InCollection_Pok
 BB1_PU17:	// 0x1a5
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:780]  
-	     SP = SP - 3              	// [2:780]  
-	     BP = SP + 1              	// [3:780]  
+	     push BP to [SP]          	// [0:781]  
+	     SP = SP - 3              	// [2:781]  
+	     BP = SP + 1              	// [3:781]  
 LBB15:
-// 781  	unsigned temp = 0;
+// 782  	unsigned temp = 0;
 
 LM58:
-	     .stabn 68,0,781,LM58-_Get_InCollection_Pok
-	     R4 = 0                   	// [5:781]  
-	     [BP + 0] = R4            	// [6:781]  temp
-// 782  	unsigned i = 0;
+	     .stabn 68,0,782,LM58-_Get_InCollection_Pok
+	     R4 = 0                   	// [5:782]  
+	     [BP + 0] = R4            	// [6:782]  temp
+// 783  	unsigned i = 0;
 
 LM59:
-	     .stabn 68,0,782,LM59-_Get_InCollection_Pok
-	     R4 = 0                   	// [7:782]  
-	     [BP + 1] = R4            	// [8:782]  i
+	     .stabn 68,0,783,LM59-_Get_InCollection_Pok
+	     R4 = 0                   	// [7:783]  
+	     [BP + 1] = R4            	// [8:783]  i
 L_17_1:	// 0x1ad
 // BB:2 cycle count: 12
-// 783  	while(i<R_QuestionNum)
+// 784  	while(i<R_QuestionNum)
 
 LM60:
-	     .stabn 68,0,783,LM60-_Get_InCollection_Pok
-	     R3 = [BP + 1]            	// [0:783]  i
-	     DS = seg(_R_QuestionNum) 	// [2:783]  R_QuestionNum
-	     R4 = (_R_QuestionNum)    	// [3:783]  R_QuestionNum
-	     R4 = DS:[R4]             	// [5:783]  
-	     cmp R3, R4               	// [7:783]  
-	     jae L_17_2               	// [8:783]  
+	     .stabn 68,0,784,LM60-_Get_InCollection_Pok
+	     R3 = [BP + 1]            	// [0:784]  i
+	     DS = seg(_R_QuestionNum) 	// [2:784]  R_QuestionNum
+	     R4 = (_R_QuestionNum)    	// [3:784]  R_QuestionNum
+	     R4 = DS:[R4]             	// [5:784]  
+	     cmp R3, R4               	// [7:784]  
+	     jae L_17_2               	// [8:784]  
 BB3_PU17:	// 0x1b4
 // BB:3 cycle count: 33
-// 784  	{
-// 785  		 if (BitMap[i%16]&InCollection_Pok[i/16]) temp+=1;
+// 785  	{
+// 786  		 if (BitMap[i%16]&InCollection_Pok[i/16]) temp+=1;
 
 LM61:
-	     .stabn 68,0,785,LM61-_Get_InCollection_Pok
-	     R4 = [BP + 1]            	// [0:785]  i
-	     R4 = R4 & 15             	// [2:785]  
-	     R3 = 0                   	// [3:785]  
-	     R1 = (_BitMap)           	// [4:785]  BitMap
-	     R2 = seg(_BitMap)        	// [6:785]  BitMap
-	     R4 = R4 + R1             	// [7:785]  
-	     R3 = R3 + R2, Carry      	// [8:785]  
-	     DS = R3                  	// [9:785]  
-	     R4 = DS:[R4]             	// [10:785]  
-	     [BP + 2] = R4            	// [12:785]  lra_spill_temp_2
-	     R4 = [BP + 1]            	// [13:785]  i
-	     R4 = R4 lsr 4            	// [15:785]  
-	     R3 = 0                   	// [16:785]  
-	     R1 = (_InCollection_Pok) 	// [17:785]  InCollection_Pok
-	     R2 = seg(_InCollection_Pok)	// [19:785]  InCollection_Pok
-	     R4 = R4 + R1             	// [20:785]  
-	     R3 = R3 + R2, Carry      	// [21:785]  
-	     DS = R3                  	// [22:785]  
-	     R3 = DS:[R4]             	// [23:785]  
-	     R4 = [BP + 2]            	// [25:785]  lra_spill_temp_2
-	     R4 = R4 & R3             	// [27:785]  
-	     cmp R4, 0                	// [28:785]  
-	     je L_17_3                	// [29:785]  
+	     .stabn 68,0,786,LM61-_Get_InCollection_Pok
+	     R4 = [BP + 1]            	// [0:786]  i
+	     R4 = R4 & 15             	// [2:786]  
+	     R3 = 0                   	// [3:786]  
+	     R1 = (_BitMap)           	// [4:786]  BitMap
+	     R2 = seg(_BitMap)        	// [6:786]  BitMap
+	     R4 = R4 + R1             	// [7:786]  
+	     R3 = R3 + R2, Carry      	// [8:786]  
+	     DS = R3                  	// [9:786]  
+	     R4 = DS:[R4]             	// [10:786]  
+	     [BP + 2] = R4            	// [12:786]  lra_spill_temp_2
+	     R4 = [BP + 1]            	// [13:786]  i
+	     R4 = R4 lsr 4            	// [15:786]  
+	     R3 = 0                   	// [16:786]  
+	     R1 = (_InCollection_Pok) 	// [17:786]  InCollection_Pok
+	     R2 = seg(_InCollection_Pok)	// [19:786]  InCollection_Pok
+	     R4 = R4 + R1             	// [20:786]  
+	     R3 = R3 + R2, Carry      	// [21:786]  
+	     DS = R3                  	// [22:786]  
+	     R3 = DS:[R4]             	// [23:786]  
+	     R4 = [BP + 2]            	// [25:786]  lra_spill_temp_2
+	     R4 = R4 & R3             	// [27:786]  
+	     cmp R4, 0                	// [28:786]  
+	     je L_17_3                	// [29:786]  
 BB4_PU17:	// 0x1cd
 // BB:4 cycle count: 4
-	     R4 = [BP + 0]            	// [0:785]  temp
-	     R4 = R4 + 1              	// [2:785]  
-	     [BP + 0] = R4            	// [3:785]  temp
+	     R4 = [BP + 0]            	// [0:786]  temp
+	     R4 = R4 + 1              	// [2:786]  
+	     [BP + 0] = R4            	// [3:786]  temp
 L_17_3:	// 0x1d0
 // BB:5 cycle count: 8
-// 786  		 i++;
+// 787  		 i++;
 
 LM62:
-	     .stabn 68,0,786,LM62-_Get_InCollection_Pok
-	     R4 = [BP + 1]            	// [0:786]  i
-	     R4 = R4 + 1              	// [2:786]  
-	     [BP + 1] = R4            	// [3:786]  i
-	     jmp L_17_1               	// [4:786]  
+	     .stabn 68,0,787,LM62-_Get_InCollection_Pok
+	     R4 = [BP + 1]            	// [0:787]  i
+	     R4 = R4 + 1              	// [2:787]  
+	     [BP + 1] = R4            	// [3:787]  i
+	     jmp L_17_1               	// [4:787]  
 L_17_2:	// 0x1d4
 // BB:6 cycle count: 8
-// 787  	}
-// 788  	return temp;
+// 788  	}
+// 789  	return temp;
 
 LM63:
-	     .stabn 68,0,788,LM63-_Get_InCollection_Pok
-	     R1 = [BP + 0]            	// [0:788]  temp
-	     SP = SP + 3              	// [2:788]  
-	     pop BP, PC from [SP]     	// [3:788]  
+	     .stabn 68,0,789,LM63-_Get_InCollection_Pok
+	     R1 = [BP + 0]            	// [0:789]  temp
+	     SP = SP + 3              	// [2:789]  
+	     pop BP, PC from [SP]     	// [3:789]  
 LBE15:
 	.endp	
 	     .stabn 192,0,0,LBB15-_Get_InCollection_Pok
@@ -1595,97 +1598,97 @@ _Get_LQA_Mission: .proc
 	// old_frame_pointer = 3
 	// return_address = 4
 	// lra_spill_temp_3 = 2
-// 789  }
-// 790  unsigned Get_LQA_Mission(void)
-// 791  {
+// 790  }
+// 791  unsigned Get_LQA_Mission(void)
+// 792  {
 
 LM64:
-	     .stabn 68,0,791,LM64-_Get_LQA_Mission
+	     .stabn 68,0,792,LM64-_Get_LQA_Mission
 BB1_PU18:	// 0x1d7
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:791]  
-	     SP = SP - 3              	// [2:791]  
-	     BP = SP + 1              	// [3:791]  
+	     push BP to [SP]          	// [0:792]  
+	     SP = SP - 3              	// [2:792]  
+	     BP = SP + 1              	// [3:792]  
 LBB16:
-// 792  	unsigned temp = 0;
+// 793  	unsigned temp = 0;
 
 LM65:
-	     .stabn 68,0,792,LM65-_Get_LQA_Mission
-	     R4 = 0                   	// [5:792]  
-	     [BP + 0] = R4            	// [6:792]  temp
-// 793  	unsigned i = 0;
+	     .stabn 68,0,793,LM65-_Get_LQA_Mission
+	     R4 = 0                   	// [5:793]  
+	     [BP + 0] = R4            	// [6:793]  temp
+// 794  	unsigned i = 0;
 
 LM66:
-	     .stabn 68,0,793,LM66-_Get_LQA_Mission
-	     R4 = 0                   	// [7:793]  
-	     [BP + 1] = R4            	// [8:793]  i
+	     .stabn 68,0,794,LM66-_Get_LQA_Mission
+	     R4 = 0                   	// [7:794]  
+	     [BP + 1] = R4            	// [8:794]  i
 L_18_1:	// 0x1df
 // BB:2 cycle count: 12
-// 794  	while(i<Mission_Num)
+// 795  	while(i<Mission_Num)
 
 LM67:
-	     .stabn 68,0,794,LM67-_Get_LQA_Mission
-	     R3 = [BP + 1]            	// [0:794]  i
-	     DS = seg(_Mission_Num)   	// [2:794]  Mission_Num
-	     R4 = (_Mission_Num)      	// [3:794]  Mission_Num
-	     R4 = DS:[R4]             	// [5:794]  
-	     cmp R3, R4               	// [7:794]  
-	     jae L_18_2               	// [8:794]  
+	     .stabn 68,0,795,LM67-_Get_LQA_Mission
+	     R3 = [BP + 1]            	// [0:795]  i
+	     DS = seg(_Mission_Num)   	// [2:795]  Mission_Num
+	     R4 = (_Mission_Num)      	// [3:795]  Mission_Num
+	     R4 = DS:[R4]             	// [5:795]  
+	     cmp R3, R4               	// [7:795]  
+	     jae L_18_2               	// [8:795]  
 BB3_PU18:	// 0x1e6
 // BB:3 cycle count: 33
-// 795  	{
-// 796  		 if (BitMap[i%16]&Mission_Success[i/16]) temp+=1;
+// 796  	{
+// 797  		 if (BitMap[i%16]&Mission_Success[i/16]) temp+=1;
 
 LM68:
-	     .stabn 68,0,796,LM68-_Get_LQA_Mission
-	     R4 = [BP + 1]            	// [0:796]  i
-	     R4 = R4 & 15             	// [2:796]  
-	     R3 = 0                   	// [3:796]  
-	     R1 = (_BitMap)           	// [4:796]  BitMap
-	     R2 = seg(_BitMap)        	// [6:796]  BitMap
-	     R4 = R4 + R1             	// [7:796]  
-	     R3 = R3 + R2, Carry      	// [8:796]  
-	     DS = R3                  	// [9:796]  
-	     R4 = DS:[R4]             	// [10:796]  
-	     [BP + 2] = R4            	// [12:796]  lra_spill_temp_3
-	     R4 = [BP + 1]            	// [13:796]  i
-	     R4 = R4 lsr 4            	// [15:796]  
-	     R3 = 0                   	// [16:796]  
-	     R1 = (_Mission_Success)  	// [17:796]  Mission_Success
-	     R2 = seg(_Mission_Success)	// [19:796]  Mission_Success
-	     R4 = R4 + R1             	// [20:796]  
-	     R3 = R3 + R2, Carry      	// [21:796]  
-	     DS = R3                  	// [22:796]  
-	     R3 = DS:[R4]             	// [23:796]  
-	     R4 = [BP + 2]            	// [25:796]  lra_spill_temp_3
-	     R4 = R4 & R3             	// [27:796]  
-	     cmp R4, 0                	// [28:796]  
-	     je L_18_3                	// [29:796]  
+	     .stabn 68,0,797,LM68-_Get_LQA_Mission
+	     R4 = [BP + 1]            	// [0:797]  i
+	     R4 = R4 & 15             	// [2:797]  
+	     R3 = 0                   	// [3:797]  
+	     R1 = (_BitMap)           	// [4:797]  BitMap
+	     R2 = seg(_BitMap)        	// [6:797]  BitMap
+	     R4 = R4 + R1             	// [7:797]  
+	     R3 = R3 + R2, Carry      	// [8:797]  
+	     DS = R3                  	// [9:797]  
+	     R4 = DS:[R4]             	// [10:797]  
+	     [BP + 2] = R4            	// [12:797]  lra_spill_temp_3
+	     R4 = [BP + 1]            	// [13:797]  i
+	     R4 = R4 lsr 4            	// [15:797]  
+	     R3 = 0                   	// [16:797]  
+	     R1 = (_Mission_Success)  	// [17:797]  Mission_Success
+	     R2 = seg(_Mission_Success)	// [19:797]  Mission_Success
+	     R4 = R4 + R1             	// [20:797]  
+	     R3 = R3 + R2, Carry      	// [21:797]  
+	     DS = R3                  	// [22:797]  
+	     R3 = DS:[R4]             	// [23:797]  
+	     R4 = [BP + 2]            	// [25:797]  lra_spill_temp_3
+	     R4 = R4 & R3             	// [27:797]  
+	     cmp R4, 0                	// [28:797]  
+	     je L_18_3                	// [29:797]  
 BB4_PU18:	// 0x1ff
 // BB:4 cycle count: 4
-	     R4 = [BP + 0]            	// [0:796]  temp
-	     R4 = R4 + 1              	// [2:796]  
-	     [BP + 0] = R4            	// [3:796]  temp
+	     R4 = [BP + 0]            	// [0:797]  temp
+	     R4 = R4 + 1              	// [2:797]  
+	     [BP + 0] = R4            	// [3:797]  temp
 L_18_3:	// 0x202
 // BB:5 cycle count: 8
-// 797  		 i++;
+// 798  		 i++;
 
 LM69:
-	     .stabn 68,0,797,LM69-_Get_LQA_Mission
-	     R4 = [BP + 1]            	// [0:797]  i
-	     R4 = R4 + 1              	// [2:797]  
-	     [BP + 1] = R4            	// [3:797]  i
-	     jmp L_18_1               	// [4:797]  
+	     .stabn 68,0,798,LM69-_Get_LQA_Mission
+	     R4 = [BP + 1]            	// [0:798]  i
+	     R4 = R4 + 1              	// [2:798]  
+	     [BP + 1] = R4            	// [3:798]  i
+	     jmp L_18_1               	// [4:798]  
 L_18_2:	// 0x206
 // BB:6 cycle count: 8
-// 798  	}
-// 799  	return temp;
+// 799  	}
+// 800  	return temp;
 
 LM70:
-	     .stabn 68,0,799,LM70-_Get_LQA_Mission
-	     R1 = [BP + 0]            	// [0:799]  temp
-	     SP = SP + 3              	// [2:799]  
-	     pop BP, PC from [SP]     	// [3:799]  
+	     .stabn 68,0,800,LM70-_Get_LQA_Mission
+	     R1 = [BP + 0]            	// [0:800]  temp
+	     SP = SP + 3              	// [2:800]  
+	     pop BP, PC from [SP]     	// [3:800]  
 LBE16:
 	.endp	
 	     .stabn 192,0,0,LBB16-_Get_LQA_Mission
@@ -1708,172 +1711,172 @@ _Get_PokecatchInMisson: .proc
 	// old_frame_pointer = 6
 	// return_address = 7
 	// lra_spill_temp_4 = 5
-// 800  }
-// 801  
+// 801  }
 // 802  
-// 803  unsigned Get_PokecatchInMisson(void)
-// 804  {
+// 803  
+// 804  unsigned Get_PokecatchInMisson(void)
+// 805  {
 
 LM71:
-	     .stabn 68,0,804,LM71-_Get_PokecatchInMisson
+	     .stabn 68,0,805,LM71-_Get_PokecatchInMisson
 BB1_PU19:	// 0x209
 // BB:1 cycle count: 24
-	     push BP to [SP]          	// [0:804]  
-	     SP = SP - 6              	// [2:804]  
-	     BP = SP + 1              	// [3:804]  
+	     push BP to [SP]          	// [0:805]  
+	     SP = SP - 6              	// [2:805]  
+	     BP = SP + 1              	// [3:805]  
 LBB17:
-// 805  	
-// 806     unsigned long int Addr;
-// 807  	unsigned int i=0,temp=0,temp1=0;
+// 806  	
+// 807     unsigned long int Addr;
+// 808  	unsigned int i=0,temp=0,temp1=0;
 
 LM72:
-	     .stabn 68,0,807,LM72-_Get_PokecatchInMisson
-	     R4 = 0                   	// [5:807]  
-	     [BP + 0] = R4            	// [6:807]  i
-	     R4 = 0                   	// [7:807]  
-	     [BP + 1] = R4            	// [8:807]  temp
-	     R4 = 0                   	// [9:807]  
-	     [BP + 2] = R4            	// [10:807]  temp1
-// 808  
-// 809  	//unsigned int pok_cnt =0;
-// 810  	
-// 811     
-// 812  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,808,LM72-_Get_PokecatchInMisson
+	     R4 = 0                   	// [5:808]  
+	     [BP + 0] = R4            	// [6:808]  i
+	     R4 = 0                   	// [7:808]  
+	     [BP + 1] = R4            	// [8:808]  temp
+	     R4 = 0                   	// [9:808]  
+	     [BP + 2] = R4            	// [10:808]  temp1
+// 809  
+// 810  	//unsigned int pok_cnt =0;
+// 811  	
+// 812     
+// 813  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM73:
-	     .stabn 68,0,812,LM73-_Get_PokecatchInMisson
-	     DS = seg(_Mem0)          	// [11:812]  Mem0
-	     R4 = (_Mem0)             	// [12:812]  Mem0
-	     R4 = DS:[R4]             	// [14:812]  
-	     R3 = R4 lsl 2            	// [16:812]  
-	     R3 = R3 + R3 lsl 1       	// [17:812]  
-	     R4 = 0                   	// [18:812]  
-	     R3 = R3 + 38500          	// [19:812]  
-	     R4 = R4 + 0, Carry       	// [21:812]  
-	     [BP + 3] = R3            	// [22:812]  Addr
-	     [BP + 4] = R4            	// [23:812]  Addr+1
+	     .stabn 68,0,813,LM73-_Get_PokecatchInMisson
+	     DS = seg(_Mem0)          	// [11:813]  Mem0
+	     R4 = (_Mem0)             	// [12:813]  Mem0
+	     R4 = DS:[R4]             	// [14:813]  
+	     R3 = R4 lsl 2            	// [16:813]  
+	     R3 = R3 + R3 lsl 1       	// [17:813]  
+	     R4 = 0                   	// [18:813]  
+	     R3 = R3 + 38500          	// [19:813]  
+	     R4 = R4 + 0, Carry       	// [21:813]  
+	     [BP + 3] = R3            	// [22:813]  Addr
+	     [BP + 4] = R4            	// [23:813]  Addr+1
 L_19_8:	// 0x21f
 // BB:2 cycle count: 7
-// 813  	 
-// 814  
-// 815  		while(i<6 )//Num
+// 814  	 
+// 815  
+// 816  		while(i<6 )//Num
 
 LM74:
-	     .stabn 68,0,815,LM74-_Get_PokecatchInMisson
-	     R4 = [BP + 0]            	// [0:815]  i
-	     cmp R4, 5                	// [2:815]  
-	     ja L_19_9                	// [3:815]  
+	     .stabn 68,0,816,LM74-_Get_PokecatchInMisson
+	     R4 = [BP + 0]            	// [0:816]  i
+	     cmp R4, 5                	// [2:816]  
+	     ja L_19_9                	// [3:816]  
 BB3_PU19:	// 0x222
 // BB:3 cycle count: 18
-// 816  		{
-// 817  			temp1 = SPI_ReadAWord_Big(Addr+i*2);
+// 817  		{
+// 818  			temp1 = SPI_ReadAWord_Big(Addr+i*2);
 
 LM75:
-	     .stabn 68,0,817,LM75-_Get_PokecatchInMisson
-	     SP = SP - 2              	// [0:817]  
-	     R4 = [BP + 0]            	// [1:817]  i
-	     R3 = R4 lsl 1            	// [3:817]  
-	     R4 = 0                   	// [4:817]  
-	     R3 = R3 + [BP + 3]       	// [5:817]  Addr
-	     R4 = R4 + [BP + 4], Carry	// [7:817]  Addr+1
-	     R2 = SP + 1              	// [9:817]  
-	     [R2++] = R3              	// [11:817]  
-	     [R2] = R4                	// [13:817]  
-	     call _SPI_ReadAWord_Big  	// [15:817]  SPI_ReadAWord_Big
+	     .stabn 68,0,818,LM75-_Get_PokecatchInMisson
+	     SP = SP - 2              	// [0:818]  
+	     R4 = [BP + 0]            	// [1:818]  i
+	     R3 = R4 lsl 1            	// [3:818]  
+	     R4 = 0                   	// [4:818]  
+	     R3 = R3 + [BP + 3]       	// [5:818]  Addr
+	     R4 = R4 + [BP + 4], Carry	// [7:818]  Addr+1
+	     R2 = SP + 1              	// [9:818]  
+	     [R2++] = R3              	// [11:818]  
+	     [R2] = R4                	// [13:818]  
+	     call _SPI_ReadAWord_Big  	// [15:818]  SPI_ReadAWord_Big
 BB4_PU19:	// 0x22e
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:817]  
-	     [BP + 2] = R1            	// [1:817]  temp1
-// 818  
-// 819  		   if(temp1 == 9999)
+	     SP = SP + 2              	// [0:818]  
+	     [BP + 2] = R1            	// [1:818]  temp1
+// 819  
+// 820  		   if(temp1 == 9999)
 
 LM76:
-	     .stabn 68,0,819,LM76-_Get_PokecatchInMisson
-	     R4 = [BP + 2]            	// [2:819]  temp1
-	     cmp R4, 9999             	// [4:819]  
-	     jne L_19_11              	// [6:819]  
+	     .stabn 68,0,820,LM76-_Get_PokecatchInMisson
+	     R4 = [BP + 2]            	// [2:820]  temp1
+	     cmp R4, 9999             	// [4:820]  
+	     jne L_19_11              	// [6:820]  
 BB5_PU19:	// 0x234
 // BB:5 cycle count: 4
-// 820  		     {
-// 821  			  
-// 822  			     break;
+// 821  		     {
+// 822  			  
+// 823  			     break;
 
 LM77:
-	     .stabn 68,0,822,LM77-_Get_PokecatchInMisson
-	     jmp Lt_19_1              	// [0:822]  
+	     .stabn 68,0,823,LM77-_Get_PokecatchInMisson
+	     jmp Lt_19_1              	// [0:823]  
 L_19_11:	// 0x235
 // BB:6 cycle count: 33
-// 824  			else
-// 825  				{
-// 826  				    
-// 827              
-// 828  		          if (BitMap[temp1%16]&Pokecatch_Pok[temp1/16])
+// 825  			else
+// 826  				{
+// 827  				    
+// 828              
+// 829  		          if (BitMap[temp1%16]&Pokecatch_Pok[temp1/16])
 
 LM78:
-	     .stabn 68,0,828,LM78-_Get_PokecatchInMisson
-	     R4 = [BP + 2]            	// [0:828]  temp1
-	     R4 = R4 & 15             	// [2:828]  
-	     R3 = 0                   	// [3:828]  
-	     R1 = (_BitMap)           	// [4:828]  BitMap
-	     R2 = seg(_BitMap)        	// [6:828]  BitMap
-	     R4 = R4 + R1             	// [7:828]  
-	     R3 = R3 + R2, Carry      	// [8:828]  
-	     DS = R3                  	// [9:828]  
-	     R4 = DS:[R4]             	// [10:828]  
-	     [BP + 5] = R4            	// [12:828]  lra_spill_temp_4
-	     R4 = [BP + 2]            	// [13:828]  temp1
-	     R4 = R4 lsr 4            	// [15:828]  
-	     R3 = 0                   	// [16:828]  
-	     R1 = (_Pokecatch_Pok)    	// [17:828]  Pokecatch_Pok
-	     R2 = seg(_Pokecatch_Pok) 	// [19:828]  Pokecatch_Pok
-	     R4 = R4 + R1             	// [20:828]  
-	     R3 = R3 + R2, Carry      	// [21:828]  
-	     DS = R3                  	// [22:828]  
-	     R3 = DS:[R4]             	// [23:828]  
-	     R4 = [BP + 5]            	// [25:828]  lra_spill_temp_4
-	     R4 = R4 & R3             	// [27:828]  
-	     cmp R4, 0                	// [28:828]  
-	     je L_19_12               	// [29:828]  
+	     .stabn 68,0,829,LM78-_Get_PokecatchInMisson
+	     R4 = [BP + 2]            	// [0:829]  temp1
+	     R4 = R4 & 15             	// [2:829]  
+	     R3 = 0                   	// [3:829]  
+	     R1 = (_BitMap)           	// [4:829]  BitMap
+	     R2 = seg(_BitMap)        	// [6:829]  BitMap
+	     R4 = R4 + R1             	// [7:829]  
+	     R3 = R3 + R2, Carry      	// [8:829]  
+	     DS = R3                  	// [9:829]  
+	     R4 = DS:[R4]             	// [10:829]  
+	     [BP + 5] = R4            	// [12:829]  lra_spill_temp_4
+	     R4 = [BP + 2]            	// [13:829]  temp1
+	     R4 = R4 lsr 4            	// [15:829]  
+	     R3 = 0                   	// [16:829]  
+	     R1 = (_Pokecatch_Pok)    	// [17:829]  Pokecatch_Pok
+	     R2 = seg(_Pokecatch_Pok) 	// [19:829]  Pokecatch_Pok
+	     R4 = R4 + R1             	// [20:829]  
+	     R3 = R3 + R2, Carry      	// [21:829]  
+	     DS = R3                  	// [22:829]  
+	     R3 = DS:[R4]             	// [23:829]  
+	     R4 = [BP + 5]            	// [25:829]  lra_spill_temp_4
+	     R4 = R4 & R3             	// [27:829]  
+	     cmp R4, 0                	// [28:829]  
+	     je L_19_12               	// [29:829]  
 BB7_PU19:	// 0x24e
 // BB:7 cycle count: 4
-// 829  				   	  {
-// 830  
-// 831  						 temp++;
+// 830  				   	  {
+// 831  
+// 832  						 temp++;
 
 LM79:
-	     .stabn 68,0,831,LM79-_Get_PokecatchInMisson
-	     R4 = [BP + 1]            	// [0:831]  temp
-	     R4 = R4 + 1              	// [2:831]  
-	     [BP + 1] = R4            	// [3:831]  temp
+	     .stabn 68,0,832,LM79-_Get_PokecatchInMisson
+	     R4 = [BP + 1]            	// [0:832]  temp
+	     R4 = R4 + 1              	// [2:832]  
+	     [BP + 1] = R4            	// [3:832]  temp
 L_19_12:	// 0x251
 L_19_10:	// 0x251
 // BB:8 cycle count: 8
-// 833  
-// 834  		           	 }
-// 835  				}
-// 836  		
-// 837  			i++;
+// 834  
+// 835  		           	 }
+// 836  				}
+// 837  		
+// 838  			i++;
 
 LM80:
-	     .stabn 68,0,837,LM80-_Get_PokecatchInMisson
-	     R4 = [BP + 0]            	// [0:837]  i
-	     R4 = R4 + 1              	// [2:837]  
-	     [BP + 0] = R4            	// [3:837]  i
-	     jmp L_19_8               	// [4:837]  
+	     .stabn 68,0,838,LM80-_Get_PokecatchInMisson
+	     R4 = [BP + 0]            	// [0:838]  i
+	     R4 = R4 + 1              	// [2:838]  
+	     [BP + 0] = R4            	// [3:838]  i
+	     jmp L_19_8               	// [4:838]  
 L_19_9:	// 0x255
 Lt_19_1:	// 0x255
 // BB:9 cycle count: 8
-// 840  //				break;
-// 841  
-// 842     	}
-// 843  
-// 844       return temp;
+// 841  //				break;
+// 842  
+// 843     	}
+// 844  
+// 845       return temp;
 
 LM81:
-	     .stabn 68,0,844,LM81-_Get_PokecatchInMisson
-	     R1 = [BP + 1]            	// [0:844]  temp
-	     SP = SP + 6              	// [2:844]  
-	     pop BP, PC from [SP]     	// [3:844]  
+	     .stabn 68,0,845,LM81-_Get_PokecatchInMisson
+	     R1 = [BP + 1]            	// [0:845]  temp
+	     SP = SP + 6              	// [2:845]  
+	     pop BP, PC from [SP]     	// [3:845]  
 LBE17:
 	.endp	
 	     .stabn 192,0,0,LBB17-_Get_PokecatchInMisson
@@ -1897,165 +1900,165 @@ _Get_MissionPok_Same: .proc
 	// temp1 = 2
 	// old_frame_pointer = 5
 	// return_address = 6
-// 854  
-// 855  /*************************************************************************************
-// 856  ************************************************************************************/
-// 857  void Get_MissionPok_Same(void)
-// 858  {
+// 855  
+// 856  /*************************************************************************************
+// 857  ************************************************************************************/
+// 858  void Get_MissionPok_Same(void)
+// 859  {
 
 LM82:
-	     .stabn 68,0,858,LM82-_Get_MissionPok_Same
+	     .stabn 68,0,859,LM82-_Get_MissionPok_Same
 BB1_PU20:	// 0x258
 // BB:1 cycle count: 30
-	     push BP to [SP]          	// [0:858]  
-	     SP = SP - 5              	// [2:858]  
-	     BP = SP + 1              	// [3:858]  
+	     push BP to [SP]          	// [0:859]  
+	     SP = SP - 5              	// [2:859]  
+	     BP = SP + 1              	// [3:859]  
 LBB18:
-// 859  	
-// 860     unsigned long int Addr;
-// 861  	unsigned int i=0,temp=0xffff,temp1=0;
+// 860  	
+// 861     unsigned long int Addr;
+// 862  	unsigned int i=0,temp=0xffff,temp1=0;
 
 LM83:
-	     .stabn 68,0,861,LM83-_Get_MissionPok_Same
-	     R4 = 0                   	// [5:861]  
-	     [BP + 0] = R4            	// [6:861]  i
-	     R4 = - 1                 	// [7:861]  
-	     [BP + 1] = R4            	// [8:861]  temp
-	     R4 = 0                   	// [9:861]  
-	     [BP + 2] = R4            	// [10:861]  temp1
-// 862  
-// 863  	//unsigned int pok_cnt =0;
-// 864  	
-// 865       Mem0.Mission_Pok_Same =1;
+	     .stabn 68,0,862,LM83-_Get_MissionPok_Same
+	     R4 = 0                   	// [5:862]  
+	     [BP + 0] = R4            	// [6:862]  i
+	     R4 = - 1                 	// [7:862]  
+	     [BP + 1] = R4            	// [8:862]  temp
+	     R4 = 0                   	// [9:862]  
+	     [BP + 2] = R4            	// [10:862]  temp1
+// 863  
+// 864  	//unsigned int pok_cnt =0;
+// 865  	
+// 866       Mem0.Mission_Pok_Same =1;
 
 LM84:
-	     .stabn 68,0,865,LM84-_Get_MissionPok_Same
-	     R3 = 1                   	// [11:865]  
-	     DS = seg(_Mem0+1)        	// [12:865]  Mem0+1
-	     R4 = (_Mem0+1)           	// [13:865]  Mem0+1
-	     DS:[R4] = R3             	// [15:865]  
-// 866  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,866,LM84-_Get_MissionPok_Same
+	     R3 = 1                   	// [11:866]  
+	     DS = seg(_Mem0+1)        	// [12:866]  Mem0+1
+	     R4 = (_Mem0+1)           	// [13:866]  Mem0+1
+	     DS:[R4] = R3             	// [15:866]  
+// 867  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM85:
-	     .stabn 68,0,866,LM85-_Get_MissionPok_Same
-	     DS = seg(_Mem0)          	// [17:866]  Mem0
-	     R4 = (_Mem0)             	// [18:866]  Mem0
-	     R4 = DS:[R4]             	// [20:866]  
-	     R3 = R4 lsl 2            	// [22:866]  
-	     R3 = R3 + R3 lsl 1       	// [23:866]  
-	     R4 = 0                   	// [24:866]  
-	     R3 = R3 + 38500          	// [25:866]  
-	     R4 = R4 + 0, Carry       	// [27:866]  
-	     [BP + 3] = R3            	// [28:866]  Addr
-	     [BP + 4] = R4            	// [29:866]  Addr+1
+	     .stabn 68,0,867,LM85-_Get_MissionPok_Same
+	     DS = seg(_Mem0)          	// [17:867]  Mem0
+	     R4 = (_Mem0)             	// [18:867]  Mem0
+	     R4 = DS:[R4]             	// [20:867]  
+	     R3 = R4 lsl 2            	// [22:867]  
+	     R3 = R3 + R3 lsl 1       	// [23:867]  
+	     R4 = 0                   	// [24:867]  
+	     R3 = R3 + 38500          	// [25:867]  
+	     R4 = R4 + 0, Carry       	// [27:867]  
+	     [BP + 3] = R3            	// [28:867]  Addr
+	     [BP + 4] = R4            	// [29:867]  Addr+1
 L_20_8:	// 0x273
 // BB:2 cycle count: 7
-// 867  	 
-// 868  
-// 869  		while(i<6 )//Num
+// 868  	 
+// 869  
+// 870  		while(i<6 )//Num
 
 LM86:
-	     .stabn 68,0,869,LM86-_Get_MissionPok_Same
-	     R4 = [BP + 0]            	// [0:869]  i
-	     cmp R4, 5                	// [2:869]  
-	     ja L_20_9                	// [3:869]  
+	     .stabn 68,0,870,LM86-_Get_MissionPok_Same
+	     R4 = [BP + 0]            	// [0:870]  i
+	     cmp R4, 5                	// [2:870]  
+	     ja L_20_9                	// [3:870]  
 BB3_PU20:	// 0x276
 // BB:3 cycle count: 18
-// 870  		{
-// 871  			temp1 = SPI_ReadAWord_Big(Addr+i*2);
+// 871  		{
+// 872  			temp1 = SPI_ReadAWord_Big(Addr+i*2);
 
 LM87:
-	     .stabn 68,0,871,LM87-_Get_MissionPok_Same
-	     SP = SP - 2              	// [0:871]  
-	     R4 = [BP + 0]            	// [1:871]  i
-	     R3 = R4 lsl 1            	// [3:871]  
-	     R4 = 0                   	// [4:871]  
-	     R3 = R3 + [BP + 3]       	// [5:871]  Addr
-	     R4 = R4 + [BP + 4], Carry	// [7:871]  Addr+1
-	     R2 = SP + 1              	// [9:871]  
-	     [R2++] = R3              	// [11:871]  
-	     [R2] = R4                	// [13:871]  
-	     call _SPI_ReadAWord_Big  	// [15:871]  SPI_ReadAWord_Big
+	     .stabn 68,0,872,LM87-_Get_MissionPok_Same
+	     SP = SP - 2              	// [0:872]  
+	     R4 = [BP + 0]            	// [1:872]  i
+	     R3 = R4 lsl 1            	// [3:872]  
+	     R4 = 0                   	// [4:872]  
+	     R3 = R3 + [BP + 3]       	// [5:872]  Addr
+	     R4 = R4 + [BP + 4], Carry	// [7:872]  Addr+1
+	     R2 = SP + 1              	// [9:872]  
+	     [R2++] = R3              	// [11:872]  
+	     [R2] = R4                	// [13:872]  
+	     call _SPI_ReadAWord_Big  	// [15:872]  SPI_ReadAWord_Big
 BB4_PU20:	// 0x282
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:871]  
-	     [BP + 2] = R1            	// [1:871]  temp1
-// 872  
-// 873  		   if(temp1 == 9999)
+	     SP = SP + 2              	// [0:872]  
+	     [BP + 2] = R1            	// [1:872]  temp1
+// 873  
+// 874  		   if(temp1 == 9999)
 
 LM88:
-	     .stabn 68,0,873,LM88-_Get_MissionPok_Same
-	     R4 = [BP + 2]            	// [2:873]  temp1
-	     cmp R4, 9999             	// [4:873]  
-	     jne L_20_11              	// [6:873]  
+	     .stabn 68,0,874,LM88-_Get_MissionPok_Same
+	     R4 = [BP + 2]            	// [2:874]  temp1
+	     cmp R4, 9999             	// [4:874]  
+	     jne L_20_11              	// [6:874]  
 BB5_PU20:	// 0x288
 // BB:5 cycle count: 4
-// 874  		     {
-// 875  			  
-// 876  			     break;
+// 875  		     {
+// 876  			  
+// 877  			     break;
 
 LM89:
-	     .stabn 68,0,876,LM89-_Get_MissionPok_Same
-	     jmp Lt_20_1              	// [0:876]  
+	     .stabn 68,0,877,LM89-_Get_MissionPok_Same
+	     jmp Lt_20_1              	// [0:877]  
 L_20_11:	// 0x289
 // BB:6 cycle count: 9
-// 877  			 }
-// 878  			else
-// 879  				{
-// 880  			       if(temp1==temp)//������ͬ
+// 878  			 }
+// 879  			else
+// 880  				{
+// 881  			       if(temp1==temp)//������ͬ
 
 LM90:
-	     .stabn 68,0,880,LM90-_Get_MissionPok_Same
-	     R3 = [BP + 1]            	// [0:880]  temp
-	     R4 = [BP + 2]            	// [2:880]  temp1
-	     cmp R3, R4               	// [4:880]  
-	     jne L_20_12              	// [5:880]  
+	     .stabn 68,0,881,LM90-_Get_MissionPok_Same
+	     R3 = [BP + 1]            	// [0:881]  temp
+	     R4 = [BP + 2]            	// [2:881]  temp1
+	     cmp R3, R4               	// [4:881]  
+	     jne L_20_12              	// [5:881]  
 BB7_PU20:	// 0x28d
 // BB:7 cycle count: 11
-// 881  			       	    Mem0.Mission_Pok_Same++;	    
+// 882  			       	    Mem0.Mission_Pok_Same++;	    
 
 LM91:
-	     .stabn 68,0,881,LM91-_Get_MissionPok_Same
-	     DS = seg(_Mem0+1)        	// [0:881]  Mem0+1
-	     R4 = (_Mem0+1)           	// [1:881]  Mem0+1
-	     R4 = DS:[R4]             	// [3:881]  
-	     R4 = R4 + 1              	// [5:881]  
-	     DS = seg(_Mem0+1)        	// [6:881]  Mem0+1
-	     R3 = (_Mem0+1)           	// [7:881]  Mem0+1
-	     DS:[R3] = R4             	// [9:881]  
+	     .stabn 68,0,882,LM91-_Get_MissionPok_Same
+	     DS = seg(_Mem0+1)        	// [0:882]  Mem0+1
+	     R4 = (_Mem0+1)           	// [1:882]  Mem0+1
+	     R4 = DS:[R4]             	// [3:882]  
+	     R4 = R4 + 1              	// [5:882]  
+	     DS = seg(_Mem0+1)        	// [6:882]  Mem0+1
+	     R3 = (_Mem0+1)           	// [7:882]  Mem0+1
+	     DS:[R3] = R4             	// [9:882]  
 L_20_12:	// 0x296
 // BB:8 cycle count: 3
-// 882  				    
-// 883  				     temp = temp1;   
+// 883  				    
+// 884  				     temp = temp1;   
 
 LM92:
-	     .stabn 68,0,883,LM92-_Get_MissionPok_Same
-	     R4 = [BP + 2]            	// [0:883]  temp1
-	     [BP + 1] = R4            	// [2:883]  temp
+	     .stabn 68,0,884,LM92-_Get_MissionPok_Same
+	     R4 = [BP + 2]            	// [0:884]  temp1
+	     [BP + 1] = R4            	// [2:884]  temp
 L_20_10:	// 0x298
 // BB:9 cycle count: 8
-// 885                 
-// 886  
-// 887  				}
-// 888  		
-// 889  			i++;
+// 886                 
+// 887  
+// 888  				}
+// 889  		
+// 890  			i++;
 
 LM93:
-	     .stabn 68,0,889,LM93-_Get_MissionPok_Same
-	     R4 = [BP + 0]            	// [0:889]  i
-	     R4 = R4 + 1              	// [2:889]  
-	     [BP + 0] = R4            	// [3:889]  i
-	     jmp L_20_8               	// [4:889]  
+	     .stabn 68,0,890,LM93-_Get_MissionPok_Same
+	     R4 = [BP + 0]            	// [0:890]  i
+	     R4 = R4 + 1              	// [2:890]  
+	     [BP + 0] = R4            	// [3:890]  i
+	     jmp L_20_8               	// [4:890]  
 L_20_9:	// 0x29c
 Lt_20_1:	// 0x29c
 // BB:10 cycle count: 6
-// 890  			
-// 891     	}
+// 891  			
+// 892     	}
 
 LM94:
-	     .stabn 68,0,891,LM94-_Get_MissionPok_Same
-	     SP = SP + 5              	// [0:891]  
-	     pop BP, PC from [SP]     	// [1:891]  
+	     .stabn 68,0,892,LM94-_Get_MissionPok_Same
+	     SP = SP + 5              	// [0:892]  
+	     pop BP, PC from [SP]     	// [1:892]  
 LBE18:
 	.endp	
 	     .stabn 192,0,0,LBB18-_Get_MissionPok_Same
@@ -2078,107 +2081,107 @@ _Get_Mission_SuccessNT: .proc
 	// old_frame_pointer = 3
 	// return_address = 4
 	// lra_spill_temp_5 = 2
-// 903  ************************************************************************************/
-// 904  
+// 904  ************************************************************************************/
 // 905  
-// 906  unsigned Get_Mission_SuccessNT(void)
-// 907  {
+// 906  
+// 907  unsigned Get_Mission_SuccessNT(void)
+// 908  {
 
 LM95:
-	     .stabn 68,0,907,LM95-_Get_Mission_SuccessNT
+	     .stabn 68,0,908,LM95-_Get_Mission_SuccessNT
 BB1_PU21:	// 0x29e
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:907]  
-	     SP = SP - 3              	// [2:907]  
-	     BP = SP + 1              	// [3:907]  
+	     push BP to [SP]          	// [0:908]  
+	     SP = SP - 3              	// [2:908]  
+	     BP = SP + 1              	// [3:908]  
 LBB19:
-// 908  	unsigned temp = 0;
+// 909  	unsigned temp = 0;
 
 LM96:
-	     .stabn 68,0,908,LM96-_Get_Mission_SuccessNT
-	     R4 = 0                   	// [5:908]  
-	     [BP + 0] = R4            	// [6:908]  temp
-// 909  	unsigned i = 0;
+	     .stabn 68,0,909,LM96-_Get_Mission_SuccessNT
+	     R4 = 0                   	// [5:909]  
+	     [BP + 0] = R4            	// [6:909]  temp
+// 910  	unsigned i = 0;
 
 LM97:
-	     .stabn 68,0,909,LM97-_Get_Mission_SuccessNT
-	     R4 = 0                   	// [7:909]  
-	     [BP + 1] = R4            	// [8:909]  i
+	     .stabn 68,0,910,LM97-_Get_Mission_SuccessNT
+	     R4 = 0                   	// [7:910]  
+	     [BP + 1] = R4            	// [8:910]  i
 L_21_1:	// 0x2a6
 // BB:2 cycle count: 12
-// 910  	while(i<Mission_Num)
+// 911  	while(i<Mission_Num)
 
 LM98:
-	     .stabn 68,0,910,LM98-_Get_Mission_SuccessNT
-	     R3 = [BP + 1]            	// [0:910]  i
-	     DS = seg(_Mission_Num)   	// [2:910]  Mission_Num
-	     R4 = (_Mission_Num)      	// [3:910]  Mission_Num
-	     R4 = DS:[R4]             	// [5:910]  
-	     cmp R3, R4               	// [7:910]  
-	     jae L_21_2               	// [8:910]  
+	     .stabn 68,0,911,LM98-_Get_Mission_SuccessNT
+	     R3 = [BP + 1]            	// [0:911]  i
+	     DS = seg(_Mission_Num)   	// [2:911]  Mission_Num
+	     R4 = (_Mission_Num)      	// [3:911]  Mission_Num
+	     R4 = DS:[R4]             	// [5:911]  
+	     cmp R3, R4               	// [7:911]  
+	     jae L_21_2               	// [8:911]  
 BB3_PU21:	// 0x2ad
 // BB:3 cycle count: 33
-// 911  	{
-// 912  		 if (BitMap[i%16]&Mission_Success[i/16]) 
+// 912  	{
+// 913  		 if (BitMap[i%16]&Mission_Success[i/16]) 
 
 LM99:
-	     .stabn 68,0,912,LM99-_Get_Mission_SuccessNT
-	     R4 = [BP + 1]            	// [0:912]  i
-	     R4 = R4 & 15             	// [2:912]  
-	     R3 = 0                   	// [3:912]  
-	     R1 = (_BitMap)           	// [4:912]  BitMap
-	     R2 = seg(_BitMap)        	// [6:912]  BitMap
-	     R4 = R4 + R1             	// [7:912]  
-	     R3 = R3 + R2, Carry      	// [8:912]  
-	     DS = R3                  	// [9:912]  
-	     R4 = DS:[R4]             	// [10:912]  
-	     [BP + 2] = R4            	// [12:912]  lra_spill_temp_5
-	     R4 = [BP + 1]            	// [13:912]  i
-	     R4 = R4 lsr 4            	// [15:912]  
-	     R3 = 0                   	// [16:912]  
-	     R1 = (_Mission_Success)  	// [17:912]  Mission_Success
-	     R2 = seg(_Mission_Success)	// [19:912]  Mission_Success
-	     R4 = R4 + R1             	// [20:912]  
-	     R3 = R3 + R2, Carry      	// [21:912]  
-	     DS = R3                  	// [22:912]  
-	     R3 = DS:[R4]             	// [23:912]  
-	     R4 = [BP + 2]            	// [25:912]  lra_spill_temp_5
-	     R4 = R4 & R3             	// [27:912]  
-	     cmp R4, 0                	// [28:912]  
-	     jne L_21_3               	// [29:912]  
+	     .stabn 68,0,913,LM99-_Get_Mission_SuccessNT
+	     R4 = [BP + 1]            	// [0:913]  i
+	     R4 = R4 & 15             	// [2:913]  
+	     R3 = 0                   	// [3:913]  
+	     R1 = (_BitMap)           	// [4:913]  BitMap
+	     R2 = seg(_BitMap)        	// [6:913]  BitMap
+	     R4 = R4 + R1             	// [7:913]  
+	     R3 = R3 + R2, Carry      	// [8:913]  
+	     DS = R3                  	// [9:913]  
+	     R4 = DS:[R4]             	// [10:913]  
+	     [BP + 2] = R4            	// [12:913]  lra_spill_temp_5
+	     R4 = [BP + 1]            	// [13:913]  i
+	     R4 = R4 lsr 4            	// [15:913]  
+	     R3 = 0                   	// [16:913]  
+	     R1 = (_Mission_Success)  	// [17:913]  Mission_Success
+	     R2 = seg(_Mission_Success)	// [19:913]  Mission_Success
+	     R4 = R4 + R1             	// [20:913]  
+	     R3 = R3 + R2, Carry      	// [21:913]  
+	     DS = R3                  	// [22:913]  
+	     R3 = DS:[R4]             	// [23:913]  
+	     R4 = [BP + 2]            	// [25:913]  lra_spill_temp_5
+	     R4 = R4 & R3             	// [27:913]  
+	     cmp R4, 0                	// [28:913]  
+	     jne L_21_3               	// [29:913]  
 BB4_PU21:	// 0x2c6
 // BB:4 cycle count: 8
-// 913  		  {
-// 914  		  }
-// 915  		 else
-// 916  		   return i;
+// 914  		  {
+// 915  		  }
+// 916  		 else
+// 917  		   return i;
 
 LM100:
-	     .stabn 68,0,916,LM100-_Get_Mission_SuccessNT
-	     R1 = [BP + 1]            	// [0:916]  i
-	     SP = SP + 3              	// [2:916]  
-	     pop BP, PC from [SP]     	// [3:916]  
+	     .stabn 68,0,917,LM100-_Get_Mission_SuccessNT
+	     R1 = [BP + 1]            	// [0:917]  i
+	     SP = SP + 3              	// [2:917]  
+	     pop BP, PC from [SP]     	// [3:917]  
 L_21_3:	// 0x2c9
 // BB:5 cycle count: 8
-// 917  		 
-// 918  		 i++;
+// 918  		 
+// 919  		 i++;
 
 LM101:
-	     .stabn 68,0,918,LM101-_Get_Mission_SuccessNT
-	     R4 = [BP + 1]            	// [0:918]  i
-	     R4 = R4 + 1              	// [2:918]  
-	     [BP + 1] = R4            	// [3:918]  i
-	     jmp L_21_1               	// [4:918]  
+	     .stabn 68,0,919,LM101-_Get_Mission_SuccessNT
+	     R4 = [BP + 1]            	// [0:919]  i
+	     R4 = R4 + 1              	// [2:919]  
+	     [BP + 1] = R4            	// [3:919]  i
+	     jmp L_21_1               	// [4:919]  
 L_21_2:	// 0x2cd
 // BB:6 cycle count: 8
-// 919  	}
-// 920  	return temp;
+// 920  	}
+// 921  	return temp;
 
 LM102:
-	     .stabn 68,0,920,LM102-_Get_Mission_SuccessNT
-	     R1 = [BP + 0]            	// [0:920]  temp
-	     SP = SP + 3              	// [2:920]  
-	     pop BP, PC from [SP]     	// [3:920]  
+	     .stabn 68,0,921,LM102-_Get_Mission_SuccessNT
+	     R1 = [BP + 0]            	// [0:921]  temp
+	     SP = SP + 3              	// [2:921]  
+	     pop BP, PC from [SP]     	// [3:921]  
 LBE19:
 	.endp	
 	     .stabn 192,0,0,LBB19-_Get_Mission_SuccessNT
@@ -2197,201 +2200,202 @@ _GameTimeout: .proc
 	// temp = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//1564  
-//1565  /****************************************************************
-//1566  *********************************************************************/
-//1567  unsigned int GameTimeout()
-//1568  {
+//1565  
+//1566  /****************************************************************
+//1567  *********************************************************************/
+//1568  unsigned int GameTimeout()
+//1569  {
 
 LM103:
-	     .stabn 68,0,1568,LM103-_GameTimeout
+	     .stabn 68,0,1569,LM103-_GameTimeout
 BB1_PU22:	// 0x2d0
 // BB:1 cycle count: 35
-	     push BP to [SP]          	// [0:1568]  
-	     SP = SP - 1              	// [2:1568]  
-	     BP = SP + 1              	// [3:1568]  
+	     push BP to [SP]          	// [0:1569]  
+	     SP = SP - 1              	// [2:1569]  
+	     BP = SP + 1              	// [3:1569]  
 LBB20:
-//1569  //	                       Sleepflag &=~C_GameTimeout;
-//1570  //					       Key =0;
-//1571  //						   Key_Event =0;
-//1572  //						   Key_activeflag = Registered_Play_Status|Key_True|Key_False;
-//1573                            unsigned int temp =0;
+//1570  //	                       Sleepflag &=~C_GameTimeout;
+//1571  //					       Key =0;
+//1572  //						   Key_Event =0;
+//1573  //						   Key_activeflag = Registered_Play_Status|Key_True|Key_False;
+//1574                            unsigned int temp =0;
 
 LM104:
-	     .stabn 68,0,1573,LM104-_GameTimeout
-	     R4 = 0                   	// [5:1573]  
-	     [BP + 0] = R4            	// [6:1573]  temp
-//1574  
-//1575                             MoveSucessFlag =0;
+	     .stabn 68,0,1574,LM104-_GameTimeout
+	     R4 = 0                   	// [5:1574]  
+	     [BP + 0] = R4            	// [6:1574]  temp
+//1575  
+//1576                             MoveSucessFlag =0;
 
 LM105:
-	     .stabn 68,0,1575,LM105-_GameTimeout
-	     R3 = 0                   	// [7:1575]  
-	     DS = seg(_MoveSucessFlag)	// [8:1575]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [9:1575]  MoveSucessFlag
-	     DS:[R4] = R3             	// [11:1575]  
-//1576                             MoveOnflag =1;
+	     .stabn 68,0,1576,LM105-_GameTimeout
+	     R3 = 0                   	// [7:1576]  
+	     DS = seg(_MoveSucessFlag)	// [8:1576]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [9:1576]  MoveSucessFlag
+	     DS:[R4] = R3             	// [11:1576]  
+//1577                             MoveOnflag =1;
 
 LM106:
-	     .stabn 68,0,1576,LM106-_GameTimeout
-	     R3 = 1                   	// [13:1576]  
-	     DS = seg(_MoveOnflag)    	// [14:1576]  MoveOnflag
-	     R4 = (_MoveOnflag)       	// [15:1576]  MoveOnflag
-	     DS:[R4] = R3             	// [17:1576]  
-//1577                             G_Sensor_Status=G_BHIT;
+	     .stabn 68,0,1577,LM106-_GameTimeout
+	     R3 = 1                   	// [13:1577]  
+	     DS = seg(_MoveOnflag)    	// [14:1577]  MoveOnflag
+	     R4 = (_MoveOnflag)       	// [15:1577]  MoveOnflag
+	     DS:[R4] = R3             	// [17:1577]  
+//1578                             G_Sensor_Status=G_Shake|G_SixDir;
 
 LM107:
-	     .stabn 68,0,1577,LM107-_GameTimeout
-	     R3 = 4479                	// [19:1577]  
-	     DS = seg(_G_Sensor_Status)	// [21:1577]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [22:1577]  G_Sensor_Status
-	     DS:[R4] = R3             	// [24:1577]  
-//1578                             
-//1579  					       PlayA1800_Elements(A_VLMHTEN_TimeOut1);//A_VLMHTEN_Silent
+	     .stabn 68,0,1578,LM107-_GameTimeout
+	     R3 = 127                 	// [19:1578]  
+	     DS = seg(_G_Sensor_Status)	// [21:1578]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [22:1578]  G_Sensor_Status
+	     DS:[R4] = R3             	// [24:1578]  
+//1579                             
+//1580  					       PlayA1800_Elements(A_VLMHTEN_TimeOut1);//A_VLMHTEN_Silent
 
 LM108:
-	     .stabn 68,0,1579,LM108-_GameTimeout
-	     SP = SP - 1              	// [26:1579]  
-	     R3 = 15                  	// [27:1579]  
-	     R4 = SP + 1              	// [28:1579]  
-	     [R4] = R3                	// [30:1579]  
-	     call _PlayA1800_Elements 	// [32:1579]  PlayA1800_Elements
+	     .stabn 68,0,1580,LM108-_GameTimeout
+	     SP = SP - 1              	// [26:1580]  
+	     R3 = 15                  	// [27:1580]  
+	     R4 = SP + 1              	// [28:1580]  
+	     [R4] = R3                	// [30:1580]  
+	     call _PlayA1800_Elements 	// [32:1580]  PlayA1800_Elements
 BB2_PU22:	// 0x2ed
 // BB:2 cycle count: 15
-	     SP = SP - 1              	// [0:1579]  
-//1580  	 
-//1581  	                        temp = Mov_Detected(10*16,0);
+	     SP = SP - 1              	// [0:1580]  
+//1581  	 
+//1582  	                        temp = Mov_Detected(10*16,0);
 
 LM109:
-	     .stabn 68,0,1581,LM109-_GameTimeout
-	     R3 = 160                 	// [1:1581]  
-	     R4 = SP + 1              	// [3:1581]  
-	     [R4] = R3                	// [5:1581]  
-	     R3 = 0                   	// [7:1581]  
-	     R4 = SP + 2              	// [8:1581]  
-	     [R4] = R3                	// [10:1581]  
-	     call _Mov_Detected       	// [12:1581]  Mov_Detected
+	     .stabn 68,0,1582,LM109-_GameTimeout
+	     R3 = 160                 	// [1:1582]  
+	     R4 = SP + 1              	// [3:1582]  
+	     [R4] = R3                	// [5:1582]  
+	     R3 = 0                   	// [7:1582]  
+	     R4 = SP + 2              	// [8:1582]  
+	     [R4] = R3                	// [10:1582]  
+	     call _Mov_Detected       	// [12:1582]  Mov_Detected
 BB3_PU22:	// 0x2f9
-// BB:3 cycle count: 9
-	     SP = SP + 2              	// [0:1581]  
-	     [BP + 0] = R1            	// [1:1581]  temp
-//1582  							if(temp==1)//Mov_Detected
+// BB:3 cycle count: 11
+	     SP = SP + 2              	// [0:1582]  
+	     [BP + 0] = R1            	// [1:1582]  temp
+//1583  						    if( temp&C_MovSucessStatus)
 
 LM110:
-	     .stabn 68,0,1582,LM110-_GameTimeout
-	     R4 = [BP + 0]            	// [2:1582]  temp
-	     cmp R4, 1                	// [4:1582]  
-	     jne L_22_6               	// [5:1582]  
-BB4_PU22:	// 0x2fe
+	     .stabn 68,0,1583,LM110-_GameTimeout
+	     R4 = [BP + 0]            	// [2:1583]  temp
+	     R4 = R4 & 8191           	// [4:1583]  
+	     cmp R4, 0                	// [6:1583]  
+	     je L_22_6                	// [7:1583]  
+BB4_PU22:	// 0x300
 // BB:4 cycle count: 10
-//1583  							   {
-//1584  					              MoveSucessFlag =1;
+//1584  							   {
+//1585  					              MoveSucessFlag =1;
 
 LM111:
-	     .stabn 68,0,1584,LM111-_GameTimeout
-	     R3 = 1                   	// [0:1584]  
-	     DS = seg(_MoveSucessFlag)	// [1:1584]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [2:1584]  MoveSucessFlag
-	     DS:[R4] = R3             	// [4:1584]  
-	     jmp L_22_5               	// [6:1584]  
-L_22_6:	// 0x304
+	     .stabn 68,0,1585,LM111-_GameTimeout
+	     R3 = 1                   	// [0:1585]  
+	     DS = seg(_MoveSucessFlag)	// [1:1585]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [2:1585]  MoveSucessFlag
+	     DS:[R4] = R3             	// [4:1585]  
+	     jmp L_22_5               	// [6:1585]  
+L_22_6:	// 0x306
 // BB:5 cycle count: 9
-//1585  					
-//1586  							   }
-//1587  						    else
-//1588  						       {  	   
-//1589  	                               PlayA1800_Elements(A_VLMHTEN_TimeOut2);
+//1586  					
+//1587  							   }
+//1588  						    else
+//1589  						       {  	   
+//1590  	                               PlayA1800_Elements(A_VLMHTEN_TimeOut2);
 
 LM112:
-	     .stabn 68,0,1589,LM112-_GameTimeout
-	     SP = SP - 1              	// [0:1589]  
-	     R3 = 16                  	// [1:1589]  
-	     R4 = SP + 1              	// [2:1589]  
-	     [R4] = R3                	// [4:1589]  
-	     call _PlayA1800_Elements 	// [6:1589]  PlayA1800_Elements
-BB6_PU22:	// 0x30b
+	     .stabn 68,0,1590,LM112-_GameTimeout
+	     SP = SP - 1              	// [0:1590]  
+	     R3 = 16                  	// [1:1590]  
+	     R4 = SP + 1              	// [2:1590]  
+	     [R4] = R3                	// [4:1590]  
+	     call _PlayA1800_Elements 	// [6:1590]  PlayA1800_Elements
+BB6_PU22:	// 0x30d
 // BB:6 cycle count: 1
-	     SP = SP + 1              	// [0:1589]  
-L_22_5:	// 0x30c
+	     SP = SP + 1              	// [0:1590]  
+L_22_5:	// 0x30e
 // BB:7 cycle count: 16
-//1590  							   
 //1591  							   
-//1592  						        }
-//1593  						        
-//1594  						    MoveOnflag =0;
+//1592  							   
+//1593  						        }
+//1594  						        
+//1595  						    MoveOnflag =0;
 
 LM113:
-	     .stabn 68,0,1594,LM113-_GameTimeout
-	     R3 = 0                   	// [0:1594]  
-	     DS = seg(_MoveOnflag)    	// [1:1594]  MoveOnflag
-	     R4 = (_MoveOnflag)       	// [2:1594]  MoveOnflag
-	     DS:[R4] = R3             	// [4:1594]  
-//1595  						        
-//1596  						   if(MoveSucessFlag)
+	     .stabn 68,0,1595,LM113-_GameTimeout
+	     R3 = 0                   	// [0:1595]  
+	     DS = seg(_MoveOnflag)    	// [1:1595]  MoveOnflag
+	     R4 = (_MoveOnflag)       	// [2:1595]  MoveOnflag
+	     DS:[R4] = R3             	// [4:1595]  
+//1596  						        
+//1597  						   if(MoveSucessFlag)
 
 LM114:
-	     .stabn 68,0,1596,LM114-_GameTimeout
-	     DS = seg(_MoveSucessFlag)	// [6:1596]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [7:1596]  MoveSucessFlag
-	     R4 = DS:[R4]             	// [9:1596]  
-	     cmp R4, 0                	// [11:1596]  
-	     je L_22_8                	// [12:1596]  
-BB8_PU22:	// 0x317
+	     .stabn 68,0,1597,LM114-_GameTimeout
+	     DS = seg(_MoveSucessFlag)	// [6:1597]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [7:1597]  MoveSucessFlag
+	     R4 = DS:[R4]             	// [9:1597]  
+	     cmp R4, 0                	// [11:1597]  
+	     je L_22_8                	// [12:1597]  
+BB8_PU22:	// 0x319
 // BB:8 cycle count: 10
-//1597  						   {						   	    
-//1598                                MoveSucessFlag =0;
+//1598  						   {						   	    
+//1599                                MoveSucessFlag =0;
 
 LM115:
-	     .stabn 68,0,1598,LM115-_GameTimeout
-	     R3 = 0                   	// [0:1598]  
-	     DS = seg(_MoveSucessFlag)	// [1:1598]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [2:1598]  MoveSucessFlag
-	     DS:[R4] = R3             	// [4:1598]  
-	     jmp L_22_7               	// [6:1598]  
-L_22_8:	// 0x31d
+	     .stabn 68,0,1599,LM115-_GameTimeout
+	     R3 = 0                   	// [0:1599]  
+	     DS = seg(_MoveSucessFlag)	// [1:1599]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [2:1599]  MoveSucessFlag
+	     DS:[R4] = R3             	// [4:1599]  
+	     jmp L_22_7               	// [6:1599]  
+L_22_8:	// 0x31f
 // BB:9 cycle count: 9
-//1599  						   }
-//1600  						   else
-//1601  						   {
-//1602  						   	  PlayA1800_Elements(SFX_Off);
+//1600  						   }
+//1601  						   else
+//1602  						   {
+//1603  						   	  PlayA1800_Elements(SFX_Off);
 
 LM116:
-	     .stabn 68,0,1602,LM116-_GameTimeout
-	     SP = SP - 1              	// [0:1602]  
-	     R3 = 34                  	// [1:1602]  
-	     R4 = SP + 1              	// [2:1602]  
-	     [R4] = R3                	// [4:1602]  
-	     call _PlayA1800_Elements 	// [6:1602]  PlayA1800_Elements
-BB10_PU22:	// 0x324
+	     .stabn 68,0,1603,LM116-_GameTimeout
+	     SP = SP - 1              	// [0:1603]  
+	     R3 = 34                  	// [1:1603]  
+	     R4 = SP + 1              	// [2:1603]  
+	     [R4] = R3                	// [4:1603]  
+	     call _PlayA1800_Elements 	// [6:1603]  PlayA1800_Elements
+BB10_PU22:	// 0x326
 // BB:10 cycle count: 8
-//1603  						   	  delay_time(8);
+//1604  						   	  delay_time(8);
 
 LM117:
-	     .stabn 68,0,1603,LM117-_GameTimeout
-	     R3 = 8                   	// [0:1603]  
-	     R4 = SP + 1              	// [1:1603]  
-	     [R4] = R3                	// [3:1603]  
-	     call _delay_time         	// [5:1603]  delay_time
-BB11_PU22:	// 0x32a
+	     .stabn 68,0,1604,LM117-_GameTimeout
+	     R3 = 8                   	// [0:1604]  
+	     R4 = SP + 1              	// [1:1604]  
+	     [R4] = R3                	// [3:1604]  
+	     call _delay_time         	// [5:1604]  delay_time
+BB11_PU22:	// 0x32c
 // BB:11 cycle count: 8
-	     SP = SP + 2              	// [0:1603]  
-//1604  						      return  C_Off_Mode;
+	     SP = SP + 2              	// [0:1604]  
+//1605  						      return  C_Off_Mode;
 
 LM118:
-	     .stabn 68,0,1604,LM118-_GameTimeout
-	     R1 = - 4079              	// [1:1604]  
-	     pop BP, PC from [SP]     	// [3:1604]  
-L_22_7:	// 0x32e
+	     .stabn 68,0,1605,LM118-_GameTimeout
+	     R1 = - 4079              	// [1:1605]  
+	     pop BP, PC from [SP]     	// [3:1605]  
+L_22_7:	// 0x330
 // BB:12 cycle count: 7
-//1605  						   }
-//1606                             
-//1607            return 0;
+//1606  						   }
+//1607                             
+//1608            return 0;
 
 LM119:
-	     .stabn 68,0,1607,LM119-_GameTimeout
-	     R1 = 0                   	// [0:1607]  
-	     SP = SP + 1              	// [1:1607]  
-	     pop BP, PC from [SP]     	// [2:1607]  
+	     .stabn 68,0,1608,LM119-_GameTimeout
+	     R1 = 0                   	// [0:1608]  
+	     SP = SP + 1              	// [1:1608]  
+	     pop BP, PC from [SP]     	// [2:1608]  
 LBE20:
 	.endp	
 	     .stabn 192,0,0,LBB20-_GameTimeout
@@ -2408,68 +2412,68 @@ _Read_Flash_info: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-//1610  
-//1611  /********************************************************
-//1612  **********************************************************/
-//1613  void Read_Flash_info()
-//1614  {
+//1611  
+//1612  /********************************************************
+//1613  **********************************************************/
+//1614  void Read_Flash_info()
+//1615  {
 
 LM120:
-	     .stabn 68,0,1614,LM120-_Read_Flash_info
-BB1_PU23:	// 0x331
+	     .stabn 68,0,1615,LM120-_Read_Flash_info
+BB1_PU23:	// 0x333
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:1614]  
-	     BP = SP + 1              	// [2:1614]  
+	     push BP to [SP]          	// [0:1615]  
+	     BP = SP + 1              	// [2:1615]  
 	//;;
 	INT OFF
 	//;;
-//1615  //	unsigned int temp;
-//1616  
+//1616  //	unsigned int temp;
 //1617  
-//1618  	  __asm("INT OFF");
-//1619  	   MoveSPIDriverToRAM();
+//1618  
+//1619  	  __asm("INT OFF");
+//1620  	   MoveSPIDriverToRAM();
 
 LM121:
-	     .stabn 68,0,1619,LM121-_Read_Flash_info
-	     call _MoveSPIDriverToRAM 	// [6:1619]  MoveSPIDriverToRAM
-BB2_PU23:	// 0x339
+	     .stabn 68,0,1620,LM121-_Read_Flash_info
+	     call _MoveSPIDriverToRAM 	// [6:1620]  MoveSPIDriverToRAM
+BB2_PU23:	// 0x33b
 // BB:2 cycle count: 30
-//1631  //      SPI_Flash_ReadNWords(InCollection_Pok,C_QuestionRAM,T_PokLQInColl_L,T_PokLQInColl_H);    
-//1632  //      SPI_Flash_ReadNWords(Pokecatch_Pok,C_QuestionRAM,T_PokCatch_L,T_PokCatch_H);     
-//1633  //      SPI_Flash_ReadNWords(Mission_Success,C_MissionRAM,T_MissionSucess_L,T_MissionSucess_H);
-//1634        
-//1635        SPI_Flash_ReadNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);
+//1632  //      SPI_Flash_ReadNWords(InCollection_Pok,C_QuestionRAM,T_PokLQInColl_L,T_PokLQInColl_H);    
+//1633  //      SPI_Flash_ReadNWords(Pokecatch_Pok,C_QuestionRAM,T_PokCatch_L,T_PokCatch_H);     
+//1634  //      SPI_Flash_ReadNWords(Mission_Success,C_MissionRAM,T_MissionSucess_L,T_MissionSucess_H);
+//1635        
+//1636        SPI_Flash_ReadNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);
 
 LM122:
-	     .stabn 68,0,1635,LM122-_Read_Flash_info
-	     SP = SP - 5              	// [0:1635]  
-	     R2 = (_Mem0)             	// [1:1635]  Mem0
-	     R3 = seg(_Mem0)          	// [3:1635]  Mem0
-	     R4 = SP + 1              	// [4:1635]  
-	     [R4++] = R2              	// [6:1635]  
-	     [R4] = R3                	// [8:1635]  
-	     R3 = 5                   	// [10:1635]  
-	     R4 = SP + 3              	// [11:1635]  
-	     [R4] = R3                	// [13:1635]  
-	     R3 = - 16384             	// [15:1635]  
-	     R4 = SP + 4              	// [17:1635]  
-	     [R4] = R3                	// [19:1635]  
-	     R3 = 127                 	// [21:1635]  
-	     R4 = SP + 5              	// [23:1635]  
-	     [R4] = R3                	// [25:1635]  
-	     call _SPI_Flash_ReadNWords	// [27:1635]  SPI_Flash_ReadNWords
-BB3_PU23:	// 0x351
+	     .stabn 68,0,1636,LM122-_Read_Flash_info
+	     SP = SP - 5              	// [0:1636]  
+	     R2 = (_Mem0)             	// [1:1636]  Mem0
+	     R3 = seg(_Mem0)          	// [3:1636]  Mem0
+	     R4 = SP + 1              	// [4:1636]  
+	     [R4++] = R2              	// [6:1636]  
+	     [R4] = R3                	// [8:1636]  
+	     R3 = 5                   	// [10:1636]  
+	     R4 = SP + 3              	// [11:1636]  
+	     [R4] = R3                	// [13:1636]  
+	     R3 = - 16384             	// [15:1636]  
+	     R4 = SP + 4              	// [17:1636]  
+	     [R4] = R3                	// [19:1636]  
+	     R3 = 127                 	// [21:1636]  
+	     R4 = SP + 5              	// [23:1636]  
+	     [R4] = R3                	// [25:1636]  
+	     call _SPI_Flash_ReadNWords	// [27:1636]  SPI_Flash_ReadNWords
+BB3_PU23:	// 0x353
 // BB:3 cycle count: 8
-	     SP = SP + 5              	// [0:1635]  
+	     SP = SP + 5              	// [0:1636]  
 	//;;
 	INT FIQ,IRQ
 	//;;
-//1636  
-//1637       __asm("INT FIQ,IRQ");
+//1637  
+//1638       __asm("INT FIQ,IRQ");
 
 LM123:
-	     .stabn 68,0,1637,LM123-_Read_Flash_info
-	     pop BP, PC from [SP]     	// [3:1637]  
+	     .stabn 68,0,1638,LM123-_Read_Flash_info
+	     pop BP, PC from [SP]     	// [3:1638]  
 	.endp	
 LME24:
 	     .stabf LME24-_Read_Flash_info
@@ -2482,19 +2486,19 @@ _Leader_Light: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-//1657  
-//1658  /****************************************************************
-//1659  *********************************************************************/
-//1660  void Leader_Light()
-//1661  {
+//1658  
+//1659  /****************************************************************
+//1660  *********************************************************************/
+//1661  void Leader_Light()
+//1662  {
 
 LM124:
-	     .stabn 68,0,1661,LM124-_Leader_Light
-BB1_PU24:	// 0x350
+	     .stabn 68,0,1662,LM124-_Leader_Light
+BB1_PU24:	// 0x352
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:1661]  
-	     BP = SP + 1              	// [2:1661]  
-	     pop BP, PC from [SP]     	// [4:1661]  
+	     push BP to [SP]          	// [0:1662]  
+	     BP = SP + 1              	// [2:1662]  
+	     pop BP, PC from [SP]     	// [4:1662]  
 	.endp	
 LME25:
 	     .stabf LME25-_Leader_Light
@@ -2509,91 +2513,91 @@ _Get_Registered_Player_Num: .proc
 	// i = 1
 	// old_frame_pointer = 2
 	// return_address = 3
-//1670  
-//1671  /***************************************************************
-//1672  ******************************************************************/
-//1673  unsigned  Get_Registered_Player_Num(unsigned int temp)
-//1674  {
+//1671  
+//1672  /***************************************************************
+//1673  ******************************************************************/
+//1674  unsigned  Get_Registered_Player_Num(unsigned int temp)
+//1675  {
 
 LM125:
-	     .stabn 68,0,1674,LM125-_Get_Registered_Player_Num
-BB1_PU25:	// 0x354
+	     .stabn 68,0,1675,LM125-_Get_Registered_Player_Num
+BB1_PU25:	// 0x356
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:1674]  
-	     SP = SP - 2              	// [2:1674]  
-	     BP = SP + 1              	// [3:1674]  
+	     push BP to [SP]          	// [0:1675]  
+	     SP = SP - 2              	// [2:1675]  
+	     BP = SP + 1              	// [3:1675]  
 LBB21:
-//1675  	
-//1676  	unsigned j = 0;
+//1676  	
+//1677  	unsigned j = 0;
 
 LM126:
-	     .stabn 68,0,1676,LM126-_Get_Registered_Player_Num
-	     R4 = 0                   	// [5:1676]  
-	     [BP + 0] = R4            	// [6:1676]  j
-//1677  	unsigned i = 0;
+	     .stabn 68,0,1677,LM126-_Get_Registered_Player_Num
+	     R4 = 0                   	// [5:1677]  
+	     [BP + 0] = R4            	// [6:1677]  j
+//1678  	unsigned i = 0;
 
 LM127:
-	     .stabn 68,0,1677,LM127-_Get_Registered_Player_Num
-	     R4 = 0                   	// [7:1677]  
-	     [BP + 1] = R4            	// [8:1677]  i
-L_25_1:	// 0x35c
+	     .stabn 68,0,1678,LM127-_Get_Registered_Player_Num
+	     R4 = 0                   	// [7:1678]  
+	     [BP + 1] = R4            	// [8:1678]  i
+L_25_1:	// 0x35e
 // BB:2 cycle count: 7
-//1678  	while(i<C_Player_Num)//C_Player_Num <16
+//1679  	while(i<C_Player_Num)//C_Player_Num <16
 
 LM128:
-	     .stabn 68,0,1678,LM128-_Get_Registered_Player_Num
-	     R4 = [BP + 1]            	// [0:1678]  i
-	     cmp R4, 15               	// [2:1678]  
-	     ja L_25_2                	// [3:1678]  
-BB3_PU25:	// 0x35f
+	     .stabn 68,0,1679,LM128-_Get_Registered_Player_Num
+	     R4 = [BP + 1]            	// [0:1679]  i
+	     cmp R4, 15               	// [2:1679]  
+	     ja L_25_2                	// [3:1679]  
+BB3_PU25:	// 0x361
 // BB:3 cycle count: 18
-//1679  	{
-//1680  		 if (BitMap[i]&temp) //Registered_Play_Status
+//1680  	{
+//1681  		 if (BitMap[i]&temp) //Registered_Play_Status
 
 LM129:
-	     .stabn 68,0,1680,LM129-_Get_Registered_Player_Num
-	     R4 = [BP + 1]            	// [0:1680]  i
-	     R3 = 0                   	// [2:1680]  
-	     R1 = (_BitMap)           	// [3:1680]  BitMap
-	     R2 = seg(_BitMap)        	// [5:1680]  BitMap
-	     R4 = R4 + R1             	// [6:1680]  
-	     R3 = R3 + R2, Carry      	// [7:1680]  
-	     DS = R3                  	// [8:1680]  
-	     R4 = DS:[R4]             	// [9:1680]  
-	     R4 = R4 & [BP + 5]       	// [11:1680]  temp
-	     cmp R4, 0                	// [13:1680]  
-	     je L_25_3                	// [14:1680]  
-BB4_PU25:	// 0x36b
+	     .stabn 68,0,1681,LM129-_Get_Registered_Player_Num
+	     R4 = [BP + 1]            	// [0:1681]  i
+	     R3 = 0                   	// [2:1681]  
+	     R1 = (_BitMap)           	// [3:1681]  BitMap
+	     R2 = seg(_BitMap)        	// [5:1681]  BitMap
+	     R4 = R4 + R1             	// [6:1681]  
+	     R3 = R3 + R2, Carry      	// [7:1681]  
+	     DS = R3                  	// [8:1681]  
+	     R4 = DS:[R4]             	// [9:1681]  
+	     R4 = R4 & [BP + 5]       	// [11:1681]  temp
+	     cmp R4, 0                	// [13:1681]  
+	     je L_25_3                	// [14:1681]  
+BB4_PU25:	// 0x36d
 // BB:4 cycle count: 4
-//1681  		    {
-//1682  		     j+=1;
+//1682  		    {
+//1683  		     j+=1;
 
 LM130:
-	     .stabn 68,0,1682,LM130-_Get_Registered_Player_Num
-	     R4 = [BP + 0]            	// [0:1682]  j
-	     R4 = R4 + 1              	// [2:1682]  
-	     [BP + 0] = R4            	// [3:1682]  j
-L_25_3:	// 0x36e
+	     .stabn 68,0,1683,LM130-_Get_Registered_Player_Num
+	     R4 = [BP + 0]            	// [0:1683]  j
+	     R4 = R4 + 1              	// [2:1683]  
+	     [BP + 0] = R4            	// [3:1683]  j
+L_25_3:	// 0x370
 // BB:5 cycle count: 8
-//1683  		    }
-//1684  		   i++;
+//1684  		    }
+//1685  		   i++;
 
 LM131:
-	     .stabn 68,0,1684,LM131-_Get_Registered_Player_Num
-	     R4 = [BP + 1]            	// [0:1684]  i
-	     R4 = R4 + 1              	// [2:1684]  
-	     [BP + 1] = R4            	// [3:1684]  i
-	     jmp L_25_1               	// [4:1684]  
-L_25_2:	// 0x372
+	     .stabn 68,0,1685,LM131-_Get_Registered_Player_Num
+	     R4 = [BP + 1]            	// [0:1685]  i
+	     R4 = R4 + 1              	// [2:1685]  
+	     [BP + 1] = R4            	// [3:1685]  i
+	     jmp L_25_1               	// [4:1685]  
+L_25_2:	// 0x374
 // BB:6 cycle count: 8
-//1685  	}
-//1686  	return j;
+//1686  	}
+//1687  	return j;
 
 LM132:
-	     .stabn 68,0,1686,LM132-_Get_Registered_Player_Num
-	     R1 = [BP + 0]            	// [0:1686]  j
-	     SP = SP + 2              	// [2:1686]  
-	     pop BP, PC from [SP]     	// [3:1686]  
+	     .stabn 68,0,1687,LM132-_Get_Registered_Player_Num
+	     R1 = [BP + 0]            	// [0:1687]  j
+	     SP = SP + 2              	// [2:1687]  
+	     pop BP, PC from [SP]     	// [3:1687]  
 LBE21:
 	.endp	
 	     .stabs "temp:p4",160,0,0,5
@@ -2614,97 +2618,97 @@ _Get_LedDate_From_Play: .proc
 	// i = 1
 	// old_frame_pointer = 2
 	// return_address = 3
-//1737  
-//1738  /***************************************************************
-//1739  ******************************************************************/
-//1740  unsigned Get_LedDate_From_Play(unsigned temp_Player)
-//1741  {
+//1738  
+//1739  /***************************************************************
+//1740  ******************************************************************/
+//1741  unsigned Get_LedDate_From_Play(unsigned temp_Player)
+//1742  {
 
 LM133:
-	     .stabn 68,0,1741,LM133-_Get_LedDate_From_Play
-BB1_PU26:	// 0x375
+	     .stabn 68,0,1742,LM133-_Get_LedDate_From_Play
+BB1_PU26:	// 0x377
 // BB:1 cycle count: 9
-	     push BP to [SP]          	// [0:1741]  
-	     SP = SP - 2              	// [2:1741]  
-	     BP = SP + 1              	// [3:1741]  
+	     push BP to [SP]          	// [0:1742]  
+	     SP = SP - 2              	// [2:1742]  
+	     BP = SP + 1              	// [3:1742]  
 LBB22:
-//1742  	unsigned temp = 0;
+//1743  	unsigned temp = 0;
 
 LM134:
-	     .stabn 68,0,1742,LM134-_Get_LedDate_From_Play
-	     R4 = 0                   	// [5:1742]  
-	     [BP + 0] = R4            	// [6:1742]  temp
-//1743  	unsigned i = 0;
+	     .stabn 68,0,1743,LM134-_Get_LedDate_From_Play
+	     R4 = 0                   	// [5:1743]  
+	     [BP + 0] = R4            	// [6:1743]  temp
+//1744  	unsigned i = 0;
 
 LM135:
-	     .stabn 68,0,1743,LM135-_Get_LedDate_From_Play
-	     R4 = 0                   	// [7:1743]  
-	     [BP + 1] = R4            	// [8:1743]  i
-L_26_1:	// 0x37d
+	     .stabn 68,0,1744,LM135-_Get_LedDate_From_Play
+	     R4 = 0                   	// [7:1744]  
+	     [BP + 1] = R4            	// [8:1744]  i
+L_26_1:	// 0x37f
 // BB:2 cycle count: 7
-//1744  	while(i<C_Player_Num)//C_Player_Num <16
+//1745  	while(i<C_Player_Num)//C_Player_Num <16
 
 LM136:
-	     .stabn 68,0,1744,LM136-_Get_LedDate_From_Play
-	     R4 = [BP + 1]            	// [0:1744]  i
-	     cmp R4, 15               	// [2:1744]  
-	     ja L_26_2                	// [3:1744]  
-BB3_PU26:	// 0x380
+	     .stabn 68,0,1745,LM136-_Get_LedDate_From_Play
+	     R4 = [BP + 1]            	// [0:1745]  i
+	     cmp R4, 15               	// [2:1745]  
+	     ja L_26_2                	// [3:1745]  
+BB3_PU26:	// 0x382
 // BB:3 cycle count: 18
-//1745  	{
-//1746  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
+//1746  	{
+//1747  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
 
 LM137:
-	     .stabn 68,0,1746,LM137-_Get_LedDate_From_Play
-	     R4 = [BP + 1]            	// [0:1746]  i
-	     R3 = 0                   	// [2:1746]  
-	     R1 = (_BitMap)           	// [3:1746]  BitMap
-	     R2 = seg(_BitMap)        	// [5:1746]  BitMap
-	     R4 = R4 + R1             	// [6:1746]  
-	     R3 = R3 + R2, Carry      	// [7:1746]  
-	     DS = R3                  	// [8:1746]  
-	     R4 = DS:[R4]             	// [9:1746]  
-	     R4 = R4 & [BP + 5]       	// [11:1746]  temp_Player
-	     cmp R4, 0                	// [13:1746]  
-	     je L_26_3                	// [14:1746]  
-BB4_PU26:	// 0x38c
+	     .stabn 68,0,1747,LM137-_Get_LedDate_From_Play
+	     R4 = [BP + 1]            	// [0:1747]  i
+	     R3 = 0                   	// [2:1747]  
+	     R1 = (_BitMap)           	// [3:1747]  BitMap
+	     R2 = seg(_BitMap)        	// [5:1747]  BitMap
+	     R4 = R4 + R1             	// [6:1747]  
+	     R3 = R3 + R2, Carry      	// [7:1747]  
+	     DS = R3                  	// [8:1747]  
+	     R4 = DS:[R4]             	// [9:1747]  
+	     R4 = R4 & [BP + 5]       	// [11:1747]  temp_Player
+	     cmp R4, 0                	// [13:1747]  
+	     je L_26_3                	// [14:1747]  
+BB4_PU26:	// 0x38e
 // BB:4 cycle count: 14
-//1747  		    {
-//1748  		     temp|=Led_Data_Play[i];
+//1748  		    {
+//1749  		     temp|=Led_Data_Play[i];
 
 LM138:
-	     .stabn 68,0,1748,LM138-_Get_LedDate_From_Play
-	     R4 = [BP + 1]            	// [0:1748]  i
-	     R3 = 0                   	// [2:1748]  
-	     R1 = (_Led_Data_Play)    	// [3:1748]  Led_Data_Play
-	     R2 = seg(_Led_Data_Play) 	// [5:1748]  Led_Data_Play
-	     R4 = R4 + R1             	// [6:1748]  
-	     R3 = R3 + R2, Carry      	// [7:1748]  
-	     DS = R3                  	// [8:1748]  
-	     R4 = DS:[R4]             	// [9:1748]  
-	     R4 = R4 | [BP + 0]       	// [11:1748]  temp
-	     [BP + 0] = R4            	// [13:1748]  temp
-L_26_3:	// 0x397
+	     .stabn 68,0,1749,LM138-_Get_LedDate_From_Play
+	     R4 = [BP + 1]            	// [0:1749]  i
+	     R3 = 0                   	// [2:1749]  
+	     R1 = (_Led_Data_Play)    	// [3:1749]  Led_Data_Play
+	     R2 = seg(_Led_Data_Play) 	// [5:1749]  Led_Data_Play
+	     R4 = R4 + R1             	// [6:1749]  
+	     R3 = R3 + R2, Carry      	// [7:1749]  
+	     DS = R3                  	// [8:1749]  
+	     R4 = DS:[R4]             	// [9:1749]  
+	     R4 = R4 | [BP + 0]       	// [11:1749]  temp
+	     [BP + 0] = R4            	// [13:1749]  temp
+L_26_3:	// 0x399
 // BB:5 cycle count: 8
-//1749  		    }
-//1750  		   i++;
+//1750  		    }
+//1751  		   i++;
 
 LM139:
-	     .stabn 68,0,1750,LM139-_Get_LedDate_From_Play
-	     R4 = [BP + 1]            	// [0:1750]  i
-	     R4 = R4 + 1              	// [2:1750]  
-	     [BP + 1] = R4            	// [3:1750]  i
-	     jmp L_26_1               	// [4:1750]  
-L_26_2:	// 0x39b
+	     .stabn 68,0,1751,LM139-_Get_LedDate_From_Play
+	     R4 = [BP + 1]            	// [0:1751]  i
+	     R4 = R4 + 1              	// [2:1751]  
+	     [BP + 1] = R4            	// [3:1751]  i
+	     jmp L_26_1               	// [4:1751]  
+L_26_2:	// 0x39d
 // BB:6 cycle count: 8
-//1751  	}
-//1752  	return temp;
+//1752  	}
+//1753  	return temp;
 
 LM140:
-	     .stabn 68,0,1752,LM140-_Get_LedDate_From_Play
-	     R1 = [BP + 0]            	// [0:1752]  temp
-	     SP = SP + 2              	// [2:1752]  
-	     pop BP, PC from [SP]     	// [3:1752]  
+	     .stabn 68,0,1753,LM140-_Get_LedDate_From_Play
+	     R1 = [BP + 0]            	// [0:1753]  temp
+	     SP = SP + 2              	// [2:1753]  
+	     pop BP, PC from [SP]     	// [3:1753]  
 LBE22:
 	.endp	
 	     .stabs "temp_Player:p4",160,0,0,5
@@ -2724,85 +2728,85 @@ _Get_Firstcnt_From_Play: .proc
 	// i = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//1755  
 //1756  
 //1757  
-//1758  unsigned Get_Firstcnt_From_Play(unsigned temp_Player)
-//1759  {
+//1758  
+//1759  unsigned Get_Firstcnt_From_Play(unsigned temp_Player)
+//1760  {
 
 LM141:
-	     .stabn 68,0,1759,LM141-_Get_Firstcnt_From_Play
-BB1_PU27:	// 0x39e
+	     .stabn 68,0,1760,LM141-_Get_Firstcnt_From_Play
+BB1_PU27:	// 0x3a0
 // BB:1 cycle count: 7
-	     push BP to [SP]          	// [0:1759]  
-	     SP = SP - 1              	// [2:1759]  
-	     BP = SP + 1              	// [3:1759]  
+	     push BP to [SP]          	// [0:1760]  
+	     SP = SP - 1              	// [2:1760]  
+	     BP = SP + 1              	// [3:1760]  
 LBB23:
-//1760  	
-//1761  	unsigned i = 0;
+//1761  	
+//1762  	unsigned i = 0;
 
 LM142:
-	     .stabn 68,0,1761,LM142-_Get_Firstcnt_From_Play
-	     R4 = 0                   	// [5:1761]  
-	     [BP + 0] = R4            	// [6:1761]  i
-L_27_1:	// 0x3a4
+	     .stabn 68,0,1762,LM142-_Get_Firstcnt_From_Play
+	     R4 = 0                   	// [5:1762]  
+	     [BP + 0] = R4            	// [6:1762]  i
+L_27_1:	// 0x3a6
 // BB:2 cycle count: 7
-//1762  	while(i<C_Player_Num)//C_Player_Num <16
+//1763  	while(i<C_Player_Num)//C_Player_Num <16
 
 LM143:
-	     .stabn 68,0,1762,LM143-_Get_Firstcnt_From_Play
-	     R4 = [BP + 0]            	// [0:1762]  i
-	     cmp R4, 15               	// [2:1762]  
-	     ja L_27_2                	// [3:1762]  
-BB3_PU27:	// 0x3a7
+	     .stabn 68,0,1763,LM143-_Get_Firstcnt_From_Play
+	     R4 = [BP + 0]            	// [0:1763]  i
+	     cmp R4, 15               	// [2:1763]  
+	     ja L_27_2                	// [3:1763]  
+BB3_PU27:	// 0x3a9
 // BB:3 cycle count: 18
-//1763  	{
-//1764  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
+//1764  	{
+//1765  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
 
 LM144:
-	     .stabn 68,0,1764,LM144-_Get_Firstcnt_From_Play
-	     R4 = [BP + 0]            	// [0:1764]  i
-	     R3 = 0                   	// [2:1764]  
-	     R1 = (_BitMap)           	// [3:1764]  BitMap
-	     R2 = seg(_BitMap)        	// [5:1764]  BitMap
-	     R4 = R4 + R1             	// [6:1764]  
-	     R3 = R3 + R2, Carry      	// [7:1764]  
-	     DS = R3                  	// [8:1764]  
-	     R4 = DS:[R4]             	// [9:1764]  
-	     R4 = R4 & [BP + 4]       	// [11:1764]  temp_Player
-	     cmp R4, 0                	// [13:1764]  
-	     je L_27_3                	// [14:1764]  
-BB4_PU27:	// 0x3b3
+	     .stabn 68,0,1765,LM144-_Get_Firstcnt_From_Play
+	     R4 = [BP + 0]            	// [0:1765]  i
+	     R3 = 0                   	// [2:1765]  
+	     R1 = (_BitMap)           	// [3:1765]  BitMap
+	     R2 = seg(_BitMap)        	// [5:1765]  BitMap
+	     R4 = R4 + R1             	// [6:1765]  
+	     R3 = R3 + R2, Carry      	// [7:1765]  
+	     DS = R3                  	// [8:1765]  
+	     R4 = DS:[R4]             	// [9:1765]  
+	     R4 = R4 & [BP + 4]       	// [11:1765]  temp_Player
+	     cmp R4, 0                	// [13:1765]  
+	     je L_27_3                	// [14:1765]  
+BB4_PU27:	// 0x3b5
 // BB:4 cycle count: 8
-//1765  		    {
-//1766  		     return i;
+//1766  		    {
+//1767  		     return i;
 
 LM145:
-	     .stabn 68,0,1766,LM145-_Get_Firstcnt_From_Play
-	     R1 = [BP + 0]            	// [0:1766]  i
-	     SP = SP + 1              	// [2:1766]  
-	     pop BP, PC from [SP]     	// [3:1766]  
-L_27_3:	// 0x3b6
+	     .stabn 68,0,1767,LM145-_Get_Firstcnt_From_Play
+	     R1 = [BP + 0]            	// [0:1767]  i
+	     SP = SP + 1              	// [2:1767]  
+	     pop BP, PC from [SP]     	// [3:1767]  
+L_27_3:	// 0x3b8
 // BB:5 cycle count: 8
-//1767  		    }
-//1768  		   i++;
+//1768  		    }
+//1769  		   i++;
 
 LM146:
-	     .stabn 68,0,1768,LM146-_Get_Firstcnt_From_Play
-	     R4 = [BP + 0]            	// [0:1768]  i
-	     R4 = R4 + 1              	// [2:1768]  
-	     [BP + 0] = R4            	// [3:1768]  i
-	     jmp L_27_1               	// [4:1768]  
-L_27_2:	// 0x3ba
+	     .stabn 68,0,1769,LM146-_Get_Firstcnt_From_Play
+	     R4 = [BP + 0]            	// [0:1769]  i
+	     R4 = R4 + 1              	// [2:1769]  
+	     [BP + 0] = R4            	// [3:1769]  i
+	     jmp L_27_1               	// [4:1769]  
+L_27_2:	// 0x3bc
 // BB:6 cycle count: 7
-//1769  	}
-//1770  	return 0;//Go_Rest();
+//1770  	}
+//1771  	return 0;//Go_Rest();
 
 LM147:
-	     .stabn 68,0,1770,LM147-_Get_Firstcnt_From_Play
-	     R1 = 0                   	// [0:1770]  
-	     SP = SP + 1              	// [1:1770]  
-	     pop BP, PC from [SP]     	// [2:1770]  
+	     .stabn 68,0,1771,LM147-_Get_Firstcnt_From_Play
+	     R1 = 0                   	// [0:1771]  
+	     SP = SP + 1              	// [1:1771]  
+	     pop BP, PC from [SP]     	// [2:1771]  
 LBE23:
 	.endp	
 	     .stabs "temp_Player:p4",160,0,0,4
@@ -2821,85 +2825,85 @@ _Get_Firstcolor_From_Play: .proc
 	// i = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//1773  
 //1774  
 //1775  
-//1776  unsigned Get_Firstcolor_From_Play(unsigned temp_Player)
-//1777  {
+//1776  
+//1777  unsigned Get_Firstcolor_From_Play(unsigned temp_Player)
+//1778  {
 
 LM148:
-	     .stabn 68,0,1777,LM148-_Get_Firstcolor_From_Play
-BB1_PU28:	// 0x3bd
+	     .stabn 68,0,1778,LM148-_Get_Firstcolor_From_Play
+BB1_PU28:	// 0x3bf
 // BB:1 cycle count: 7
-	     push BP to [SP]          	// [0:1777]  
-	     SP = SP - 1              	// [2:1777]  
-	     BP = SP + 1              	// [3:1777]  
+	     push BP to [SP]          	// [0:1778]  
+	     SP = SP - 1              	// [2:1778]  
+	     BP = SP + 1              	// [3:1778]  
 LBB24:
-//1778  	
-//1779  	unsigned i = 0;
+//1779  	
+//1780  	unsigned i = 0;
 
 LM149:
-	     .stabn 68,0,1779,LM149-_Get_Firstcolor_From_Play
-	     R4 = 0                   	// [5:1779]  
-	     [BP + 0] = R4            	// [6:1779]  i
-L_28_1:	// 0x3c3
+	     .stabn 68,0,1780,LM149-_Get_Firstcolor_From_Play
+	     R4 = 0                   	// [5:1780]  
+	     [BP + 0] = R4            	// [6:1780]  i
+L_28_1:	// 0x3c5
 // BB:2 cycle count: 7
-//1780  	while(i<C_Player_Num)//C_Player_Num <16
+//1781  	while(i<C_Player_Num)//C_Player_Num <16
 
 LM150:
-	     .stabn 68,0,1780,LM150-_Get_Firstcolor_From_Play
-	     R4 = [BP + 0]            	// [0:1780]  i
-	     cmp R4, 15               	// [2:1780]  
-	     ja L_28_2                	// [3:1780]  
-BB3_PU28:	// 0x3c6
+	     .stabn 68,0,1781,LM150-_Get_Firstcolor_From_Play
+	     R4 = [BP + 0]            	// [0:1781]  i
+	     cmp R4, 15               	// [2:1781]  
+	     ja L_28_2                	// [3:1781]  
+BB3_PU28:	// 0x3c8
 // BB:3 cycle count: 18
-//1781  	{
-//1782  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
+//1782  	{
+//1783  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
 
 LM151:
-	     .stabn 68,0,1782,LM151-_Get_Firstcolor_From_Play
-	     R4 = [BP + 0]            	// [0:1782]  i
-	     R3 = 0                   	// [2:1782]  
-	     R1 = (_BitMap)           	// [3:1782]  BitMap
-	     R2 = seg(_BitMap)        	// [5:1782]  BitMap
-	     R4 = R4 + R1             	// [6:1782]  
-	     R3 = R3 + R2, Carry      	// [7:1782]  
-	     DS = R3                  	// [8:1782]  
-	     R4 = DS:[R4]             	// [9:1782]  
-	     R4 = R4 & [BP + 4]       	// [11:1782]  temp_Player
-	     cmp R4, 0                	// [13:1782]  
-	     je L_28_3                	// [14:1782]  
-BB4_PU28:	// 0x3d2
+	     .stabn 68,0,1783,LM151-_Get_Firstcolor_From_Play
+	     R4 = [BP + 0]            	// [0:1783]  i
+	     R3 = 0                   	// [2:1783]  
+	     R1 = (_BitMap)           	// [3:1783]  BitMap
+	     R2 = seg(_BitMap)        	// [5:1783]  BitMap
+	     R4 = R4 + R1             	// [6:1783]  
+	     R3 = R3 + R2, Carry      	// [7:1783]  
+	     DS = R3                  	// [8:1783]  
+	     R4 = DS:[R4]             	// [9:1783]  
+	     R4 = R4 & [BP + 4]       	// [11:1783]  temp_Player
+	     cmp R4, 0                	// [13:1783]  
+	     je L_28_3                	// [14:1783]  
+BB4_PU28:	// 0x3d4
 // BB:4 cycle count: 8
-//1783  		    {
-//1784  		     return i;//
+//1784  		    {
+//1785  		     return i;//
 
 LM152:
-	     .stabn 68,0,1784,LM152-_Get_Firstcolor_From_Play
-	     R1 = [BP + 0]            	// [0:1784]  i
-	     SP = SP + 1              	// [2:1784]  
-	     pop BP, PC from [SP]     	// [3:1784]  
-L_28_3:	// 0x3d5
+	     .stabn 68,0,1785,LM152-_Get_Firstcolor_From_Play
+	     R1 = [BP + 0]            	// [0:1785]  i
+	     SP = SP + 1              	// [2:1785]  
+	     pop BP, PC from [SP]     	// [3:1785]  
+L_28_3:	// 0x3d7
 // BB:5 cycle count: 8
-//1785  		    }
-//1786  		   i++;
+//1786  		    }
+//1787  		   i++;
 
 LM153:
-	     .stabn 68,0,1786,LM153-_Get_Firstcolor_From_Play
-	     R4 = [BP + 0]            	// [0:1786]  i
-	     R4 = R4 + 1              	// [2:1786]  
-	     [BP + 0] = R4            	// [3:1786]  i
-	     jmp L_28_1               	// [4:1786]  
-L_28_2:	// 0x3d9
+	     .stabn 68,0,1787,LM153-_Get_Firstcolor_From_Play
+	     R4 = [BP + 0]            	// [0:1787]  i
+	     R4 = R4 + 1              	// [2:1787]  
+	     [BP + 0] = R4            	// [3:1787]  i
+	     jmp L_28_1               	// [4:1787]  
+L_28_2:	// 0x3db
 // BB:6 cycle count: 7
-//1787  	}
-//1788  	return 0;//Go_Rest();
+//1788  	}
+//1789  	return 0;//Go_Rest();
 
 LM154:
-	     .stabn 68,0,1788,LM154-_Get_Firstcolor_From_Play
-	     R1 = 0                   	// [0:1788]  
-	     SP = SP + 1              	// [1:1788]  
-	     pop BP, PC from [SP]     	// [2:1788]  
+	     .stabn 68,0,1789,LM154-_Get_Firstcolor_From_Play
+	     R1 = 0                   	// [0:1789]  
+	     SP = SP + 1              	// [1:1789]  
+	     pop BP, PC from [SP]     	// [2:1789]  
 LBE24:
 	.endp	
 	     .stabs "temp_Player:p4",160,0,0,4
@@ -2918,96 +2922,96 @@ _Get_FirstBit_From_Play: .proc
 	// i = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//1791  
 //1792  
 //1793  
-//1794  unsigned Get_FirstBit_From_Play(unsigned temp_Player)
-//1795  {
+//1794  
+//1795  unsigned Get_FirstBit_From_Play(unsigned temp_Player)
+//1796  {
 
 LM155:
-	     .stabn 68,0,1795,LM155-_Get_FirstBit_From_Play
-BB1_PU29:	// 0x3dc
+	     .stabn 68,0,1796,LM155-_Get_FirstBit_From_Play
+BB1_PU29:	// 0x3de
 // BB:1 cycle count: 7
-	     push BP to [SP]          	// [0:1795]  
-	     SP = SP - 1              	// [2:1795]  
-	     BP = SP + 1              	// [3:1795]  
+	     push BP to [SP]          	// [0:1796]  
+	     SP = SP - 1              	// [2:1796]  
+	     BP = SP + 1              	// [3:1796]  
 LBB25:
-//1796  	
-//1797  	unsigned i = 0;
+//1797  	
+//1798  	unsigned i = 0;
 
 LM156:
-	     .stabn 68,0,1797,LM156-_Get_FirstBit_From_Play
-	     R4 = 0                   	// [5:1797]  
-	     [BP + 0] = R4            	// [6:1797]  i
-L_29_5:	// 0x3e2
+	     .stabn 68,0,1798,LM156-_Get_FirstBit_From_Play
+	     R4 = 0                   	// [5:1798]  
+	     [BP + 0] = R4            	// [6:1798]  i
+L_29_5:	// 0x3e4
 // BB:2 cycle count: 7
-//1798  	while(i<C_Player_Num)//C_Player_Num <16
+//1799  	while(i<C_Player_Num)//C_Player_Num <16
 
 LM157:
-	     .stabn 68,0,1798,LM157-_Get_FirstBit_From_Play
-	     R4 = [BP + 0]            	// [0:1798]  i
-	     cmp R4, 15               	// [2:1798]  
-	     ja L_29_6                	// [3:1798]  
-BB3_PU29:	// 0x3e5
+	     .stabn 68,0,1799,LM157-_Get_FirstBit_From_Play
+	     R4 = [BP + 0]            	// [0:1799]  i
+	     cmp R4, 15               	// [2:1799]  
+	     ja L_29_6                	// [3:1799]  
+BB3_PU29:	// 0x3e7
 // BB:3 cycle count: 18
-//1799  	{
-//1800  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
+//1800  	{
+//1801  		 if (BitMap[i]&temp_Player) //Registered_Play_Status
 
 LM158:
-	     .stabn 68,0,1800,LM158-_Get_FirstBit_From_Play
-	     R4 = [BP + 0]            	// [0:1800]  i
-	     R3 = 0                   	// [2:1800]  
-	     R1 = (_BitMap)           	// [3:1800]  BitMap
-	     R2 = seg(_BitMap)        	// [5:1800]  BitMap
-	     R4 = R4 + R1             	// [6:1800]  
-	     R3 = R3 + R2, Carry      	// [7:1800]  
-	     DS = R3                  	// [8:1800]  
-	     R4 = DS:[R4]             	// [9:1800]  
-	     R4 = R4 & [BP + 4]       	// [11:1800]  temp_Player
-	     cmp R4, 0                	// [13:1800]  
-	     je L_29_7                	// [14:1800]  
-BB4_PU29:	// 0x3f1
+	     .stabn 68,0,1801,LM158-_Get_FirstBit_From_Play
+	     R4 = [BP + 0]            	// [0:1801]  i
+	     R3 = 0                   	// [2:1801]  
+	     R1 = (_BitMap)           	// [3:1801]  BitMap
+	     R2 = seg(_BitMap)        	// [5:1801]  BitMap
+	     R4 = R4 + R1             	// [6:1801]  
+	     R3 = R3 + R2, Carry      	// [7:1801]  
+	     DS = R3                  	// [8:1801]  
+	     R4 = DS:[R4]             	// [9:1801]  
+	     R4 = R4 & [BP + 4]       	// [11:1801]  temp_Player
+	     cmp R4, 0                	// [13:1801]  
+	     je L_29_7                	// [14:1801]  
+BB4_PU29:	// 0x3f3
 // BB:4 cycle count: 17
-//1801  		    {
-//1802  		    // Player_Activing_Cnt =i;	
-//1803  		     return BitMap[i];
+//1802  		    {
+//1803  		    // Player_Activing_Cnt =i;	
+//1804  		     return BitMap[i];
 
 LM159:
-	     .stabn 68,0,1803,LM159-_Get_FirstBit_From_Play
-	     R4 = [BP + 0]            	// [0:1803]  i
-	     R3 = 0                   	// [2:1803]  
-	     R1 = (_BitMap)           	// [3:1803]  BitMap
-	     R2 = seg(_BitMap)        	// [5:1803]  BitMap
-	     R4 = R4 + R1             	// [6:1803]  
-	     R3 = R3 + R2, Carry      	// [7:1803]  
-	     DS = R3                  	// [8:1803]  
-	     R1 = DS:[R4]             	// [9:1803]  
-	     SP = SP + 1              	// [11:1803]  
-	     pop BP, PC from [SP]     	// [12:1803]  
-L_29_7:	// 0x3fc
+	     .stabn 68,0,1804,LM159-_Get_FirstBit_From_Play
+	     R4 = [BP + 0]            	// [0:1804]  i
+	     R3 = 0                   	// [2:1804]  
+	     R1 = (_BitMap)           	// [3:1804]  BitMap
+	     R2 = seg(_BitMap)        	// [5:1804]  BitMap
+	     R4 = R4 + R1             	// [6:1804]  
+	     R3 = R3 + R2, Carry      	// [7:1804]  
+	     DS = R3                  	// [8:1804]  
+	     R1 = DS:[R4]             	// [9:1804]  
+	     SP = SP + 1              	// [11:1804]  
+	     pop BP, PC from [SP]     	// [12:1804]  
+L_29_7:	// 0x3fe
 // BB:5 cycle count: 8
-//1804  		     
-//1805  		    }
-//1806  		   i++;
+//1805  		     
+//1806  		    }
+//1807  		   i++;
 
 LM160:
-	     .stabn 68,0,1806,LM160-_Get_FirstBit_From_Play
-	     R4 = [BP + 0]            	// [0:1806]  i
-	     R4 = R4 + 1              	// [2:1806]  
-	     [BP + 0] = R4            	// [3:1806]  i
-	     jmp L_29_5               	// [4:1806]  
-L_29_6:	// 0x400
+	     .stabn 68,0,1807,LM160-_Get_FirstBit_From_Play
+	     R4 = [BP + 0]            	// [0:1807]  i
+	     R4 = R4 + 1              	// [2:1807]  
+	     [BP + 0] = R4            	// [3:1807]  i
+	     jmp L_29_5               	// [4:1807]  
+L_29_6:	// 0x402
 // BB:6 cycle count: 3
-//1807  	}
-//1808  	return Go_Rest();
+//1808  	}
+//1809  	return Go_Rest();
 
 LM161:
-	     .stabn 68,0,1808,LM161-_Get_FirstBit_From_Play
-	     call _Go_Rest            	// [0:1808]  Go_Rest
-BB7_PU29:	// 0x402
+	     .stabn 68,0,1809,LM161-_Get_FirstBit_From_Play
+	     call _Go_Rest            	// [0:1809]  Go_Rest
+BB7_PU29:	// 0x404
 // BB:7 cycle count: 6
-	     SP = SP + 1              	// [0:1808]  
-	     pop BP, PC from [SP]     	// [1:1808]  
+	     SP = SP + 1              	// [0:1809]  
+	     pop BP, PC from [SP]     	// [1:1809]  
 LBE25:
 	.endp	
 	     .stabs "temp_Player:p4",160,0,0,4
@@ -3031,154 +3035,154 @@ _Reset_OneMissionPokemon: .proc
 	// return_address = 8
 	// lra_spill_temp_6 = 5
 	// lra_spill_temp_7 = 6
-//1849  
-//1850  /*************************************************************
-//1851  *************************************************************/
-//1852  void  Reset_OneMissionPokemon()
-//1853  {
+//1850  
+//1851  /*************************************************************
+//1852  *************************************************************/
+//1853  void  Reset_OneMissionPokemon()
+//1854  {
 
 LM162:
-	     .stabn 68,0,1853,LM162-_Reset_OneMissionPokemon
-BB1_PU30:	// 0x404
+	     .stabn 68,0,1854,LM162-_Reset_OneMissionPokemon
+BB1_PU30:	// 0x406
 // BB:1 cycle count: 20
-	     push BP to [SP]          	// [0:1853]  
-	     SP = SP - 7              	// [2:1853]  
-	     BP = SP + 1              	// [3:1853]  
+	     push BP to [SP]          	// [0:1854]  
+	     SP = SP - 7              	// [2:1854]  
+	     BP = SP + 1              	// [3:1854]  
 LBB26:
-//1854      unsigned long int Addr;
-//1855  	unsigned int i=0,temp;
+//1855      unsigned long int Addr;
+//1856  	unsigned int i=0,temp;
 
 LM163:
-	     .stabn 68,0,1855,LM163-_Reset_OneMissionPokemon
-	     R4 = 0                   	// [5:1855]  
-	     [BP + 0] = R4            	// [6:1855]  i
-//1856  
-//1857  	
-//1858  
-//1859     
-//1860  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,1856,LM163-_Reset_OneMissionPokemon
+	     R4 = 0                   	// [5:1856]  
+	     [BP + 0] = R4            	// [6:1856]  i
+//1857  
+//1858  	
+//1859  
+//1860     
+//1861  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM164:
-	     .stabn 68,0,1860,LM164-_Reset_OneMissionPokemon
-	     DS = seg(_Mem0)          	// [7:1860]  Mem0
-	     R4 = (_Mem0)             	// [8:1860]  Mem0
-	     R4 = DS:[R4]             	// [10:1860]  
-	     R3 = R4 lsl 2            	// [12:1860]  
-	     R3 = R3 + R3 lsl 1       	// [13:1860]  
-	     R4 = 0                   	// [14:1860]  
-	     R3 = R3 + 38500          	// [15:1860]  
-	     R4 = R4 + 0, Carry       	// [17:1860]  
-	     [BP + 1] = R3            	// [18:1860]  Addr
-	     [BP + 2] = R4            	// [19:1860]  Addr+1
-L_30_6:	// 0x416
+	     .stabn 68,0,1861,LM164-_Reset_OneMissionPokemon
+	     DS = seg(_Mem0)          	// [7:1861]  Mem0
+	     R4 = (_Mem0)             	// [8:1861]  Mem0
+	     R4 = DS:[R4]             	// [10:1861]  
+	     R3 = R4 lsl 2            	// [12:1861]  
+	     R3 = R3 + R3 lsl 1       	// [13:1861]  
+	     R4 = 0                   	// [14:1861]  
+	     R3 = R3 + 38500          	// [15:1861]  
+	     R4 = R4 + 0, Carry       	// [17:1861]  
+	     [BP + 1] = R3            	// [18:1861]  Addr
+	     [BP + 2] = R4            	// [19:1861]  Addr+1
+L_30_6:	// 0x418
 // BB:2 cycle count: 7
-//1861  	 
-//1862  
-//1863  		while(i<6 )//Num
+//1862  	 
+//1863  
+//1864  		while(i<6 )//Num
 
 LM165:
-	     .stabn 68,0,1863,LM165-_Reset_OneMissionPokemon
-	     R4 = [BP + 0]            	// [0:1863]  i
-	     cmp R4, 5                	// [2:1863]  
-	     ja L_30_7                	// [3:1863]  
-BB3_PU30:	// 0x419
+	     .stabn 68,0,1864,LM165-_Reset_OneMissionPokemon
+	     R4 = [BP + 0]            	// [0:1864]  i
+	     cmp R4, 5                	// [2:1864]  
+	     ja L_30_7                	// [3:1864]  
+BB3_PU30:	// 0x41b
 // BB:3 cycle count: 18
-//1864  		{
-//1865  			temp = SPI_ReadAWord_Big(Addr+i*2);
+//1865  		{
+//1866  			temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM166:
-	     .stabn 68,0,1865,LM166-_Reset_OneMissionPokemon
-	     SP = SP - 2              	// [0:1865]  
-	     R4 = [BP + 0]            	// [1:1865]  i
-	     R3 = R4 lsl 1            	// [3:1865]  
-	     R4 = 0                   	// [4:1865]  
-	     R3 = R3 + [BP + 1]       	// [5:1865]  Addr
-	     R4 = R4 + [BP + 2], Carry	// [7:1865]  Addr+1
-	     R2 = SP + 1              	// [9:1865]  
-	     [R2++] = R3              	// [11:1865]  
-	     [R2] = R4                	// [13:1865]  
-	     call _SPI_ReadAWord_Big  	// [15:1865]  SPI_ReadAWord_Big
-BB4_PU30:	// 0x425
+	     .stabn 68,0,1866,LM166-_Reset_OneMissionPokemon
+	     SP = SP - 2              	// [0:1866]  
+	     R4 = [BP + 0]            	// [1:1866]  i
+	     R3 = R4 lsl 1            	// [3:1866]  
+	     R4 = 0                   	// [4:1866]  
+	     R3 = R3 + [BP + 1]       	// [5:1866]  Addr
+	     R4 = R4 + [BP + 2], Carry	// [7:1866]  Addr+1
+	     R2 = SP + 1              	// [9:1866]  
+	     [R2++] = R3              	// [11:1866]  
+	     [R2] = R4                	// [13:1866]  
+	     call _SPI_ReadAWord_Big  	// [15:1866]  SPI_ReadAWord_Big
+BB4_PU30:	// 0x427
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:1865]  
-	     [BP + 3] = R1            	// [1:1865]  temp
-//1866  
-//1867  		   if(temp == 9999)
+	     SP = SP + 2              	// [0:1866]  
+	     [BP + 3] = R1            	// [1:1866]  temp
+//1867  
+//1868  		   if(temp == 9999)
 
 LM167:
-	     .stabn 68,0,1867,LM167-_Reset_OneMissionPokemon
-	     R4 = [BP + 3]            	// [2:1867]  temp
-	     cmp R4, 9999             	// [4:1867]  
-	     jne L_30_8               	// [6:1867]  
-BB5_PU30:	// 0x42b
+	     .stabn 68,0,1868,LM167-_Reset_OneMissionPokemon
+	     R4 = [BP + 3]            	// [2:1868]  temp
+	     cmp R4, 9999             	// [4:1868]  
+	     jne L_30_8               	// [6:1868]  
+BB5_PU30:	// 0x42d
 // BB:5 cycle count: 4
-//1868  		     {
-//1869  			     break;
+//1869  		     {
+//1870  			     break;
 
 LM168:
-	     .stabn 68,0,1869,LM168-_Reset_OneMissionPokemon
-	     jmp Lt_30_1              	// [0:1869]  
-L_30_8:	// 0x42c
+	     .stabn 68,0,1870,LM168-_Reset_OneMissionPokemon
+	     jmp Lt_30_1              	// [0:1870]  
+L_30_8:	// 0x42e
 // BB:6 cycle count: 53
-//1870  			 }
-//1871  			
-//1872                   Pokenm_LQ[temp/16]|=BitMap[temp%16];
+//1871  			 }
+//1872  			
+//1873                   Pokenm_LQ[temp/16]|=BitMap[temp%16];
 
 LM169:
-	     .stabn 68,0,1872,LM169-_Reset_OneMissionPokemon
-	     R4 = [BP + 3]            	// [0:1872]  temp
-	     R4 = R4 lsr 4            	// [2:1872]  
-	     [BP + 4] = R4            	// [3:1872]  __save_expr_temp_0
-	     R4 = [BP + 4]            	// [4:1872]  __save_expr_temp_0
-	     R3 = 0                   	// [6:1872]  
-	     R1 = (_Pokenm_LQ)        	// [7:1872]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [9:1872]  Pokenm_LQ
-	     R4 = R4 + R1             	// [10:1872]  
-	     R3 = R3 + R2, Carry      	// [11:1872]  
-	     DS = R3                  	// [12:1872]  
-	     R4 = DS:[R4]             	// [13:1872]  
-	     [BP + 5] = R4            	// [15:1872]  lra_spill_temp_6
-	     R4 = [BP + 3]            	// [16:1872]  temp
-	     R4 = R4 & 15             	// [18:1872]  
-	     R3 = 0                   	// [19:1872]  
-	     R1 = (_BitMap)           	// [20:1872]  BitMap
-	     R2 = seg(_BitMap)        	// [22:1872]  BitMap
-	     R4 = R4 + R1             	// [23:1872]  
-	     R3 = R3 + R2, Carry      	// [24:1872]  
-	     DS = R3                  	// [25:1872]  
-	     R3 = DS:[R4]             	// [26:1872]  
-	     R4 = [BP + 5]            	// [28:1872]  lra_spill_temp_6
-	     R4 = R4 | R3             	// [30:1872]  
-	     [BP + 6] = R4            	// [31:1872]  lra_spill_temp_7
-	     R4 = [BP + 4]            	// [32:1872]  __save_expr_temp_0
-	     R3 = 0                   	// [34:1872]  
-	     R1 = (_Pokenm_LQ)        	// [35:1872]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [37:1872]  Pokenm_LQ
-	     R4 = R4 + R1             	// [38:1872]  
-	     R3 = R3 + R2, Carry      	// [39:1872]  
-	     DS = R3                  	// [40:1872]  
-	     R3 = [BP + 6]            	// [41:1872]  lra_spill_temp_7
-	     DS:[R4] = R3             	// [43:1872]  
-//1873               		
-//1874  			i++;
+	     .stabn 68,0,1873,LM169-_Reset_OneMissionPokemon
+	     R4 = [BP + 3]            	// [0:1873]  temp
+	     R4 = R4 lsr 4            	// [2:1873]  
+	     [BP + 4] = R4            	// [3:1873]  __save_expr_temp_0
+	     R4 = [BP + 4]            	// [4:1873]  __save_expr_temp_0
+	     R3 = 0                   	// [6:1873]  
+	     R1 = (_Pokenm_LQ)        	// [7:1873]  Pokenm_LQ
+	     R2 = seg(_Pokenm_LQ)     	// [9:1873]  Pokenm_LQ
+	     R4 = R4 + R1             	// [10:1873]  
+	     R3 = R3 + R2, Carry      	// [11:1873]  
+	     DS = R3                  	// [12:1873]  
+	     R4 = DS:[R4]             	// [13:1873]  
+	     [BP + 5] = R4            	// [15:1873]  lra_spill_temp_6
+	     R4 = [BP + 3]            	// [16:1873]  temp
+	     R4 = R4 & 15             	// [18:1873]  
+	     R3 = 0                   	// [19:1873]  
+	     R1 = (_BitMap)           	// [20:1873]  BitMap
+	     R2 = seg(_BitMap)        	// [22:1873]  BitMap
+	     R4 = R4 + R1             	// [23:1873]  
+	     R3 = R3 + R2, Carry      	// [24:1873]  
+	     DS = R3                  	// [25:1873]  
+	     R3 = DS:[R4]             	// [26:1873]  
+	     R4 = [BP + 5]            	// [28:1873]  lra_spill_temp_6
+	     R4 = R4 | R3             	// [30:1873]  
+	     [BP + 6] = R4            	// [31:1873]  lra_spill_temp_7
+	     R4 = [BP + 4]            	// [32:1873]  __save_expr_temp_0
+	     R3 = 0                   	// [34:1873]  
+	     R1 = (_Pokenm_LQ)        	// [35:1873]  Pokenm_LQ
+	     R2 = seg(_Pokenm_LQ)     	// [37:1873]  Pokenm_LQ
+	     R4 = R4 + R1             	// [38:1873]  
+	     R3 = R3 + R2, Carry      	// [39:1873]  
+	     DS = R3                  	// [40:1873]  
+	     R3 = [BP + 6]            	// [41:1873]  lra_spill_temp_7
+	     DS:[R4] = R3             	// [43:1873]  
+//1874               		
+//1875  			i++;
 
 LM170:
-	     .stabn 68,0,1874,LM170-_Reset_OneMissionPokemon
-	     R4 = [BP + 0]            	// [45:1874]  i
-	     R4 = R4 + 1              	// [47:1874]  
-	     [BP + 0] = R4            	// [48:1874]  i
-	     jmp L_30_6               	// [49:1874]  
-L_30_7:	// 0x454
-Lt_30_1:	// 0x454
+	     .stabn 68,0,1875,LM170-_Reset_OneMissionPokemon
+	     R4 = [BP + 0]            	// [45:1875]  i
+	     R4 = R4 + 1              	// [47:1875]  
+	     [BP + 0] = R4            	// [48:1875]  i
+	     jmp L_30_6               	// [49:1875]  
+L_30_7:	// 0x456
+Lt_30_1:	// 0x456
 // BB:7 cycle count: 6
-//1875  
-//1876  			
-//1877  		}
+//1876  
+//1877  			
+//1878  		}
 
 LM171:
-	     .stabn 68,0,1877,LM171-_Reset_OneMissionPokemon
-	     SP = SP + 7              	// [0:1877]  
-	     pop BP, PC from [SP]     	// [1:1877]  
+	     .stabn 68,0,1878,LM171-_Reset_OneMissionPokemon
+	     SP = SP + 7              	// [0:1878]  
+	     pop BP, PC from [SP]     	// [1:1878]  
 LBE26:
 	.endp	
 	     .stabn 192,0,0,LBB26-_Reset_OneMissionPokemon
@@ -3203,154 +3207,154 @@ _Reset_OneMissionFiller: .proc
 	// return_address = 8
 	// lra_spill_temp_8 = 5
 	// lra_spill_temp_9 = 6
-//1894  
-//1895  /*************************************************************
-//1896  *************************************************************/
-//1897  void  Reset_OneMissionFiller()
-//1898  {
+//1895  
+//1896  /*************************************************************
+//1897  *************************************************************/
+//1898  void  Reset_OneMissionFiller()
+//1899  {
 
 LM172:
-	     .stabn 68,0,1898,LM172-_Reset_OneMissionFiller
-BB1_PU31:	// 0x456
+	     .stabn 68,0,1899,LM172-_Reset_OneMissionFiller
+BB1_PU31:	// 0x458
 // BB:1 cycle count: 20
-	     push BP to [SP]          	// [0:1898]  
-	     SP = SP - 7              	// [2:1898]  
-	     BP = SP + 1              	// [3:1898]  
+	     push BP to [SP]          	// [0:1899]  
+	     SP = SP - 7              	// [2:1899]  
+	     BP = SP + 1              	// [3:1899]  
 LBB27:
-//1899      unsigned long int Addr;
-//1900  	unsigned int i=0,temp;
+//1900      unsigned long int Addr;
+//1901  	unsigned int i=0,temp;
 
 LM173:
-	     .stabn 68,0,1900,LM173-_Reset_OneMissionFiller
-	     R4 = 0                   	// [5:1900]  
-	     [BP + 0] = R4            	// [6:1900]  i
-//1901  
-//1902  	
-//1903  
-//1904     
-//1905  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pok_Filer;//Table; Num
+	     .stabn 68,0,1901,LM173-_Reset_OneMissionFiller
+	     R4 = 0                   	// [5:1901]  
+	     [BP + 0] = R4            	// [6:1901]  i
+//1902  
+//1903  	
+//1904  
+//1905     
+//1906  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pok_Filer;//Table; Num
 
 LM174:
-	     .stabn 68,0,1905,LM174-_Reset_OneMissionFiller
-	     DS = seg(_Mem0)          	// [7:1905]  Mem0
-	     R4 = (_Mem0)             	// [8:1905]  Mem0
-	     R4 = DS:[R4]             	// [10:1905]  
-	     R3 = R4 lsl 2            	// [12:1905]  
-	     R3 = R3 + R3 lsl 1       	// [13:1905]  
-	     R4 = 0                   	// [14:1905]  
-	     R3 = R3 + 41500          	// [15:1905]  
-	     R4 = R4 + 0, Carry       	// [17:1905]  
-	     [BP + 1] = R3            	// [18:1905]  Addr
-	     [BP + 2] = R4            	// [19:1905]  Addr+1
-L_31_6:	// 0x468
+	     .stabn 68,0,1906,LM174-_Reset_OneMissionFiller
+	     DS = seg(_Mem0)          	// [7:1906]  Mem0
+	     R4 = (_Mem0)             	// [8:1906]  Mem0
+	     R4 = DS:[R4]             	// [10:1906]  
+	     R3 = R4 lsl 2            	// [12:1906]  
+	     R3 = R3 + R3 lsl 1       	// [13:1906]  
+	     R4 = 0                   	// [14:1906]  
+	     R3 = R3 + 41500          	// [15:1906]  
+	     R4 = R4 + 0, Carry       	// [17:1906]  
+	     [BP + 1] = R3            	// [18:1906]  Addr
+	     [BP + 2] = R4            	// [19:1906]  Addr+1
+L_31_6:	// 0x46a
 // BB:2 cycle count: 7
-//1906  	 
-//1907  
-//1908  		while(i<6 )//Num
+//1907  	 
+//1908  
+//1909  		while(i<6 )//Num
 
 LM175:
-	     .stabn 68,0,1908,LM175-_Reset_OneMissionFiller
-	     R4 = [BP + 0]            	// [0:1908]  i
-	     cmp R4, 5                	// [2:1908]  
-	     ja L_31_7                	// [3:1908]  
-BB3_PU31:	// 0x46b
+	     .stabn 68,0,1909,LM175-_Reset_OneMissionFiller
+	     R4 = [BP + 0]            	// [0:1909]  i
+	     cmp R4, 5                	// [2:1909]  
+	     ja L_31_7                	// [3:1909]  
+BB3_PU31:	// 0x46d
 // BB:3 cycle count: 18
-//1909  		{
-//1910  			temp = SPI_ReadAWord_Big(Addr+i*2);
+//1910  		{
+//1911  			temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM176:
-	     .stabn 68,0,1910,LM176-_Reset_OneMissionFiller
-	     SP = SP - 2              	// [0:1910]  
-	     R4 = [BP + 0]            	// [1:1910]  i
-	     R3 = R4 lsl 1            	// [3:1910]  
-	     R4 = 0                   	// [4:1910]  
-	     R3 = R3 + [BP + 1]       	// [5:1910]  Addr
-	     R4 = R4 + [BP + 2], Carry	// [7:1910]  Addr+1
-	     R2 = SP + 1              	// [9:1910]  
-	     [R2++] = R3              	// [11:1910]  
-	     [R2] = R4                	// [13:1910]  
-	     call _SPI_ReadAWord_Big  	// [15:1910]  SPI_ReadAWord_Big
-BB4_PU31:	// 0x477
+	     .stabn 68,0,1911,LM176-_Reset_OneMissionFiller
+	     SP = SP - 2              	// [0:1911]  
+	     R4 = [BP + 0]            	// [1:1911]  i
+	     R3 = R4 lsl 1            	// [3:1911]  
+	     R4 = 0                   	// [4:1911]  
+	     R3 = R3 + [BP + 1]       	// [5:1911]  Addr
+	     R4 = R4 + [BP + 2], Carry	// [7:1911]  Addr+1
+	     R2 = SP + 1              	// [9:1911]  
+	     [R2++] = R3              	// [11:1911]  
+	     [R2] = R4                	// [13:1911]  
+	     call _SPI_ReadAWord_Big  	// [15:1911]  SPI_ReadAWord_Big
+BB4_PU31:	// 0x479
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:1910]  
-	     [BP + 3] = R1            	// [1:1910]  temp
-//1911  
-//1912  		   if(temp == 9999)
+	     SP = SP + 2              	// [0:1911]  
+	     [BP + 3] = R1            	// [1:1911]  temp
+//1912  
+//1913  		   if(temp == 9999)
 
 LM177:
-	     .stabn 68,0,1912,LM177-_Reset_OneMissionFiller
-	     R4 = [BP + 3]            	// [2:1912]  temp
-	     cmp R4, 9999             	// [4:1912]  
-	     jne L_31_8               	// [6:1912]  
-BB5_PU31:	// 0x47d
+	     .stabn 68,0,1913,LM177-_Reset_OneMissionFiller
+	     R4 = [BP + 3]            	// [2:1913]  temp
+	     cmp R4, 9999             	// [4:1913]  
+	     jne L_31_8               	// [6:1913]  
+BB5_PU31:	// 0x47f
 // BB:5 cycle count: 4
-//1913  		     {
-//1914  			     break;
+//1914  		     {
+//1915  			     break;
 
 LM178:
-	     .stabn 68,0,1914,LM178-_Reset_OneMissionFiller
-	     jmp Lt_31_1              	// [0:1914]  
-L_31_8:	// 0x47e
+	     .stabn 68,0,1915,LM178-_Reset_OneMissionFiller
+	     jmp Lt_31_1              	// [0:1915]  
+L_31_8:	// 0x480
 // BB:6 cycle count: 53
-//1915  			 }
-//1916  			
-//1917                   Pokenm_LQ[temp/16]|=BitMap[temp%16];
+//1916  			 }
+//1917  			
+//1918                   Pokenm_LQ[temp/16]|=BitMap[temp%16];
 
 LM179:
-	     .stabn 68,0,1917,LM179-_Reset_OneMissionFiller
-	     R4 = [BP + 3]            	// [0:1917]  temp
-	     R4 = R4 lsr 4            	// [2:1917]  
-	     [BP + 4] = R4            	// [3:1917]  __save_expr_temp_1
-	     R4 = [BP + 4]            	// [4:1917]  __save_expr_temp_1
-	     R3 = 0                   	// [6:1917]  
-	     R1 = (_Pokenm_LQ)        	// [7:1917]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [9:1917]  Pokenm_LQ
-	     R4 = R4 + R1             	// [10:1917]  
-	     R3 = R3 + R2, Carry      	// [11:1917]  
-	     DS = R3                  	// [12:1917]  
-	     R4 = DS:[R4]             	// [13:1917]  
-	     [BP + 5] = R4            	// [15:1917]  lra_spill_temp_8
-	     R4 = [BP + 3]            	// [16:1917]  temp
-	     R4 = R4 & 15             	// [18:1917]  
-	     R3 = 0                   	// [19:1917]  
-	     R1 = (_BitMap)           	// [20:1917]  BitMap
-	     R2 = seg(_BitMap)        	// [22:1917]  BitMap
-	     R4 = R4 + R1             	// [23:1917]  
-	     R3 = R3 + R2, Carry      	// [24:1917]  
-	     DS = R3                  	// [25:1917]  
-	     R3 = DS:[R4]             	// [26:1917]  
-	     R4 = [BP + 5]            	// [28:1917]  lra_spill_temp_8
-	     R4 = R4 | R3             	// [30:1917]  
-	     [BP + 6] = R4            	// [31:1917]  lra_spill_temp_9
-	     R4 = [BP + 4]            	// [32:1917]  __save_expr_temp_1
-	     R3 = 0                   	// [34:1917]  
-	     R1 = (_Pokenm_LQ)        	// [35:1917]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [37:1917]  Pokenm_LQ
-	     R4 = R4 + R1             	// [38:1917]  
-	     R3 = R3 + R2, Carry      	// [39:1917]  
-	     DS = R3                  	// [40:1917]  
-	     R3 = [BP + 6]            	// [41:1917]  lra_spill_temp_9
-	     DS:[R4] = R3             	// [43:1917]  
-//1918               		
-//1919  			i++;
+	     .stabn 68,0,1918,LM179-_Reset_OneMissionFiller
+	     R4 = [BP + 3]            	// [0:1918]  temp
+	     R4 = R4 lsr 4            	// [2:1918]  
+	     [BP + 4] = R4            	// [3:1918]  __save_expr_temp_1
+	     R4 = [BP + 4]            	// [4:1918]  __save_expr_temp_1
+	     R3 = 0                   	// [6:1918]  
+	     R1 = (_Pokenm_LQ)        	// [7:1918]  Pokenm_LQ
+	     R2 = seg(_Pokenm_LQ)     	// [9:1918]  Pokenm_LQ
+	     R4 = R4 + R1             	// [10:1918]  
+	     R3 = R3 + R2, Carry      	// [11:1918]  
+	     DS = R3                  	// [12:1918]  
+	     R4 = DS:[R4]             	// [13:1918]  
+	     [BP + 5] = R4            	// [15:1918]  lra_spill_temp_8
+	     R4 = [BP + 3]            	// [16:1918]  temp
+	     R4 = R4 & 15             	// [18:1918]  
+	     R3 = 0                   	// [19:1918]  
+	     R1 = (_BitMap)           	// [20:1918]  BitMap
+	     R2 = seg(_BitMap)        	// [22:1918]  BitMap
+	     R4 = R4 + R1             	// [23:1918]  
+	     R3 = R3 + R2, Carry      	// [24:1918]  
+	     DS = R3                  	// [25:1918]  
+	     R3 = DS:[R4]             	// [26:1918]  
+	     R4 = [BP + 5]            	// [28:1918]  lra_spill_temp_8
+	     R4 = R4 | R3             	// [30:1918]  
+	     [BP + 6] = R4            	// [31:1918]  lra_spill_temp_9
+	     R4 = [BP + 4]            	// [32:1918]  __save_expr_temp_1
+	     R3 = 0                   	// [34:1918]  
+	     R1 = (_Pokenm_LQ)        	// [35:1918]  Pokenm_LQ
+	     R2 = seg(_Pokenm_LQ)     	// [37:1918]  Pokenm_LQ
+	     R4 = R4 + R1             	// [38:1918]  
+	     R3 = R3 + R2, Carry      	// [39:1918]  
+	     DS = R3                  	// [40:1918]  
+	     R3 = [BP + 6]            	// [41:1918]  lra_spill_temp_9
+	     DS:[R4] = R3             	// [43:1918]  
+//1919               		
+//1920  			i++;
 
 LM180:
-	     .stabn 68,0,1919,LM180-_Reset_OneMissionFiller
-	     R4 = [BP + 0]            	// [45:1919]  i
-	     R4 = R4 + 1              	// [47:1919]  
-	     [BP + 0] = R4            	// [48:1919]  i
-	     jmp L_31_6               	// [49:1919]  
-L_31_7:	// 0x4a6
-Lt_31_1:	// 0x4a6
+	     .stabn 68,0,1920,LM180-_Reset_OneMissionFiller
+	     R4 = [BP + 0]            	// [45:1920]  i
+	     R4 = R4 + 1              	// [47:1920]  
+	     [BP + 0] = R4            	// [48:1920]  i
+	     jmp L_31_6               	// [49:1920]  
+L_31_7:	// 0x4a8
+Lt_31_1:	// 0x4a8
 // BB:7 cycle count: 6
-//1920  
-//1921  			
-//1922  		}
+//1921  
+//1922  			
+//1923  		}
 
 LM181:
-	     .stabn 68,0,1922,LM181-_Reset_OneMissionFiller
-	     SP = SP + 7              	// [0:1922]  
-	     pop BP, PC from [SP]     	// [1:1922]  
+	     .stabn 68,0,1923,LM181-_Reset_OneMissionFiller
+	     SP = SP + 7              	// [0:1923]  
+	     pop BP, PC from [SP]     	// [1:1923]  
 LBE27:
 	.endp	
 	     .stabn 192,0,0,LBB27-_Reset_OneMissionFiller
@@ -3373,169 +3377,169 @@ _CheckPokeCatchEquMission: .proc
 	// old_frame_pointer = 5
 	// return_address = 6
 	// lra_spill_temp_10 = 4
-//1925  
 //1926  
 //1927  
-//1928  unsigned int  CheckPokeCatchEquMission()
-//1929  	{
+//1928  
+//1929  unsigned int  CheckPokeCatchEquMission()
+//1930  	{
 
 LM182:
-	     .stabn 68,0,1929,LM182-_CheckPokeCatchEquMission
-BB1_PU32:	// 0x4a8
+	     .stabn 68,0,1930,LM182-_CheckPokeCatchEquMission
+BB1_PU32:	// 0x4aa
 // BB:1 cycle count: 22
-	     push BP to [SP]          	// [0:1929]  
-	     SP = SP - 5              	// [2:1929]  
-	     BP = SP + 1              	// [3:1929]  
+	     push BP to [SP]          	// [0:1930]  
+	     SP = SP - 5              	// [2:1930]  
+	     BP = SP + 1              	// [3:1930]  
 LBB28:
-//1930  		unsigned long int Addr;
-//1931  		unsigned int i=0,temp=0;
+//1931  		unsigned long int Addr;
+//1932  		unsigned int i=0,temp=0;
 
 LM183:
-	     .stabn 68,0,1931,LM183-_CheckPokeCatchEquMission
-	     R4 = 0                   	// [5:1931]  
-	     [BP + 0] = R4            	// [6:1931]  i
-	     R4 = 0                   	// [7:1931]  
-	     [BP + 1] = R4            	// [8:1931]  temp
-//1932  	
-//1933  		//unsigned int pok_cnt =0;
-//1934  		
-//1935  	   
-//1936  		 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,1932,LM183-_CheckPokeCatchEquMission
+	     R4 = 0                   	// [5:1932]  
+	     [BP + 0] = R4            	// [6:1932]  i
+	     R4 = 0                   	// [7:1932]  
+	     [BP + 1] = R4            	// [8:1932]  temp
+//1933  	
+//1934  		//unsigned int pok_cnt =0;
+//1935  		
+//1936  	   
+//1937  		 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM184:
-	     .stabn 68,0,1936,LM184-_CheckPokeCatchEquMission
-	     DS = seg(_Mem0)          	// [9:1936]  Mem0
-	     R4 = (_Mem0)             	// [10:1936]  Mem0
-	     R4 = DS:[R4]             	// [12:1936]  
-	     R3 = R4 lsl 2            	// [14:1936]  
-	     R3 = R3 + R3 lsl 1       	// [15:1936]  
-	     R4 = 0                   	// [16:1936]  
-	     R3 = R3 + 38500          	// [17:1936]  
-	     R4 = R4 + 0, Carry       	// [19:1936]  
-	     [BP + 2] = R3            	// [20:1936]  Addr
-	     [BP + 3] = R4            	// [21:1936]  Addr+1
-L_32_8:	// 0x4bc
+	     .stabn 68,0,1937,LM184-_CheckPokeCatchEquMission
+	     DS = seg(_Mem0)          	// [9:1937]  Mem0
+	     R4 = (_Mem0)             	// [10:1937]  Mem0
+	     R4 = DS:[R4]             	// [12:1937]  
+	     R3 = R4 lsl 2            	// [14:1937]  
+	     R3 = R3 + R3 lsl 1       	// [15:1937]  
+	     R4 = 0                   	// [16:1937]  
+	     R3 = R3 + 38500          	// [17:1937]  
+	     R4 = R4 + 0, Carry       	// [19:1937]  
+	     [BP + 2] = R3            	// [20:1937]  Addr
+	     [BP + 3] = R4            	// [21:1937]  Addr+1
+L_32_8:	// 0x4be
 // BB:2 cycle count: 7
-//1937  		 
-//1938  	
-//1939  			while(i<6 )//Num
+//1938  		 
+//1939  	
+//1940  			while(i<6 )//Num
 
 LM185:
-	     .stabn 68,0,1939,LM185-_CheckPokeCatchEquMission
-	     R4 = [BP + 0]            	// [0:1939]  i
-	     cmp R4, 5                	// [2:1939]  
-	     ja L_32_9                	// [3:1939]  
-BB3_PU32:	// 0x4bf
+	     .stabn 68,0,1940,LM185-_CheckPokeCatchEquMission
+	     R4 = [BP + 0]            	// [0:1940]  i
+	     cmp R4, 5                	// [2:1940]  
+	     ja L_32_9                	// [3:1940]  
+BB3_PU32:	// 0x4c1
 // BB:3 cycle count: 18
-//1940  			{
-//1941  				temp = SPI_ReadAWord_Big(Addr+i*2);
+//1941  			{
+//1942  				temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM186:
-	     .stabn 68,0,1941,LM186-_CheckPokeCatchEquMission
-	     SP = SP - 2              	// [0:1941]  
-	     R4 = [BP + 0]            	// [1:1941]  i
-	     R3 = R4 lsl 1            	// [3:1941]  
-	     R4 = 0                   	// [4:1941]  
-	     R3 = R3 + [BP + 2]       	// [5:1941]  Addr
-	     R4 = R4 + [BP + 3], Carry	// [7:1941]  Addr+1
-	     R2 = SP + 1              	// [9:1941]  
-	     [R2++] = R3              	// [11:1941]  
-	     [R2] = R4                	// [13:1941]  
-	     call _SPI_ReadAWord_Big  	// [15:1941]  SPI_ReadAWord_Big
-BB4_PU32:	// 0x4cb
+	     .stabn 68,0,1942,LM186-_CheckPokeCatchEquMission
+	     SP = SP - 2              	// [0:1942]  
+	     R4 = [BP + 0]            	// [1:1942]  i
+	     R3 = R4 lsl 1            	// [3:1942]  
+	     R4 = 0                   	// [4:1942]  
+	     R3 = R3 + [BP + 2]       	// [5:1942]  Addr
+	     R4 = R4 + [BP + 3], Carry	// [7:1942]  Addr+1
+	     R2 = SP + 1              	// [9:1942]  
+	     [R2++] = R3              	// [11:1942]  
+	     [R2] = R4                	// [13:1942]  
+	     call _SPI_ReadAWord_Big  	// [15:1942]  SPI_ReadAWord_Big
+BB4_PU32:	// 0x4cd
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:1941]  
-	     [BP + 1] = R1            	// [1:1941]  temp
-//1942  	
-//1943  			   if(temp == 9999)
+	     SP = SP + 2              	// [0:1942]  
+	     [BP + 1] = R1            	// [1:1942]  temp
+//1943  	
+//1944  			   if(temp == 9999)
 
 LM187:
-	     .stabn 68,0,1943,LM187-_CheckPokeCatchEquMission
-	     R4 = [BP + 1]            	// [2:1943]  temp
-	     cmp R4, 9999             	// [4:1943]  
-	     jne L_32_11              	// [6:1943]  
-BB5_PU32:	// 0x4d1
+	     .stabn 68,0,1944,LM187-_CheckPokeCatchEquMission
+	     R4 = [BP + 1]            	// [2:1944]  temp
+	     cmp R4, 9999             	// [4:1944]  
+	     jne L_32_11              	// [6:1944]  
+BB5_PU32:	// 0x4d3
 // BB:5 cycle count: 4
-//1944  				 {
-//1945  				  
-//1946  					 break;
+//1945  				 {
+//1946  				  
+//1947  					 break;
 
 LM188:
-	     .stabn 68,0,1946,LM188-_CheckPokeCatchEquMission
-	     jmp Lt_32_1              	// [0:1946]  
-L_32_11:	// 0x4d2
+	     .stabn 68,0,1947,LM188-_CheckPokeCatchEquMission
+	     jmp Lt_32_1              	// [0:1947]  
+L_32_11:	// 0x4d4
 // BB:6 cycle count: 33
-//1948  				else
-//1949  					{
-//1950  						
-//1951  				
-//1952  					  if((BitMap[temp%16]&Pokecatch_Pok[temp/16])==0)//if(gQuestionIdx==temp)// if(BitMap[temp%16]&Pokenm_LQ[temp/16])
+//1949  				else
+//1950  					{
+//1951  						
+//1952  				
+//1953  					  if((BitMap[temp%16]&Pokecatch_Pok[temp/16])==0)//if(gQuestionIdx==temp)// if(BitMap[temp%16]&Pokenm_LQ[temp/16])
 
 LM189:
-	     .stabn 68,0,1952,LM189-_CheckPokeCatchEquMission
-	     R4 = [BP + 1]            	// [0:1952]  temp
-	     R4 = R4 & 15             	// [2:1952]  
-	     R3 = 0                   	// [3:1952]  
-	     R1 = (_BitMap)           	// [4:1952]  BitMap
-	     R2 = seg(_BitMap)        	// [6:1952]  BitMap
-	     R4 = R4 + R1             	// [7:1952]  
-	     R3 = R3 + R2, Carry      	// [8:1952]  
-	     DS = R3                  	// [9:1952]  
-	     R4 = DS:[R4]             	// [10:1952]  
-	     [BP + 4] = R4            	// [12:1952]  lra_spill_temp_10
-	     R4 = [BP + 1]            	// [13:1952]  temp
-	     R4 = R4 lsr 4            	// [15:1952]  
-	     R3 = 0                   	// [16:1952]  
-	     R1 = (_Pokecatch_Pok)    	// [17:1952]  Pokecatch_Pok
-	     R2 = seg(_Pokecatch_Pok) 	// [19:1952]  Pokecatch_Pok
-	     R4 = R4 + R1             	// [20:1952]  
-	     R3 = R3 + R2, Carry      	// [21:1952]  
-	     DS = R3                  	// [22:1952]  
-	     R3 = DS:[R4]             	// [23:1952]  
-	     R4 = [BP + 4]            	// [25:1952]  lra_spill_temp_10
-	     R4 = R4 & R3             	// [27:1952]  
-	     cmp R4, 0                	// [28:1952]  
-	     jne L_32_12              	// [29:1952]  
-BB7_PU32:	// 0x4eb
+	     .stabn 68,0,1953,LM189-_CheckPokeCatchEquMission
+	     R4 = [BP + 1]            	// [0:1953]  temp
+	     R4 = R4 & 15             	// [2:1953]  
+	     R3 = 0                   	// [3:1953]  
+	     R1 = (_BitMap)           	// [4:1953]  BitMap
+	     R2 = seg(_BitMap)        	// [6:1953]  BitMap
+	     R4 = R4 + R1             	// [7:1953]  
+	     R3 = R3 + R2, Carry      	// [8:1953]  
+	     DS = R3                  	// [9:1953]  
+	     R4 = DS:[R4]             	// [10:1953]  
+	     [BP + 4] = R4            	// [12:1953]  lra_spill_temp_10
+	     R4 = [BP + 1]            	// [13:1953]  temp
+	     R4 = R4 lsr 4            	// [15:1953]  
+	     R3 = 0                   	// [16:1953]  
+	     R1 = (_Pokecatch_Pok)    	// [17:1953]  Pokecatch_Pok
+	     R2 = seg(_Pokecatch_Pok) 	// [19:1953]  Pokecatch_Pok
+	     R4 = R4 + R1             	// [20:1953]  
+	     R3 = R3 + R2, Carry      	// [21:1953]  
+	     DS = R3                  	// [22:1953]  
+	     R3 = DS:[R4]             	// [23:1953]  
+	     R4 = [BP + 4]            	// [25:1953]  lra_spill_temp_10
+	     R4 = R4 & R3             	// [27:1953]  
+	     cmp R4, 0                	// [28:1953]  
+	     jne L_32_12              	// [29:1953]  
+BB7_PU32:	// 0x4ed
 // BB:7 cycle count: 7
-//1953  						  {
-//1954  	
-//1955  							 return 0;
+//1954  						  {
+//1955  	
+//1956  							 return 0;
 
 LM190:
-	     .stabn 68,0,1955,LM190-_CheckPokeCatchEquMission
-	     R1 = 0                   	// [0:1955]  
-	     SP = SP + 5              	// [1:1955]  
-	     pop BP, PC from [SP]     	// [2:1955]  
-L_32_12:	// 0x4ee
-L_32_10:	// 0x4ee
+	     .stabn 68,0,1956,LM190-_CheckPokeCatchEquMission
+	     R1 = 0                   	// [0:1956]  
+	     SP = SP + 5              	// [1:1956]  
+	     pop BP, PC from [SP]     	// [2:1956]  
+L_32_12:	// 0x4f0
+L_32_10:	// 0x4f0
 // BB:8 cycle count: 8
-//1957  	
-//1958  						 }
-//1959  					}
-//1960  			
-//1961  				i++;
+//1958  	
+//1959  						 }
+//1960  					}
+//1961  			
+//1962  				i++;
 
 LM191:
-	     .stabn 68,0,1961,LM191-_CheckPokeCatchEquMission
-	     R4 = [BP + 0]            	// [0:1961]  i
-	     R4 = R4 + 1              	// [2:1961]  
-	     [BP + 0] = R4            	// [3:1961]  i
-	     jmp L_32_8               	// [4:1961]  
-L_32_9:	// 0x4f2
-Lt_32_1:	// 0x4f2
+	     .stabn 68,0,1962,LM191-_CheckPokeCatchEquMission
+	     R4 = [BP + 0]            	// [0:1962]  i
+	     R4 = R4 + 1              	// [2:1962]  
+	     [BP + 0] = R4            	// [3:1962]  i
+	     jmp L_32_8               	// [4:1962]  
+L_32_9:	// 0x4f4
+Lt_32_1:	// 0x4f4
 // BB:9 cycle count: 7
-//1964  	//				break;
-//1965  	
-//1966  		}
-//1967  	
-//1968  		 return 1;
+//1965  	//				break;
+//1966  	
+//1967  		}
+//1968  	
+//1969  		 return 1;
 
 LM192:
-	     .stabn 68,0,1968,LM192-_CheckPokeCatchEquMission
-	     R1 = 1                   	// [0:1968]  
-	     SP = SP + 5              	// [1:1968]  
-	     pop BP, PC from [SP]     	// [2:1968]  
+	     .stabn 68,0,1969,LM192-_CheckPokeCatchEquMission
+	     R1 = 1                   	// [0:1969]  
+	     SP = SP + 5              	// [1:1969]  
+	     pop BP, PC from [SP]     	// [2:1969]  
 LBE28:
 	.endp	
 	     .stabn 192,0,0,LBB28-_CheckPokeCatchEquMission
@@ -3560,215 +3564,215 @@ _SetCollectOfMission: .proc
 	// return_address = 8
 	// lra_spill_temp_11 = 5
 	// lra_spill_temp_12 = 6
-//1971  
 //1972  
 //1973  
-//1974  void  SetCollectOfMission()
-//1975  	{
+//1974  
+//1975  void  SetCollectOfMission()
+//1976  	{
 
 LM193:
-	     .stabn 68,0,1975,LM193-_SetCollectOfMission
-BB1_PU33:	// 0x4f5
+	     .stabn 68,0,1976,LM193-_SetCollectOfMission
+BB1_PU33:	// 0x4f7
 // BB:1 cycle count: 22
-	     push BP to [SP]          	// [0:1975]  
-	     SP = SP - 7              	// [2:1975]  
-	     BP = SP + 1              	// [3:1975]  
+	     push BP to [SP]          	// [0:1976]  
+	     SP = SP - 7              	// [2:1976]  
+	     BP = SP + 1              	// [3:1976]  
 LBB29:
-//1976  		unsigned long int Addr;
-//1977  		unsigned int i=0,temp=0;
+//1977  		unsigned long int Addr;
+//1978  		unsigned int i=0,temp=0;
 
 LM194:
-	     .stabn 68,0,1977,LM194-_SetCollectOfMission
-	     R4 = 0                   	// [5:1977]  
-	     [BP + 0] = R4            	// [6:1977]  i
-	     R4 = 0                   	// [7:1977]  
-	     [BP + 1] = R4            	// [8:1977]  temp
-//1978  	
-//1979  		//unsigned int pok_cnt =0;
-//1980  		
-//1981  	   
-//1982  		 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,1978,LM194-_SetCollectOfMission
+	     R4 = 0                   	// [5:1978]  
+	     [BP + 0] = R4            	// [6:1978]  i
+	     R4 = 0                   	// [7:1978]  
+	     [BP + 1] = R4            	// [8:1978]  temp
+//1979  	
+//1980  		//unsigned int pok_cnt =0;
+//1981  		
+//1982  	   
+//1983  		 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM195:
-	     .stabn 68,0,1982,LM195-_SetCollectOfMission
-	     DS = seg(_Mem0)          	// [9:1982]  Mem0
-	     R4 = (_Mem0)             	// [10:1982]  Mem0
-	     R4 = DS:[R4]             	// [12:1982]  
-	     R3 = R4 lsl 2            	// [14:1982]  
-	     R3 = R3 + R3 lsl 1       	// [15:1982]  
-	     R4 = 0                   	// [16:1982]  
-	     R3 = R3 + 38500          	// [17:1982]  
-	     R4 = R4 + 0, Carry       	// [19:1982]  
-	     [BP + 2] = R3            	// [20:1982]  Addr
-	     [BP + 3] = R4            	// [21:1982]  Addr+1
-L_33_6:	// 0x509
+	     .stabn 68,0,1983,LM195-_SetCollectOfMission
+	     DS = seg(_Mem0)          	// [9:1983]  Mem0
+	     R4 = (_Mem0)             	// [10:1983]  Mem0
+	     R4 = DS:[R4]             	// [12:1983]  
+	     R3 = R4 lsl 2            	// [14:1983]  
+	     R3 = R3 + R3 lsl 1       	// [15:1983]  
+	     R4 = 0                   	// [16:1983]  
+	     R3 = R3 + 38500          	// [17:1983]  
+	     R4 = R4 + 0, Carry       	// [19:1983]  
+	     [BP + 2] = R3            	// [20:1983]  Addr
+	     [BP + 3] = R4            	// [21:1983]  Addr+1
+L_33_6:	// 0x50b
 // BB:2 cycle count: 7
-//1983  		 
-//1984  	
-//1985  			while(i<6 )//Num
+//1984  		 
+//1985  	
+//1986  			while(i<6 )//Num
 
 LM196:
-	     .stabn 68,0,1985,LM196-_SetCollectOfMission
-	     R4 = [BP + 0]            	// [0:1985]  i
-	     cmp R4, 5                	// [2:1985]  
-	     ja L_33_7                	// [3:1985]  
-BB3_PU33:	// 0x50c
+	     .stabn 68,0,1986,LM196-_SetCollectOfMission
+	     R4 = [BP + 0]            	// [0:1986]  i
+	     cmp R4, 5                	// [2:1986]  
+	     ja L_33_7                	// [3:1986]  
+BB3_PU33:	// 0x50e
 // BB:3 cycle count: 18
-//1986  			{
-//1987  				temp = SPI_ReadAWord_Big(Addr+i*2);
+//1987  			{
+//1988  				temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM197:
-	     .stabn 68,0,1987,LM197-_SetCollectOfMission
-	     SP = SP - 2              	// [0:1987]  
-	     R4 = [BP + 0]            	// [1:1987]  i
-	     R3 = R4 lsl 1            	// [3:1987]  
-	     R4 = 0                   	// [4:1987]  
-	     R3 = R3 + [BP + 2]       	// [5:1987]  Addr
-	     R4 = R4 + [BP + 3], Carry	// [7:1987]  Addr+1
-	     R2 = SP + 1              	// [9:1987]  
-	     [R2++] = R3              	// [11:1987]  
-	     [R2] = R4                	// [13:1987]  
-	     call _SPI_ReadAWord_Big  	// [15:1987]  SPI_ReadAWord_Big
-BB4_PU33:	// 0x518
+	     .stabn 68,0,1988,LM197-_SetCollectOfMission
+	     SP = SP - 2              	// [0:1988]  
+	     R4 = [BP + 0]            	// [1:1988]  i
+	     R3 = R4 lsl 1            	// [3:1988]  
+	     R4 = 0                   	// [4:1988]  
+	     R3 = R3 + [BP + 2]       	// [5:1988]  Addr
+	     R4 = R4 + [BP + 3], Carry	// [7:1988]  Addr+1
+	     R2 = SP + 1              	// [9:1988]  
+	     [R2++] = R3              	// [11:1988]  
+	     [R2] = R4                	// [13:1988]  
+	     call _SPI_ReadAWord_Big  	// [15:1988]  SPI_ReadAWord_Big
+BB4_PU33:	// 0x51a
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:1987]  
-	     [BP + 1] = R1            	// [1:1987]  temp
-//1988  	
-//1989  			   if(temp == 9999)
+	     SP = SP + 2              	// [0:1988]  
+	     [BP + 1] = R1            	// [1:1988]  temp
+//1989  	
+//1990  			   if(temp == 9999)
 
 LM198:
-	     .stabn 68,0,1989,LM198-_SetCollectOfMission
-	     R4 = [BP + 1]            	// [2:1989]  temp
-	     cmp R4, 9999             	// [4:1989]  
-	     jne L_33_9               	// [6:1989]  
-BB5_PU33:	// 0x51e
+	     .stabn 68,0,1990,LM198-_SetCollectOfMission
+	     R4 = [BP + 1]            	// [2:1990]  temp
+	     cmp R4, 9999             	// [4:1990]  
+	     jne L_33_9               	// [6:1990]  
+BB5_PU33:	// 0x520
 // BB:5 cycle count: 4
-//1990  				 {
-//1991  				  
-//1992  					 break;
+//1991  				 {
+//1992  				  
+//1993  					 break;
 
 LM199:
-	     .stabn 68,0,1992,LM199-_SetCollectOfMission
-	     jmp Lt_33_1              	// [0:1992]  
-L_33_9:	// 0x51f
+	     .stabn 68,0,1993,LM199-_SetCollectOfMission
+	     jmp Lt_33_1              	// [0:1993]  
+L_33_9:	// 0x521
 // BB:6 cycle count: 45
-//1994  				else
-//1995  					{
-//1996  						
-//1997  				
-//1998  					  InCollection_Pok[temp/16]|=BitMap[temp%16];//if(gQuestionIdx==temp)// if(BitMap[temp%16]&Pokenm_LQ[temp/16])
+//1995  				else
+//1996  					{
+//1997  						
+//1998  				
+//1999  					  InCollection_Pok[temp/16]|=BitMap[temp%16];//if(gQuestionIdx==temp)// if(BitMap[temp%16]&Pokenm_LQ[temp/16])
 
 LM200:
-	     .stabn 68,0,1998,LM200-_SetCollectOfMission
-	     R4 = [BP + 1]            	// [0:1998]  temp
-	     R4 = R4 lsr 4            	// [2:1998]  
-	     [BP + 4] = R4            	// [3:1998]  __save_expr_temp_2
-	     R4 = [BP + 4]            	// [4:1998]  __save_expr_temp_2
-	     R3 = 0                   	// [6:1998]  
-	     R1 = (_InCollection_Pok) 	// [7:1998]  InCollection_Pok
-	     R2 = seg(_InCollection_Pok)	// [9:1998]  InCollection_Pok
-	     R4 = R4 + R1             	// [10:1998]  
-	     R3 = R3 + R2, Carry      	// [11:1998]  
-	     DS = R3                  	// [12:1998]  
-	     R4 = DS:[R4]             	// [13:1998]  
-	     [BP + 5] = R4            	// [15:1998]  lra_spill_temp_11
-	     R4 = [BP + 1]            	// [16:1998]  temp
-	     R4 = R4 & 15             	// [18:1998]  
-	     R3 = 0                   	// [19:1998]  
-	     R1 = (_BitMap)           	// [20:1998]  BitMap
-	     R2 = seg(_BitMap)        	// [22:1998]  BitMap
-	     R4 = R4 + R1             	// [23:1998]  
-	     R3 = R3 + R2, Carry      	// [24:1998]  
-	     DS = R3                  	// [25:1998]  
-	     R3 = DS:[R4]             	// [26:1998]  
-	     R4 = [BP + 5]            	// [28:1998]  lra_spill_temp_11
-	     R4 = R4 | R3             	// [30:1998]  
-	     [BP + 6] = R4            	// [31:1998]  lra_spill_temp_12
-	     R4 = [BP + 4]            	// [32:1998]  __save_expr_temp_2
-	     R3 = 0                   	// [34:1998]  
-	     R1 = (_InCollection_Pok) 	// [35:1998]  InCollection_Pok
-	     R2 = seg(_InCollection_Pok)	// [37:1998]  InCollection_Pok
-	     R4 = R4 + R1             	// [38:1998]  
-	     R3 = R3 + R2, Carry      	// [39:1998]  
-	     DS = R3                  	// [40:1998]  
-	     R3 = [BP + 6]            	// [41:1998]  lra_spill_temp_12
-	     DS:[R4] = R3             	// [43:1998]  
-L_33_8:	// 0x543
+	     .stabn 68,0,1999,LM200-_SetCollectOfMission
+	     R4 = [BP + 1]            	// [0:1999]  temp
+	     R4 = R4 lsr 4            	// [2:1999]  
+	     [BP + 4] = R4            	// [3:1999]  __save_expr_temp_2
+	     R4 = [BP + 4]            	// [4:1999]  __save_expr_temp_2
+	     R3 = 0                   	// [6:1999]  
+	     R1 = (_InCollection_Pok) 	// [7:1999]  InCollection_Pok
+	     R2 = seg(_InCollection_Pok)	// [9:1999]  InCollection_Pok
+	     R4 = R4 + R1             	// [10:1999]  
+	     R3 = R3 + R2, Carry      	// [11:1999]  
+	     DS = R3                  	// [12:1999]  
+	     R4 = DS:[R4]             	// [13:1999]  
+	     [BP + 5] = R4            	// [15:1999]  lra_spill_temp_11
+	     R4 = [BP + 1]            	// [16:1999]  temp
+	     R4 = R4 & 15             	// [18:1999]  
+	     R3 = 0                   	// [19:1999]  
+	     R1 = (_BitMap)           	// [20:1999]  BitMap
+	     R2 = seg(_BitMap)        	// [22:1999]  BitMap
+	     R4 = R4 + R1             	// [23:1999]  
+	     R3 = R3 + R2, Carry      	// [24:1999]  
+	     DS = R3                  	// [25:1999]  
+	     R3 = DS:[R4]             	// [26:1999]  
+	     R4 = [BP + 5]            	// [28:1999]  lra_spill_temp_11
+	     R4 = R4 | R3             	// [30:1999]  
+	     [BP + 6] = R4            	// [31:1999]  lra_spill_temp_12
+	     R4 = [BP + 4]            	// [32:1999]  __save_expr_temp_2
+	     R3 = 0                   	// [34:1999]  
+	     R1 = (_InCollection_Pok) 	// [35:1999]  InCollection_Pok
+	     R2 = seg(_InCollection_Pok)	// [37:1999]  InCollection_Pok
+	     R4 = R4 + R1             	// [38:1999]  
+	     R3 = R3 + R2, Carry      	// [39:1999]  
+	     DS = R3                  	// [40:1999]  
+	     R3 = [BP + 6]            	// [41:1999]  lra_spill_temp_12
+	     DS:[R4] = R3             	// [43:1999]  
+L_33_8:	// 0x545
 // BB:7 cycle count: 8
-//1999  	
-//2000  					}
-//2001  			
-//2002  				i++;
+//2000  	
+//2001  					}
+//2002  			
+//2003  				i++;
 
 LM201:
-	     .stabn 68,0,2002,LM201-_SetCollectOfMission
-	     R4 = [BP + 0]            	// [0:2002]  i
-	     R4 = R4 + 1              	// [2:2002]  
-	     [BP + 0] = R4            	// [3:2002]  i
-	     jmp L_33_6               	// [4:2002]  
-L_33_7:	// 0x547
-Lt_33_1:	// 0x547
+	     .stabn 68,0,2003,LM201-_SetCollectOfMission
+	     R4 = [BP + 0]            	// [0:2003]  i
+	     R4 = R4 + 1              	// [2:2003]  
+	     [BP + 0] = R4            	// [3:2003]  i
+	     jmp L_33_6               	// [4:2003]  
+L_33_7:	// 0x549
+Lt_33_1:	// 0x549
 // BB:8 cycle count: 5
 	//;;
 	INT OFF
 	//;;
-//2006  	
-//2007  		}
-//2008  	
-//2009  		__asm("INT OFF");
-//2010  	   MoveSPIDriverToRAM();
+//2007  	
+//2008  		}
+//2009  	
+//2010  		__asm("INT OFF");
+//2011  	   MoveSPIDriverToRAM();
 
 LM202:
-	     .stabn 68,0,2010,LM202-_SetCollectOfMission
-	     call _MoveSPIDriverToRAM 	// [2:2010]  MoveSPIDriverToRAM
-BB9_PU33:	// 0x54c
+	     .stabn 68,0,2011,LM202-_SetCollectOfMission
+	     call _MoveSPIDriverToRAM 	// [2:2011]  MoveSPIDriverToRAM
+BB9_PU33:	// 0x54e
 // BB:9 cycle count: 16
-//2011  	   
-//2012  	  SPI_Flash_Sector_Erase(T_PokLQInColl_L,T_PokLQInColl_H);
+//2012  	   
+//2013  	  SPI_Flash_Sector_Erase(T_PokLQInColl_L,T_PokLQInColl_H);
 
 LM203:
-	     .stabn 68,0,2012,LM203-_SetCollectOfMission
-	     SP = SP - 2              	// [0:2012]  
-	     R3 = - 8192              	// [1:2012]  
-	     R4 = SP + 1              	// [3:2012]  
-	     [R4] = R3                	// [5:2012]  
-	     R3 = 127                 	// [7:2012]  
-	     R4 = SP + 2              	// [9:2012]  
-	     [R4] = R3                	// [11:2012]  
-	     call _SPI_Flash_Sector_Erase	// [13:2012]  SPI_Flash_Sector_Erase
-BB10_PU33:	// 0x559
+	     .stabn 68,0,2013,LM203-_SetCollectOfMission
+	     SP = SP - 2              	// [0:2013]  
+	     R3 = - 8192              	// [1:2013]  
+	     R4 = SP + 1              	// [3:2013]  
+	     [R4] = R3                	// [5:2013]  
+	     R3 = 127                 	// [7:2013]  
+	     R4 = SP + 2              	// [9:2013]  
+	     [R4] = R3                	// [11:2013]  
+	     call _SPI_Flash_Sector_Erase	// [13:2013]  SPI_Flash_Sector_Erase
+BB10_PU33:	// 0x55b
 // BB:10 cycle count: 30
-	     SP = SP - 3              	// [0:2012]  
-//2013        SPI_Flash_SendNWords(InCollection_Pok,C_QuestionRAM,T_PokLQInColl_L,T_PokLQInColl_H);
+	     SP = SP - 3              	// [0:2013]  
+//2014        SPI_Flash_SendNWords(InCollection_Pok,C_QuestionRAM,T_PokLQInColl_L,T_PokLQInColl_H);
 
 LM204:
-	     .stabn 68,0,2013,LM204-_SetCollectOfMission
-	     R2 = (_InCollection_Pok) 	// [1:2013]  InCollection_Pok
-	     R3 = seg(_InCollection_Pok)	// [3:2013]  InCollection_Pok
-	     R4 = SP + 1              	// [4:2013]  
-	     [R4++] = R2              	// [6:2013]  
-	     [R4] = R3                	// [8:2013]  
-	     R3 = 10                  	// [10:2013]  
-	     R4 = SP + 3              	// [11:2013]  
-	     [R4] = R3                	// [13:2013]  
-	     R3 = - 8192              	// [15:2013]  
-	     R4 = SP + 4              	// [17:2013]  
-	     [R4] = R3                	// [19:2013]  
-	     R3 = 127                 	// [21:2013]  
-	     R4 = SP + 5              	// [23:2013]  
-	     [R4] = R3                	// [25:2013]  
-	     call _SPI_Flash_SendNWords	// [27:2013]  SPI_Flash_SendNWords
-BB11_PU33:	// 0x571
+	     .stabn 68,0,2014,LM204-_SetCollectOfMission
+	     R2 = (_InCollection_Pok) 	// [1:2014]  InCollection_Pok
+	     R3 = seg(_InCollection_Pok)	// [3:2014]  InCollection_Pok
+	     R4 = SP + 1              	// [4:2014]  
+	     [R4++] = R2              	// [6:2014]  
+	     [R4] = R3                	// [8:2014]  
+	     R3 = 10                  	// [10:2014]  
+	     R4 = SP + 3              	// [11:2014]  
+	     [R4] = R3                	// [13:2014]  
+	     R3 = - 8192              	// [15:2014]  
+	     R4 = SP + 4              	// [17:2014]  
+	     [R4] = R3                	// [19:2014]  
+	     R3 = 127                 	// [21:2014]  
+	     R4 = SP + 5              	// [23:2014]  
+	     [R4] = R3                	// [25:2014]  
+	     call _SPI_Flash_SendNWords	// [27:2014]  SPI_Flash_SendNWords
+BB11_PU33:	// 0x573
 // BB:11 cycle count: 8
-	     SP = SP + 12             	// [0:2013]  
+	     SP = SP + 12             	// [0:2014]  
 	//;;
 	INT FIQ,IRQ
 	//;;
-//2014          __asm("INT FIQ,IRQ");
+//2015          __asm("INT FIQ,IRQ");
 
 LM205:
-	     .stabn 68,0,2014,LM205-_SetCollectOfMission
-	     pop BP, PC from [SP]     	// [3:2014]  
+	     .stabn 68,0,2015,LM205-_SetCollectOfMission
+	     pop BP, PC from [SP]     	// [3:2015]  
 LBE29:
 	.endp	
 	     .stabn 192,0,0,LBB29-_SetCollectOfMission
@@ -3790,152 +3794,152 @@ _CheckPokemon_ifMission: .proc
 	// temp = 1
 	// old_frame_pointer = 4
 	// return_address = 5
-//2018  
 //2019  
 //2020  
-//2021  unsigned int  CheckPokemon_ifMission()
-//2022  {
+//2021  
+//2022  unsigned int  CheckPokemon_ifMission()
+//2023  {
 
 LM206:
-	     .stabn 68,0,2022,LM206-_CheckPokemon_ifMission
-BB1_PU34:	// 0x570
+	     .stabn 68,0,2023,LM206-_CheckPokemon_ifMission
+BB1_PU34:	// 0x572
 // BB:1 cycle count: 22
-	     push BP to [SP]          	// [0:2022]  
-	     SP = SP - 4              	// [2:2022]  
-	     BP = SP + 1              	// [3:2022]  
+	     push BP to [SP]          	// [0:2023]  
+	     SP = SP - 4              	// [2:2023]  
+	     BP = SP + 1              	// [3:2023]  
 LBB30:
-//2023      unsigned long int Addr;
-//2024  	unsigned int i=0,temp=0;
+//2024      unsigned long int Addr;
+//2025  	unsigned int i=0,temp=0;
 
 LM207:
-	     .stabn 68,0,2024,LM207-_CheckPokemon_ifMission
-	     R4 = 0                   	// [5:2024]  
-	     [BP + 0] = R4            	// [6:2024]  i
-	     R4 = 0                   	// [7:2024]  
-	     [BP + 1] = R4            	// [8:2024]  temp
-//2025  
-//2026  	//unsigned int pok_cnt =0;
-//2027  	
-//2028     
-//2029  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,2025,LM207-_CheckPokemon_ifMission
+	     R4 = 0                   	// [5:2025]  
+	     [BP + 0] = R4            	// [6:2025]  i
+	     R4 = 0                   	// [7:2025]  
+	     [BP + 1] = R4            	// [8:2025]  temp
+//2026  
+//2027  	//unsigned int pok_cnt =0;
+//2028  	
+//2029     
+//2030  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM208:
-	     .stabn 68,0,2029,LM208-_CheckPokemon_ifMission
-	     DS = seg(_Mem0)          	// [9:2029]  Mem0
-	     R4 = (_Mem0)             	// [10:2029]  Mem0
-	     R4 = DS:[R4]             	// [12:2029]  
-	     R3 = R4 lsl 2            	// [14:2029]  
-	     R3 = R3 + R3 lsl 1       	// [15:2029]  
-	     R4 = 0                   	// [16:2029]  
-	     R3 = R3 + 38500          	// [17:2029]  
-	     R4 = R4 + 0, Carry       	// [19:2029]  
-	     [BP + 2] = R3            	// [20:2029]  Addr
-	     [BP + 3] = R4            	// [21:2029]  Addr+1
-L_34_8:	// 0x584
+	     .stabn 68,0,2030,LM208-_CheckPokemon_ifMission
+	     DS = seg(_Mem0)          	// [9:2030]  Mem0
+	     R4 = (_Mem0)             	// [10:2030]  Mem0
+	     R4 = DS:[R4]             	// [12:2030]  
+	     R3 = R4 lsl 2            	// [14:2030]  
+	     R3 = R3 + R3 lsl 1       	// [15:2030]  
+	     R4 = 0                   	// [16:2030]  
+	     R3 = R3 + 38500          	// [17:2030]  
+	     R4 = R4 + 0, Carry       	// [19:2030]  
+	     [BP + 2] = R3            	// [20:2030]  Addr
+	     [BP + 3] = R4            	// [21:2030]  Addr+1
+L_34_8:	// 0x586
 // BB:2 cycle count: 7
-//2030  	 
-//2031  
-//2032  		while(i<6 )//Num
+//2031  	 
+//2032  
+//2033  		while(i<6 )//Num
 
 LM209:
-	     .stabn 68,0,2032,LM209-_CheckPokemon_ifMission
-	     R4 = [BP + 0]            	// [0:2032]  i
-	     cmp R4, 5                	// [2:2032]  
-	     ja L_34_9                	// [3:2032]  
-BB3_PU34:	// 0x587
+	     .stabn 68,0,2033,LM209-_CheckPokemon_ifMission
+	     R4 = [BP + 0]            	// [0:2033]  i
+	     cmp R4, 5                	// [2:2033]  
+	     ja L_34_9                	// [3:2033]  
+BB3_PU34:	// 0x589
 // BB:3 cycle count: 18
-//2033  		{
-//2034  			temp = SPI_ReadAWord_Big(Addr+i*2);
+//2034  		{
+//2035  			temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM210:
-	     .stabn 68,0,2034,LM210-_CheckPokemon_ifMission
-	     SP = SP - 2              	// [0:2034]  
-	     R4 = [BP + 0]            	// [1:2034]  i
-	     R3 = R4 lsl 1            	// [3:2034]  
-	     R4 = 0                   	// [4:2034]  
-	     R3 = R3 + [BP + 2]       	// [5:2034]  Addr
-	     R4 = R4 + [BP + 3], Carry	// [7:2034]  Addr+1
-	     R2 = SP + 1              	// [9:2034]  
-	     [R2++] = R3              	// [11:2034]  
-	     [R2] = R4                	// [13:2034]  
-	     call _SPI_ReadAWord_Big  	// [15:2034]  SPI_ReadAWord_Big
-BB4_PU34:	// 0x593
+	     .stabn 68,0,2035,LM210-_CheckPokemon_ifMission
+	     SP = SP - 2              	// [0:2035]  
+	     R4 = [BP + 0]            	// [1:2035]  i
+	     R3 = R4 lsl 1            	// [3:2035]  
+	     R4 = 0                   	// [4:2035]  
+	     R3 = R3 + [BP + 2]       	// [5:2035]  Addr
+	     R4 = R4 + [BP + 3], Carry	// [7:2035]  Addr+1
+	     R2 = SP + 1              	// [9:2035]  
+	     [R2++] = R3              	// [11:2035]  
+	     [R2] = R4                	// [13:2035]  
+	     call _SPI_ReadAWord_Big  	// [15:2035]  SPI_ReadAWord_Big
+BB4_PU34:	// 0x595
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:2034]  
-	     [BP + 1] = R1            	// [1:2034]  temp
-//2035  
-//2036  		   if(temp == 9999)
+	     SP = SP + 2              	// [0:2035]  
+	     [BP + 1] = R1            	// [1:2035]  temp
+//2036  
+//2037  		   if(temp == 9999)
 
 LM211:
-	     .stabn 68,0,2036,LM211-_CheckPokemon_ifMission
-	     R4 = [BP + 1]            	// [2:2036]  temp
-	     cmp R4, 9999             	// [4:2036]  
-	     jne L_34_11              	// [6:2036]  
-BB5_PU34:	// 0x599
+	     .stabn 68,0,2037,LM211-_CheckPokemon_ifMission
+	     R4 = [BP + 1]            	// [2:2037]  temp
+	     cmp R4, 9999             	// [4:2037]  
+	     jne L_34_11              	// [6:2037]  
+BB5_PU34:	// 0x59b
 // BB:5 cycle count: 4
-//2037  		     {
-//2038  			  
-//2039  			     break;
+//2038  		     {
+//2039  			  
+//2040  			     break;
 
 LM212:
-	     .stabn 68,0,2039,LM212-_CheckPokemon_ifMission
-	     jmp Lt_34_1              	// [0:2039]  
-L_34_11:	// 0x59a
+	     .stabn 68,0,2040,LM212-_CheckPokemon_ifMission
+	     jmp Lt_34_1              	// [0:2040]  
+L_34_11:	// 0x59c
 // BB:6 cycle count: 12
-//2041  			else
-//2042  				{
-//2043  				    
-//2044              
-//2045  		          if((gQuestionIdx==temp))//&&(BitMap[temp%16]&Pokecatch_Pok[temp/16]))  
+//2042  			else
+//2043  				{
+//2044  				    
+//2045              
+//2046  		          if((gQuestionIdx==temp))//&&(BitMap[temp%16]&Pokecatch_Pok[temp/16]))  
 
 LM213:
-	     .stabn 68,0,2045,LM213-_CheckPokemon_ifMission
-	     R3 = [BP + 1]            	// [0:2045]  temp
-	     DS = seg(_gQuestionIdx)  	// [2:2045]  gQuestionIdx
-	     R4 = (_gQuestionIdx)     	// [3:2045]  gQuestionIdx
-	     R4 = DS:[R4]             	// [5:2045]  
-	     cmp R3, R4               	// [7:2045]  
-	     jne L_34_12              	// [8:2045]  
-BB7_PU34:	// 0x5a1
+	     .stabn 68,0,2046,LM213-_CheckPokemon_ifMission
+	     R3 = [BP + 1]            	// [0:2046]  temp
+	     DS = seg(_gQuestionIdx)  	// [2:2046]  gQuestionIdx
+	     R4 = (_gQuestionIdx)     	// [3:2046]  gQuestionIdx
+	     R4 = DS:[R4]             	// [5:2046]  
+	     cmp R3, R4               	// [7:2046]  
+	     jne L_34_12              	// [8:2046]  
+BB7_PU34:	// 0x5a3
 // BB:7 cycle count: 7
-//2046  				   	  {
-//2047  
-//2048  						 return 1;
+//2047  				   	  {
+//2048  
+//2049  						 return 1;
 
 LM214:
-	     .stabn 68,0,2048,LM214-_CheckPokemon_ifMission
-	     R1 = 1                   	// [0:2048]  
-	     SP = SP + 4              	// [1:2048]  
-	     pop BP, PC from [SP]     	// [2:2048]  
-L_34_12:	// 0x5a4
-L_34_10:	// 0x5a4
+	     .stabn 68,0,2049,LM214-_CheckPokemon_ifMission
+	     R1 = 1                   	// [0:2049]  
+	     SP = SP + 4              	// [1:2049]  
+	     pop BP, PC from [SP]     	// [2:2049]  
+L_34_12:	// 0x5a6
+L_34_10:	// 0x5a6
 // BB:8 cycle count: 8
-//2050  
-//2051  		           	 }
-//2052  				}
-//2053  		
-//2054  			i++;
+//2051  
+//2052  		           	 }
+//2053  				}
+//2054  		
+//2055  			i++;
 
 LM215:
-	     .stabn 68,0,2054,LM215-_CheckPokemon_ifMission
-	     R4 = [BP + 0]            	// [0:2054]  i
-	     R4 = R4 + 1              	// [2:2054]  
-	     [BP + 0] = R4            	// [3:2054]  i
-	     jmp L_34_8               	// [4:2054]  
-L_34_9:	// 0x5a8
-Lt_34_1:	// 0x5a8
+	     .stabn 68,0,2055,LM215-_CheckPokemon_ifMission
+	     R4 = [BP + 0]            	// [0:2055]  i
+	     R4 = R4 + 1              	// [2:2055]  
+	     [BP + 0] = R4            	// [3:2055]  i
+	     jmp L_34_8               	// [4:2055]  
+L_34_9:	// 0x5aa
+Lt_34_1:	// 0x5aa
 // BB:9 cycle count: 7
-//2057  //				break;
-//2058  
-//2059     	}
-//2060  
-//2061       return 0;
+//2058  //				break;
+//2059  
+//2060     	}
+//2061  
+//2062       return 0;
 
 LM216:
-	     .stabn 68,0,2061,LM216-_CheckPokemon_ifMission
-	     R1 = 0                   	// [0:2061]  
-	     SP = SP + 4              	// [1:2061]  
-	     pop BP, PC from [SP]     	// [2:2061]  
+	     .stabn 68,0,2062,LM216-_CheckPokemon_ifMission
+	     R1 = 0                   	// [0:2062]  
+	     SP = SP + 4              	// [1:2062]  
+	     pop BP, PC from [SP]     	// [2:2062]  
 LBE30:
 	.endp	
 	     .stabn 192,0,0,LBB30-_CheckPokemon_ifMission
@@ -3958,177 +3962,177 @@ _CheckCatch_ifMission: .proc
 	// old_frame_pointer = 5
 	// return_address = 6
 	// lra_spill_temp_13 = 4
-//2067  
 //2068  
 //2069  
-//2070  unsigned int  CheckCatch_ifMission()
-//2071  {
+//2070  
+//2071  unsigned int  CheckCatch_ifMission()
+//2072  {
 
 LM217:
-	     .stabn 68,0,2071,LM217-_CheckCatch_ifMission
-BB1_PU35:	// 0x5ab
+	     .stabn 68,0,2072,LM217-_CheckCatch_ifMission
+BB1_PU35:	// 0x5ad
 // BB:1 cycle count: 22
-	     push BP to [SP]          	// [0:2071]  
-	     SP = SP - 5              	// [2:2071]  
-	     BP = SP + 1              	// [3:2071]  
+	     push BP to [SP]          	// [0:2072]  
+	     SP = SP - 5              	// [2:2072]  
+	     BP = SP + 1              	// [3:2072]  
 LBB31:
-//2072      unsigned long int Addr;
-//2073  	unsigned int i=0,temp=0;
+//2073      unsigned long int Addr;
+//2074  	unsigned int i=0,temp=0;
 
 LM218:
-	     .stabn 68,0,2073,LM218-_CheckCatch_ifMission
-	     R4 = 0                   	// [5:2073]  
-	     [BP + 0] = R4            	// [6:2073]  i
-	     R4 = 0                   	// [7:2073]  
-	     [BP + 1] = R4            	// [8:2073]  temp
-//2074  
-//2075  	//unsigned int pok_cnt =0;
-//2076  	
-//2077     
-//2078  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,2074,LM218-_CheckCatch_ifMission
+	     R4 = 0                   	// [5:2074]  
+	     [BP + 0] = R4            	// [6:2074]  i
+	     R4 = 0                   	// [7:2074]  
+	     [BP + 1] = R4            	// [8:2074]  temp
+//2075  
+//2076  	//unsigned int pok_cnt =0;
+//2077  	
+//2078     
+//2079  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM219:
-	     .stabn 68,0,2078,LM219-_CheckCatch_ifMission
-	     DS = seg(_Mem0)          	// [9:2078]  Mem0
-	     R4 = (_Mem0)             	// [10:2078]  Mem0
-	     R4 = DS:[R4]             	// [12:2078]  
-	     R3 = R4 lsl 2            	// [14:2078]  
-	     R3 = R3 + R3 lsl 1       	// [15:2078]  
-	     R4 = 0                   	// [16:2078]  
-	     R3 = R3 + 38500          	// [17:2078]  
-	     R4 = R4 + 0, Carry       	// [19:2078]  
-	     [BP + 2] = R3            	// [20:2078]  Addr
-	     [BP + 3] = R4            	// [21:2078]  Addr+1
-L_35_9:	// 0x5bf
+	     .stabn 68,0,2079,LM219-_CheckCatch_ifMission
+	     DS = seg(_Mem0)          	// [9:2079]  Mem0
+	     R4 = (_Mem0)             	// [10:2079]  Mem0
+	     R4 = DS:[R4]             	// [12:2079]  
+	     R3 = R4 lsl 2            	// [14:2079]  
+	     R3 = R3 + R3 lsl 1       	// [15:2079]  
+	     R4 = 0                   	// [16:2079]  
+	     R3 = R3 + 38500          	// [17:2079]  
+	     R4 = R4 + 0, Carry       	// [19:2079]  
+	     [BP + 2] = R3            	// [20:2079]  Addr
+	     [BP + 3] = R4            	// [21:2079]  Addr+1
+L_35_9:	// 0x5c1
 // BB:2 cycle count: 7
-//2079  	 
-//2080  
-//2081  		while(i<6 )//Num
+//2080  	 
+//2081  
+//2082  		while(i<6 )//Num
 
 LM220:
-	     .stabn 68,0,2081,LM220-_CheckCatch_ifMission
-	     R4 = [BP + 0]            	// [0:2081]  i
-	     cmp R4, 5                	// [2:2081]  
-	     ja L_35_10               	// [3:2081]  
-BB3_PU35:	// 0x5c2
+	     .stabn 68,0,2082,LM220-_CheckCatch_ifMission
+	     R4 = [BP + 0]            	// [0:2082]  i
+	     cmp R4, 5                	// [2:2082]  
+	     ja L_35_10               	// [3:2082]  
+BB3_PU35:	// 0x5c4
 // BB:3 cycle count: 18
-//2082  		{
-//2083  			temp = SPI_ReadAWord_Big(Addr+i*2);
+//2083  		{
+//2084  			temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM221:
-	     .stabn 68,0,2083,LM221-_CheckCatch_ifMission
-	     SP = SP - 2              	// [0:2083]  
-	     R4 = [BP + 0]            	// [1:2083]  i
-	     R3 = R4 lsl 1            	// [3:2083]  
-	     R4 = 0                   	// [4:2083]  
-	     R3 = R3 + [BP + 2]       	// [5:2083]  Addr
-	     R4 = R4 + [BP + 3], Carry	// [7:2083]  Addr+1
-	     R2 = SP + 1              	// [9:2083]  
-	     [R2++] = R3              	// [11:2083]  
-	     [R2] = R4                	// [13:2083]  
-	     call _SPI_ReadAWord_Big  	// [15:2083]  SPI_ReadAWord_Big
-BB4_PU35:	// 0x5ce
+	     .stabn 68,0,2084,LM221-_CheckCatch_ifMission
+	     SP = SP - 2              	// [0:2084]  
+	     R4 = [BP + 0]            	// [1:2084]  i
+	     R3 = R4 lsl 1            	// [3:2084]  
+	     R4 = 0                   	// [4:2084]  
+	     R3 = R3 + [BP + 2]       	// [5:2084]  Addr
+	     R4 = R4 + [BP + 3], Carry	// [7:2084]  Addr+1
+	     R2 = SP + 1              	// [9:2084]  
+	     [R2++] = R3              	// [11:2084]  
+	     [R2] = R4                	// [13:2084]  
+	     call _SPI_ReadAWord_Big  	// [15:2084]  SPI_ReadAWord_Big
+BB4_PU35:	// 0x5d0
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:2083]  
-	     [BP + 1] = R1            	// [1:2083]  temp
-//2084  
-//2085  		   if(temp == 9999)
+	     SP = SP + 2              	// [0:2084]  
+	     [BP + 1] = R1            	// [1:2084]  temp
+//2085  
+//2086  		   if(temp == 9999)
 
 LM222:
-	     .stabn 68,0,2085,LM222-_CheckCatch_ifMission
-	     R4 = [BP + 1]            	// [2:2085]  temp
-	     cmp R4, 9999             	// [4:2085]  
-	     jne L_35_12              	// [6:2085]  
-BB5_PU35:	// 0x5d4
+	     .stabn 68,0,2086,LM222-_CheckCatch_ifMission
+	     R4 = [BP + 1]            	// [2:2086]  temp
+	     cmp R4, 9999             	// [4:2086]  
+	     jne L_35_12              	// [6:2086]  
+BB5_PU35:	// 0x5d6
 // BB:5 cycle count: 4
-//2086  		     {
-//2087  			  
-//2088  			     break;
+//2087  		     {
+//2088  			  
+//2089  			     break;
 
 LM223:
-	     .stabn 68,0,2088,LM223-_CheckCatch_ifMission
-	     jmp Lt_35_1              	// [0:2088]  
-L_35_12:	// 0x5d5
+	     .stabn 68,0,2089,LM223-_CheckCatch_ifMission
+	     jmp Lt_35_1              	// [0:2089]  
+L_35_12:	// 0x5d7
 // BB:6 cycle count: 12
-//2090  			else
-//2091  				{
-//2092  				    
-//2093              
-//2094  		          if((gQuestionIdx==temp)&&(BitMap[temp%16]&Pokecatch_Pok[temp/16]))  
+//2091  			else
+//2092  				{
+//2093  				    
+//2094              
+//2095  		          if((gQuestionIdx==temp)&&(BitMap[temp%16]&Pokecatch_Pok[temp/16]))  
 
 LM224:
-	     .stabn 68,0,2094,LM224-_CheckCatch_ifMission
-	     R3 = [BP + 1]            	// [0:2094]  temp
-	     DS = seg(_gQuestionIdx)  	// [2:2094]  gQuestionIdx
-	     R4 = (_gQuestionIdx)     	// [3:2094]  gQuestionIdx
-	     R4 = DS:[R4]             	// [5:2094]  
-	     cmp R3, R4               	// [7:2094]  
-	     jne L_35_13              	// [8:2094]  
-BB7_PU35:	// 0x5dc
+	     .stabn 68,0,2095,LM224-_CheckCatch_ifMission
+	     R3 = [BP + 1]            	// [0:2095]  temp
+	     DS = seg(_gQuestionIdx)  	// [2:2095]  gQuestionIdx
+	     R4 = (_gQuestionIdx)     	// [3:2095]  gQuestionIdx
+	     R4 = DS:[R4]             	// [5:2095]  
+	     cmp R3, R4               	// [7:2095]  
+	     jne L_35_13              	// [8:2095]  
+BB7_PU35:	// 0x5de
 // BB:7 cycle count: 33
-	     R4 = [BP + 1]            	// [0:2094]  temp
-	     R4 = R4 & 15             	// [2:2094]  
-	     R3 = 0                   	// [3:2094]  
-	     R1 = (_BitMap)           	// [4:2094]  BitMap
-	     R2 = seg(_BitMap)        	// [6:2094]  BitMap
-	     R4 = R4 + R1             	// [7:2094]  
-	     R3 = R3 + R2, Carry      	// [8:2094]  
-	     DS = R3                  	// [9:2094]  
-	     R4 = DS:[R4]             	// [10:2094]  
-	     [BP + 4] = R4            	// [12:2094]  lra_spill_temp_13
-	     R4 = [BP + 1]            	// [13:2094]  temp
-	     R4 = R4 lsr 4            	// [15:2094]  
-	     R3 = 0                   	// [16:2094]  
-	     R1 = (_Pokecatch_Pok)    	// [17:2094]  Pokecatch_Pok
-	     R2 = seg(_Pokecatch_Pok) 	// [19:2094]  Pokecatch_Pok
-	     R4 = R4 + R1             	// [20:2094]  
-	     R3 = R3 + R2, Carry      	// [21:2094]  
-	     DS = R3                  	// [22:2094]  
-	     R3 = DS:[R4]             	// [23:2094]  
-	     R4 = [BP + 4]            	// [25:2094]  lra_spill_temp_13
-	     R4 = R4 & R3             	// [27:2094]  
-	     cmp R4, 0                	// [28:2094]  
-	     je L_35_13               	// [29:2094]  
-L_35_14:	// 0x5f5
+	     R4 = [BP + 1]            	// [0:2095]  temp
+	     R4 = R4 & 15             	// [2:2095]  
+	     R3 = 0                   	// [3:2095]  
+	     R1 = (_BitMap)           	// [4:2095]  BitMap
+	     R2 = seg(_BitMap)        	// [6:2095]  BitMap
+	     R4 = R4 + R1             	// [7:2095]  
+	     R3 = R3 + R2, Carry      	// [8:2095]  
+	     DS = R3                  	// [9:2095]  
+	     R4 = DS:[R4]             	// [10:2095]  
+	     [BP + 4] = R4            	// [12:2095]  lra_spill_temp_13
+	     R4 = [BP + 1]            	// [13:2095]  temp
+	     R4 = R4 lsr 4            	// [15:2095]  
+	     R3 = 0                   	// [16:2095]  
+	     R1 = (_Pokecatch_Pok)    	// [17:2095]  Pokecatch_Pok
+	     R2 = seg(_Pokecatch_Pok) 	// [19:2095]  Pokecatch_Pok
+	     R4 = R4 + R1             	// [20:2095]  
+	     R3 = R3 + R2, Carry      	// [21:2095]  
+	     DS = R3                  	// [22:2095]  
+	     R3 = DS:[R4]             	// [23:2095]  
+	     R4 = [BP + 4]            	// [25:2095]  lra_spill_temp_13
+	     R4 = R4 & R3             	// [27:2095]  
+	     cmp R4, 0                	// [28:2095]  
+	     je L_35_13               	// [29:2095]  
+L_35_14:	// 0x5f7
 // BB:8 cycle count: 7
-//2095  				   	  {
-//2096  
-//2097  						 return 1;
+//2096  				   	  {
+//2097  
+//2098  						 return 1;
 
 LM225:
-	     .stabn 68,0,2097,LM225-_CheckCatch_ifMission
-	     R1 = 1                   	// [0:2097]  
-	     SP = SP + 5              	// [1:2097]  
-	     pop BP, PC from [SP]     	// [2:2097]  
-L_35_13:	// 0x5f8
-L_35_11:	// 0x5f8
+	     .stabn 68,0,2098,LM225-_CheckCatch_ifMission
+	     R1 = 1                   	// [0:2098]  
+	     SP = SP + 5              	// [1:2098]  
+	     pop BP, PC from [SP]     	// [2:2098]  
+L_35_13:	// 0x5fa
+L_35_11:	// 0x5fa
 // BB:9 cycle count: 8
-//2099  
-//2100  		           	 }
-//2101  				}
-//2102  		
-//2103  			i++;
+//2100  
+//2101  		           	 }
+//2102  				}
+//2103  		
+//2104  			i++;
 
 LM226:
-	     .stabn 68,0,2103,LM226-_CheckCatch_ifMission
-	     R4 = [BP + 0]            	// [0:2103]  i
-	     R4 = R4 + 1              	// [2:2103]  
-	     [BP + 0] = R4            	// [3:2103]  i
-	     jmp L_35_9               	// [4:2103]  
-L_35_10:	// 0x5fc
-Lt_35_1:	// 0x5fc
+	     .stabn 68,0,2104,LM226-_CheckCatch_ifMission
+	     R4 = [BP + 0]            	// [0:2104]  i
+	     R4 = R4 + 1              	// [2:2104]  
+	     [BP + 0] = R4            	// [3:2104]  i
+	     jmp L_35_9               	// [4:2104]  
+L_35_10:	// 0x5fe
+Lt_35_1:	// 0x5fe
 // BB:10 cycle count: 7
-//2106  //				break;
-//2107  
-//2108     	}
-//2109  
-//2110       return 0;
+//2107  //				break;
+//2108  
+//2109     	}
+//2110  
+//2111       return 0;
 
 LM227:
-	     .stabn 68,0,2110,LM227-_CheckCatch_ifMission
-	     R1 = 0                   	// [0:2110]  
-	     SP = SP + 5              	// [1:2110]  
-	     pop BP, PC from [SP]     	// [2:2110]  
+	     .stabn 68,0,2111,LM227-_CheckCatch_ifMission
+	     R1 = 0                   	// [0:2111]  
+	     SP = SP + 5              	// [1:2111]  
+	     pop BP, PC from [SP]     	// [2:2111]  
 LBE31:
 	.endp	
 	     .stabn 192,0,0,LBB31-_CheckCatch_ifMission
@@ -4152,237 +4156,237 @@ _CheckPok_InCollectiORNocatch: .proc
 	// old_frame_pointer = 6
 	// return_address = 7
 	// lra_spill_temp_14 = 5
-//2112  }
-//2113  
+//2113  }
 //2114  
-//2115  unsigned int  CheckPok_InCollectiORNocatch(unsigned int  Incollectfalg)
-//2116  {
+//2115  
+//2116  unsigned int  CheckPok_InCollectiORNocatch(unsigned int  Incollectfalg)
+//2117  {
 
 LM228:
-	     .stabn 68,0,2116,LM228-_CheckPok_InCollectiORNocatch
-BB1_PU36:	// 0x5ff
+	     .stabn 68,0,2117,LM228-_CheckPok_InCollectiORNocatch
+BB1_PU36:	// 0x601
 // BB:1 cycle count: 24
-	     push BP to [SP]          	// [0:2116]  
-	     SP = SP - 6              	// [2:2116]  
-	     BP = SP + 1              	// [3:2116]  
+	     push BP to [SP]          	// [0:2117]  
+	     SP = SP - 6              	// [2:2117]  
+	     BP = SP + 1              	// [3:2117]  
 LBB32:
-//2117      unsigned long int Addr;
-//2118  	unsigned int i=0,temp=0;
+//2118      unsigned long int Addr;
+//2119  	unsigned int i=0,temp=0;
 
 LM229:
-	     .stabn 68,0,2118,LM229-_CheckPok_InCollectiORNocatch
-	     R4 = 0                   	// [5:2118]  
-	     [BP + 0] = R4            	// [6:2118]  i
-	     R4 = 0                   	// [7:2118]  
-	     [BP + 1] = R4            	// [8:2118]  temp
-//2119  
-//2120  	unsigned int pok_cnt =0;
+	     .stabn 68,0,2119,LM229-_CheckPok_InCollectiORNocatch
+	     R4 = 0                   	// [5:2119]  
+	     [BP + 0] = R4            	// [6:2119]  i
+	     R4 = 0                   	// [7:2119]  
+	     [BP + 1] = R4            	// [8:2119]  temp
+//2120  
+//2121  	unsigned int pok_cnt =0;
 
 LM230:
-	     .stabn 68,0,2120,LM230-_CheckPok_InCollectiORNocatch
-	     R4 = 0                   	// [9:2120]  
-	     [BP + 2] = R4            	// [10:2120]  pok_cnt
-//2121  	
-//2122     
-//2123  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
+	     .stabn 68,0,2121,LM230-_CheckPok_InCollectiORNocatch
+	     R4 = 0                   	// [9:2121]  
+	     [BP + 2] = R4            	// [10:2121]  pok_cnt
+//2122  	
+//2123     
+//2124  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
 
 LM231:
-	     .stabn 68,0,2123,LM231-_CheckPok_InCollectiORNocatch
-	     DS = seg(_Mem0)          	// [11:2123]  Mem0
-	     R4 = (_Mem0)             	// [12:2123]  Mem0
-	     R4 = DS:[R4]             	// [14:2123]  
-	     R3 = R4 lsl 2            	// [16:2123]  
-	     R3 = R3 + R3 lsl 1       	// [17:2123]  
-	     R4 = 0                   	// [18:2123]  
-	     R3 = R3 + 38500          	// [19:2123]  
-	     R4 = R4 + 0, Carry       	// [21:2123]  
-	     [BP + 3] = R3            	// [22:2123]  Addr
-	     [BP + 4] = R4            	// [23:2123]  Addr+1
-L_36_12:	// 0x615
+	     .stabn 68,0,2124,LM231-_CheckPok_InCollectiORNocatch
+	     DS = seg(_Mem0)          	// [11:2124]  Mem0
+	     R4 = (_Mem0)             	// [12:2124]  Mem0
+	     R4 = DS:[R4]             	// [14:2124]  
+	     R3 = R4 lsl 2            	// [16:2124]  
+	     R3 = R3 + R3 lsl 1       	// [17:2124]  
+	     R4 = 0                   	// [18:2124]  
+	     R3 = R3 + 38500          	// [19:2124]  
+	     R4 = R4 + 0, Carry       	// [21:2124]  
+	     [BP + 3] = R3            	// [22:2124]  Addr
+	     [BP + 4] = R4            	// [23:2124]  Addr+1
+L_36_12:	// 0x617
 // BB:2 cycle count: 7
-//2124  	 
-//2125  
-//2126  		while(i<6 )//Num
+//2125  	 
+//2126  
+//2127  		while(i<6 )//Num
 
 LM232:
-	     .stabn 68,0,2126,LM232-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 0]            	// [0:2126]  i
-	     cmp R4, 5                	// [2:2126]  
-	     jbe BB3_PU36             	// [3:2126]  
-BB14_PU36:	// 0x618
+	     .stabn 68,0,2127,LM232-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 0]            	// [0:2127]  i
+	     cmp R4, 5                	// [2:2127]  
+	     jbe BB3_PU36             	// [3:2127]  
+BB14_PU36:	// 0x61a
 // BB:14 cycle count: 3
 	     goto L_36_13             	// [0:0]  
-BB3_PU36:	// 0x61a
+BB3_PU36:	// 0x61c
 // BB:3 cycle count: 18
-//2127  		{
-//2128  			temp = SPI_ReadAWord_Big(Addr+i*2);
+//2128  		{
+//2129  			temp = SPI_ReadAWord_Big(Addr+i*2);
 
 LM233:
-	     .stabn 68,0,2128,LM233-_CheckPok_InCollectiORNocatch
-	     SP = SP - 2              	// [0:2128]  
-	     R4 = [BP + 0]            	// [1:2128]  i
-	     R3 = R4 lsl 1            	// [3:2128]  
-	     R4 = 0                   	// [4:2128]  
-	     R3 = R3 + [BP + 3]       	// [5:2128]  Addr
-	     R4 = R4 + [BP + 4], Carry	// [7:2128]  Addr+1
-	     R2 = SP + 1              	// [9:2128]  
-	     [R2++] = R3              	// [11:2128]  
-	     [R2] = R4                	// [13:2128]  
-	     call _SPI_ReadAWord_Big  	// [15:2128]  SPI_ReadAWord_Big
-BB4_PU36:	// 0x626
+	     .stabn 68,0,2129,LM233-_CheckPok_InCollectiORNocatch
+	     SP = SP - 2              	// [0:2129]  
+	     R4 = [BP + 0]            	// [1:2129]  i
+	     R3 = R4 lsl 1            	// [3:2129]  
+	     R4 = 0                   	// [4:2129]  
+	     R3 = R3 + [BP + 3]       	// [5:2129]  Addr
+	     R4 = R4 + [BP + 4], Carry	// [7:2129]  Addr+1
+	     R2 = SP + 1              	// [9:2129]  
+	     [R2++] = R3              	// [11:2129]  
+	     [R2] = R4                	// [13:2129]  
+	     call _SPI_ReadAWord_Big  	// [15:2129]  SPI_ReadAWord_Big
+BB4_PU36:	// 0x628
 // BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:2128]  
-	     [BP + 1] = R1            	// [1:2128]  temp
-//2129  
-//2130  		   if(temp == 9999)
+	     SP = SP + 2              	// [0:2129]  
+	     [BP + 1] = R1            	// [1:2129]  temp
+//2130  
+//2131  		   if(temp == 9999)
 
 LM234:
-	     .stabn 68,0,2130,LM234-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 1]            	// [2:2130]  temp
-	     cmp R4, 9999             	// [4:2130]  
-	     jne L_36_15              	// [6:2130]  
-BB5_PU36:	// 0x62c
+	     .stabn 68,0,2131,LM234-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 1]            	// [2:2131]  temp
+	     cmp R4, 9999             	// [4:2131]  
+	     jne L_36_15              	// [6:2131]  
+BB5_PU36:	// 0x62e
 // BB:5 cycle count: 3
-//2131  		     {
-//2132  			  
-//2133  			     break;
+//2132  		     {
+//2133  			  
+//2134  			     break;
 
 LM235:
-	     .stabn 68,0,2133,LM235-_CheckPok_InCollectiORNocatch
-	     goto Lt_36_1             	// [0:2133]  
-L_36_15:	// 0x62e
+	     .stabn 68,0,2134,LM235-_CheckPok_InCollectiORNocatch
+	     goto Lt_36_1             	// [0:2134]  
+L_36_15:	// 0x630
 // BB:6 cycle count: 7
-//2134  			 }
-//2135  			else
-//2136  				{
-//2137  				    
-//2138                     if(Incollectfalg)
+//2135  			 }
+//2136  			else
+//2137  				{
+//2138  				    
+//2139                     if(Incollectfalg)
 
 LM236:
-	     .stabn 68,0,2138,LM236-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 9]            	// [0:2138]  Incollectfalg
-	     cmp R4, 0                	// [2:2138]  
-	     je L_36_17               	// [3:2138]  
-BB7_PU36:	// 0x631
+	     .stabn 68,0,2139,LM236-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 9]            	// [0:2139]  Incollectfalg
+	     cmp R4, 0                	// [2:2139]  
+	     je L_36_17               	// [3:2139]  
+BB7_PU36:	// 0x633
 // BB:7 cycle count: 33
-//2139                     	{
-//2140  			           if(BitMap[temp%16]&InCollection_Pok[temp/16])
+//2140                     	{
+//2141  			           if(BitMap[temp%16]&InCollection_Pok[temp/16])
 
 LM237:
-	     .stabn 68,0,2140,LM237-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 1]            	// [0:2140]  temp
-	     R4 = R4 & 15             	// [2:2140]  
-	     R3 = 0                   	// [3:2140]  
-	     R1 = (_BitMap)           	// [4:2140]  BitMap
-	     R2 = seg(_BitMap)        	// [6:2140]  BitMap
-	     R4 = R4 + R1             	// [7:2140]  
-	     R3 = R3 + R2, Carry      	// [8:2140]  
-	     DS = R3                  	// [9:2140]  
-	     R4 = DS:[R4]             	// [10:2140]  
-	     [BP + 5] = R4            	// [12:2140]  lra_spill_temp_14
-	     R4 = [BP + 1]            	// [13:2140]  temp
-	     R4 = R4 lsr 4            	// [15:2140]  
-	     R3 = 0                   	// [16:2140]  
-	     R1 = (_InCollection_Pok) 	// [17:2140]  InCollection_Pok
-	     R2 = seg(_InCollection_Pok)	// [19:2140]  InCollection_Pok
-	     R4 = R4 + R1             	// [20:2140]  
-	     R3 = R3 + R2, Carry      	// [21:2140]  
-	     DS = R3                  	// [22:2140]  
-	     R3 = DS:[R4]             	// [23:2140]  
-	     R4 = [BP + 5]            	// [25:2140]  lra_spill_temp_14
-	     R4 = R4 & R3             	// [27:2140]  
-	     cmp R4, 0                	// [28:2140]  
-	     je L_36_18               	// [29:2140]  
-BB8_PU36:	// 0x64a
+	     .stabn 68,0,2141,LM237-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 1]            	// [0:2141]  temp
+	     R4 = R4 & 15             	// [2:2141]  
+	     R3 = 0                   	// [3:2141]  
+	     R1 = (_BitMap)           	// [4:2141]  BitMap
+	     R2 = seg(_BitMap)        	// [6:2141]  BitMap
+	     R4 = R4 + R1             	// [7:2141]  
+	     R3 = R3 + R2, Carry      	// [8:2141]  
+	     DS = R3                  	// [9:2141]  
+	     R4 = DS:[R4]             	// [10:2141]  
+	     [BP + 5] = R4            	// [12:2141]  lra_spill_temp_14
+	     R4 = [BP + 1]            	// [13:2141]  temp
+	     R4 = R4 lsr 4            	// [15:2141]  
+	     R3 = 0                   	// [16:2141]  
+	     R1 = (_InCollection_Pok) 	// [17:2141]  InCollection_Pok
+	     R2 = seg(_InCollection_Pok)	// [19:2141]  InCollection_Pok
+	     R4 = R4 + R1             	// [20:2141]  
+	     R3 = R3 + R2, Carry      	// [21:2141]  
+	     DS = R3                  	// [22:2141]  
+	     R3 = DS:[R4]             	// [23:2141]  
+	     R4 = [BP + 5]            	// [25:2141]  lra_spill_temp_14
+	     R4 = R4 & R3             	// [27:2141]  
+	     cmp R4, 0                	// [28:2141]  
+	     je L_36_18               	// [29:2141]  
+BB8_PU36:	// 0x64c
 // BB:8 cycle count: 4
-//2141  					   	  {
-//2142  
-//2143  	                   
-//2144  							   pok_cnt++;
+//2142  					   	  {
+//2143  
+//2144  	                   
+//2145  							   pok_cnt++;
 
 LM238:
-	     .stabn 68,0,2144,LM238-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 2]            	// [0:2144]  pok_cnt
-	     R4 = R4 + 1              	// [2:2144]  
-	     [BP + 2] = R4            	// [3:2144]  pok_cnt
-L_36_18:	// 0x64d
+	     .stabn 68,0,2145,LM238-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 2]            	// [0:2145]  pok_cnt
+	     R4 = R4 + 1              	// [2:2145]  
+	     [BP + 2] = R4            	// [3:2145]  pok_cnt
+L_36_18:	// 0x64f
 // BB:9 cycle count: 4
 
 LM239:
-	     .stabn 68,0,2140,LM239-_CheckPok_InCollectiORNocatch
-	     jmp L_36_16              	// [0:2140]  
-L_36_17:	// 0x64e
+	     .stabn 68,0,2141,LM239-_CheckPok_InCollectiORNocatch
+	     jmp L_36_16              	// [0:2141]  
+L_36_17:	// 0x650
 // BB:10 cycle count: 33
-//2147  		           	 }
-//2148                     	}
-//2149  				    else//NO catch
-//2150  				    	{
-//2151                            if((BitMap[temp%16]&Pokecatch_Pok[temp/16])==0)
+//2148  		           	 }
+//2149                     	}
+//2150  				    else//NO catch
+//2151  				    	{
+//2152                            if((BitMap[temp%16]&Pokecatch_Pok[temp/16])==0)
 
 LM240:
-	     .stabn 68,0,2151,LM240-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 1]            	// [0:2151]  temp
-	     R4 = R4 & 15             	// [2:2151]  
-	     R3 = 0                   	// [3:2151]  
-	     R1 = (_BitMap)           	// [4:2151]  BitMap
-	     R2 = seg(_BitMap)        	// [6:2151]  BitMap
-	     R4 = R4 + R1             	// [7:2151]  
-	     R3 = R3 + R2, Carry      	// [8:2151]  
-	     DS = R3                  	// [9:2151]  
-	     R4 = DS:[R4]             	// [10:2151]  
-	     [BP + 5] = R4            	// [12:2151]  lra_spill_temp_14
-	     R4 = [BP + 1]            	// [13:2151]  temp
-	     R4 = R4 lsr 4            	// [15:2151]  
-	     R3 = 0                   	// [16:2151]  
-	     R1 = (_Pokecatch_Pok)    	// [17:2151]  Pokecatch_Pok
-	     R2 = seg(_Pokecatch_Pok) 	// [19:2151]  Pokecatch_Pok
-	     R4 = R4 + R1             	// [20:2151]  
-	     R3 = R3 + R2, Carry      	// [21:2151]  
-	     DS = R3                  	// [22:2151]  
-	     R3 = DS:[R4]             	// [23:2151]  
-	     R4 = [BP + 5]            	// [25:2151]  lra_spill_temp_14
-	     R4 = R4 & R3             	// [27:2151]  
-	     cmp R4, 0                	// [28:2151]  
-	     jne L_36_19              	// [29:2151]  
-BB11_PU36:	// 0x667
+	     .stabn 68,0,2152,LM240-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 1]            	// [0:2152]  temp
+	     R4 = R4 & 15             	// [2:2152]  
+	     R3 = 0                   	// [3:2152]  
+	     R1 = (_BitMap)           	// [4:2152]  BitMap
+	     R2 = seg(_BitMap)        	// [6:2152]  BitMap
+	     R4 = R4 + R1             	// [7:2152]  
+	     R3 = R3 + R2, Carry      	// [8:2152]  
+	     DS = R3                  	// [9:2152]  
+	     R4 = DS:[R4]             	// [10:2152]  
+	     [BP + 5] = R4            	// [12:2152]  lra_spill_temp_14
+	     R4 = [BP + 1]            	// [13:2152]  temp
+	     R4 = R4 lsr 4            	// [15:2152]  
+	     R3 = 0                   	// [16:2152]  
+	     R1 = (_Pokecatch_Pok)    	// [17:2152]  Pokecatch_Pok
+	     R2 = seg(_Pokecatch_Pok) 	// [19:2152]  Pokecatch_Pok
+	     R4 = R4 + R1             	// [20:2152]  
+	     R3 = R3 + R2, Carry      	// [21:2152]  
+	     DS = R3                  	// [22:2152]  
+	     R3 = DS:[R4]             	// [23:2152]  
+	     R4 = [BP + 5]            	// [25:2152]  lra_spill_temp_14
+	     R4 = R4 & R3             	// [27:2152]  
+	     cmp R4, 0                	// [28:2152]  
+	     jne L_36_19              	// [29:2152]  
+BB11_PU36:	// 0x669
 // BB:11 cycle count: 4
-//2152  						        pok_cnt++;
+//2153  						        pok_cnt++;
 
 LM241:
-	     .stabn 68,0,2152,LM241-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 2]            	// [0:2152]  pok_cnt
-	     R4 = R4 + 1              	// [2:2152]  
-	     [BP + 2] = R4            	// [3:2152]  pok_cnt
-L_36_19:	// 0x66a
-L_36_16:	// 0x66a
-L_36_14:	// 0x66a
+	     .stabn 68,0,2153,LM241-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 2]            	// [0:2153]  pok_cnt
+	     R4 = R4 + 1              	// [2:2153]  
+	     [BP + 2] = R4            	// [3:2153]  pok_cnt
+L_36_19:	// 0x66c
+L_36_16:	// 0x66c
+L_36_14:	// 0x66c
 // BB:12 cycle count: 7
-//2155  				    	}
-//2156  
-//2157  				}
-//2158  		
-//2159  			i++;
+//2156  				    	}
+//2157  
+//2158  				}
+//2159  		
+//2160  			i++;
 
 LM242:
-	     .stabn 68,0,2159,LM242-_CheckPok_InCollectiORNocatch
-	     R4 = [BP + 0]            	// [0:2159]  i
-	     R4 = R4 + 1              	// [2:2159]  
-	     [BP + 0] = R4            	// [3:2159]  i
-	     goto L_36_12             	// [4:2159]  
-L_36_13:	// 0x66f
-Lt_36_1:	// 0x66f
+	     .stabn 68,0,2160,LM242-_CheckPok_InCollectiORNocatch
+	     R4 = [BP + 0]            	// [0:2160]  i
+	     R4 = R4 + 1              	// [2:2160]  
+	     [BP + 0] = R4            	// [3:2160]  i
+	     goto L_36_12             	// [4:2160]  
+L_36_13:	// 0x671
+Lt_36_1:	// 0x671
 // BB:13 cycle count: 8
-//2162  //				break;
-//2163  
-//2164     	}
-//2165  
-//2166       return pok_cnt;
+//2163  //				break;
+//2164  
+//2165     	}
+//2166  
+//2167       return pok_cnt;
 
 LM243:
-	     .stabn 68,0,2166,LM243-_CheckPok_InCollectiORNocatch
-	     R1 = [BP + 2]            	// [0:2166]  pok_cnt
-	     SP = SP + 6              	// [2:2166]  
-	     pop BP, PC from [SP]     	// [3:2166]  
+	     .stabn 68,0,2167,LM243-_CheckPok_InCollectiORNocatch
+	     R1 = [BP + 2]            	// [0:2167]  pok_cnt
+	     SP = SP + 6              	// [2:2167]  
+	     pop BP, PC from [SP]     	// [3:2167]  
 LBE32:
 	.endp	
 	     .stabs "Incollectfalg:p4",160,0,0,9
@@ -4403,161 +4407,161 @@ _Get_Mission: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-//2169  
 //2170  
 //2171  
-//2172  void Get_Mission()
-//2173  {
+//2172  
+//2173  void Get_Mission()
+//2174  {
 
 LM244:
-	     .stabn 68,0,2173,LM244-_Get_Mission
-BB1_PU37:	// 0x672
+	     .stabn 68,0,2174,LM244-_Get_Mission
+BB1_PU37:	// 0x674
 // BB:1 cycle count: 14
-	     push BP to [SP]          	// [0:2173]  
-	     BP = SP + 1              	// [2:2173]  
-//2174  
-//2175         if(Mem0.Mission_Cur>=30)
+	     push BP to [SP]          	// [0:2174]  
+	     BP = SP + 1              	// [2:2174]  
+//2175  
+//2176         if(Mem0.Mission_Cur>=30)
 
 LM245:
-	     .stabn 68,0,2175,LM245-_Get_Mission
-	     DS = seg(_Mem0)          	// [4:2175]  Mem0
-	     R4 = (_Mem0)             	// [5:2175]  Mem0
-	     R4 = DS:[R4]             	// [7:2175]  
-	     cmp R4, 29               	// [9:2175]  
-	     jbe L_37_8               	// [10:2175]  
-BB2_PU37:	// 0x67b
+	     .stabn 68,0,2176,LM245-_Get_Mission
+	     DS = seg(_Mem0)          	// [4:2176]  Mem0
+	     R4 = (_Mem0)             	// [5:2176]  Mem0
+	     R4 = DS:[R4]             	// [7:2176]  
+	     cmp R4, 29               	// [9:2176]  
+	     jbe L_37_8               	// [10:2176]  
+BB2_PU37:	// 0x67d
 // BB:2 cycle count: 6
-//2176  	   	   Mem0.Mission_Cur =0;
+//2177  	   	   Mem0.Mission_Cur =0;
 
 LM246:
-	     .stabn 68,0,2176,LM246-_Get_Mission
-	     R3 = 0                   	// [0:2176]  
-	     DS = seg(_Mem0)          	// [1:2176]  Mem0
-	     R4 = (_Mem0)             	// [2:2176]  Mem0
-	     DS:[R4] = R3             	// [4:2176]  
-L_37_8:	// 0x680
-L_37_9:	// 0x680
+	     .stabn 68,0,2177,LM246-_Get_Mission
+	     R3 = 0                   	// [0:2177]  
+	     DS = seg(_Mem0)          	// [1:2177]  Mem0
+	     R4 = (_Mem0)             	// [2:2177]  Mem0
+	     DS:[R4] = R3             	// [4:2177]  
+L_37_8:	// 0x682
+L_37_9:	// 0x682
 // BB:3 cycle count: 10
-//2177  
 //2178  
-//2179  	 while(Mem0.Mission_Cur<30)  
+//2179  
+//2180  	 while(Mem0.Mission_Cur<30)  
 
 LM247:
-	     .stabn 68,0,2179,LM247-_Get_Mission
-	     DS = seg(_Mem0)          	// [0:2179]  Mem0
-	     R4 = (_Mem0)             	// [1:2179]  Mem0
-	     R4 = DS:[R4]             	// [3:2179]  
-	     cmp R4, 29               	// [5:2179]  
-	     ja L_37_10               	// [6:2179]  
-BB4_PU37:	// 0x686
+	     .stabn 68,0,2180,LM247-_Get_Mission
+	     DS = seg(_Mem0)          	// [0:2180]  Mem0
+	     R4 = (_Mem0)             	// [1:2180]  Mem0
+	     R4 = DS:[R4]             	// [3:2180]  
+	     cmp R4, 29               	// [5:2180]  
+	     ja L_37_10               	// [6:2180]  
+BB4_PU37:	// 0x688
 // BB:4 cycle count: 13
-//2180  	 	{
-//2181               if(GetMission_name( Mem0.Mission_Cur)==1)
+//2181  	 	{
+//2182               if(GetMission_name( Mem0.Mission_Cur)==1)
 
 LM248:
-	     .stabn 68,0,2181,LM248-_Get_Mission
-	     SP = SP - 1              	// [0:2181]  
-	     DS = seg(_Mem0)          	// [1:2181]  Mem0
-	     R4 = (_Mem0)             	// [2:2181]  Mem0
-	     R3 = DS:[R4]             	// [4:2181]  
-	     R4 = SP + 1              	// [6:2181]  
-	     [R4] = R3                	// [8:2181]  
-	     call _GetMission_name    	// [10:2181]  GetMission_name
-BB5_PU37:	// 0x690
+	     .stabn 68,0,2182,LM248-_Get_Mission
+	     SP = SP - 1              	// [0:2182]  
+	     DS = seg(_Mem0)          	// [1:2182]  Mem0
+	     R4 = (_Mem0)             	// [2:2182]  Mem0
+	     R3 = DS:[R4]             	// [4:2182]  
+	     R4 = SP + 1              	// [6:2182]  
+	     [R4] = R3                	// [8:2182]  
+	     call _GetMission_name    	// [10:2182]  GetMission_name
+BB5_PU37:	// 0x692
 // BB:5 cycle count: 6
-	     SP = SP + 1              	// [0:2181]  
-	     cmp R1, 1                	// [1:2181]  
-	     jne L_37_12              	// [2:2181]  
-BB6_PU37:	// 0x693
+	     SP = SP + 1              	// [0:2182]  
+	     cmp R1, 1                	// [1:2182]  
+	     jne L_37_12              	// [2:2182]  
+BB6_PU37:	// 0x695
 // BB:6 cycle count: 4
-//2182  			 	break;
+//2183  			 	break;
 
 LM249:
-	     .stabn 68,0,2182,LM249-_Get_Mission
-	     jmp Lt_37_1              	// [0:2182]  
-L_37_12:	// 0x694
+	     .stabn 68,0,2183,LM249-_Get_Mission
+	     jmp Lt_37_1              	// [0:2183]  
+L_37_12:	// 0x696
 // BB:7 cycle count: 11
-//2183  			 else
-//2184  			 	Mem0.Mission_Cur++;			 	
+//2184  			 else
+//2185  			 	Mem0.Mission_Cur++;			 	
 
 LM250:
-	     .stabn 68,0,2184,LM250-_Get_Mission
-	     DS = seg(_Mem0)          	// [0:2184]  Mem0
-	     R4 = (_Mem0)             	// [1:2184]  Mem0
-	     R4 = DS:[R4]             	// [3:2184]  
-	     R4 = R4 + 1              	// [5:2184]  
-	     DS = seg(_Mem0)          	// [6:2184]  Mem0
-	     R3 = (_Mem0)             	// [7:2184]  Mem0
-	     DS:[R3] = R4             	// [9:2184]  
-L_37_11:	// 0x69d
+	     .stabn 68,0,2185,LM250-_Get_Mission
+	     DS = seg(_Mem0)          	// [0:2185]  Mem0
+	     R4 = (_Mem0)             	// [1:2185]  Mem0
+	     R4 = DS:[R4]             	// [3:2185]  
+	     R4 = R4 + 1              	// [5:2185]  
+	     DS = seg(_Mem0)          	// [6:2185]  Mem0
+	     R3 = (_Mem0)             	// [7:2185]  Mem0
+	     DS:[R3] = R4             	// [9:2185]  
+L_37_11:	// 0x69f
 // BB:8 cycle count: 4
 
 LM251:
-	     .stabn 68,0,2181,LM251-_Get_Mission
-	     jmp L_37_9               	// [0:2181]  
-L_37_10:	// 0x69e
-Lt_37_1:	// 0x69e
+	     .stabn 68,0,2182,LM251-_Get_Mission
+	     jmp L_37_9               	// [0:2182]  
+L_37_10:	// 0x6a0
+Lt_37_1:	// 0x6a0
 // BB:9 cycle count: 5
 	//;;
 	INT OFF
 	//;;
-//2185  	 	}
-//2186  
+//2186  	 	}
 //2187  
-//2188     	  	   __asm("INT OFF");
-//2189             MoveSPIDriverToRAM();
+//2188  
+//2189     	  	   __asm("INT OFF");
+//2190             MoveSPIDriverToRAM();
 
 LM252:
-	     .stabn 68,0,2189,LM252-_Get_Mission
-	     call _MoveSPIDriverToRAM 	// [2:2189]  MoveSPIDriverToRAM
-BB10_PU37:	// 0x6a3
+	     .stabn 68,0,2190,LM252-_Get_Mission
+	     call _MoveSPIDriverToRAM 	// [2:2190]  MoveSPIDriverToRAM
+BB10_PU37:	// 0x6a5
 // BB:10 cycle count: 16
-//2190         	      
-//2191         	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
+//2191         	      
+//2192         	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
 
 LM253:
-	     .stabn 68,0,2191,LM253-_Get_Mission
-	     SP = SP - 2              	// [0:2191]  
-	     R3 = - 16384             	// [1:2191]  
-	     R4 = SP + 1              	// [3:2191]  
-	     [R4] = R3                	// [5:2191]  
-	     R3 = 127                 	// [7:2191]  
-	     R4 = SP + 2              	// [9:2191]  
-	     [R4] = R3                	// [11:2191]  
-	     call _SPI_Flash_Sector_Erase	// [13:2191]  SPI_Flash_Sector_Erase
-BB11_PU37:	// 0x6b0
+	     .stabn 68,0,2192,LM253-_Get_Mission
+	     SP = SP - 2              	// [0:2192]  
+	     R3 = - 16384             	// [1:2192]  
+	     R4 = SP + 1              	// [3:2192]  
+	     [R4] = R3                	// [5:2192]  
+	     R3 = 127                 	// [7:2192]  
+	     R4 = SP + 2              	// [9:2192]  
+	     [R4] = R3                	// [11:2192]  
+	     call _SPI_Flash_Sector_Erase	// [13:2192]  SPI_Flash_Sector_Erase
+BB11_PU37:	// 0x6b2
 // BB:11 cycle count: 30
-	     SP = SP - 3              	// [0:2191]  
-//2192            SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
+	     SP = SP - 3              	// [0:2192]  
+//2193            SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
 
 LM254:
-	     .stabn 68,0,2192,LM254-_Get_Mission
-	     R2 = (_Mem0)             	// [1:2192]  Mem0
-	     R3 = seg(_Mem0)          	// [3:2192]  Mem0
-	     R4 = SP + 1              	// [4:2192]  
-	     [R4++] = R2              	// [6:2192]  
-	     [R4] = R3                	// [8:2192]  
-	     R3 = 5                   	// [10:2192]  
-	     R4 = SP + 3              	// [11:2192]  
-	     [R4] = R3                	// [13:2192]  
-	     R3 = - 16384             	// [15:2192]  
-	     R4 = SP + 4              	// [17:2192]  
-	     [R4] = R3                	// [19:2192]  
-	     R3 = 127                 	// [21:2192]  
-	     R4 = SP + 5              	// [23:2192]  
-	     [R4] = R3                	// [25:2192]  
-	     call _SPI_Flash_SendNWords	// [27:2192]  SPI_Flash_SendNWords
-BB12_PU37:	// 0x6c8
+	     .stabn 68,0,2193,LM254-_Get_Mission
+	     R2 = (_Mem0)             	// [1:2193]  Mem0
+	     R3 = seg(_Mem0)          	// [3:2193]  Mem0
+	     R4 = SP + 1              	// [4:2193]  
+	     [R4++] = R2              	// [6:2193]  
+	     [R4] = R3                	// [8:2193]  
+	     R3 = 5                   	// [10:2193]  
+	     R4 = SP + 3              	// [11:2193]  
+	     [R4] = R3                	// [13:2193]  
+	     R3 = - 16384             	// [15:2193]  
+	     R4 = SP + 4              	// [17:2193]  
+	     [R4] = R3                	// [19:2193]  
+	     R3 = 127                 	// [21:2193]  
+	     R4 = SP + 5              	// [23:2193]  
+	     [R4] = R3                	// [25:2193]  
+	     call _SPI_Flash_SendNWords	// [27:2193]  SPI_Flash_SendNWords
+BB12_PU37:	// 0x6ca
 // BB:12 cycle count: 8
-	     SP = SP + 5              	// [0:2192]  
+	     SP = SP + 5              	// [0:2193]  
 	//;;
 	INT FIQ,IRQ
 	//;;
-//2193              __asm("INT FIQ,IRQ");  
+//2194              __asm("INT FIQ,IRQ");  
 
 LM255:
-	     .stabn 68,0,2193,LM255-_Get_Mission
-	     pop BP, PC from [SP]     	// [3:2193]  
+	     .stabn 68,0,2194,LM255-_Get_Mission
+	     pop BP, PC from [SP]     	// [3:2194]  
 	.endp	
 LME38:
 	     .stabf LME38-_Get_Mission
@@ -4576,155 +4580,155 @@ _Select_Pokenmonrandom: .proc
 	// old_frame_pointer = 6
 	// return_address = 7
 	// lra_spill_temp_15 = 5
-//2196  
 //2197  
 //2198  
-//2199   unsigned Select_Pokenmonrandom()
-//2200  {
+//2199  
+//2200   unsigned Select_Pokenmonrandom()
+//2201  {
 
 LM256:
-	     .stabn 68,0,2200,LM256-_Select_Pokenmonrandom
-BB1_PU38:	// 0x6c7
+	     .stabn 68,0,2201,LM256-_Select_Pokenmonrandom
+BB1_PU38:	// 0x6c9
 // BB:1 cycle count: 12
-	     push BP to [SP]          	// [0:2200]  
-	     SP = SP - 6              	// [2:2200]  
-	     BP = SP + 1              	// [3:2200]  
+	     push BP to [SP]          	// [0:2201]  
+	     SP = SP - 6              	// [2:2201]  
+	     BP = SP + 1              	// [3:2201]  
 LBB33:
-//2201  	unsigned i= 0;
+//2202  	unsigned i= 0;
 
 LM257:
-	     .stabn 68,0,2201,LM257-_Select_Pokenmonrandom
-	     R4 = 0                   	// [5:2201]  
-	     [BP + 0] = R4            	// [6:2201]  i
-//2202  	unsigned j= 0;
+	     .stabn 68,0,2202,LM257-_Select_Pokenmonrandom
+	     R4 = 0                   	// [5:2202]  
+	     [BP + 0] = R4            	// [6:2202]  i
+//2203  	unsigned j= 0;
 
 LM258:
-	     .stabn 68,0,2202,LM258-_Select_Pokenmonrandom
-	     R4 = 0                   	// [7:2202]  
-	     [BP + 1] = R4            	// [8:2202]  j
-//2203  	unsigned temp;
-//2204  	unsigned LQA;
-//2205      unsigned int Index;
-//2206  
-//2207  	LQA = Get_LQA();
+	     .stabn 68,0,2203,LM258-_Select_Pokenmonrandom
+	     R4 = 0                   	// [7:2203]  
+	     [BP + 1] = R4            	// [8:2203]  j
+//2204  	unsigned temp;
+//2205  	unsigned LQA;
+//2206      unsigned int Index;
+//2207  
+//2208  	LQA = Get_LQA();
 
 LM259:
-	     .stabn 68,0,2207,LM259-_Select_Pokenmonrandom
-	     call _Get_LQA            	// [9:2207]  Get_LQA
-BB2_PU38:	// 0x6d1
+	     .stabn 68,0,2208,LM259-_Select_Pokenmonrandom
+	     call _Get_LQA            	// [9:2208]  Get_LQA
+BB2_PU38:	// 0x6d3
 // BB:2 cycle count: 15
-	     [BP + 2] = R1            	// [0:2207]  LQA
-//2208  
-//2209  	Index = *P_TimerB_CNTR % LQA;
+	     [BP + 2] = R1            	// [0:2208]  LQA
+//2209  
+//2210  	Index = *P_TimerB_CNTR % LQA;
 
 LM260:
-	     .stabn 68,0,2209,LM260-_Select_Pokenmonrandom
-	     R3 = 12307               	// [1:2209]  
-	     R4 = 0                   	// [3:2209]  
-	     DS = R4                  	// [4:2209]  
-	     R3 = DS:[R3]             	// [5:2209]  
-	     R4 = [BP + 2]            	// [7:2209]  LQA
-	     push R4, R3 to [SP]      	// [9:2209]  
-	     call __modu1             	// [12:2209]  _modu1
-BB3_PU38:	// 0x6db
+	     .stabn 68,0,2210,LM260-_Select_Pokenmonrandom
+	     R3 = 12307               	// [1:2210]  
+	     R4 = 0                   	// [3:2210]  
+	     DS = R4                  	// [4:2210]  
+	     R3 = DS:[R3]             	// [5:2210]  
+	     R4 = [BP + 2]            	// [7:2210]  LQA
+	     push R4, R3 to [SP]      	// [9:2210]  
+	     call __modu1             	// [12:2210]  _modu1
+BB3_PU38:	// 0x6dd
 // BB:3 cycle count: 2
 	     SP = SP + 2              	// [0:0]  
 	     [BP + 3] = R1            	// [1:0]  Index
-L_38_7:	// 0x6dd
+L_38_7:	// 0x6df
 // BB:4 cycle count: 12
-//2210  
-//2211  	while(i<R_QuestionNum)
+//2211  
+//2212  	while(i<R_QuestionNum)
 
 LM261:
-	     .stabn 68,0,2211,LM261-_Select_Pokenmonrandom
-	     R3 = [BP + 0]            	// [0:2211]  i
-	     DS = seg(_R_QuestionNum) 	// [2:2211]  R_QuestionNum
-	     R4 = (_R_QuestionNum)    	// [3:2211]  R_QuestionNum
-	     R4 = DS:[R4]             	// [5:2211]  
-	     cmp R3, R4               	// [7:2211]  
-	     jae L_38_8               	// [8:2211]  
-BB5_PU38:	// 0x6e4
+	     .stabn 68,0,2212,LM261-_Select_Pokenmonrandom
+	     R3 = [BP + 0]            	// [0:2212]  i
+	     DS = seg(_R_QuestionNum) 	// [2:2212]  R_QuestionNum
+	     R4 = (_R_QuestionNum)    	// [3:2212]  R_QuestionNum
+	     R4 = DS:[R4]             	// [5:2212]  
+	     cmp R3, R4               	// [7:2212]  
+	     jae L_38_8               	// [8:2212]  
+BB5_PU38:	// 0x6e6
 // BB:5 cycle count: 36
-//2212  	{
-//2213  		 temp = BitMap[i%16]&Pokenm_LQ[i/16];
+//2213  	{
+//2214  		 temp = BitMap[i%16]&Pokenm_LQ[i/16];
 
 LM262:
-	     .stabn 68,0,2213,LM262-_Select_Pokenmonrandom
-	     R4 = [BP + 0]            	// [0:2213]  i
-	     R4 = R4 & 15             	// [2:2213]  
-	     R3 = 0                   	// [3:2213]  
-	     R1 = (_BitMap)           	// [4:2213]  BitMap
-	     R2 = seg(_BitMap)        	// [6:2213]  BitMap
-	     R4 = R4 + R1             	// [7:2213]  
-	     R3 = R3 + R2, Carry      	// [8:2213]  
-	     DS = R3                  	// [9:2213]  
-	     R4 = DS:[R4]             	// [10:2213]  
-	     [BP + 5] = R4            	// [12:2213]  lra_spill_temp_15
-	     R4 = [BP + 0]            	// [13:2213]  i
-	     R4 = R4 lsr 4            	// [15:2213]  
-	     R3 = 0                   	// [16:2213]  
-	     R1 = (_Pokenm_LQ)        	// [17:2213]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [19:2213]  Pokenm_LQ
-	     R4 = R4 + R1             	// [20:2213]  
-	     R3 = R3 + R2, Carry      	// [21:2213]  
-	     DS = R3                  	// [22:2213]  
-	     R3 = DS:[R4]             	// [23:2213]  
-	     R4 = [BP + 5]            	// [25:2213]  lra_spill_temp_15
-	     R4 = R4 & R3             	// [27:2213]  
-	     [BP + 4] = R4            	// [28:2213]  temp
-//2214  		 if (temp)
+	     .stabn 68,0,2214,LM262-_Select_Pokenmonrandom
+	     R4 = [BP + 0]            	// [0:2214]  i
+	     R4 = R4 & 15             	// [2:2214]  
+	     R3 = 0                   	// [3:2214]  
+	     R1 = (_BitMap)           	// [4:2214]  BitMap
+	     R2 = seg(_BitMap)        	// [6:2214]  BitMap
+	     R4 = R4 + R1             	// [7:2214]  
+	     R3 = R3 + R2, Carry      	// [8:2214]  
+	     DS = R3                  	// [9:2214]  
+	     R4 = DS:[R4]             	// [10:2214]  
+	     [BP + 5] = R4            	// [12:2214]  lra_spill_temp_15
+	     R4 = [BP + 0]            	// [13:2214]  i
+	     R4 = R4 lsr 4            	// [15:2214]  
+	     R3 = 0                   	// [16:2214]  
+	     R1 = (_Pokenm_LQ)        	// [17:2214]  Pokenm_LQ
+	     R2 = seg(_Pokenm_LQ)     	// [19:2214]  Pokenm_LQ
+	     R4 = R4 + R1             	// [20:2214]  
+	     R3 = R3 + R2, Carry      	// [21:2214]  
+	     DS = R3                  	// [22:2214]  
+	     R3 = DS:[R4]             	// [23:2214]  
+	     R4 = [BP + 5]            	// [25:2214]  lra_spill_temp_15
+	     R4 = R4 & R3             	// [27:2214]  
+	     [BP + 4] = R4            	// [28:2214]  temp
+//2215  		 if (temp)
 
 LM263:
-	     .stabn 68,0,2214,LM263-_Select_Pokenmonrandom
-	     R4 = [BP + 4]            	// [29:2214]  temp
-	     cmp R4, 0                	// [31:2214]  
-	     je L_38_9                	// [32:2214]  
-BB6_PU38:	// 0x6ff
+	     .stabn 68,0,2215,LM263-_Select_Pokenmonrandom
+	     R4 = [BP + 4]            	// [29:2215]  temp
+	     cmp R4, 0                	// [31:2215]  
+	     je L_38_9                	// [32:2215]  
+BB6_PU38:	// 0x701
 // BB:6 cycle count: 9
-//2215  		 {
-//2216  		 	if (j == Index) return i;
+//2216  		 {
+//2217  		 	if (j == Index) return i;
 
 LM264:
-	     .stabn 68,0,2216,LM264-_Select_Pokenmonrandom
-	     R3 = [BP + 1]            	// [0:2216]  j
-	     R4 = [BP + 3]            	// [2:2216]  Index
-	     cmp R3, R4               	// [4:2216]  
-	     jne L_38_10              	// [5:2216]  
-BB7_PU38:	// 0x703
+	     .stabn 68,0,2217,LM264-_Select_Pokenmonrandom
+	     R3 = [BP + 1]            	// [0:2217]  j
+	     R4 = [BP + 3]            	// [2:2217]  Index
+	     cmp R3, R4               	// [4:2217]  
+	     jne L_38_10              	// [5:2217]  
+BB7_PU38:	// 0x705
 // BB:7 cycle count: 8
-	     R1 = [BP + 0]            	// [0:2216]  i
-	     SP = SP + 6              	// [2:2216]  
-	     pop BP, PC from [SP]     	// [3:2216]  
-L_38_10:	// 0x706
+	     R1 = [BP + 0]            	// [0:2217]  i
+	     SP = SP + 6              	// [2:2217]  
+	     pop BP, PC from [SP]     	// [3:2217]  
+L_38_10:	// 0x708
 // BB:8 cycle count: 4
-//2217  		 	j++;
+//2218  		 	j++;
 
 LM265:
-	     .stabn 68,0,2217,LM265-_Select_Pokenmonrandom
-	     R4 = [BP + 1]            	// [0:2217]  j
-	     R4 = R4 + 1              	// [2:2217]  
-	     [BP + 1] = R4            	// [3:2217]  j
-L_38_9:	// 0x709
+	     .stabn 68,0,2218,LM265-_Select_Pokenmonrandom
+	     R4 = [BP + 1]            	// [0:2218]  j
+	     R4 = R4 + 1              	// [2:2218]  
+	     [BP + 1] = R4            	// [3:2218]  j
+L_38_9:	// 0x70b
 // BB:9 cycle count: 8
-//2218  		 }
-//2219  		 i++;
+//2219  		 }
+//2220  		 i++;
 
 LM266:
-	     .stabn 68,0,2219,LM266-_Select_Pokenmonrandom
-	     R4 = [BP + 0]            	// [0:2219]  i
-	     R4 = R4 + 1              	// [2:2219]  
-	     [BP + 0] = R4            	// [3:2219]  i
-	     jmp L_38_7               	// [4:2219]  
-L_38_8:	// 0x70d
+	     .stabn 68,0,2220,LM266-_Select_Pokenmonrandom
+	     R4 = [BP + 0]            	// [0:2220]  i
+	     R4 = R4 + 1              	// [2:2220]  
+	     [BP + 0] = R4            	// [3:2220]  i
+	     jmp L_38_7               	// [4:2220]  
+L_38_8:	// 0x70f
 // BB:10 cycle count: 8
-//2220  	}
-//2221  	return i;
+//2221  	}
+//2222  	return i;
 
 LM267:
-	     .stabn 68,0,2221,LM267-_Select_Pokenmonrandom
-	     R1 = [BP + 0]            	// [0:2221]  i
-	     SP = SP + 6              	// [2:2221]  
-	     pop BP, PC from [SP]     	// [3:2221]  
+	     .stabn 68,0,2222,LM267-_Select_Pokenmonrandom
+	     R1 = [BP + 0]            	// [0:2222]  i
+	     SP = SP + 6              	// [2:2222]  
+	     pop BP, PC from [SP]     	// [3:2222]  
 LBE33:
 	.endp	
 	     .stabn 192,0,0,LBB33-_Select_Pokenmonrandom
@@ -4736,771 +4740,6 @@ LBE33:
 	     .stabn 224,0,0,LBE33-_Select_Pokenmonrandom
 LME39:
 	     .stabf LME39-_Select_Pokenmonrandom
-.code
-	     .stabs "SelectPokemon:F4",36,0,0,_SelectPokemon
-
-	// Program Unit: SelectPokemon
-.public	_SelectPokemon
-_SelectPokemon: .proc	
-	     .stabn 0xa6,0,0,13
-	// Addr = 7
-	// i = 0
-	// temp = 1
-	// temp1 = 2
-	// pok_cnt = 3
-	// temp_select = 4
-	// filler_flag = 5
-	// pokecnt_IN_Mis = 6
-	// temp_Randomflag = 9
-	// __save_expr_temp_3 = 10
-	// old_frame_pointer = 13
-	// return_address = 14
-	// lra_spill_temp_16 = 11
-	// lra_spill_temp_17 = 12
-//2227  
-//2228  
-//2229  
-//2230  unsigned int  SelectPokemon(unsigned int Randomflag)
-//2231  {
-
-LM268:
-	     .stabn 68,0,2231,LM268-_SelectPokemon
-BB1_PU39:	// 0x710
-// BB:1 cycle count: 31
-	     push BP to [SP]          	// [0:2231]  
-	     SP = SP - 13             	// [2:2231]  
-	     BP = SP + 1              	// [3:2231]  
-LBB34:
-//2232      unsigned long int Addr;
-//2233  	unsigned int i=0,temp=0,temp1=0;
-
-LM269:
-	     .stabn 68,0,2233,LM269-_SelectPokemon
-	     R4 = 0                   	// [5:2233]  
-	     [BP + 0] = R4            	// [6:2233]  i
-	     R4 = 0                   	// [7:2233]  
-	     [BP + 1] = R4            	// [8:2233]  temp
-	     R4 = 0                   	// [9:2233]  
-	     [BP + 2] = R4            	// [10:2233]  temp1
-//2234  
-//2235  	unsigned int pok_cnt =0;
-
-LM270:
-	     .stabn 68,0,2235,LM270-_SelectPokemon
-	     R4 = 0                   	// [11:2235]  
-	     [BP + 3] = R4            	// [12:2235]  pok_cnt
-//2236  	unsigned int temp_select =0;
-
-LM271:
-	     .stabn 68,0,2236,LM271-_SelectPokemon
-	     R4 = 0                   	// [13:2236]  
-	     [BP + 4] = R4            	// [14:2236]  temp_select
-//2237      unsigned int filler_flag =0;
-
-LM272:
-	     .stabn 68,0,2237,LM272-_SelectPokemon
-	     R4 = 0                   	// [15:2237]  
-	     [BP + 5] = R4            	// [16:2237]  filler_flag
-//2238      unsigned int pokecnt_IN_Mis =0;
-
-LM273:
-	     .stabn 68,0,2238,LM273-_SelectPokemon
-	     R4 = 0                   	// [17:2238]  
-	     [BP + 6] = R4            	// [18:2238]  pokecnt_IN_Mis
-//2239  	unsigned int temp_Randomflag;
-//2240  
-//2241  
-//2242  
-//2243        if(Mem0.firstFlag_23b&0x80)
-
-LM274:
-	     .stabn 68,0,2243,LM274-_SelectPokemon
-	     DS = seg(_Mem0+2)        	// [19:2243]  Mem0+2
-	     R4 = (_Mem0+2)           	// [20:2243]  Mem0+2
-	     R4 = DS:[R4]             	// [22:2243]  
-	     R4 = R4 & 128            	// [24:2243]  
-	     cmp R4, 0                	// [26:2243]  
-	     je L_39_37               	// [27:2243]  
-BB2_PU39:	// 0x72a
-// BB:2 cycle count: 3
-//2244        	{
-//2245  
-//2246                 temp = Select_Pokenmonrandom();
-
-LM275:
-	     .stabn 68,0,2246,LM275-_SelectPokemon
-	     call _Select_Pokenmonrandom	// [0:2246]  Select_Pokenmonrandom
-BB3_PU39:	// 0x72c
-// BB:3 cycle count: 11
-	     [BP + 1] = R1            	// [0:2246]  temp
-//2247  		   
-//2248                 R_Envi= GetEnvir_Pok(temp);
-
-LM276:
-	     .stabn 68,0,2248,LM276-_SelectPokemon
-	     SP = SP - 1              	// [1:2248]  
-	     R3 = [BP + 1]            	// [2:2248]  temp
-	     R4 = SP + 1              	// [4:2248]  
-	     [R4] = R3                	// [6:2248]  
-	     call _GetEnvir_Pok       	// [8:2248]  GetEnvir_Pok
-BB4_PU39:	// 0x734
-// BB:4 cycle count: 14
-	     SP = SP + 1              	// [0:2248]  
-	     DS = seg(_R_Envi)        	// [1:2248]  R_Envi
-	     R4 = (_R_Envi)           	// [2:2248]  R_Envi
-	     DS:[R4] = R1             	// [4:2248]  
-//2249  			   return temp;
-
-LM277:
-	     .stabn 68,0,2249,LM277-_SelectPokemon
-	     R1 = [BP + 1]            	// [6:2249]  temp
-	     SP = SP + 13             	// [8:2249]  
-	     pop BP, PC from [SP]     	// [9:2249]  
-L_39_37:	// 0x73c
-// BB:5 cycle count: 13
-//2251        	}
-//2252  
-//2253  	
-//2254      
-//2255         temp= 1+*P_TimerB_CNTR%3;
-
-LM278:
-	     .stabn 68,0,2255,LM278-_SelectPokemon
-	     R3 = 12307               	// [0:2255]  
-	     R4 = 0                   	// [2:2255]  
-	     DS = R4                  	// [3:2255]  
-	     R3 = DS:[R3]             	// [4:2255]  
-	     R4 = 3                   	// [6:2255]  
-	     push R4, R3 to [SP]      	// [7:2255]  
-	     call __modu1             	// [10:2255]  _modu1
-BB6_PU39:	// 0x745
-// BB:6 cycle count: 11
-	     SP = SP + 2              	// [0:0]  
-	     R4 = R1 + 1              	// [1:0]  
-	     [BP + 1] = R4            	// [3:0]  temp
-//2256         
-//2257         if(temp ==1)
-
-LM279:
-	     .stabn 68,0,2257,LM279-_SelectPokemon
-	     R4 = [BP + 1]            	// [4:2257]  temp
-	     cmp R4, 1                	// [6:2257]  
-	     jne L_39_38              	// [7:2257]  
-BB7_PU39:	// 0x74c
-// BB:7 cycle count: 2
-//2258            filler_flag =1;
-
-LM280:
-	     .stabn 68,0,2258,LM280-_SelectPokemon
-	     R4 = 1                   	// [0:2258]  
-	     [BP + 5] = R4            	// [1:2258]  filler_flag
-L_39_38:	// 0x74e
-// BB:8 cycle count: 7
-//2259         
-//2260        if(filler_flag)
-
-LM281:
-	     .stabn 68,0,2260,LM281-_SelectPokemon
-	     R4 = [BP + 5]            	// [0:2260]  filler_flag
-	     cmp R4, 0                	// [2:2260]  
-	     je L_39_39               	// [3:2260]  
-BB9_PU39:	// 0x751
-// BB:9 cycle count: 10
-//2261        {
-//2262        	
-//2263        	if(FillerCount>=2)
-
-LM282:
-	     .stabn 68,0,2263,LM282-_SelectPokemon
-	     DS = seg(_FillerCount)   	// [0:2263]  FillerCount
-	     R4 = (_FillerCount)      	// [1:2263]  FillerCount
-	     R4 = DS:[R4]             	// [3:2263]  
-	     cmp R4, 1                	// [5:2263]  
-	     jbe L_39_40              	// [6:2263]  
-BB10_PU39:	// 0x757
-// BB:10 cycle count: 2
-//2264        	   filler_flag=0;
-
-LM283:
-	     .stabn 68,0,2264,LM283-_SelectPokemon
-	     R4 = 0                   	// [0:2264]  
-	     [BP + 5] = R4            	// [1:2264]  filler_flag
-L_39_40:	// 0x759
-L_39_39:	// 0x759
-// BB:11 cycle count: 7
-//2265        }  
-//2266  
-//2267     if(filler_flag)
-
-LM284:
-	     .stabn 68,0,2267,LM284-_SelectPokemon
-	     R4 = [BP + 5]            	// [0:2267]  filler_flag
-	     cmp R4, 0                	// [2:2267]  
-	     je L_39_42               	// [3:2267]  
-BB12_PU39:	// 0x75c
-// BB:12 cycle count: 22
-//2268     	{
-//2269       Addr = Mem0.Mission_Cur* 6 * 2 + T_Pok_Filer;
-
-LM285:
-	     .stabn 68,0,2269,LM285-_SelectPokemon
-	     DS = seg(_Mem0)          	// [0:2269]  Mem0
-	     R4 = (_Mem0)             	// [1:2269]  Mem0
-	     R4 = DS:[R4]             	// [3:2269]  
-	     R3 = R4 lsl 2            	// [5:2269]  
-	     R3 = R3 + R3 lsl 1       	// [6:2269]  
-	     R4 = 0                   	// [7:2269]  
-	     R3 = R3 + 41500          	// [8:2269]  
-	     R4 = R4 + 0, Carry       	// [10:2269]  
-	     [BP + 7] = R3            	// [11:2269]  Addr
-	     [BP + 8] = R4            	// [12:2269]  Addr+1
-//2270  	 temp_Randomflag = Randomflag;
-
-LM286:
-	     .stabn 68,0,2270,LM286-_SelectPokemon
-	     R4 = [BP + 16]           	// [13:2270]  Randomflag
-	     [BP + 9] = R4            	// [15:2270]  temp_Randomflag
-//2271       Randomflag=1;
-
-LM287:
-	     .stabn 68,0,2271,LM287-_SelectPokemon
-	     R4 = 1                   	// [16:2271]  
-	     [BP + 16] = R4           	// [17:2271]  Randomflag
-	     jmp L_39_41              	// [18:2271]  
-L_39_42:	// 0x76d
-// BB:13 cycle count: 13
-//2272     	}
-//2273     	else
-//2274  	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
-
-LM288:
-	     .stabn 68,0,2274,LM288-_SelectPokemon
-	     DS = seg(_Mem0)          	// [0:2274]  Mem0
-	     R4 = (_Mem0)             	// [1:2274]  Mem0
-	     R4 = DS:[R4]             	// [3:2274]  
-	     R3 = R4 lsl 2            	// [5:2274]  
-	     R3 = R3 + R3 lsl 1       	// [6:2274]  
-	     R4 = 0                   	// [7:2274]  
-	     R3 = R3 + 38500          	// [8:2274]  
-	     R4 = R4 + 0, Carry       	// [10:2274]  
-	     [BP + 7] = R3            	// [11:2274]  Addr
-	     [BP + 8] = R4            	// [12:2274]  Addr+1
-L_39_41:	// 0x779
-L_39_43:	// 0x779
-// BB:14 cycle count: 7
-//2275  	 
-//2276  
-//2277  		while(i<6 )//Num
-
-LM289:
-	     .stabn 68,0,2277,LM289-_SelectPokemon
-	     R4 = [BP + 0]            	// [0:2277]  i
-	     cmp R4, 5                	// [2:2277]  
-	     jbe BB15_PU39            	// [3:2277]  
-BB44_PU39:	// 0x77c
-// BB:44 cycle count: 3
-	     goto L_39_44             	// [0:0]  
-BB15_PU39:	// 0x77e
-// BB:15 cycle count: 18
-//2278  		{
-//2279  			temp = SPI_ReadAWord_Big(Addr+i*2);
-
-LM290:
-	     .stabn 68,0,2279,LM290-_SelectPokemon
-	     SP = SP - 2              	// [0:2279]  
-	     R4 = [BP + 0]            	// [1:2279]  i
-	     R3 = R4 lsl 1            	// [3:2279]  
-	     R4 = 0                   	// [4:2279]  
-	     R3 = R3 + [BP + 7]       	// [5:2279]  Addr
-	     R4 = R4 + [BP + 8], Carry	// [7:2279]  Addr+1
-	     R2 = SP + 1              	// [9:2279]  
-	     [R2++] = R3              	// [11:2279]  
-	     [R2] = R4                	// [13:2279]  
-	     call _SPI_ReadAWord_Big  	// [15:2279]  SPI_ReadAWord_Big
-BB16_PU39:	// 0x78a
-// BB:16 cycle count: 10
-	     SP = SP + 2              	// [0:2279]  
-	     [BP + 1] = R1            	// [1:2279]  temp
-//2280  
-//2281  		   if(temp == 9999)
-
-LM291:
-	     .stabn 68,0,2281,LM291-_SelectPokemon
-	     R4 = [BP + 1]            	// [2:2281]  temp
-	     cmp R4, 9999             	// [4:2281]  
-	     jne BB17_PU39            	// [6:2281]  
-BB45_PU39:	// 0x790
-// BB:45 cycle count: 3
-	     goto L_39_45             	// [0:0]  
-BB17_PU39:	// 0x792
-// BB:17 cycle count: 7
-//2284  			   // break;
-//2285  			 }
-//2286  			else
-//2287  				{
-//2288  				   if(Randomflag == 0)	  
-
-LM292:
-	     .stabn 68,0,2288,LM292-_SelectPokemon
-	     R4 = [BP + 16]           	// [0:2288]  Randomflag
-	     cmp R4, 0                	// [2:2288]  
-	     jne L_39_47              	// [3:2288]  
-BB18_PU39:	// 0x795
-// BB:18 cycle count: 33
-//2289  				   {
-//2290  				       if((BitMap[temp%16]&Pokecatch_Pok[temp/16])==0)
-
-LM293:
-	     .stabn 68,0,2290,LM293-_SelectPokemon
-	     R4 = [BP + 1]            	// [0:2290]  temp
-	     R4 = R4 & 15             	// [2:2290]  
-	     R3 = 0                   	// [3:2290]  
-	     R1 = (_BitMap)           	// [4:2290]  BitMap
-	     R2 = seg(_BitMap)        	// [6:2290]  BitMap
-	     R4 = R4 + R1             	// [7:2290]  
-	     R3 = R3 + R2, Carry      	// [8:2290]  
-	     DS = R3                  	// [9:2290]  
-	     R4 = DS:[R4]             	// [10:2290]  
-	     [BP + 11] = R4           	// [12:2290]  lra_spill_temp_16
-	     R4 = [BP + 1]            	// [13:2290]  temp
-	     R4 = R4 lsr 4            	// [15:2290]  
-	     R3 = 0                   	// [16:2290]  
-	     R1 = (_Pokecatch_Pok)    	// [17:2290]  Pokecatch_Pok
-	     R2 = seg(_Pokecatch_Pok) 	// [19:2290]  Pokecatch_Pok
-	     R4 = R4 + R1             	// [20:2290]  
-	     R3 = R3 + R2, Carry      	// [21:2290]  
-	     DS = R3                  	// [22:2290]  
-	     R3 = DS:[R4]             	// [23:2290]  
-	     R4 = [BP + 11]           	// [25:2290]  lra_spill_temp_16
-	     R4 = R4 & R3             	// [27:2290]  
-	     cmp R4, 0                	// [28:2290]  
-	     jne L_39_48              	// [29:2290]  
-BB19_PU39:	// 0x7ae
-// BB:19 cycle count: 10
-//2291  				        {
-//2292  				       	   pokecnt_IN_Mis = i;	
-
-LM294:
-	     .stabn 68,0,2292,LM294-_SelectPokemon
-	     R4 = [BP + 0]            	// [0:2292]  i
-	     [BP + 6] = R4            	// [2:2292]  pokecnt_IN_Mis
-//2293  				       	   
-//2294  				       	   if(filler_flag)
-
-LM295:
-	     .stabn 68,0,2294,LM295-_SelectPokemon
-	     R4 = [BP + 5]            	// [3:2294]  filler_flag
-	     cmp R4, 0                	// [5:2294]  
-	     je L_39_50               	// [6:2294]  
-BB20_PU39:	// 0x7b3
-// BB:20 cycle count: 15
-//2295  				       	   	   FillerCount++;
-
-LM296:
-	     .stabn 68,0,2295,LM296-_SelectPokemon
-	     DS = seg(_FillerCount)   	// [0:2295]  FillerCount
-	     R4 = (_FillerCount)      	// [1:2295]  FillerCount
-	     R4 = DS:[R4]             	// [3:2295]  
-	     R4 = R4 + 1              	// [5:2295]  
-	     DS = seg(_FillerCount)   	// [6:2295]  FillerCount
-	     R3 = (_FillerCount)      	// [7:2295]  FillerCount
-	     DS:[R3] = R4             	// [9:2295]  
-	     jmp L_39_49              	// [11:2295]  
-L_39_50:	// 0x7bd
-// BB:21 cycle count: 6
-//2296  				       	   else
-//2297  				       	   {
-//2298  				       	       FillerCount=0;
-
-LM297:
-	     .stabn 68,0,2298,LM297-_SelectPokemon
-	     R3 = 0                   	// [0:2298]  
-	     DS = seg(_FillerCount)   	// [1:2298]  FillerCount
-	     R4 = (_FillerCount)      	// [2:2298]  FillerCount
-	     DS:[R4] = R3             	// [4:2298]  
-L_39_49:	// 0x7c2
-// BB:22 cycle count: 8
-//2299  				       	       
-//2300  				       	       //Mission_Pok_bit&=~BitMap[i];
-//2301  				       	   }
-//2302  				       	   return temp;	
-
-LM298:
-	     .stabn 68,0,2302,LM298-_SelectPokemon
-	     R1 = [BP + 1]            	// [0:2302]  temp
-	     SP = SP + 13             	// [2:2302]  
-	     pop BP, PC from [SP]     	// [3:2302]  
-L_39_48:	// 0x7c5
-// BB:23 cycle count: 3
-
-LM299:
-	     .stabn 68,0,2290,LM299-_SelectPokemon
-	     goto L_39_46             	// [0:2290]  
-L_39_47:	// 0x7c7
-// BB:24 cycle count: 33
-//2307  				 else
-//2308  				   {   
-//2309  				    
-//2310              
-//2311  			           if(BitMap[temp%16]&Pokenm_LQ[temp/16])
-
-LM300:
-	     .stabn 68,0,2311,LM300-_SelectPokemon
-	     R4 = [BP + 1]            	// [0:2311]  temp
-	     R4 = R4 & 15             	// [2:2311]  
-	     R3 = 0                   	// [3:2311]  
-	     R1 = (_BitMap)           	// [4:2311]  BitMap
-	     R2 = seg(_BitMap)        	// [6:2311]  BitMap
-	     R4 = R4 + R1             	// [7:2311]  
-	     R3 = R3 + R2, Carry      	// [8:2311]  
-	     DS = R3                  	// [9:2311]  
-	     R4 = DS:[R4]             	// [10:2311]  
-	     [BP + 11] = R4           	// [12:2311]  lra_spill_temp_16
-	     R4 = [BP + 1]            	// [13:2311]  temp
-	     R4 = R4 lsr 4            	// [15:2311]  
-	     R3 = 0                   	// [16:2311]  
-	     R1 = (_Pokenm_LQ)        	// [17:2311]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [19:2311]  Pokenm_LQ
-	     R4 = R4 + R1             	// [20:2311]  
-	     R3 = R3 + R2, Carry      	// [21:2311]  
-	     DS = R3                  	// [22:2311]  
-	     R3 = DS:[R4]             	// [23:2311]  
-	     R4 = [BP + 11]           	// [25:2311]  lra_spill_temp_16
-	     R4 = R4 & R3             	// [27:2311]  
-	     cmp R4, 0                	// [28:2311]  
-	     jne BB25_PU39            	// [29:2311]  
-BB47_PU39:	// 0x7e0
-// BB:47 cycle count: 3
-	     goto L_39_51             	// [0:0]  
-BB25_PU39:	// 0x7e2
-// BB:25 cycle count: 7
-//2312  			         // if((BitMap[temp%16]&Pokecatch_Pok[temp/16])==0)
-//2313  					   	  {
-//2314  	
-//2315  							 if(temp1)
-
-LM301:
-	     .stabn 68,0,2315,LM301-_SelectPokemon
-	     R4 = [BP + 2]            	// [0:2315]  temp1
-	     cmp R4, 0                	// [2:2315]  
-	     jne BB26_PU39            	// [3:2315]  
-BB48_PU39:	// 0x7e5
-// BB:48 cycle count: 3
-	     goto L_39_52             	// [0:0]  
-BB26_PU39:	// 0x7e7
-// BB:26 cycle count: 9
-//2316  							   {
-//2317  								 if(pok_cnt==temp_select)
-
-LM302:
-	     .stabn 68,0,2317,LM302-_SelectPokemon
-	     R3 = [BP + 3]            	// [0:2317]  pok_cnt
-	     R4 = [BP + 4]            	// [2:2317]  temp_select
-	     cmp R3, R4               	// [4:2317]  
-	     jne L_39_53              	// [5:2317]  
-BB27_PU39:	// 0x7eb
-// BB:27 cycle count: 57
-//2318  								 	{
-//2319  			                           Pokenm_LQ[temp/16]&=~BitMap[temp%16];
-
-LM303:
-	     .stabn 68,0,2319,LM303-_SelectPokemon
-	     R4 = [BP + 1]            	// [0:2319]  temp
-	     R4 = R4 lsr 4            	// [2:2319]  
-	     [BP + 10] = R4           	// [3:2319]  __save_expr_temp_3
-	     R4 = [BP + 10]           	// [4:2319]  __save_expr_temp_3
-	     R3 = 0                   	// [6:2319]  
-	     R1 = (_Pokenm_LQ)        	// [7:2319]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [9:2319]  Pokenm_LQ
-	     R4 = R4 + R1             	// [10:2319]  
-	     R3 = R3 + R2, Carry      	// [11:2319]  
-	     DS = R3                  	// [12:2319]  
-	     R4 = DS:[R4]             	// [13:2319]  
-	     [BP + 11] = R4           	// [15:2319]  lra_spill_temp_16
-	     R4 = [BP + 1]            	// [16:2319]  temp
-	     R4 = R4 & 15             	// [18:2319]  
-	     R3 = 0                   	// [19:2319]  
-	     R1 = (_BitMap)           	// [20:2319]  BitMap
-	     R2 = seg(_BitMap)        	// [22:2319]  BitMap
-	     R4 = R4 + R1             	// [23:2319]  
-	     R3 = R3 + R2, Carry      	// [24:2319]  
-	     DS = R3                  	// [25:2319]  
-	     R4 = DS:[R4]             	// [26:2319]  
-	     R3 = R4 ^ 65535          	// [28:2319]  
-	     R4 = [BP + 11]           	// [30:2319]  lra_spill_temp_16
-	     R4 = R4 & R3             	// [32:2319]  
-	     [BP + 12] = R4           	// [33:2319]  lra_spill_temp_17
-	     R4 = [BP + 10]           	// [34:2319]  __save_expr_temp_3
-	     R3 = 0                   	// [36:2319]  
-	     R1 = (_Pokenm_LQ)        	// [37:2319]  Pokenm_LQ
-	     R2 = seg(_Pokenm_LQ)     	// [39:2319]  Pokenm_LQ
-	     R4 = R4 + R1             	// [40:2319]  
-	     R3 = R3 + R2, Carry      	// [41:2319]  
-	     DS = R3                  	// [42:2319]  
-	     R3 = [BP + 12]           	// [43:2319]  lra_spill_temp_17
-	     DS:[R4] = R3             	// [45:2319]  
-//2320  									   	{
-//2321  										   pokecnt_IN_Mis = i;	
-
-LM304:
-	     .stabn 68,0,2321,LM304-_SelectPokemon
-	     R4 = [BP + 0]            	// [47:2321]  i
-	     [BP + 6] = R4            	// [49:2321]  pokecnt_IN_Mis
-//2322  										   
-//2323  									     if(filler_flag)
-
-LM305:
-	     .stabn 68,0,2323,LM305-_SelectPokemon
-	     R4 = [BP + 5]            	// [50:2323]  filler_flag
-	     cmp R4, 0                	// [52:2323]  
-	     je L_39_55               	// [53:2323]  
-BB28_PU39:	// 0x816
-// BB:28 cycle count: 15
-//2324  								       	   	   FillerCount++;
-
-LM306:
-	     .stabn 68,0,2324,LM306-_SelectPokemon
-	     DS = seg(_FillerCount)   	// [0:2324]  FillerCount
-	     R4 = (_FillerCount)      	// [1:2324]  FillerCount
-	     R4 = DS:[R4]             	// [3:2324]  
-	     R4 = R4 + 1              	// [5:2324]  
-	     DS = seg(_FillerCount)   	// [6:2324]  FillerCount
-	     R3 = (_FillerCount)      	// [7:2324]  FillerCount
-	     DS:[R3] = R4             	// [9:2324]  
-	     jmp L_39_54              	// [11:2324]  
-L_39_55:	// 0x820
-// BB:29 cycle count: 6
-//2325  								       	   else
-//2326  								       	   {
-//2327  								       	       FillerCount=0;
-
-LM307:
-	     .stabn 68,0,2327,LM307-_SelectPokemon
-	     R3 = 0                   	// [0:2327]  
-	     DS = seg(_FillerCount)   	// [1:2327]  FillerCount
-	     R4 = (_FillerCount)      	// [2:2327]  FillerCount
-	     DS:[R4] = R3             	// [4:2327]  
-L_39_54:	// 0x825
-// BB:30 cycle count: 8
-//2328  								       	       //Mission_Pok_bit&=~BitMap[i];
-//2329  								       	       
-//2330  								       	   }
-//2331  								       	       
-//2332  			                               return temp;	
-
-LM308:
-	     .stabn 68,0,2332,LM308-_SelectPokemon
-	     R1 = [BP + 1]            	// [0:2332]  temp
-	     SP = SP + 13             	// [2:2332]  
-	     pop BP, PC from [SP]     	// [3:2332]  
-L_39_53:	// 0x828
-L_39_52:	// 0x828
-// BB:31 cycle count: 4
-//2336  								 	}
-//2337  							 
-//2338  							   }			
-//2339  	
-//2340  							 pok_cnt++;
-
-LM309:
-	     .stabn 68,0,2340,LM309-_SelectPokemon
-	     R4 = [BP + 3]            	// [0:2340]  pok_cnt
-	     R4 = R4 + 1              	// [2:2340]  
-	     [BP + 3] = R4            	// [3:2340]  pok_cnt
-L_39_51:	// 0x82b
-L_39_46:	// 0x82b
-L_39_45:	// 0x82b
-// BB:32 cycle count: 11
-//2344  		           	 
-//2345  				   }
-//2346  				}
-//2347  		
-//2348  			i++;
-
-LM310:
-	     .stabn 68,0,2348,LM310-_SelectPokemon
-	     R4 = [BP + 0]            	// [0:2348]  i
-	     R4 = R4 + 1              	// [2:2348]  
-	     [BP + 0] = R4            	// [3:2348]  i
-//2352  
-//2353  
-//2354  
-//2355  
-//2356      	 if(i == 6)
-
-LM311:
-	     .stabn 68,0,2356,LM311-_SelectPokemon
-	     R4 = [BP + 0]            	// [4:2356]  i
-	     cmp R4, 6                	// [6:2356]  
-	     jne L_39_56              	// [7:2356]  
-BB33_PU39:	// 0x831
-// BB:33 cycle count: 3
-//2357  		  {
-//2358  
-//2359                 WatchdogClear();
-
-LM312:
-	     .stabn 68,0,2359,LM312-_SelectPokemon
-	     call _WatchdogClear      	// [0:2359]  WatchdogClear
-BB34_PU39:	// 0x833
-// BB:34 cycle count: 7
-//2360  			  
-//2361  			   
-//2362  				 
-//2363  			  	if(pok_cnt)
-
-LM313:
-	     .stabn 68,0,2363,LM313-_SelectPokemon
-	     R4 = [BP + 3]            	// [0:2363]  pok_cnt
-	     cmp R4, 0                	// [2:2363]  
-	     je L_39_58               	// [3:2363]  
-BB35_PU39:	// 0x836
-// BB:35 cycle count: 9
-//2364  			  	{		
-//2365  
-//2366  				    i=0;	
-
-LM314:
-	     .stabn 68,0,2366,LM314-_SelectPokemon
-	     R4 = 0                   	// [0:2366]  
-	     [BP + 0] = R4            	// [1:2366]  i
-//2367  				
-//2368  				 if(Randomflag)	 
-
-LM315:
-	     .stabn 68,0,2368,LM315-_SelectPokemon
-	     R4 = [BP + 16]           	// [2:2368]  Randomflag
-	     cmp R4, 0                	// [4:2368]  
-	     je L_39_60               	// [5:2368]  
-BB36_PU39:	// 0x83b
-// BB:36 cycle count: 14
-//2369  			  	     temp_select = *P_TimerB_CNTR %pok_cnt;
-
-LM316:
-	     .stabn 68,0,2369,LM316-_SelectPokemon
-	     R3 = 12307               	// [0:2369]  
-	     R4 = 0                   	// [2:2369]  
-	     DS = R4                  	// [3:2369]  
-	     R3 = DS:[R3]             	// [4:2369]  
-	     R4 = [BP + 3]            	// [6:2369]  pok_cnt
-	     push R4, R3 to [SP]      	// [8:2369]  
-	     call __modu1             	// [11:2369]  _modu1
-BB37_PU39:	// 0x844
-// BB:37 cycle count: 6
-	     SP = SP + 2              	// [0:0]  
-	     [BP + 4] = R1            	// [1:0]  temp_select
-	     jmp L_39_59              	// [2:2369]  
-L_39_60:	// 0x847
-// BB:38 cycle count: 2
-//2370  			  	 else
-//2371  			  	    temp_select =0;  
-
-LM317:
-	     .stabn 68,0,2371,LM317-_SelectPokemon
-	     R4 = 0                   	// [0:2371]  
-	     [BP + 4] = R4            	// [1:2371]  temp_select
-L_39_59:	// 0x849
-// BB:39 cycle count: 8
-//2372  			  	   
-//2373  			  	   
-//2374  			  	   pok_cnt=0;
-
-LM318:
-	     .stabn 68,0,2374,LM318-_SelectPokemon
-	     R4 = 0                   	// [0:2374]  
-	     [BP + 3] = R4            	// [1:2374]  pok_cnt
-//2375  			  	   temp1 =1;
-
-LM319:
-	     .stabn 68,0,2375,LM319-_SelectPokemon
-	     R4 = 1                   	// [2:2375]  
-	     [BP + 2] = R4            	// [3:2375]  temp1
-	     jmp L_39_57              	// [4:2375]  
-L_39_58:	// 0x84e
-// BB:40 cycle count: 7
-//2376  			  		
-//2377  			  	}
-//2378  			   else
-//2379  			     {
-//2380  			     	 if(filler_flag)
-
-LM320:
-	     .stabn 68,0,2380,LM320-_SelectPokemon
-	     R4 = [BP + 5]            	// [0:2380]  filler_flag
-	     cmp R4, 0                	// [2:2380]  
-	     je L_39_61               	// [3:2380]  
-BB41_PU39:	// 0x851
-// BB:41 cycle count: 20
-//2381  			     	 {
-//2382  			     	 	 filler_flag =0;
-
-LM321:
-	     .stabn 68,0,2382,LM321-_SelectPokemon
-	     R4 = 0                   	// [0:2382]  
-	     [BP + 5] = R4            	// [1:2382]  filler_flag
-//2383  						 Randomflag = temp_Randomflag;
-
-LM322:
-	     .stabn 68,0,2383,LM322-_SelectPokemon
-	     R4 = [BP + 9]            	// [2:2383]  temp_Randomflag
-	     [BP + 16] = R4           	// [4:2383]  Randomflag
-//2384  			     	     i=0;	
-
-LM323:
-	     .stabn 68,0,2384,LM323-_SelectPokemon
-	     R4 = 0                   	// [5:2384]  
-	     [BP + 0] = R4            	// [6:2384]  i
-//2385  			     	 	 Addr = Mem0.Mission_Cur* 6 * 2 + T_Pokemission;//Table; Num
-
-LM324:
-	     .stabn 68,0,2385,LM324-_SelectPokemon
-	     DS = seg(_Mem0)          	// [7:2385]  Mem0
-	     R4 = (_Mem0)             	// [8:2385]  Mem0
-	     R4 = DS:[R4]             	// [10:2385]  
-	     R3 = R4 lsl 2            	// [12:2385]  
-	     R3 = R3 + R3 lsl 1       	// [13:2385]  
-	     R4 = 0                   	// [14:2385]  
-	     R3 = R3 + 38500          	// [15:2385]  
-	     R4 = R4 + 0, Carry       	// [17:2385]  
-	     [BP + 7] = R3            	// [18:2385]  Addr
-	     [BP + 8] = R4            	// [19:2385]  Addr+1
-L_39_61:	// 0x863
-L_39_57:	// 0x863
-L_39_56:	// 0x863
-// BB:42 cycle count: 3
-
-LM325:
-	     .stabn 68,0,2356,LM325-_SelectPokemon
-	     goto L_39_43             	// [0:2356]  
-L_39_44:	// 0x865
-// BB:43 cycle count: 8
-//2403  		
-//2404  
-//2405     	}
-//2406  
-//2407     return 9999;
-
-LM326:
-	     .stabn 68,0,2407,LM326-_SelectPokemon
-	     R1 = 9999                	// [0:2407]  
-	     SP = SP + 13             	// [2:2407]  
-	     pop BP, PC from [SP]     	// [3:2407]  
-LBE34:
-	.endp	
-	     .stabs "Randomflag:p4",160,0,0,16
-	     .stabn 192,0,0,LBB34-_SelectPokemon
-	     .stabs "Addr:5",128,0,0,7
-	     .stabs "i:4",128,0,0,0
-	     .stabs "temp:4",128,0,0,1
-	     .stabs "temp1:4",128,0,0,2
-	     .stabs "pok_cnt:4",128,0,0,3
-	     .stabs "temp_select:4",128,0,0,4
-	     .stabs "filler_flag:4",128,0,0,5
-	     .stabs "pokecnt_IN_Mis:4",128,0,0,6
-	     .stabs "temp_Randomflag:4",128,0,0,9
-	     .stabn 224,0,0,LBE34-_SelectPokemon
-LME40:
-	     .stabf LME40-_SelectPokemon
 .code
 	     .stabs "Play_Activeplayer:F18",36,0,0,_Play_Activeplayer
 
@@ -5518,47 +4757,47 @@ _Play_Activeplayer: .proc
 //5803  void Play_Activeplayer(unsigned int Ledonflag,unsigned int Player_buffer,unsigned int first_SP)
 //5804  {
 
-LM327:
-	     .stabn 68,0,5804,LM327-_Play_Activeplayer
-BB1_PU40:	// 0x869
+LM268:
+	     .stabn 68,0,5804,LM268-_Play_Activeplayer
+BB1_PU39:	// 0x712
 // BB:1 cycle count: 5
 	     push BP to [SP]          	// [0:5804]  
 	     SP = SP - 2              	// [2:5804]  
 	     BP = SP + 1              	// [3:5804]  
-L_40_5:	// 0x86d
+L_39_5:	// 0x716
 // BB:2 cycle count: 7
-LBB35:
+LBB34:
 //5805       //unsigned int temp1 = Player_Activing_Bit;
 //5806  	 unsigned int temp,temp3;
 //5807  
 //5808           while(Player_buffer)
 
-LM328:
-	     .stabn 68,0,5808,LM328-_Play_Activeplayer
+LM269:
+	     .stabn 68,0,5808,LM269-_Play_Activeplayer
 	     R4 = [BP + 6]            	// [0:5808]  Player_buffer
 	     cmp R4, 0                	// [2:5808]  
-	     je L_40_6                	// [3:5808]  
-BB3_PU40:	// 0x870
+	     je L_39_6                	// [3:5808]  
+BB3_PU39:	// 0x719
 // BB:3 cycle count: 10
 //5809  		  {
 //5810  	             
 //5811  	              temp =  Get_Firstcnt_From_Play(Player_buffer);
 
-LM329:
-	     .stabn 68,0,5811,LM329-_Play_Activeplayer
+LM270:
+	     .stabn 68,0,5811,LM270-_Play_Activeplayer
 	     SP = SP - 1              	// [0:5811]  
 	     R3 = [BP + 6]            	// [1:5811]  Player_buffer
 	     R4 = SP + 1              	// [3:5811]  
 	     [R4] = R3                	// [5:5811]  
 	     call _Get_Firstcnt_From_Play	// [7:5811]  Get_Firstcnt_From_Play
-BB4_PU40:	// 0x877
+BB4_PU39:	// 0x720
 // BB:4 cycle count: 19
 	     SP = SP + 1              	// [0:5811]  
 	     [BP + 0] = R1            	// [1:5811]  temp
 //5812  	              Player_buffer&=~(1<<temp);
 
-LM330:
-	     .stabn 68,0,5812,LM330-_Play_Activeplayer
+LM271:
+	     .stabn 68,0,5812,LM271-_Play_Activeplayer
 	     R4 = 1                   	// [2:5812]  
 	     R3 = [BP + 0]            	// [3:5812]  temp
 	     R3 = R3 & 15             	// [5:5812]  
@@ -5569,18 +4808,18 @@ LM330:
 //5813                     
 //5814                  if(Ledonflag)
 
-LM331:
-	     .stabn 68,0,5814,LM331-_Play_Activeplayer
+LM272:
+	     .stabn 68,0,5814,LM272-_Play_Activeplayer
 	     R4 = [BP + 5]            	// [12:5814]  Ledonflag
 	     cmp R4, 0                	// [14:5814]  
-	     je L_40_7                	// [15:5814]  
-BB5_PU40:	// 0x884
+	     je L_39_7                	// [15:5814]  
+BB5_PU39:	// 0x72d
 // BB:5 cycle count: 22
 //5815                  	{
 //5816  					  temp3 = Led_Data_Play[temp];
 
-LM332:
-	     .stabn 68,0,5816,LM332-_Play_Activeplayer
+LM273:
+	     .stabn 68,0,5816,LM273-_Play_Activeplayer
 	     R4 = [BP + 0]            	// [0:5816]  temp
 	     R3 = 0                   	// [2:5816]  
 	     R1 = (_Led_Data_Play)    	// [3:5816]  Led_Data_Play
@@ -5592,48 +4831,48 @@ LM332:
 	     [BP + 1] = R4            	// [11:5816]  temp3
 //5817  	                  Led_ON_Some(temp3);
 
-LM333:
-	     .stabn 68,0,5817,LM333-_Play_Activeplayer
+LM274:
+	     .stabn 68,0,5817,LM274-_Play_Activeplayer
 	     SP = SP - 1              	// [12:5817]  
 	     R3 = [BP + 1]            	// [13:5817]  temp3
 	     R4 = SP + 1              	// [15:5817]  
 	     [R4] = R3                	// [17:5817]  
 	     call _Led_ON_Some        	// [19:5817]  Led_ON_Some
-BB6_PU40:	// 0x895
+BB6_PU39:	// 0x73e
 // BB:6 cycle count: 1
 	     SP = SP + 1              	// [0:5817]  
-L_40_7:	// 0x896
+L_39_7:	// 0x73f
 // BB:7 cycle count: 12
 //5818                  	}				  
 //5819  				  PlayA1800_Elements(first_SP +temp);	//B_VLPTTEN_Blue
 
-LM334:
-	     .stabn 68,0,5819,LM334-_Play_Activeplayer
+LM275:
+	     .stabn 68,0,5819,LM275-_Play_Activeplayer
 	     SP = SP - 1              	// [0:5819]  
 	     R4 = [BP + 7]            	// [1:5819]  first_SP
 	     R4 = R4 + [BP + 0]       	// [3:5819]  temp
 	     R3 = SP + 1              	// [5:5819]  
 	     [R3] = R4                	// [7:5819]  
 	     call _PlayA1800_Elements 	// [9:5819]  PlayA1800_Elements
-BB8_PU40:	// 0x89e
+BB8_PU39:	// 0x747
 // BB:8 cycle count: 5
 	     SP = SP + 1              	// [0:5819]  
-	     jmp L_40_5               	// [1:5819]  
-L_40_6:	// 0x8a0
+	     jmp L_39_5               	// [1:5819]  
+L_39_6:	// 0x749
 // BB:9 cycle count: 6
 	     SP = SP + 2              	// [0:5819]  
 	     pop BP, PC from [SP]     	// [1:5819]  
-LBE35:
+LBE34:
 	.endp	
 	     .stabs "Ledonflag:p4",160,0,0,5
 	     .stabs "Player_buffer:p4",160,0,0,6
 	     .stabs "first_SP:p4",160,0,0,7
-	     .stabn 192,0,0,LBB35-_Play_Activeplayer
+	     .stabn 192,0,0,LBB34-_Play_Activeplayer
 	     .stabs "temp:4",128,0,0,0
 	     .stabs "temp3:4",128,0,0,1
-	     .stabn 224,0,0,LBE35-_Play_Activeplayer
-LME41:
-	     .stabf LME41-_Play_Activeplayer
+	     .stabn 224,0,0,LBE34-_Play_Activeplayer
+LME40:
+	     .stabf LME40-_Play_Activeplayer
 .code
 	     .stabs "Rest_LQA:F18",36,0,0,_Rest_LQA
 
@@ -5650,39 +4889,39 @@ _Rest_LQA: .proc
 //6855  void Rest_LQA()
 //6856  {
 
-LM335:
-	     .stabn 68,0,6856,LM335-_Rest_LQA
-BB1_PU41:	// 0x8a2
+LM276:
+	     .stabn 68,0,6856,LM276-_Rest_LQA
+BB1_PU40:	// 0x74b
 // BB:1 cycle count: 7
 	     push BP to [SP]          	// [0:6856]  
 	     SP = SP - 1              	// [2:6856]  
 	     BP = SP + 1              	// [3:6856]  
-LBB36:
+LBB35:
 //6857        unsigned i;
 //6858  
 //6859  		i = 0;///////////////!!!!!!!!!!!!!!!!!!
 
-LM336:
-	     .stabn 68,0,6859,LM336-_Rest_LQA
+LM277:
+	     .stabn 68,0,6859,LM277-_Rest_LQA
 	     R4 = 0                   	// [5:6859]  
 	     [BP + 0] = R4            	// [6:6859]  i
-L_41_1:	// 0x8a8
+L_40_1:	// 0x751
 // BB:2 cycle count: 7
 //6860  		while(i<C_QuestionRAM)
 
-LM337:
-	     .stabn 68,0,6860,LM337-_Rest_LQA
+LM278:
+	     .stabn 68,0,6860,LM278-_Rest_LQA
 	     R4 = [BP + 0]            	// [0:6860]  i
 	     cmp R4, 9                	// [2:6860]  
-	     ja L_41_2                	// [3:6860]  
-BB3_PU41:	// 0x8ab
+	     ja L_40_2                	// [3:6860]  
+BB3_PU40:	// 0x754
 // BB:3 cycle count: 20
 //6861  		{
 //6862  	
 //6863  			Pokenm_LQ[i] = 0xFFFF;
 
-LM338:
-	     .stabn 68,0,6863,LM338-_Rest_LQA
+LM279:
+	     .stabn 68,0,6863,LM279-_Rest_LQA
 	     R4 = [BP + 0]            	// [0:6863]  i
 	     R3 = 0                   	// [2:6863]  
 	     R1 = (_Pokenm_LQ)        	// [3:6863]  Pokenm_LQ
@@ -5695,23 +4934,23 @@ LM338:
 //6864  
 //6865  			i++;	
 
-LM339:
-	     .stabn 68,0,6865,LM339-_Rest_LQA
+LM280:
+	     .stabn 68,0,6865,LM280-_Rest_LQA
 	     R4 = [BP + 0]            	// [12:6865]  i
 	     R4 = R4 + 1              	// [14:6865]  
 	     [BP + 0] = R4            	// [15:6865]  i
-	     jmp L_41_1               	// [16:6865]  
-L_41_2:	// 0x8b9
+	     jmp L_40_1               	// [16:6865]  
+L_40_2:	// 0x762
 // BB:4 cycle count: 6
 	     SP = SP + 1              	// [0:6865]  
 	     pop BP, PC from [SP]     	// [1:6865]  
-LBE36:
+LBE35:
 	.endp	
-	     .stabn 192,0,0,LBB36-_Rest_LQA
+	     .stabn 192,0,0,LBB35-_Rest_LQA
 	     .stabs "i:4",128,0,0,0
-	     .stabn 224,0,0,LBE36-_Rest_LQA
-LME42:
-	     .stabf LME42-_Rest_LQA
+	     .stabn 224,0,0,LBE35-_Rest_LQA
+LME41:
+	     .stabf LME41-_Rest_LQA
 .code
 	     .stabs "Rest_Pokecatch_Pok:F18",36,0,0,_Rest_Pokecatch_Pok
 
@@ -5728,38 +4967,38 @@ _Rest_Pokecatch_Pok: .proc
 //6882  void Rest_Pokecatch_Pok()
 //6883  {
 
-LM340:
-	     .stabn 68,0,6883,LM340-_Rest_Pokecatch_Pok
-BB1_PU42:	// 0x8bb
+LM281:
+	     .stabn 68,0,6883,LM281-_Rest_Pokecatch_Pok
+BB1_PU41:	// 0x764
 // BB:1 cycle count: 7
 	     push BP to [SP]          	// [0:6883]  
 	     SP = SP - 1              	// [2:6883]  
 	     BP = SP + 1              	// [3:6883]  
-LBB37:
+LBB36:
 //6884        unsigned i;
 //6885  
 //6886  		i = 0;///////////////!!!!!!!!!!!!!!!!!!
 
-LM341:
-	     .stabn 68,0,6886,LM341-_Rest_Pokecatch_Pok
+LM282:
+	     .stabn 68,0,6886,LM282-_Rest_Pokecatch_Pok
 	     R4 = 0                   	// [5:6886]  
 	     [BP + 0] = R4            	// [6:6886]  i
-L_42_1:	// 0x8c1
+L_41_1:	// 0x76a
 // BB:2 cycle count: 7
 //6887  		while(i<C_QuestionRAM)
 
-LM342:
-	     .stabn 68,0,6887,LM342-_Rest_Pokecatch_Pok
+LM283:
+	     .stabn 68,0,6887,LM283-_Rest_Pokecatch_Pok
 	     R4 = [BP + 0]            	// [0:6887]  i
 	     cmp R4, 9                	// [2:6887]  
-	     ja L_42_2                	// [3:6887]  
-BB3_PU42:	// 0x8c4
+	     ja L_41_2                	// [3:6887]  
+BB3_PU41:	// 0x76d
 // BB:3 cycle count: 20
 //6888  		{
 //6889  			Pokecatch_Pok[i] =0;
 
-LM343:
-	     .stabn 68,0,6889,LM343-_Rest_Pokecatch_Pok
+LM284:
+	     .stabn 68,0,6889,LM284-_Rest_Pokecatch_Pok
 	     R4 = [BP + 0]            	// [0:6889]  i
 	     R3 = 0                   	// [2:6889]  
 	     R1 = (_Pokecatch_Pok)    	// [3:6889]  Pokecatch_Pok
@@ -5771,13 +5010,13 @@ LM343:
 	     DS:[R4] = R3             	// [10:6889]  
 //6890  			i++;	
 
-LM344:
-	     .stabn 68,0,6890,LM344-_Rest_Pokecatch_Pok
+LM285:
+	     .stabn 68,0,6890,LM285-_Rest_Pokecatch_Pok
 	     R4 = [BP + 0]            	// [12:6890]  i
 	     R4 = R4 + 1              	// [14:6890]  
 	     [BP + 0] = R4            	// [15:6890]  i
-	     jmp L_42_1               	// [16:6890]  
-L_42_2:	// 0x8d2
+	     jmp L_41_1               	// [16:6890]  
+L_41_2:	// 0x77b
 // BB:4 cycle count: 5
 	//;;
 	INT OFF
@@ -5788,16 +5027,16 @@ L_42_2:	// 0x8d2
 //6894         	  __asm("INT OFF");
 //6895  	     MoveSPIDriverToRAM();
 
-LM345:
-	     .stabn 68,0,6895,LM345-_Rest_Pokecatch_Pok
+LM286:
+	     .stabn 68,0,6895,LM286-_Rest_Pokecatch_Pok
 	     call _MoveSPIDriverToRAM 	// [2:6895]  MoveSPIDriverToRAM
-BB5_PU42:	// 0x8d7
+BB5_PU41:	// 0x780
 // BB:5 cycle count: 16
 //6896    
 //6897           SPI_Flash_Sector_Erase(T_PokCatch_L,T_PokCatch_H);
 
-LM346:
-	     .stabn 68,0,6897,LM346-_Rest_Pokecatch_Pok
+LM287:
+	     .stabn 68,0,6897,LM287-_Rest_Pokecatch_Pok
 	     SP = SP - 2              	// [0:6897]  
 	     R3 = - 4096              	// [1:6897]  
 	     R4 = SP + 1              	// [3:6897]  
@@ -5806,13 +5045,13 @@ LM346:
 	     R4 = SP + 2              	// [9:6897]  
 	     [R4] = R3                	// [11:6897]  
 	     call _SPI_Flash_Sector_Erase	// [13:6897]  SPI_Flash_Sector_Erase
-BB6_PU42:	// 0x8e4
+BB6_PU41:	// 0x78d
 // BB:6 cycle count: 30
 	     SP = SP - 3              	// [0:6897]  
 //6898           SPI_Flash_SendNWords(Pokecatch_Pok,C_QuestionRAM,T_PokCatch_L,T_PokCatch_H);
 
-LM347:
-	     .stabn 68,0,6898,LM347-_Rest_Pokecatch_Pok
+LM288:
+	     .stabn 68,0,6898,LM288-_Rest_Pokecatch_Pok
 	     R2 = (_Pokecatch_Pok)    	// [1:6898]  Pokecatch_Pok
 	     R3 = seg(_Pokecatch_Pok) 	// [3:6898]  Pokecatch_Pok
 	     R4 = SP + 1              	// [4:6898]  
@@ -5828,7 +5067,7 @@ LM347:
 	     R4 = SP + 5              	// [23:6898]  
 	     [R4] = R3                	// [25:6898]  
 	     call _SPI_Flash_SendNWords	// [27:6898]  SPI_Flash_SendNWords
-BB7_PU42:	// 0x8fc
+BB7_PU41:	// 0x7a5
 // BB:7 cycle count: 8
 	     SP = SP + 6              	// [0:6898]  
 	//;;
@@ -5836,16 +5075,16 @@ BB7_PU42:	// 0x8fc
 	//;;
 //6899             __asm("INT FIQ,IRQ");
 
-LM348:
-	     .stabn 68,0,6899,LM348-_Rest_Pokecatch_Pok
+LM289:
+	     .stabn 68,0,6899,LM289-_Rest_Pokecatch_Pok
 	     pop BP, PC from [SP]     	// [3:6899]  
-LBE37:
+LBE36:
 	.endp	
-	     .stabn 192,0,0,LBB37-_Rest_Pokecatch_Pok
+	     .stabn 192,0,0,LBB36-_Rest_Pokecatch_Pok
 	     .stabs "i:4",128,0,0,0
-	     .stabn 224,0,0,LBE37-_Rest_Pokecatch_Pok
-LME43:
-	     .stabf LME43-_Rest_Pokecatch_Pok
+	     .stabn 224,0,0,LBE36-_Rest_Pokecatch_Pok
+LME42:
+	     .stabf LME42-_Rest_Pokecatch_Pok
 .code
 	     .stabs "Rest_MissionSuccess_InCollection:F18",36,0,0,_Rest_MissionSuccess_InCollection
 
@@ -5862,38 +5101,38 @@ _Rest_MissionSuccess_InCollection: .proc
 //6908  void Rest_MissionSuccess_InCollection()
 //6909  {
 
-LM349:
-	     .stabn 68,0,6909,LM349-_Rest_MissionSuccess_InCollection
-BB1_PU43:	// 0x8fb
+LM290:
+	     .stabn 68,0,6909,LM290-_Rest_MissionSuccess_InCollection
+BB1_PU42:	// 0x7a4
 // BB:1 cycle count: 7
 	     push BP to [SP]          	// [0:6909]  
 	     SP = SP - 1              	// [2:6909]  
 	     BP = SP + 1              	// [3:6909]  
-LBB38:
+LBB37:
 //6910        unsigned i;
 //6911  
 //6912  		i = 0;///////////////!!!!!!!!!!!!!!!!!!
 
-LM350:
-	     .stabn 68,0,6912,LM350-_Rest_MissionSuccess_InCollection
+LM291:
+	     .stabn 68,0,6912,LM291-_Rest_MissionSuccess_InCollection
 	     R4 = 0                   	// [5:6912]  
 	     [BP + 0] = R4            	// [6:6912]  i
-L_43_1:	// 0x901
+L_42_1:	// 0x7aa
 // BB:2 cycle count: 7
 //6913  		while(i<C_MissionRAM)
 
-LM351:
-	     .stabn 68,0,6913,LM351-_Rest_MissionSuccess_InCollection
+LM292:
+	     .stabn 68,0,6913,LM292-_Rest_MissionSuccess_InCollection
 	     R4 = [BP + 0]            	// [0:6913]  i
 	     cmp R4, 4                	// [2:6913]  
-	     ja L_43_2                	// [3:6913]  
-BB3_PU43:	// 0x904
+	     ja L_42_2                	// [3:6913]  
+BB3_PU42:	// 0x7ad
 // BB:3 cycle count: 20
 //6914  		{
 //6915  			Mission_Success[i] = 0;		
 
-LM352:
-	     .stabn 68,0,6915,LM352-_Rest_MissionSuccess_InCollection
+LM293:
+	     .stabn 68,0,6915,LM293-_Rest_MissionSuccess_InCollection
 	     R4 = [BP + 0]            	// [0:6915]  i
 	     R3 = 0                   	// [2:6915]  
 	     R1 = (_Mission_Success)  	// [3:6915]  Mission_Success
@@ -5905,40 +5144,40 @@ LM352:
 	     DS:[R4] = R3             	// [10:6915]  
 //6916  			i++;	
 
-LM353:
-	     .stabn 68,0,6916,LM353-_Rest_MissionSuccess_InCollection
+LM294:
+	     .stabn 68,0,6916,LM294-_Rest_MissionSuccess_InCollection
 	     R4 = [BP + 0]            	// [12:6916]  i
 	     R4 = R4 + 1              	// [14:6916]  
 	     [BP + 0] = R4            	// [15:6916]  i
-	     jmp L_43_1               	// [16:6916]  
-L_43_2:	// 0x912
+	     jmp L_42_1               	// [16:6916]  
+L_42_2:	// 0x7bb
 // BB:4 cycle count: 2
 //6917  					
 //6918  		}
 //6919  	
 //6920  		i = 0;///////////////!!!!!!!!!!!!!!!!!!
 
-LM354:
-	     .stabn 68,0,6920,LM354-_Rest_MissionSuccess_InCollection
+LM295:
+	     .stabn 68,0,6920,LM295-_Rest_MissionSuccess_InCollection
 	     R4 = 0                   	// [0:6920]  
 	     [BP + 0] = R4            	// [1:6920]  i
-L_43_3:	// 0x914
+L_42_3:	// 0x7bd
 // BB:5 cycle count: 7
 //6921  		while(i<C_QuestionRAM)
 
-LM355:
-	     .stabn 68,0,6921,LM355-_Rest_MissionSuccess_InCollection
+LM296:
+	     .stabn 68,0,6921,LM296-_Rest_MissionSuccess_InCollection
 	     R4 = [BP + 0]            	// [0:6921]  i
 	     cmp R4, 9                	// [2:6921]  
-	     ja L_43_4                	// [3:6921]  
-BB6_PU43:	// 0x917
+	     ja L_42_4                	// [3:6921]  
+BB6_PU42:	// 0x7c0
 // BB:6 cycle count: 20
 //6922  		{
 //6923  
 //6924  			InCollection_Pok[i]=0;
 
-LM356:
-	     .stabn 68,0,6924,LM356-_Rest_MissionSuccess_InCollection
+LM297:
+	     .stabn 68,0,6924,LM297-_Rest_MissionSuccess_InCollection
 	     R4 = [BP + 0]            	// [0:6924]  i
 	     R3 = 0                   	// [2:6924]  
 	     R1 = (_InCollection_Pok) 	// [3:6924]  InCollection_Pok
@@ -5950,23 +5189,23 @@ LM356:
 	     DS:[R4] = R3             	// [10:6924]  
 //6925  			i++;	
 
-LM357:
-	     .stabn 68,0,6925,LM357-_Rest_MissionSuccess_InCollection
+LM298:
+	     .stabn 68,0,6925,LM298-_Rest_MissionSuccess_InCollection
 	     R4 = [BP + 0]            	// [12:6925]  i
 	     R4 = R4 + 1              	// [14:6925]  
 	     [BP + 0] = R4            	// [15:6925]  i
-	     jmp L_43_3               	// [16:6925]  
-L_43_4:	// 0x925
+	     jmp L_42_3               	// [16:6925]  
+L_42_4:	// 0x7ce
 // BB:7 cycle count: 6
 	     SP = SP + 1              	// [0:6925]  
 	     pop BP, PC from [SP]     	// [1:6925]  
-LBE38:
+LBE37:
 	.endp	
-	     .stabn 192,0,0,LBB38-_Rest_MissionSuccess_InCollection
+	     .stabn 192,0,0,LBB37-_Rest_MissionSuccess_InCollection
 	     .stabs "i:4",128,0,0,0
-	     .stabn 224,0,0,LBE38-_Rest_MissionSuccess_InCollection
-LME44:
-	     .stabf LME44-_Rest_MissionSuccess_InCollection
+	     .stabn 224,0,0,LBE37-_Rest_MissionSuccess_InCollection
+LME43:
+	     .stabf LME43-_Rest_MissionSuccess_InCollection
 .code
 	     .stabs "Get_Key:F4",36,0,0,_Get_Key
 
@@ -5985,23 +5224,23 @@ _Get_Key: .proc
 //8135  unsigned int Get_Key(Countdown_E,G_checkflag)
 //8136  {
 
-LM358:
-	     .stabn 68,0,8136,LM358-_Get_Key
-BB1_PU44:	// 0x927
+LM299:
+	     .stabn 68,0,8136,LM299-_Get_Key
+BB1_PU43:	// 0x7d0
 // BB:1 cycle count: 7
 	     push BP to [SP]          	// [0:8136]  
 	     SP = SP - 3              	// [2:8136]  
 	     BP = SP + 1              	// [3:8136]  
-LBB39:
+LBB38:
 //8137    unsigned int temp;
 //8138    unsigned int FiveSec_cnt_temp;
 //8139    unsigned int key_temp =0;
 
-LM359:
-	     .stabn 68,0,8139,LM359-_Get_Key
+LM300:
+	     .stabn 68,0,8139,LM300-_Get_Key
 	     R4 = 0                   	// [5:8139]  
 	     [BP + 0] = R4            	// [6:8139]  key_temp
-L_44_80:	// 0x92d
+L_43_82:	// 0x7d6
 // BB:2 cycle count: 3
 //8140   
 //8141    do
@@ -6009,165 +5248,165 @@ L_44_80:	// 0x92d
 //8143     	
 //8144     	  WatchdogClear();
 
-LM360:
-	     .stabn 68,0,8144,LM360-_Get_Key
+LM301:
+	     .stabn 68,0,8144,LM301-_Get_Key
 	     call _WatchdogClear      	// [0:8144]  WatchdogClear
-BB3_PU44:	// 0x92f
+BB3_PU43:	// 0x7d8
 // BB:3 cycle count: 10
 //8145     	  
 //8146     	  	if(Sleepflag) 
 
-LM361:
-	     .stabn 68,0,8146,LM361-_Get_Key
+LM302:
+	     .stabn 68,0,8146,LM302-_Get_Key
 	     DS = seg(_Sleepflag)     	// [0:8146]  Sleepflag
 	     R4 = (_Sleepflag)        	// [1:8146]  Sleepflag
 	     R4 = DS:[R4]             	// [3:8146]  
 	     cmp R4, 0                	// [5:8146]  
-	     je L_44_81               	// [6:8146]  
-BB4_PU44:	// 0x935
+	     je L_43_83               	// [6:8146]  
+BB4_PU43:	// 0x7de
 // BB:4 cycle count: 7
 //8147  		     return C_Finish ;
 
-LM362:
-	     .stabn 68,0,8147,LM362-_Get_Key
+LM303:
+	     .stabn 68,0,8147,LM303-_Get_Key
 	     R1 = - 1                 	// [0:8147]  
 	     SP = SP + 3              	// [1:8147]  
 	     pop BP, PC from [SP]     	// [2:8147]  
-L_44_81:	// 0x938
+L_43_83:	// 0x7e1
 // BB:5 cycle count: 10
 //8148  			
 //8149  			
 //8150            #ifdef C_debug
 //8151  				if(PassFlag)
 
-LM363:
-	     .stabn 68,0,8151,LM363-_Get_Key
+LM304:
+	     .stabn 68,0,8151,LM304-_Get_Key
 	     DS = seg(_PassFlag)      	// [0:8151]  PassFlag
 	     R4 = (_PassFlag)         	// [1:8151]  PassFlag
 	     R4 = DS:[R4]             	// [3:8151]  
 	     cmp R4, 0                	// [5:8151]  
-	     je L_44_82               	// [6:8151]  
-BB6_PU44:	// 0x93e
+	     je L_43_84               	// [6:8151]  
+BB6_PU43:	// 0x7e7
 // BB:6 cycle count: 7
 //8152  					return 0xffff;
 
-LM364:
-	     .stabn 68,0,8152,LM364-_Get_Key
+LM305:
+	     .stabn 68,0,8152,LM305-_Get_Key
 	     R1 = - 1                 	// [0:8152]  
 	     SP = SP + 3              	// [1:8152]  
 	     pop BP, PC from [SP]     	// [2:8152]  
-L_44_82:	// 0x941
+L_43_84:	// 0x7ea
 // BB:7 cycle count: 10
 //8153             #endif
 //8154  			
 //8155  			  if(PauseFlag)
 
-LM365:
-	     .stabn 68,0,8155,LM365-_Get_Key
+LM306:
+	     .stabn 68,0,8155,LM306-_Get_Key
 	     DS = seg(_PauseFlag)     	// [0:8155]  PauseFlag
 	     R4 = (_PauseFlag)        	// [1:8155]  PauseFlag
 	     R4 = DS:[R4]             	// [3:8155]  
 	     cmp R4, 0                	// [5:8155]  
-	     je L_44_83               	// [6:8155]  
-BB8_PU44:	// 0x947
+	     je L_43_85               	// [6:8155]  
+BB8_PU43:	// 0x7f0
 // BB:8 cycle count: 7
 //8156  				  return 0xffff;
 
-LM366:
-	     .stabn 68,0,8156,LM366-_Get_Key
+LM307:
+	     .stabn 68,0,8156,LM307-_Get_Key
 	     R1 = - 1                 	// [0:8156]  
 	     SP = SP + 3              	// [1:8156]  
 	     pop BP, PC from [SP]     	// [2:8156]  
-L_44_83:	// 0x94a
+L_43_85:	// 0x7f3
 // BB:9 cycle count: 10
 //8157  			
 //8158  			
 //8159  			  if(CheaterFlag)
 
-LM367:
-	     .stabn 68,0,8159,LM367-_Get_Key
+LM308:
+	     .stabn 68,0,8159,LM308-_Get_Key
 	     DS = seg(_CheaterFlag)   	// [0:8159]  CheaterFlag
 	     R4 = (_CheaterFlag)      	// [1:8159]  CheaterFlag
 	     R4 = DS:[R4]             	// [3:8159]  
 	     cmp R4, 0                	// [5:8159]  
-	     je L_44_84               	// [6:8159]  
-BB10_PU44:	// 0x950
+	     je L_43_86               	// [6:8159]  
+BB10_PU43:	// 0x7f9
 // BB:10 cycle count: 7
 //8160  				  return 0xffff; 
 
-LM368:
-	     .stabn 68,0,8160,LM368-_Get_Key
+LM309:
+	     .stabn 68,0,8160,LM309-_Get_Key
 	     R1 = - 1                 	// [0:8160]  
 	     SP = SP + 3              	// [1:8160]  
 	     pop BP, PC from [SP]     	// [2:8160]  
-L_44_84:	// 0x953
+L_43_86:	// 0x7fc
 // BB:11 cycle count: 10
 //8161  
 //8162  		    if(Key_Event)
 
-LM369:
-	     .stabn 68,0,8162,LM369-_Get_Key
+LM310:
+	     .stabn 68,0,8162,LM310-_Get_Key
 	     DS = seg(_Key_Event)     	// [0:8162]  Key_Event
 	     R4 = (_Key_Event)        	// [1:8162]  Key_Event
 	     R4 = DS:[R4]             	// [3:8162]  
 	     cmp R4, 0                	// [5:8162]  
-	     je L_44_85               	// [6:8162]  
-BB12_PU44:	// 0x959
+	     je L_43_87               	// [6:8162]  
+BB12_PU43:	// 0x802
 // BB:12 cycle count: 11
 //8163  		 	    return Key_Event;
 
-LM370:
-	     .stabn 68,0,8163,LM370-_Get_Key
+LM311:
+	     .stabn 68,0,8163,LM311-_Get_Key
 	     DS = seg(_Key_Event)     	// [0:8163]  Key_Event
 	     R4 = (_Key_Event)        	// [1:8163]  Key_Event
 	     R1 = DS:[R4]             	// [3:8163]  
 	     SP = SP + 3              	// [5:8163]  
 	     pop BP, PC from [SP]     	// [6:8163]  
-L_44_85:	// 0x95f
+L_43_87:	// 0x808
 // BB:13 cycle count: 10
 //8164  		    
 //8165  		    if(MoveSucessFlag)
 
-LM371:
-	     .stabn 68,0,8165,LM371-_Get_Key
+LM312:
+	     .stabn 68,0,8165,LM312-_Get_Key
 	     DS = seg(_MoveSucessFlag)	// [0:8165]  MoveSucessFlag
 	     R4 = (_MoveSucessFlag)   	// [1:8165]  MoveSucessFlag
 	     R4 = DS:[R4]             	// [3:8165]  
 	     cmp R4, 0                	// [5:8165]  
-	     je L_44_86               	// [6:8165]  
-BB14_PU44:	// 0x965
+	     je L_43_88               	// [6:8165]  
+BB14_PU43:	// 0x80e
 // BB:14 cycle count: 7
 //8166  		    	return 1;
 
-LM372:
-	     .stabn 68,0,8166,LM372-_Get_Key
+LM313:
+	     .stabn 68,0,8166,LM313-_Get_Key
 	     R1 = 1                   	// [0:8166]  
 	     SP = SP + 3              	// [1:8166]  
 	     pop BP, PC from [SP]     	// [2:8166]  
-L_44_86:	// 0x968
+L_43_88:	// 0x811
 // BB:15 cycle count: 10
 //8167     	  
 //8168     	  
 //8169     	    if(PlaySFX_Flag)
 
-LM373:
-	     .stabn 68,0,8169,LM373-_Get_Key
+LM314:
+	     .stabn 68,0,8169,LM314-_Get_Key
 	     DS = seg(_PlaySFX_Flag)  	// [0:8169]  PlaySFX_Flag
 	     R4 = (_PlaySFX_Flag)     	// [1:8169]  PlaySFX_Flag
 	     R4 = DS:[R4]             	// [3:8169]  
 	     cmp R4, 0                	// [5:8169]  
-	     je L_44_87               	// [6:8169]  
-BB16_PU44:	// 0x96e
+	     je L_43_89               	// [6:8169]  
+BB16_PU43:	// 0x817
 // BB:16 cycle count: 3
 //8170     	    {
 //8171     	       if((SACM_A1800_Status() & 0x0001) == 0)
 
-LM374:
-	     .stabn 68,0,8171,LM374-_Get_Key
+LM315:
+	     .stabn 68,0,8171,LM315-_Get_Key
 	     call _SACM_A1800_Status  	// [0:8171]  SACM_A1800_Status
-BB17_PU44:	// 0x970
+BB17_PU43:	// 0x819
 // BB:17 cycle count: 0
-L_44_87:	// 0x970
+L_43_89:	// 0x819
 // BB:18 cycle count: 10
 //8183  //			    sensor_read_xyz();
 //8184  //				G_Sensor_Check();
@@ -6175,126 +5414,126 @@ L_44_87:	// 0x970
 //8186  //			
 //8187  	         if((MotorOnflag==0)&&(G_checkflag==1))
 
-LM375:
-	     .stabn 68,0,8187,LM375-_Get_Key
+LM316:
+	     .stabn 68,0,8187,LM316-_Get_Key
 	     DS = seg(_MotorOnflag)   	// [0:8187]  MotorOnflag
 	     R4 = (_MotorOnflag)      	// [1:8187]  MotorOnflag
 	     R4 = DS:[R4]             	// [3:8187]  
 	     cmp R4, 0                	// [5:8187]  
-	     je BB19_PU44             	// [6:8187]  
-BB83_PU44:	// 0x976
-// BB:83 cycle count: 3
-	     goto L_44_89             	// [0:0]  
-BB19_PU44:	// 0x978
+	     je BB19_PU43             	// [6:8187]  
+BB84_PU43:	// 0x81f
+// BB:84 cycle count: 3
+	     goto L_43_91             	// [0:0]  
+BB19_PU43:	// 0x821
 // BB:19 cycle count: 7
 	     R4 = [BP + 7]            	// [0:8187]  G_checkflag
 	     cmp R4, 1                	// [2:8187]  
-	     je L_44_90               	// [3:8187]  
-BB84_PU44:	// 0x97b
-// BB:84 cycle count: 3
-	     goto L_44_89             	// [0:0]  
-L_44_90:	// 0x97d
+	     je L_43_92               	// [3:8187]  
+BB85_PU43:	// 0x824
+// BB:85 cycle count: 3
+	     goto L_43_91             	// [0:0]  
+L_43_92:	// 0x826
 // BB:20 cycle count: 10
 //8188  	         {
 //8189                 if(HZ_1K_flag>=C_HZ_Num)
 
-LM376:
-	     .stabn 68,0,8189,LM376-_Get_Key
+LM317:
+	     .stabn 68,0,8189,LM317-_Get_Key
 	     DS = seg(_HZ_1K_flag)    	// [0:8189]  HZ_1K_flag
 	     R4 = (_HZ_1K_flag)       	// [1:8189]  HZ_1K_flag
 	     R4 = DS:[R4]             	// [3:8189]  
 	     cmp R4, 2                	// [5:8189]  
-	     ja BB21_PU44             	// [6:8189]  
-BB85_PU44:	// 0x983
-// BB:85 cycle count: 3
-	     goto L_44_91             	// [0:0]  
-BB21_PU44:	// 0x985
+	     ja BB21_PU43             	// [6:8189]  
+BB86_PU43:	// 0x82c
+// BB:86 cycle count: 3
+	     goto L_43_93             	// [0:0]  
+BB21_PU43:	// 0x82e
 // BB:21 cycle count: 9
 //8190  					{
 //8191  					    HZ_1K_flag =0;
 
-LM377:
-	     .stabn 68,0,8191,LM377-_Get_Key
+LM318:
+	     .stabn 68,0,8191,LM318-_Get_Key
 	     R3 = 0                   	// [0:8191]  
 	     DS = seg(_HZ_1K_flag)    	// [1:8191]  HZ_1K_flag
 	     R4 = (_HZ_1K_flag)       	// [2:8191]  HZ_1K_flag
 	     DS:[R4] = R3             	// [4:8191]  
 //8192  					    sensor_read_xyz();
 
-LM378:
-	     .stabn 68,0,8192,LM378-_Get_Key
+LM319:
+	     .stabn 68,0,8192,LM319-_Get_Key
 	     call _sensor_read_xyz    	// [6:8192]  sensor_read_xyz
-BB22_PU44:	// 0x98c
+BB22_PU43:	// 0x835
 // BB:22 cycle count: 10
 //8193  					 
 //8194  					if(MoveOnflag==1)   
 
-LM379:
-	     .stabn 68,0,8194,LM379-_Get_Key
+LM320:
+	     .stabn 68,0,8194,LM320-_Get_Key
 	     DS = seg(_MoveOnflag)    	// [0:8194]  MoveOnflag
 	     R4 = (_MoveOnflag)       	// [1:8194]  MoveOnflag
 	     R4 = DS:[R4]             	// [3:8194]  
 	     cmp R4, 1                	// [5:8194]  
-	     jne L_44_93              	// [6:8194]  
-BB23_PU44:	// 0x992
+	     jne L_43_95              	// [6:8194]  
+BB23_PU43:	// 0x83b
 // BB:23 cycle count: 3
 //8195  					{
 //8196  					   temp = G_Sensor_Check();
 
-LM380:
-	     .stabn 68,0,8196,LM380-_Get_Key
+LM321:
+	     .stabn 68,0,8196,LM321-_Get_Key
 	     call _G_Sensor_Check     	// [0:8196]  G_Sensor_Check
-BB24_PU44:	// 0x994
+BB24_PU43:	// 0x83d
 // BB:24 cycle count: 9
 	     [BP + 1] = R1            	// [0:8196]  temp
 //8197  				
 //8198  				     	if((temp==C_MovSucess)&&(IMMO_Flag == 0))
 
-LM381:
-	     .stabn 68,0,8198,LM381-_Get_Key
+LM322:
+	     .stabn 68,0,8198,LM322-_Get_Key
 	     R4 = [BP + 1]            	// [1:8198]  temp
 	     cmp R4, 4096             	// [3:8198]  
-	     jne L_44_94              	// [5:8198]  
-BB25_PU44:	// 0x999
+	     jne L_43_96              	// [5:8198]  
+BB25_PU43:	// 0x842
 // BB:25 cycle count: 10
 	     DS = seg(_IMMO_Flag)     	// [0:8198]  IMMO_Flag
 	     R4 = (_IMMO_Flag)        	// [1:8198]  IMMO_Flag
 	     R4 = DS:[R4]             	// [3:8198]  
 	     cmp R4, 0                	// [5:8198]  
-	     jne L_44_94              	// [6:8198]  
-L_44_95:	// 0x99f
+	     jne L_43_96              	// [6:8198]  
+L_43_97:	// 0x848
 // BB:26 cycle count: 20
 //8199  				     	{
 //8200  					            MoveSucessFlag =1;
 
-LM382:
-	     .stabn 68,0,8200,LM382-_Get_Key
+LM323:
+	     .stabn 68,0,8200,LM323-_Get_Key
 	     R3 = 1                   	// [0:8200]  
 	     DS = seg(_MoveSucessFlag)	// [1:8200]  MoveSucessFlag
 	     R4 = (_MoveSucessFlag)   	// [2:8200]  MoveSucessFlag
 	     DS:[R4] = R3             	// [4:8200]  
 //8201  					            TimeCnt =0;
 
-LM383:
-	     .stabn 68,0,8201,LM383-_Get_Key
+LM324:
+	     .stabn 68,0,8201,LM324-_Get_Key
 	     R3 = 0                   	// [6:8201]  
 	     DS = seg(_TimeCnt)       	// [7:8201]  TimeCnt
 	     R4 = (_TimeCnt)          	// [8:8201]  TimeCnt
 	     DS:[R4] = R3             	// [10:8201]  
 //8202  					            return C_MovSucess;
 
-LM384:
-	     .stabn 68,0,8202,LM384-_Get_Key
+LM325:
+	     .stabn 68,0,8202,LM325-_Get_Key
 	     R1 = 4096                	// [12:8202]  
 	     SP = SP + 3              	// [14:8202]  
 	     pop BP, PC from [SP]     	// [15:8202]  
-L_44_94:	// 0x9ad
+L_43_96:	// 0x856
 // BB:27 cycle count: 3
 
-LM385:
-	     .stabn 68,0,8198,LM385-_Get_Key
-	     goto L_44_92             	// [0:8198]  
-L_44_93:	// 0x9af
+LM326:
+	     .stabn 68,0,8198,LM326-_Get_Key
+	     goto L_43_94             	// [0:8198]  
+L_43_95:	// 0x858
 // BB:28 cycle count: 90
 //8205  					}
 //8206  				  else
@@ -6302,8 +5541,8 @@ L_44_93:	// 0x9af
 //8208  					  
 //8209  					      Sum_X = Sum_X+(long int)ACC_X;
 
-LM386:
-	     .stabn 68,0,8209,LM386-_Get_Key
+LM327:
+	     .stabn 68,0,8209,LM327-_Get_Key
 	     DS = seg(_ACC_X)         	// [0:8209]  ACC_X
 	     R4 = (_ACC_X)            	// [1:8209]  ACC_X
 	     R3 = DS:[R4]             	// [3:8209]  
@@ -6321,8 +5560,8 @@ LM386:
 	     DS:[R2] = R4             	// [21:8209]  
 //8210                            Sum_Y = Sum_Y+(long int)ACC_Y;	
 
-LM387:
-	     .stabn 68,0,8210,LM387-_Get_Key
+LM328:
+	     .stabn 68,0,8210,LM328-_Get_Key
 	     DS = seg(_ACC_Y)         	// [23:8210]  ACC_Y
 	     R4 = (_ACC_Y)            	// [24:8210]  ACC_Y
 	     R3 = DS:[R4]             	// [26:8210]  
@@ -6340,8 +5579,8 @@ LM387:
 	     DS:[R2] = R4             	// [44:8210]  
 //8211  						  Sum_Z = Sum_Z+(long int)ACC_Z;
 
-LM388:
-	     .stabn 68,0,8211,LM388-_Get_Key
+LM329:
+	     .stabn 68,0,8211,LM329-_Get_Key
 	     DS = seg(_ACC_Z)         	// [46:8211]  ACC_Z
 	     R4 = (_ACC_Z)            	// [47:8211]  ACC_Z
 	     R3 = DS:[R4]             	// [49:8211]  
@@ -6359,8 +5598,8 @@ LM388:
 	     DS:[R2] = R4             	// [67:8211]  
 //8212  					   if(++i_g>=N_Gensor_sum)
 
-LM389:
-	     .stabn 68,0,8212,LM389-_Get_Key
+LM330:
+	     .stabn 68,0,8212,LM330-_Get_Key
 	     DS = seg(_i_g)           	// [69:8212]  i_g
 	     R4 = (_i_g)              	// [70:8212]  i_g
 	     R4 = DS:[R4]             	// [72:8212]  
@@ -6372,25 +5611,25 @@ LM389:
 	     R4 = (_i_g)              	// [81:8212]  i_g
 	     R4 = DS:[R4]             	// [83:8212]  
 	     cmp R4, 7                	// [85:8212]  
-	     ja BB29_PU44             	// [86:8212]  
-BB87_PU44:	// 0x9f4
-// BB:87 cycle count: 3
-	     goto L_44_96             	// [0:0]  
-BB29_PU44:	// 0x9f6
+	     ja BB29_PU43             	// [86:8212]  
+BB88_PU43:	// 0x89d
+// BB:88 cycle count: 3
+	     goto L_43_98             	// [0:0]  
+BB29_PU43:	// 0x89f
 // BB:29 cycle count: 26
 //8213                           {
 //8214                           	 i_g =0;
 
-LM390:
-	     .stabn 68,0,8214,LM390-_Get_Key
+LM331:
+	     .stabn 68,0,8214,LM331-_Get_Key
 	     R3 = 0                   	// [0:8214]  
 	     DS = seg(_i_g)           	// [1:8214]  i_g
 	     R4 = (_i_g)              	// [2:8214]  i_g
 	     DS:[R4] = R3             	// [4:8214]  
 //8215  							 Sum_X =Sum_X/N_Gensor_sum;
 
-LM391:
-	     .stabn 68,0,8215,LM391-_Get_Key
+LM332:
+	     .stabn 68,0,8215,LM332-_Get_Key
 	     DS = seg(_Sum_X)         	// [6:8215]  Sum_X
 	     R3 = (_Sum_X)            	// [7:8215]  Sum_X
 	     R4 = DS:[R3++]           	// [9:8215]  
@@ -6402,7 +5641,7 @@ LM391:
 	     push R2 to [SP]          	// [19:8215]  
 	     push R4 to [SP]          	// [21:8215]  
 	     call __divi2             	// [23:8215]  _divi2
-BB30_PU44:	// 0xa08
+BB30_PU43:	// 0x8b1
 // BB:30 cycle count: 28
 	     SP = SP + 4              	// [0:0]  
 	     DS = seg(_Sum_X)         	// [1:0]  Sum_X
@@ -6411,8 +5650,8 @@ BB30_PU44:	// 0xa08
 	     DS:[R4] = R2             	// [6:0]  
 //8216  							 Sum_Y =Sum_Y/N_Gensor_sum;
 
-LM392:
-	     .stabn 68,0,8216,LM392-_Get_Key
+LM333:
+	     .stabn 68,0,8216,LM333-_Get_Key
 	     DS = seg(_Sum_Y)         	// [8:8216]  Sum_Y
 	     R3 = (_Sum_Y)            	// [9:8216]  Sum_Y
 	     R4 = DS:[R3++]           	// [11:8216]  
@@ -6424,7 +5663,7 @@ LM392:
 	     push R2 to [SP]          	// [21:8216]  
 	     push R4 to [SP]          	// [23:8216]  
 	     call __divi2             	// [25:8216]  _divi2
-BB31_PU44:	// 0xa1b
+BB31_PU43:	// 0x8c4
 // BB:31 cycle count: 28
 	     SP = SP + 4              	// [0:0]  
 	     DS = seg(_Sum_Y)         	// [1:0]  Sum_Y
@@ -6433,8 +5672,8 @@ BB31_PU44:	// 0xa1b
 	     DS:[R4] = R2             	// [6:0]  
 //8217  							 Sum_Z =Sum_Z/N_Gensor_sum;
 
-LM393:
-	     .stabn 68,0,8217,LM393-_Get_Key
+LM334:
+	     .stabn 68,0,8217,LM334-_Get_Key
 	     DS = seg(_Sum_Z)         	// [8:8217]  Sum_Z
 	     R3 = (_Sum_Z)            	// [9:8217]  Sum_Z
 	     R4 = DS:[R3++]           	// [11:8217]  
@@ -6446,7 +5685,7 @@ LM393:
 	     push R2 to [SP]          	// [21:8217]  
 	     push R4 to [SP]          	// [23:8217]  
 	     call __divi2             	// [25:8217]  _divi2
-BB32_PU44:	// 0xa2e
+BB32_PU43:	// 0x8d7
 // BB:32 cycle count: 11
 	     SP = SP + 4              	// [0:0]  
 	     DS = seg(_Sum_Z)         	// [1:0]  Sum_Z
@@ -6455,36 +5694,36 @@ BB32_PU44:	// 0xa2e
 	     DS:[R4] = R2             	// [6:0]  
 //8218                               G_Sensor_Real();
 
-LM394:
-	     .stabn 68,0,8218,LM394-_Get_Key
+LM335:
+	     .stabn 68,0,8218,LM335-_Get_Key
 	     call _G_Sensor_Real      	// [8:8218]  G_Sensor_Real
-BB33_PU44:	// 0xa36
+BB33_PU43:	// 0x8df
 // BB:33 cycle count: 3
 //8219  							 check_Standy_X();
 
-LM395:
-	     .stabn 68,0,8219,LM395-_Get_Key
+LM336:
+	     .stabn 68,0,8219,LM336-_Get_Key
 	     call _check_Standy_X     	// [0:8219]  check_Standy_X
-BB34_PU44:	// 0xa38
+BB34_PU43:	// 0x8e1
 // BB:34 cycle count: 3
 //8220  							 check_Standy_Y();
 
-LM396:
-	     .stabn 68,0,8220,LM396-_Get_Key
+LM337:
+	     .stabn 68,0,8220,LM337-_Get_Key
 	     call _check_Standy_Y     	// [0:8220]  check_Standy_Y
-BB35_PU44:	// 0xa3a
+BB35_PU43:	// 0x8e3
 // BB:35 cycle count: 3
 //8221  							 check_Standy_Z();
 
-LM397:
-	     .stabn 68,0,8221,LM397-_Get_Key
+LM338:
+	     .stabn 68,0,8221,LM338-_Get_Key
 	     call _check_Standy_Z     	// [0:8221]  check_Standy_Z
-BB36_PU44:	// 0xa3c
+BB36_PU43:	// 0x8e5
 // BB:36 cycle count: 27
 //8222  							 Sum_X =0;
 
-LM398:
-	     .stabn 68,0,8222,LM398-_Get_Key
+LM339:
+	     .stabn 68,0,8222,LM339-_Get_Key
 	     R2 = 0                   	// [0:8222]  
 	     R3 = 0                   	// [1:8222]  
 	     DS = seg(_Sum_X)         	// [2:8222]  Sum_X
@@ -6493,8 +5732,8 @@ LM398:
 	     DS:[R4] = R3             	// [7:8222]  
 //8223  							 Sum_Y =0;
 
-LM399:
-	     .stabn 68,0,8223,LM399-_Get_Key
+LM340:
+	     .stabn 68,0,8223,LM340-_Get_Key
 	     R2 = 0                   	// [9:8223]  
 	     R3 = 0                   	// [10:8223]  
 	     DS = seg(_Sum_Y)         	// [11:8223]  Sum_Y
@@ -6503,18 +5742,18 @@ LM399:
 	     DS:[R4] = R3             	// [16:8223]  
 //8224                               Sum_Z =0;
 
-LM400:
-	     .stabn 68,0,8224,LM400-_Get_Key
+LM341:
+	     .stabn 68,0,8224,LM341-_Get_Key
 	     R2 = 0                   	// [18:8224]  
 	     R3 = 0                   	// [19:8224]  
 	     DS = seg(_Sum_Z)         	// [20:8224]  Sum_Z
 	     R4 = (_Sum_Z)            	// [21:8224]  Sum_Z
 	     DS:[R4++] = R2           	// [23:8224]  
 	     DS:[R4] = R3             	// [25:8224]  
-L_44_96:	// 0xa51
-L_44_92:	// 0xa51
-L_44_91:	// 0xa51
-L_44_89:	// 0xa51
+L_43_98:	// 0x8fa
+L_43_94:	// 0x8fa
+L_43_93:	// 0x8fa
+L_43_91:	// 0x8fa
 // BB:37 cycle count: 10
 //8228  					}
 //8229  											
@@ -6522,21 +5761,21 @@ L_44_89:	// 0xa51
 //8231  	         
 //8232  	  if(LongPressflag)
 
-LM401:
-	     .stabn 68,0,8232,LM401-_Get_Key
+LM342:
+	     .stabn 68,0,8232,LM342-_Get_Key
 	     DS = seg(_LongPressflag) 	// [0:8232]  LongPressflag
 	     R4 = (_LongPressflag)    	// [1:8232]  LongPressflag
 	     R4 = DS:[R4]             	// [3:8232]  
 	     cmp R4, 0                	// [5:8232]  
-	     je L_44_97               	// [6:8232]  
-BB38_PU44:	// 0xa57
+	     je L_43_99               	// [6:8232]  
+BB38_PU43:	// 0x900
 // BB:38 cycle count: 21
 //8233  	  {
 //8234  	  	
 //8235          Key_Event = LongPressflag;	//20160215 xiang
 
-LM402:
-	     .stabn 68,0,8235,LM402-_Get_Key
+LM343:
+	     .stabn 68,0,8235,LM343-_Get_Key
 	     DS = seg(_LongPressflag) 	// [0:8235]  LongPressflag
 	     R4 = (_LongPressflag)    	// [1:8235]  LongPressflag
 	     R3 = DS:[R4]             	// [3:8235]  
@@ -6545,14 +5784,14 @@ LM402:
 	     DS:[R4] = R3             	// [8:8235]  
 //8236  		return Key_Event;
 
-LM403:
-	     .stabn 68,0,8236,LM403-_Get_Key
+LM344:
+	     .stabn 68,0,8236,LM344-_Get_Key
 	     DS = seg(_Key_Event)     	// [10:8236]  Key_Event
 	     R4 = (_Key_Event)        	// [11:8236]  Key_Event
 	     R1 = DS:[R4]             	// [13:8236]  
 	     SP = SP + 3              	// [15:8236]  
 	     pop BP, PC from [SP]     	// [16:8236]  
-L_44_97:	// 0xa65
+L_43_99:	// 0x90e
 // BB:39 cycle count: 10
 //8238  	  	
 //8239  	  }	
@@ -6560,23 +5799,23 @@ L_44_97:	// 0xa65
 //8241  		
 //8242  	  if(Key)	
 
-LM404:
-	     .stabn 68,0,8242,LM404-_Get_Key
+LM345:
+	     .stabn 68,0,8242,LM345-_Get_Key
 	     DS = seg(_Key)           	// [0:8242]  Key
 	     R4 = (_Key)              	// [1:8242]  Key
 	     R4 = DS:[R4]             	// [3:8242]  
 	     cmp R4, 0                	// [5:8242]  
-	     jne BB40_PU44            	// [6:8242]  
-BB78_PU44:	// 0xa6b
-// BB:78 cycle count: 3
-	     goto L_44_98             	// [0:0]  
-BB40_PU44:	// 0xa6d
+	     jne BB40_PU43            	// [6:8242]  
+BB79_PU43:	// 0x914
+// BB:79 cycle count: 3
+	     goto L_43_100            	// [0:0]  
+BB40_PU43:	// 0x916
 // BB:40 cycle count: 18
 //8243  	  {	
 //8244  	  	 temp = Pressflag&Key;
 
-LM405:
-	     .stabn 68,0,8244,LM405-_Get_Key
+LM346:
+	     .stabn 68,0,8244,LM346-_Get_Key
 	     DS = seg(_Key)           	// [0:8244]  Key
 	     R4 = (_Key)              	// [1:8244]  Key
 	     R4 = DS:[R4]             	// [3:8244]  
@@ -6586,39 +5825,39 @@ LM405:
 	     [BP + 1] = R4            	// [10:8244]  temp
 //8245  		  	
 //8246  
-//8247          if(temp ==0)//̧��
+//8247          if(temp ==0)//̧��
 
-LM406:
-	     .stabn 68,0,8247,LM406-_Get_Key
+LM347:
+	     .stabn 68,0,8247,LM347-_Get_Key
 	     R4 = [BP + 1]            	// [11:8247]  temp
 	     cmp R4, 0                	// [13:8247]  
-	     je BB41_PU44             	// [14:8247]  
-BB79_PU44:	// 0xa79
-// BB:79 cycle count: 3
-	     goto L_44_100            	// [0:0]  
-BB41_PU44:	// 0xa7b
+	     je BB41_PU43             	// [14:8247]  
+BB80_PU43:	// 0x922
+// BB:80 cycle count: 3
+	     goto L_43_102            	// [0:0]  
+BB41_PU43:	// 0x924
 // BB:41 cycle count: 29
 //8248          	{
 //8249          	       temp = Key;
 
-LM407:
-	     .stabn 68,0,8249,LM407-_Get_Key
+LM348:
+	     .stabn 68,0,8249,LM348-_Get_Key
 	     DS = seg(_Key)           	// [0:8249]  Key
 	     R4 = (_Key)              	// [1:8249]  Key
 	     R4 = DS:[R4]             	// [3:8249]  
 	     [BP + 1] = R4            	// [5:8249]  temp
 //8250  				   key_temp =Key;
 
-LM408:
-	     .stabn 68,0,8250,LM408-_Get_Key
+LM349:
+	     .stabn 68,0,8250,LM349-_Get_Key
 	     DS = seg(_Key)           	// [6:8250]  Key
 	     R4 = (_Key)              	// [7:8250]  Key
 	     R4 = DS:[R4]             	// [9:8250]  
 	     [BP + 0] = R4            	// [11:8250]  key_temp
 //8251          	   	  	Key =0;
 
-LM409:
-	     .stabn 68,0,8251,LM409-_Get_Key
+LM350:
+	     .stabn 68,0,8251,LM350-_Get_Key
 	     R3 = 0                   	// [12:8251]  
 	     DS = seg(_Key)           	// [13:8251]  Key
 	     R4 = (_Key)              	// [14:8251]  Key
@@ -6627,62 +5866,62 @@ LM409:
 //8253  
 //8254          if(Eventflag != E_Demo)
 
-LM410:
-	     .stabn 68,0,8254,LM410-_Get_Key
+LM351:
+	     .stabn 68,0,8254,LM351-_Get_Key
 	     DS = seg(_Eventflag)     	// [18:8254]  Eventflag
 	     R4 = (_Eventflag)        	// [19:8254]  Eventflag
 	     R4 = DS:[R4]             	// [21:8254]  
 	     cmp R4, 255              	// [23:8254]  
-	     jne BB42_PU44            	// [25:8254]  
-BB80_PU44:	// 0xa91
-// BB:80 cycle count: 3
-	     goto L_44_101            	// [0:0]  
-BB42_PU44:	// 0xa93
+	     jne BB42_PU43            	// [25:8254]  
+BB81_PU43:	// 0x93a
+// BB:81 cycle count: 3
+	     goto L_43_103            	// [0:0]  
+BB42_PU43:	// 0x93c
 // BB:42 cycle count: 10
 //8255            	{
 //8256  		  	
 //8257  		
 //8258  	    	  if((TwoKeyflag))//(PlayQuestionflag )||
 
-LM411:
-	     .stabn 68,0,8258,LM411-_Get_Key
+LM352:
+	     .stabn 68,0,8258,LM352-_Get_Key
 	     DS = seg(_TwoKeyflag)    	// [0:8258]  TwoKeyflag
 	     R4 = (_TwoKeyflag)       	// [1:8258]  TwoKeyflag
 	     R4 = DS:[R4]             	// [3:8258]  
 	     cmp R4, 0                	// [5:8258]  
-	     jne BB43_PU44            	// [6:8258]  
-BB81_PU44:	// 0xa99
-// BB:81 cycle count: 3
-	     goto L_44_102            	// [0:0]  
-BB43_PU44:	// 0xa9b
+	     jne BB43_PU43            	// [6:8258]  
+BB82_PU43:	// 0x942
+// BB:82 cycle count: 3
+	     goto L_43_104            	// [0:0]  
+BB43_PU43:	// 0x944
 // BB:43 cycle count: 10
 //8259  	    	 	 {
 //8260  	    	 		 if(TimeCnt_Key<=C_1S)//TwokeyCntl
 
-LM412:
-	     .stabn 68,0,8260,LM412-_Get_Key
+LM353:
+	     .stabn 68,0,8260,LM353-_Get_Key
 	     DS = seg(_TimeCnt_Key)   	// [0:8260]  TimeCnt_Key
 	     R4 = (_TimeCnt_Key)      	// [1:8260]  TimeCnt_Key
 	     R4 = DS:[R4]             	// [3:8260]  
 	     cmp R4, 14               	// [5:8260]  
-	     jbe BB44_PU44            	// [6:8260]  
-BB82_PU44:	// 0xaa1
-// BB:82 cycle count: 3
-	     goto L_44_103            	// [0:0]  
-BB44_PU44:	// 0xaa3
+	     jbe BB44_PU43            	// [6:8260]  
+BB83_PU43:	// 0x94a
+// BB:83 cycle count: 3
+	     goto L_43_105            	// [0:0]  
+BB44_PU43:	// 0x94c
 // BB:44 cycle count: 12
 //8261  	    	 		 	 {
 //8262  	    	 		 	 	  if(temp == TwoKey_temp)
 
-LM413:
-	     .stabn 68,0,8262,LM413-_Get_Key
+LM354:
+	     .stabn 68,0,8262,LM354-_Get_Key
 	     R3 = [BP + 1]            	// [0:8262]  temp
 	     DS = seg(_TwoKey_temp)   	// [2:8262]  TwoKey_temp
 	     R4 = (_TwoKey_temp)      	// [3:8262]  TwoKey_temp
 	     R4 = DS:[R4]             	// [5:8262]  
 	     cmp R3, R4               	// [7:8262]  
-	     jne L_44_105             	// [8:8262]  
-BB45_PU44:	// 0xaaa
+	     jne L_43_107             	// [8:8262]  
+BB45_PU43:	// 0x953
 // BB:45 cycle count: 7
 //8266  								//	A1800_Flag = 0;
 //8267  								//	//TwoKeyflag =0; 
@@ -6690,12 +5929,12 @@ BB45_PU44:	// 0xaaa
 //8269  								
 //8270  									if(temp == Key_True)
 
-LM414:
-	     .stabn 68,0,8270,LM414-_Get_Key
+LM355:
+	     .stabn 68,0,8270,LM355-_Get_Key
 	     R4 = [BP + 1]            	// [0:8270]  temp
 	     cmp R4, 1                	// [2:8270]  
-	     jne L_44_107             	// [3:8270]  
-BB46_PU44:	// 0xaad
+	     jne L_43_109             	// [3:8270]  
+BB46_PU43:	// 0x956
 // BB:46 cycle count: 29
 //8271  									{						
 //8272  									  //if((PlayQuestionflag&0x01)&&((!PlayScoresFlag)||(TieflagAskQuestion)))	//xiang 20150106
@@ -6703,8 +5942,8 @@ BB46_PU44:	// 0xaad
 //8274  										 //   PauseFlag =1;
 //8275  										    Key_TrueFlase_Buffer =0;//20160215
 
-LM415:
-	     .stabn 68,0,8275,LM415-_Get_Key
+LM356:
+	     .stabn 68,0,8275,LM356-_Get_Key
 	     R3 = 0                   	// [0:8275]  
 	     DS = seg(_Key_TrueFlase_Buffer)	// [1:8275]  Key_TrueFlase_Buffer
 	     R4 = (_Key_TrueFlase_Buffer)	// [2:8275]  Key_TrueFlase_Buffer
@@ -6713,8 +5952,8 @@ LM415:
 //8277  											//TwoKey_temp =0;//20160323
 //8278  											TwoKey_cnt++;//Collection();//Pause_Process();
 
-LM416:
-	     .stabn 68,0,8278,LM416-_Get_Key
+LM357:
+	     .stabn 68,0,8278,LM357-_Get_Key
 	     DS = seg(_TwoKey_cnt)    	// [6:8278]  TwoKey_cnt
 	     R4 = (_TwoKey_cnt)       	// [7:8278]  TwoKey_cnt
 	     R4 = DS:[R4]             	// [9:8278]  
@@ -6724,57 +5963,57 @@ LM416:
 	     DS:[R3] = R4             	// [15:8278]  
 //8279  											temp =0;//�ް�����Ӧ!!!!!!!!!!!!
 
-LM417:
-	     .stabn 68,0,8279,LM417-_Get_Key
+LM358:
+	     .stabn 68,0,8279,LM358-_Get_Key
 	     R4 = 0                   	// [17:8279]  
 	     [BP + 1] = R4            	// [18:8279]  temp
 //8280  											
-//8281  											if(TwoKey_cnt>=2)//3��
+//8281  											if(TwoKey_cnt>=2)//3��
 
-LM418:
-	     .stabn 68,0,8281,LM418-_Get_Key
+LM359:
+	     .stabn 68,0,8281,LM359-_Get_Key
 	     DS = seg(_TwoKey_cnt)    	// [19:8281]  TwoKey_cnt
 	     R4 = (_TwoKey_cnt)       	// [20:8281]  TwoKey_cnt
 	     R4 = DS:[R4]             	// [22:8281]  
 	     cmp R4, 1                	// [24:8281]  
-	     jbe L_44_108             	// [25:8281]  
-BB47_PU44:	// 0xac3
+	     jbe L_43_110             	// [25:8281]  
+BB47_PU43:	// 0x96c
 // BB:47 cycle count: 44
 //8282  											{
 //8283  											     TwoKey_cnt=0;
 
-LM419:
-	     .stabn 68,0,8283,LM419-_Get_Key
+LM360:
+	     .stabn 68,0,8283,LM360-_Get_Key
 	     R3 = 0                   	// [0:8283]  
 	     DS = seg(_TwoKey_cnt)    	// [1:8283]  TwoKey_cnt
 	     R4 = (_TwoKey_cnt)       	// [2:8283]  TwoKey_cnt
 	     DS:[R4] = R3             	// [4:8283]  
 //8284  											     TwoKey_temp =0;
 
-LM420:
-	     .stabn 68,0,8284,LM420-_Get_Key
+LM361:
+	     .stabn 68,0,8284,LM361-_Get_Key
 	     R3 = 0                   	// [6:8284]  
 	     DS = seg(_TwoKey_temp)   	// [7:8284]  TwoKey_temp
 	     R4 = (_TwoKey_temp)      	// [8:8284]  TwoKey_temp
 	     DS:[R4] = R3             	// [10:8284]  
 //8285  											     key_temp =0;
 
-LM421:
-	     .stabn 68,0,8285,LM421-_Get_Key
+LM362:
+	     .stabn 68,0,8285,LM362-_Get_Key
 	     R4 = 0                   	// [12:8285]  
 	     [BP + 0] = R4            	// [13:8285]  key_temp
 //8286  											     Resumeflag =0;
 
-LM422:
-	     .stabn 68,0,8286,LM422-_Get_Key
+LM363:
+	     .stabn 68,0,8286,LM363-_Get_Key
 	     R3 = 0                   	// [14:8286]  
 	     DS = seg(_Resumeflag)    	// [15:8286]  Resumeflag
 	     R4 = (_Resumeflag)       	// [16:8286]  Resumeflag
 	     DS:[R4] = R3             	// [18:8286]  
 //8287  											     Key_TrueFlase_Buffer =0; 
 
-LM423:
-	     .stabn 68,0,8287,LM423-_Get_Key
+LM364:
+	     .stabn 68,0,8287,LM364-_Get_Key
 	     R3 = 0                   	// [20:8287]  
 	     DS = seg(_Key_TrueFlase_Buffer)	// [21:8287]  Key_TrueFlase_Buffer
 	     R4 = (_Key_TrueFlase_Buffer)	// [22:8287]  Key_TrueFlase_Buffer
@@ -6785,35 +6024,35 @@ LM423:
 //8295  													                                                       
 //8296                                                    Key_Event = 0x88;	//M++
 
-LM424:
-	     .stabn 68,0,8296,LM424-_Get_Key
+LM365:
+	     .stabn 68,0,8296,LM365-_Get_Key
 	     R3 = 136                 	// [26:8296]  
 	     DS = seg(_Key_Event)     	// [28:8296]  Key_Event
 	     R4 = (_Key_Event)        	// [29:8296]  Key_Event
 	     DS:[R4] = R3             	// [31:8296]  
 //8297  		                                          return Key_Event; 
 
-LM425:
-	     .stabn 68,0,8297,LM425-_Get_Key
+LM366:
+	     .stabn 68,0,8297,LM366-_Get_Key
 	     DS = seg(_Key_Event)     	// [33:8297]  Key_Event
 	     R4 = (_Key_Event)        	// [34:8297]  Key_Event
 	     R1 = DS:[R4]             	// [36:8297]  
 	     SP = SP + 3              	// [38:8297]  
 	     pop BP, PC from [SP]     	// [39:8297]  
-L_44_108:	// 0xae5
+L_43_110:	// 0x98e
 // BB:48 cycle count: 4
 
-LM426:
-	     .stabn 68,0,8281,LM426-_Get_Key
-	     jmp L_44_106             	// [0:8281]  
-L_44_107:	// 0xae6
-L_44_106:	// 0xae6
+LM367:
+	     .stabn 68,0,8281,LM367-_Get_Key
+	     jmp L_43_108             	// [0:8281]  
+L_43_109:	// 0x98f
+L_43_108:	// 0x98f
 // BB:49 cycle count: 4
 
-LM427:
-	     .stabn 68,0,8270,LM427-_Get_Key
-	     jmp L_44_104             	// [0:8270]  
-L_44_105:	// 0xae7
+LM368:
+	     .stabn 68,0,8270,LM368-_Get_Key
+	     jmp L_43_106             	// [0:8270]  
+L_43_107:	// 0x990
 // BB:50 cycle count: 6
 //8321  									//	return Tell_Scores(0);
 //8322  	    	 		 	 	  		
@@ -6821,28 +6060,28 @@ L_44_105:	// 0xae7
 //8324  							   else
 //8325  							   	  TwoKey_cnt=0;
 
-LM428:
-	     .stabn 68,0,8325,LM428-_Get_Key
+LM369:
+	     .stabn 68,0,8325,LM369-_Get_Key
 	     R3 = 0                   	// [0:8325]  
 	     DS = seg(_TwoKey_cnt)    	// [1:8325]  TwoKey_cnt
 	     R4 = (_TwoKey_cnt)       	// [2:8325]  TwoKey_cnt
 	     DS:[R4] = R3             	// [4:8325]  
-L_44_104:	// 0xaec
-L_44_103:	// 0xaec
+L_43_106:	// 0x995
+L_43_105:	// 0x995
 // BB:51 cycle count: 7
 //8326  	    	 		 	 	
 //8327  	    	 		 	  
 //8328  	    	 		 	 }
 //8329  	    	 		    TwoKey_temp = key_temp;
 
-LM429:
-	     .stabn 68,0,8329,LM429-_Get_Key
+LM370:
+	     .stabn 68,0,8329,LM370-_Get_Key
 	     R3 = [BP + 0]            	// [0:8329]  key_temp
 	     DS = seg(_TwoKey_temp)   	// [2:8329]  TwoKey_temp
 	     R4 = (_TwoKey_temp)      	// [3:8329]  TwoKey_temp
 	     DS:[R4] = R3             	// [5:8329]  
-L_44_102:	// 0xaf1
-L_44_101:	// 0xaf1
+L_43_104:	// 0x99a
+L_43_103:	// 0x99a
 // BB:52 cycle count: 12
 //8335  
 //8336            	}
@@ -6850,58 +6089,58 @@ L_44_101:	// 0xaf1
 //8338  
 //8339               if((TwoKeyflag&temp))
 
-LM430:
-	     .stabn 68,0,8339,LM430-_Get_Key
+LM371:
+	     .stabn 68,0,8339,LM371-_Get_Key
 	     R4 = [BP + 1]            	// [0:8339]  temp
 	     DS = seg(_TwoKeyflag)    	// [2:8339]  TwoKeyflag
 	     R3 = (_TwoKeyflag)       	// [3:8339]  TwoKeyflag
 	     R4 = R4 & DS:[R3]        	// [5:8339]  
 	     cmp R4, 0                	// [7:8339]  
-	     je L_44_110              	// [8:8339]  
-BB53_PU44:	// 0xaf8
+	     je L_43_112              	// [8:8339]  
+BB53_PU43:	// 0x9a1
 // BB:53 cycle count: 9
 //8340               	{
 //8341  	              // if(temp&(Key_True))//Key_False
 //8342  	             	{
 //8343  	                    Key_TrueFlase_Buffer = temp;
 
-LM431:
-	     .stabn 68,0,8343,LM431-_Get_Key
+LM372:
+	     .stabn 68,0,8343,LM372-_Get_Key
 	     R3 = [BP + 1]            	// [0:8343]  temp
 	     DS = seg(_Key_TrueFlase_Buffer)	// [2:8343]  Key_TrueFlase_Buffer
 	     R4 = (_Key_TrueFlase_Buffer)	// [3:8343]  Key_TrueFlase_Buffer
 	     DS:[R4] = R3             	// [5:8343]  
 //8344  	                    temp=0;				
 
-LM432:
-	     .stabn 68,0,8344,LM432-_Get_Key
+LM373:
+	     .stabn 68,0,8344,LM373-_Get_Key
 	     R4 = 0                   	// [7:8344]  
 	     [BP + 1] = R4            	// [8:8344]  temp
-L_44_110:	// 0xaff
+L_43_112:	// 0x9a8
 // BB:54 cycle count: 7
 //8345  	             	}
 //8346  
 //8347               	}
 //8348  			  if(temp)//collection��
 
-LM433:
-	     .stabn 68,0,8348,LM433-_Get_Key
+LM374:
+	     .stabn 68,0,8348,LM374-_Get_Key
 	     R4 = [BP + 1]            	// [0:8348]  temp
 	     cmp R4, 0                	// [2:8348]  
-	     je L_44_111              	// [3:8348]  
-BB55_PU44:	// 0xb02
+	     je L_43_113              	// [3:8348]  
+BB55_PU43:	// 0x9ab
 // BB:55 cycle count: 8
 //8349  				{
 //8350                       
 //8351                     if((temp&Key_False))//&&(A1800_Flag==0))                      
 
-LM434:
-	     .stabn 68,0,8351,LM434-_Get_Key
+LM375:
+	     .stabn 68,0,8351,LM375-_Get_Key
 	     R4 = [BP + 1]            	// [0:8351]  temp
 	     R4 = R4 & 16             	// [2:8351]  
 	     cmp R4, 0                	// [3:8351]  
-	     jne L_44_112             	// [4:8351]  
-BB56_PU44:	// 0xb06
+	     jne L_43_114             	// [4:8351]  
+BB56_PU43:	// 0x9af
 // BB:56 cycle count: 36
 //8353                     }
 //8354                     else
@@ -6909,62 +6148,62 @@ BB56_PU44:	// 0xb06
 //8356  			
 //8357  						Key_Event = temp;//Key_TrueFlase_Buffer;//20160215 xiang
 
-LM435:
-	     .stabn 68,0,8357,LM435-_Get_Key
+LM376:
+	     .stabn 68,0,8357,LM376-_Get_Key
 	     R3 = [BP + 1]            	// [0:8357]  temp
 	     DS = seg(_Key_Event)     	// [2:8357]  Key_Event
 	     R4 = (_Key_Event)        	// [3:8357]  Key_Event
 	     DS:[R4] = R3             	// [5:8357]  
 //8358  						Key_TrueFlase_Buffer =0;   
 
-LM436:
-	     .stabn 68,0,8358,LM436-_Get_Key
+LM377:
+	     .stabn 68,0,8358,LM377-_Get_Key
 	     R3 = 0                   	// [7:8358]  
 	     DS = seg(_Key_TrueFlase_Buffer)	// [8:8358]  Key_TrueFlase_Buffer
 	     R4 = (_Key_TrueFlase_Buffer)	// [9:8358]  Key_TrueFlase_Buffer
 	     DS:[R4] = R3             	// [11:8358]  
 //8359  						TwoKey_temp =0;
 
-LM437:
-	     .stabn 68,0,8359,LM437-_Get_Key
+LM378:
+	     .stabn 68,0,8359,LM378-_Get_Key
 	     R3 = 0                   	// [13:8359]  
 	     DS = seg(_TwoKey_temp)   	// [14:8359]  TwoKey_temp
 	     R4 = (_TwoKey_temp)      	// [15:8359]  TwoKey_temp
 	     DS:[R4] = R3             	// [17:8359]  
 //8360  						Resumeflag =0;
 
-LM438:
-	     .stabn 68,0,8360,LM438-_Get_Key
+LM379:
+	     .stabn 68,0,8360,LM379-_Get_Key
 	     R3 = 0                   	// [19:8360]  
 	     DS = seg(_Resumeflag)    	// [20:8360]  Resumeflag
 	     R4 = (_Resumeflag)       	// [21:8360]  Resumeflag
 	     DS:[R4] = R3             	// [23:8360]  
 //8361  						return Key_Event;
 
-LM439:
-	     .stabn 68,0,8361,LM439-_Get_Key
+LM380:
+	     .stabn 68,0,8361,LM380-_Get_Key
 	     DS = seg(_Key_Event)     	// [25:8361]  Key_Event
 	     R4 = (_Key_Event)        	// [26:8361]  Key_Event
 	     R1 = DS:[R4]             	// [28:8361]  
 	     SP = SP + 3              	// [30:8361]  
 	     pop BP, PC from [SP]     	// [31:8361]  
-L_44_112:	// 0xb20
-L_44_111:	// 0xb20
+L_43_114:	// 0x9c9
+L_43_113:	// 0x9c9
 // BB:57 cycle count: 4
 
-LM440:
-	     .stabn 68,0,8348,LM440-_Get_Key
-	     jmp L_44_99              	// [0:8348]  
-L_44_100:	// 0xb21
+LM381:
+	     .stabn 68,0,8348,LM381-_Get_Key
+	     jmp L_43_101             	// [0:8348]  
+L_43_102:	// 0x9ca
 // BB:58 cycle count: 14
 //8398          	}
-//8399  	  else //����
+//8399  	  else //����
 //8400  	   {
 //8401  
 //8402            	  	Key =0;
 
-LM441:
-	     .stabn 68,0,8402,LM441-_Get_Key
+LM382:
+	     .stabn 68,0,8402,LM382-_Get_Key
 	     R3 = 0                   	// [0:8402]  
 	     DS = seg(_Key)           	// [1:8402]  Key
 	     R4 = (_Key)              	// [2:8402]  Key
@@ -6975,366 +6214,378 @@ LM441:
 //8447  
 //8448  			   if(temp&(Key_False))//if(Key_TrueFlase_Buffer)  Key_True|
 
-LM442:
-	     .stabn 68,0,8448,LM442-_Get_Key
+LM383:
+	     .stabn 68,0,8448,LM383-_Get_Key
 	     R4 = [BP + 1]            	// [6:8448]  temp
 	     R4 = R4 & 16             	// [8:8448]  
 	     cmp R4, 0                	// [9:8448]  
-	     je L_44_113              	// [10:8448]  
-BB59_PU44:	// 0xb2a
-// BB:59 cycle count: 36
+	     je L_43_115              	// [10:8448]  
+BB59_PU43:	// 0x9d3
+// BB:59 cycle count: 10
 //8449  			   	{
 //8450  
 //8451  
-//8452  							
-//8453  						Key_Event = temp;//Key_TrueFlase_Buffer;//20160215 xiang
+//8452  					   if(A1800_Flag)
 
-LM443:
-	     .stabn 68,0,8453,LM443-_Get_Key
-	     R3 = [BP + 1]            	// [0:8453]  temp
-	     DS = seg(_Key_Event)     	// [2:8453]  Key_Event
-	     R4 = (_Key_Event)        	// [3:8453]  Key_Event
-	     DS:[R4] = R3             	// [5:8453]  
-//8454  						Key_TrueFlase_Buffer =0;   
+LM384:
+	     .stabn 68,0,8452,LM384-_Get_Key
+	     DS = seg(_A1800_Flag)    	// [0:8452]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [1:8452]  A1800_Flag
+	     R4 = DS:[R4]             	// [3:8452]  
+	     cmp R4, 0                	// [5:8452]  
+	     je L_43_116              	// [6:8452]  
+BB60_PU43:	// 0x9d9
+// BB:60 cycle count: 36
+//8453  					   {		
+//8454  							Key_Event = temp;//Key_TrueFlase_Buffer;//20160215 xiang
 
-LM444:
-	     .stabn 68,0,8454,LM444-_Get_Key
-	     R3 = 0                   	// [7:8454]  
-	     DS = seg(_Key_TrueFlase_Buffer)	// [8:8454]  Key_TrueFlase_Buffer
-	     R4 = (_Key_TrueFlase_Buffer)	// [9:8454]  Key_TrueFlase_Buffer
-	     DS:[R4] = R3             	// [11:8454]  
-//8455  						TwoKey_temp =0;
+LM385:
+	     .stabn 68,0,8454,LM385-_Get_Key
+	     R3 = [BP + 1]            	// [0:8454]  temp
+	     DS = seg(_Key_Event)     	// [2:8454]  Key_Event
+	     R4 = (_Key_Event)        	// [3:8454]  Key_Event
+	     DS:[R4] = R3             	// [5:8454]  
+//8455  							Key_TrueFlase_Buffer =0;   
 
-LM445:
-	     .stabn 68,0,8455,LM445-_Get_Key
-	     R3 = 0                   	// [13:8455]  
-	     DS = seg(_TwoKey_temp)   	// [14:8455]  TwoKey_temp
-	     R4 = (_TwoKey_temp)      	// [15:8455]  TwoKey_temp
-	     DS:[R4] = R3             	// [17:8455]  
-//8456  						Resumeflag =0;
+LM386:
+	     .stabn 68,0,8455,LM386-_Get_Key
+	     R3 = 0                   	// [7:8455]  
+	     DS = seg(_Key_TrueFlase_Buffer)	// [8:8455]  Key_TrueFlase_Buffer
+	     R4 = (_Key_TrueFlase_Buffer)	// [9:8455]  Key_TrueFlase_Buffer
+	     DS:[R4] = R3             	// [11:8455]  
+//8456  							TwoKey_temp =0;
 
-LM446:
-	     .stabn 68,0,8456,LM446-_Get_Key
-	     R3 = 0                   	// [19:8456]  
-	     DS = seg(_Resumeflag)    	// [20:8456]  Resumeflag
-	     R4 = (_Resumeflag)       	// [21:8456]  Resumeflag
-	     DS:[R4] = R3             	// [23:8456]  
-//8457  						return Key_Event;
+LM387:
+	     .stabn 68,0,8456,LM387-_Get_Key
+	     R3 = 0                   	// [13:8456]  
+	     DS = seg(_TwoKey_temp)   	// [14:8456]  TwoKey_temp
+	     R4 = (_TwoKey_temp)      	// [15:8456]  TwoKey_temp
+	     DS:[R4] = R3             	// [17:8456]  
+//8457  							Resumeflag =0;
 
-LM447:
-	     .stabn 68,0,8457,LM447-_Get_Key
-	     DS = seg(_Key_Event)     	// [25:8457]  Key_Event
-	     R4 = (_Key_Event)        	// [26:8457]  Key_Event
-	     R1 = DS:[R4]             	// [28:8457]  
-	     SP = SP + 3              	// [30:8457]  
-	     pop BP, PC from [SP]     	// [31:8457]  
-L_44_113:	// 0xb44
-L_44_99:	// 0xb44
-// BB:60 cycle count: 6
-//8478  		      }
-//8479  	    
-//8480  	      }
-//8481  
-//8482  		  TimeCnt_Key =0;
+LM388:
+	     .stabn 68,0,8457,LM388-_Get_Key
+	     R3 = 0                   	// [19:8457]  
+	     DS = seg(_Resumeflag)    	// [20:8457]  Resumeflag
+	     R4 = (_Resumeflag)       	// [21:8457]  Resumeflag
+	     DS:[R4] = R3             	// [23:8457]  
+//8458  							return Key_Event;
 
-LM448:
-	     .stabn 68,0,8482,LM448-_Get_Key
-	     R3 = 0                   	// [0:8482]  
-	     DS = seg(_TimeCnt_Key)   	// [1:8482]  TimeCnt_Key
-	     R4 = (_TimeCnt_Key)      	// [2:8482]  TimeCnt_Key
-	     DS:[R4] = R3             	// [4:8482]  
-L_44_98:	// 0xb49
-// BB:61 cycle count: 10
-//8483  	     
-//8484  	  }
-//8485  
-//8486  
-//8487          if(Key_TrueFlase_Buffer)
+LM389:
+	     .stabn 68,0,8458,LM389-_Get_Key
+	     DS = seg(_Key_Event)     	// [25:8458]  Key_Event
+	     R4 = (_Key_Event)        	// [26:8458]  Key_Event
+	     R1 = DS:[R4]             	// [28:8458]  
+	     SP = SP + 3              	// [30:8458]  
+	     pop BP, PC from [SP]     	// [31:8458]  
+L_43_116:	// 0x9f3
+L_43_115:	// 0x9f3
+L_43_101:	// 0x9f3
+// BB:61 cycle count: 6
+//8480  		      }
+//8481  	    
+//8482  	      }
+//8483  
+//8484  		  TimeCnt_Key =0;
 
-LM449:
-	     .stabn 68,0,8487,LM449-_Get_Key
-	     DS = seg(_Key_TrueFlase_Buffer)	// [0:8487]  Key_TrueFlase_Buffer
-	     R4 = (_Key_TrueFlase_Buffer)	// [1:8487]  Key_TrueFlase_Buffer
-	     R4 = DS:[R4]             	// [3:8487]  
-	     cmp R4, 0                	// [5:8487]  
-	     je L_44_114              	// [6:8487]  
-BB62_PU44:	// 0xb4f
+LM390:
+	     .stabn 68,0,8484,LM390-_Get_Key
+	     R3 = 0                   	// [0:8484]  
+	     DS = seg(_TimeCnt_Key)   	// [1:8484]  TimeCnt_Key
+	     R4 = (_TimeCnt_Key)      	// [2:8484]  TimeCnt_Key
+	     DS:[R4] = R3             	// [4:8484]  
+L_43_100:	// 0x9f8
 // BB:62 cycle count: 10
-//8488          	{
-//8489  
-//8490                   if(TimeCnt_Key>=C_1s_Pause)
+//8485  	     
+//8486  	  }
+//8487  
+//8488  
+//8489          if(Key_TrueFlase_Buffer)
 
-LM450:
-	     .stabn 68,0,8490,LM450-_Get_Key
-	     DS = seg(_TimeCnt_Key)   	// [0:8490]  TimeCnt_Key
-	     R4 = (_TimeCnt_Key)      	// [1:8490]  TimeCnt_Key
-	     R4 = DS:[R4]             	// [3:8490]  
-	     cmp R4, 13               	// [5:8490]  
-	     jbe L_44_115             	// [6:8490]  
-BB63_PU44:	// 0xb55
-// BB:63 cycle count: 35
-//8491                   	{
-//8492                   	   
-//8493  
-//8494  					  	 Key_Event = 0;//Key_TrueFlase_Buffer;//20160215 xiang
+LM391:
+	     .stabn 68,0,8489,LM391-_Get_Key
+	     DS = seg(_Key_TrueFlase_Buffer)	// [0:8489]  Key_TrueFlase_Buffer
+	     R4 = (_Key_TrueFlase_Buffer)	// [1:8489]  Key_TrueFlase_Buffer
+	     R4 = DS:[R4]             	// [3:8489]  
+	     cmp R4, 0                	// [5:8489]  
+	     je L_43_117              	// [6:8489]  
+BB63_PU43:	// 0x9fe
+// BB:63 cycle count: 10
+//8490          	{
+//8491  
+//8492                   if(TimeCnt_Key>=C_1s_Pause)
 
-LM451:
-	     .stabn 68,0,8494,LM451-_Get_Key
-	     R3 = 0                   	// [0:8494]  
-	     DS = seg(_Key_Event)     	// [1:8494]  Key_Event
-	     R4 = (_Key_Event)        	// [2:8494]  Key_Event
-	     DS:[R4] = R3             	// [4:8494]  
-//8495  					  	 Key_TrueFlase_Buffer =0;   
+LM392:
+	     .stabn 68,0,8492,LM392-_Get_Key
+	     DS = seg(_TimeCnt_Key)   	// [0:8492]  TimeCnt_Key
+	     R4 = (_TimeCnt_Key)      	// [1:8492]  TimeCnt_Key
+	     R4 = DS:[R4]             	// [3:8492]  
+	     cmp R4, 13               	// [5:8492]  
+	     jbe L_43_118             	// [6:8492]  
+BB64_PU43:	// 0xa04
+// BB:64 cycle count: 35
+//8493                   	{
+//8494                   	   
+//8495  
+//8496  					  	 Key_Event = 0;//Key_TrueFlase_Buffer;//20160215 xiang
 
-LM452:
-	     .stabn 68,0,8495,LM452-_Get_Key
-	     R3 = 0                   	// [6:8495]  
-	     DS = seg(_Key_TrueFlase_Buffer)	// [7:8495]  Key_TrueFlase_Buffer
-	     R4 = (_Key_TrueFlase_Buffer)	// [8:8495]  Key_TrueFlase_Buffer
-	     DS:[R4] = R3             	// [10:8495]  
-//8496  						 TwoKey_temp =0;
+LM393:
+	     .stabn 68,0,8496,LM393-_Get_Key
+	     R3 = 0                   	// [0:8496]  
+	     DS = seg(_Key_Event)     	// [1:8496]  Key_Event
+	     R4 = (_Key_Event)        	// [2:8496]  Key_Event
+	     DS:[R4] = R3             	// [4:8496]  
+//8497  					  	 Key_TrueFlase_Buffer =0;   
 
-LM453:
-	     .stabn 68,0,8496,LM453-_Get_Key
-	     R3 = 0                   	// [12:8496]  
-	     DS = seg(_TwoKey_temp)   	// [13:8496]  TwoKey_temp
-	     R4 = (_TwoKey_temp)      	// [14:8496]  TwoKey_temp
-	     DS:[R4] = R3             	// [16:8496]  
-//8497  						 Resumeflag =0;
+LM394:
+	     .stabn 68,0,8497,LM394-_Get_Key
+	     R3 = 0                   	// [6:8497]  
+	     DS = seg(_Key_TrueFlase_Buffer)	// [7:8497]  Key_TrueFlase_Buffer
+	     R4 = (_Key_TrueFlase_Buffer)	// [8:8497]  Key_TrueFlase_Buffer
+	     DS:[R4] = R3             	// [10:8497]  
+//8498  						 TwoKey_temp =0;
 
-LM454:
-	     .stabn 68,0,8497,LM454-_Get_Key
-	     R3 = 0                   	// [18:8497]  
-	     DS = seg(_Resumeflag)    	// [19:8497]  Resumeflag
-	     R4 = (_Resumeflag)       	// [20:8497]  Resumeflag
-	     DS:[R4] = R3             	// [22:8497]  
-//8498  ////						 ButtonisPressed();
-//8499  //						 						 
-//8500  //				 	     return Key_Event;
-//8501  
-//8502                          temp =0;
+LM395:
+	     .stabn 68,0,8498,LM395-_Get_Key
+	     R3 = 0                   	// [12:8498]  
+	     DS = seg(_TwoKey_temp)   	// [13:8498]  TwoKey_temp
+	     R4 = (_TwoKey_temp)      	// [14:8498]  TwoKey_temp
+	     DS:[R4] = R3             	// [16:8498]  
+//8499  						 Resumeflag =0;
 
-LM455:
-	     .stabn 68,0,8502,LM455-_Get_Key
-	     R4 = 0                   	// [24:8502]  
-	     [BP + 1] = R4            	// [25:8502]  temp
-//8503                          FiveSec_cnt_temp = FiveSec_cnt;
+LM396:
+	     .stabn 68,0,8499,LM396-_Get_Key
+	     R3 = 0                   	// [18:8499]  
+	     DS = seg(_Resumeflag)    	// [19:8499]  Resumeflag
+	     R4 = (_Resumeflag)       	// [20:8499]  Resumeflag
+	     DS:[R4] = R3             	// [22:8499]  
+//8500  ////						 ButtonisPressed();
+//8501  //						 						 
+//8502  //				 	     return Key_Event;
+//8503  
+//8504                          temp =0;
 
-LM456:
-	     .stabn 68,0,8503,LM456-_Get_Key
-	     DS = seg(_FiveSec_cnt)   	// [26:8503]  FiveSec_cnt
-	     R4 = (_FiveSec_cnt)      	// [27:8503]  FiveSec_cnt
-	     R4 = DS:[R4]             	// [29:8503]  
-	     [BP + 2] = R4            	// [31:8503]  FiveSec_cnt_temp
-//8504                          
-//8505  					   if(Pause_Process())
+LM397:
+	     .stabn 68,0,8504,LM397-_Get_Key
+	     R4 = 0                   	// [24:8504]  
+	     [BP + 1] = R4            	// [25:8504]  temp
+//8505                          FiveSec_cnt_temp = FiveSec_cnt;
 
-LM457:
-	     .stabn 68,0,8505,LM457-_Get_Key
-	     call _Pause_Process      	// [32:8505]  Pause_Process
-BB64_PU44:	// 0xb72
-// BB:64 cycle count: 5
-	     cmp R1, 0                	// [0:8505]  
-	     je L_44_116              	// [1:8505]  
-BB65_PU44:	// 0xb74
-// BB:65 cycle count: 14
-//8506  					   {
-//8507  					   	
-//8508  					   	   FiveSec_cnt = FiveSec_cnt_temp;
+LM398:
+	     .stabn 68,0,8505,LM398-_Get_Key
+	     DS = seg(_FiveSec_cnt)   	// [26:8505]  FiveSec_cnt
+	     R4 = (_FiveSec_cnt)      	// [27:8505]  FiveSec_cnt
+	     R4 = DS:[R4]             	// [29:8505]  
+	     [BP + 2] = R4            	// [31:8505]  FiveSec_cnt_temp
+//8506                          
+//8507  					   if(Pause_Process())
 
-LM458:
-	     .stabn 68,0,8508,LM458-_Get_Key
-	     R3 = [BP + 2]            	// [0:8508]  FiveSec_cnt_temp
-	     DS = seg(_FiveSec_cnt)   	// [2:8508]  FiveSec_cnt
-	     R4 = (_FiveSec_cnt)      	// [3:8508]  FiveSec_cnt
-	     DS:[R4] = R3             	// [5:8508]  
-//8509  					   	   return 0xffff;
+LM399:
+	     .stabn 68,0,8507,LM399-_Get_Key
+	     call _Pause_Process      	// [32:8507]  Pause_Process
+BB65_PU43:	// 0xa21
+// BB:65 cycle count: 5
+	     cmp R1, 0                	// [0:8507]  
+	     je L_43_119              	// [1:8507]  
+BB66_PU43:	// 0xa23
+// BB:66 cycle count: 14
+//8508  					   {
+//8509  					   	
+//8510  					   	   FiveSec_cnt = FiveSec_cnt_temp;
 
-LM459:
-	     .stabn 68,0,8509,LM459-_Get_Key
-	     R1 = - 1                 	// [7:8509]  
-	     SP = SP + 3              	// [8:8509]  
-	     pop BP, PC from [SP]     	// [9:8509]  
-L_44_116:	// 0xb7c
-// BB:66 cycle count: 7
-//8510  					   }
-//8511  					   
-//8512                         FiveSec_cnt = FiveSec_cnt_temp;
+LM400:
+	     .stabn 68,0,8510,LM400-_Get_Key
+	     R3 = [BP + 2]            	// [0:8510]  FiveSec_cnt_temp
+	     DS = seg(_FiveSec_cnt)   	// [2:8510]  FiveSec_cnt
+	     R4 = (_FiveSec_cnt)      	// [3:8510]  FiveSec_cnt
+	     DS:[R4] = R3             	// [5:8510]  
+//8511  					   	   return 0xffff;
 
-LM460:
-	     .stabn 68,0,8512,LM460-_Get_Key
-	     R3 = [BP + 2]            	// [0:8512]  FiveSec_cnt_temp
-	     DS = seg(_FiveSec_cnt)   	// [2:8512]  FiveSec_cnt
-	     R4 = (_FiveSec_cnt)      	// [3:8512]  FiveSec_cnt
-	     DS:[R4] = R3             	// [5:8512]  
-L_44_115:	// 0xb81
-L_44_114:	// 0xb81
-// BB:67 cycle count: 10
-//8515  
-//8516          	}
+LM401:
+	     .stabn 68,0,8511,LM401-_Get_Key
+	     R1 = - 1                 	// [7:8511]  
+	     SP = SP + 3              	// [8:8511]  
+	     pop BP, PC from [SP]     	// [9:8511]  
+L_43_119:	// 0xa2b
+// BB:67 cycle count: 7
+//8512  					   }
+//8513  					   
+//8514                         FiveSec_cnt = FiveSec_cnt_temp;
+
+LM402:
+	     .stabn 68,0,8514,LM402-_Get_Key
+	     R3 = [BP + 2]            	// [0:8514]  FiveSec_cnt_temp
+	     DS = seg(_FiveSec_cnt)   	// [2:8514]  FiveSec_cnt
+	     R4 = (_FiveSec_cnt)      	// [3:8514]  FiveSec_cnt
+	     DS:[R4] = R3             	// [5:8514]  
+L_43_118:	// 0xa30
+L_43_117:	// 0xa30
+// BB:68 cycle count: 10
 //8517  
-//8518  
-//8519  		 if(TwoKey_cnt==1)//2��
+//8518          	}
+//8519  
+//8520  
+//8521  		 if(TwoKey_cnt==1)//2��
 
-LM461:
-	     .stabn 68,0,8519,LM461-_Get_Key
-	     DS = seg(_TwoKey_cnt)    	// [0:8519]  TwoKey_cnt
-	     R4 = (_TwoKey_cnt)       	// [1:8519]  TwoKey_cnt
-	     R4 = DS:[R4]             	// [3:8519]  
-	     cmp R4, 1                	// [5:8519]  
-	     je L_44_117              	// [6:8519]  
-L_44_117:	// 0xb87
-// BB:68 cycle count: 7
-//8593  
-//8594  
+LM403:
+	     .stabn 68,0,8521,LM403-_Get_Key
+	     DS = seg(_TwoKey_cnt)    	// [0:8521]  TwoKey_cnt
+	     R4 = (_TwoKey_cnt)       	// [1:8521]  TwoKey_cnt
+	     R4 = DS:[R4]             	// [3:8521]  
+	     cmp R4, 1                	// [5:8521]  
+	     je L_43_120              	// [6:8521]  
+L_43_120:	// 0xa36
+// BB:69 cycle count: 7
 //8595  
-//8596    
-//8597          if(Countdown_E ==1 )
+//8596  
+//8597  
+//8598    
+//8599          if(Countdown_E ==1 )
 
-LM462:
-	     .stabn 68,0,8597,LM462-_Get_Key
-	     R4 = [BP + 6]            	// [0:8597]  Countdown_E
-	     cmp R4, 1                	// [2:8597]  
-	     jne L_44_119             	// [3:8597]  
-BB69_PU44:	// 0xb8a
-// BB:69 cycle count: 15
-//8598  			  	{
-//8599                    if(TimeCnt > Time_Countdown)
+LM404:
+	     .stabn 68,0,8599,LM404-_Get_Key
+	     R4 = [BP + 6]            	// [0:8599]  Countdown_E
+	     cmp R4, 1                	// [2:8599]  
+	     jne L_43_122             	// [3:8599]  
+BB70_PU43:	// 0xa39
+// BB:70 cycle count: 15
+//8600  			  	{
+//8601                    if(TimeCnt > Time_Countdown)
 
-LM463:
-	     .stabn 68,0,8599,LM463-_Get_Key
-	     DS = seg(_Time_Countdown)	// [0:8599]  Time_Countdown
-	     R4 = (_Time_Countdown)   	// [1:8599]  Time_Countdown
-	     R3 = DS:[R4]             	// [3:8599]  
-	     DS = seg(_TimeCnt)       	// [5:8599]  TimeCnt
-	     R4 = (_TimeCnt)          	// [6:8599]  TimeCnt
-	     R4 = DS:[R4]             	// [8:8599]  
-	     cmp R3, R4               	// [10:8599]  
-	     jae L_44_120             	// [11:8599]  
-BB70_PU44:	// 0xb94
-// BB:70 cycle count: 8
-//8600                    {
-//8601                         return TimeOver;
+LM405:
+	     .stabn 68,0,8601,LM405-_Get_Key
+	     DS = seg(_Time_Countdown)	// [0:8601]  Time_Countdown
+	     R4 = (_Time_Countdown)   	// [1:8601]  Time_Countdown
+	     R3 = DS:[R4]             	// [3:8601]  
+	     DS = seg(_TimeCnt)       	// [5:8601]  TimeCnt
+	     R4 = (_TimeCnt)          	// [6:8601]  TimeCnt
+	     R4 = DS:[R4]             	// [8:8601]  
+	     cmp R3, R4               	// [10:8601]  
+	     jae L_43_123             	// [11:8601]  
+BB71_PU43:	// 0xa43
+// BB:71 cycle count: 8
+//8602                    {
+//8603                         return TimeOver;
 
-LM464:
-	     .stabn 68,0,8601,LM464-_Get_Key
-	     R1 = - 32768             	// [0:8601]  
-	     SP = SP + 3              	// [2:8601]  
-	     pop BP, PC from [SP]     	// [3:8601]  
-L_44_120:	// 0xb98
-// BB:71 cycle count: 10
-//8603  				  	
-//8604                    }      
-//8605                    
-//8606                    
-//8607                  if(A1800_Flag)  
+LM406:
+	     .stabn 68,0,8603,LM406-_Get_Key
+	     R1 = - 32768             	// [0:8603]  
+	     SP = SP + 3              	// [2:8603]  
+	     pop BP, PC from [SP]     	// [3:8603]  
+L_43_123:	// 0xa47
+// BB:72 cycle count: 10
+//8605  				  	
+//8606                    }      
+//8607                    
+//8608                    
+//8609                  if(A1800_Flag)  
 
-LM465:
-	     .stabn 68,0,8607,LM465-_Get_Key
-	     DS = seg(_A1800_Flag)    	// [0:8607]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [1:8607]  A1800_Flag
-	     R4 = DS:[R4]             	// [3:8607]  
-	     cmp R4, 0                	// [5:8607]  
-	     je L_44_121              	// [6:8607]  
-BB72_PU44:	// 0xb9e
-// BB:72 cycle count: 3
-//8608                    SACM_A1800_ServiceLoop();
+LM407:
+	     .stabn 68,0,8609,LM407-_Get_Key
+	     DS = seg(_A1800_Flag)    	// [0:8609]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [1:8609]  A1800_Flag
+	     R4 = DS:[R4]             	// [3:8609]  
+	     cmp R4, 0                	// [5:8609]  
+	     je L_43_124              	// [6:8609]  
+BB73_PU43:	// 0xa4d
+// BB:73 cycle count: 3
+//8610                    SACM_A1800_ServiceLoop();
 
-LM466:
-	     .stabn 68,0,8608,LM466-_Get_Key
-	     call _SACM_A1800_ServiceLoop	// [0:8608]  SACM_A1800_ServiceLoop
-L_44_121:	// 0xba0
-L_44_119:	// 0xba0
-// BB:73 cycle count: 10
-//8609                             
-//8610  			   }
-//8611  			   
-//8612  			   
-//8613  		  if(Countdownflag)
+LM408:
+	     .stabn 68,0,8610,LM408-_Get_Key
+	     call _SACM_A1800_ServiceLoop	// [0:8610]  SACM_A1800_ServiceLoop
+L_43_124:	// 0xa4f
+L_43_122:	// 0xa4f
+// BB:74 cycle count: 10
+//8611                             
+//8612  			   }
+//8613  			   
+//8614  			   
+//8615  		  if(Countdownflag)
 
-LM467:
-	     .stabn 68,0,8613,LM467-_Get_Key
-	     DS = seg(_Countdownflag) 	// [0:8613]  Countdownflag
-	     R4 = (_Countdownflag)    	// [1:8613]  Countdownflag
-	     R4 = DS:[R4]             	// [3:8613]  
-	     cmp R4, 0                	// [5:8613]  
-	     je L_44_122              	// [6:8613]  
-BB74_PU44:	// 0xba6
-// BB:74 cycle count: 15
-//8614  			{
-//8615  				
-//8616  			    if(T_Countdowncnt > Time_Countdownflag)	//Time_Countdown_Sleep
+LM409:
+	     .stabn 68,0,8615,LM409-_Get_Key
+	     DS = seg(_Countdownflag) 	// [0:8615]  Countdownflag
+	     R4 = (_Countdownflag)    	// [1:8615]  Countdownflag
+	     R4 = DS:[R4]             	// [3:8615]  
+	     cmp R4, 0                	// [5:8615]  
+	     je L_43_125              	// [6:8615]  
+BB75_PU43:	// 0xa55
+// BB:75 cycle count: 15
+//8616  			{
+//8617  				
+//8618  			    if(T_Countdowncnt > Time_Countdownflag)	//Time_Countdown_Sleep
 
-LM468:
-	     .stabn 68,0,8616,LM468-_Get_Key
-	     DS = seg(_T_Countdowncnt)	// [0:8616]  T_Countdowncnt
-	     R4 = (_T_Countdowncnt)   	// [1:8616]  T_Countdowncnt
-	     R3 = DS:[R4]             	// [3:8616]  
-	     DS = seg(_Time_Countdownflag)	// [5:8616]  Time_Countdownflag
-	     R4 = (_Time_Countdownflag)	// [6:8616]  Time_Countdownflag
-	     R4 = DS:[R4]             	// [8:8616]  
-	     cmp R3, R4               	// [10:8616]  
-	     jbe L_44_123             	// [11:8616]  
-BB75_PU44:	// 0xbb0
-// BB:75 cycle count: 19
-//8617  			    {
-//8618  			    	 Sleepflag |=1;//off
+LM410:
+	     .stabn 68,0,8618,LM410-_Get_Key
+	     DS = seg(_T_Countdowncnt)	// [0:8618]  T_Countdowncnt
+	     R4 = (_T_Countdowncnt)   	// [1:8618]  T_Countdowncnt
+	     R3 = DS:[R4]             	// [3:8618]  
+	     DS = seg(_Time_Countdownflag)	// [5:8618]  Time_Countdownflag
+	     R4 = (_Time_Countdownflag)	// [6:8618]  Time_Countdownflag
+	     R4 = DS:[R4]             	// [8:8618]  
+	     cmp R3, R4               	// [10:8618]  
+	     jbe L_43_126             	// [11:8618]  
+BB76_PU43:	// 0xa5f
+// BB:76 cycle count: 19
+//8619  			    {
+//8620  			    	 Sleepflag |=1;//off
 
-LM469:
-	     .stabn 68,0,8618,LM469-_Get_Key
-	     DS = seg(_Sleepflag)     	// [0:8618]  Sleepflag
-	     R4 = (_Sleepflag)        	// [1:8618]  Sleepflag
-	     R4 = DS:[R4]             	// [3:8618]  
-	     R4 = R4 | 1              	// [5:8618]  
-	     DS = seg(_Sleepflag)     	// [6:8618]  Sleepflag
-	     R3 = (_Sleepflag)        	// [7:8618]  Sleepflag
-	     DS:[R3] = R4             	// [9:8618]  
-//8619  				     return TimeOver;
+LM411:
+	     .stabn 68,0,8620,LM411-_Get_Key
+	     DS = seg(_Sleepflag)     	// [0:8620]  Sleepflag
+	     R4 = (_Sleepflag)        	// [1:8620]  Sleepflag
+	     R4 = DS:[R4]             	// [3:8620]  
+	     R4 = R4 | 1              	// [5:8620]  
+	     DS = seg(_Sleepflag)     	// [6:8620]  Sleepflag
+	     R3 = (_Sleepflag)        	// [7:8620]  Sleepflag
+	     DS:[R3] = R4             	// [9:8620]  
+//8621  				     return TimeOver;
 
-LM470:
-	     .stabn 68,0,8619,LM470-_Get_Key
-	     R1 = - 32768             	// [11:8619]  
-	     SP = SP + 3              	// [13:8619]  
-	     pop BP, PC from [SP]     	// [14:8619]  
-L_44_123:	// 0xbbd
-L_44_122:	// 0xbbd
-Lt_44_1:	// 0xbbd
-// BB:76 cycle count: 7
-//8620  			    }
-//8621  			}	   
-//8622  			   
-//8623  
-//8624   	}while(Countdown_E);
-
-LM471:
-	     .stabn 68,0,8624,LM471-_Get_Key
-	     R4 = [BP + 6]            	// [0:8624]  Countdown_E
-	     cmp R4, 0                	// [2:8624]  
-	     je BB77_PU44             	// [3:8624]  
-BB88_PU44:	// 0xbc0
-// BB:88 cycle count: 3
-	     goto L_44_80             	// [0:0]  
-BB77_PU44:	// 0xbc2
+LM412:
+	     .stabn 68,0,8621,LM412-_Get_Key
+	     R1 = - 32768             	// [11:8621]  
+	     SP = SP + 3              	// [13:8621]  
+	     pop BP, PC from [SP]     	// [14:8621]  
+L_43_126:	// 0xa6c
+L_43_125:	// 0xa6c
+Lt_43_1:	// 0xa6c
 // BB:77 cycle count: 7
-//8625   	
-//8626   	return 0;
+//8622  			    }
+//8623  			}	   
+//8624  			   
+//8625  
+//8626   	}while(Countdown_E);
 
-LM472:
-	     .stabn 68,0,8626,LM472-_Get_Key
-	     R1 = 0                   	// [0:8626]  
-	     SP = SP + 3              	// [1:8626]  
-	     pop BP, PC from [SP]     	// [2:8626]  
-LBE39:
+LM413:
+	     .stabn 68,0,8626,LM413-_Get_Key
+	     R4 = [BP + 6]            	// [0:8626]  Countdown_E
+	     cmp R4, 0                	// [2:8626]  
+	     je BB78_PU43             	// [3:8626]  
+BB89_PU43:	// 0xa6f
+// BB:89 cycle count: 3
+	     goto L_43_82             	// [0:0]  
+BB78_PU43:	// 0xa71
+// BB:78 cycle count: 7
+//8627   	
+//8628   	return 0;
+
+LM414:
+	     .stabn 68,0,8628,LM414-_Get_Key
+	     R1 = 0                   	// [0:8628]  
+	     SP = SP + 3              	// [1:8628]  
+	     pop BP, PC from [SP]     	// [2:8628]  
+LBE38:
 	.endp	
 	     .stabs "Countdown_E:p1",160,0,0,6
 	     .stabs "G_checkflag:p1",160,0,0,7
-	     .stabn 192,0,0,LBB39-_Get_Key
+	     .stabn 192,0,0,LBB38-_Get_Key
 	     .stabs "temp:4",128,0,0,1
 	     .stabs "FiveSec_cnt_temp:4",128,0,0,2
 	     .stabs "key_temp:4",128,0,0,0
-	     .stabn 224,0,0,LBE39-_Get_Key
-LME45:
-	     .stabf LME45-_Get_Key
+	     .stabn 224,0,0,LBE38-_Get_Key
+LME44:
+	     .stabf LME44-_Get_Key
 .code
 	     .stabs "Rest_Randm:F18",36,0,0,_Rest_Randm
 
@@ -7345,184 +6596,648 @@ _Rest_Randm: .proc
 	// i = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//9641  
-//9642  /******************************************************************
-//9643  *****************************************************************/
-//9644  void Rest_Randm()
-//9645  {
+//9643  
+//9644  /******************************************************************
+//9645  *****************************************************************/
+//9646  void Rest_Randm()
+//9647  {
 
-LM473:
-	     .stabn 68,0,9645,LM473-_Rest_Randm
-BB1_PU45:	// 0xbc5
+LM415:
+	     .stabn 68,0,9647,LM415-_Rest_Randm
+BB1_PU44:	// 0xa74
 // BB:1 cycle count: 7
-	     push BP to [SP]          	// [0:9645]  
-	     SP = SP - 1              	// [2:9645]  
-	     BP = SP + 1              	// [3:9645]  
-LBB40:
-//9646  	unsigned int i=0;
+	     push BP to [SP]          	// [0:9647]  
+	     SP = SP - 1              	// [2:9647]  
+	     BP = SP + 1              	// [3:9647]  
+LBB39:
+//9648  	unsigned int i=0;
 
-LM474:
-	     .stabn 68,0,9646,LM474-_Rest_Randm
-	     R4 = 0                   	// [5:9646]  
-	     [BP + 0] = R4            	// [6:9646]  i
-L_45_1:	// 0xbcb
+LM416:
+	     .stabn 68,0,9648,LM416-_Rest_Randm
+	     R4 = 0                   	// [5:9648]  
+	     [BP + 0] = R4            	// [6:9648]  i
+L_44_1:	// 0xa7a
 // BB:2 cycle count: 7
-//9647  
-//9648  	while(i<52)
+//9649  
+//9650  	while(i<5)
 
-LM475:
-	     .stabn 68,0,9648,LM475-_Rest_Randm
-	     R4 = [BP + 0]            	// [0:9648]  i
-	     cmp R4, 51               	// [2:9648]  
-	     ja L_45_2                	// [3:9648]  
-BB3_PU45:	// 0xbce
-// BB:3 cycle count: 20
-//9649  	{
-//9650  		OtherSph_Random_Value[i]=0;
-
-LM476:
-	     .stabn 68,0,9650,LM476-_Rest_Randm
+LM417:
+	     .stabn 68,0,9650,LM417-_Rest_Randm
 	     R4 = [BP + 0]            	// [0:9650]  i
-	     R3 = 0                   	// [2:9650]  
-	     R1 = (_OtherSph_Random_Value)	// [3:9650]  OtherSph_Random_Value
-	     R2 = seg(_OtherSph_Random_Value)	// [5:9650]  OtherSph_Random_Value
-	     R4 = R4 + R1             	// [6:9650]  
-	     R3 = R3 + R2, Carry      	// [7:9650]  
-	     DS = R3                  	// [8:9650]  
-	     R3 = 0                   	// [9:9650]  
-	     DS:[R4] = R3             	// [10:9650]  
-//9651  		i++;
+	     cmp R4, 4                	// [2:9650]  
+	     ja L_44_2                	// [3:9650]  
+BB3_PU44:	// 0xa7d
+// BB:3 cycle count: 20
+//9651  	{
+//9652  		OtherSph_Random_Value[i]=0;
 
-LM477:
-	     .stabn 68,0,9651,LM477-_Rest_Randm
-	     R4 = [BP + 0]            	// [12:9651]  i
-	     R4 = R4 + 1              	// [14:9651]  
-	     [BP + 0] = R4            	// [15:9651]  i
-	     jmp L_45_1               	// [16:9651]  
-L_45_2:	// 0xbdc
-// BB:4 cycle count: 84
-//9656  //		 LED_Right= Led2;
-//9657  //		 LED_UP   = Led3;//LED_Hit;
-//9658  //		 LED_Down = Led1;//LED_Back;
-//9659  	
-//9660   	Arm = A_Right;//��ʼΪ����
+LM418:
+	     .stabn 68,0,9652,LM418-_Rest_Randm
+	     R4 = [BP + 0]            	// [0:9652]  i
+	     R3 = 0                   	// [2:9652]  
+	     R1 = (_OtherSph_Random_Value)	// [3:9652]  OtherSph_Random_Value
+	     R2 = seg(_OtherSph_Random_Value)	// [5:9652]  OtherSph_Random_Value
+	     R4 = R4 + R1             	// [6:9652]  
+	     R3 = R3 + R2, Carry      	// [7:9652]  
+	     DS = R3                  	// [8:9652]  
+	     R3 = 0                   	// [9:9652]  
+	     DS:[R4] = R3             	// [10:9652]  
+//9653  		i++;
 
-LM478:
-	     .stabn 68,0,9660,LM478-_Rest_Randm
-	     R3 = 0                   	// [0:9660]  
-	     DS = seg(_Arm)           	// [1:9660]  Arm
-	     R4 = (_Arm)              	// [2:9660]  Arm
-	     DS:[R4] = R3             	// [4:9660]  
-//9661  	G_X_A  = G_Hit;//G_Right//ֵ���ӷ���
+LM419:
+	     .stabn 68,0,9653,LM419-_Rest_Randm
+	     R4 = [BP + 0]            	// [12:9653]  i
+	     R4 = R4 + 1              	// [14:9653]  
+	     [BP + 0] = R4            	// [15:9653]  i
+	     jmp L_44_1               	// [16:9653]  
+L_44_2:	// 0xa8b
+// BB:4 cycle count: 10
+//9657  //		 LED_Back =  Led1;
+//9658  //		 LED_Right= Led2;
+//9659  //		 LED_UP   = Led3;//LED_Hit;
+//9660  //		 LED_Down = Led1;//LED_Back;
+//9661     if(Mem0.Arm_Mode == A_Left)
 
-LM479:
-	     .stabn 68,0,9661,LM479-_Rest_Randm
-	     R3 = 16                  	// [6:9661]  
-	     DS = seg(_G_X_A)         	// [7:9661]  G_X_A
-	     R4 = (_G_X_A)            	// [8:9661]  G_X_A
-	     DS:[R4] = R3             	// [10:9661]  
-//9662  	G_X_M  = G_Back;//G_Left//ֵ���ٷ���
+LM420:
+	     .stabn 68,0,9661,LM420-_Rest_Randm
+	     DS = seg(_Mem0+3)        	// [0:9661]  Mem0+3
+	     R4 = (_Mem0+3)           	// [1:9661]  Mem0+3
+	     R4 = DS:[R4]             	// [3:9661]  
+	     cmp R4, 1                	// [5:9661]  
+	     jne L_44_4               	// [6:9661]  
+BB5_PU44:	// 0xa91
+// BB:5 cycle count: 75
+//9662     {
+//9663                      G_X_A  = G_Back;//G_Hit;////ֵ���ӷ���
 
-LM480:
-	     .stabn 68,0,9662,LM480-_Rest_Randm
-	     R3 = 32                  	// [12:9662]  
-	     DS = seg(_G_X_M)         	// [13:9662]  G_X_M
-	     R4 = (_G_X_M)            	// [14:9662]  G_X_M
-	     DS:[R4] = R3             	// [16:9662]  
-//9663  	
-//9664  	G_Y_A  = G_Left;//G_Hit
+LM421:
+	     .stabn 68,0,9663,LM421-_Rest_Randm
+	     R3 = 32                  	// [0:9663]  
+	     DS = seg(_G_X_A)         	// [1:9663]  G_X_A
+	     R4 = (_G_X_A)            	// [2:9663]  G_X_A
+	     DS:[R4] = R3             	// [4:9663]  
+//9664                      G_X_M  = G_Hit;//G_Back;////ֵ���ٷ���
 
-LM481:
-	     .stabn 68,0,9664,LM481-_Rest_Randm
-	     R3 = 4                   	// [18:9664]  
-	     DS = seg(_G_Y_A)         	// [19:9664]  G_Y_A
-	     R4 = (_G_Y_A)            	// [20:9664]  G_Y_A
-	     DS:[R4] = R3             	// [22:9664]  
-//9665  	G_Y_M  =  G_Right;//G_Back
+LM422:
+	     .stabn 68,0,9664,LM422-_Rest_Randm
+	     R3 = 16                  	// [6:9664]  
+	     DS = seg(_G_X_M)         	// [7:9664]  G_X_M
+	     R4 = (_G_X_M)            	// [8:9664]  G_X_M
+	     DS:[R4] = R3             	// [10:9664]  
+//9665  
+//9666  					G_Y_A  = G_Right;//G_Left;//G_Hit
 
-LM482:
-	     .stabn 68,0,9665,LM482-_Rest_Randm
-	     R3 = 8                   	// [24:9665]  
-	     DS = seg(_G_Y_M)         	// [25:9665]  G_Y_M
-	     R4 = (_G_Y_M)            	// [26:9665]  G_Y_M
-	     DS:[R4] = R3             	// [28:9665]  
-//9666  	
-//9667  	G_Z_A =  G_UP;
+LM423:
+	     .stabn 68,0,9666,LM423-_Rest_Randm
+	     R3 = 8                   	// [12:9666]  
+	     DS = seg(_G_Y_A)         	// [13:9666]  G_Y_A
+	     R4 = (_G_Y_A)            	// [14:9666]  G_Y_A
+	     DS:[R4] = R3             	// [16:9666]  
+//9667  					G_Y_M  = G_Left;// G_Right;//G_Back
 
-LM483:
-	     .stabn 68,0,9667,LM483-_Rest_Randm
-	     R3 = 1                   	// [30:9667]  
-	     DS = seg(_G_Z_A)         	// [31:9667]  G_Z_A
-	     R4 = (_G_Z_A)            	// [32:9667]  G_Z_A
-	     DS:[R4] = R3             	// [34:9667]  
-//9668  	G_Z_M   = G_Down;
+LM424:
+	     .stabn 68,0,9667,LM424-_Rest_Randm
+	     R3 = 4                   	// [18:9667]  
+	     DS = seg(_G_Y_M)         	// [19:9667]  G_Y_M
+	     R4 = (_G_Y_M)            	// [20:9667]  G_Y_M
+	     DS:[R4] = R3             	// [22:9667]  
+//9668  					
+//9669  					G_Z_A =  G_UP;
 
-LM484:
-	     .stabn 68,0,9668,LM484-_Rest_Randm
-	     R3 = 2                   	// [36:9668]  
-	     DS = seg(_G_Z_M)         	// [37:9668]  G_Z_M
-	     R4 = (_G_Z_M)            	// [38:9668]  G_Z_M
-	     DS:[R4] = R3             	// [40:9668]  
-//9669  	
-//9670  	
-//9671      //Led_Data_Play[6]={LED_UP,LED_Down,LED_Left,LED_Right,LED_Hit,LED_Back};
-//9672  	   Led_Data_Play[0]= Led3;//LED_UP;
+LM425:
+	     .stabn 68,0,9669,LM425-_Rest_Randm
+	     R3 = 1                   	// [24:9669]  
+	     DS = seg(_G_Z_A)         	// [25:9669]  G_Z_A
+	     R4 = (_G_Z_A)            	// [26:9669]  G_Z_A
+	     DS:[R4] = R3             	// [28:9669]  
+//9670  					G_Z_M   = G_Down;
 
-LM485:
-	     .stabn 68,0,9672,LM485-_Rest_Randm
-	     R3 = 4                   	// [42:9672]  
-	     DS = seg(_Led_Data_Play) 	// [43:9672]  Led_Data_Play
-	     R4 = (_Led_Data_Play)    	// [44:9672]  Led_Data_Play
-	     DS:[R4] = R3             	// [46:9672]  
-//9673  	   Led_Data_Play[1]= Led1;//LED_Down;
+LM426:
+	     .stabn 68,0,9670,LM426-_Rest_Randm
+	     R3 = 2                   	// [30:9670]  
+	     DS = seg(_G_Z_M)         	// [31:9670]  G_Z_M
+	     R4 = (_G_Z_M)            	// [32:9670]  G_Z_M
+	     DS:[R4] = R3             	// [34:9670]  
+//9677  //					
+//9678  //					LED_UP   = LED_Hit;//LED_Hit;
+//9679  //					LED_Down = LED_Back;//LED_Back;					
+//9680  					
+//9681                     Led_Data_Play[0]= Led1;//LED_UP;
 
-LM486:
-	     .stabn 68,0,9673,LM486-_Rest_Randm
-	     R3 = 1                   	// [48:9673]  
-	     DS = seg(_Led_Data_Play+1)	// [49:9673]  Led_Data_Play+1
-	     R4 = (_Led_Data_Play+1)  	// [50:9673]  Led_Data_Play+1
-	     DS:[R4] = R3             	// [52:9673]  
-//9674  	   Led_Data_Play[2]= Led4;//LED_Left;
+LM427:
+	     .stabn 68,0,9681,LM427-_Rest_Randm
+	     R3 = 1                   	// [36:9681]  
+	     DS = seg(_Led_Data_Play) 	// [37:9681]  Led_Data_Play
+	     R4 = (_Led_Data_Play)    	// [38:9681]  Led_Data_Play
+	     DS:[R4] = R3             	// [40:9681]  
+//9682                     Led_Data_Play[1]= Led3;//LED_Down;
 
-LM487:
-	     .stabn 68,0,9674,LM487-_Rest_Randm
-	     R3 = 8                   	// [54:9674]  
-	     DS = seg(_Led_Data_Play+2)	// [55:9674]  Led_Data_Play+2
-	     R4 = (_Led_Data_Play+2)  	// [56:9674]  Led_Data_Play+2
-	     DS:[R4] = R3             	// [58:9674]  
-//9675  	   Led_Data_Play[3]= Led2;//LED_Right;
+LM428:
+	     .stabn 68,0,9682,LM428-_Rest_Randm
+	     R3 = 4                   	// [42:9682]  
+	     DS = seg(_Led_Data_Play+1)	// [43:9682]  Led_Data_Play+1
+	     R4 = (_Led_Data_Play+1)  	// [44:9682]  Led_Data_Play+1
+	     DS:[R4] = R3             	// [46:9682]  
+//9683                     Led_Data_Play[2]= Led2;//LED_Left;
 
-LM488:
-	     .stabn 68,0,9675,LM488-_Rest_Randm
-	     R3 = 2                   	// [60:9675]  
-	     DS = seg(_Led_Data_Play+3)	// [61:9675]  Led_Data_Play+3
-	     R4 = (_Led_Data_Play+3)  	// [62:9675]  Led_Data_Play+3
-	     DS:[R4] = R3             	// [64:9675]  
-//9676  	   Led_Data_Play[4]= Led3;//LED_Hit;
+LM429:
+	     .stabn 68,0,9683,LM429-_Rest_Randm
+	     R3 = 2                   	// [48:9683]  
+	     DS = seg(_Led_Data_Play+2)	// [49:9683]  Led_Data_Play+2
+	     R4 = (_Led_Data_Play+2)  	// [50:9683]  Led_Data_Play+2
+	     DS:[R4] = R3             	// [52:9683]  
+//9684                     Led_Data_Play[3]= Led4;//LED_Right;
 
-LM489:
-	     .stabn 68,0,9676,LM489-_Rest_Randm
-	     R3 = 4                   	// [66:9676]  
-	     DS = seg(_Led_Data_Play+4)	// [67:9676]  Led_Data_Play+4
-	     R4 = (_Led_Data_Play+4)  	// [68:9676]  Led_Data_Play+4
-	     DS:[R4] = R3             	// [70:9676]  
-//9677  	   Led_Data_Play[5]= Led1;//LED_Back; 
+LM430:
+	     .stabn 68,0,9684,LM430-_Rest_Randm
+	     R3 = 8                   	// [54:9684]  
+	     DS = seg(_Led_Data_Play+3)	// [55:9684]  Led_Data_Play+3
+	     R4 = (_Led_Data_Play+3)  	// [56:9684]  Led_Data_Play+3
+	     DS:[R4] = R3             	// [58:9684]  
+//9685                     Led_Data_Play[4]= Led1;//LED_Hit;
 
-LM490:
-	     .stabn 68,0,9677,LM490-_Rest_Randm
-	     R3 = 1                   	// [72:9677]  
-	     DS = seg(_Led_Data_Play+5)	// [73:9677]  Led_Data_Play+5
-	     R4 = (_Led_Data_Play+5)  	// [74:9677]  Led_Data_Play+5
-	     DS:[R4] = R3             	// [76:9677]  
-	     SP = SP + 1              	// [78:9677]  
-	     pop BP, PC from [SP]     	// [79:9677]  
-LBE40:
+LM431:
+	     .stabn 68,0,9685,LM431-_Rest_Randm
+	     R3 = 1                   	// [60:9685]  
+	     DS = seg(_Led_Data_Play+4)	// [61:9685]  Led_Data_Play+4
+	     R4 = (_Led_Data_Play+4)  	// [62:9685]  Led_Data_Play+4
+	     DS:[R4] = R3             	// [64:9685]  
+//9686                     Led_Data_Play[5]= Led3;//LED_Back; 
+
+LM432:
+	     .stabn 68,0,9686,LM432-_Rest_Randm
+	     R3 = 4                   	// [66:9686]  
+	     DS = seg(_Led_Data_Play+5)	// [67:9686]  Led_Data_Play+5
+	     R4 = (_Led_Data_Play+5)  	// [68:9686]  Led_Data_Play+5
+	     DS:[R4] = R3             	// [70:9686]  
+	     goto L_44_3              	// [72:9686]  
+L_44_4:	// 0xacf
+// BB:6 cycle count: 78
+//9690     	
+//9691     }
+//9692   else  //Ĭ������
+//9693   	{
+//9694   		Mem0.Arm_Mode = A_Right;
+
+LM433:
+	     .stabn 68,0,9694,LM433-_Rest_Randm
+	     R3 = 0                   	// [0:9694]  
+	     DS = seg(_Mem0+3)        	// [1:9694]  Mem0+3
+	     R4 = (_Mem0+3)           	// [2:9694]  Mem0+3
+	     DS:[R4] = R3             	// [4:9694]  
+//9695   		
+//9696  		G_X_A  = G_Hit;//G_Right//ֵ���ӷ���
+
+LM434:
+	     .stabn 68,0,9696,LM434-_Rest_Randm
+	     R3 = 16                  	// [6:9696]  
+	     DS = seg(_G_X_A)         	// [7:9696]  G_X_A
+	     R4 = (_G_X_A)            	// [8:9696]  G_X_A
+	     DS:[R4] = R3             	// [10:9696]  
+//9697  		G_X_M  = G_Back;//G_Left//ֵ���ٷ���
+
+LM435:
+	     .stabn 68,0,9697,LM435-_Rest_Randm
+	     R3 = 32                  	// [12:9697]  
+	     DS = seg(_G_X_M)         	// [13:9697]  G_X_M
+	     R4 = (_G_X_M)            	// [14:9697]  G_X_M
+	     DS:[R4] = R3             	// [16:9697]  
+//9698  		
+//9699  		G_Y_A  = G_Left;//G_Hit
+
+LM436:
+	     .stabn 68,0,9699,LM436-_Rest_Randm
+	     R3 = 4                   	// [18:9699]  
+	     DS = seg(_G_Y_A)         	// [19:9699]  G_Y_A
+	     R4 = (_G_Y_A)            	// [20:9699]  G_Y_A
+	     DS:[R4] = R3             	// [22:9699]  
+//9700  		G_Y_M  =  G_Right;//G_Back
+
+LM437:
+	     .stabn 68,0,9700,LM437-_Rest_Randm
+	     R3 = 8                   	// [24:9700]  
+	     DS = seg(_G_Y_M)         	// [25:9700]  G_Y_M
+	     R4 = (_G_Y_M)            	// [26:9700]  G_Y_M
+	     DS:[R4] = R3             	// [28:9700]  
+//9701  		
+//9702  		G_Z_A =  G_UP;
+
+LM438:
+	     .stabn 68,0,9702,LM438-_Rest_Randm
+	     R3 = 1                   	// [30:9702]  
+	     DS = seg(_G_Z_A)         	// [31:9702]  G_Z_A
+	     R4 = (_G_Z_A)            	// [32:9702]  G_Z_A
+	     DS:[R4] = R3             	// [34:9702]  
+//9703  		G_Z_M   = G_Down;
+
+LM439:
+	     .stabn 68,0,9703,LM439-_Rest_Randm
+	     R3 = 2                   	// [36:9703]  
+	     DS = seg(_G_Z_M)         	// [37:9703]  G_Z_M
+	     R4 = (_G_Z_M)            	// [38:9703]  G_Z_M
+	     DS:[R4] = R3             	// [40:9703]  
+//9704  		
+//9705  		
+//9706  	    //Led_Data_Play[6]={LED_UP,LED_Down,LED_Left,LED_Right,LED_Hit,LED_Back};
+//9707  		   Led_Data_Play[0]= Led3;//LED_UP;
+
+LM440:
+	     .stabn 68,0,9707,LM440-_Rest_Randm
+	     R3 = 4                   	// [42:9707]  
+	     DS = seg(_Led_Data_Play) 	// [43:9707]  Led_Data_Play
+	     R4 = (_Led_Data_Play)    	// [44:9707]  Led_Data_Play
+	     DS:[R4] = R3             	// [46:9707]  
+//9708  		   Led_Data_Play[1]= Led1;//LED_Down;
+
+LM441:
+	     .stabn 68,0,9708,LM441-_Rest_Randm
+	     R3 = 1                   	// [48:9708]  
+	     DS = seg(_Led_Data_Play+1)	// [49:9708]  Led_Data_Play+1
+	     R4 = (_Led_Data_Play+1)  	// [50:9708]  Led_Data_Play+1
+	     DS:[R4] = R3             	// [52:9708]  
+//9709  		   Led_Data_Play[2]= Led4;//LED_Left;
+
+LM442:
+	     .stabn 68,0,9709,LM442-_Rest_Randm
+	     R3 = 8                   	// [54:9709]  
+	     DS = seg(_Led_Data_Play+2)	// [55:9709]  Led_Data_Play+2
+	     R4 = (_Led_Data_Play+2)  	// [56:9709]  Led_Data_Play+2
+	     DS:[R4] = R3             	// [58:9709]  
+//9710  		   Led_Data_Play[3]= Led2;//LED_Right;
+
+LM443:
+	     .stabn 68,0,9710,LM443-_Rest_Randm
+	     R3 = 2                   	// [60:9710]  
+	     DS = seg(_Led_Data_Play+3)	// [61:9710]  Led_Data_Play+3
+	     R4 = (_Led_Data_Play+3)  	// [62:9710]  Led_Data_Play+3
+	     DS:[R4] = R3             	// [64:9710]  
+//9711  		   Led_Data_Play[4]= Led3;//LED_Hit;
+
+LM444:
+	     .stabn 68,0,9711,LM444-_Rest_Randm
+	     R3 = 4                   	// [66:9711]  
+	     DS = seg(_Led_Data_Play+4)	// [67:9711]  Led_Data_Play+4
+	     R4 = (_Led_Data_Play+4)  	// [68:9711]  Led_Data_Play+4
+	     DS:[R4] = R3             	// [70:9711]  
+//9712  		   Led_Data_Play[5]= Led1;//LED_Back; 
+
+LM445:
+	     .stabn 68,0,9712,LM445-_Rest_Randm
+	     R3 = 1                   	// [72:9712]  
+	     DS = seg(_Led_Data_Play+5)	// [73:9712]  Led_Data_Play+5
+	     R4 = (_Led_Data_Play+5)  	// [74:9712]  Led_Data_Play+5
+	     DS:[R4] = R3             	// [76:9712]  
+L_44_3:	// 0xb10
+// BB:7 cycle count: 6
+	     SP = SP + 1              	// [0:9712]  
+	     pop BP, PC from [SP]     	// [1:9712]  
+LBE39:
 	.endp	
-	     .stabn 192,0,0,LBB40-_Rest_Randm
+	     .stabn 192,0,0,LBB39-_Rest_Randm
 	     .stabs "i:4",128,0,0,0
-	     .stabn 224,0,0,LBE40-_Rest_Randm
+	     .stabn 224,0,0,LBE39-_Rest_Randm
+LME45:
+	     .stabf LME45-_Rest_Randm
+.code
+	     .stabs "Intro:F18",36,0,0,_Intro
+
+	// Program Unit: Intro
+.public	_Intro
+_Intro: .proc	
+	     .stabn 0xa6,0,0,0
+	// old_frame_pointer = 0
+	// return_address = 1
+//9888  
+//9889  /******************************************************************
+//9890  *****************************************************************/
+//9891  void  Intro()
+//9892  {
+
+LM446:
+	     .stabn 68,0,9892,LM446-_Intro
+BB1_PU45:	// 0xb12
+// BB:1 cycle count: 15
+	     push BP to [SP]          	// [0:9892]  
+	     BP = SP + 1              	// [2:9892]  
+//9893  	if(Mem0.firstFlag_23b.BitCTL_f.TokenText==1)
+
+LM447:
+	     .stabn 68,0,9893,LM447-_Intro
+	     DS = seg(_Mem0+2)        	// [4:9893]  Mem0+2
+	     R4 = (_Mem0+2)           	// [5:9893]  Mem0+2
+	     R4 = DS:[R4]             	// [7:9893]  
+	     R4 = R4 & 1              	// [9:9893]  
+	     cmp R4, 1                	// [10:9893]  
+	     je BB2_PU45              	// [11:9893]  
+BB35_PU45:	// 0xb1c
+// BB:35 cycle count: 3
+	     goto L_45_18             	// [0:0]  
+BB2_PU45:	// 0xb1e
+// BB:2 cycle count: 10
+//9894  	{
+//9895          switch (TokenMission)
+
+LM448:
+	     .stabn 68,0,9895,LM448-_Intro
+	     DS = seg(_TokenMission)  	// [0:9895]  TokenMission
+	     R4 = (_TokenMission)     	// [1:9895]  TokenMission
+	     R4 = DS:[R4]             	// [3:9895]  
+	     cmp R4, 1                	// [5:9895]  
+	     je Lt_45_1               	// [6:9895]  
+BB3_PU45:	// 0xb24
+// BB:3 cycle count: 10
+	     DS = seg(_TokenMission)  	// [0:9895]  TokenMission
+	     R4 = (_TokenMission)     	// [1:9895]  TokenMission
+	     R4 = DS:[R4]             	// [3:9895]  
+	     cmp R4, 6                	// [5:9895]  
+	     je Lt_45_3               	// [6:9895]  
+BB4_PU45:	// 0xb2a
+// BB:4 cycle count: 10
+	     DS = seg(_TokenMission)  	// [0:9895]  TokenMission
+	     R4 = (_TokenMission)     	// [1:9895]  TokenMission
+	     R4 = DS:[R4]             	// [3:9895]  
+	     cmp R4, 12               	// [5:9895]  
+	     je Lt_45_4               	// [6:9895]  
+BB5_PU45:	// 0xb30
+// BB:5 cycle count: 10
+	     DS = seg(_TokenMission)  	// [0:9895]  TokenMission
+	     R4 = (_TokenMission)     	// [1:9895]  TokenMission
+	     R4 = DS:[R4]             	// [3:9895]  
+	     cmp R4, 17               	// [5:9895]  
+	     je Lt_45_5               	// [6:9895]  
+BB6_PU45:	// 0xb36
+// BB:6 cycle count: 10
+	     DS = seg(_TokenMission)  	// [0:9895]  TokenMission
+	     R4 = (_TokenMission)     	// [1:9895]  TokenMission
+	     R4 = DS:[R4]             	// [3:9895]  
+	     cmp R4, 23               	// [5:9895]  
+	     je Lt_45_6               	// [6:9895]  
+BB7_PU45:	// 0xb3c
+// BB:7 cycle count: 10
+	     DS = seg(_TokenMission)  	// [0:9895]  TokenMission
+	     R4 = (_TokenMission)     	// [1:9895]  TokenMission
+	     R4 = DS:[R4]             	// [3:9895]  
+	     cmp R4, 28               	// [5:9895]  
+	     je Lt_45_7               	// [6:9895]  
+BB8_PU45:	// 0xb42
+// BB:8 cycle count: 4
+	     jmp Lt_45_8              	// [0:9895]  
+Lt_45_1:	// 0xb43
+// BB:9 cycle count: 9
+//9896  		{
+//9897  		case 1:/* constant-expression */
+//9898  			/* code */
+//9899  			PlayA1800_Elements(A_VLMHTEN_Intro1);
+
+LM449:
+	     .stabn 68,0,9899,LM449-_Intro
+	     SP = SP - 1              	// [0:9899]  
+	     R3 = 7                   	// [1:9899]  
+	     R4 = SP + 1              	// [2:9899]  
+	     [R4] = R3                	// [4:9899]  
+	     call _PlayA1800_Elements 	// [6:9899]  PlayA1800_Elements
+BB10_PU45:	// 0xb4a
+// BB:10 cycle count: 5
+	     SP = SP + 1              	// [0:9899]  
+//9900  			break;
+
+LM450:
+	     .stabn 68,0,9900,LM450-_Intro
+	     jmp Lt_45_2              	// [1:9900]  
+Lt_45_3:	// 0xb4c
+// BB:11 cycle count: 9
+//9901  		case 6:
+//9902  		     PlayA1800_Elements(A_VLMHTEN_Intro2);
+
+LM451:
+	     .stabn 68,0,9902,LM451-_Intro
+	     SP = SP - 1              	// [0:9902]  
+	     R3 = 8                   	// [1:9902]  
+	     R4 = SP + 1              	// [2:9902]  
+	     [R4] = R3                	// [4:9902]  
+	     call _PlayA1800_Elements 	// [6:9902]  PlayA1800_Elements
+BB12_PU45:	// 0xb53
+// BB:12 cycle count: 5
+	     SP = SP + 1              	// [0:9902]  
+//9903  		       break;
+
+LM452:
+	     .stabn 68,0,9903,LM452-_Intro
+	     jmp Lt_45_2              	// [1:9903]  
+Lt_45_4:	// 0xb55
+// BB:13 cycle count: 9
+//9904  
+//9905  	    case 12:
+//9906  		    PlayA1800_Elements(A_VLMHTEN_Intro3);
+
+LM453:
+	     .stabn 68,0,9906,LM453-_Intro
+	     SP = SP - 1              	// [0:9906]  
+	     R3 = 9                   	// [1:9906]  
+	     R4 = SP + 1              	// [2:9906]  
+	     [R4] = R3                	// [4:9906]  
+	     call _PlayA1800_Elements 	// [6:9906]  PlayA1800_Elements
+BB14_PU45:	// 0xb5c
+// BB:14 cycle count: 5
+	     SP = SP + 1              	// [0:9906]  
+//9907  		       break;
+
+LM454:
+	     .stabn 68,0,9907,LM454-_Intro
+	     jmp Lt_45_2              	// [1:9907]  
+Lt_45_5:	// 0xb5e
+// BB:15 cycle count: 9
+//9908  		case 17:
+//9909  		    PlayA1800_Elements(A_VLMHTEN_Intro4);
+
+LM455:
+	     .stabn 68,0,9909,LM455-_Intro
+	     SP = SP - 1              	// [0:9909]  
+	     R3 = 10                  	// [1:9909]  
+	     R4 = SP + 1              	// [2:9909]  
+	     [R4] = R3                	// [4:9909]  
+	     call _PlayA1800_Elements 	// [6:9909]  PlayA1800_Elements
+BB16_PU45:	// 0xb65
+// BB:16 cycle count: 5
+	     SP = SP + 1              	// [0:9909]  
+//9910  		        break;
+
+LM456:
+	     .stabn 68,0,9910,LM456-_Intro
+	     jmp Lt_45_2              	// [1:9910]  
+Lt_45_6:	// 0xb67
+// BB:17 cycle count: 9
+//9911  	    case 23:
+//9912  		    PlayA1800_Elements(A_VLMHTEN_Intro5);
+
+LM457:
+	     .stabn 68,0,9912,LM457-_Intro
+	     SP = SP - 1              	// [0:9912]  
+	     R3 = 11                  	// [1:9912]  
+	     R4 = SP + 1              	// [2:9912]  
+	     [R4] = R3                	// [4:9912]  
+	     call _PlayA1800_Elements 	// [6:9912]  PlayA1800_Elements
+BB18_PU45:	// 0xb6e
+// BB:18 cycle count: 5
+	     SP = SP + 1              	// [0:9912]  
+//9913  		        break;
+
+LM458:
+	     .stabn 68,0,9913,LM458-_Intro
+	     jmp Lt_45_2              	// [1:9913]  
+Lt_45_7:	// 0xb70
+// BB:19 cycle count: 9
+//9914  		case 28:
+//9915  		    PlayA1800_Elements(A_VLMHTEN_Intro6);
+
+LM459:
+	     .stabn 68,0,9915,LM459-_Intro
+	     SP = SP - 1              	// [0:9915]  
+	     R3 = 12                  	// [1:9915]  
+	     R4 = SP + 1              	// [2:9915]  
+	     [R4] = R3                	// [4:9915]  
+	     call _PlayA1800_Elements 	// [6:9915]  PlayA1800_Elements
+BB20_PU45:	// 0xb77
+// BB:20 cycle count: 5
+	     SP = SP + 1              	// [0:9915]  
+//9916  		       break;
+
+LM460:
+	     .stabn 68,0,9916,LM460-_Intro
+	     jmp Lt_45_2              	// [1:9916]  
+Lt_45_8:	// 0xb79
+// BB:21 cycle count: 4
+//9917  		default:
+//9918  			break;
+
+LM461:
+	     .stabn 68,0,9918,LM461-_Intro
+	     jmp Lt_45_2              	// [0:9918]  
+Lt_45_2:	// 0xb7a
+// BB:22 cycle count: 12
+//9919  		}
+//9920  
+//9921     
+//9922         Mem0.firstFlag_23b.BitCTL_f.TokenText=0;
+
+LM462:
+	     .stabn 68,0,9922,LM462-_Intro
+	     DS = seg(_Mem0+2)        	// [0:9922]  Mem0+2
+	     R4 = (_Mem0+2)           	// [1:9922]  Mem0+2
+	     R4 = DS:[R4]             	// [3:9922]  
+	     R3 = R4 & 65534          	// [5:9922]  
+	     DS = seg(_Mem0+2)        	// [7:9922]  Mem0+2
+	     R4 = (_Mem0+2)           	// [8:9922]  Mem0+2
+	     DS:[R4] = R3             	// [10:9922]  
+L_45_18:	// 0xb84
+// BB:23 cycle count: 10
+//9923  	}
+//9924  
+//9925  	
+//9926  	
+//9927  	  if((Mem0.Mission_Cur>=12)&&(Mem0.Mission_Cur<=16))
+
+LM463:
+	     .stabn 68,0,9927,LM463-_Intro
+	     DS = seg(_Mem0)          	// [0:9927]  Mem0
+	     R4 = (_Mem0)             	// [1:9927]  Mem0
+	     R4 = DS:[R4]             	// [3:9927]  
+	     cmp R4, 11               	// [5:9927]  
+	     jbe L_45_20              	// [6:9927]  
+BB24_PU45:	// 0xb8a
+// BB:24 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:9927]  Mem0
+	     R4 = (_Mem0)             	// [1:9927]  Mem0
+	     R4 = DS:[R4]             	// [3:9927]  
+	     cmp R4, 16               	// [5:9927]  
+	     ja L_45_20               	// [6:9927]  
+L_45_21:	// 0xb90
+// BB:25 cycle count: 9
+//9928  	   {
+//9929            PlayA1800_Elements(A_VLMHTEN_Continue2);
+
+LM464:
+	     .stabn 68,0,9929,LM464-_Intro
+	     SP = SP - 1              	// [0:9929]  
+	     R3 = 3                   	// [1:9929]  
+	     R4 = SP + 1              	// [2:9929]  
+	     [R4] = R3                	// [4:9929]  
+	     call _PlayA1800_Elements 	// [6:9929]  PlayA1800_Elements
+BB26_PU45:	// 0xb97
+// BB:26 cycle count: 5
+	     SP = SP + 1              	// [0:9929]  
+	     jmp L_45_19              	// [1:9929]  
+L_45_20:	// 0xb99
+// BB:27 cycle count: 10
+//9930  
+//9931  	   }
+//9932  	   else if(((Mem0.Mission_Cur>=23)&&(Mem0.Mission_Cur<=26))||(Mem0.Mission_Cur==29))
+
+LM465:
+	     .stabn 68,0,9932,LM465-_Intro
+	     DS = seg(_Mem0)          	// [0:9932]  Mem0
+	     R4 = (_Mem0)             	// [1:9932]  Mem0
+	     R4 = DS:[R4]             	// [3:9932]  
+	     cmp R4, 22               	// [5:9932]  
+	     jbe L_45_25              	// [6:9932]  
+BB28_PU45:	// 0xb9f
+// BB:28 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:9932]  Mem0
+	     R4 = (_Mem0)             	// [1:9932]  Mem0
+	     R4 = DS:[R4]             	// [3:9932]  
+	     cmp R4, 26               	// [5:9932]  
+	     jbe L_45_24              	// [6:9932]  
+L_45_25:	// 0xba5
+// BB:29 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:9932]  Mem0
+	     R4 = (_Mem0)             	// [1:9932]  Mem0
+	     R4 = DS:[R4]             	// [3:9932]  
+	     cmp R4, 29               	// [5:9932]  
+	     jne L_45_23              	// [6:9932]  
+L_45_24:	// 0xbab
+// BB:30 cycle count: 9
+//9933  	   {
+//9934             PlayA1800_Elements(A_VLMHTEN_Continue2);
+
+LM466:
+	     .stabn 68,0,9934,LM466-_Intro
+	     SP = SP - 1              	// [0:9934]  
+	     R3 = 3                   	// [1:9934]  
+	     R4 = SP + 1              	// [2:9934]  
+	     [R4] = R3                	// [4:9934]  
+	     call _PlayA1800_Elements 	// [6:9934]  PlayA1800_Elements
+BB31_PU45:	// 0xbb2
+// BB:31 cycle count: 5
+	     SP = SP + 1              	// [0:9934]  
+	     jmp L_45_22              	// [1:9934]  
+L_45_23:	// 0xbb4
+// BB:32 cycle count: 9
+//9935  	   }
+//9936  	
+//9937       else 
+//9938  	 {
+//9939              PlayA1800_Elements(A_VLMHTEN_Continue1);
+
+LM467:
+	     .stabn 68,0,9939,LM467-_Intro
+	     SP = SP - 1              	// [0:9939]  
+	     R3 = 2                   	// [1:9939]  
+	     R4 = SP + 1              	// [2:9939]  
+	     [R4] = R3                	// [4:9939]  
+	     call _PlayA1800_Elements 	// [6:9939]  PlayA1800_Elements
+BB33_PU45:	// 0xbbb
+// BB:33 cycle count: 1
+	     SP = SP + 1              	// [0:9939]  
+L_45_22:	// 0xbbc
+L_45_19:	// 0xbbc
+// BB:34 cycle count: 5
+
+LM468:
+	     .stabn 68,0,9932,LM468-_Intro
+	     pop BP, PC from [SP]     	// [0:9932]  
+	.endp	
 LME46:
-	     .stabf LME46-_Rest_Randm
+	     .stabf LME46-_Intro
 .code
 	     .stabs "Step1:F4",36,0,0,_Step1
 
@@ -7532,252 +7247,258 @@ _Step1: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-//9856  /******************************************************************
-//9857  *****************************************************************/
-//9858  
-//9859  unsigned  Step1()
-//9860  {	
+//9945  /******************************************************************
+//9946  *****************************************************************/
+//9947  
+//9948  unsigned  Step1()
+//9949  {	
+
+LM469:
+	     .stabn 68,0,9949,LM469-_Step1
+BB1_PU46:	// 0xbbd
+// BB:1 cycle count: 139
+	     push BP to [SP]          	// [0:9949]  
+	     BP = SP + 1              	// [2:9949]  
+//9951  
+//9952  //	PVlowFlag_SixScore =0;	
+//9953  //	PVlowFlag_20Score =0;
+//9954  
+//9955     	Sleepflag =0;
+
+LM470:
+	     .stabn 68,0,9955,LM470-_Step1
+	     R3 = 0                   	// [4:9955]  
+	     DS = seg(_Sleepflag)     	// [5:9955]  Sleepflag
+	     R4 = (_Sleepflag)        	// [6:9955]  Sleepflag
+	     DS:[R4] = R3             	// [8:9955]  
+//9956      Resumeflag =0;
+
+LM471:
+	     .stabn 68,0,9956,LM471-_Step1
+	     R3 = 0                   	// [10:9956]  
+	     DS = seg(_Resumeflag)    	// [11:9956]  Resumeflag
+	     R4 = (_Resumeflag)       	// [12:9956]  Resumeflag
+	     DS:[R4] = R3             	// [14:9956]  
+//9957      TwoKeyflag=Key_True;
+
+LM472:
+	     .stabn 68,0,9957,LM472-_Step1
+	     R3 = 1                   	// [16:9957]  
+	     DS = seg(_TwoKeyflag)    	// [17:9957]  TwoKeyflag
+	     R4 = (_TwoKeyflag)       	// [18:9957]  TwoKeyflag
+	     DS:[R4] = R3             	// [20:9957]  
+//9958      
+//9959     	BlinkFlag_Data = 0;//xiang 20150226
+
+LM473:
+	     .stabn 68,0,9959,LM473-_Step1
+	     R3 = 0                   	// [22:9959]  
+	     DS = seg(_BlinkFlag_Data)	// [23:9959]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [24:9959]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [26:9959]  
+//9960     	CheaterFlag =0;
+
+LM474:
+	     .stabn 68,0,9960,LM474-_Step1
+	     R3 = 0                   	// [28:9960]  
+	     DS = seg(_CheaterFlag)   	// [29:9960]  CheaterFlag
+	     R4 = (_CheaterFlag)      	// [30:9960]  CheaterFlag
+	     DS:[R4] = R3             	// [32:9960]  
+//9961  //    Temp_Registered_Play_Select =0; 		
+//9962  				
+//9963      gQuestionIdx = 0xffff;		
+
+LM475:
+	     .stabn 68,0,9963,LM475-_Step1
+	     R3 = - 1                 	// [34:9963]  
+	     DS = seg(_gQuestionIdx)  	// [35:9963]  gQuestionIdx
+	     R4 = (_gQuestionIdx)     	// [36:9963]  gQuestionIdx
+	     DS:[R4] = R3             	// [38:9963]  
+//9964  	Mem0.firstFlag_23b.BitCTL&=0x0ff;
+
+LM476:
+	     .stabn 68,0,9964,LM476-_Step1
+	     DS = seg(_Mem0+2)        	// [40:9964]  Mem0+2
+	     R4 = (_Mem0+2)           	// [41:9964]  Mem0+2
+	     R4 = DS:[R4]             	// [43:9964]  
+	     R3 = R4 & 255            	// [45:9964]  
+	     DS = seg(_Mem0+2)        	// [47:9964]  Mem0+2
+	     R4 = (_Mem0+2)           	// [48:9964]  Mem0+2
+	     DS:[R4] = R3             	// [50:9964]  
+//9965  		
+//9966  	MCollection =0;
+
+LM477:
+	     .stabn 68,0,9966,LM477-_Step1
+	     R3 = 0                   	// [52:9966]  
+	     DS = seg(_MCollection)   	// [53:9966]  MCollection
+	     R4 = (_MCollection)      	// [54:9966]  MCollection
+	     DS:[R4] = R3             	// [56:9966]  
+//9967  	Countdownflag =0;
+
+LM478:
+	     .stabn 68,0,9967,LM478-_Step1
+	     R3 = 0                   	// [58:9967]  
+	     DS = seg(_Countdownflag) 	// [59:9967]  Countdownflag
+	     R4 = (_Countdownflag)    	// [60:9967]  Countdownflag
+	     DS:[R4] = R3             	// [62:9967]  
+//9968  
+//9969  	
+//9970  
+//9971  	OffText =0;
+
+LM479:
+	     .stabn 68,0,9971,LM479-_Step1
+	     R3 = 0                   	// [64:9971]  
+	     DS = seg(_OffText)       	// [65:9971]  OffText
+	     R4 = (_OffText)          	// [66:9971]  OffText
+	     DS:[R4] = R3             	// [68:9971]  
+//9972  	Eventflag =0;
+
+LM480:
+	     .stabn 68,0,9972,LM480-_Step1
+	     R3 = 0                   	// [70:9972]  
+	     DS = seg(_Eventflag)     	// [71:9972]  Eventflag
+	     R4 = (_Eventflag)        	// [72:9972]  Eventflag
+	     DS:[R4] = R3             	// [74:9972]  
+//9973  
+//9974      FailV =0;
+
+LM481:
+	     .stabn 68,0,9974,LM481-_Step1
+	     R3 = 0                   	// [76:9974]  
+	     DS = seg(_FailV)         	// [77:9974]  FailV
+	     R4 = (_FailV)            	// [78:9974]  FailV
+	     DS:[R4] = R3             	// [80:9974]  
+//9975      IMMO_Flag =0;
+
+LM482:
+	     .stabn 68,0,9975,LM482-_Step1
+	     R3 = 0                   	// [82:9975]  
+	     DS = seg(_IMMO_Flag)     	// [83:9975]  IMMO_Flag
+	     R4 = (_IMMO_Flag)        	// [84:9975]  IMMO_Flag
+	     DS:[R4] = R3             	// [86:9975]  
+//9976      MoveSucessFlag =0;  
+
+LM483:
+	     .stabn 68,0,9976,LM483-_Step1
+	     R3 = 0                   	// [88:9976]  
+	     DS = seg(_MoveSucessFlag)	// [89:9976]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [90:9976]  MoveSucessFlag
+	     DS:[R4] = R3             	// [92:9976]  
+//9977      FillerCount =0;
+
+LM484:
+	     .stabn 68,0,9977,LM484-_Step1
+	     R3 = 0                   	// [94:9977]  
+	     DS = seg(_FillerCount)   	// [95:9977]  FillerCount
+	     R4 = (_FillerCount)      	// [96:9977]  FillerCount
+	     DS:[R4] = R3             	// [98:9977]  
+//9978      CoMov =3;
+
+LM485:
+	     .stabn 68,0,9978,LM485-_Step1
+	     R3 = 3                   	// [100:9978]  
+	     DS = seg(_CoMov)         	// [101:9978]  CoMov
+	     R4 = (_CoMov)            	// [102:9978]  CoMov
+	     DS:[R4] = R3             	// [104:9978]  
+//9979      
+//9980      
+//9981  	
+//9982      Key_Event =0;
+
+LM486:
+	     .stabn 68,0,9982,LM486-_Step1
+	     R3 = 0                   	// [106:9982]  
+	     DS = seg(_Key_Event)     	// [107:9982]  Key_Event
+	     R4 = (_Key_Event)        	// [108:9982]  Key_Event
+	     DS:[R4] = R3             	// [110:9982]  
+//9983      
+//9984  
+//9985  	FiveSec_En =0;
+
+LM487:
+	     .stabn 68,0,9985,LM487-_Step1
+	     R3 = 0                   	// [112:9985]  
+	     DS = seg(_FiveSec_En)    	// [113:9985]  FiveSec_En
+	     R4 = (_FiveSec_En)       	// [114:9985]  FiveSec_En
+	     DS:[R4] = R3             	// [116:9985]  
+//9986  	FiveSec_cnt =0;
+
+LM488:
+	     .stabn 68,0,9986,LM488-_Step1
+	     R3 = 0                   	// [118:9986]  
+	     DS = seg(_FiveSec_cnt)   	// [119:9986]  FiveSec_cnt
+	     R4 = (_FiveSec_cnt)      	// [120:9986]  FiveSec_cnt
+	     DS:[R4] = R3             	// [122:9986]  
+//9987  	
+//9988      OtherSph_Random_Value[Serie_Wrong2]=0;
+
+LM489:
+	     .stabn 68,0,9988,LM489-_Step1
+	     R3 = 0                   	// [124:9988]  
+	     DS = seg(_OtherSph_Random_Value+43)	// [125:9988]  OtherSph_Random_Value+43
+	     R4 = (_OtherSph_Random_Value+43)	// [126:9988]  OtherSph_Random_Value+43
+	     DS:[R4] = R3             	// [128:9988]  
+//9989   
+//9990      PlaySFX_Flag =0;
+
+LM490:
+	     .stabn 68,0,9990,LM490-_Step1
+	     R3 = 0                   	// [130:9990]  
+	     DS = seg(_PlaySFX_Flag)  	// [131:9990]  PlaySFX_Flag
+	     R4 = (_PlaySFX_Flag)     	// [132:9990]  PlaySFX_Flag
+	     DS:[R4] = R3             	// [134:9990]  
+//9991      
+//9992       Clean_LFX_Led();
 
 LM491:
-	     .stabn 68,0,9860,LM491-_Step1
-BB1_PU46:	// 0xc1f
-// BB:1 cycle count: 139
-	     push BP to [SP]          	// [0:9860]  
-	     BP = SP + 1              	// [2:9860]  
-//9862  
-//9863  //	PVlowFlag_SixScore =0;	
-//9864  //	PVlowFlag_20Score =0;
-//9865  
-//9866     	Sleepflag =0;
+	     .stabn 68,0,9992,LM491-_Step1
+	     call _Clean_LFX_Led      	// [136:9992]  Clean_LFX_Led
+BB2_PU46:	// 0xc30
+// BB:2 cycle count: 3
+//9993       Clean_LFX_Color();
 
 LM492:
-	     .stabn 68,0,9866,LM492-_Step1
-	     R3 = 0                   	// [4:9866]  
-	     DS = seg(_Sleepflag)     	// [5:9866]  Sleepflag
-	     R4 = (_Sleepflag)        	// [6:9866]  Sleepflag
-	     DS:[R4] = R3             	// [8:9866]  
-//9867      Resumeflag =0;
+	     .stabn 68,0,9993,LM492-_Step1
+	     call _Clean_LFX_Color    	// [0:9993]  Clean_LFX_Color
+BB3_PU46:	// 0xc32
+// BB:3 cycle count: 3
+//9994       Clean_Led_Color();
 
 LM493:
-	     .stabn 68,0,9867,LM493-_Step1
-	     R3 = 0                   	// [10:9867]  
-	     DS = seg(_Resumeflag)    	// [11:9867]  Resumeflag
-	     R4 = (_Resumeflag)       	// [12:9867]  Resumeflag
-	     DS:[R4] = R3             	// [14:9867]  
-//9868      TwoKeyflag=Key_True;
+	     .stabn 68,0,9994,LM493-_Step1
+	     call _Clean_Led_Color    	// [0:9994]  Clean_Led_Color
+BB4_PU46:	// 0xc34
+// BB:4 cycle count: 9
+//9995      
+//9996        
+//9997      PlayA1800_Elements(SFX_On);
 
 LM494:
-	     .stabn 68,0,9868,LM494-_Step1
-	     R3 = 1                   	// [16:9868]  
-	     DS = seg(_TwoKeyflag)    	// [17:9868]  TwoKeyflag
-	     R4 = (_TwoKeyflag)       	// [18:9868]  TwoKeyflag
-	     DS:[R4] = R3             	// [20:9868]  
-//9869      
-//9870     	BlinkFlag_Data = 0;//xiang 20150226
+	     .stabn 68,0,9997,LM494-_Step1
+	     SP = SP - 1              	// [0:9997]  
+	     R3 = 35                  	// [1:9997]  
+	     R4 = SP + 1              	// [2:9997]  
+	     [R4] = R3                	// [4:9997]  
+	     call _PlayA1800_Elements 	// [6:9997]  PlayA1800_Elements
+BB5_PU46:	// 0xc3b
+// BB:5 cycle count: 4
+	     SP = SP + 1              	// [0:9997]  
+//9998  //     Mem0.Mission_Cur=18;
+//9999       Intro();
 
 LM495:
-	     .stabn 68,0,9870,LM495-_Step1
-	     R3 = 0                   	// [22:9870]  
-	     DS = seg(_BlinkFlag_Data)	// [23:9870]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [24:9870]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [26:9870]  
-//9871     	CheaterFlag =0;
+	     .stabn 68,0,9999,LM495-_Step1
+	     call _Intro              	// [1:9999]  Intro
+BB6_PU46:	// 0xc3e
+// BB:6 cycle count: 7
+//10000       return C_SelectMission;
 
 LM496:
-	     .stabn 68,0,9871,LM496-_Step1
-	     R3 = 0                   	// [28:9871]  
-	     DS = seg(_CheaterFlag)   	// [29:9871]  CheaterFlag
-	     R4 = (_CheaterFlag)      	// [30:9871]  CheaterFlag
-	     DS:[R4] = R3             	// [32:9871]  
-//9872  //    Temp_Registered_Play_Select =0; 		
-//9873  				
-//9874      gQuestionIdx = 0xffff;		
-
-LM497:
-	     .stabn 68,0,9874,LM497-_Step1
-	     R3 = - 1                 	// [34:9874]  
-	     DS = seg(_gQuestionIdx)  	// [35:9874]  gQuestionIdx
-	     R4 = (_gQuestionIdx)     	// [36:9874]  gQuestionIdx
-	     DS:[R4] = R3             	// [38:9874]  
-//9875  	Mem0.firstFlag_23b &=0x0ff;
-
-LM498:
-	     .stabn 68,0,9875,LM498-_Step1
-	     DS = seg(_Mem0+2)        	// [40:9875]  Mem0+2
-	     R4 = (_Mem0+2)           	// [41:9875]  Mem0+2
-	     R4 = DS:[R4]             	// [43:9875]  
-	     R3 = R4 & 255            	// [45:9875]  
-	     DS = seg(_Mem0+2)        	// [47:9875]  Mem0+2
-	     R4 = (_Mem0+2)           	// [48:9875]  Mem0+2
-	     DS:[R4] = R3             	// [50:9875]  
-//9876  		
-//9877  	MCollection =0;
-
-LM499:
-	     .stabn 68,0,9877,LM499-_Step1
-	     R3 = 0                   	// [52:9877]  
-	     DS = seg(_MCollection)   	// [53:9877]  MCollection
-	     R4 = (_MCollection)      	// [54:9877]  MCollection
-	     DS:[R4] = R3             	// [56:9877]  
-//9878  	Countdownflag =0;
-
-LM500:
-	     .stabn 68,0,9878,LM500-_Step1
-	     R3 = 0                   	// [58:9878]  
-	     DS = seg(_Countdownflag) 	// [59:9878]  Countdownflag
-	     R4 = (_Countdownflag)    	// [60:9878]  Countdownflag
-	     DS:[R4] = R3             	// [62:9878]  
-//9879  
-//9880  	
-//9881  
-//9882  	OffText =0;
-
-LM501:
-	     .stabn 68,0,9882,LM501-_Step1
-	     R3 = 0                   	// [64:9882]  
-	     DS = seg(_OffText)       	// [65:9882]  OffText
-	     R4 = (_OffText)          	// [66:9882]  OffText
-	     DS:[R4] = R3             	// [68:9882]  
-//9883  	Eventflag =0;
-
-LM502:
-	     .stabn 68,0,9883,LM502-_Step1
-	     R3 = 0                   	// [70:9883]  
-	     DS = seg(_Eventflag)     	// [71:9883]  Eventflag
-	     R4 = (_Eventflag)        	// [72:9883]  Eventflag
-	     DS:[R4] = R3             	// [74:9883]  
-//9884  
-//9885      FailV =0;
-
-LM503:
-	     .stabn 68,0,9885,LM503-_Step1
-	     R3 = 0                   	// [76:9885]  
-	     DS = seg(_FailV)         	// [77:9885]  FailV
-	     R4 = (_FailV)            	// [78:9885]  FailV
-	     DS:[R4] = R3             	// [80:9885]  
-//9886      IMMO_Flag =0;
-
-LM504:
-	     .stabn 68,0,9886,LM504-_Step1
-	     R3 = 0                   	// [82:9886]  
-	     DS = seg(_IMMO_Flag)     	// [83:9886]  IMMO_Flag
-	     R4 = (_IMMO_Flag)        	// [84:9886]  IMMO_Flag
-	     DS:[R4] = R3             	// [86:9886]  
-//9887      MoveSucessFlag =0;  
-
-LM505:
-	     .stabn 68,0,9887,LM505-_Step1
-	     R3 = 0                   	// [88:9887]  
-	     DS = seg(_MoveSucessFlag)	// [89:9887]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [90:9887]  MoveSucessFlag
-	     DS:[R4] = R3             	// [92:9887]  
-//9888      FillerCount =0;
-
-LM506:
-	     .stabn 68,0,9888,LM506-_Step1
-	     R3 = 0                   	// [94:9888]  
-	     DS = seg(_FillerCount)   	// [95:9888]  FillerCount
-	     R4 = (_FillerCount)      	// [96:9888]  FillerCount
-	     DS:[R4] = R3             	// [98:9888]  
-//9889      CoMov =3;
-
-LM507:
-	     .stabn 68,0,9889,LM507-_Step1
-	     R3 = 3                   	// [100:9889]  
-	     DS = seg(_CoMov)         	// [101:9889]  CoMov
-	     R4 = (_CoMov)            	// [102:9889]  CoMov
-	     DS:[R4] = R3             	// [104:9889]  
-//9890      
-//9891      
-//9892  	
-//9893      Key_Event =0;
-
-LM508:
-	     .stabn 68,0,9893,LM508-_Step1
-	     R3 = 0                   	// [106:9893]  
-	     DS = seg(_Key_Event)     	// [107:9893]  Key_Event
-	     R4 = (_Key_Event)        	// [108:9893]  Key_Event
-	     DS:[R4] = R3             	// [110:9893]  
-//9894      
-//9895  
-//9896  	FiveSec_En =0;
-
-LM509:
-	     .stabn 68,0,9896,LM509-_Step1
-	     R3 = 0                   	// [112:9896]  
-	     DS = seg(_FiveSec_En)    	// [113:9896]  FiveSec_En
-	     R4 = (_FiveSec_En)       	// [114:9896]  FiveSec_En
-	     DS:[R4] = R3             	// [116:9896]  
-//9897  	FiveSec_cnt =0;
-
-LM510:
-	     .stabn 68,0,9897,LM510-_Step1
-	     R3 = 0                   	// [118:9897]  
-	     DS = seg(_FiveSec_cnt)   	// [119:9897]  FiveSec_cnt
-	     R4 = (_FiveSec_cnt)      	// [120:9897]  FiveSec_cnt
-	     DS:[R4] = R3             	// [122:9897]  
-//9898  	
-//9899      OtherSph_Random_Value[Serie_Wrong2]=0;
-
-LM511:
-	     .stabn 68,0,9899,LM511-_Step1
-	     R3 = 0                   	// [124:9899]  
-	     DS = seg(_OtherSph_Random_Value+43)	// [125:9899]  OtherSph_Random_Value+43
-	     R4 = (_OtherSph_Random_Value+43)	// [126:9899]  OtherSph_Random_Value+43
-	     DS:[R4] = R3             	// [128:9899]  
-//9900   
-//9901      PlaySFX_Flag =0;
-
-LM512:
-	     .stabn 68,0,9901,LM512-_Step1
-	     R3 = 0                   	// [130:9901]  
-	     DS = seg(_PlaySFX_Flag)  	// [131:9901]  PlaySFX_Flag
-	     R4 = (_PlaySFX_Flag)     	// [132:9901]  PlaySFX_Flag
-	     DS:[R4] = R3             	// [134:9901]  
-//9902      
-//9903       Clean_LFX_Led();
-
-LM513:
-	     .stabn 68,0,9903,LM513-_Step1
-	     call _Clean_LFX_Led      	// [136:9903]  Clean_LFX_Led
-BB2_PU46:	// 0xc92
-// BB:2 cycle count: 3
-//9904       Clean_LFX_Color();
-
-LM514:
-	     .stabn 68,0,9904,LM514-_Step1
-	     call _Clean_LFX_Color    	// [0:9904]  Clean_LFX_Color
-BB3_PU46:	// 0xc94
-// BB:3 cycle count: 3
-//9905       Clean_Led_Color();
-
-LM515:
-	     .stabn 68,0,9905,LM515-_Step1
-	     call _Clean_Led_Color    	// [0:9905]  Clean_Led_Color
-BB4_PU46:	// 0xc96
-// BB:4 cycle count: 9
-//9906      
-//9907        
-//9908      PlayA1800_Elements(SFX_On);
-
-LM516:
-	     .stabn 68,0,9908,LM516-_Step1
-	     SP = SP - 1              	// [0:9908]  
-	     R3 = 35                  	// [1:9908]  
-	     R4 = SP + 1              	// [2:9908]  
-	     [R4] = R3                	// [4:9908]  
-	     call _PlayA1800_Elements 	// [6:9908]  PlayA1800_Elements
-BB5_PU46:	// 0xc9d
-// BB:5 cycle count: 8
-	     SP = SP + 1              	// [0:9908]  
-//9909  //     Mem0.Mission_Cur=18;
-//9910     
-//9911       return C_SelectMission;
-
-LM517:
-	     .stabn 68,0,9911,LM517-_Step1
-	     R1 = - 4075              	// [1:9911]  
-	     pop BP, PC from [SP]     	// [3:9911]  
+	     .stabn 68,0,10000,LM496-_Step1
+	     R1 = - 4075              	// [0:10000]  
+	     pop BP, PC from [SP]     	// [2:10000]  
 	.endp	
 LME47:
 	     .stabf LME47-_Step1
@@ -7790,33 +7511,33 @@ _Select_Mission: .proc
 	     .stabn 0xa6,0,0,0
 	// old_frame_pointer = 0
 	// return_address = 1
-//9915  		 
-//9916  }
-//9917  
-//9918  unsigned int Select_Mission()
-//9919  {
+//10004  		 
+//10005  }
+//10006  
+//10007  unsigned int Select_Mission()
+//10008  {
 
-LM518:
-	     .stabn 68,0,9919,LM518-_Select_Mission
-BB1_PU47:	// 0xca1
+LM497:
+	     .stabn 68,0,10008,LM497-_Select_Mission
+BB1_PU47:	// 0xc41
 // BB:1 cycle count: 7
-	     push BP to [SP]          	// [0:9919]  
-	     BP = SP + 1              	// [2:9919]  
-//9920  	
-//9921  	
-//9922  	 Get_Mission();
+	     push BP to [SP]          	// [0:10008]  
+	     BP = SP + 1              	// [2:10008]  
+//10009  	
+//10010  	
+//10011  	 Get_Mission();
 
-LM519:
-	     .stabn 68,0,9922,LM519-_Select_Mission
-	     call _Get_Mission        	// [4:9922]  Get_Mission
-BB2_PU47:	// 0xca6
+LM498:
+	     .stabn 68,0,10011,LM498-_Select_Mission
+	     call _Get_Mission        	// [4:10011]  Get_Mission
+BB2_PU47:	// 0xc46
 // BB:2 cycle count: 7
-//9923       return C_Mission;
+//10012       return C_Mission;
 
-LM520:
-	     .stabn 68,0,9923,LM520-_Select_Mission
-	     R1 = - 4077              	// [0:9923]  
-	     pop BP, PC from [SP]     	// [2:9923]  
+LM499:
+	     .stabn 68,0,10012,LM499-_Select_Mission
+	     R1 = - 4077              	// [0:10012]  
+	     pop BP, PC from [SP]     	// [2:10012]  
 	.endp	
 LME48:
 	     .stabf LME48-_Select_Mission
@@ -7826,141 +7547,184 @@ LME48:
 	// Program Unit: CheckIntro
 .public	_CheckIntro
 _CheckIntro: .proc	
-	     .stabn 0xa6,0,0,4
+	     .stabn 0xa6,0,0,5
 	// Addr = 2
 	// num = 0
 	// T_TableH = 1
-	// old_frame_pointer = 4
-	// return_address = 5
-//11414  }
-//11415  /***********************************************************************
-//11416  *************************************************************************/
-//11417  unsigned int CheckIntro()
-//11418  {
+	// temp = 4
+	// old_frame_pointer = 5
+	// return_address = 6
+//11503  }
+//11504  /***********************************************************************
+//11505  *************************************************************************/
+//11506  unsigned int CheckIntro()
+//11507  {
 
-LM521:
-	     .stabn 68,0,11418,LM521-_CheckIntro
-BB1_PU48:	// 0xca9
+LM500:
+	     .stabn 68,0,11507,LM500-_CheckIntro
+BB1_PU48:	// 0xc49
 // BB:1 cycle count: 19
-	     push BP to [SP]          	// [0:11418]  
-	     SP = SP - 4              	// [2:11418]  
-	     BP = SP + 1              	// [3:11418]  
-LBB41:
-//11419     unsigned long Addr;
-//11420     
-//11421     unsigned int num =3;
+	     push BP to [SP]          	// [0:11507]  
+	     SP = SP - 5              	// [2:11507]  
+	     BP = SP + 1              	// [3:11507]  
+LBB40:
+//11508     unsigned long Addr;
+//11509     
+//11510     unsigned int num =3;
 
-LM522:
-	     .stabn 68,0,11421,LM522-_CheckIntro
-	     R4 = 3                   	// [5:11421]  
-	     [BP + 0] = R4            	// [6:11421]  num
-//11422     unsigned int  T_TableH=0;
+LM501:
+	     .stabn 68,0,11510,LM501-_CheckIntro
+	     R4 = 3                   	// [5:11510]  
+	     [BP + 0] = R4            	// [6:11510]  num
+//11511     unsigned int  T_TableH=0;
 
-LM523:
-	     .stabn 68,0,11422,LM523-_CheckIntro
-	     R4 = 0                   	// [7:11422]  
-	     [BP + 1] = R4            	// [8:11422]  T_TableH
-//11423  
-//11424        
-//11425     if(Mem0.X>=10)
+LM502:
+	     .stabn 68,0,11511,LM502-_CheckIntro
+	     R4 = 0                   	// [7:11511]  
+	     [BP + 1] = R4            	// [8:11511]  T_TableH
+//11512     unsigned int temp;
+//11513  
+//11514        
+//11515     if(Mem0.X>=10)
 
-LM524:
-	     .stabn 68,0,11425,LM524-_CheckIntro
-	     DS = seg(_Mem0+5)        	// [9:11425]  Mem0+5
-	     R4 = (_Mem0+5)           	// [10:11425]  Mem0+5
-	     R4 = DS:[R4]             	// [12:11425]  
-	     cmp R4, 9                	// [14:11425]  
-	     jbe L_48_6               	// [15:11425]  
-BB2_PU48:	// 0xcb7
+LM503:
+	     .stabn 68,0,11515,LM503-_CheckIntro
+	     DS = seg(_Mem0+5)        	// [9:11515]  Mem0+5
+	     R4 = (_Mem0+5)           	// [10:11515]  Mem0+5
+	     R4 = DS:[R4]             	// [12:11515]  
+	     cmp R4, 9                	// [14:11515]  
+	     jbe L_48_10              	// [15:11515]  
+BB2_PU48:	// 0xc57
 // BB:2 cycle count: 7
-//11426       return 0;
+//11516       return 0;
 
-LM525:
-	     .stabn 68,0,11426,LM525-_CheckIntro
-	     R1 = 0                   	// [0:11426]  
-	     SP = SP + 4              	// [1:11426]  
-	     pop BP, PC from [SP]     	// [2:11426]  
-L_48_6:	// 0xcba
+LM504:
+	     .stabn 68,0,11516,LM504-_CheckIntro
+	     R1 = 0                   	// [0:11516]  
+	     SP = SP + 5              	// [1:11516]  
+	     pop BP, PC from [SP]     	// [2:11516]  
+L_48_10:	// 0xc5a
 // BB:3 cycle count: 24
-//11427  
-//11428        T_TableH = Intro_Table[Mem0.X+1];
+//11517  
+//11518        T_TableH = Intro_Table[Mem0.X+1];
 
-LM526:
-	     .stabn 68,0,11428,LM526-_CheckIntro
-	     DS = seg(_Mem0+5)        	// [0:11428]  Mem0+5
-	     R4 = (_Mem0+5)           	// [1:11428]  Mem0+5
-	     R4 = DS:[R4]             	// [3:11428]  
-	     R4 = R4 + 1              	// [5:11428]  
-	     R3 = 0                   	// [6:11428]  
-	     R1 = (_Intro_Table)      	// [7:11428]  Intro_Table
-	     R2 = seg(_Intro_Table)   	// [9:11428]  Intro_Table
-	     R4 = R4 + R1             	// [10:11428]  
-	     R3 = R3 + R2, Carry      	// [11:11428]  
-	     DS = R3                  	// [12:11428]  
-	     R4 = DS:[R4]             	// [13:11428]  
-	     [BP + 1] = R4            	// [15:11428]  T_TableH
-//11429         
-//11430        if((T_TableH==T_Intro2)||(T_TableH==T_Intro1))
+LM505:
+	     .stabn 68,0,11518,LM505-_CheckIntro
+	     DS = seg(_Mem0+5)        	// [0:11518]  Mem0+5
+	     R4 = (_Mem0+5)           	// [1:11518]  Mem0+5
+	     R4 = DS:[R4]             	// [3:11518]  
+	     R4 = R4 + 1              	// [5:11518]  
+	     R3 = 0                   	// [6:11518]  
+	     R1 = (_Intro_Table)      	// [7:11518]  Intro_Table
+	     R2 = seg(_Intro_Table)   	// [9:11518]  Intro_Table
+	     R4 = R4 + R1             	// [10:11518]  
+	     R3 = R3 + R2, Carry      	// [11:11518]  
+	     DS = R3                  	// [12:11518]  
+	     R4 = DS:[R4]             	// [13:11518]  
+	     [BP + 1] = R4            	// [15:11518]  T_TableH
+//11519         
+//11520        if((T_TableH==T_Intro2)||(T_TableH==T_Intro1)||(T_TableH==T_Intro4))
 
-LM527:
-	     .stabn 68,0,11430,LM527-_CheckIntro
-	     R4 = [BP + 1]            	// [16:11430]  T_TableH
-	     cmp R4, 1400             	// [18:11430]  
-	     je L_48_8                	// [20:11430]  
-BB4_PU48:	// 0xccc
+LM506:
+	     .stabn 68,0,11520,LM506-_CheckIntro
+	     R4 = [BP + 1]            	// [16:11520]  T_TableH
+	     cmp R4, 1400             	// [18:11520]  
+	     je L_48_12               	// [20:11520]  
+BB4_PU48:	// 0xc6c
 // BB:4 cycle count: 8
-	     R4 = [BP + 1]            	// [0:11430]  T_TableH
-	     cmp R4, 1100             	// [2:11430]  
-	     jne L_48_7               	// [4:11430]  
-L_48_8:	// 0xcd0
-// BB:5 cycle count: 2
-//11431             num =4;
+	     R4 = [BP + 1]            	// [0:11520]  T_TableH
+	     cmp R4, 1100             	// [2:11520]  
+	     je L_48_12               	// [4:11520]  
+L_48_13:	// 0xc70
+// BB:5 cycle count: 8
+	     R4 = [BP + 1]            	// [0:11520]  T_TableH
+	     cmp R4, 2200             	// [2:11520]  
+	     jne L_48_11              	// [4:11520]  
+L_48_12:	// 0xc74
+// BB:6 cycle count: 2
+//11521             num =4;
 
-LM528:
-	     .stabn 68,0,11431,LM528-_CheckIntro
-	     R4 = 4                   	// [0:11431]  
-	     [BP + 0] = R4            	// [1:11431]  num
-L_48_7:	// 0xcd2
-// BB:6 cycle count: 28
-//11432  
-//11433  
-//11434       Addr = Mem0.Mission_Cur * num * 2 +T_TableH;// Intro_Table[Mem0.X+1] ;//Table; Num
+LM507:
+	     .stabn 68,0,11521,LM507-_CheckIntro
+	     R4 = 4                   	// [0:11521]  
+	     [BP + 0] = R4            	// [1:11521]  num
+L_48_11:	// 0xc76
+// BB:7 cycle count: 28
+//11522  
+//11523  
+//11524       Addr = Mem0.Mission_Cur * num * 2 +T_TableH;// Intro_Table[Mem0.X+1] ;//Table; Num
 
-LM529:
-	     .stabn 68,0,11434,LM529-_CheckIntro
-	     R3 = [BP + 0]            	// [0:11434]  num
-	     DS = seg(_Mem0)          	// [2:11434]  Mem0
-	     R4 = (_Mem0)             	// [3:11434]  Mem0
-	     R4 = DS:[R4]             	// [5:11434]  
-	     MR = R3 * R4, uu         	// [7:11434]  
-	     R4 = R3 lsl 1            	// [8:11434]  
-	     R4 = R4 + [BP + 1]       	// [9:11434]  T_TableH
-	     R3 = 0                   	// [11:11434]  
-	     [BP + 2] = R4            	// [12:11434]  Addr
-	     [BP + 3] = R3            	// [13:11434]  Addr+1
-//11435  
-//11436       return SPI_ReadAWord_Big(Addr);
+LM508:
+	     .stabn 68,0,11524,LM508-_CheckIntro
+	     R3 = [BP + 0]            	// [0:11524]  num
+	     DS = seg(_Mem0)          	// [2:11524]  Mem0
+	     R4 = (_Mem0)             	// [3:11524]  Mem0
+	     R4 = DS:[R4]             	// [5:11524]  
+	     MR = R3 * R4, uu         	// [7:11524]  
+	     R4 = R3 lsl 1            	// [8:11524]  
+	     R4 = R4 + [BP + 1]       	// [9:11524]  T_TableH
+	     R3 = 0                   	// [11:11524]  
+	     [BP + 2] = R4            	// [12:11524]  Addr
+	     [BP + 3] = R3            	// [13:11524]  Addr+1
+//11525       temp=SPI_ReadAWord_Big(Addr);
 
-LM530:
-	     .stabn 68,0,11436,LM530-_CheckIntro
-	     SP = SP - 2              	// [14:11436]  
-	     R2 = [BP + 2]            	// [15:11436]  Addr
-	     R3 = [BP + 3]            	// [17:11436]  Addr+1
-	     R4 = SP + 1              	// [19:11436]  
-	     [R4++] = R2              	// [21:11436]  
-	     [R4] = R3                	// [23:11436]  
-	     call _SPI_ReadAWord_Big  	// [25:11436]  SPI_ReadAWord_Big
-BB7_PU48:	// 0xce6
-// BB:7 cycle count: 6
-	     SP = SP + 6              	// [0:11436]  
-	     pop BP, PC from [SP]     	// [1:11436]  
-LBE41:
+LM509:
+	     .stabn 68,0,11525,LM509-_CheckIntro
+	     SP = SP - 2              	// [14:11525]  
+	     R2 = [BP + 2]            	// [15:11525]  Addr
+	     R3 = [BP + 3]            	// [17:11525]  Addr+1
+	     R4 = SP + 1              	// [19:11525]  
+	     [R4++] = R2              	// [21:11525]  
+	     [R4] = R3                	// [23:11525]  
+	     call _SPI_ReadAWord_Big  	// [25:11525]  SPI_ReadAWord_Big
+BB8_PU48:	// 0xc8a
+// BB:8 cycle count: 9
+	     SP = SP + 2              	// [0:11525]  
+	     [BP + 4] = R1            	// [1:11525]  temp
+//11526       
+//11527       if((temp==0)||(temp==9999))
+
+LM510:
+	     .stabn 68,0,11527,LM510-_CheckIntro
+	     R4 = [BP + 4]            	// [2:11527]  temp
+	     cmp R4, 0                	// [4:11527]  
+	     je L_48_16               	// [5:11527]  
+BB9_PU48:	// 0xc8f
+// BB:9 cycle count: 8
+	     R4 = [BP + 4]            	// [0:11527]  temp
+	     cmp R4, 9999             	// [2:11527]  
+	     jne L_48_15              	// [4:11527]  
+L_48_16:	// 0xc93
+// BB:10 cycle count: 7
+//11528           return 0;
+
+LM511:
+	     .stabn 68,0,11528,LM511-_CheckIntro
+	     R1 = 0                   	// [0:11528]  
+	     SP = SP + 5              	// [1:11528]  
+	     pop BP, PC from [SP]     	// [2:11528]  
+L_48_15:	// 0xc96
+// BB:11 cycle count: 7
+//11529       else
+//11530            return 1;
+
+LM512:
+	     .stabn 68,0,11530,LM512-_CheckIntro
+	     R1 = 1                   	// [0:11530]  
+	     SP = SP + 5              	// [1:11530]  
+	     pop BP, PC from [SP]     	// [2:11530]  
+L_48_14:	// 0xc99
+// BB:12 cycle count: 6
+	     SP = SP + 5              	// [0:11530]  
+	     pop BP, PC from [SP]     	// [1:11530]  
+LBE40:
 	.endp	
-	     .stabn 192,0,0,LBB41-_CheckIntro
+	     .stabn 192,0,0,LBB40-_CheckIntro
 	     .stabs "Addr:5",128,0,0,2
 	     .stabs "num:4",128,0,0,0
 	     .stabs "T_TableH:4",128,0,0,1
-	     .stabn 224,0,0,LBE41-_CheckIntro
+	     .stabs "temp:4",128,0,0,4
+	     .stabn 224,0,0,LBE40-_CheckIntro
 LME49:
 	     .stabf LME49-_CheckIntro
 .code
@@ -7979,1917 +7743,2110 @@ _Mission: .proc
 	// status = 4
 	// old_frame_pointer = 7
 	// return_address = 8
-//11442  /*******************************************************************
-//11443  
-//11444  **********************************************************************/
-//11445  unsigned int Mission()
-//11446  {
+//11536  /*******************************************************************
+//11537  
+//11538  **********************************************************************/
+//11539  unsigned int Mission()
+//11540  {
 
-LM531:
-	     .stabn 68,0,11446,LM531-_Mission
-BB1_PU49:	// 0xce8
+LM513:
+	     .stabn 68,0,11540,LM513-_Mission
+BB1_PU49:	// 0xc9b
 // BB:1 cycle count: 51
-	     push BP to [SP]          	// [0:11446]  
-	     SP = SP - 7              	// [2:11446]  
-	     BP = SP + 1              	// [3:11446]  
-LBB42:
-//11447  	unsigned int temp;
-//11448  	unsigned int  temp_MoveText2_Right=0;
+	     push BP to [SP]          	// [0:11540]  
+	     SP = SP - 7              	// [2:11540]  
+	     BP = SP + 1              	// [3:11540]  
+LBB41:
+//11541  	unsigned int temp;
+//11542  	unsigned int  temp_MoveText2_Right=0;
 
-LM532:
-	     .stabn 68,0,11448,LM532-_Mission
-	     R4 = 0                   	// [5:11448]  
-	     [BP + 0] = R4            	// [6:11448]  temp_MoveText2_Right
-//11449  	unsigned int timeovercnt =0;
+LM514:
+	     .stabn 68,0,11542,LM514-_Mission
+	     R4 = 0                   	// [5:11542]  
+	     [BP + 0] = R4            	// [6:11542]  temp_MoveText2_Right
+//11543  	unsigned int timeovercnt =0;
 
-LM533:
-	     .stabn 68,0,11449,LM533-_Mission
-	     R4 = 0                   	// [7:11449]  
-	     [BP + 1] = R4            	// [8:11449]  timeovercnt
-//11450  	unsigned int temp_TimeTatleCnt =0;
+LM515:
+	     .stabn 68,0,11543,LM515-_Mission
+	     R4 = 0                   	// [7:11543]  
+	     [BP + 1] = R4            	// [8:11543]  timeovercnt
+//11544  	unsigned int temp_TimeTatleCnt =0;
 
-LM534:
-	     .stabn 68,0,11450,LM534-_Mission
-	     R4 = 0                   	// [9:11450]  
-	     [BP + 2] = R4            	// [10:11450]  temp_TimeTatleCnt
-//11451  
-//11452      //Mem0.firstFlag_23b=0;//&=~0x800;
-//11453  
-//11454  	unsigned int Mvmt =0;
+LM516:
+	     .stabn 68,0,11544,LM516-_Mission
+	     R4 = 0                   	// [9:11544]  
+	     [BP + 2] = R4            	// [10:11544]  temp_TimeTatleCnt
+//11545  
+//11546      //Mem0.firstFlag_23b=0;//&=~0x800;
+//11547  
+//11548  	unsigned int Mvmt =0;
 
-LM535:
-	     .stabn 68,0,11454,LM535-_Mission
-	     R4 = 0                   	// [11:11454]  
-	     [BP + 3] = R4            	// [12:11454]  Mvmt
-//11455      unsigned int Movetime;
-//11456  	unsigned int status=0;
+LM517:
+	     .stabn 68,0,11548,LM517-_Mission
+	     R4 = 0                   	// [11:11548]  
+	     [BP + 3] = R4            	// [12:11548]  Mvmt
+//11549      unsigned int Movetime;
+//11550  	unsigned int status=0;
 
-LM536:
-	     .stabn 68,0,11456,LM536-_Mission
-	     R4 = 0                   	// [13:11456]  
-	     [BP + 4] = R4            	// [14:11456]  status
-//11457  	Movetime=15*16;
+LM518:
+	     .stabn 68,0,11550,LM518-_Mission
+	     R4 = 0                   	// [13:11550]  
+	     [BP + 4] = R4            	// [14:11550]  status
+//11551  	Movetime=15*16;
 
-LM537:
-	     .stabn 68,0,11457,LM537-_Mission
-	     R4 = 240                 	// [15:11457]  
-	     [BP + 5] = R4            	// [17:11457]  Movetime
-//11458  
-//11459      CheaterFlag =0;
+LM519:
+	     .stabn 68,0,11551,LM519-_Mission
+	     R4 = 240                 	// [15:11551]  
+	     [BP + 5] = R4            	// [17:11551]  Movetime
+//11552  
+//11553      CheaterFlag =0;
 
-LM538:
-	     .stabn 68,0,11459,LM538-_Mission
-	     R3 = 0                   	// [18:11459]  
-	     DS = seg(_CheaterFlag)   	// [19:11459]  CheaterFlag
-	     R4 = (_CheaterFlag)      	// [20:11459]  CheaterFlag
-	     DS:[R4] = R3             	// [22:11459]  
-//11460      Eventflag =0;
+LM520:
+	     .stabn 68,0,11553,LM520-_Mission
+	     R3 = 0                   	// [18:11553]  
+	     DS = seg(_CheaterFlag)   	// [19:11553]  CheaterFlag
+	     R4 = (_CheaterFlag)      	// [20:11553]  CheaterFlag
+	     DS:[R4] = R3             	// [22:11553]  
+//11554      Eventflag =0;
 
-LM539:
-	     .stabn 68,0,11460,LM539-_Mission
-	     R3 = 0                   	// [24:11460]  
-	     DS = seg(_Eventflag)     	// [25:11460]  Eventflag
-	     R4 = (_Eventflag)        	// [26:11460]  Eventflag
-	     DS:[R4] = R3             	// [28:11460]  
-//11461  
-//11462  
-//11463  //    Cn =0;     
-//11464  
-//11465  	Key_Event &=~0x01;
+LM521:
+	     .stabn 68,0,11554,LM521-_Mission
+	     R3 = 0                   	// [24:11554]  
+	     DS = seg(_Eventflag)     	// [25:11554]  Eventflag
+	     R4 = (_Eventflag)        	// [26:11554]  Eventflag
+	     DS:[R4] = R3             	// [28:11554]  
+//11555  
+//11556  
+//11557  //    Cn =0;     
+//11558  
+//11559  	Key_Event &=~0x01;
 
-LM540:
-	     .stabn 68,0,11465,LM540-_Mission
-	     DS = seg(_Key_Event)     	// [30:11465]  Key_Event
-	     R4 = (_Key_Event)        	// [31:11465]  Key_Event
-	     R4 = DS:[R4]             	// [33:11465]  
-	     R3 = R4 & 65534          	// [35:11465]  
-	     DS = seg(_Key_Event)     	// [37:11465]  Key_Event
-	     R4 = (_Key_Event)        	// [38:11465]  Key_Event
-	     DS:[R4] = R3             	// [40:11465]  
-//11466  //	Key_activeflag = 0;
-//11467  
-//11468      BlinkFlag_Data =0;
+LM522:
+	     .stabn 68,0,11559,LM522-_Mission
+	     DS = seg(_Key_Event)     	// [30:11559]  Key_Event
+	     R4 = (_Key_Event)        	// [31:11559]  Key_Event
+	     R4 = DS:[R4]             	// [33:11559]  
+	     R3 = R4 & 65534          	// [35:11559]  
+	     DS = seg(_Key_Event)     	// [37:11559]  Key_Event
+	     R4 = (_Key_Event)        	// [38:11559]  Key_Event
+	     DS:[R4] = R3             	// [40:11559]  
+//11560  //	Key_activeflag = 0;
+//11561  
+//11562      BlinkFlag_Data =0;
 
-LM541:
-	     .stabn 68,0,11468,LM541-_Mission
-	     R3 = 0                   	// [42:11468]  
-	     DS = seg(_BlinkFlag_Data)	// [43:11468]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [44:11468]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [46:11468]  
-//11469      Light_all_off();
+LM523:
+	     .stabn 68,0,11562,LM523-_Mission
+	     R3 = 0                   	// [42:11562]  
+	     DS = seg(_BlinkFlag_Data)	// [43:11562]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [44:11562]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [46:11562]  
+//11563      Light_all_off();
 
-LM542:
-	     .stabn 68,0,11469,LM542-_Mission
-	     call _Light_all_off      	// [48:11469]  Light_all_off
-BB2_PU49:	// 0xd14
+LM524:
+	     .stabn 68,0,11563,LM524-_Mission
+	     call _Light_all_off      	// [48:11563]  Light_all_off
+BB2_PU49:	// 0xcc7
 // BB:2 cycle count: 10
-//11470  	
-//11471  
-//11472  	
-//11473     if(Mem0.Mission_Cur>=30)
+//11564  	
+//11565  
+//11566  	
+//11567     if(Mem0.Mission_Cur>=30)
 
-LM543:
-	     .stabn 68,0,11473,LM543-_Mission
-	     DS = seg(_Mem0)          	// [0:11473]  Mem0
-	     R4 = (_Mem0)             	// [1:11473]  Mem0
-	     R4 = DS:[R4]             	// [3:11473]  
-	     cmp R4, 29               	// [5:11473]  
-	     jbe L_49_76              	// [6:11473]  
-BB3_PU49:	// 0xd1a
+LM525:
+	     .stabn 68,0,11567,LM525-_Mission
+	     DS = seg(_Mem0)          	// [0:11567]  Mem0
+	     R4 = (_Mem0)             	// [1:11567]  Mem0
+	     R4 = DS:[R4]             	// [3:11567]  
+	     cmp R4, 29               	// [5:11567]  
+	     jbe L_49_87              	// [6:11567]  
+BB3_PU49:	// 0xccd
 // BB:3 cycle count: 11
-//11474     {
-//11475     	      Mem0.Mission_Cur =0;
+//11568     {
+//11569     	      Mem0.Mission_Cur =0;
 
-LM544:
-	     .stabn 68,0,11475,LM544-_Mission
-	     R3 = 0                   	// [0:11475]  
-	     DS = seg(_Mem0)          	// [1:11475]  Mem0
-	     R4 = (_Mem0)             	// [2:11475]  Mem0
-	     DS:[R4] = R3             	// [4:11475]  
+LM526:
+	     .stabn 68,0,11569,LM526-_Mission
+	     R3 = 0                   	// [0:11569]  
+	     DS = seg(_Mem0)          	// [1:11569]  Mem0
+	     R4 = (_Mem0)             	// [2:11569]  Mem0
+	     DS:[R4] = R3             	// [4:11569]  
 	//;;
 	INT OFF
 	//;;
-//11476     	  
-//11477     	   	  	   __asm("INT OFF");
-//11478             MoveSPIDriverToRAM();
+//11570     	  
+//11571     	   	  	   __asm("INT OFF");
+//11572             MoveSPIDriverToRAM();
 
-LM545:
-	     .stabn 68,0,11478,LM545-_Mission
-	     call _MoveSPIDriverToRAM 	// [8:11478]  MoveSPIDriverToRAM
-BB4_PU49:	// 0xd24
+LM527:
+	     .stabn 68,0,11572,LM527-_Mission
+	     call _MoveSPIDriverToRAM 	// [8:11572]  MoveSPIDriverToRAM
+BB4_PU49:	// 0xcd7
 // BB:4 cycle count: 16
-//11479         	      
-//11480         	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
+//11573         	      
+//11574         	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
 
-LM546:
-	     .stabn 68,0,11480,LM546-_Mission
-	     SP = SP - 2              	// [0:11480]  
-	     R3 = - 16384             	// [1:11480]  
-	     R4 = SP + 1              	// [3:11480]  
-	     [R4] = R3                	// [5:11480]  
-	     R3 = 127                 	// [7:11480]  
-	     R4 = SP + 2              	// [9:11480]  
-	     [R4] = R3                	// [11:11480]  
-	     call _SPI_Flash_Sector_Erase	// [13:11480]  SPI_Flash_Sector_Erase
-BB5_PU49:	// 0xd31
+LM528:
+	     .stabn 68,0,11574,LM528-_Mission
+	     SP = SP - 2              	// [0:11574]  
+	     R3 = - 16384             	// [1:11574]  
+	     R4 = SP + 1              	// [3:11574]  
+	     [R4] = R3                	// [5:11574]  
+	     R3 = 127                 	// [7:11574]  
+	     R4 = SP + 2              	// [9:11574]  
+	     [R4] = R3                	// [11:11574]  
+	     call _SPI_Flash_Sector_Erase	// [13:11574]  SPI_Flash_Sector_Erase
+BB5_PU49:	// 0xce4
 // BB:5 cycle count: 30
-	     SP = SP - 3              	// [0:11480]  
-//11481            SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
+	     SP = SP - 3              	// [0:11574]  
+//11575            SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
 
-LM547:
-	     .stabn 68,0,11481,LM547-_Mission
-	     R2 = (_Mem0)             	// [1:11481]  Mem0
-	     R3 = seg(_Mem0)          	// [3:11481]  Mem0
-	     R4 = SP + 1              	// [4:11481]  
-	     [R4++] = R2              	// [6:11481]  
-	     [R4] = R3                	// [8:11481]  
-	     R3 = 5                   	// [10:11481]  
-	     R4 = SP + 3              	// [11:11481]  
-	     [R4] = R3                	// [13:11481]  
-	     R3 = - 16384             	// [15:11481]  
-	     R4 = SP + 4              	// [17:11481]  
-	     [R4] = R3                	// [19:11481]  
-	     R3 = 127                 	// [21:11481]  
-	     R4 = SP + 5              	// [23:11481]  
-	     [R4] = R3                	// [25:11481]  
-	     call _SPI_Flash_SendNWords	// [27:11481]  SPI_Flash_SendNWords
-BB6_PU49:	// 0xd49
+LM529:
+	     .stabn 68,0,11575,LM529-_Mission
+	     R2 = (_Mem0)             	// [1:11575]  Mem0
+	     R3 = seg(_Mem0)          	// [3:11575]  Mem0
+	     R4 = SP + 1              	// [4:11575]  
+	     [R4++] = R2              	// [6:11575]  
+	     [R4] = R3                	// [8:11575]  
+	     R3 = 5                   	// [10:11575]  
+	     R4 = SP + 3              	// [11:11575]  
+	     [R4] = R3                	// [13:11575]  
+	     R3 = - 16384             	// [15:11575]  
+	     R4 = SP + 4              	// [17:11575]  
+	     [R4] = R3                	// [19:11575]  
+	     R3 = 127                 	// [21:11575]  
+	     R4 = SP + 5              	// [23:11575]  
+	     [R4] = R3                	// [25:11575]  
+	     call _SPI_Flash_SendNWords	// [27:11575]  SPI_Flash_SendNWords
+BB6_PU49:	// 0xcfc
 // BB:6 cycle count: 11
-	     SP = SP + 4              	// [0:11481]  
+	     SP = SP + 4              	// [0:11575]  
 	//;;
 	INT FIQ,IRQ
 	//;;
-//11482              __asm("INT FIQ,IRQ");  
-//11483     	
-//11484     	  PlayA1800_Elements(SFX_Off);
+//11576              __asm("INT FIQ,IRQ");  
+//11577     	
+//11578     	  PlayA1800_Elements(SFX_Off);
+
+LM530:
+	     .stabn 68,0,11578,LM530-_Mission
+	     R3 = 34                  	// [3:11578]  
+	     R4 = SP + 1              	// [4:11578]  
+	     [R4] = R3                	// [6:11578]  
+	     call _PlayA1800_Elements 	// [8:11578]  PlayA1800_Elements
+BB7_PU49:	// 0xd06
+// BB:7 cycle count: 8
+	     SP = SP + 8              	// [0:11578]  
+//11579        return C_Off_Mode;
+
+LM531:
+	     .stabn 68,0,11579,LM531-_Mission
+	     R1 = - 4079              	// [1:11579]  
+	     pop BP, PC from [SP]     	// [3:11579]  
+L_49_87:	// 0xd0a
+// BB:8 cycle count: 37
+//11580        
+//11581     }
+//11582  
+//11583      Mem0.X =0;
+
+LM532:
+	     .stabn 68,0,11583,LM532-_Mission
+	     R3 = 0                   	// [0:11583]  
+	     DS = seg(_Mem0+5)        	// [1:11583]  Mem0+5
+	     R4 = (_Mem0+5)           	// [2:11583]  Mem0+5
+	     DS:[R4] = R3             	// [4:11583]  
+//11584      Mem0.Y =0;
+
+LM533:
+	     .stabn 68,0,11584,LM533-_Mission
+	     R3 = 0                   	// [6:11584]  
+	     DS = seg(_Mem0+6)        	// [7:11584]  Mem0+6
+	     R4 = (_Mem0+6)           	// [8:11584]  Mem0+6
+	     DS:[R4] = R3             	// [10:11584]  
+//11585      Mem0.Z =0;
+
+LM534:
+	     .stabn 68,0,11585,LM534-_Mission
+	     R3 = 0                   	// [12:11585]  
+	     DS = seg(_Mem0+7)        	// [13:11585]  Mem0+7
+	     R4 = (_Mem0+7)           	// [14:11585]  Mem0+7
+	     DS:[R4] = R3             	// [16:11585]  
+//11586      FailV =0;
+
+LM535:
+	     .stabn 68,0,11586,LM535-_Mission
+	     R3 = 0                   	// [18:11586]  
+	     DS = seg(_FailV)         	// [19:11586]  FailV
+	     R4 = (_FailV)            	// [20:11586]  FailV
+	     DS:[R4] = R3             	// [22:11586]  
+//11587      FailV2 =0;
+
+LM536:
+	     .stabn 68,0,11587,LM536-_Mission
+	     R3 = 0                   	// [24:11587]  
+	     DS = seg(_FailV2)        	// [25:11587]  FailV2
+	     R4 = (_FailV2)           	// [26:11587]  FailV2
+	     DS:[R4] = R3             	// [28:11587]  
+//11588  
+//11589    // TimeTatleCnt =0;
+//11590     TimeTatleCnt=25*16;
+
+LM537:
+	     .stabn 68,0,11590,LM537-_Mission
+	     R3 = 400                 	// [30:11590]  
+	     DS = seg(_TimeTatleCnt)  	// [32:11590]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [33:11590]  TimeTatleCnt
+	     DS:[R4] = R3             	// [35:11590]  
+L_49_88:	// 0xd29
+// BB:9 cycle count: 3
+//11591     while (1)
+//11592     {
+//11593  	/* code */
+//11594       		 	
+//11595  	      WatchdogClear();
+
+LM538:
+	     .stabn 68,0,11595,LM538-_Mission
+	     call _WatchdogClear      	// [0:11595]  WatchdogClear
+BB10_PU49:	// 0xd2b
+// BB:10 cycle count: 14
+//11596  	       
+//11597  		    if(Get_Key(0,0))
+
+LM539:
+	     .stabn 68,0,11597,LM539-_Mission
+	     SP = SP - 2              	// [0:11597]  
+	     R3 = 0                   	// [1:11597]  
+	     R4 = SP + 1              	// [2:11597]  
+	     [R4] = R3                	// [4:11597]  
+	     R3 = 0                   	// [6:11597]  
+	     R4 = SP + 2              	// [7:11597]  
+	     [R4] = R3                	// [9:11597]  
+	     call _Get_Key            	// [11:11597]  Get_Key
+BB11_PU49:	// 0xd36
+// BB:11 cycle count: 6
+	     SP = SP + 2              	// [0:11597]  
+	     cmp R1, 0                	// [1:11597]  
+	     je L_49_90               	// [2:11597]  
+BB12_PU49:	// 0xd39
+// BB:12 cycle count: 8
+//11598  		    {
+//11599  			 	  return C_Off_Mode;
+
+LM540:
+	     .stabn 68,0,11599,LM540-_Mission
+	     R1 = - 4079              	// [0:11599]  
+	     SP = SP + 7              	// [2:11599]  
+	     pop BP, PC from [SP]     	// [3:11599]  
+L_49_90:	// 0xd3d
+// BB:13 cycle count: 10
+//11600  		    }
+//11601  				 	  
+//11602  
+//11603        if(TimeTatleCnt==0)
+
+LM541:
+	     .stabn 68,0,11603,LM541-_Mission
+	     DS = seg(_TimeTatleCnt)  	// [0:11603]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [1:11603]  TimeTatleCnt
+	     R4 = DS:[R4]             	// [3:11603]  
+	     cmp R4, 0                	// [5:11603]  
+	     jne L_49_91              	// [6:11603]  
+BB14_PU49:	// 0xd43
+// BB:14 cycle count: 3
+//11604        	{
+//11605  		    
+//11606               temp = GameTimeout();//C_GameTimeout;
+
+LM542:
+	     .stabn 68,0,11606,LM542-_Mission
+	     call _GameTimeout        	// [0:11606]  GameTimeout
+BB15_PU49:	// 0xd45
+// BB:15 cycle count: 16
+	     [BP + 6] = R1            	// [0:11606]  temp
+//11607               TimeTatleCnt=25*16;
+
+LM543:
+	     .stabn 68,0,11607,LM543-_Mission
+	     R3 = 400                 	// [1:11607]  
+	     DS = seg(_TimeTatleCnt)  	// [3:11607]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [4:11607]  TimeTatleCnt
+	     DS:[R4] = R3             	// [6:11607]  
+//11608               if(C_Off_Mode==temp)
+
+LM544:
+	     .stabn 68,0,11608,LM544-_Mission
+	     R4 = [BP + 6]            	// [8:11608]  temp
+	     cmp R4, 61457            	// [10:11608]  
+	     jne L_49_92              	// [12:11608]  
+BB16_PU49:	// 0xd50
+// BB:16 cycle count: 8
+//11609          	     return C_Off_Mode;
+
+LM545:
+	     .stabn 68,0,11609,LM545-_Mission
+	     R1 = - 4079              	// [0:11609]  
+	     SP = SP + 7              	// [2:11609]  
+	     pop BP, PC from [SP]     	// [3:11609]  
+L_49_92:	// 0xd54
+L_49_91:	// 0xd54
+// BB:17 cycle count: 6
+//11610        	}
+//11611  	
+//11612     
+//11613         temp_TimeTatleCnt = TimeTatleCnt;
+
+LM546:
+	     .stabn 68,0,11613,LM546-_Mission
+	     DS = seg(_TimeTatleCnt)  	// [0:11613]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [1:11613]  TimeTatleCnt
+	     R4 = DS:[R4]             	// [3:11613]  
+	     [BP + 2] = R4            	// [5:11613]  temp_TimeTatleCnt
+L_49_93:	// 0xd59
+// BB:18 cycle count: 10
+//11614     for(;Mem0.X<11;Mem0.X++)
+
+LM547:
+	     .stabn 68,0,11614,LM547-_Mission
+	     DS = seg(_Mem0+5)        	// [0:11614]  Mem0+5
+	     R4 = (_Mem0+5)           	// [1:11614]  Mem0+5
+	     R4 = DS:[R4]             	// [3:11614]  
+	     cmp R4, 10               	// [5:11614]  
+	     jbe BB19_PU49            	// [6:11614]  
+BB142_PU49:	// 0xd5f
+// BB:142 cycle count: 3
+	     goto L_49_94             	// [0:0]  
+BB19_PU49:	// 0xd61
+// BB:19 cycle count: 10
+//11615     {
+//11616     	    
+//11617         if((Mem0.Mission_Cur ==0)&&(Mem0.X==3))//SetArm
 
 LM548:
-	     .stabn 68,0,11484,LM548-_Mission
-	     R3 = 34                  	// [3:11484]  
-	     R4 = SP + 1              	// [4:11484]  
-	     [R4] = R3                	// [6:11484]  
-	     call _PlayA1800_Elements 	// [8:11484]  PlayA1800_Elements
-BB7_PU49:	// 0xd53
-// BB:7 cycle count: 8
-	     SP = SP + 8              	// [0:11484]  
-//11485        return C_Off_Mode;
+	     .stabn 68,0,11617,LM548-_Mission
+	     DS = seg(_Mem0)          	// [0:11617]  Mem0
+	     R4 = (_Mem0)             	// [1:11617]  Mem0
+	     R4 = DS:[R4]             	// [3:11617]  
+	     cmp R4, 0                	// [5:11617]  
+	     je BB20_PU49             	// [6:11617]  
+BB143_PU49:	// 0xd67
+// BB:143 cycle count: 3
+	     goto L_49_96             	// [0:0]  
+BB20_PU49:	// 0xd69
+// BB:20 cycle count: 10
+	     DS = seg(_Mem0+5)        	// [0:11617]  Mem0+5
+	     R4 = (_Mem0+5)           	// [1:11617]  Mem0+5
+	     R4 = DS:[R4]             	// [3:11617]  
+	     cmp R4, 3                	// [5:11617]  
+	     je L_49_97               	// [6:11617]  
+BB144_PU49:	// 0xd6f
+// BB:144 cycle count: 3
+	     goto L_49_96             	// [0:0]  
+L_49_97:	// 0xd71
+// BB:21 cycle count: 2
+//11618         {
+//11619         	   //SetArm();
+//11620         	   timeovercnt =0;
 
 LM549:
-	     .stabn 68,0,11485,LM549-_Mission
-	     R1 = - 4079              	// [1:11485]  
-	     pop BP, PC from [SP]     	// [3:11485]  
-L_49_76:	// 0xd57
-// BB:8 cycle count: 43
-//11486        
-//11487     }
-//11488  
-//11489      Mem0.X =0;
+	     .stabn 68,0,11620,LM549-_Mission
+	     R4 = 0                   	// [0:11620]  
+	     [BP + 1] = R4            	// [1:11620]  timeovercnt
+L_49_98:	// 0xd73
+// BB:22 cycle count: 31
+//11621         	   while(1)
+//11622         	   {
+//11623         	   	
+//11624         	     Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
 
 LM550:
-	     .stabn 68,0,11489,LM550-_Mission
-	     R3 = 0                   	// [0:11489]  
-	     DS = seg(_Mem0+5)        	// [1:11489]  Mem0+5
-	     R4 = (_Mem0+5)           	// [2:11489]  Mem0+5
-	     DS:[R4] = R3             	// [4:11489]  
-//11490      Mem0.Y =0;
+	     .stabn 68,0,11624,LM550-_Mission
+	     SP = SP - 2              	// [0:11624]  
+	     DS = seg(_Mem0)          	// [1:11624]  Mem0
+	     R4 = (_Mem0)             	// [2:11624]  Mem0
+	     R3 = DS:[R4]             	// [4:11624]  
+	     R4 = SP + 1              	// [6:11624]  
+	     [R4] = R3                	// [8:11624]  
+	     DS = seg(_Mem0+5)        	// [10:11624]  Mem0+5
+	     R4 = (_Mem0+5)           	// [11:11624]  Mem0+5
+	     R4 = DS:[R4]             	// [13:11624]  
+	     R3 = 0                   	// [15:11624]  
+	     R1 = (_Intro_Table)      	// [16:11624]  Intro_Table
+	     R2 = seg(_Intro_Table)   	// [18:11624]  Intro_Table
+	     R4 = R4 + R1             	// [19:11624]  
+	     R3 = R3 + R2, Carry      	// [20:11624]  
+	     DS = R3                  	// [21:11624]  
+	     R3 = DS:[R4]             	// [22:11624]  
+	     R4 = SP + 2              	// [24:11624]  
+	     [R4] = R3                	// [26:11624]  
+	     call _Play_Seq           	// [28:11624]  Play_Seq
+BB23_PU49:	// 0xd8c
+// BB:23 cycle count: 20
+//11625         	     
+//11626         	     G_Sensor_Status =G_UP| G_Down;
 
 LM551:
-	     .stabn 68,0,11490,LM551-_Mission
-	     R3 = 0                   	// [6:11490]  
-	     DS = seg(_Mem0+6)        	// [7:11490]  Mem0+6
-	     R4 = (_Mem0+6)           	// [8:11490]  Mem0+6
-	     DS:[R4] = R3             	// [10:11490]  
-//11491      Mem0.Z =0;
-
-LM552:
-	     .stabn 68,0,11491,LM552-_Mission
-	     R3 = 0                   	// [12:11491]  
-	     DS = seg(_Mem0+7)        	// [13:11491]  Mem0+7
-	     R4 = (_Mem0+7)           	// [14:11491]  Mem0+7
-	     DS:[R4] = R3             	// [16:11491]  
-//11492      FailV =0;
-
-LM553:
-	     .stabn 68,0,11492,LM553-_Mission
-	     R3 = 0                   	// [18:11492]  
-	     DS = seg(_FailV)         	// [19:11492]  FailV
-	     R4 = (_FailV)            	// [20:11492]  FailV
-	     DS:[R4] = R3             	// [22:11492]  
-//11493      FailV2 =0;
-
-LM554:
-	     .stabn 68,0,11493,LM554-_Mission
-	     R3 = 0                   	// [24:11493]  
-	     DS = seg(_FailV2)        	// [25:11493]  FailV2
-	     R4 = (_FailV2)           	// [26:11493]  FailV2
-	     DS:[R4] = R3             	// [28:11493]  
-//11494  
-//11495     TimeTatleCnt =0;
-
-LM555:
-	     .stabn 68,0,11495,LM555-_Mission
-	     R3 = 0                   	// [30:11495]  
-	     DS = seg(_TimeTatleCnt)  	// [31:11495]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [32:11495]  TimeTatleCnt
-	     DS:[R4] = R3             	// [34:11495]  
-//11496     TimeTatleCnt=50*16;
-
-LM556:
-	     .stabn 68,0,11496,LM556-_Mission
-	     R3 = 800                 	// [36:11496]  
-	     DS = seg(_TimeTatleCnt)  	// [38:11496]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [39:11496]  TimeTatleCnt
-	     DS:[R4] = R3             	// [41:11496]  
-L_49_77:	// 0xd7b
-// BB:9 cycle count: 3
-//11497     while (1)
-//11498     {
-//11499  	/* code */
-//11500       		 	
-//11501  	      WatchdogClear();
-
-LM557:
-	     .stabn 68,0,11501,LM557-_Mission
-	     call _WatchdogClear      	// [0:11501]  WatchdogClear
-BB10_PU49:	// 0xd7d
-// BB:10 cycle count: 14
-//11502  	       
-//11503  		    if(Get_Key(0,0))
-
-LM558:
-	     .stabn 68,0,11503,LM558-_Mission
-	     SP = SP - 2              	// [0:11503]  
-	     R3 = 0                   	// [1:11503]  
-	     R4 = SP + 1              	// [2:11503]  
-	     [R4] = R3                	// [4:11503]  
-	     R3 = 0                   	// [6:11503]  
-	     R4 = SP + 2              	// [7:11503]  
-	     [R4] = R3                	// [9:11503]  
-	     call _Get_Key            	// [11:11503]  Get_Key
-BB11_PU49:	// 0xd88
-// BB:11 cycle count: 6
-	     SP = SP + 2              	// [0:11503]  
-	     cmp R1, 0                	// [1:11503]  
-	     je L_49_79               	// [2:11503]  
-BB12_PU49:	// 0xd8b
-// BB:12 cycle count: 8
-//11504  		    {
-//11505  			 	  return C_Off_Mode;
-
-LM559:
-	     .stabn 68,0,11505,LM559-_Mission
-	     R1 = - 4079              	// [0:11505]  
-	     SP = SP + 7              	// [2:11505]  
-	     pop BP, PC from [SP]     	// [3:11505]  
-L_49_79:	// 0xd8f
-// BB:13 cycle count: 10
-//11506  		    }
-//11507  				 	  
-//11508  
-//11509        if(TimeTatleCnt==0)
-
-LM560:
-	     .stabn 68,0,11509,LM560-_Mission
-	     DS = seg(_TimeTatleCnt)  	// [0:11509]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [1:11509]  TimeTatleCnt
-	     R4 = DS:[R4]             	// [3:11509]  
-	     cmp R4, 0                	// [5:11509]  
-	     jne L_49_80              	// [6:11509]  
-BB14_PU49:	// 0xd95
-// BB:14 cycle count: 10
-//11510        	{
-//11511  		    TimeTatleCnt=50*16;
-
-LM561:
-	     .stabn 68,0,11511,LM561-_Mission
-	     R3 = 800                 	// [0:11511]  
-	     DS = seg(_TimeTatleCnt)  	// [2:11511]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [3:11511]  TimeTatleCnt
-	     DS:[R4] = R3             	// [5:11511]  
-//11512               temp = GameTimeout();//C_GameTimeout;
-
-LM562:
-	     .stabn 68,0,11512,LM562-_Mission
-	     call _GameTimeout        	// [7:11512]  GameTimeout
-BB15_PU49:	// 0xd9d
-// BB:15 cycle count: 9
-	     [BP + 6] = R1            	// [0:11512]  temp
-//11513               if(C_Off_Mode==temp)
-
-LM563:
-	     .stabn 68,0,11513,LM563-_Mission
-	     R4 = [BP + 6]            	// [1:11513]  temp
-	     cmp R4, 61457            	// [3:11513]  
-	     jne L_49_81              	// [5:11513]  
-BB16_PU49:	// 0xda2
-// BB:16 cycle count: 8
-//11514          	     return C_Off_Mode;
-
-LM564:
-	     .stabn 68,0,11514,LM564-_Mission
-	     R1 = - 4079              	// [0:11514]  
-	     SP = SP + 7              	// [2:11514]  
-	     pop BP, PC from [SP]     	// [3:11514]  
-L_49_81:	// 0xda6
-L_49_80:	// 0xda6
-// BB:17 cycle count: 6
-//11515        	}
-//11516  	
-//11517     
-//11518         temp_TimeTatleCnt = TimeTatleCnt;
-
-LM565:
-	     .stabn 68,0,11518,LM565-_Mission
-	     DS = seg(_TimeTatleCnt)  	// [0:11518]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [1:11518]  TimeTatleCnt
-	     R4 = DS:[R4]             	// [3:11518]  
-	     [BP + 2] = R4            	// [5:11518]  temp_TimeTatleCnt
-L_49_82:	// 0xdab
-// BB:18 cycle count: 10
-//11519     for(;Mem0.X<11;Mem0.X++)
-
-LM566:
-	     .stabn 68,0,11519,LM566-_Mission
-	     DS = seg(_Mem0+5)        	// [0:11519]  Mem0+5
-	     R4 = (_Mem0+5)           	// [1:11519]  Mem0+5
-	     R4 = DS:[R4]             	// [3:11519]  
-	     cmp R4, 10               	// [5:11519]  
-	     jbe BB19_PU49            	// [6:11519]  
-BB126_PU49:	// 0xdb1
-// BB:126 cycle count: 3
-	     goto L_49_83             	// [0:0]  
-BB19_PU49:	// 0xdb3
-// BB:19 cycle count: 10
-//11520     {
-//11521     	    
-//11522         if((Mem0.Mission_Cur ==0)&&(Mem0.X==3))//SetArm
-
-LM567:
-	     .stabn 68,0,11522,LM567-_Mission
-	     DS = seg(_Mem0)          	// [0:11522]  Mem0
-	     R4 = (_Mem0)             	// [1:11522]  Mem0
-	     R4 = DS:[R4]             	// [3:11522]  
-	     cmp R4, 0                	// [5:11522]  
-	     je BB20_PU49             	// [6:11522]  
-BB127_PU49:	// 0xdb9
-// BB:127 cycle count: 3
-	     goto L_49_85             	// [0:0]  
-BB20_PU49:	// 0xdbb
-// BB:20 cycle count: 10
-	     DS = seg(_Mem0+5)        	// [0:11522]  Mem0+5
-	     R4 = (_Mem0+5)           	// [1:11522]  Mem0+5
-	     R4 = DS:[R4]             	// [3:11522]  
-	     cmp R4, 3                	// [5:11522]  
-	     je L_49_86               	// [6:11522]  
-BB128_PU49:	// 0xdc1
-// BB:128 cycle count: 3
-	     goto L_49_85             	// [0:0]  
-L_49_86:	// 0xdc3
-L_49_87:	// 0xdc3
-// BB:21 cycle count: 31
-//11524         	   //SetArm();
-//11525         	   
-//11526         	   while(1)
-//11527         	   {
-//11528         	     Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
-
-LM568:
-	     .stabn 68,0,11528,LM568-_Mission
-	     SP = SP - 2              	// [0:11528]  
-	     DS = seg(_Mem0)          	// [1:11528]  Mem0
-	     R4 = (_Mem0)             	// [2:11528]  Mem0
-	     R3 = DS:[R4]             	// [4:11528]  
-	     R4 = SP + 1              	// [6:11528]  
-	     [R4] = R3                	// [8:11528]  
-	     DS = seg(_Mem0+5)        	// [10:11528]  Mem0+5
-	     R4 = (_Mem0+5)           	// [11:11528]  Mem0+5
-	     R4 = DS:[R4]             	// [13:11528]  
-	     R3 = 0                   	// [15:11528]  
-	     R1 = (_Intro_Table)      	// [16:11528]  Intro_Table
-	     R2 = seg(_Intro_Table)   	// [18:11528]  Intro_Table
-	     R4 = R4 + R1             	// [19:11528]  
-	     R3 = R3 + R2, Carry      	// [20:11528]  
-	     DS = R3                  	// [21:11528]  
-	     R3 = DS:[R4]             	// [22:11528]  
-	     R4 = SP + 2              	// [24:11528]  
-	     [R4] = R3                	// [26:11528]  
-	     call _Play_Seq           	// [28:11528]  Play_Seq
-BB22_PU49:	// 0xddc
-// BB:22 cycle count: 20
-//11529         	     
-//11530         	     G_Sensor_Status =G_UP| G_Down;
-
-LM569:
-	     .stabn 68,0,11530,LM569-_Mission
-	     R3 = 3                   	// [0:11530]  
-	     DS = seg(_G_Sensor_Status)	// [1:11530]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [2:11530]  G_Sensor_Status
-	     DS:[R4] = R3             	// [4:11530]  
-//11531         	     temp = WaitAction(5*16,0);
-
-LM570:
-	     .stabn 68,0,11531,LM570-_Mission
-	     R3 = 80                  	// [6:11531]  
-	     R4 = SP + 1              	// [8:11531]  
-	     [R4] = R3                	// [10:11531]  
-	     R3 = 0                   	// [12:11531]  
-	     R4 = SP + 2              	// [13:11531]  
-	     [R4] = R3                	// [15:11531]  
-	     call _WaitAction         	// [17:11531]  WaitAction
-BB23_PU49:	// 0xdec
-// BB:23 cycle count: 9
-	     SP = SP + 2              	// [0:11531]  
-	     [BP + 6] = R1            	// [1:11531]  temp
-//11532         	     if(temp==G_UP)//Mov_Detected
-
-LM571:
-	     .stabn 68,0,11532,LM571-_Mission
-	     R4 = [BP + 6]            	// [2:11532]  temp
-	     cmp R4, 1                	// [4:11532]  
-	     jne L_49_90              	// [5:11532]  
-BB24_PU49:	// 0xdf1
-// BB:24 cycle count: 15
-//11533         	        {
-//11534         	             Arm= A_Right;	
-
-LM572:
-	     .stabn 68,0,11534,LM572-_Mission
-	     R3 = 0                   	// [0:11534]  
-	     DS = seg(_Arm)           	// [1:11534]  Arm
-	     R4 = (_Arm)              	// [2:11534]  Arm
-	     DS:[R4] = R3             	// [4:11534]  
-//11535         	             PlayA1800_Elements(SFX_Start); 
-
-LM573:
-	     .stabn 68,0,11535,LM573-_Mission
-	     SP = SP - 1              	// [6:11535]  
-	     R3 = 42                  	// [7:11535]  
-	     R4 = SP + 1              	// [8:11535]  
-	     [R4] = R3                	// [10:11535]  
-	     call _PlayA1800_Elements 	// [12:11535]  PlayA1800_Elements
-BB25_PU49:	// 0xdfd
-// BB:25 cycle count: 4
-	     SP = SP + 1              	// [0:11535]  
-//11536         	             break;
-
-LM574:
-	     .stabn 68,0,11536,LM574-_Mission
-	     goto Lt_49_2             	// [1:11536]  
-L_49_90:	// 0xe00
-// BB:26 cycle count: 7
-//11537         	        }
-//11538         	      else  if(temp==G_Down)
-
-LM575:
-	     .stabn 68,0,11538,LM575-_Mission
-	     R4 = [BP + 6]            	// [0:11538]  temp
-	     cmp R4, 2                	// [2:11538]  
-	     je BB27_PU49             	// [3:11538]  
-BB130_PU49:	// 0xe03
-// BB:130 cycle count: 3
-	     goto L_49_91             	// [0:0]  
-BB27_PU49:	// 0xe05
-// BB:27 cycle count: 87
-//11539         	        {
-//11540         	        	 Arm= A_Left;	  
-
-LM576:
-	     .stabn 68,0,11540,LM576-_Mission
-	     R3 = 1                   	// [0:11540]  
-	     DS = seg(_Arm)           	// [1:11540]  Arm
-	     R4 = (_Arm)              	// [2:11540]  Arm
-	     DS:[R4] = R3             	// [4:11540]  
-//11541         	        	 
-//11542                      G_X_A  = G_Back;//G_Hit;////ֵ���ӷ���
-
-LM577:
-	     .stabn 68,0,11542,LM577-_Mission
-	     R3 = 32                  	// [6:11542]  
-	     DS = seg(_G_X_A)         	// [7:11542]  G_X_A
-	     R4 = (_G_X_A)            	// [8:11542]  G_X_A
-	     DS:[R4] = R3             	// [10:11542]  
-//11543                      G_X_M  = G_Hit;//G_Back;////ֵ���ٷ���
-
-LM578:
-	     .stabn 68,0,11543,LM578-_Mission
-	     R3 = 16                  	// [12:11543]  
-	     DS = seg(_G_X_M)         	// [13:11543]  G_X_M
-	     R4 = (_G_X_M)            	// [14:11543]  G_X_M
-	     DS:[R4] = R3             	// [16:11543]  
-//11544  
-//11545  					G_Y_A  = G_Right;//G_Left;//G_Hit
-
-LM579:
-	     .stabn 68,0,11545,LM579-_Mission
-	     R3 = 8                   	// [18:11545]  
-	     DS = seg(_G_Y_A)         	// [19:11545]  G_Y_A
-	     R4 = (_G_Y_A)            	// [20:11545]  G_Y_A
-	     DS:[R4] = R3             	// [22:11545]  
-//11546  					G_Y_M  = G_Left;// G_Right;//G_Back
-
-LM580:
-	     .stabn 68,0,11546,LM580-_Mission
-	     R3 = 4                   	// [24:11546]  
-	     DS = seg(_G_Y_M)         	// [25:11546]  G_Y_M
-	     R4 = (_G_Y_M)            	// [26:11546]  G_Y_M
-	     DS:[R4] = R3             	// [28:11546]  
-//11547  					
-//11548  					G_Z_A =  G_UP;
-
-LM581:
-	     .stabn 68,0,11548,LM581-_Mission
-	     R3 = 1                   	// [30:11548]  
-	     DS = seg(_G_Z_A)         	// [31:11548]  G_Z_A
-	     R4 = (_G_Z_A)            	// [32:11548]  G_Z_A
-	     DS:[R4] = R3             	// [34:11548]  
-//11549  					G_Z_M   = G_Down;
-
-LM582:
-	     .stabn 68,0,11549,LM582-_Mission
-	     R3 = 2                   	// [36:11549]  
-	     DS = seg(_G_Z_M)         	// [37:11549]  G_Z_M
-	     R4 = (_G_Z_M)            	// [38:11549]  G_Z_M
-	     DS:[R4] = R3             	// [40:11549]  
-//11556  //					
-//11557  //					LED_UP   = LED_Hit;//LED_Hit;
-//11558  //					LED_Down = LED_Back;//LED_Back;					
-//11559  					
-//11560                     Led_Data_Play[0]= Led1;//LED_UP;
-
-LM583:
-	     .stabn 68,0,11560,LM583-_Mission
-	     R3 = 1                   	// [42:11560]  
-	     DS = seg(_Led_Data_Play) 	// [43:11560]  Led_Data_Play
-	     R4 = (_Led_Data_Play)    	// [44:11560]  Led_Data_Play
-	     DS:[R4] = R3             	// [46:11560]  
-//11561                     Led_Data_Play[1]= Led3;//LED_Down;
-
-LM584:
-	     .stabn 68,0,11561,LM584-_Mission
-	     R3 = 4                   	// [48:11561]  
-	     DS = seg(_Led_Data_Play+1)	// [49:11561]  Led_Data_Play+1
-	     R4 = (_Led_Data_Play+1)  	// [50:11561]  Led_Data_Play+1
-	     DS:[R4] = R3             	// [52:11561]  
-//11562                     Led_Data_Play[2]= Led2;//LED_Left;
-
-LM585:
-	     .stabn 68,0,11562,LM585-_Mission
-	     R3 = 2                   	// [54:11562]  
-	     DS = seg(_Led_Data_Play+2)	// [55:11562]  Led_Data_Play+2
-	     R4 = (_Led_Data_Play+2)  	// [56:11562]  Led_Data_Play+2
-	     DS:[R4] = R3             	// [58:11562]  
-//11563                     Led_Data_Play[3]= Led4;//LED_Right;
-
-LM586:
-	     .stabn 68,0,11563,LM586-_Mission
-	     R3 = 8                   	// [60:11563]  
-	     DS = seg(_Led_Data_Play+3)	// [61:11563]  Led_Data_Play+3
-	     R4 = (_Led_Data_Play+3)  	// [62:11563]  Led_Data_Play+3
-	     DS:[R4] = R3             	// [64:11563]  
-//11564                     Led_Data_Play[4]= Led1;//LED_Hit;
-
-LM587:
-	     .stabn 68,0,11564,LM587-_Mission
-	     R3 = 1                   	// [66:11564]  
-	     DS = seg(_Led_Data_Play+4)	// [67:11564]  Led_Data_Play+4
-	     R4 = (_Led_Data_Play+4)  	// [68:11564]  Led_Data_Play+4
-	     DS:[R4] = R3             	// [70:11564]  
-//11565                     Led_Data_Play[5]= Led3;//LED_Back; 
-
-LM588:
-	     .stabn 68,0,11565,LM588-_Mission
-	     R3 = 4                   	// [72:11565]  
-	     DS = seg(_Led_Data_Play+5)	// [73:11565]  Led_Data_Play+5
-	     R4 = (_Led_Data_Play+5)  	// [74:11565]  Led_Data_Play+5
-	     DS:[R4] = R3             	// [76:11565]  
-//11566                     
-//11567                      PlayA1800_Elements(SFX_Start); 
-
-LM589:
-	     .stabn 68,0,11567,LM589-_Mission
-	     SP = SP - 1              	// [78:11567]  
-	     R3 = 42                  	// [79:11567]  
-	     R4 = SP + 1              	// [80:11567]  
-	     [R4] = R3                	// [82:11567]  
-	     call _PlayA1800_Elements 	// [84:11567]  PlayA1800_Elements
-BB28_PU49:	// 0xe4d
-// BB:28 cycle count: 5
-	     SP = SP + 1              	// [0:11567]  
-//11568                      break;     	        	 
-
-LM590:
-	     .stabn 68,0,11568,LM590-_Mission
-	     jmp Lt_49_2              	// [1:11568]  
-L_49_91:	// 0xe4f
-L_49_89:	// 0xe4f
-// BB:29 cycle count: 9
-//11571         	      else	
-//11572         	        {
-//11573         	        	 //Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
-//11574         	        }   
-//11575         	      G_Sensor_Status =0;  
-
-LM591:
-	     .stabn 68,0,11575,LM591-_Mission
-	     R3 = 0                   	// [0:11575]  
-	     DS = seg(_G_Sensor_Status)	// [1:11575]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [2:11575]  G_Sensor_Status
-	     DS:[R4] = R3             	// [4:11575]  
-	     goto L_49_87             	// [6:11575]  
-L_49_88:	// 0xe56
-Lt_49_2:	// 0xe56
-// BB:30 cycle count: 4
-//11576         	   }
-
-LM592:
-	     .stabn 68,0,11576,LM592-_Mission
-	     jmp L_49_84              	// [0:11576]  
-L_49_85:	// 0xe57
-// BB:31 cycle count: 31
-//11577         }
-//11578        else
-//11579            Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
-
-LM593:
-	     .stabn 68,0,11579,LM593-_Mission
-	     SP = SP - 2              	// [0:11579]  
-	     DS = seg(_Mem0)          	// [1:11579]  Mem0
-	     R4 = (_Mem0)             	// [2:11579]  Mem0
-	     R3 = DS:[R4]             	// [4:11579]  
-	     R4 = SP + 1              	// [6:11579]  
-	     [R4] = R3                	// [8:11579]  
-	     DS = seg(_Mem0+5)        	// [10:11579]  Mem0+5
-	     R4 = (_Mem0+5)           	// [11:11579]  Mem0+5
-	     R4 = DS:[R4]             	// [13:11579]  
-	     R3 = 0                   	// [15:11579]  
-	     R1 = (_Intro_Table)      	// [16:11579]  Intro_Table
-	     R2 = seg(_Intro_Table)   	// [18:11579]  Intro_Table
-	     R4 = R4 + R1             	// [19:11579]  
-	     R3 = R3 + R2, Carry      	// [20:11579]  
-	     DS = R3                  	// [21:11579]  
-	     R3 = DS:[R4]             	// [22:11579]  
-	     R4 = SP + 2              	// [24:11579]  
-	     [R4] = R3                	// [26:11579]  
-	     call _Play_Seq           	// [28:11579]  Play_Seq
-BB32_PU49:	// 0xe70
-// BB:32 cycle count: 1
-	     SP = SP + 2              	// [0:11579]  
-L_49_84:	// 0xe71
-// BB:33 cycle count: 3
-//11580            
-//11581         if(CheckIntro()==0)
-
-LM594:
-	     .stabn 68,0,11581,LM594-_Mission
-	     call _CheckIntro         	// [0:11581]  CheckIntro
-BB34_PU49:	// 0xe73
-// BB:34 cycle count: 5
-	     cmp R1, 0                	// [0:11581]  
-	     jne L_49_92              	// [1:11581]  
-BB35_PU49:	// 0xe75
-// BB:35 cycle count: 4
-//11582  	       break;
-
-LM595:
-	     .stabn 68,0,11582,LM595-_Mission
-	     jmp Lt_49_3              	// [0:11582]  
-L_49_92:	// 0xe76
-Lt_49_1:	// 0xe76
-// BB:36 cycle count: 14
-
-LM596:
-	     .stabn 68,0,11519,LM596-_Mission
-	     DS = seg(_Mem0+5)        	// [0:11519]  Mem0+5
-	     R4 = (_Mem0+5)           	// [1:11519]  Mem0+5
-	     R4 = DS:[R4]             	// [3:11519]  
-	     R4 = R4 + 1              	// [5:11519]  
-	     DS = seg(_Mem0+5)        	// [6:11519]  Mem0+5
-	     R3 = (_Mem0+5)           	// [7:11519]  Mem0+5
-	     DS:[R3] = R4             	// [9:11519]  
-	     goto L_49_82             	// [11:11519]  
-L_49_83:	// 0xe81
-Lt_49_3:	// 0xe81
-// BB:37 cycle count: 35
-//11583  
-//11584     }
-//11585  
-//11586         TimeTatleCnt = temp_TimeTatleCnt;
-
-LM597:
-	     .stabn 68,0,11586,LM597-_Mission
-	     R3 = [BP + 2]            	// [0:11586]  temp_TimeTatleCnt
-	     DS = seg(_TimeTatleCnt)  	// [2:11586]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [3:11586]  TimeTatleCnt
-	     DS:[R4] = R3             	// [5:11586]  
-//11591  //	    Set_Led_RGB(Red,Led4);
-//11592  //        Clean_LFX_Led();
-//11593     
-//11594  
-//11595     	    G_Sensor_Status=G_Shake;
-
-LM598:
-	     .stabn 68,0,11595,LM598-_Mission
-	     R3 = 64                  	// [7:11595]  
-	     DS = seg(_G_Sensor_Status)	// [9:11595]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [10:11595]  G_Sensor_Status
-	     DS:[R4] = R3             	// [12:11595]  
-//11596  //        Led_On(All_Led_data);
-//11597  		BlinkFlag_Data =All_Led_data;
-
-LM599:
-	     .stabn 68,0,11597,LM599-_Mission
-	     R3 = 15                  	// [14:11597]  
-	     DS = seg(_BlinkFlag_Data)	// [15:11597]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [16:11597]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [18:11597]  
-//11598  		 
-//11599  		 
-//11600  		if(WaitAction(6*16,0)==C_MovSucess)//Mov_Detected
-
-LM600:
-	     .stabn 68,0,11600,LM600-_Mission
-	     SP = SP - 2              	// [20:11600]  
-	     R3 = 96                  	// [21:11600]  
-	     R4 = SP + 1              	// [23:11600]  
-	     [R4] = R3                	// [25:11600]  
-	     R3 = 0                   	// [27:11600]  
-	     R4 = SP + 2              	// [28:11600]  
-	     [R4] = R3                	// [30:11600]  
-	     call _WaitAction         	// [32:11600]  WaitAction
-BB38_PU49:	// 0xe9d
-// BB:38 cycle count: 7
-	     SP = SP + 2              	// [0:11600]  
-	     cmp R1, 4096             	// [1:11600]  
-	     jne L_49_93              	// [3:11600]  
-BB39_PU49:	// 0xea1
-// BB:39 cycle count: 9
-//11601  		   {
-//11602  		   	   PlayA1800_Elements(SFX_Start); 
-
-LM601:
-	     .stabn 68,0,11602,LM601-_Mission
-	     SP = SP - 1              	// [0:11602]  
-	     R3 = 42                  	// [1:11602]  
-	     R4 = SP + 1              	// [2:11602]  
-	     [R4] = R3                	// [4:11602]  
-	     call _PlayA1800_Elements 	// [6:11602]  PlayA1800_Elements
-BB40_PU49:	// 0xea8
-// BB:40 cycle count: 11
-	     SP = SP + 1              	// [0:11602]  
-//11603                  Mem0.Y =0;
-
-LM602:
-	     .stabn 68,0,11603,LM602-_Mission
-	     R3 = 0                   	// [1:11603]  
-	     DS = seg(_Mem0+6)        	// [2:11603]  Mem0+6
-	     R4 = (_Mem0+6)           	// [3:11603]  Mem0+6
-	     DS:[R4] = R3             	// [5:11603]  
-//11604  				break;
-
-LM603:
-	     .stabn 68,0,11604,LM603-_Mission
-	     jmp Lt_49_4              	// [7:11604]  
-L_49_93:	// 0xeaf
-// BB:41 cycle count: 9
-//11605  
-//11606  
-//11607  		   }
-//11608  		   
-//11609  		   BlinkFlag_Data =0;
-
-LM604:
-	     .stabn 68,0,11609,LM604-_Mission
-	     R3 = 0                   	// [0:11609]  
-	     DS = seg(_BlinkFlag_Data)	// [1:11609]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [2:11609]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [4:11609]  
-//11610  		   Light_all_off();	  
-
-LM605:
-	     .stabn 68,0,11610,LM605-_Mission
-	     call _Light_all_off      	// [6:11610]  Light_all_off
-BB42_PU49:	// 0xeb6
-// BB:42 cycle count: 3
-//11611  		   Clean_Led_Color();
-
-LM606:
-	     .stabn 68,0,11611,LM606-_Mission
-	     call _Clean_Led_Color    	// [0:11611]  Clean_Led_Color
-BB43_PU49:	// 0xeb8
-// BB:43 cycle count: 3
-//11612             Clean_LFX_Led();
-
-LM607:
-	     .stabn 68,0,11612,LM607-_Mission
-	     call _Clean_LFX_Led      	// [0:11612]  Clean_LFX_Led
-BB44_PU49:	// 0xeba
-// BB:44 cycle count: 3
-	     goto L_49_77             	// [0:11612]  
-L_49_78:	// 0xebc
-Lt_49_4:	// 0xebc
-L_49_94:	// 0xebc
-// BB:45 cycle count: 9
-//11618  
-//11619     while (1)
-//11620     {   
-//11621  
-//11622         BlinkFlag_Data =0;
-
-LM608:
-	     .stabn 68,0,11622,LM608-_Mission
-	     R3 = 0                   	// [0:11622]  
-	     DS = seg(_BlinkFlag_Data)	// [1:11622]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [2:11622]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [4:11622]  
-//11623  	   Light_all_off();	  
-
-LM609:
-	     .stabn 68,0,11623,LM609-_Mission
-	     call _Light_all_off      	// [6:11623]  Light_all_off
-BB46_PU49:	// 0xec3
-// BB:46 cycle count: 3
-//11624  	   Clean_Led_Color();
-
-LM610:
-	     .stabn 68,0,11624,LM610-_Mission
-	     call _Clean_Led_Color    	// [0:11624]  Clean_Led_Color
-BB47_PU49:	// 0xec5
-// BB:47 cycle count: 3
-//11625         Clean_LFX_Led();
-
-LM611:
-	     .stabn 68,0,11625,LM611-_Mission
-	     call _Clean_LFX_Led      	// [0:11625]  Clean_LFX_Led
-BB48_PU49:	// 0xec7
-// BB:48 cycle count: 16
-//11626         G_Sensor_Status =0;
-
-LM612:
-	     .stabn 68,0,11626,LM612-_Mission
-	     R3 = 0                   	// [0:11626]  
+	     .stabn 68,0,11626,LM551-_Mission
+	     R3 = 3                   	// [0:11626]  
 	     DS = seg(_G_Sensor_Status)	// [1:11626]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [2:11626]  G_Sensor_Status
 	     DS:[R4] = R3             	// [4:11626]  
-//11627        if(Mem0.Y>22) 
-
-LM613:
-	     .stabn 68,0,11627,LM613-_Mission
-	     DS = seg(_Mem0+6)        	// [6:11627]  Mem0+6
-	     R4 = (_Mem0+6)           	// [7:11627]  Mem0+6
-	     R4 = DS:[R4]             	// [9:11627]  
-	     cmp R4, 22               	// [11:11627]  
-	     jbe L_49_96              	// [12:11627]  
-BB49_PU49:	// 0xed2
-// BB:49 cycle count: 3
-//11628            break;
-
-LM614:
-	     .stabn 68,0,11628,LM614-_Mission
-	     goto Lt_49_5             	// [0:11628]  
-L_49_96:	// 0xed4
-// BB:50 cycle count: 13
-//11629            	
-//11630    	  Mvmt = Get_Move_data(Mem0.Y);
-
-LM615:
-	     .stabn 68,0,11630,LM615-_Mission
-	     SP = SP - 1              	// [0:11630]  
-	     DS = seg(_Mem0+6)        	// [1:11630]  Mem0+6
-	     R4 = (_Mem0+6)           	// [2:11630]  Mem0+6
-	     R3 = DS:[R4]             	// [4:11630]  
-	     R4 = SP + 1              	// [6:11630]  
-	     [R4] = R3                	// [8:11630]  
-	     call _Get_Move_data      	// [10:11630]  Get_Move_data
-BB51_PU49:	// 0xede
-// BB:51 cycle count: 12
-	     SP = SP + 1              	// [0:11630]  
-	     [BP + 3] = R1            	// [1:11630]  Mvmt
-//11631        temp_MoveText2_Right =0;     
-
-LM616:
-	     .stabn 68,0,11631,LM616-_Mission
-	     R4 = 0                   	// [2:11631]  
-	     [BP + 0] = R4            	// [3:11631]  temp_MoveText2_Right
-//11632        
-//11633  	 if((Mvmt==0x0ff))
-
-LM617:
-	     .stabn 68,0,11633,LM617-_Mission
-	     R4 = [BP + 3]            	// [4:11633]  Mvmt
-	     cmp R4, 255              	// [6:11633]  
-	     jne L_49_97              	// [8:11633]  
-BB52_PU49:	// 0xee6
-// BB:52 cycle count: 3
-//11634  			break;
-
-LM618:
-	     .stabn 68,0,11634,LM618-_Mission
-	     goto Lt_49_5             	// [0:11634]  
-L_49_97:	// 0xee8
-// BB:53 cycle count: 3
-//11635  	 
-//11636  	 		 	
-//11637  	      WatchdogClear();
-
-LM619:
-	     .stabn 68,0,11637,LM619-_Mission
-	     call _WatchdogClear      	// [0:11637]  WatchdogClear
-BB54_PU49:	// 0xeea
-// BB:54 cycle count: 14
-//11638  	       
-//11639  		    if(Get_Key(0,0))
-
-LM620:
-	     .stabn 68,0,11639,LM620-_Mission
-	     SP = SP - 2              	// [0:11639]  
-	     R3 = 0                   	// [1:11639]  
-	     R4 = SP + 1              	// [2:11639]  
-	     [R4] = R3                	// [4:11639]  
-	     R3 = 0                   	// [6:11639]  
-	     R4 = SP + 2              	// [7:11639]  
-	     [R4] = R3                	// [9:11639]  
-	     call _Get_Key            	// [11:11639]  Get_Key
-BB55_PU49:	// 0xef5
-// BB:55 cycle count: 6
-	     SP = SP + 2              	// [0:11639]  
-	     cmp R1, 0                	// [1:11639]  
-	     je L_49_98               	// [2:11639]  
-BB56_PU49:	// 0xef8
-// BB:56 cycle count: 8
-//11640  			 	  return C_Off_Mode;  
-
-LM621:
-	     .stabn 68,0,11640,LM621-_Mission
-	     R1 = - 4079              	// [0:11640]  
-	     SP = SP + 7              	// [2:11640]  
-	     pop BP, PC from [SP]     	// [3:11640]  
-L_49_98:	// 0xefc
-// BB:57 cycle count: 7
-//11641  	 
-//11642  	 
-//11643  
-//11644  		if(G_TurnAround == Mvmt)
-
-LM622:
-	     .stabn 68,0,11644,LM622-_Mission
-	     R4 = [BP + 3]            	// [0:11644]  Mvmt
-	     cmp R4, 12               	// [2:11644]  
-	     jne L_49_99              	// [3:11644]  
-BB58_PU49:	// 0xeff
-// BB:58 cycle count: 18
-//11645  		{
-//11646  
-//11647  			Mvmt = G_Left<<(*P_TimerB_CNTR%2);
-
-LM623:
-	     .stabn 68,0,11647,LM623-_Mission
-	     R4 = 4                   	// [0:11647]  
-	     R2 = 12307               	// [1:11647]  
-	     R3 = 0                   	// [3:11647]  
-	     DS = R3                  	// [4:11647]  
-	     R3 = DS:[R2]             	// [5:11647]  
-	     R3 = R3 & 1              	// [7:11647]  
-	     R3 = R3 & 15             	// [8:11647]  
-	     R4 = R4 lsl R3           	// [9:11647]  
-	     [BP + 3] = R4            	// [10:11647]  Mvmt
-//11648  			
-//11649  			 if(Mvmt == G_Right)
-
-LM624:
-	     .stabn 68,0,11649,LM624-_Mission
-	     R4 = [BP + 3]            	// [11:11649]  Mvmt
-	     cmp R4, 8                	// [13:11649]  
-	     jne L_49_100             	// [14:11649]  
-BB59_PU49:	// 0xf0c
-// BB:59 cycle count: 2
-//11650  			 {
-//11651  		 	//	MoveText2_Right =1;
-//11652  		 		temp_MoveText2_Right =1;
-
-LM625:
-	     .stabn 68,0,11652,LM625-_Mission
-	     R4 = 1                   	// [0:11652]  
-	     [BP + 0] = R4            	// [1:11652]  temp_MoveText2_Right
-L_49_100:	// 0xf0e
-L_49_99:	// 0xf0e
-// BB:60 cycle count: 34
-//11655  		}
-//11656  
-//11657  
-//11658  		// Get_MoveText_data(Mem0.Y,M_Text1);
-//11659  			Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text1]); 
-
-LM626:
-	     .stabn 68,0,11659,LM626-_Mission
-	     SP = SP - 2              	// [0:11659]  
-	     DS = seg(_Mem0)          	// [1:11659]  Mem0
-	     R4 = (_Mem0)             	// [2:11659]  Mem0
-	     R3 = DS:[R4]             	// [4:11659]  
-	     R4 = SP + 1              	// [6:11659]  
-	     [R4] = R3                	// [8:11659]  
-	     R3 = (_Movetext_Table)   	// [10:11659]  Movetext_Table
-	     R4 = seg(_Movetext_Table)	// [12:11659]  Movetext_Table
-	     DS = seg(_Mem0+6)        	// [13:11659]  Mem0+6
-	     R2 = (_Mem0+6)           	// [14:11659]  Mem0+6
-	     R2 = DS:[R2]             	// [16:11659]  
-	     R1 = 0                   	// [18:11659]  
-	     test R2, R2 lsl 4        	// [19:11659]  
-	     R1 = R1 rol 1            	// [20:11659]  
-	     R2 = R2 lsl 1            	// [21:11659]  
-	     R3 = R3 + R2             	// [22:11659]  
-	     R4 = R4 + R1, Carry      	// [23:11659]  
-	     DS = R4                  	// [24:11659]  
-	     R3 = DS:[R3]             	// [25:11659]  
-	     R4 = SP + 2              	// [27:11659]  
-	     [R4] = R3                	// [29:11659]  
-	     call _Play_Seq           	// [31:11659]  Play_Seq
-BB61_PU49:	// 0xf2a
-// BB:61 cycle count: 10
-	     SP = SP + 2              	// [0:11659]  
-//11660  			BlinkFlag_Data=0;
-
-LM627:
-	     .stabn 68,0,11660,LM627-_Mission
-	     R3 = 0                   	// [1:11660]  
-	     DS = seg(_BlinkFlag_Data)	// [2:11660]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [3:11660]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [5:11660]  
-//11661              Light_all_off();
-
-LM628:
-	     .stabn 68,0,11661,LM628-_Mission
-	     call _Light_all_off      	// [7:11661]  Light_all_off
-BB62_PU49:	// 0xf32
-// BB:62 cycle count: 3
-//11662  			Clean_LFX_Led();
-
-LM629:
-	     .stabn 68,0,11662,LM629-_Mission
-	     call _Clean_LFX_Led      	// [0:11662]  Clean_LFX_Led
-BB63_PU49:	// 0xf34
-// BB:63 cycle count: 3
-//11663              Clean_Led_Color();
-
-LM630:
-	     .stabn 68,0,11663,LM630-_Mission
-	     call _Clean_Led_Color    	// [0:11663]  Clean_Led_Color
-L_49_101:	// 0xf36
-// BB:64 cycle count: 3
-//11666  
-//11667  		 while (1)
-//11668  		 {
-//11669  		 	
-//11670  		      WatchdogClear();
-
-LM631:
-	     .stabn 68,0,11670,LM631-_Mission
-	     call _WatchdogClear      	// [0:11670]  WatchdogClear
-BB65_PU49:	// 0xf38
-// BB:65 cycle count: 14
-//11671  		       
-//11672  			    if(Get_Key(0,0))
-
-LM632:
-	     .stabn 68,0,11672,LM632-_Mission
-	     SP = SP - 2              	// [0:11672]  
-	     R3 = 0                   	// [1:11672]  
-	     R4 = SP + 1              	// [2:11672]  
-	     [R4] = R3                	// [4:11672]  
-	     R3 = 0                   	// [6:11672]  
-	     R4 = SP + 2              	// [7:11672]  
-	     [R4] = R3                	// [9:11672]  
-	     call _Get_Key            	// [11:11672]  Get_Key
-BB66_PU49:	// 0xf43
-// BB:66 cycle count: 6
-	     SP = SP + 2              	// [0:11672]  
-	     cmp R1, 0                	// [1:11672]  
-	     je L_49_103              	// [2:11672]  
-BB67_PU49:	// 0xf46
-// BB:67 cycle count: 8
-//11673  				 	  return C_Off_Mode;  
-
-LM633:
-	     .stabn 68,0,11673,LM633-_Mission
-	     R1 = - 4079              	// [0:11673]  
-	     SP = SP + 7              	// [2:11673]  
-	     pop BP, PC from [SP]     	// [3:11673]  
-L_49_103:	// 0xf4a
-// BB:68 cycle count: 50
-//11674  				 	    
-//11675  			  G_Sensor_Status = Mvmt;	 	    
-
-LM634:
-	     .stabn 68,0,11675,LM634-_Mission
-	     R3 = [BP + 3]            	// [0:11675]  Mvmt
-	     DS = seg(_G_Sensor_Status)	// [2:11675]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [3:11675]  G_Sensor_Status
-	     DS:[R4] = R3             	// [5:11675]  
-//11676  				 	    
-//11677  			  MoveText2_Right =  temp_MoveText2_Right;	  
-
-LM635:
-	     .stabn 68,0,11677,LM635-_Mission
-	     R3 = [BP + 0]            	// [7:11677]  temp_MoveText2_Right
-	     DS = seg(_MoveText2_Right)	// [9:11677]  MoveText2_Right
-	     R4 = (_MoveText2_Right)  	// [10:11677]  MoveText2_Right
-	     DS:[R4] = R3             	// [12:11677]  
-//11678  			  Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text2]); 
-
-LM636:
-	     .stabn 68,0,11678,LM636-_Mission
-	     SP = SP - 2              	// [14:11678]  
-	     DS = seg(_Mem0)          	// [15:11678]  Mem0
-	     R4 = (_Mem0)             	// [16:11678]  Mem0
-	     R3 = DS:[R4]             	// [18:11678]  
-	     R4 = SP + 1              	// [20:11678]  
-	     [R4] = R3                	// [22:11678]  
-	     R3 = (_Movetext_Table)   	// [24:11678]  Movetext_Table
-	     R4 = seg(_Movetext_Table)	// [26:11678]  Movetext_Table
-	     DS = seg(_Mem0+6)        	// [27:11678]  Mem0+6
-	     R2 = (_Mem0+6)           	// [28:11678]  Mem0+6
-	     R2 = DS:[R2]             	// [30:11678]  
-	     R1 = 0                   	// [32:11678]  
-	     test R2, R2 lsl 4        	// [33:11678]  
-	     R1 = R1 rol 1            	// [34:11678]  
-	     R2 = R2 lsl 1            	// [35:11678]  
-	     R3 = R3 + R2             	// [36:11678]  
-	     R4 = R4 + R1, Carry      	// [37:11678]  
-	     R3 = R3 + 1              	// [38:11678]  
-	     R4 = R4 + 0, Carry       	// [39:11678]  
-	     DS = R4                  	// [40:11678]  
-	     R3 = DS:[R3]             	// [41:11678]  
-	     R4 = SP + 2              	// [43:11678]  
-	     [R4] = R3                	// [45:11678]  
-	     call _Play_Seq           	// [47:11678]  Play_Seq
-BB69_PU49:	// 0xf72
-// BB:69 cycle count: 14
-	     SP = SP + 2              	// [0:11678]  
-//11679  			  MoveText2_Right=0;
-
-LM637:
-	     .stabn 68,0,11679,LM637-_Mission
-	     R3 = 0                   	// [1:11679]  
-	     DS = seg(_MoveText2_Right)	// [2:11679]  MoveText2_Right
-	     R4 = (_MoveText2_Right)  	// [3:11679]  MoveText2_Right
-	     DS:[R4] = R3             	// [5:11679]  
-//11684  //			    Set_Led_RGB(Red,Led4);
-//11685  
-//11686  
-//11687  
-//11688  			if((Mvmt==0)||(Mvmt==0x0ff))
-
-LM638:
-	     .stabn 68,0,11688,LM638-_Mission
-	     R4 = [BP + 3]            	// [7:11688]  Mvmt
-	     cmp R4, 0                	// [9:11688]  
-	     je L_49_106              	// [10:11688]  
-BB70_PU49:	// 0xf7b
-// BB:70 cycle count: 8
-	     R4 = [BP + 3]            	// [0:11688]  Mvmt
-	     cmp R4, 255              	// [2:11688]  
-	     jne L_49_105             	// [4:11688]  
-L_49_106:	// 0xf7f
-// BB:71 cycle count: 3
-//11689  				break;
-
-LM639:
-	     .stabn 68,0,11689,LM639-_Mission
-	     goto Lt_49_6             	// [0:11689]  
-L_49_105:	// 0xf81
-// BB:72 cycle count: 24
-//11690  		    else		
-//11691  			{
-//11692  
-//11693                     G_Sensor_Status = Mvmt;
-
-LM640:
-	     .stabn 68,0,11693,LM640-_Mission
-	     R3 = [BP + 3]            	// [0:11693]  Mvmt
-	     DS = seg(_G_Sensor_Status)	// [2:11693]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [3:11693]  G_Sensor_Status
-	     DS:[R4] = R3             	// [5:11693]  
-//11694                   
-//11695                      TimeCnt1 =0;
-
-LM641:
-	     .stabn 68,0,11695,LM641-_Mission
-	     R3 = 0                   	// [7:11695]  
-	     DS = seg(_TimeCnt1)      	// [8:11695]  TimeCnt1
-	     R4 = (_TimeCnt1)         	// [9:11695]  TimeCnt1
-	     DS:[R4] = R3             	// [11:11695]  
-//11696  				   if(G_Sensor_Status == G_BHIT)	
-
-LM642:
-	     .stabn 68,0,11696,LM642-_Mission
-	     DS = seg(_G_Sensor_Status)	// [13:11696]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [14:11696]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [16:11696]  
-	     cmp R4, 4479             	// [18:11696]  
-	     je BB73_PU49             	// [20:11696]  
-BB125_PU49:	// 0xf92
-// BB:125 cycle count: 3
-	     goto L_49_108            	// [0:0]  
-BB73_PU49:	// 0xf94
-// BB:73 cycle count: 9
-//11709  //					   Led_On(All_Led_data);
-//11710  //					   BlinkFlag_Data =All_Led_data;
-//11711  						
-//11712  						
-//11713  						  temp = TimeOver;////���ؽ��
-
-LM643:
-	     .stabn 68,0,11713,LM643-_Mission
-	     R4 = - 32768             	// [0:11713]  
-	     [BP + 6] = R4            	// [2:11713]  temp
-//11714  						 TimeTatleCnt =0;
-
-LM644:
-	     .stabn 68,0,11714,LM644-_Mission
-	     R3 = 0                   	// [3:11714]  
-	     DS = seg(_TimeTatleCnt)  	// [4:11714]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [5:11714]  TimeTatleCnt
-	     DS:[R4] = R3             	// [7:11714]  
-L_49_109:	// 0xf9c
-// BB:74 cycle count: 11
-//11715  						 while(TimeTatleCnt<15*16)
-
-LM645:
-	     .stabn 68,0,11715,LM645-_Mission
-	     DS = seg(_TimeTatleCnt)  	// [0:11715]  TimeTatleCnt
-	     R4 = (_TimeTatleCnt)     	// [1:11715]  TimeTatleCnt
-	     R4 = DS:[R4]             	// [3:11715]  
-	     cmp R4, 239              	// [5:11715]  
-	     ja L_49_110              	// [7:11715]  
-BB75_PU49:	// 0xfa3
-// BB:75 cycle count: 22
-//11716  						 {
-//11717  						 	
-//11718  						 	   G_Sensor_Status = G_Shake;
-
-LM646:
-	     .stabn 68,0,11718,LM646-_Mission
-	     R3 = 64                  	// [0:11718]  
-	     DS = seg(_G_Sensor_Status)	// [2:11718]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [3:11718]  G_Sensor_Status
-	     DS:[R4] = R3             	// [5:11718]  
-//11719  //							   BlinkFlag_Data =0;
-//11720  //							   Light_all_off();		
-//11721  
-//11722  						 	 	 	  
-//11723  						 	 if(WaitAction(24,status)==C_MovSucess)
-
-LM647:
-	     .stabn 68,0,11723,LM647-_Mission
-	     SP = SP - 2              	// [7:11723]  
-	     R3 = 24                  	// [8:11723]  
-	     R4 = SP + 1              	// [9:11723]  
-	     [R4] = R3                	// [11:11723]  
-	     R3 = [BP + 4]            	// [13:11723]  status
-	     R4 = SP + 2              	// [15:11723]  
-	     [R4] = R3                	// [17:11723]  
-	     call _WaitAction         	// [19:11723]  WaitAction
-BB76_PU49:	// 0xfb4
-// BB:76 cycle count: 7
-	     SP = SP + 2              	// [0:11723]  
-	     cmp R1, 4096             	// [1:11723]  
-	     jne L_49_112             	// [3:11723]  
-BB77_PU49:	// 0xfb8
-// BB:77 cycle count: 11
-//11724  						 	 {
-//11725  						 	 	status=2;
-
-LM648:
-	     .stabn 68,0,11725,LM648-_Mission
-	     R4 = 2                   	// [0:11725]  
-	     [BP + 4] = R4            	// [1:11725]  status
-//11726  						 	 	PlayA1800_ElementsInit(SFX_Shake);
-
-LM649:
-	     .stabn 68,0,11726,LM649-_Mission
-	     SP = SP - 1              	// [2:11726]  
-	     R3 = 39                  	// [3:11726]  
-	     R4 = SP + 1              	// [4:11726]  
-	     [R4] = R3                	// [6:11726]  
-	     call _PlayA1800_ElementsInit	// [8:11726]  PlayA1800_ElementsInit
-BB78_PU49:	// 0xfc1
-// BB:78 cycle count: 12
-	     SP = SP + 1              	// [0:11726]  
-//11727  						 	 	
-//11728  						 	 	 if(TimeCnt1>=70)
-
-LM650:
-	     .stabn 68,0,11728,LM650-_Mission
-	     DS = seg(_TimeCnt1)      	// [1:11728]  TimeCnt1
-	     R4 = (_TimeCnt1)         	// [2:11728]  TimeCnt1
-	     R4 = DS:[R4]             	// [4:11728]  
-	     cmp R4, 69               	// [6:11728]  
-	     jbe L_49_113             	// [8:11728]  
-BB79_PU49:	// 0xfc9
-// BB:79 cycle count: 6
-//11729  						 	 	    {
-//11730  						 	 	    	temp =1;//���ؽ��
-
-LM651:
-	     .stabn 68,0,11730,LM651-_Mission
-	     R4 = 1                   	// [0:11730]  
-	     [BP + 6] = R4            	// [1:11730]  temp
-//11731  						 	 	    	break;	
-
-LM652:
-	     .stabn 68,0,11731,LM652-_Mission
-	     jmp Lt_49_7              	// [2:11731]  
-L_49_113:	// 0xfcc
-// BB:80 cycle count: 4
-
-LM653:
-	     .stabn 68,0,11728,LM653-_Mission
-	     jmp L_49_111             	// [0:11728]  
-L_49_112:	// 0xfcd
-// BB:81 cycle count: 8
-//11733  						 	 }
-//11734  						 	else
-//11735  						 	    {
-//11736  						 	        //temp =0;////���ؽ��
-//11737  						 	        status=0;
-
-LM654:
-	     .stabn 68,0,11737,LM654-_Mission
-	     R4 = 0                   	// [0:11737]  
-	     [BP + 4] = R4            	// [1:11737]  status
-//11738  						 	        TimeCnt1 =0;
-
-LM655:
-	     .stabn 68,0,11738,LM655-_Mission
-	     R3 = 0                   	// [2:11738]  
-	     DS = seg(_TimeCnt1)      	// [3:11738]  TimeCnt1
-	     R4 = (_TimeCnt1)         	// [4:11738]  TimeCnt1
-	     DS:[R4] = R3             	// [6:11738]  
-L_49_111:	// 0xfd4
-// BB:82 cycle count: 4
-
-LM656:
-	     .stabn 68,0,11723,LM656-_Mission
-	     jmp L_49_109             	// [0:11723]  
-L_49_110:	// 0xfd5
-Lt_49_7:	// 0xfd5
-// BB:83 cycle count: 4
-//11739  						 	        //break;	
-//11740  						 	    }
-//11741  						 	    
-//11742  						 	
-//11743  						 }	
-
-LM657:
-	     .stabn 68,0,11743,LM657-_Mission
-	     jmp L_49_107             	// [0:11743]  
-L_49_108:	// 0xfd6
-// BB:84 cycle count: 24
-//11780  						 	 
-//11781  						 } */
-//11782  						
-//11783  							
-//11784  							IMMO_Flag =0;
-
-LM658:
-	     .stabn 68,0,11784,LM658-_Mission
-	     R3 = 0                   	// [0:11784]  
-	     DS = seg(_IMMO_Flag)     	// [1:11784]  IMMO_Flag
-	     R4 = (_IMMO_Flag)        	// [2:11784]  IMMO_Flag
-	     DS:[R4] = R3             	// [4:11784]  
-//11785  							Movetime=6*16;
-
-LM659:
-	     .stabn 68,0,11785,LM659-_Mission
-	     R4 = 96                  	// [6:11785]  
-	     [BP + 5] = R4            	// [8:11785]  Movetime
-//11786  							
-//11787  						 temp = Mov_Detected(Movetime,0);
-
-LM660:
-	     .stabn 68,0,11787,LM660-_Mission
-	     SP = SP - 2              	// [9:11787]  
-	     R3 = [BP + 5]            	// [10:11787]  Movetime
-	     R4 = SP + 1              	// [12:11787]  
-	     [R4] = R3                	// [14:11787]  
-	     R3 = 0                   	// [16:11787]  
-	     R4 = SP + 2              	// [17:11787]  
-	     [R4] = R3                	// [19:11787]  
-	     call _Mov_Detected       	// [21:11787]  Mov_Detected
-BB85_PU49:	// 0xfe9
-// BB:85 cycle count: 2
-	     SP = SP + 2              	// [0:11787]  
-	     [BP + 6] = R1            	// [1:11787]  temp
-L_49_107:	// 0xfeb
-// BB:86 cycle count: 21
-//11788  						
-//11789  					}
-//11790                    
-//11791                     G_Sensor_Status&=~G_BHIT; 
-
-LM661:
-	     .stabn 68,0,11791,LM661-_Mission
-	     DS = seg(_G_Sensor_Status)	// [0:11791]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:11791]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:11791]  
-	     R3 = R4 & 61056          	// [5:11791]  
-	     DS = seg(_G_Sensor_Status)	// [7:11791]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:11791]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:11791]  
-//11792                     if( temp&C_MovSucessStatus)
-
-LM662:
-	     .stabn 68,0,11792,LM662-_Mission
-	     R4 = [BP + 6]            	// [12:11792]  temp
-	     R4 = R4 & 8191           	// [14:11792]  
-	     cmp R4, 0                	// [16:11792]  
-	     je L_49_115              	// [17:11792]  
-BB87_PU49:	// 0xffa
-// BB:87 cycle count: 11
-//11793  				   {
-//11794  					   timeovercnt =0;
-
-LM663:
-	     .stabn 68,0,11794,LM663-_Mission
-	     R4 = 0                   	// [0:11794]  
-	     [BP + 1] = R4            	// [1:11794]  timeovercnt
-//11795  				       PlayA1800_Elements(SFX_Good);
-
-LM664:
-	     .stabn 68,0,11795,LM664-_Mission
-	     SP = SP - 1              	// [2:11795]  
-	     R3 = 22                  	// [3:11795]  
-	     R4 = SP + 1              	// [4:11795]  
-	     [R4] = R3                	// [6:11795]  
-	     call _PlayA1800_Elements 	// [8:11795]  PlayA1800_Elements
-BB88_PU49:	// 0x1003
-// BB:88 cycle count: 4
-	     SP = SP + 1              	// [0:11795]  
-//11796  					   break;
-
-LM665:
-	     .stabn 68,0,11796,LM665-_Mission
-	     goto Lt_49_6             	// [1:11796]  
-L_49_115:	// 0x1006
-// BB:89 cycle count: 8
-//11797  				   }
-//11798  				   else if(temp == TimeOver)
-
-LM666:
-	     .stabn 68,0,11798,LM666-_Mission
-	     R4 = [BP + 6]            	// [0:11798]  temp
-	     cmp R4, 32768            	// [2:11798]  
-	     jne L_49_117             	// [4:11798]  
-BB90_PU49:	// 0x100a
-// BB:90 cycle count: 11
-//11799  				   {
-//11800                             timeovercnt++;
-
-LM667:
-	     .stabn 68,0,11800,LM667-_Mission
-	     R4 = [BP + 1]            	// [0:11800]  timeovercnt
-	     R4 = R4 + 1              	// [2:11800]  
-	     [BP + 1] = R4            	// [3:11800]  timeovercnt
-//11801  						   if(timeovercnt>1)
-
-LM668:
-	     .stabn 68,0,11801,LM668-_Mission
-	     R4 = [BP + 1]            	// [4:11801]  timeovercnt
-	     cmp R4, 1                	// [6:11801]  
-	     jbe L_49_118             	// [7:11801]  
-BB91_PU49:	// 0x1010
-// BB:91 cycle count: 3
-//11802  						   {
-//11803                                  temp = GameTimeout();//C_GameTimeout;
-
-LM669:
-	     .stabn 68,0,11803,LM669-_Mission
-	     call _GameTimeout        	// [0:11803]  GameTimeout
-BB92_PU49:	// 0x1012
-// BB:92 cycle count: 9
-	     [BP + 6] = R1            	// [0:11803]  temp
-//11804                                  if(C_Off_Mode==temp)
-
-LM670:
-	     .stabn 68,0,11804,LM670-_Mission
-	     R4 = [BP + 6]            	// [1:11804]  temp
-	     cmp R4, 61457            	// [3:11804]  
-	     jne L_49_119             	// [5:11804]  
-BB93_PU49:	// 0x1017
-// BB:93 cycle count: 8
-//11805                                  	return C_Off_Mode;
-
-LM671:
-	     .stabn 68,0,11805,LM671-_Mission
-	     R1 = - 4079              	// [0:11805]  
-	     SP = SP + 7              	// [2:11805]  
-	     pop BP, PC from [SP]     	// [3:11805]  
-L_49_119:	// 0x101b
-L_49_118:	// 0x101b
-// BB:94 cycle count: 3
-
-LM672:
-	     .stabn 68,0,11801,LM672-_Mission
-	     goto L_49_116            	// [0:11801]  
-L_49_117:	// 0x101d
-// BB:95 cycle count: 12
-//11807  
-//11808  				   }
-//11809  				   else				   
-//11810  				   {
-//11811                         timeovercnt =0;
-
-LM673:
-	     .stabn 68,0,11811,LM673-_Mission
-	     R4 = 0                   	// [0:11811]  
-	     [BP + 1] = R4            	// [1:11811]  timeovercnt
-//11812                        if(FailV<2)
-
-LM674:
-	     .stabn 68,0,11812,LM674-_Mission
-	     DS = seg(_FailV)         	// [2:11812]  FailV
-	     R4 = (_FailV)            	// [3:11812]  FailV
-	     R4 = DS:[R4]             	// [5:11812]  
-	     cmp R4, 1                	// [7:11812]  
-	     ja L_49_121              	// [8:11812]  
-BB96_PU49:	// 0x1025
-// BB:96 cycle count: 14
-//11813  					  {
-//11814  						FailV++;
-
-LM675:
-	     .stabn 68,0,11814,LM675-_Mission
-	     DS = seg(_FailV)         	// [0:11814]  FailV
-	     R4 = (_FailV)            	// [1:11814]  FailV
-	     R4 = DS:[R4]             	// [3:11814]  
-	     R4 = R4 + 1              	// [5:11814]  
-	     DS = seg(_FailV)         	// [6:11814]  FailV
-	     R3 = (_FailV)            	// [7:11814]  FailV
-	     DS:[R3] = R4             	// [9:11814]  
-//11815  						Motor_On();
-
-LM676:
-	     .stabn 68,0,11815,LM676-_Mission
-	     call _Motor_On           	// [11:11815]  Motor_On
-BB97_PU49:	// 0x1030
-// BB:97 cycle count: 9
-//11816  						delay_time(8);
-
-LM677:
-	     .stabn 68,0,11816,LM677-_Mission
-	     SP = SP - 1              	// [0:11816]  
-	     R3 = 8                   	// [1:11816]  
-	     R4 = SP + 1              	// [2:11816]  
-	     [R4] = R3                	// [4:11816]  
-	     call _delay_time         	// [6:11816]  delay_time
-BB98_PU49:	// 0x1037
-// BB:98 cycle count: 4
-	     SP = SP + 1              	// [0:11816]  
-//11817  						Motor_Off();
-
-LM678:
-	     .stabn 68,0,11817,LM678-_Mission
-	     call _Motor_Off          	// [1:11817]  Motor_Off
-BB99_PU49:	// 0x103a
-// BB:99 cycle count: 4
-	     jmp L_49_120             	// [0:11817]  
-L_49_121:	// 0x103b
-// BB:100 cycle count: 21
-//11818  					  }
-//11819  					else
-//11820  					{
-//11821                            FailV2++;
-
-LM679:
-	     .stabn 68,0,11821,LM679-_Mission
-	     DS = seg(_FailV2)        	// [0:11821]  FailV2
-	     R4 = (_FailV2)           	// [1:11821]  FailV2
-	     R4 = DS:[R4]             	// [3:11821]  
-	     R4 = R4 + 1              	// [5:11821]  
-	     DS = seg(_FailV2)        	// [6:11821]  FailV2
-	     R3 = (_FailV2)           	// [7:11821]  FailV2
-	     DS:[R3] = R4             	// [9:11821]  
-//11822  						  if(FailV2>1)
-
-LM680:
-	     .stabn 68,0,11822,LM680-_Mission
-	     DS = seg(_FailV2)        	// [11:11822]  FailV2
-	     R4 = (_FailV2)           	// [12:11822]  FailV2
-	     R4 = DS:[R4]             	// [14:11822]  
-	     cmp R4, 1                	// [16:11822]  
-	     jbe L_49_123             	// [17:11822]  
-BB101_PU49:	// 0x104a
-// BB:101 cycle count: 15
-//11823  						    {
-//11824                                 FailV2 =0;
-
-LM681:
-	     .stabn 68,0,11824,LM681-_Mission
-	     R3 = 0                   	// [0:11824]  
-	     DS = seg(_FailV2)        	// [1:11824]  FailV2
-	     R4 = (_FailV2)           	// [2:11824]  FailV2
-	     DS:[R4] = R3             	// [4:11824]  
-//11825  
-//11826  				               PlayA1800_Elements(SFX_Good);
-
-LM682:
-	     .stabn 68,0,11826,LM682-_Mission
-	     SP = SP - 1              	// [6:11826]  
-	     R3 = 22                  	// [7:11826]  
-	     R4 = SP + 1              	// [8:11826]  
-	     [R4] = R3                	// [10:11826]  
-	     call _PlayA1800_Elements 	// [12:11826]  PlayA1800_Elements
-BB102_PU49:	// 0x1056
-// BB:102 cycle count: 5
-	     SP = SP + 1              	// [0:11826]  
-//11827  					           break;
-
-LM683:
-	     .stabn 68,0,11827,LM683-_Mission
-	     jmp Lt_49_6              	// [1:11827]  
-L_49_123:	// 0x1058
-// BB:103 cycle count: 3
-//11828  							}
-//11829  						  else
-//11830  						  {
-//11831  								Motor_On();
-
-LM684:
-	     .stabn 68,0,11831,LM684-_Mission
-	     call _Motor_On           	// [0:11831]  Motor_On
-BB104_PU49:	// 0x105a
-// BB:104 cycle count: 9
-//11832  								delay_time(8);
-
-LM685:
-	     .stabn 68,0,11832,LM685-_Mission
-	     SP = SP - 1              	// [0:11832]  
-	     R3 = 8                   	// [1:11832]  
-	     R4 = SP + 1              	// [2:11832]  
-	     [R4] = R3                	// [4:11832]  
-	     call _delay_time         	// [6:11832]  delay_time
-BB105_PU49:	// 0x1061
-// BB:105 cycle count: 4
-	     SP = SP + 1              	// [0:11832]  
-//11833  								Motor_Off();							 
-
-LM686:
-	     .stabn 68,0,11833,LM686-_Mission
-	     call _Motor_Off          	// [1:11833]  Motor_Off
-L_49_122:	// 0x1064
-L_49_120:	// 0x1064
-L_49_116:	// 0x1064
-L_49_114:	// 0x1064
-L_49_104:	// 0x1064
-// BB:106 cycle count: 3
-
-LM687:
-	     .stabn 68,0,11688,LM687-_Mission
-	     goto L_49_101            	// [0:11688]  
-L_49_102:	// 0x1066
-Lt_49_6:	// 0x1066
-// BB:107 cycle count: 14
-//11845  
-//11846  			}
-//11847  		 }
-//11848  
-//11849         Mem0.Y++;
-
-LM688:
-	     .stabn 68,0,11849,LM688-_Mission
-	     DS = seg(_Mem0+6)        	// [0:11849]  Mem0+6
-	     R4 = (_Mem0+6)           	// [1:11849]  Mem0+6
-	     R4 = DS:[R4]             	// [3:11849]  
-	     R4 = R4 + 1              	// [5:11849]  
-	     DS = seg(_Mem0+6)        	// [6:11849]  Mem0+6
-	     R3 = (_Mem0+6)           	// [7:11849]  Mem0+6
-	     DS:[R3] = R4             	// [9:11849]  
-	     goto L_49_94             	// [11:11849]  
-L_49_95:	// 0x1071
-Lt_49_5:	// 0x1071
-L_49_124:	// 0x1071
-// BB:108 cycle count: 10
-//11850      }
-//11851  	
-//11852        while(Mem0.Z<7)     
-
-LM689:
-	     .stabn 68,0,11852,LM689-_Mission
-	     DS = seg(_Mem0+7)        	// [0:11852]  Mem0+7
-	     R4 = (_Mem0+7)           	// [1:11852]  Mem0+7
-	     R4 = DS:[R4]             	// [3:11852]  
-	     cmp R4, 6                	// [5:11852]  
-	     ja L_49_125              	// [6:11852]  
-BB109_PU49:	// 0x1077
-// BB:109 cycle count: 31
-//11853  	  {
-//11854         Play_Seq(Mem0.Mission_Cur,End_Table[Mem0.Z]); 
-
-LM690:
-	     .stabn 68,0,11854,LM690-_Mission
-	     SP = SP - 2              	// [0:11854]  
-	     DS = seg(_Mem0)          	// [1:11854]  Mem0
-	     R4 = (_Mem0)             	// [2:11854]  Mem0
-	     R3 = DS:[R4]             	// [4:11854]  
-	     R4 = SP + 1              	// [6:11854]  
-	     [R4] = R3                	// [8:11854]  
-	     DS = seg(_Mem0+7)        	// [10:11854]  Mem0+7
-	     R4 = (_Mem0+7)           	// [11:11854]  Mem0+7
-	     R4 = DS:[R4]             	// [13:11854]  
-	     R3 = 0                   	// [15:11854]  
-	     R1 = (_End_Table)        	// [16:11854]  End_Table
-	     R2 = seg(_End_Table)     	// [18:11854]  End_Table
-	     R4 = R4 + R1             	// [19:11854]  
-	     R3 = R3 + R2, Carry      	// [20:11854]  
-	     DS = R3                  	// [21:11854]  
-	     R3 = DS:[R4]             	// [22:11854]  
-	     R4 = SP + 2              	// [24:11854]  
-	     [R4] = R3                	// [26:11854]  
-	     call _Play_Seq           	// [28:11854]  Play_Seq
-BB110_PU49:	// 0x1090
-// BB:110 cycle count: 16
-	     SP = SP + 2              	// [0:11854]  
-//11855         Mem0.Z++;
-
-LM691:
-	     .stabn 68,0,11855,LM691-_Mission
-	     DS = seg(_Mem0+7)        	// [1:11855]  Mem0+7
-	     R4 = (_Mem0+7)           	// [2:11855]  Mem0+7
-	     R4 = DS:[R4]             	// [4:11855]  
-	     R4 = R4 + 1              	// [6:11855]  
-	     DS = seg(_Mem0+7)        	// [7:11855]  Mem0+7
-	     R3 = (_Mem0+7)           	// [8:11855]  Mem0+7
-	     DS:[R3] = R4             	// [10:11855]  
-	     jmp L_49_124             	// [12:11855]  
-L_49_125:	// 0x109b
-// BB:111 cycle count: 16
-//11856  	  }
-//11857  
-//11858       Mem0.Mission_Cur++;	
-
-LM692:
-	     .stabn 68,0,11858,LM692-_Mission
-	     DS = seg(_Mem0)          	// [0:11858]  Mem0
-	     R4 = (_Mem0)             	// [1:11858]  Mem0
-	     R4 = DS:[R4]             	// [3:11858]  
-	     R4 = R4 + 1              	// [5:11858]  
-	     DS = seg(_Mem0)          	// [6:11858]  Mem0
-	     R3 = (_Mem0)             	// [7:11858]  Mem0
-	     DS:[R3] = R4             	// [9:11858]  
+//11627         	     temp = WaitAction(5*16,0);
+
+LM552:
+	     .stabn 68,0,11627,LM552-_Mission
+	     R3 = 80                  	// [6:11627]  
+	     R4 = SP + 1              	// [8:11627]  
+	     [R4] = R3                	// [10:11627]  
+	     R3 = 0                   	// [12:11627]  
+	     R4 = SP + 2              	// [13:11627]  
+	     [R4] = R3                	// [15:11627]  
+	     call _WaitAction         	// [17:11627]  WaitAction
+BB24_PU49:	// 0xd9c
+// BB:24 cycle count: 9
+	     SP = SP + 2              	// [0:11627]  
+	     [BP + 6] = R1            	// [1:11627]  temp
+//11628         	     if(temp==G_UP)//Mov_Detected
+
+LM553:
+	     .stabn 68,0,11628,LM553-_Mission
+	     R4 = [BP + 6]            	// [2:11628]  temp
+	     cmp R4, 1                	// [4:11628]  
+	     jne L_49_101             	// [5:11628]  
+BB25_PU49:	// 0xda1
+// BB:25 cycle count: 15
+//11629         	        {
+//11630         	             Mem0.Arm_Mode= A_Right;	
+
+LM554:
+	     .stabn 68,0,11630,LM554-_Mission
+	     R3 = 0                   	// [0:11630]  
+	     DS = seg(_Mem0+3)        	// [1:11630]  Mem0+3
+	     R4 = (_Mem0+3)           	// [2:11630]  Mem0+3
+	     DS:[R4] = R3             	// [4:11630]  
+//11631         	             PlayA1800_Elements(SFX_Start); 
+
+LM555:
+	     .stabn 68,0,11631,LM555-_Mission
+	     SP = SP - 1              	// [6:11631]  
+	     R3 = 42                  	// [7:11631]  
+	     R4 = SP + 1              	// [8:11631]  
+	     [R4] = R3                	// [10:11631]  
+	     call _PlayA1800_Elements 	// [12:11631]  PlayA1800_Elements
+BB26_PU49:	// 0xdad
+// BB:26 cycle count: 4
+	     SP = SP + 1              	// [0:11631]  
+//11632         	             break;
+
+LM556:
+	     .stabn 68,0,11632,LM556-_Mission
+	     goto Lt_49_2             	// [1:11632]  
+L_49_101:	// 0xdb0
+// BB:27 cycle count: 7
+//11633         	        }
+//11634         	      else  if(temp==G_Down)
+
+LM557:
+	     .stabn 68,0,11634,LM557-_Mission
+	     R4 = [BP + 6]            	// [0:11634]  temp
+	     cmp R4, 2                	// [2:11634]  
+	     je BB28_PU49             	// [3:11634]  
+BB146_PU49:	// 0xdb3
+// BB:146 cycle count: 3
+	     goto L_49_103            	// [0:0]  
+BB28_PU49:	// 0xdb5
+// BB:28 cycle count: 87
+//11635         	        {
+//11636         	        	 Mem0.Arm_Mode= A_Left;	  
+
+LM558:
+	     .stabn 68,0,11636,LM558-_Mission
+	     R3 = 1                   	// [0:11636]  
+	     DS = seg(_Mem0+3)        	// [1:11636]  Mem0+3
+	     R4 = (_Mem0+3)           	// [2:11636]  Mem0+3
+	     DS:[R4] = R3             	// [4:11636]  
+//11637         	        	 
+//11638                      G_X_A  = G_Back;//G_Hit;////ֵ���ӷ���
+
+LM559:
+	     .stabn 68,0,11638,LM559-_Mission
+	     R3 = 32                  	// [6:11638]  
+	     DS = seg(_G_X_A)         	// [7:11638]  G_X_A
+	     R4 = (_G_X_A)            	// [8:11638]  G_X_A
+	     DS:[R4] = R3             	// [10:11638]  
+//11639                      G_X_M  = G_Hit;//G_Back;////ֵ���ٷ���
+
+LM560:
+	     .stabn 68,0,11639,LM560-_Mission
+	     R3 = 16                  	// [12:11639]  
+	     DS = seg(_G_X_M)         	// [13:11639]  G_X_M
+	     R4 = (_G_X_M)            	// [14:11639]  G_X_M
+	     DS:[R4] = R3             	// [16:11639]  
+//11640  
+//11641  					G_Y_A  = G_Right;//G_Left;//G_Hit
+
+LM561:
+	     .stabn 68,0,11641,LM561-_Mission
+	     R3 = 8                   	// [18:11641]  
+	     DS = seg(_G_Y_A)         	// [19:11641]  G_Y_A
+	     R4 = (_G_Y_A)            	// [20:11641]  G_Y_A
+	     DS:[R4] = R3             	// [22:11641]  
+//11642  					G_Y_M  = G_Left;// G_Right;//G_Back
+
+LM562:
+	     .stabn 68,0,11642,LM562-_Mission
+	     R3 = 4                   	// [24:11642]  
+	     DS = seg(_G_Y_M)         	// [25:11642]  G_Y_M
+	     R4 = (_G_Y_M)            	// [26:11642]  G_Y_M
+	     DS:[R4] = R3             	// [28:11642]  
+//11643  					
+//11644  					G_Z_A =  G_UP;
+
+LM563:
+	     .stabn 68,0,11644,LM563-_Mission
+	     R3 = 1                   	// [30:11644]  
+	     DS = seg(_G_Z_A)         	// [31:11644]  G_Z_A
+	     R4 = (_G_Z_A)            	// [32:11644]  G_Z_A
+	     DS:[R4] = R3             	// [34:11644]  
+//11645  					G_Z_M   = G_Down;
+
+LM564:
+	     .stabn 68,0,11645,LM564-_Mission
+	     R3 = 2                   	// [36:11645]  
+	     DS = seg(_G_Z_M)         	// [37:11645]  G_Z_M
+	     R4 = (_G_Z_M)            	// [38:11645]  G_Z_M
+	     DS:[R4] = R3             	// [40:11645]  
+//11652  //					
+//11653  //					LED_UP   = LED_Hit;//LED_Hit;
+//11654  //					LED_Down = LED_Back;//LED_Back;					
+//11655  					
+//11656                     Led_Data_Play[0]= Led1;//LED_UP;
+
+LM565:
+	     .stabn 68,0,11656,LM565-_Mission
+	     R3 = 1                   	// [42:11656]  
+	     DS = seg(_Led_Data_Play) 	// [43:11656]  Led_Data_Play
+	     R4 = (_Led_Data_Play)    	// [44:11656]  Led_Data_Play
+	     DS:[R4] = R3             	// [46:11656]  
+//11657                     Led_Data_Play[1]= Led3;//LED_Down;
+
+LM566:
+	     .stabn 68,0,11657,LM566-_Mission
+	     R3 = 4                   	// [48:11657]  
+	     DS = seg(_Led_Data_Play+1)	// [49:11657]  Led_Data_Play+1
+	     R4 = (_Led_Data_Play+1)  	// [50:11657]  Led_Data_Play+1
+	     DS:[R4] = R3             	// [52:11657]  
+//11658                     Led_Data_Play[2]= Led2;//LED_Left;
+
+LM567:
+	     .stabn 68,0,11658,LM567-_Mission
+	     R3 = 2                   	// [54:11658]  
+	     DS = seg(_Led_Data_Play+2)	// [55:11658]  Led_Data_Play+2
+	     R4 = (_Led_Data_Play+2)  	// [56:11658]  Led_Data_Play+2
+	     DS:[R4] = R3             	// [58:11658]  
+//11659                     Led_Data_Play[3]= Led4;//LED_Right;
+
+LM568:
+	     .stabn 68,0,11659,LM568-_Mission
+	     R3 = 8                   	// [60:11659]  
+	     DS = seg(_Led_Data_Play+3)	// [61:11659]  Led_Data_Play+3
+	     R4 = (_Led_Data_Play+3)  	// [62:11659]  Led_Data_Play+3
+	     DS:[R4] = R3             	// [64:11659]  
+//11660                     Led_Data_Play[4]= Led1;//LED_Hit;
+
+LM569:
+	     .stabn 68,0,11660,LM569-_Mission
+	     R3 = 1                   	// [66:11660]  
+	     DS = seg(_Led_Data_Play+4)	// [67:11660]  Led_Data_Play+4
+	     R4 = (_Led_Data_Play+4)  	// [68:11660]  Led_Data_Play+4
+	     DS:[R4] = R3             	// [70:11660]  
+//11661                     Led_Data_Play[5]= Led3;//LED_Back;    
+
+LM570:
+	     .stabn 68,0,11661,LM570-_Mission
+	     R3 = 4                   	// [72:11661]  
+	     DS = seg(_Led_Data_Play+5)	// [73:11661]  Led_Data_Play+5
+	     R4 = (_Led_Data_Play+5)  	// [74:11661]  Led_Data_Play+5
+	     DS:[R4] = R3             	// [76:11661]  
+//11662                     
+//11663                      PlayA1800_Elements(SFX_Start); 
+
+LM571:
+	     .stabn 68,0,11663,LM571-_Mission
+	     SP = SP - 1              	// [78:11663]  
+	     R3 = 42                  	// [79:11663]  
+	     R4 = SP + 1              	// [80:11663]  
+	     [R4] = R3                	// [82:11663]  
+	     call _PlayA1800_Elements 	// [84:11663]  PlayA1800_Elements
+BB29_PU49:	// 0xdfd
+// BB:29 cycle count: 6
+	     SP = SP + 1              	// [0:11663]  
 	//;;
 	INT OFF
 	//;;
-//11859          	   	  	   
-//11860          __asm("INT OFF");
-//11861         MoveSPIDriverToRAM();
+//11664                      
+//11665                      
+//11666  			          __asm("INT OFF");
+//11667  			           MoveSPIDriverToRAM();
 
-LM693:
-	     .stabn 68,0,11861,LM693-_Mission
-	     call _MoveSPIDriverToRAM 	// [13:11861]  MoveSPIDriverToRAM
-BB112_PU49:	// 0x10a9
-// BB:112 cycle count: 16
-//11862     	      
-//11863     	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
+LM572:
+	     .stabn 68,0,11667,LM572-_Mission
+	     call _MoveSPIDriverToRAM 	// [3:11667]  MoveSPIDriverToRAM
+BB30_PU49:	// 0xe03
+// BB:30 cycle count: 16
+//11668  			       	      
+//11669  			       	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
 
-LM694:
-	     .stabn 68,0,11863,LM694-_Mission
-	     SP = SP - 2              	// [0:11863]  
-	     R3 = - 16384             	// [1:11863]  
-	     R4 = SP + 1              	// [3:11863]  
-	     [R4] = R3                	// [5:11863]  
-	     R3 = 127                 	// [7:11863]  
-	     R4 = SP + 2              	// [9:11863]  
-	     [R4] = R3                	// [11:11863]  
-	     call _SPI_Flash_Sector_Erase	// [13:11863]  SPI_Flash_Sector_Erase
-BB113_PU49:	// 0x10b6
-// BB:113 cycle count: 30
-	     SP = SP - 3              	// [0:11863]  
-//11864        SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
+LM573:
+	     .stabn 68,0,11669,LM573-_Mission
+	     SP = SP - 2              	// [0:11669]  
+	     R3 = - 16384             	// [1:11669]  
+	     R4 = SP + 1              	// [3:11669]  
+	     [R4] = R3                	// [5:11669]  
+	     R3 = 127                 	// [7:11669]  
+	     R4 = SP + 2              	// [9:11669]  
+	     [R4] = R3                	// [11:11669]  
+	     call _SPI_Flash_Sector_Erase	// [13:11669]  SPI_Flash_Sector_Erase
+BB31_PU49:	// 0xe10
+// BB:31 cycle count: 30
+	     SP = SP - 3              	// [0:11669]  
+//11670  			          SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
 
-LM695:
-	     .stabn 68,0,11864,LM695-_Mission
-	     R2 = (_Mem0)             	// [1:11864]  Mem0
-	     R3 = seg(_Mem0)          	// [3:11864]  Mem0
-	     R4 = SP + 1              	// [4:11864]  
-	     [R4++] = R2              	// [6:11864]  
-	     [R4] = R3                	// [8:11864]  
-	     R3 = 5                   	// [10:11864]  
-	     R4 = SP + 3              	// [11:11864]  
-	     [R4] = R3                	// [13:11864]  
-	     R3 = - 16384             	// [15:11864]  
-	     R4 = SP + 4              	// [17:11864]  
-	     [R4] = R3                	// [19:11864]  
-	     R3 = 127                 	// [21:11864]  
-	     R4 = SP + 5              	// [23:11864]  
-	     [R4] = R3                	// [25:11864]  
-	     call _SPI_Flash_SendNWords	// [27:11864]  SPI_Flash_SendNWords
-BB114_PU49:	// 0x10ce
-// BB:114 cycle count: 13
-	     SP = SP + 5              	// [0:11864]  
+LM574:
+	     .stabn 68,0,11670,LM574-_Mission
+	     R2 = (_Mem0)             	// [1:11670]  Mem0
+	     R3 = seg(_Mem0)          	// [3:11670]  Mem0
+	     R4 = SP + 1              	// [4:11670]  
+	     [R4++] = R2              	// [6:11670]  
+	     [R4] = R3                	// [8:11670]  
+	     R3 = 5                   	// [10:11670]  
+	     R4 = SP + 3              	// [11:11670]  
+	     [R4] = R3                	// [13:11670]  
+	     R3 = - 16384             	// [15:11670]  
+	     R4 = SP + 4              	// [17:11670]  
+	     [R4] = R3                	// [19:11670]  
+	     R3 = 127                 	// [21:11670]  
+	     R4 = SP + 5              	// [23:11670]  
+	     [R4] = R3                	// [25:11670]  
+	     call _SPI_Flash_SendNWords	// [27:11670]  SPI_Flash_SendNWords
+BB32_PU49:	// 0xe28
+// BB:32 cycle count: 7
+	     SP = SP + 5              	// [0:11670]  
 	//;;
 	INT FIQ,IRQ
 	//;;
-//11865          __asm("INT FIQ,IRQ");  
-//11866     
-//11867     if(Mem0.Mission_Cur>=30)
+//11671  			            __asm("INT FIQ,IRQ");  
+//11672                      
+//11673                      
+//11674                      break;     	        	 
 
-LM696:
-	     .stabn 68,0,11867,LM696-_Mission
-	     DS = seg(_Mem0)          	// [3:11867]  Mem0
-	     R4 = (_Mem0)             	// [4:11867]  Mem0
-	     R4 = DS:[R4]             	// [6:11867]  
-	     cmp R4, 29               	// [8:11867]  
-	     jbe L_49_127             	// [9:11867]  
-BB115_PU49:	// 0x10d8
-// BB:115 cycle count: 9
-//11868     {
-//11869     	    PlayA1800_Elements(SFX_Off);
+LM575:
+	     .stabn 68,0,11674,LM575-_Mission
+	     jmp Lt_49_2              	// [3:11674]  
+L_49_103:	// 0xe2d
+// BB:33 cycle count: 11
+//11676         	        }
+//11677         	      else	
+//11678         	        {
+//11679         	        	 //Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
+//11680         	        	 if(++timeovercnt>8)
 
-LM697:
-	     .stabn 68,0,11869,LM697-_Mission
-	     SP = SP - 1              	// [0:11869]  
-	     R3 = 34                  	// [1:11869]  
-	     R4 = SP + 1              	// [2:11869]  
-	     [R4] = R3                	// [4:11869]  
-	     call _PlayA1800_Elements 	// [6:11869]  PlayA1800_Elements
-BB116_PU49:	// 0x10df
-// BB:116 cycle count: 8
-	     SP = SP + 8              	// [0:11869]  
-//11870     	     return C_Off_Mode;
+LM576:
+	     .stabn 68,0,11680,LM576-_Mission
+	     R4 = [BP + 1]            	// [0:11680]  timeovercnt
+	     R4 = R4 + 1              	// [2:11680]  
+	     [BP + 1] = R4            	// [3:11680]  timeovercnt
+	     R4 = [BP + 1]            	// [4:11680]  timeovercnt
+	     cmp R4, 8                	// [6:11680]  
+	     jbe L_49_104             	// [7:11680]  
+BB34_PU49:	// 0xe33
+// BB:34 cycle count: 5
+//11681         	        	 {
+//11682         	        	 	 timeovercnt=0;
 
-LM698:
-	     .stabn 68,0,11870,LM698-_Mission
-	     R1 = - 4079              	// [1:11870]  
-	     pop BP, PC from [SP]     	// [3:11870]  
-L_49_127:	// 0x10e3
-// BB:117 cycle count: 9
-//11871     } 
-//11872    else
-//11873    {          
-//11874        delay_time(2*16);
+LM577:
+	     .stabn 68,0,11682,LM577-_Mission
+	     R4 = 0                   	// [0:11682]  
+	     [BP + 1] = R4            	// [1:11682]  timeovercnt
+//11683  			       	     temp = GameTimeout();//C_GameTimeout;
 
-LM699:
-	     .stabn 68,0,11874,LM699-_Mission
-	     SP = SP - 1              	// [0:11874]  
-	     R3 = 32                  	// [1:11874]  
-	     R4 = SP + 1              	// [2:11874]  
-	     [R4] = R3                	// [4:11874]  
-	     call _delay_time         	// [6:11874]  delay_time
-BB118_PU49:	// 0x10ea
-// BB:118 cycle count: 8
-	     SP = SP + 8              	// [0:11874]  
-//11875       return C_SelectMission;
+LM578:
+	     .stabn 68,0,11683,LM578-_Mission
+	     call _GameTimeout        	// [2:11683]  GameTimeout
+BB35_PU49:	// 0xe37
+// BB:35 cycle count: 9
+	     [BP + 6] = R1            	// [0:11683]  temp
+//11684  			             if(C_Off_Mode==temp)
 
-LM700:
-	     .stabn 68,0,11875,LM700-_Mission
-	     R1 = - 4075              	// [1:11875]  
-	     pop BP, PC from [SP]     	// [3:11875]  
-L_49_126:	// 0x10ee
-// BB:119 cycle count: 6
-	     SP = SP + 7              	// [0:11875]  
-	     pop BP, PC from [SP]     	// [1:11875]  
-LBE42:
+LM579:
+	     .stabn 68,0,11684,LM579-_Mission
+	     R4 = [BP + 6]            	// [1:11684]  temp
+	     cmp R4, 61457            	// [3:11684]  
+	     jne L_49_105             	// [5:11684]  
+BB36_PU49:	// 0xe3c
+// BB:36 cycle count: 8
+//11685  			        	     return C_Off_Mode;
+
+LM580:
+	     .stabn 68,0,11685,LM580-_Mission
+	     R1 = - 4079              	// [0:11685]  
+	     SP = SP + 7              	// [2:11685]  
+	     pop BP, PC from [SP]     	// [3:11685]  
+L_49_105:	// 0xe40
+L_49_104:	// 0xe40
+L_49_102:	// 0xe40
+L_49_100:	// 0xe40
+// BB:37 cycle count: 9
+//11686         	        	 }
+//11687         	        	 
+//11688         	        	 
+//11689         	        }   
+//11690         	      G_Sensor_Status =0;  
+
+LM581:
+	     .stabn 68,0,11690,LM581-_Mission
+	     R3 = 0                   	// [0:11690]  
+	     DS = seg(_G_Sensor_Status)	// [1:11690]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [2:11690]  G_Sensor_Status
+	     DS:[R4] = R3             	// [4:11690]  
+	     goto L_49_98             	// [6:11690]  
+L_49_99:	// 0xe47
+Lt_49_2:	// 0xe47
+// BB:38 cycle count: 4
+//11691         	   }
+
+LM582:
+	     .stabn 68,0,11691,LM582-_Mission
+	     jmp L_49_95              	// [0:11691]  
+L_49_96:	// 0xe48
+// BB:39 cycle count: 31
+//11692         }
+//11693        else
+//11694            Play_Seq(Mem0.Mission_Cur,Intro_Table[Mem0.X]); 
+
+LM583:
+	     .stabn 68,0,11694,LM583-_Mission
+	     SP = SP - 2              	// [0:11694]  
+	     DS = seg(_Mem0)          	// [1:11694]  Mem0
+	     R4 = (_Mem0)             	// [2:11694]  Mem0
+	     R3 = DS:[R4]             	// [4:11694]  
+	     R4 = SP + 1              	// [6:11694]  
+	     [R4] = R3                	// [8:11694]  
+	     DS = seg(_Mem0+5)        	// [10:11694]  Mem0+5
+	     R4 = (_Mem0+5)           	// [11:11694]  Mem0+5
+	     R4 = DS:[R4]             	// [13:11694]  
+	     R3 = 0                   	// [15:11694]  
+	     R1 = (_Intro_Table)      	// [16:11694]  Intro_Table
+	     R2 = seg(_Intro_Table)   	// [18:11694]  Intro_Table
+	     R4 = R4 + R1             	// [19:11694]  
+	     R3 = R3 + R2, Carry      	// [20:11694]  
+	     DS = R3                  	// [21:11694]  
+	     R3 = DS:[R4]             	// [22:11694]  
+	     R4 = SP + 2              	// [24:11694]  
+	     [R4] = R3                	// [26:11694]  
+	     call _Play_Seq           	// [28:11694]  Play_Seq
+BB40_PU49:	// 0xe61
+// BB:40 cycle count: 1
+	     SP = SP + 2              	// [0:11694]  
+L_49_95:	// 0xe62
+// BB:41 cycle count: 3
+//11695            
+//11696         if(CheckIntro()==0)
+
+LM584:
+	     .stabn 68,0,11696,LM584-_Mission
+	     call _CheckIntro         	// [0:11696]  CheckIntro
+BB42_PU49:	// 0xe64
+// BB:42 cycle count: 5
+	     cmp R1, 0                	// [0:11696]  
+	     jne L_49_106             	// [1:11696]  
+BB43_PU49:	// 0xe66
+// BB:43 cycle count: 4
+//11697  	       break;
+
+LM585:
+	     .stabn 68,0,11697,LM585-_Mission
+	     jmp Lt_49_3              	// [0:11697]  
+L_49_106:	// 0xe67
+Lt_49_1:	// 0xe67
+// BB:44 cycle count: 14
+
+LM586:
+	     .stabn 68,0,11614,LM586-_Mission
+	     DS = seg(_Mem0+5)        	// [0:11614]  Mem0+5
+	     R4 = (_Mem0+5)           	// [1:11614]  Mem0+5
+	     R4 = DS:[R4]             	// [3:11614]  
+	     R4 = R4 + 1              	// [5:11614]  
+	     DS = seg(_Mem0+5)        	// [6:11614]  Mem0+5
+	     R3 = (_Mem0+5)           	// [7:11614]  Mem0+5
+	     DS:[R3] = R4             	// [9:11614]  
+	     goto L_49_93             	// [11:11614]  
+L_49_94:	// 0xe72
+Lt_49_3:	// 0xe72
+// BB:45 cycle count: 35
+//11698  
+//11699     }
+//11700  
+//11701         TimeTatleCnt = temp_TimeTatleCnt;
+
+LM587:
+	     .stabn 68,0,11701,LM587-_Mission
+	     R3 = [BP + 2]            	// [0:11701]  temp_TimeTatleCnt
+	     DS = seg(_TimeTatleCnt)  	// [2:11701]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [3:11701]  TimeTatleCnt
+	     DS:[R4] = R3             	// [5:11701]  
+//11706  //	    Set_Led_RGB(Red,Led4);
+//11707  //        Clean_LFX_Led();
+//11708     
+//11709  
+//11710     	    G_Sensor_Status=G_Shake;
+
+LM588:
+	     .stabn 68,0,11710,LM588-_Mission
+	     R3 = 64                  	// [7:11710]  
+	     DS = seg(_G_Sensor_Status)	// [9:11710]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [10:11710]  G_Sensor_Status
+	     DS:[R4] = R3             	// [12:11710]  
+//11711  //        Led_On(All_Led_data);
+//11712  		BlinkFlag_Data =All_Led_data;
+
+LM589:
+	     .stabn 68,0,11712,LM589-_Mission
+	     R3 = 15                  	// [14:11712]  
+	     DS = seg(_BlinkFlag_Data)	// [15:11712]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [16:11712]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [18:11712]  
+//11713  		 
+//11714  		 
+//11715  		if(WaitAction(10*16,0)==C_MovSucess)// ֻ���shake ��C_MovSucess
+
+LM590:
+	     .stabn 68,0,11715,LM590-_Mission
+	     SP = SP - 2              	// [20:11715]  
+	     R3 = 160                 	// [21:11715]  
+	     R4 = SP + 1              	// [23:11715]  
+	     [R4] = R3                	// [25:11715]  
+	     R3 = 0                   	// [27:11715]  
+	     R4 = SP + 2              	// [28:11715]  
+	     [R4] = R3                	// [30:11715]  
+	     call _WaitAction         	// [32:11715]  WaitAction
+BB46_PU49:	// 0xe8e
+// BB:46 cycle count: 7
+	     SP = SP + 2              	// [0:11715]  
+	     cmp R1, 4096             	// [1:11715]  
+	     jne L_49_107             	// [3:11715]  
+BB47_PU49:	// 0xe92
+// BB:47 cycle count: 9
+//11716  		   {
+//11717  		   	   PlayA1800_Elements(SFX_Start); 
+
+LM591:
+	     .stabn 68,0,11717,LM591-_Mission
+	     SP = SP - 1              	// [0:11717]  
+	     R3 = 42                  	// [1:11717]  
+	     R4 = SP + 1              	// [2:11717]  
+	     [R4] = R3                	// [4:11717]  
+	     call _PlayA1800_Elements 	// [6:11717]  PlayA1800_Elements
+BB48_PU49:	// 0xe99
+// BB:48 cycle count: 11
+	     SP = SP + 1              	// [0:11717]  
+//11718                  Mem0.Y =0;
+
+LM592:
+	     .stabn 68,0,11718,LM592-_Mission
+	     R3 = 0                   	// [1:11718]  
+	     DS = seg(_Mem0+6)        	// [2:11718]  Mem0+6
+	     R4 = (_Mem0+6)           	// [3:11718]  Mem0+6
+	     DS:[R4] = R3             	// [5:11718]  
+//11719  				break;
+
+LM593:
+	     .stabn 68,0,11719,LM593-_Mission
+	     jmp Lt_49_4              	// [7:11719]  
+L_49_107:	// 0xea0
+// BB:49 cycle count: 9
+//11720  
+//11721  
+//11722  		   }
+//11723  		   
+//11724  		   BlinkFlag_Data =0;
+
+LM594:
+	     .stabn 68,0,11724,LM594-_Mission
+	     R3 = 0                   	// [0:11724]  
+	     DS = seg(_BlinkFlag_Data)	// [1:11724]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [2:11724]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [4:11724]  
+//11725  		   Light_all_off();	  
+
+LM595:
+	     .stabn 68,0,11725,LM595-_Mission
+	     call _Light_all_off      	// [6:11725]  Light_all_off
+BB50_PU49:	// 0xea7
+// BB:50 cycle count: 3
+//11726  		   Clean_Led_Color();
+
+LM596:
+	     .stabn 68,0,11726,LM596-_Mission
+	     call _Clean_Led_Color    	// [0:11726]  Clean_Led_Color
+BB51_PU49:	// 0xea9
+// BB:51 cycle count: 3
+//11727             Clean_LFX_Led();
+
+LM597:
+	     .stabn 68,0,11727,LM597-_Mission
+	     call _Clean_LFX_Led      	// [0:11727]  Clean_LFX_Led
+BB52_PU49:	// 0xeab
+// BB:52 cycle count: 3
+	     goto L_49_88             	// [0:11727]  
+L_49_89:	// 0xead
+Lt_49_4:	// 0xead
+L_49_108:	// 0xead
+// BB:53 cycle count: 9
+//11733  
+//11734     while (1)
+//11735     {   
+//11736  
+//11737         BlinkFlag_Data =0;
+
+LM598:
+	     .stabn 68,0,11737,LM598-_Mission
+	     R3 = 0                   	// [0:11737]  
+	     DS = seg(_BlinkFlag_Data)	// [1:11737]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [2:11737]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [4:11737]  
+//11738  	   Light_all_off();	  
+
+LM599:
+	     .stabn 68,0,11738,LM599-_Mission
+	     call _Light_all_off      	// [6:11738]  Light_all_off
+BB54_PU49:	// 0xeb4
+// BB:54 cycle count: 3
+//11739  	   Clean_Led_Color();
+
+LM600:
+	     .stabn 68,0,11739,LM600-_Mission
+	     call _Clean_Led_Color    	// [0:11739]  Clean_Led_Color
+BB55_PU49:	// 0xeb6
+// BB:55 cycle count: 3
+//11740         Clean_LFX_Led();
+
+LM601:
+	     .stabn 68,0,11740,LM601-_Mission
+	     call _Clean_LFX_Led      	// [0:11740]  Clean_LFX_Led
+BB56_PU49:	// 0xeb8
+// BB:56 cycle count: 16
+//11741         G_Sensor_Status =0;
+
+LM602:
+	     .stabn 68,0,11741,LM602-_Mission
+	     R3 = 0                   	// [0:11741]  
+	     DS = seg(_G_Sensor_Status)	// [1:11741]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [2:11741]  G_Sensor_Status
+	     DS:[R4] = R3             	// [4:11741]  
+//11742        if(Mem0.Y>22) 
+
+LM603:
+	     .stabn 68,0,11742,LM603-_Mission
+	     DS = seg(_Mem0+6)        	// [6:11742]  Mem0+6
+	     R4 = (_Mem0+6)           	// [7:11742]  Mem0+6
+	     R4 = DS:[R4]             	// [9:11742]  
+	     cmp R4, 22               	// [11:11742]  
+	     jbe L_49_110             	// [12:11742]  
+BB57_PU49:	// 0xec3
+// BB:57 cycle count: 3
+//11743            break;
+
+LM604:
+	     .stabn 68,0,11743,LM604-_Mission
+	     goto Lt_49_5             	// [0:11743]  
+L_49_110:	// 0xec5
+// BB:58 cycle count: 13
+//11744            	
+//11745    	  Mvmt = Get_Move_data(Mem0.Y);
+
+LM605:
+	     .stabn 68,0,11745,LM605-_Mission
+	     SP = SP - 1              	// [0:11745]  
+	     DS = seg(_Mem0+6)        	// [1:11745]  Mem0+6
+	     R4 = (_Mem0+6)           	// [2:11745]  Mem0+6
+	     R3 = DS:[R4]             	// [4:11745]  
+	     R4 = SP + 1              	// [6:11745]  
+	     [R4] = R3                	// [8:11745]  
+	     call _Get_Move_data      	// [10:11745]  Get_Move_data
+BB59_PU49:	// 0xecf
+// BB:59 cycle count: 12
+	     SP = SP + 1              	// [0:11745]  
+	     [BP + 3] = R1            	// [1:11745]  Mvmt
+//11746        temp_MoveText2_Right =0;     
+
+LM606:
+	     .stabn 68,0,11746,LM606-_Mission
+	     R4 = 0                   	// [2:11746]  
+	     [BP + 0] = R4            	// [3:11746]  temp_MoveText2_Right
+//11747        
+//11748  	 if((Mvmt==0x0ff))
+
+LM607:
+	     .stabn 68,0,11748,LM607-_Mission
+	     R4 = [BP + 3]            	// [4:11748]  Mvmt
+	     cmp R4, 255              	// [6:11748]  
+	     jne L_49_111             	// [8:11748]  
+BB60_PU49:	// 0xed7
+// BB:60 cycle count: 3
+//11749  			break;
+
+LM608:
+	     .stabn 68,0,11749,LM608-_Mission
+	     goto Lt_49_5             	// [0:11749]  
+L_49_111:	// 0xed9
+// BB:61 cycle count: 3
+//11750  	 
+//11751  	 		 	
+//11752  	      WatchdogClear();
+
+LM609:
+	     .stabn 68,0,11752,LM609-_Mission
+	     call _WatchdogClear      	// [0:11752]  WatchdogClear
+BB62_PU49:	// 0xedb
+// BB:62 cycle count: 14
+//11753  	       
+//11754  		    if(Get_Key(0,0))
+
+LM610:
+	     .stabn 68,0,11754,LM610-_Mission
+	     SP = SP - 2              	// [0:11754]  
+	     R3 = 0                   	// [1:11754]  
+	     R4 = SP + 1              	// [2:11754]  
+	     [R4] = R3                	// [4:11754]  
+	     R3 = 0                   	// [6:11754]  
+	     R4 = SP + 2              	// [7:11754]  
+	     [R4] = R3                	// [9:11754]  
+	     call _Get_Key            	// [11:11754]  Get_Key
+BB63_PU49:	// 0xee6
+// BB:63 cycle count: 6
+	     SP = SP + 2              	// [0:11754]  
+	     cmp R1, 0                	// [1:11754]  
+	     je L_49_112              	// [2:11754]  
+BB64_PU49:	// 0xee9
+// BB:64 cycle count: 8
+//11755  			 	  return C_Off_Mode;  
+
+LM611:
+	     .stabn 68,0,11755,LM611-_Mission
+	     R1 = - 4079              	// [0:11755]  
+	     SP = SP + 7              	// [2:11755]  
+	     pop BP, PC from [SP]     	// [3:11755]  
+L_49_112:	// 0xeed
+// BB:65 cycle count: 7
+//11756  	 
+//11757  	 
+//11758  
+//11759  		if(G_TurnAround == Mvmt)
+
+LM612:
+	     .stabn 68,0,11759,LM612-_Mission
+	     R4 = [BP + 3]            	// [0:11759]  Mvmt
+	     cmp R4, 12               	// [2:11759]  
+	     jne L_49_113             	// [3:11759]  
+BB66_PU49:	// 0xef0
+// BB:66 cycle count: 18
+//11760  		{
+//11761  
+//11762  			Mvmt = G_Left<<(*P_TimerB_CNTR%2);
+
+LM613:
+	     .stabn 68,0,11762,LM613-_Mission
+	     R4 = 4                   	// [0:11762]  
+	     R2 = 12307               	// [1:11762]  
+	     R3 = 0                   	// [3:11762]  
+	     DS = R3                  	// [4:11762]  
+	     R3 = DS:[R2]             	// [5:11762]  
+	     R3 = R3 & 1              	// [7:11762]  
+	     R3 = R3 & 15             	// [8:11762]  
+	     R4 = R4 lsl R3           	// [9:11762]  
+	     [BP + 3] = R4            	// [10:11762]  Mvmt
+//11763  			
+//11764  			 if(Mvmt == G_Right)
+
+LM614:
+	     .stabn 68,0,11764,LM614-_Mission
+	     R4 = [BP + 3]            	// [11:11764]  Mvmt
+	     cmp R4, 8                	// [13:11764]  
+	     jne L_49_114             	// [14:11764]  
+BB67_PU49:	// 0xefd
+// BB:67 cycle count: 2
+//11765  			 {
+//11766  		 	//	MoveText2_Right =1;
+//11767  		 		temp_MoveText2_Right =1;
+
+LM615:
+	     .stabn 68,0,11767,LM615-_Mission
+	     R4 = 1                   	// [0:11767]  
+	     [BP + 0] = R4            	// [1:11767]  temp_MoveText2_Right
+L_49_114:	// 0xeff
+L_49_113:	// 0xeff
+// BB:68 cycle count: 34
+//11770  		}
+//11771  
+//11772  
+//11773  		// Get_MoveText_data(Mem0.Y,M_Text1);
+//11774  			Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text1]); 
+
+LM616:
+	     .stabn 68,0,11774,LM616-_Mission
+	     SP = SP - 2              	// [0:11774]  
+	     DS = seg(_Mem0)          	// [1:11774]  Mem0
+	     R4 = (_Mem0)             	// [2:11774]  Mem0
+	     R3 = DS:[R4]             	// [4:11774]  
+	     R4 = SP + 1              	// [6:11774]  
+	     [R4] = R3                	// [8:11774]  
+	     R3 = (_Movetext_Table)   	// [10:11774]  Movetext_Table
+	     R4 = seg(_Movetext_Table)	// [12:11774]  Movetext_Table
+	     DS = seg(_Mem0+6)        	// [13:11774]  Mem0+6
+	     R2 = (_Mem0+6)           	// [14:11774]  Mem0+6
+	     R2 = DS:[R2]             	// [16:11774]  
+	     R1 = 0                   	// [18:11774]  
+	     test R2, R2 lsl 4        	// [19:11774]  
+	     R1 = R1 rol 1            	// [20:11774]  
+	     R2 = R2 lsl 1            	// [21:11774]  
+	     R3 = R3 + R2             	// [22:11774]  
+	     R4 = R4 + R1, Carry      	// [23:11774]  
+	     DS = R4                  	// [24:11774]  
+	     R3 = DS:[R3]             	// [25:11774]  
+	     R4 = SP + 2              	// [27:11774]  
+	     [R4] = R3                	// [29:11774]  
+	     call _Play_Seq           	// [31:11774]  Play_Seq
+BB69_PU49:	// 0xf1b
+// BB:69 cycle count: 10
+	     SP = SP + 2              	// [0:11774]  
+//11775  			BlinkFlag_Data=0;
+
+LM617:
+	     .stabn 68,0,11775,LM617-_Mission
+	     R3 = 0                   	// [1:11775]  
+	     DS = seg(_BlinkFlag_Data)	// [2:11775]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [3:11775]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [5:11775]  
+//11776              Light_all_off();
+
+LM618:
+	     .stabn 68,0,11776,LM618-_Mission
+	     call _Light_all_off      	// [7:11776]  Light_all_off
+BB70_PU49:	// 0xf23
+// BB:70 cycle count: 3
+//11777  			Clean_LFX_Led();
+
+LM619:
+	     .stabn 68,0,11777,LM619-_Mission
+	     call _Clean_LFX_Led      	// [0:11777]  Clean_LFX_Led
+BB71_PU49:	// 0xf25
+// BB:71 cycle count: 3
+//11778              Clean_Led_Color();
+
+LM620:
+	     .stabn 68,0,11778,LM620-_Mission
+	     call _Clean_Led_Color    	// [0:11778]  Clean_Led_Color
+BB72_PU49:	// 0xf27
+// BB:72 cycle count: 2
+//11779  
+//11780  
+//11781            timeovercnt =0;
+
+LM621:
+	     .stabn 68,0,11781,LM621-_Mission
+	     R4 = 0                   	// [0:11781]  
+	     [BP + 1] = R4            	// [1:11781]  timeovercnt
+L_49_115:	// 0xf29
+// BB:73 cycle count: 3
+//11782  		 while (1)
+//11783  		 {
+//11784  		 	
+//11785  		      WatchdogClear();
+
+LM622:
+	     .stabn 68,0,11785,LM622-_Mission
+	     call _WatchdogClear      	// [0:11785]  WatchdogClear
+BB74_PU49:	// 0xf2b
+// BB:74 cycle count: 14
+//11786  		       
+//11787  			    if(Get_Key(0,0))
+
+LM623:
+	     .stabn 68,0,11787,LM623-_Mission
+	     SP = SP - 2              	// [0:11787]  
+	     R3 = 0                   	// [1:11787]  
+	     R4 = SP + 1              	// [2:11787]  
+	     [R4] = R3                	// [4:11787]  
+	     R3 = 0                   	// [6:11787]  
+	     R4 = SP + 2              	// [7:11787]  
+	     [R4] = R3                	// [9:11787]  
+	     call _Get_Key            	// [11:11787]  Get_Key
+BB75_PU49:	// 0xf36
+// BB:75 cycle count: 6
+	     SP = SP + 2              	// [0:11787]  
+	     cmp R1, 0                	// [1:11787]  
+	     je L_49_117              	// [2:11787]  
+BB76_PU49:	// 0xf39
+// BB:76 cycle count: 8
+//11788  				 	  return C_Off_Mode;  
+
+LM624:
+	     .stabn 68,0,11788,LM624-_Mission
+	     R1 = - 4079              	// [0:11788]  
+	     SP = SP + 7              	// [2:11788]  
+	     pop BP, PC from [SP]     	// [3:11788]  
+L_49_117:	// 0xf3d
+// BB:77 cycle count: 50
+//11789  				 	    
+//11790  			  G_Sensor_Status = Mvmt;	 	    
+
+LM625:
+	     .stabn 68,0,11790,LM625-_Mission
+	     R3 = [BP + 3]            	// [0:11790]  Mvmt
+	     DS = seg(_G_Sensor_Status)	// [2:11790]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [3:11790]  G_Sensor_Status
+	     DS:[R4] = R3             	// [5:11790]  
+//11791  				 	    
+//11792  			  MoveText2_Right =  temp_MoveText2_Right;	  
+
+LM626:
+	     .stabn 68,0,11792,LM626-_Mission
+	     R3 = [BP + 0]            	// [7:11792]  temp_MoveText2_Right
+	     DS = seg(_MoveText2_Right)	// [9:11792]  MoveText2_Right
+	     R4 = (_MoveText2_Right)  	// [10:11792]  MoveText2_Right
+	     DS:[R4] = R3             	// [12:11792]  
+//11793  			  Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text2]); 
+
+LM627:
+	     .stabn 68,0,11793,LM627-_Mission
+	     SP = SP - 2              	// [14:11793]  
+	     DS = seg(_Mem0)          	// [15:11793]  Mem0
+	     R4 = (_Mem0)             	// [16:11793]  Mem0
+	     R3 = DS:[R4]             	// [18:11793]  
+	     R4 = SP + 1              	// [20:11793]  
+	     [R4] = R3                	// [22:11793]  
+	     R3 = (_Movetext_Table)   	// [24:11793]  Movetext_Table
+	     R4 = seg(_Movetext_Table)	// [26:11793]  Movetext_Table
+	     DS = seg(_Mem0+6)        	// [27:11793]  Mem0+6
+	     R2 = (_Mem0+6)           	// [28:11793]  Mem0+6
+	     R2 = DS:[R2]             	// [30:11793]  
+	     R1 = 0                   	// [32:11793]  
+	     test R2, R2 lsl 4        	// [33:11793]  
+	     R1 = R1 rol 1            	// [34:11793]  
+	     R2 = R2 lsl 1            	// [35:11793]  
+	     R3 = R3 + R2             	// [36:11793]  
+	     R4 = R4 + R1, Carry      	// [37:11793]  
+	     R3 = R3 + 1              	// [38:11793]  
+	     R4 = R4 + 0, Carry       	// [39:11793]  
+	     DS = R4                  	// [40:11793]  
+	     R3 = DS:[R3]             	// [41:11793]  
+	     R4 = SP + 2              	// [43:11793]  
+	     [R4] = R3                	// [45:11793]  
+	     call _Play_Seq           	// [47:11793]  Play_Seq
+BB78_PU49:	// 0xf65
+// BB:78 cycle count: 14
+	     SP = SP + 2              	// [0:11793]  
+//11794  			  MoveText2_Right=0;
+
+LM628:
+	     .stabn 68,0,11794,LM628-_Mission
+	     R3 = 0                   	// [1:11794]  
+	     DS = seg(_MoveText2_Right)	// [2:11794]  MoveText2_Right
+	     R4 = (_MoveText2_Right)  	// [3:11794]  MoveText2_Right
+	     DS:[R4] = R3             	// [5:11794]  
+//11799  //			    Set_Led_RGB(Red,Led4);
+//11800  
+//11801  
+//11802  
+//11803  			if((Mvmt==0)||(Mvmt==0x0ff))
+
+LM629:
+	     .stabn 68,0,11803,LM629-_Mission
+	     R4 = [BP + 3]            	// [7:11803]  Mvmt
+	     cmp R4, 0                	// [9:11803]  
+	     je L_49_120              	// [10:11803]  
+BB79_PU49:	// 0xf6e
+// BB:79 cycle count: 8
+	     R4 = [BP + 3]            	// [0:11803]  Mvmt
+	     cmp R4, 255              	// [2:11803]  
+	     jne L_49_119             	// [4:11803]  
+L_49_120:	// 0xf72
+// BB:80 cycle count: 3
+//11804  				break;
+
+LM630:
+	     .stabn 68,0,11804,LM630-_Mission
+	     goto Lt_49_6             	// [0:11804]  
+L_49_119:	// 0xf74
+// BB:81 cycle count: 24
+//11805  		    else		
+//11806  			{
+//11807  
+//11808                     G_Sensor_Status = Mvmt;
+
+LM631:
+	     .stabn 68,0,11808,LM631-_Mission
+	     R3 = [BP + 3]            	// [0:11808]  Mvmt
+	     DS = seg(_G_Sensor_Status)	// [2:11808]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [3:11808]  G_Sensor_Status
+	     DS:[R4] = R3             	// [5:11808]  
+//11809                   
+//11810                      TimeCnt1 =0;
+
+LM632:
+	     .stabn 68,0,11810,LM632-_Mission
+	     R3 = 0                   	// [7:11810]  
+	     DS = seg(_TimeCnt1)      	// [8:11810]  TimeCnt1
+	     R4 = (_TimeCnt1)         	// [9:11810]  TimeCnt1
+	     DS:[R4] = R3             	// [11:11810]  
+//11811  				   if(G_Sensor_Status == G_BHIT)	
+
+LM633:
+	     .stabn 68,0,11811,LM633-_Mission
+	     DS = seg(_G_Sensor_Status)	// [13:11811]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [14:11811]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [16:11811]  
+	     cmp R4, 4479             	// [18:11811]  
+	     je BB82_PU49             	// [20:11811]  
+BB141_PU49:	// 0xf85
+// BB:141 cycle count: 3
+	     goto L_49_122            	// [0:0]  
+BB82_PU49:	// 0xf87
+// BB:82 cycle count: 9
+//11824  //					   Led_On(All_Led_data);
+//11825  //					   BlinkFlag_Data =All_Led_data;
+//11826  						
+//11827  						
+//11828  						  temp = TimeOver;////���ؽ��
+
+LM634:
+	     .stabn 68,0,11828,LM634-_Mission
+	     R4 = - 32768             	// [0:11828]  
+	     [BP + 6] = R4            	// [2:11828]  temp
+//11829  						 TimeTatleCnt =0;
+
+LM635:
+	     .stabn 68,0,11829,LM635-_Mission
+	     R3 = 0                   	// [3:11829]  
+	     DS = seg(_TimeTatleCnt)  	// [4:11829]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [5:11829]  TimeTatleCnt
+	     DS:[R4] = R3             	// [7:11829]  
+L_49_123:	// 0xf8f
+// BB:83 cycle count: 11
+//11830  						 while(TimeTatleCnt<15*16)
+
+LM636:
+	     .stabn 68,0,11830,LM636-_Mission
+	     DS = seg(_TimeTatleCnt)  	// [0:11830]  TimeTatleCnt
+	     R4 = (_TimeTatleCnt)     	// [1:11830]  TimeTatleCnt
+	     R4 = DS:[R4]             	// [3:11830]  
+	     cmp R4, 239              	// [5:11830]  
+	     ja L_49_124              	// [7:11830]  
+BB84_PU49:	// 0xf96
+// BB:84 cycle count: 22
+//11831  						 {
+//11832  						 	
+//11833  						 	   G_Sensor_Status = G_Shake;
+
+LM637:
+	     .stabn 68,0,11833,LM637-_Mission
+	     R3 = 64                  	// [0:11833]  
+	     DS = seg(_G_Sensor_Status)	// [2:11833]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [3:11833]  G_Sensor_Status
+	     DS:[R4] = R3             	// [5:11833]  
+//11834  //							   BlinkFlag_Data =0;
+//11835  //							   Light_all_off();		
+//11836  
+//11837  						 	 	 	  
+//11838  						 	 if(WaitAction(24,status)==C_MovSucess)
+
+LM638:
+	     .stabn 68,0,11838,LM638-_Mission
+	     SP = SP - 2              	// [7:11838]  
+	     R3 = 24                  	// [8:11838]  
+	     R4 = SP + 1              	// [9:11838]  
+	     [R4] = R3                	// [11:11838]  
+	     R3 = [BP + 4]            	// [13:11838]  status
+	     R4 = SP + 2              	// [15:11838]  
+	     [R4] = R3                	// [17:11838]  
+	     call _WaitAction         	// [19:11838]  WaitAction
+BB85_PU49:	// 0xfa7
+// BB:85 cycle count: 7
+	     SP = SP + 2              	// [0:11838]  
+	     cmp R1, 4096             	// [1:11838]  
+	     jne L_49_126             	// [3:11838]  
+BB86_PU49:	// 0xfab
+// BB:86 cycle count: 11
+//11839  						 	 {
+//11840  						 	 	status=2;
+
+LM639:
+	     .stabn 68,0,11840,LM639-_Mission
+	     R4 = 2                   	// [0:11840]  
+	     [BP + 4] = R4            	// [1:11840]  status
+//11841  						 	 	PlayA1800_ElementsInit(SFX_Shake);
+
+LM640:
+	     .stabn 68,0,11841,LM640-_Mission
+	     SP = SP - 1              	// [2:11841]  
+	     R3 = 39                  	// [3:11841]  
+	     R4 = SP + 1              	// [4:11841]  
+	     [R4] = R3                	// [6:11841]  
+	     call _PlayA1800_ElementsInit	// [8:11841]  PlayA1800_ElementsInit
+BB87_PU49:	// 0xfb4
+// BB:87 cycle count: 12
+	     SP = SP + 1              	// [0:11841]  
+//11842  						 	 	
+//11843  						 	 	 if(TimeCnt1>=70)
+
+LM641:
+	     .stabn 68,0,11843,LM641-_Mission
+	     DS = seg(_TimeCnt1)      	// [1:11843]  TimeCnt1
+	     R4 = (_TimeCnt1)         	// [2:11843]  TimeCnt1
+	     R4 = DS:[R4]             	// [4:11843]  
+	     cmp R4, 69               	// [6:11843]  
+	     jbe L_49_127             	// [8:11843]  
+BB88_PU49:	// 0xfbc
+// BB:88 cycle count: 6
+//11844  						 	 	    {
+//11845  						 	 	    	temp =1;//���ؽ��
+
+LM642:
+	     .stabn 68,0,11845,LM642-_Mission
+	     R4 = 1                   	// [0:11845]  
+	     [BP + 6] = R4            	// [1:11845]  temp
+//11846  						 	 	    	break;	
+
+LM643:
+	     .stabn 68,0,11846,LM643-_Mission
+	     jmp Lt_49_7              	// [2:11846]  
+L_49_127:	// 0xfbf
+// BB:89 cycle count: 4
+
+LM644:
+	     .stabn 68,0,11843,LM644-_Mission
+	     jmp L_49_125             	// [0:11843]  
+L_49_126:	// 0xfc0
+// BB:90 cycle count: 8
+//11848  						 	 }
+//11849  						 	else
+//11850  						 	    {
+//11851  						 	        //temp =0;////���ؽ��
+//11852  						 	        status=0;
+
+LM645:
+	     .stabn 68,0,11852,LM645-_Mission
+	     R4 = 0                   	// [0:11852]  
+	     [BP + 4] = R4            	// [1:11852]  status
+//11853  						 	        TimeCnt1 =0;
+
+LM646:
+	     .stabn 68,0,11853,LM646-_Mission
+	     R3 = 0                   	// [2:11853]  
+	     DS = seg(_TimeCnt1)      	// [3:11853]  TimeCnt1
+	     R4 = (_TimeCnt1)         	// [4:11853]  TimeCnt1
+	     DS:[R4] = R3             	// [6:11853]  
+L_49_125:	// 0xfc7
+// BB:91 cycle count: 4
+
+LM647:
+	     .stabn 68,0,11838,LM647-_Mission
+	     jmp L_49_123             	// [0:11838]  
+L_49_124:	// 0xfc8
+Lt_49_7:	// 0xfc8
+// BB:92 cycle count: 4
+//11854  						 	        //break;	
+//11855  						 	    }
+//11856  						 	    
+//11857  						 	
+//11858  						 }	
+
+LM648:
+	     .stabn 68,0,11858,LM648-_Mission
+	     jmp L_49_121             	// [0:11858]  
+L_49_122:	// 0xfc9
+// BB:93 cycle count: 24
+//11895  						 	 
+//11896  						 } */
+//11897  						
+//11898  							
+//11899  							IMMO_Flag =0;
+
+LM649:
+	     .stabn 68,0,11899,LM649-_Mission
+	     R3 = 0                   	// [0:11899]  
+	     DS = seg(_IMMO_Flag)     	// [1:11899]  IMMO_Flag
+	     R4 = (_IMMO_Flag)        	// [2:11899]  IMMO_Flag
+	     DS:[R4] = R3             	// [4:11899]  
+//11900  							Movetime=6*16;
+
+LM650:
+	     .stabn 68,0,11900,LM650-_Mission
+	     R4 = 96                  	// [6:11900]  
+	     [BP + 5] = R4            	// [8:11900]  Movetime
+//11901  							
+//11902  						 temp = Mov_Detected(Movetime,0);
+
+LM651:
+	     .stabn 68,0,11902,LM651-_Mission
+	     SP = SP - 2              	// [9:11902]  
+	     R3 = [BP + 5]            	// [10:11902]  Movetime
+	     R4 = SP + 1              	// [12:11902]  
+	     [R4] = R3                	// [14:11902]  
+	     R3 = 0                   	// [16:11902]  
+	     R4 = SP + 2              	// [17:11902]  
+	     [R4] = R3                	// [19:11902]  
+	     call _Mov_Detected       	// [21:11902]  Mov_Detected
+BB94_PU49:	// 0xfdc
+// BB:94 cycle count: 2
+	     SP = SP + 2              	// [0:11902]  
+	     [BP + 6] = R1            	// [1:11902]  temp
+L_49_121:	// 0xfde
+// BB:95 cycle count: 21
+//11903  						
+//11904  					}
+//11905                    
+//11906                     G_Sensor_Status&=~G_BHIT; 
+
+LM652:
+	     .stabn 68,0,11906,LM652-_Mission
+	     DS = seg(_G_Sensor_Status)	// [0:11906]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:11906]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:11906]  
+	     R3 = R4 & 61056          	// [5:11906]  
+	     DS = seg(_G_Sensor_Status)	// [7:11906]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:11906]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:11906]  
+//11907                     if( temp&C_MovSucessStatus)
+
+LM653:
+	     .stabn 68,0,11907,LM653-_Mission
+	     R4 = [BP + 6]            	// [12:11907]  temp
+	     R4 = R4 & 8191           	// [14:11907]  
+	     cmp R4, 0                	// [16:11907]  
+	     je L_49_129              	// [17:11907]  
+BB96_PU49:	// 0xfed
+// BB:96 cycle count: 11
+//11908  				   {
+//11909  					   timeovercnt =0;
+
+LM654:
+	     .stabn 68,0,11909,LM654-_Mission
+	     R4 = 0                   	// [0:11909]  
+	     [BP + 1] = R4            	// [1:11909]  timeovercnt
+//11910  				       PlayA1800_Elements(SFX_Good);
+
+LM655:
+	     .stabn 68,0,11910,LM655-_Mission
+	     SP = SP - 1              	// [2:11910]  
+	     R3 = 22                  	// [3:11910]  
+	     R4 = SP + 1              	// [4:11910]  
+	     [R4] = R3                	// [6:11910]  
+	     call _PlayA1800_Elements 	// [8:11910]  PlayA1800_Elements
+BB97_PU49:	// 0xff6
+// BB:97 cycle count: 4
+	     SP = SP + 1              	// [0:11910]  
+//11911  					   break;
+
+LM656:
+	     .stabn 68,0,11911,LM656-_Mission
+	     goto Lt_49_6             	// [1:11911]  
+L_49_129:	// 0xff9
+// BB:98 cycle count: 8
+//11912  				   }
+//11913  				   else if(temp == TimeOver)
+
+LM657:
+	     .stabn 68,0,11913,LM657-_Mission
+	     R4 = [BP + 6]            	// [0:11913]  temp
+	     cmp R4, 32768            	// [2:11913]  
+	     jne L_49_131             	// [4:11913]  
+BB99_PU49:	// 0xffd
+// BB:99 cycle count: 11
+//11914  				   {
+//11915                             timeovercnt++;
+
+LM658:
+	     .stabn 68,0,11915,LM658-_Mission
+	     R4 = [BP + 1]            	// [0:11915]  timeovercnt
+	     R4 = R4 + 1              	// [2:11915]  
+	     [BP + 1] = R4            	// [3:11915]  timeovercnt
+//11916  						   if(timeovercnt>1)
+
+LM659:
+	     .stabn 68,0,11916,LM659-_Mission
+	     R4 = [BP + 1]            	// [4:11916]  timeovercnt
+	     cmp R4, 1                	// [6:11916]  
+	     jbe L_49_132             	// [7:11916]  
+BB100_PU49:	// 0x1003
+// BB:100 cycle count: 3
+//11917  						   {
+//11918                                  temp = GameTimeout();//C_GameTimeout;
+
+LM660:
+	     .stabn 68,0,11918,LM660-_Mission
+	     call _GameTimeout        	// [0:11918]  GameTimeout
+BB101_PU49:	// 0x1005
+// BB:101 cycle count: 9
+	     [BP + 6] = R1            	// [0:11918]  temp
+//11919                                  if(C_Off_Mode==temp)
+
+LM661:
+	     .stabn 68,0,11919,LM661-_Mission
+	     R4 = [BP + 6]            	// [1:11919]  temp
+	     cmp R4, 61457            	// [3:11919]  
+	     jne L_49_133             	// [5:11919]  
+BB102_PU49:	// 0x100a
+// BB:102 cycle count: 8
+//11920                                  	return C_Off_Mode;
+
+LM662:
+	     .stabn 68,0,11920,LM662-_Mission
+	     R1 = - 4079              	// [0:11920]  
+	     SP = SP + 7              	// [2:11920]  
+	     pop BP, PC from [SP]     	// [3:11920]  
+L_49_133:	// 0x100e
+L_49_132:	// 0x100e
+// BB:103 cycle count: 3
+
+LM663:
+	     .stabn 68,0,11916,LM663-_Mission
+	     goto L_49_130            	// [0:11916]  
+L_49_131:	// 0x1010
+// BB:104 cycle count: 12
+//11922  
+//11923  				   }
+//11924  				   else				   
+//11925  				   {
+//11926                         timeovercnt =0;
+
+LM664:
+	     .stabn 68,0,11926,LM664-_Mission
+	     R4 = 0                   	// [0:11926]  
+	     [BP + 1] = R4            	// [1:11926]  timeovercnt
+//11927                        if(FailV<2)
+
+LM665:
+	     .stabn 68,0,11927,LM665-_Mission
+	     DS = seg(_FailV)         	// [2:11927]  FailV
+	     R4 = (_FailV)            	// [3:11927]  FailV
+	     R4 = DS:[R4]             	// [5:11927]  
+	     cmp R4, 1                	// [7:11927]  
+	     ja L_49_135              	// [8:11927]  
+BB105_PU49:	// 0x1018
+// BB:105 cycle count: 14
+//11928  					  {
+//11929  						FailV++;
+
+LM666:
+	     .stabn 68,0,11929,LM666-_Mission
+	     DS = seg(_FailV)         	// [0:11929]  FailV
+	     R4 = (_FailV)            	// [1:11929]  FailV
+	     R4 = DS:[R4]             	// [3:11929]  
+	     R4 = R4 + 1              	// [5:11929]  
+	     DS = seg(_FailV)         	// [6:11929]  FailV
+	     R3 = (_FailV)            	// [7:11929]  FailV
+	     DS:[R3] = R4             	// [9:11929]  
+//11930  						Motor_On();
+
+LM667:
+	     .stabn 68,0,11930,LM667-_Mission
+	     call _Motor_On           	// [11:11930]  Motor_On
+BB106_PU49:	// 0x1023
+// BB:106 cycle count: 9
+//11931  						delay_time(8);
+
+LM668:
+	     .stabn 68,0,11931,LM668-_Mission
+	     SP = SP - 1              	// [0:11931]  
+	     R3 = 8                   	// [1:11931]  
+	     R4 = SP + 1              	// [2:11931]  
+	     [R4] = R3                	// [4:11931]  
+	     call _delay_time         	// [6:11931]  delay_time
+BB107_PU49:	// 0x102a
+// BB:107 cycle count: 4
+	     SP = SP + 1              	// [0:11931]  
+//11932  						Motor_Off();
+
+LM669:
+	     .stabn 68,0,11932,LM669-_Mission
+	     call _Motor_Off          	// [1:11932]  Motor_Off
+BB108_PU49:	// 0x102d
+// BB:108 cycle count: 4
+	     jmp L_49_134             	// [0:11932]  
+L_49_135:	// 0x102e
+// BB:109 cycle count: 21
+//11933  					  }
+//11934  					else
+//11935  					{
+//11936                            FailV2++;
+
+LM670:
+	     .stabn 68,0,11936,LM670-_Mission
+	     DS = seg(_FailV2)        	// [0:11936]  FailV2
+	     R4 = (_FailV2)           	// [1:11936]  FailV2
+	     R4 = DS:[R4]             	// [3:11936]  
+	     R4 = R4 + 1              	// [5:11936]  
+	     DS = seg(_FailV2)        	// [6:11936]  FailV2
+	     R3 = (_FailV2)           	// [7:11936]  FailV2
+	     DS:[R3] = R4             	// [9:11936]  
+//11937  						  if(FailV2>1)
+
+LM671:
+	     .stabn 68,0,11937,LM671-_Mission
+	     DS = seg(_FailV2)        	// [11:11937]  FailV2
+	     R4 = (_FailV2)           	// [12:11937]  FailV2
+	     R4 = DS:[R4]             	// [14:11937]  
+	     cmp R4, 1                	// [16:11937]  
+	     jbe L_49_137             	// [17:11937]  
+BB110_PU49:	// 0x103d
+// BB:110 cycle count: 15
+//11938  						    {
+//11939                                 FailV2 =0;
+
+LM672:
+	     .stabn 68,0,11939,LM672-_Mission
+	     R3 = 0                   	// [0:11939]  
+	     DS = seg(_FailV2)        	// [1:11939]  FailV2
+	     R4 = (_FailV2)           	// [2:11939]  FailV2
+	     DS:[R4] = R3             	// [4:11939]  
+//11940  
+//11941  				               PlayA1800_Elements(SFX_Good);
+
+LM673:
+	     .stabn 68,0,11941,LM673-_Mission
+	     SP = SP - 1              	// [6:11941]  
+	     R3 = 22                  	// [7:11941]  
+	     R4 = SP + 1              	// [8:11941]  
+	     [R4] = R3                	// [10:11941]  
+	     call _PlayA1800_Elements 	// [12:11941]  PlayA1800_Elements
+BB111_PU49:	// 0x1049
+// BB:111 cycle count: 5
+	     SP = SP + 1              	// [0:11941]  
+//11942  					           break;
+
+LM674:
+	     .stabn 68,0,11942,LM674-_Mission
+	     jmp Lt_49_6              	// [1:11942]  
+L_49_137:	// 0x104b
+// BB:112 cycle count: 3
+//11943  							}
+//11944  						  else
+//11945  						  {
+//11946  								Motor_On();
+
+LM675:
+	     .stabn 68,0,11946,LM675-_Mission
+	     call _Motor_On           	// [0:11946]  Motor_On
+BB113_PU49:	// 0x104d
+// BB:113 cycle count: 9
+//11947  								delay_time(8);
+
+LM676:
+	     .stabn 68,0,11947,LM676-_Mission
+	     SP = SP - 1              	// [0:11947]  
+	     R3 = 8                   	// [1:11947]  
+	     R4 = SP + 1              	// [2:11947]  
+	     [R4] = R3                	// [4:11947]  
+	     call _delay_time         	// [6:11947]  delay_time
+BB114_PU49:	// 0x1054
+// BB:114 cycle count: 4
+	     SP = SP + 1              	// [0:11947]  
+//11948  								Motor_Off();							 
+
+LM677:
+	     .stabn 68,0,11948,LM677-_Mission
+	     call _Motor_Off          	// [1:11948]  Motor_Off
+L_49_136:	// 0x1057
+L_49_134:	// 0x1057
+L_49_130:	// 0x1057
+L_49_128:	// 0x1057
+L_49_118:	// 0x1057
+// BB:115 cycle count: 3
+
+LM678:
+	     .stabn 68,0,11803,LM678-_Mission
+	     goto L_49_115            	// [0:11803]  
+L_49_116:	// 0x1059
+Lt_49_6:	// 0x1059
+// BB:116 cycle count: 14
+//11960  
+//11961  			}
+//11962  		 }
+//11963  
+//11964         Mem0.Y++;
+
+LM679:
+	     .stabn 68,0,11964,LM679-_Mission
+	     DS = seg(_Mem0+6)        	// [0:11964]  Mem0+6
+	     R4 = (_Mem0+6)           	// [1:11964]  Mem0+6
+	     R4 = DS:[R4]             	// [3:11964]  
+	     R4 = R4 + 1              	// [5:11964]  
+	     DS = seg(_Mem0+6)        	// [6:11964]  Mem0+6
+	     R3 = (_Mem0+6)           	// [7:11964]  Mem0+6
+	     DS:[R3] = R4             	// [9:11964]  
+	     goto L_49_108            	// [11:11964]  
+L_49_109:	// 0x1064
+Lt_49_5:	// 0x1064
+L_49_138:	// 0x1064
+// BB:117 cycle count: 10
+//11965      }
+//11966  	
+//11967        while(Mem0.Z<7)     
+
+LM680:
+	     .stabn 68,0,11967,LM680-_Mission
+	     DS = seg(_Mem0+7)        	// [0:11967]  Mem0+7
+	     R4 = (_Mem0+7)           	// [1:11967]  Mem0+7
+	     R4 = DS:[R4]             	// [3:11967]  
+	     cmp R4, 6                	// [5:11967]  
+	     ja L_49_139              	// [6:11967]  
+BB118_PU49:	// 0x106a
+// BB:118 cycle count: 31
+//11968  	  {
+//11969         Play_Seq(Mem0.Mission_Cur,End_Table[Mem0.Z]); 
+
+LM681:
+	     .stabn 68,0,11969,LM681-_Mission
+	     SP = SP - 2              	// [0:11969]  
+	     DS = seg(_Mem0)          	// [1:11969]  Mem0
+	     R4 = (_Mem0)             	// [2:11969]  Mem0
+	     R3 = DS:[R4]             	// [4:11969]  
+	     R4 = SP + 1              	// [6:11969]  
+	     [R4] = R3                	// [8:11969]  
+	     DS = seg(_Mem0+7)        	// [10:11969]  Mem0+7
+	     R4 = (_Mem0+7)           	// [11:11969]  Mem0+7
+	     R4 = DS:[R4]             	// [13:11969]  
+	     R3 = 0                   	// [15:11969]  
+	     R1 = (_End_Table)        	// [16:11969]  End_Table
+	     R2 = seg(_End_Table)     	// [18:11969]  End_Table
+	     R4 = R4 + R1             	// [19:11969]  
+	     R3 = R3 + R2, Carry      	// [20:11969]  
+	     DS = R3                  	// [21:11969]  
+	     R3 = DS:[R4]             	// [22:11969]  
+	     R4 = SP + 2              	// [24:11969]  
+	     [R4] = R3                	// [26:11969]  
+	     call _Play_Seq           	// [28:11969]  Play_Seq
+BB119_PU49:	// 0x1083
+// BB:119 cycle count: 16
+	     SP = SP + 2              	// [0:11969]  
+//11970         Mem0.Z++;
+
+LM682:
+	     .stabn 68,0,11970,LM682-_Mission
+	     DS = seg(_Mem0+7)        	// [1:11970]  Mem0+7
+	     R4 = (_Mem0+7)           	// [2:11970]  Mem0+7
+	     R4 = DS:[R4]             	// [4:11970]  
+	     R4 = R4 + 1              	// [6:11970]  
+	     DS = seg(_Mem0+7)        	// [7:11970]  Mem0+7
+	     R3 = (_Mem0+7)           	// [8:11970]  Mem0+7
+	     DS:[R3] = R4             	// [10:11970]  
+	     jmp L_49_138             	// [12:11970]  
+L_49_139:	// 0x108e
+// BB:120 cycle count: 16
+//11971  	  }
+//11972  
+//11973       Mem0.Mission_Cur++;	
+
+LM683:
+	     .stabn 68,0,11973,LM683-_Mission
+	     DS = seg(_Mem0)          	// [0:11973]  Mem0
+	     R4 = (_Mem0)             	// [1:11973]  Mem0
+	     R4 = DS:[R4]             	// [3:11973]  
+	     R4 = R4 + 1              	// [5:11973]  
+	     DS = seg(_Mem0)          	// [6:11973]  Mem0
+	     R3 = (_Mem0)             	// [7:11973]  Mem0
+	     DS:[R3] = R4             	// [9:11973]  
+	//;;
+	INT OFF
+	//;;
+//11974          	   	  	   
+//11975          __asm("INT OFF");
+//11976         MoveSPIDriverToRAM();
+
+LM684:
+	     .stabn 68,0,11976,LM684-_Mission
+	     call _MoveSPIDriverToRAM 	// [13:11976]  MoveSPIDriverToRAM
+BB121_PU49:	// 0x109c
+// BB:121 cycle count: 16
+//11977     	      
+//11978     	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
+
+LM685:
+	     .stabn 68,0,11978,LM685-_Mission
+	     SP = SP - 2              	// [0:11978]  
+	     R3 = - 16384             	// [1:11978]  
+	     R4 = SP + 1              	// [3:11978]  
+	     [R4] = R3                	// [5:11978]  
+	     R3 = 127                 	// [7:11978]  
+	     R4 = SP + 2              	// [9:11978]  
+	     [R4] = R3                	// [11:11978]  
+	     call _SPI_Flash_Sector_Erase	// [13:11978]  SPI_Flash_Sector_Erase
+BB122_PU49:	// 0x10a9
+// BB:122 cycle count: 30
+	     SP = SP - 3              	// [0:11978]  
+//11979        SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
+
+LM686:
+	     .stabn 68,0,11979,LM686-_Mission
+	     R2 = (_Mem0)             	// [1:11979]  Mem0
+	     R3 = seg(_Mem0)          	// [3:11979]  Mem0
+	     R4 = SP + 1              	// [4:11979]  
+	     [R4++] = R2              	// [6:11979]  
+	     [R4] = R3                	// [8:11979]  
+	     R3 = 5                   	// [10:11979]  
+	     R4 = SP + 3              	// [11:11979]  
+	     [R4] = R3                	// [13:11979]  
+	     R3 = - 16384             	// [15:11979]  
+	     R4 = SP + 4              	// [17:11979]  
+	     [R4] = R3                	// [19:11979]  
+	     R3 = 127                 	// [21:11979]  
+	     R4 = SP + 5              	// [23:11979]  
+	     [R4] = R3                	// [25:11979]  
+	     call _SPI_Flash_SendNWords	// [27:11979]  SPI_Flash_SendNWords
+BB123_PU49:	// 0x10c1
+// BB:123 cycle count: 13
+	     SP = SP + 5              	// [0:11979]  
+	//;;
+	INT FIQ,IRQ
+	//;;
+//11980          __asm("INT FIQ,IRQ");  
+//11981     
+//11982     if(Mem0.Mission_Cur>=30)
+
+LM687:
+	     .stabn 68,0,11982,LM687-_Mission
+	     DS = seg(_Mem0)          	// [3:11982]  Mem0
+	     R4 = (_Mem0)             	// [4:11982]  Mem0
+	     R4 = DS:[R4]             	// [6:11982]  
+	     cmp R4, 29               	// [8:11982]  
+	     jbe L_49_141             	// [9:11982]  
+BB124_PU49:	// 0x10cb
+// BB:124 cycle count: 9
+//11983     {
+//11984     	    PlayA1800_Elements(SFX_Off);
+
+LM688:
+	     .stabn 68,0,11984,LM688-_Mission
+	     SP = SP - 1              	// [0:11984]  
+	     R3 = 34                  	// [1:11984]  
+	     R4 = SP + 1              	// [2:11984]  
+	     [R4] = R3                	// [4:11984]  
+	     call _PlayA1800_Elements 	// [6:11984]  PlayA1800_Elements
+BB125_PU49:	// 0x10d2
+// BB:125 cycle count: 8
+	     SP = SP + 8              	// [0:11984]  
+//11985     	     return C_Off_Mode;
+
+LM689:
+	     .stabn 68,0,11985,LM689-_Mission
+	     R1 = - 4079              	// [1:11985]  
+	     pop BP, PC from [SP]     	// [3:11985]  
+L_49_141:	// 0x10d6
+// BB:126 cycle count: 9
+//11986     } 
+//11987    else
+//11988    {          
+//11989        delay_time(2*16);
+
+LM690:
+	     .stabn 68,0,11989,LM690-_Mission
+	     SP = SP - 1              	// [0:11989]  
+	     R3 = 32                  	// [1:11989]  
+	     R4 = SP + 1              	// [2:11989]  
+	     [R4] = R3                	// [4:11989]  
+	     call _delay_time         	// [6:11989]  delay_time
+BB127_PU49:	// 0x10dd
+// BB:127 cycle count: 11
+	     SP = SP + 1              	// [0:11989]  
+//11990  
+//11991       if((Mem0.Mission_Cur==1)||(Mem0.Mission_Cur==6)||(Mem0.Mission_Cur==12)
+
+LM691:
+	     .stabn 68,0,11991,LM691-_Mission
+	     DS = seg(_Mem0)          	// [1:11991]  Mem0
+	     R4 = (_Mem0)             	// [2:11991]  Mem0
+	     R4 = DS:[R4]             	// [4:11991]  
+	     cmp R4, 1                	// [6:11991]  
+	     je L_49_143              	// [7:11991]  
+BB128_PU49:	// 0x10e4
+// BB:128 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:11991]  Mem0
+	     R4 = (_Mem0)             	// [1:11991]  Mem0
+	     R4 = DS:[R4]             	// [3:11991]  
+	     cmp R4, 6                	// [5:11991]  
+	     je L_49_143              	// [6:11991]  
+L_49_147:	// 0x10ea
+// BB:129 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:11991]  Mem0
+	     R4 = (_Mem0)             	// [1:11991]  Mem0
+	     R4 = DS:[R4]             	// [3:11991]  
+	     cmp R4, 12               	// [5:11991]  
+	     je L_49_143              	// [6:11991]  
+L_49_146:	// 0x10f0
+// BB:130 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:11991]  Mem0
+	     R4 = (_Mem0)             	// [1:11991]  Mem0
+	     R4 = DS:[R4]             	// [3:11991]  
+	     cmp R4, 17               	// [5:11991]  
+	     je L_49_143              	// [6:11991]  
+L_49_145:	// 0x10f6
+// BB:131 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:11991]  Mem0
+	     R4 = (_Mem0)             	// [1:11991]  Mem0
+	     R4 = DS:[R4]             	// [3:11991]  
+	     cmp R4, 23               	// [5:11991]  
+	     je L_49_143              	// [6:11991]  
+L_49_144:	// 0x10fc
+// BB:132 cycle count: 10
+	     DS = seg(_Mem0)          	// [0:11991]  Mem0
+	     R4 = (_Mem0)             	// [1:11991]  Mem0
+	     R4 = DS:[R4]             	// [3:11991]  
+	     cmp R4, 28               	// [5:11991]  
+	     jne L_49_142             	// [6:11991]  
+L_49_143:	// 0x1102
+// BB:133 cycle count: 21
+//11992  	 ||(Mem0.Mission_Cur==17)||(Mem0.Mission_Cur==23)||(Mem0.Mission_Cur==28))
+//11993  	 {
+//11994  	  Mem0.firstFlag_23b.BitCTL_f.TokenText=1;
+
+LM692:
+	     .stabn 68,0,11994,LM692-_Mission
+	     DS = seg(_Mem0+2)        	// [0:11994]  Mem0+2
+	     R4 = (_Mem0+2)           	// [1:11994]  Mem0+2
+	     R4 = DS:[R4]             	// [3:11994]  
+	     R4 = R4 | 1              	// [5:11994]  
+	     DS = seg(_Mem0+2)        	// [6:11994]  Mem0+2
+	     R3 = (_Mem0+2)           	// [7:11994]  Mem0+2
+	     DS:[R3] = R4             	// [9:11994]  
+//11995  	  TokenMission=Mem0.Mission_Cur; 
+
+LM693:
+	     .stabn 68,0,11995,LM693-_Mission
+	     DS = seg(_Mem0)          	// [11:11995]  Mem0
+	     R4 = (_Mem0)             	// [12:11995]  Mem0
+	     R3 = DS:[R4]             	// [14:11995]  
+	     DS = seg(_TokenMission)  	// [16:11995]  TokenMission
+	     R4 = (_TokenMission)     	// [17:11995]  TokenMission
+	     DS:[R4] = R3             	// [19:11995]  
+L_49_142:	// 0x1113
+// BB:134 cycle count: 8
+//11996  	 }
+//11997       return C_SelectMission;
+
+LM694:
+	     .stabn 68,0,11997,LM694-_Mission
+	     R1 = - 4075              	// [0:11997]  
+	     SP = SP + 7              	// [2:11997]  
+	     pop BP, PC from [SP]     	// [3:11997]  
+L_49_140:	// 0x1117
+// BB:135 cycle count: 6
+	     SP = SP + 7              	// [0:11997]  
+	     pop BP, PC from [SP]     	// [1:11997]  
+LBE41:
 	.endp	
-	     .stabn 192,0,0,LBB42-_Mission
+	     .stabn 192,0,0,LBB41-_Mission
 	     .stabs "temp:4",128,0,0,6
 	     .stabs "temp_MoveText2_Right:4",128,0,0,0
 	     .stabs "timeovercnt:4",128,0,0,1
@@ -9897,7 +9854,7 @@ LBE42:
 	     .stabs "Mvmt:4",128,0,0,3
 	     .stabs "Movetime:4",128,0,0,5
 	     .stabs "status:4",128,0,0,4
-	     .stabn 224,0,0,LBE42-_Mission
+	     .stabn 224,0,0,LBE41-_Mission
 LME50:
 	     .stabf LME50-_Mission
 .code
@@ -9910,105 +9867,105 @@ _Go_Rest: .proc
 	// i = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//12840  //==============================================================
-//12841  /**********************************************************
-//12842  *************************************************************/
-//12843  void  Go_Rest()
-//12844  {
+//12963  //==============================================================
+//12964  /**********************************************************
+//12965  *************************************************************/
+//12966  void  Go_Rest()
+//12967  {
 
-LM701:
-	     .stabn 68,0,12844,LM701-_Go_Rest
-BB1_PU50:	// 0x10e4
+LM695:
+	     .stabn 68,0,12967,LM695-_Go_Rest
+BB1_PU50:	// 0x1107
 // BB:1 cycle count: 17
-	     push BP to [SP]          	// [0:12844]  
-	     SP = SP - 1              	// [2:12844]  
-	     BP = SP + 1              	// [3:12844]  
+	     push BP to [SP]          	// [0:12967]  
+	     SP = SP - 1              	// [2:12967]  
+	     BP = SP + 1              	// [3:12967]  
 	//;;
 	IRQ off
 	//;;
-LBB43:
-//12845  	unsigned i;
-//12846  	asm("IRQ off");
-//12847  	
-//12848  		
-//12849  	if(A1800_Flag)
+LBB42:
+//12968  	unsigned i;
+//12969  	asm("IRQ off");
+//12970  	
+//12971  		
+//12972  	if(A1800_Flag)
 
-LM702:
-	     .stabn 68,0,12849,LM702-_Go_Rest
-	     DS = seg(_A1800_Flag)    	// [7:12849]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [8:12849]  A1800_Flag
-	     R4 = DS:[R4]             	// [10:12849]  
-	     cmp R4, 0                	// [12:12849]  
-	     je L_50_7                	// [13:12849]  
-BB2_PU50:	// 0x10f1
+LM696:
+	     .stabn 68,0,12972,LM696-_Go_Rest
+	     DS = seg(_A1800_Flag)    	// [7:12972]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [8:12972]  A1800_Flag
+	     R4 = DS:[R4]             	// [10:12972]  
+	     cmp R4, 0                	// [12:12972]  
+	     je L_50_7                	// [13:12972]  
+BB2_PU50:	// 0x1114
 // BB:2 cycle count: 3
-//12850  	{
-//12851  	 SACM_A1800_Stop();
+//12973  	{
+//12974  	 SACM_A1800_Stop();
 
-LM703:
-	     .stabn 68,0,12851,LM703-_Go_Rest
-	     call _SACM_A1800_Stop    	// [0:12851]  SACM_A1800_Stop
-BB3_PU50:	// 0x10f3
+LM697:
+	     .stabn 68,0,12974,LM697-_Go_Rest
+	     call _SACM_A1800_Stop    	// [0:12974]  SACM_A1800_Stop
+BB3_PU50:	// 0x1116
 // BB:3 cycle count: 6
-//12852  	 A1800_Flag =0;
+//12975  	 A1800_Flag =0;
 
-LM704:
-	     .stabn 68,0,12852,LM704-_Go_Rest
-	     R3 = 0                   	// [0:12852]  
-	     DS = seg(_A1800_Flag)    	// [1:12852]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:12852]  A1800_Flag
-	     DS:[R4] = R3             	// [4:12852]  
-L_50_7:	// 0x10f8
+LM698:
+	     .stabn 68,0,12975,LM698-_Go_Rest
+	     R3 = 0                   	// [0:12975]  
+	     DS = seg(_A1800_Flag)    	// [1:12975]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:12975]  A1800_Flag
+	     DS:[R4] = R3             	// [4:12975]  
+L_50_7:	// 0x111b
 // BB:4 cycle count: 3
-//12853  	}
-//12854  //	Led_SP_Off();
-//12855  	
-//12856  	i = 1000;
+//12976  	}
+//12977  //	Led_SP_Off();
+//12978  	
+//12979  	i = 1000;
 
-LM705:
-	     .stabn 68,0,12856,LM705-_Go_Rest
-	     R4 = 1000                	// [0:12856]  
-	     [BP + 0] = R4            	// [2:12856]  i
-Lt_50_5:	// 0x10fb
+LM699:
+	     .stabn 68,0,12979,LM699-_Go_Rest
+	     R4 = 1000                	// [0:12979]  
+	     [BP + 0] = R4            	// [2:12979]  i
+Lt_50_5:	// 0x111e
 // BB:5 cycle count: 12
-//12857  	while(i--) System_ServiceLoop();
+//12980  	while(i--) System_ServiceLoop();
 
-LM706:
-	     .stabn 68,0,12857,LM706-_Go_Rest
-	     R4 = [BP + 0]            	// [0:12857]  i
-	     R4 = R4 - 1              	// [2:12857]  
-	     [BP + 0] = R4            	// [3:12857]  i
-	     R4 = [BP + 0]            	// [4:12857]  i
-	     cmp R4, 65535            	// [6:12857]  
-	     je Lt_50_6               	// [8:12857]  
-BB6_PU50:	// 0x1102
+LM700:
+	     .stabn 68,0,12980,LM700-_Go_Rest
+	     R4 = [BP + 0]            	// [0:12980]  i
+	     R4 = R4 - 1              	// [2:12980]  
+	     [BP + 0] = R4            	// [3:12980]  i
+	     R4 = [BP + 0]            	// [4:12980]  i
+	     cmp R4, 65535            	// [6:12980]  
+	     je Lt_50_6               	// [8:12980]  
+BB6_PU50:	// 0x1125
 // BB:6 cycle count: 3
-	     call _System_ServiceLoop 	// [0:12857]  System_ServiceLoop
-BB7_PU50:	// 0x1104
+	     call _System_ServiceLoop 	// [0:12980]  System_ServiceLoop
+BB7_PU50:	// 0x1127
 // BB:7 cycle count: 4
-	     jmp Lt_50_5              	// [0:12857]  
-Lt_50_6:	// 0x1105
+	     jmp Lt_50_5              	// [0:12980]  
+Lt_50_6:	// 0x1128
 // BB:8 cycle count: 14
-//12872  //	i = 3000;
-//12873  //	while(i--) System_ServiceLoop();
-//12874  
-//12875     // Sleep();
-//12876  	*P_System_Reset = C_Software_Reset;
+//12995  //	i = 3000;
+//12996  //	while(i--) System_ServiceLoop();
+//12997  
+//12998     // Sleep();
+//12999  	*P_System_Reset = C_Software_Reset;
 
-LM707:
-	     .stabn 68,0,12876,LM707-_Go_Rest
-	     R2 = 21845               	// [0:12876]  
-	     R3 = 12337               	// [2:12876]  
-	     R4 = 0                   	// [4:12876]  
-	     DS = R4                  	// [5:12876]  
-	     DS:[R3] = R2             	// [6:12876]  
-	     SP = SP + 1              	// [8:12876]  
-	     pop BP, PC from [SP]     	// [9:12876]  
-LBE43:
+LM701:
+	     .stabn 68,0,12999,LM701-_Go_Rest
+	     R2 = 21845               	// [0:12999]  
+	     R3 = 12337               	// [2:12999]  
+	     R4 = 0                   	// [4:12999]  
+	     DS = R4                  	// [5:12999]  
+	     DS:[R3] = R2             	// [6:12999]  
+	     SP = SP + 1              	// [8:12999]  
+	     pop BP, PC from [SP]     	// [9:12999]  
+LBE42:
 	.endp	
-	     .stabn 192,0,0,LBB43-_Go_Rest
+	     .stabn 192,0,0,LBB42-_Go_Rest
 	     .stabs "i:4",128,0,0,0
-	     .stabn 224,0,0,LBE43-_Go_Rest
+	     .stabn 224,0,0,LBE42-_Go_Rest
 LME51:
 	     .stabf LME51-_Go_Rest
 .code
@@ -10021,262 +9978,262 @@ _Sleeping: .proc
 	// cnt = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//12878  
-//12879  /**********************************************************
-//12880  *************************************************************/
-//12881  void Sleeping()
-//12882  {
+//13001  
+//13002  /**********************************************************
+//13003  *************************************************************/
+//13004  void Sleeping()
+//13005  {
+
+LM702:
+	     .stabn 68,0,13005,LM702-_Sleeping
+BB1_PU51:	// 0x112e
+// BB:1 cycle count: 17
+	     push BP to [SP]          	// [0:13005]  
+	     SP = SP - 1              	// [2:13005]  
+	     BP = SP + 1              	// [3:13005]  
+LBB43:
+//13006  //   unsigned int temp;//temp_Mode;
+//13007     unsigned int cnt =0;
+
+LM703:
+	     .stabn 68,0,13007,LM703-_Sleeping
+	     R4 = 0                   	// [5:13007]  
+	     [BP + 0] = R4            	// [6:13007]  cnt
+//13008  	
+//13009   if(A1800_Flag)
+
+LM704:
+	     .stabn 68,0,13009,LM704-_Sleeping
+	     DS = seg(_A1800_Flag)    	// [7:13009]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [8:13009]  A1800_Flag
+	     R4 = DS:[R4]             	// [10:13009]  
+	     cmp R4, 0                	// [12:13009]  
+	     je L_51_3                	// [13:13009]  
+BB2_PU51:	// 0x113a
+// BB:2 cycle count: 3
+//13010   {
+//13011     SACM_A1800_Stop();
+
+LM705:
+	     .stabn 68,0,13011,LM705-_Sleeping
+	     call _SACM_A1800_Stop    	// [0:13011]  SACM_A1800_Stop
+BB3_PU51:	// 0x113c
+// BB:3 cycle count: 6
+//13012     A1800_Flag = 0;	
+
+LM706:
+	     .stabn 68,0,13012,LM706-_Sleeping
+	     R3 = 0                   	// [0:13012]  
+	     DS = seg(_A1800_Flag)    	// [1:13012]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:13012]  A1800_Flag
+	     DS:[R4] = R3             	// [4:13012]  
+L_51_3:	// 0x1141
+// BB:4 cycle count: 3
+//13013     
+//13014   }	
+//13015  	
+//13016     mc3416_Standby();	
+
+LM707:
+	     .stabn 68,0,13016,LM707-_Sleeping
+	     call _mc3416_Standby     	// [0:13016]  mc3416_Standby
+BB5_PU51:	// 0x1143
+// BB:5 cycle count: 3
+//13017  	
+//13018     Sleep_Io();	
 
 LM708:
-	     .stabn 68,0,12882,LM708-_Sleeping
-BB1_PU51:	// 0x110b
-// BB:1 cycle count: 17
-	     push BP to [SP]          	// [0:12882]  
-	     SP = SP - 1              	// [2:12882]  
-	     BP = SP + 1              	// [3:12882]  
-LBB44:
-//12883  //   unsigned int temp;//temp_Mode;
-//12884     unsigned int cnt =0;
+	     .stabn 68,0,13018,LM708-_Sleeping
+	     call _Sleep_Io           	// [0:13018]  Sleep_Io
+L_51_4:	// 0x1145
+// BB:6 cycle count: 3
+//13019  	
+//13020  while(1)
+//13021  {	
+//13022  	
+//13023    WatchdogClear();	
 
 LM709:
-	     .stabn 68,0,12884,LM709-_Sleeping
-	     R4 = 0                   	// [5:12884]  
-	     [BP + 0] = R4            	// [6:12884]  cnt
-//12885  	
-//12886   if(A1800_Flag)
+	     .stabn 68,0,13023,LM709-_Sleeping
+	     call _WatchdogClear      	// [0:13023]  WatchdogClear
+Lt_51_1:	// 0x1147
+// BB:7 cycle count: 5
+//13024    //temp_Mode = Switch_Mode;	
+//13025  go_on_sleep_sw:	
+//13026         cnt =0;
 
 LM710:
-	     .stabn 68,0,12886,LM710-_Sleeping
-	     DS = seg(_A1800_Flag)    	// [7:12886]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [8:12886]  A1800_Flag
-	     R4 = DS:[R4]             	// [10:12886]  
-	     cmp R4, 0                	// [12:12886]  
-	     je L_51_3                	// [13:12886]  
-BB2_PU51:	// 0x1117
-// BB:2 cycle count: 3
-//12887   {
-//12888     SACM_A1800_Stop();
+	     .stabn 68,0,13026,LM710-_Sleeping
+	     R4 = 0                   	// [0:13026]  
+	     [BP + 0] = R4            	// [1:13026]  cnt
+//13027  	   Sleep();	
 
 LM711:
-	     .stabn 68,0,12888,LM711-_Sleeping
-	     call _SACM_A1800_Stop    	// [0:12888]  SACM_A1800_Stop
-BB3_PU51:	// 0x1119
-// BB:3 cycle count: 6
-//12889     A1800_Flag = 0;	
+	     .stabn 68,0,13027,LM711-_Sleeping
+	     call _Sleep              	// [2:13027]  Sleep
+BB8_PU51:	// 0x114b
+// BB:8 cycle count: 3
+//13050  		//goto go_on_sleep_sw;	
+//13051  	{	
+//13052  
+//13053  
+//13054  		Sys_clock_init_Only();
 
 LM712:
-	     .stabn 68,0,12889,LM712-_Sleeping
-	     R3 = 0                   	// [0:12889]  
-	     DS = seg(_A1800_Flag)    	// [1:12889]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:12889]  A1800_Flag
-	     DS:[R4] = R3             	// [4:12889]  
-L_51_3:	// 0x111e
-// BB:4 cycle count: 3
-//12890     
-//12891   }	
-//12892  	
-//12893     mc3416_Standby();	
+	     .stabn 68,0,13054,LM712-_Sleeping
+	     call _Sys_clock_init_Only	// [0:13054]  Sys_clock_init_Only
+BB9_PU51:	// 0x114d
+// BB:9 cycle count: 3
+//13055  	    //Sys_clock_init();
+//13056  	    IO_init_Wakeup();
 
 LM713:
-	     .stabn 68,0,12893,LM713-_Sleeping
-	     call _mc3416_Standby     	// [0:12893]  mc3416_Standby
-BB5_PU51:	// 0x1120
-// BB:5 cycle count: 3
-//12894  	
-//12895     Sleep_Io();	
+	     .stabn 68,0,13056,LM713-_Sleeping
+	     call _IO_init_Wakeup     	// [0:13056]  IO_init_Wakeup
+BB10_PU51:	// 0x114f
+// BB:10 cycle count: 29
+//13060  	    
+//13061  	 
+//13062  //	 	if((Switch_Mode == Key_Game))//||(Switch_Mode == Key_Game_Family))
+//13063  	    {
+//13064           	cnt =Wakeup_IO_Temp^Sleep_IO_Temp;
 
 LM714:
-	     .stabn 68,0,12895,LM714-_Sleeping
-	     call _Sleep_Io           	// [0:12895]  Sleep_Io
-L_51_4:	// 0x1122
-// BB:6 cycle count: 3
-//12896  	
-//12897  while(1)
-//12898  {	
-//12899  	
-//12900    WatchdogClear();	
+	     .stabn 68,0,13064,LM714-_Sleeping
+	     DS = seg(_Sleep_IO_Temp) 	// [0:13064]  Sleep_IO_Temp
+	     R4 = (_Sleep_IO_Temp)    	// [1:13064]  Sleep_IO_Temp
+	     R4 = DS:[R4]             	// [3:13064]  
+	     DS = seg(_Wakeup_IO_Temp)	// [5:13064]  Wakeup_IO_Temp
+	     R3 = (_Wakeup_IO_Temp)   	// [6:13064]  Wakeup_IO_Temp
+	     R4 = R4 ^ DS:[R3]        	// [8:13064]  
+	     [BP + 0] = R4            	// [10:13064]  cnt
+//13065           	
+//13066           // if(VOL1Flag)	
+//13067  	           cnt&=0x01;//200
 
 LM715:
-	     .stabn 68,0,12900,LM715-_Sleeping
-	     call _WatchdogClear      	// [0:12900]  WatchdogClear
-Lt_51_1:	// 0x1124
-// BB:7 cycle count: 5
-//12901    //temp_Mode = Switch_Mode;	
-//12902  go_on_sleep_sw:	
-//12903         cnt =0;
+	     .stabn 68,0,13067,LM715-_Sleeping
+	     R4 = [BP + 0]            	// [11:13067]  cnt
+	     R4 = R4 & 1              	// [13:13067]  
+	     [BP + 0] = R4            	// [14:13067]  cnt
+//13068  	     // else
+//13069  	      //    cnt&=0x080;
+//13070  	        
+//13071  	       // if((cnt)&&(temp&0x200)==0))
+//13072  	       if((Wakeup_IO_Temp&cnt)!=cnt) 	
 
 LM716:
-	     .stabn 68,0,12903,LM716-_Sleeping
-	     R4 = 0                   	// [0:12903]  
-	     [BP + 0] = R4            	// [1:12903]  cnt
-//12904  	   Sleep();	
+	     .stabn 68,0,13072,LM716-_Sleeping
+	     R2 = [BP + 0]            	// [15:13072]  cnt
+	     R4 = [BP + 0]            	// [17:13072]  cnt
+	     DS = seg(_Wakeup_IO_Temp)	// [19:13072]  Wakeup_IO_Temp
+	     R3 = (_Wakeup_IO_Temp)   	// [20:13072]  Wakeup_IO_Temp
+	     R4 = R4 & DS:[R3]        	// [22:13072]  
+	     cmp R2, R4               	// [24:13072]  
+	     je L_51_6                	// [25:13072]  
+BB11_PU51:	// 0x1163
+// BB:11 cycle count: 4
+//13073  	  	    {
+//13074  	  	   	  break;
 
 LM717:
-	     .stabn 68,0,12904,LM717-_Sleeping
-	     call _Sleep              	// [2:12904]  Sleep
-BB8_PU51:	// 0x1128
-// BB:8 cycle count: 3
-//12927  		//goto go_on_sleep_sw;	
-//12928  	{	
-//12929  
-//12930  
-//12931  		Sys_clock_init_Only();
+	     .stabn 68,0,13074,LM717-_Sleeping
+	     jmp Lt_51_2              	// [0:13074]  
+L_51_6:	// 0x1164
+// BB:12 cycle count: 3
+//13089  //	  	
+//13090  //	    }
+//13091  
+//13092         
+//13093         Set_Sleep_IO();
 
 LM718:
-	     .stabn 68,0,12931,LM718-_Sleeping
-	     call _Sys_clock_init_Only	// [0:12931]  Sys_clock_init_Only
-BB9_PU51:	// 0x112a
-// BB:9 cycle count: 3
-//12932  	    //Sys_clock_init();
-//12933  	    IO_init_Wakeup();
+	     .stabn 68,0,13093,LM718-_Sleeping
+	     call _Set_Sleep_IO       	// [0:13093]  Set_Sleep_IO
+BB13_PU51:	// 0x1166
+// BB:13 cycle count: 4
+	     jmp L_51_4               	// [0:13093]  
+L_51_5:	// 0x1167
+Lt_51_2:	// 0x1167
+// BB:14 cycle count: 27
+//13096      
+//13097  }
+//13098  
+//13099  
+//13100     	PassFlag =0;
 
 LM719:
-	     .stabn 68,0,12933,LM719-_Sleeping
-	     call _IO_init_Wakeup     	// [0:12933]  IO_init_Wakeup
-BB10_PU51:	// 0x112c
-// BB:10 cycle count: 29
-//12937  	    
-//12938  	 
-//12939  //	 	if((Switch_Mode == Key_Game))//||(Switch_Mode == Key_Game_Family))
-//12940  	    {
-//12941           	cnt =Wakeup_IO_Temp^Sleep_IO_Temp;
+	     .stabn 68,0,13100,LM719-_Sleeping
+	     R3 = 0                   	// [0:13100]  
+	     DS = seg(_PassFlag)      	// [1:13100]  PassFlag
+	     R4 = (_PassFlag)         	// [2:13100]  PassFlag
+	     DS:[R4] = R3             	// [4:13100]  
+//13101     	Sleepflag =0;
 
 LM720:
-	     .stabn 68,0,12941,LM720-_Sleeping
-	     DS = seg(_Sleep_IO_Temp) 	// [0:12941]  Sleep_IO_Temp
-	     R4 = (_Sleep_IO_Temp)    	// [1:12941]  Sleep_IO_Temp
-	     R4 = DS:[R4]             	// [3:12941]  
-	     DS = seg(_Wakeup_IO_Temp)	// [5:12941]  Wakeup_IO_Temp
-	     R3 = (_Wakeup_IO_Temp)   	// [6:12941]  Wakeup_IO_Temp
-	     R4 = R4 ^ DS:[R3]        	// [8:12941]  
-	     [BP + 0] = R4            	// [10:12941]  cnt
-//12942           	
-//12943           // if(VOL1Flag)	
-//12944  	           cnt&=0x01;//200
+	     .stabn 68,0,13101,LM720-_Sleeping
+	     R3 = 0                   	// [6:13101]  
+	     DS = seg(_Sleepflag)     	// [7:13101]  Sleepflag
+	     R4 = (_Sleepflag)        	// [8:13101]  Sleepflag
+	     DS:[R4] = R3             	// [10:13101]  
+//13102     
+//13103       
+//13104     	BlinkFlag_Data = 0;//xiang 20150226
 
 LM721:
-	     .stabn 68,0,12944,LM721-_Sleeping
-	     R4 = [BP + 0]            	// [11:12944]  cnt
-	     R4 = R4 & 1              	// [13:12944]  
-	     [BP + 0] = R4            	// [14:12944]  cnt
-//12945  	     // else
-//12946  	      //    cnt&=0x080;
-//12947  	        
-//12948  	       // if((cnt)&&(temp&0x200)==0))
-//12949  	       if((Wakeup_IO_Temp&cnt)!=cnt) 	
+	     .stabn 68,0,13104,LM721-_Sleeping
+	     R3 = 0                   	// [12:13104]  
+	     DS = seg(_BlinkFlag_Data)	// [13:13104]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [14:13104]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [16:13104]  
+//13105     	CheaterFlag =0;
 
 LM722:
-	     .stabn 68,0,12949,LM722-_Sleeping
-	     R2 = [BP + 0]            	// [15:12949]  cnt
-	     R4 = [BP + 0]            	// [17:12949]  cnt
-	     DS = seg(_Wakeup_IO_Temp)	// [19:12949]  Wakeup_IO_Temp
-	     R3 = (_Wakeup_IO_Temp)   	// [20:12949]  Wakeup_IO_Temp
-	     R4 = R4 & DS:[R3]        	// [22:12949]  
-	     cmp R2, R4               	// [24:12949]  
-	     je L_51_6                	// [25:12949]  
-BB11_PU51:	// 0x1140
-// BB:11 cycle count: 4
-//12950  	  	    {
-//12951  	  	   	  break;
+	     .stabn 68,0,13105,LM722-_Sleeping
+	     R3 = 0                   	// [18:13105]  
+	     DS = seg(_CheaterFlag)   	// [19:13105]  CheaterFlag
+	     R4 = (_CheaterFlag)      	// [20:13105]  CheaterFlag
+	     DS:[R4] = R3             	// [22:13105]  
+//13106  //    Temp_Registered_Play_Select =0;  	
+//13107     //	Event_List = Event_List_Init;
+//13108     	
+//13109      Sys_clock_init();
 
 LM723:
-	     .stabn 68,0,12951,LM723-_Sleeping
-	     jmp Lt_51_2              	// [0:12951]  
-L_51_6:	// 0x1141
-// BB:12 cycle count: 3
-//12966  //	  	
-//12967  //	    }
-//12968  
-//12969         
-//12970         Set_Sleep_IO();
+	     .stabn 68,0,13109,LM723-_Sleeping
+	     call _Sys_clock_init     	// [24:13109]  Sys_clock_init
+BB15_PU51:	// 0x117d
+// BB:15 cycle count: 3
+//13110      Time_init();
 
 LM724:
-	     .stabn 68,0,12970,LM724-_Sleeping
-	     call _Set_Sleep_IO       	// [0:12970]  Set_Sleep_IO
-BB13_PU51:	// 0x1143
-// BB:13 cycle count: 4
-	     jmp L_51_4               	// [0:12970]  
-L_51_5:	// 0x1144
-Lt_51_2:	// 0x1144
-// BB:14 cycle count: 27
-//12973      
-//12974  }
-//12975  
-//12976  
-//12977     	PassFlag =0;
+	     .stabn 68,0,13110,LM724-_Sleeping
+	     call _Time_init          	// [0:13110]  Time_init
+BB16_PU51:	// 0x117f
+// BB:16 cycle count: 3
+//13111      
+//13112      Key_Scan_Init_Wakeup();
 
 LM725:
-	     .stabn 68,0,12977,LM725-_Sleeping
-	     R3 = 0                   	// [0:12977]  
-	     DS = seg(_PassFlag)      	// [1:12977]  PassFlag
-	     R4 = (_PassFlag)         	// [2:12977]  PassFlag
-	     DS:[R4] = R3             	// [4:12977]  
-//12978     	Sleepflag =0;
+	     .stabn 68,0,13112,LM725-_Sleeping
+	     call _Key_Scan_Init_Wakeup	// [0:13112]  Key_Scan_Init_Wakeup
+BB17_PU51:	// 0x1181
+// BB:17 cycle count: 3
+//13113      
+//13114       IIC_MasterInit();
 
 LM726:
-	     .stabn 68,0,12978,LM726-_Sleeping
-	     R3 = 0                   	// [6:12978]  
-	     DS = seg(_Sleepflag)     	// [7:12978]  Sleepflag
-	     R4 = (_Sleepflag)        	// [8:12978]  Sleepflag
-	     DS:[R4] = R3             	// [10:12978]  
-//12979     
-//12980       
-//12981     	BlinkFlag_Data = 0;//xiang 20150226
+	     .stabn 68,0,13114,LM726-_Sleeping
+	     call _IIC_MasterInit     	// [0:13114]  IIC_MasterInit
+BB18_PU51:	// 0x1183
+// BB:18 cycle count: 3
+//13115     // G_Sensor_Init();
+//13116       mc3416_init();
 
 LM727:
-	     .stabn 68,0,12981,LM727-_Sleeping
-	     R3 = 0                   	// [12:12981]  
-	     DS = seg(_BlinkFlag_Data)	// [13:12981]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [14:12981]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [16:12981]  
-//12982     	CheaterFlag =0;
-
-LM728:
-	     .stabn 68,0,12982,LM728-_Sleeping
-	     R3 = 0                   	// [18:12982]  
-	     DS = seg(_CheaterFlag)   	// [19:12982]  CheaterFlag
-	     R4 = (_CheaterFlag)      	// [20:12982]  CheaterFlag
-	     DS:[R4] = R3             	// [22:12982]  
-//12983  //    Temp_Registered_Play_Select =0;  	
-//12984     //	Event_List = Event_List_Init;
-//12985     	
-//12986      Sys_clock_init();
-
-LM729:
-	     .stabn 68,0,12986,LM729-_Sleeping
-	     call _Sys_clock_init     	// [24:12986]  Sys_clock_init
-BB15_PU51:	// 0x115a
-// BB:15 cycle count: 3
-//12987      Time_init();
-
-LM730:
-	     .stabn 68,0,12987,LM730-_Sleeping
-	     call _Time_init          	// [0:12987]  Time_init
-BB16_PU51:	// 0x115c
-// BB:16 cycle count: 3
-//12988      
-//12989      Key_Scan_Init_Wakeup();
-
-LM731:
-	     .stabn 68,0,12989,LM731-_Sleeping
-	     call _Key_Scan_Init_Wakeup	// [0:12989]  Key_Scan_Init_Wakeup
-BB17_PU51:	// 0x115e
-// BB:17 cycle count: 3
-//12990      
-//12991       IIC_MasterInit();
-
-LM732:
-	     .stabn 68,0,12991,LM732-_Sleeping
-	     call _IIC_MasterInit     	// [0:12991]  IIC_MasterInit
-BB18_PU51:	// 0x1160
-// BB:18 cycle count: 3
-//12992     // G_Sensor_Init();
-//12993       mc3416_init();
-
-LM733:
-	     .stabn 68,0,12993,LM733-_Sleeping
-	     call _mc3416_init        	// [0:12993]  mc3416_init
-BB19_PU51:	// 0x1162
+	     .stabn 68,0,13116,LM727-_Sleeping
+	     call _mc3416_init        	// [0:13116]  mc3416_init
+BB19_PU51:	// 0x1185
 // BB:19 cycle count: 16
 	//;;
 	FIQ ON
@@ -10284,25 +10241,25 @@ BB19_PU51:	// 0x1162
 	//;;
 	IRQ ON
 	//;;
-//12999  	
-//13000  	
-//13001  
-//13002  
-//13003      Key_Event =0;
+//13122  	
+//13123  	
+//13124  
+//13125  
+//13126      Key_Event =0;
 
-LM734:
-	     .stabn 68,0,13003,LM734-_Sleeping
-	     R3 = 0                   	// [4:13003]  
-	     DS = seg(_Key_Event)     	// [5:13003]  Key_Event
-	     R4 = (_Key_Event)        	// [6:13003]  Key_Event
-	     DS:[R4] = R3             	// [8:13003]  
-	     SP = SP + 1              	// [10:13003]  
-	     pop BP, PC from [SP]     	// [11:13003]  
-LBE44:
+LM728:
+	     .stabn 68,0,13126,LM728-_Sleeping
+	     R3 = 0                   	// [4:13126]  
+	     DS = seg(_Key_Event)     	// [5:13126]  Key_Event
+	     R4 = (_Key_Event)        	// [6:13126]  Key_Event
+	     DS:[R4] = R3             	// [8:13126]  
+	     SP = SP + 1              	// [10:13126]  
+	     pop BP, PC from [SP]     	// [11:13126]  
+LBE43:
 	.endp	
-	     .stabn 192,0,0,LBB44-_Sleeping
+	     .stabn 192,0,0,LBB43-_Sleeping
 	     .stabs "cnt:4",128,0,0,0
-	     .stabn 224,0,0,LBE44-_Sleeping
+	     .stabn 224,0,0,LBE43-_Sleeping
 LME52:
 	     .stabf LME52-_Sleeping
 .code
@@ -10318,562 +10275,562 @@ _Test_Assembly: .proc
 	// temp = 2
 	// old_frame_pointer = 4
 	// return_address = 5
-//13216  
-//13217  /***********************************
-//13218  ***********************************/
-//13219   unsigned  Test_Assembly(void)
-//13220  {
+//13339  
+//13340  /***********************************
+//13341  ***********************************/
+//13342   unsigned  Test_Assembly(void)
+//13343  {
+
+LM729:
+	     .stabn 68,0,13343,LM729-_Test_Assembly
+BB1_PU52:	// 0x118c
+// BB:1 cycle count: 23
+	     push BP to [SP]          	// [0:13343]  
+	     SP = SP - 4              	// [2:13343]  
+	     BP = SP + 1              	// [3:13343]  
+LBB44:
+//13344  	unsigned i;
+//13345  	unsigned int Nb_InCollection=0;
+
+LM730:
+	     .stabn 68,0,13345,LM730-_Test_Assembly
+	     R4 = 0                   	// [5:13345]  
+	     [BP + 0] = R4            	// [6:13345]  Nb_InCollection
+//13346  	unsigned key_step=0;
+
+LM731:
+	     .stabn 68,0,13346,LM731-_Test_Assembly
+	     R4 = 0                   	// [7:13346]  
+	     [BP + 1] = R4            	// [8:13346]  key_step
+//13347  	unsigned int temp =0;
+
+LM732:
+	     .stabn 68,0,13347,LM732-_Test_Assembly
+	     R4 = 0                   	// [9:13347]  
+	     [BP + 2] = R4            	// [10:13347]  temp
+//13348  
+//13349  	if(*P_IOB_Data&0x0011)
+
+LM733:
+	     .stabn 68,0,13349,LM733-_Test_Assembly
+	     R3 = 12292               	// [11:13349]  
+	     R4 = 0                   	// [13:13349]  
+	     DS = R4                  	// [14:13349]  
+	     R4 = DS:[R3]             	// [15:13349]  
+	     R4 = R4 & 17             	// [17:13349]  
+	     cmp R4, 0                	// [18:13349]  
+	     je L_52_22               	// [19:13349]  
+BB2_PU52:	// 0x119e
+// BB:2 cycle count: 7
+//13350  	{
+//13351  		return 0;
+
+LM734:
+	     .stabn 68,0,13351,LM734-_Test_Assembly
+	     R1 = 0                   	// [0:13351]  
+	     SP = SP + 4              	// [1:13351]  
+	     pop BP, PC from [SP]     	// [2:13351]  
+L_52_22:	// 0x11a1
+// BB:3 cycle count: 3
+//13352  	}
+//13353  	
+//13354  	i = 0xb00;
 
 LM735:
-	     .stabn 68,0,13220,LM735-_Test_Assembly
-BB1_PU52:	// 0x1169
-// BB:1 cycle count: 23
-	     push BP to [SP]          	// [0:13220]  
-	     SP = SP - 4              	// [2:13220]  
-	     BP = SP + 1              	// [3:13220]  
-LBB45:
-//13221  	unsigned i;
-//13222  	unsigned int Nb_InCollection=0;
+	     .stabn 68,0,13354,LM735-_Test_Assembly
+	     R4 = 2816                	// [0:13354]  
+	     [BP + 3] = R4            	// [2:13354]  i
+L_52_23:	// 0x11a4
+// BB:4 cycle count: 7
+//13355  	while(i)
 
 LM736:
-	     .stabn 68,0,13222,LM736-_Test_Assembly
-	     R4 = 0                   	// [5:13222]  
-	     [BP + 0] = R4            	// [6:13222]  Nb_InCollection
-//13223  	unsigned key_step=0;
+	     .stabn 68,0,13355,LM736-_Test_Assembly
+	     R4 = [BP + 3]            	// [0:13355]  i
+	     cmp R4, 0                	// [2:13355]  
+	     je L_52_24               	// [3:13355]  
+BB5_PU52:	// 0x11a7
+// BB:5 cycle count: 12
+//13356  	{
+//13357  		if(*P_IOB_Data&0x0011)
 
 LM737:
-	     .stabn 68,0,13223,LM737-_Test_Assembly
-	     R4 = 0                   	// [7:13223]  
-	     [BP + 1] = R4            	// [8:13223]  key_step
-//13224  	unsigned int temp =0;
+	     .stabn 68,0,13357,LM737-_Test_Assembly
+	     R3 = 12292               	// [0:13357]  
+	     R4 = 0                   	// [2:13357]  
+	     DS = R4                  	// [3:13357]  
+	     R4 = DS:[R3]             	// [4:13357]  
+	     R4 = R4 & 17             	// [6:13357]  
+	     cmp R4, 0                	// [7:13357]  
+	     je L_52_26               	// [8:13357]  
+BB6_PU52:	// 0x11af
+// BB:6 cycle count: 7
+//13358  		{
+//13359  			return 0;
 
 LM738:
-	     .stabn 68,0,13224,LM738-_Test_Assembly
-	     R4 = 0                   	// [9:13224]  
-	     [BP + 2] = R4            	// [10:13224]  temp
-//13225  
-//13226  	if(*P_IOB_Data&0x0011)
+	     .stabn 68,0,13359,LM738-_Test_Assembly
+	     R1 = 0                   	// [0:13359]  
+	     SP = SP + 4              	// [1:13359]  
+	     pop BP, PC from [SP]     	// [2:13359]  
+L_52_26:	// 0x11b2
+// BB:7 cycle count: 4
+//13360  		}
+//13361  		else
+//13362  		{
+//13363  			i--;
 
 LM739:
-	     .stabn 68,0,13226,LM739-_Test_Assembly
-	     R3 = 12292               	// [11:13226]  
-	     R4 = 0                   	// [13:13226]  
-	     DS = R4                  	// [14:13226]  
-	     R4 = DS:[R3]             	// [15:13226]  
-	     R4 = R4 & 17             	// [17:13226]  
-	     cmp R4, 0                	// [18:13226]  
-	     je L_52_22               	// [19:13226]  
-BB2_PU52:	// 0x117b
-// BB:2 cycle count: 7
-//13227  	{
-//13228  		return 0;
+	     .stabn 68,0,13363,LM739-_Test_Assembly
+	     R4 = [BP + 3]            	// [0:13363]  i
+	     R4 = R4 - 1              	// [2:13363]  
+	     [BP + 3] = R4            	// [3:13363]  i
+L_52_25:	// 0x11b5
+// BB:8 cycle count: 3
+//13364  		}
+//13365  		WatchdogClear();
 
 LM740:
-	     .stabn 68,0,13228,LM740-_Test_Assembly
-	     R1 = 0                   	// [0:13228]  
-	     SP = SP + 4              	// [1:13228]  
-	     pop BP, PC from [SP]     	// [2:13228]  
-L_52_22:	// 0x117e
-// BB:3 cycle count: 3
-//13229  	}
-//13230  	
-//13231  	i = 0xb00;
+	     .stabn 68,0,13365,LM740-_Test_Assembly
+	     call _WatchdogClear      	// [0:13365]  WatchdogClear
+BB9_PU52:	// 0x11b7
+// BB:9 cycle count: 9
+//13366  		Delay_Xms_PowerOn(10);
 
 LM741:
-	     .stabn 68,0,13231,LM741-_Test_Assembly
-	     R4 = 2816                	// [0:13231]  
-	     [BP + 3] = R4            	// [2:13231]  i
-L_52_23:	// 0x1181
-// BB:4 cycle count: 7
-//13232  	while(i)
+	     .stabn 68,0,13366,LM741-_Test_Assembly
+	     SP = SP - 1              	// [0:13366]  
+	     R3 = 10                  	// [1:13366]  
+	     R4 = SP + 1              	// [2:13366]  
+	     [R4] = R3                	// [4:13366]  
+	     call _Delay_Xms_PowerOn  	// [6:13366]  Delay_Xms_PowerOn
+BB10_PU52:	// 0x11be
+// BB:10 cycle count: 5
+	     SP = SP + 1              	// [0:13366]  
+	     jmp L_52_23              	// [1:13366]  
+L_52_24:	// 0x11c0
+// BB:11 cycle count: 10
+//13422            Nb_InCollection =Get_InCollection_Pok();	
+//13423           */
+//13424              
+//13425        
+//13426            PlayA1800_Elements(669);
 
 LM742:
-	     .stabn 68,0,13232,LM742-_Test_Assembly
-	     R4 = [BP + 3]            	// [0:13232]  i
-	     cmp R4, 0                	// [2:13232]  
-	     je L_52_24               	// [3:13232]  
-BB5_PU52:	// 0x1184
-// BB:5 cycle count: 12
-//13233  	{
-//13234  		if(*P_IOB_Data&0x0011)
+	     .stabn 68,0,13426,LM742-_Test_Assembly
+	     SP = SP - 1              	// [0:13426]  
+	     R3 = 669                 	// [1:13426]  
+	     R4 = SP + 1              	// [3:13426]  
+	     [R4] = R3                	// [5:13426]  
+	     call _PlayA1800_Elements 	// [7:13426]  PlayA1800_Elements
+BB12_PU52:	// 0x11c8
+// BB:12 cycle count: 4
+	     SP = SP + 1              	// [0:13426]  
+//13427  	     // i=Play_Seq_Test(Nb_InCollection,C_SerieNumPokemon);
+//13428  	     
+//13429  	        Time_init();
 
 LM743:
-	     .stabn 68,0,13234,LM743-_Test_Assembly
-	     R3 = 12292               	// [0:13234]  
-	     R4 = 0                   	// [2:13234]  
-	     DS = R4                  	// [3:13234]  
-	     R4 = DS:[R3]             	// [4:13234]  
-	     R4 = R4 & 17             	// [6:13234]  
-	     cmp R4, 0                	// [7:13234]  
-	     je L_52_26               	// [8:13234]  
-BB6_PU52:	// 0x118c
-// BB:6 cycle count: 7
-//13235  		{
-//13236  			return 0;
+	     .stabn 68,0,13429,LM743-_Test_Assembly
+	     call _Time_init          	// [1:13429]  Time_init
+BB13_PU52:	// 0x11cb
+// BB:13 cycle count: 3
+//13430              Key_Scan_Init_Wakeup();
 
 LM744:
-	     .stabn 68,0,13236,LM744-_Test_Assembly
-	     R1 = 0                   	// [0:13236]  
-	     SP = SP + 4              	// [1:13236]  
-	     pop BP, PC from [SP]     	// [2:13236]  
-L_52_26:	// 0x118f
-// BB:7 cycle count: 4
-//13237  		}
-//13238  		else
-//13239  		{
-//13240  			i--;
+	     .stabn 68,0,13430,LM744-_Test_Assembly
+	     call _Key_Scan_Init_Wakeup	// [0:13430]  Key_Scan_Init_Wakeup
+L_52_27:	// 0x11cd
+// BB:14 cycle count: 3
+//13431  	while(1)
+//13432  	{	
+//13433  		WatchdogClear();
 
 LM745:
-	     .stabn 68,0,13240,LM745-_Test_Assembly
-	     R4 = [BP + 3]            	// [0:13240]  i
-	     R4 = R4 - 1              	// [2:13240]  
-	     [BP + 3] = R4            	// [3:13240]  i
-L_52_25:	// 0x1192
-// BB:8 cycle count: 3
-//13241  		}
-//13242  		WatchdogClear();
+	     .stabn 68,0,13433,LM745-_Test_Assembly
+	     call _WatchdogClear      	// [0:13433]  WatchdogClear
+BB15_PU52:	// 0x11cf
+// BB:15 cycle count: 10
+//13434  			
+//13435  		if(Key)
 
 LM746:
-	     .stabn 68,0,13242,LM746-_Test_Assembly
-	     call _WatchdogClear      	// [0:13242]  WatchdogClear
-BB9_PU52:	// 0x1194
-// BB:9 cycle count: 9
-//13243  		Delay_Xms_PowerOn(10);
+	     .stabn 68,0,13435,LM746-_Test_Assembly
+	     DS = seg(_Key)           	// [0:13435]  Key
+	     R4 = (_Key)              	// [1:13435]  Key
+	     R4 = DS:[R4]             	// [3:13435]  
+	     cmp R4, 0                	// [5:13435]  
+	     je L_52_29               	// [6:13435]  
+BB16_PU52:	// 0x11d5
+// BB:16 cycle count: 30
+//13436  		{
+//13437  
+//13438  		   temp = Pressflag&Key;
 
 LM747:
-	     .stabn 68,0,13243,LM747-_Test_Assembly
-	     SP = SP - 1              	// [0:13243]  
-	     R3 = 10                  	// [1:13243]  
-	     R4 = SP + 1              	// [2:13243]  
-	     [R4] = R3                	// [4:13243]  
-	     call _Delay_Xms_PowerOn  	// [6:13243]  Delay_Xms_PowerOn
-BB10_PU52:	// 0x119b
-// BB:10 cycle count: 5
-	     SP = SP + 1              	// [0:13243]  
-	     jmp L_52_23              	// [1:13243]  
-L_52_24:	// 0x119d
-// BB:11 cycle count: 10
-//13299            Nb_InCollection =Get_InCollection_Pok();	
-//13300           */
-//13301              
-//13302        
-//13303            PlayA1800_Elements(669);
+	     .stabn 68,0,13438,LM747-_Test_Assembly
+	     DS = seg(_Key)           	// [0:13438]  Key
+	     R4 = (_Key)              	// [1:13438]  Key
+	     R4 = DS:[R4]             	// [3:13438]  
+	     DS = seg(_Pressflag)     	// [5:13438]  Pressflag
+	     R3 = (_Pressflag)        	// [6:13438]  Pressflag
+	     R4 = R4 & DS:[R3]        	// [8:13438]  
+	     [BP + 2] = R4            	// [10:13438]  temp
+//13439  
+//13440  		   Key =0;
 
 LM748:
-	     .stabn 68,0,13303,LM748-_Test_Assembly
-	     SP = SP - 1              	// [0:13303]  
-	     R3 = 669                 	// [1:13303]  
-	     R4 = SP + 1              	// [3:13303]  
-	     [R4] = R3                	// [5:13303]  
-	     call _PlayA1800_Elements 	// [7:13303]  PlayA1800_Elements
-BB12_PU52:	// 0x11a5
-// BB:12 cycle count: 4
-	     SP = SP + 1              	// [0:13303]  
-//13304  	     // i=Play_Seq_Test(Nb_InCollection,C_SerieNumPokemon);
-//13305  	     
-//13306  	        Time_init();
+	     .stabn 68,0,13440,LM748-_Test_Assembly
+	     R3 = 0                   	// [11:13440]  
+	     DS = seg(_Key)           	// [12:13440]  Key
+	     R4 = (_Key)              	// [13:13440]  Key
+	     DS:[R4] = R3             	// [15:13440]  
+//13441             Pressflag=0;
 
 LM749:
-	     .stabn 68,0,13306,LM749-_Test_Assembly
-	     call _Time_init          	// [1:13306]  Time_init
-BB13_PU52:	// 0x11a8
-// BB:13 cycle count: 3
-//13307              Key_Scan_Init_Wakeup();
+	     .stabn 68,0,13441,LM749-_Test_Assembly
+	     R3 = 0                   	// [17:13441]  
+	     DS = seg(_Pressflag)     	// [18:13441]  Pressflag
+	     R4 = (_Pressflag)        	// [19:13441]  Pressflag
+	     DS:[R4] = R3             	// [21:13441]  
+//13442              
+//13443  		  	 	 if(temp == Key_True)
 
 LM750:
-	     .stabn 68,0,13307,LM750-_Test_Assembly
-	     call _Key_Scan_Init_Wakeup	// [0:13307]  Key_Scan_Init_Wakeup
-L_52_27:	// 0x11aa
-// BB:14 cycle count: 3
-//13308  	while(1)
-//13309  	{	
-//13310  		WatchdogClear();
+	     .stabn 68,0,13443,LM750-_Test_Assembly
+	     R4 = [BP + 2]            	// [23:13443]  temp
+	     cmp R4, 1                	// [25:13443]  
+	     jne L_52_30              	// [26:13443]  
+BB17_PU52:	// 0x11eb
+// BB:17 cycle count: 9
+//13444  				 	{
+//13445  	                     PlayA1800_Elements(SFX_Shake);
 
 LM751:
-	     .stabn 68,0,13310,LM751-_Test_Assembly
-	     call _WatchdogClear      	// [0:13310]  WatchdogClear
-BB15_PU52:	// 0x11ac
-// BB:15 cycle count: 10
-//13311  			
-//13312  		if(Key)
+	     .stabn 68,0,13445,LM751-_Test_Assembly
+	     SP = SP - 1              	// [0:13445]  
+	     R3 = 39                  	// [1:13445]  
+	     R4 = SP + 1              	// [2:13445]  
+	     [R4] = R3                	// [4:13445]  
+	     call _PlayA1800_Elements 	// [6:13445]  PlayA1800_Elements
+BB18_PU52:	// 0x11f2
+// BB:18 cycle count: 5
+	     SP = SP + 1              	// [0:13445]  
+//13446  				 	      key_step |=0x01;
 
 LM752:
-	     .stabn 68,0,13312,LM752-_Test_Assembly
-	     DS = seg(_Key)           	// [0:13312]  Key
-	     R4 = (_Key)              	// [1:13312]  Key
-	     R4 = DS:[R4]             	// [3:13312]  
-	     cmp R4, 0                	// [5:13312]  
-	     je L_52_29               	// [6:13312]  
-BB16_PU52:	// 0x11b2
-// BB:16 cycle count: 30
-//13313  		{
-//13314  
-//13315  		   temp = Pressflag&Key;
+	     .stabn 68,0,13446,LM752-_Test_Assembly
+	     R4 = [BP + 1]            	// [1:13446]  key_step
+	     R4 = R4 | 1              	// [3:13446]  
+	     [BP + 1] = R4            	// [4:13446]  key_step
+L_52_30:	// 0x11f6
+// BB:19 cycle count: 7
+//13447  		  	 	 	}
+//13448  		  	 	 if(temp == Key_False)
 
 LM753:
-	     .stabn 68,0,13315,LM753-_Test_Assembly
-	     DS = seg(_Key)           	// [0:13315]  Key
-	     R4 = (_Key)              	// [1:13315]  Key
-	     R4 = DS:[R4]             	// [3:13315]  
-	     DS = seg(_Pressflag)     	// [5:13315]  Pressflag
-	     R3 = (_Pressflag)        	// [6:13315]  Pressflag
-	     R4 = R4 & DS:[R3]        	// [8:13315]  
-	     [BP + 2] = R4            	// [10:13315]  temp
-//13316  
-//13317  		   Key =0;
+	     .stabn 68,0,13448,LM753-_Test_Assembly
+	     R4 = [BP + 2]            	// [0:13448]  temp
+	     cmp R4, 16               	// [2:13448]  
+	     jne L_52_31              	// [3:13448]  
+BB20_PU52:	// 0x11f9
+// BB:20 cycle count: 9
+//13449  				 	{
+//13450                             PlayA1800_Elements(SFX_Off);
 
 LM754:
-	     .stabn 68,0,13317,LM754-_Test_Assembly
-	     R3 = 0                   	// [11:13317]  
-	     DS = seg(_Key)           	// [12:13317]  Key
-	     R4 = (_Key)              	// [13:13317]  Key
-	     DS:[R4] = R3             	// [15:13317]  
-//13318             Pressflag=0;
+	     .stabn 68,0,13450,LM754-_Test_Assembly
+	     SP = SP - 1              	// [0:13450]  
+	     R3 = 34                  	// [1:13450]  
+	     R4 = SP + 1              	// [2:13450]  
+	     [R4] = R3                	// [4:13450]  
+	     call _PlayA1800_Elements 	// [6:13450]  PlayA1800_Elements
+BB21_PU52:	// 0x1200
+// BB:21 cycle count: 5
+	     SP = SP + 1              	// [0:13450]  
+//13451  				 	       key_step |=0x02;
 
 LM755:
-	     .stabn 68,0,13318,LM755-_Test_Assembly
-	     R3 = 0                   	// [17:13318]  
-	     DS = seg(_Pressflag)     	// [18:13318]  Pressflag
-	     R4 = (_Pressflag)        	// [19:13318]  Pressflag
-	     DS:[R4] = R3             	// [21:13318]  
-//13319              
-//13320  		  	 	 if(temp == Key_True)
+	     .stabn 68,0,13451,LM755-_Test_Assembly
+	     R4 = [BP + 1]            	// [1:13451]  key_step
+	     R4 = R4 | 2              	// [3:13451]  
+	     [BP + 1] = R4            	// [4:13451]  key_step
+L_52_31:	// 0x1204
+// BB:22 cycle count: 8
+//13452  				 	     
+//13453  				 
+//13454  		  	 	 	}
+//13455  		  	 	 	
+//13456  		  	   if((key_step&0x03)==0x03)	 	
 
 LM756:
-	     .stabn 68,0,13320,LM756-_Test_Assembly
-	     R4 = [BP + 2]            	// [23:13320]  temp
-	     cmp R4, 1                	// [25:13320]  
-	     jne L_52_30              	// [26:13320]  
-BB17_PU52:	// 0x11c8
-// BB:17 cycle count: 9
-//13321  				 	{
-//13322  	                     PlayA1800_Elements(SFX_Shake);
+	     .stabn 68,0,13456,LM756-_Test_Assembly
+	     R4 = [BP + 1]            	// [0:13456]  key_step
+	     R4 = R4 & 3              	// [2:13456]  
+	     cmp R4, 3                	// [3:13456]  
+	     jne L_52_32              	// [4:13456]  
+BB23_PU52:	// 0x1208
+// BB:23 cycle count: 4
+//13457  		  	       break;
 
 LM757:
-	     .stabn 68,0,13322,LM757-_Test_Assembly
-	     SP = SP - 1              	// [0:13322]  
-	     R3 = 39                  	// [1:13322]  
-	     R4 = SP + 1              	// [2:13322]  
-	     [R4] = R3                	// [4:13322]  
-	     call _PlayA1800_Elements 	// [6:13322]  PlayA1800_Elements
-BB18_PU52:	// 0x11cf
-// BB:18 cycle count: 5
-	     SP = SP + 1              	// [0:13322]  
-//13323  				 	      key_step |=0x01;
+	     .stabn 68,0,13457,LM757-_Test_Assembly
+	     jmp Lt_52_1              	// [0:13457]  
+L_52_32:	// 0x1209
+// BB:24 cycle count: 6
+//13458  		  	       
+//13459  		  	 	 TimeCnt=0;
 
 LM758:
-	     .stabn 68,0,13323,LM758-_Test_Assembly
-	     R4 = [BP + 1]            	// [1:13323]  key_step
-	     R4 = R4 | 1              	// [3:13323]  
-	     [BP + 1] = R4            	// [4:13323]  key_step
-L_52_30:	// 0x11d3
-// BB:19 cycle count: 7
-//13324  		  	 	 	}
-//13325  		  	 	 if(temp == Key_False)
+	     .stabn 68,0,13459,LM758-_Test_Assembly
+	     R3 = 0                   	// [0:13459]  
+	     DS = seg(_TimeCnt)       	// [1:13459]  TimeCnt
+	     R4 = (_TimeCnt)          	// [2:13459]  TimeCnt
+	     DS:[R4] = R3             	// [4:13459]  
+L_52_29:	// 0x120e
+// BB:25 cycle count: 11
+//13461           }
+//13462  
+//13463  
+//13464   
+//13465  	   if(TimeCnt>16*30)
 
 LM759:
-	     .stabn 68,0,13325,LM759-_Test_Assembly
-	     R4 = [BP + 2]            	// [0:13325]  temp
-	     cmp R4, 16               	// [2:13325]  
-	     jne L_52_31              	// [3:13325]  
-BB20_PU52:	// 0x11d6
-// BB:20 cycle count: 9
-//13326  				 	{
-//13327                             PlayA1800_Elements(SFX_Off);
+	     .stabn 68,0,13465,LM759-_Test_Assembly
+	     DS = seg(_TimeCnt)       	// [0:13465]  TimeCnt
+	     R4 = (_TimeCnt)          	// [1:13465]  TimeCnt
+	     R4 = DS:[R4]             	// [3:13465]  
+	     cmp R4, 480              	// [5:13465]  
+	     jbe L_52_33              	// [7:13465]  
+BB26_PU52:	// 0x1215
+// BB:26 cycle count: 6
+//13466   		  return;	
 
 LM760:
-	     .stabn 68,0,13327,LM760-_Test_Assembly
-	     SP = SP - 1              	// [0:13327]  
-	     R3 = 34                  	// [1:13327]  
-	     R4 = SP + 1              	// [2:13327]  
-	     [R4] = R3                	// [4:13327]  
-	     call _PlayA1800_Elements 	// [6:13327]  PlayA1800_Elements
-BB21_PU52:	// 0x11dd
-// BB:21 cycle count: 5
-	     SP = SP + 1              	// [0:13327]  
-//13328  				 	       key_step |=0x02;
-
-LM761:
-	     .stabn 68,0,13328,LM761-_Test_Assembly
-	     R4 = [BP + 1]            	// [1:13328]  key_step
-	     R4 = R4 | 2              	// [3:13328]  
-	     [BP + 1] = R4            	// [4:13328]  key_step
-L_52_31:	// 0x11e1
-// BB:22 cycle count: 8
-//13329  				 	     
-//13330  				 
-//13331  		  	 	 	}
-//13332  		  	 	 	
-//13333  		  	   if((key_step&0x03)==0x03)	 	
-
-LM762:
-	     .stabn 68,0,13333,LM762-_Test_Assembly
-	     R4 = [BP + 1]            	// [0:13333]  key_step
-	     R4 = R4 & 3              	// [2:13333]  
-	     cmp R4, 3                	// [3:13333]  
-	     jne L_52_32              	// [4:13333]  
-BB23_PU52:	// 0x11e5
-// BB:23 cycle count: 4
-//13334  		  	       break;
-
-LM763:
-	     .stabn 68,0,13334,LM763-_Test_Assembly
-	     jmp Lt_52_1              	// [0:13334]  
-L_52_32:	// 0x11e6
-// BB:24 cycle count: 6
-//13335  		  	       
-//13336  		  	 	 TimeCnt=0;
-
-LM764:
-	     .stabn 68,0,13336,LM764-_Test_Assembly
-	     R3 = 0                   	// [0:13336]  
-	     DS = seg(_TimeCnt)       	// [1:13336]  TimeCnt
-	     R4 = (_TimeCnt)          	// [2:13336]  TimeCnt
-	     DS:[R4] = R3             	// [4:13336]  
-L_52_29:	// 0x11eb
-// BB:25 cycle count: 11
-//13338           }
-//13339  
-//13340  
-//13341   
-//13342  	   if(TimeCnt>16*30)
-
-LM765:
-	     .stabn 68,0,13342,LM765-_Test_Assembly
-	     DS = seg(_TimeCnt)       	// [0:13342]  TimeCnt
-	     R4 = (_TimeCnt)          	// [1:13342]  TimeCnt
-	     R4 = DS:[R4]             	// [3:13342]  
-	     cmp R4, 480              	// [5:13342]  
-	     jbe L_52_33              	// [7:13342]  
-BB26_PU52:	// 0x11f2
-// BB:26 cycle count: 6
-//13343   		  return;	
-
-LM766:
-	     .stabn 68,0,13343,LM766-_Test_Assembly
-	     SP = SP + 4              	// [0:13343]  
-	     pop BP, PC from [SP]     	// [1:13343]  
-L_52_33:	// 0x11f4
+	     .stabn 68,0,13466,LM760-_Test_Assembly
+	     SP = SP + 4              	// [0:13466]  
+	     pop BP, PC from [SP]     	// [1:13466]  
+L_52_33:	// 0x1217
 // BB:27 cycle count: 3
 
-LM767:
-	     .stabn 68,0,13342,LM767-_Test_Assembly
-	     goto L_52_27             	// [0:13342]  
-L_52_28:	// 0x11f6
-Lt_52_1:	// 0x11f6
+LM761:
+	     .stabn 68,0,13465,LM761-_Test_Assembly
+	     goto L_52_27             	// [0:13465]  
+L_52_28:	// 0x1219
+Lt_52_1:	// 0x1219
 // BB:28 cycle count: 9
-//13347  	     
-//13348  	     
-//13349  	     // if(i==1)//��������
-//13350  	      {
-//13351  	      	   Key_Event =0;
+//13470  	     
+//13471  	     
+//13472  	     // if(i==1)//��������
+//13473  	      {
+//13474  	      	   Key_Event =0;
+
+LM762:
+	     .stabn 68,0,13474,LM762-_Test_Assembly
+	     R3 = 0                   	// [0:13474]  
+	     DS = seg(_Key_Event)     	// [1:13474]  Key_Event
+	     R4 = (_Key_Event)        	// [2:13474]  Key_Event
+	     DS:[R4] = R3             	// [4:13474]  
+//13475  	      	   Key_Scan_Init_Wakeup();
+
+LM763:
+	     .stabn 68,0,13475,LM763-_Test_Assembly
+	     call _Key_Scan_Init_Wakeup	// [6:13475]  Key_Scan_Init_Wakeup
+BB29_PU52:	// 0x1220
+// BB:29 cycle count: 9
+//13476  	      	   TwoKeyflag =0;
+
+LM764:
+	     .stabn 68,0,13476,LM764-_Test_Assembly
+	     R3 = 0                   	// [0:13476]  
+	     DS = seg(_TwoKeyflag)    	// [1:13476]  TwoKeyflag
+	     R4 = (_TwoKeyflag)       	// [2:13476]  TwoKeyflag
+	     DS:[R4] = R3             	// [4:13476]  
+//13478  	      	  // PlayA1800_Elements(484);//�汾��
+//13479  	      	   
+//13480  			//	IIC_MasterInit();
+//13481  			   // G_Sensor_Init();
+//13482  			    mc3416_init();	
+
+LM765:
+	     .stabn 68,0,13482,LM765-_Test_Assembly
+	     call _mc3416_init        	// [6:13482]  mc3416_init
+BB30_PU52:	// 0x1227
+// BB:30 cycle count: 3
+//13483  			    Get_Standy(); 
+
+LM766:
+	     .stabn 68,0,13483,LM766-_Test_Assembly
+	     call _Get_Standy         	// [0:13483]  Get_Standy
+BB31_PU52:	// 0x1229
+// BB:31 cycle count: 22
+//13484  	      	   G_Sensor_Status=G_Shake;
+
+LM767:
+	     .stabn 68,0,13484,LM767-_Test_Assembly
+	     R3 = 64                  	// [0:13484]  
+	     DS = seg(_G_Sensor_Status)	// [2:13484]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [3:13484]  G_Sensor_Status
+	     DS:[R4] = R3             	// [5:13484]  
+//13485                 
+//13486  			if(WaitAction(60*16,0)==C_MovSucess)//Mov_Detected
 
 LM768:
-	     .stabn 68,0,13351,LM768-_Test_Assembly
-	     R3 = 0                   	// [0:13351]  
-	     DS = seg(_Key_Event)     	// [1:13351]  Key_Event
-	     R4 = (_Key_Event)        	// [2:13351]  Key_Event
-	     DS:[R4] = R3             	// [4:13351]  
-//13352  	      	   Key_Scan_Init_Wakeup();
+	     .stabn 68,0,13486,LM768-_Test_Assembly
+	     SP = SP - 2              	// [7:13486]  
+	     R3 = 960                 	// [8:13486]  
+	     R4 = SP + 1              	// [10:13486]  
+	     [R4] = R3                	// [12:13486]  
+	     R3 = 0                   	// [14:13486]  
+	     R4 = SP + 2              	// [15:13486]  
+	     [R4] = R3                	// [17:13486]  
+	     call _WaitAction         	// [19:13486]  WaitAction
+BB32_PU52:	// 0x123b
+// BB:32 cycle count: 7
+	     SP = SP + 2              	// [0:13486]  
+	     cmp R1, 4096             	// [1:13486]  
+	     jne L_52_34              	// [3:13486]  
+BB33_PU52:	// 0x123f
+// BB:33 cycle count: 10
+//13487  			  {
+//13488  	              //BlinkFlag_Data =0;
+//13489  	              //Light_all_off();
+//13490  	              //Led_ON_Some(All_Led_data);
+//13491  	              Led_OFF_Some(LED1_R|LED2_R|LED3_R|LED4_R);//����
 
 LM769:
-	     .stabn 68,0,13352,LM769-_Test_Assembly
-	     call _Key_Scan_Init_Wakeup	// [6:13352]  Key_Scan_Init_Wakeup
-BB29_PU52:	// 0x11fd
-// BB:29 cycle count: 9
-//13353  	      	   TwoKeyflag =0;
+	     .stabn 68,0,13491,LM769-_Test_Assembly
+	     SP = SP - 1              	// [0:13491]  
+	     R3 = 2340                	// [1:13491]  
+	     R4 = SP + 1              	// [3:13491]  
+	     [R4] = R3                	// [5:13491]  
+	     call _Led_OFF_Some       	// [7:13491]  Led_OFF_Some
+BB34_PU52:	// 0x1247
+// BB:34 cycle count: 4
+	     SP = SP + 1              	// [0:13491]  
+//13492  	              
+//13493  				  Motor_On();//*P_IOB_Buffer|=IO_Motor;
 
 LM770:
-	     .stabn 68,0,13353,LM770-_Test_Assembly
-	     R3 = 0                   	// [0:13353]  
-	     DS = seg(_TwoKeyflag)    	// [1:13353]  TwoKeyflag
-	     R4 = (_TwoKeyflag)       	// [2:13353]  TwoKeyflag
-	     DS:[R4] = R3             	// [4:13353]  
-//13355  	      	  // PlayA1800_Elements(484);//�汾��
-//13356  	      	   
-//13357  			//	IIC_MasterInit();
-//13358  			   // G_Sensor_Init();
-//13359  			    mc3416_init();	
+	     .stabn 68,0,13493,LM770-_Test_Assembly
+	     call _Motor_On           	// [1:13493]  Motor_On
+BB35_PU52:	// 0x124a
+// BB:35 cycle count: 9
+//13494  				  delay_time(6);
 
 LM771:
-	     .stabn 68,0,13359,LM771-_Test_Assembly
-	     call _mc3416_init        	// [6:13359]  mc3416_init
-BB30_PU52:	// 0x1204
-// BB:30 cycle count: 3
-//13360  			    Get_Standy(); 
+	     .stabn 68,0,13494,LM771-_Test_Assembly
+	     SP = SP - 1              	// [0:13494]  
+	     R3 = 6                   	// [1:13494]  
+	     R4 = SP + 1              	// [2:13494]  
+	     [R4] = R3                	// [4:13494]  
+	     call _delay_time         	// [6:13494]  delay_time
+BB36_PU52:	// 0x1251
+// BB:36 cycle count: 4
+	     SP = SP + 1              	// [0:13494]  
+//13495  				  Motor_Off();//*P_IOB_Buffer&=~IO_Motor;
 
 LM772:
-	     .stabn 68,0,13360,LM772-_Test_Assembly
-	     call _Get_Standy         	// [0:13360]  Get_Standy
-BB31_PU52:	// 0x1206
-// BB:31 cycle count: 22
-//13361  	      	   G_Sensor_Status=G_Shake;
-
-LM773:
-	     .stabn 68,0,13361,LM773-_Test_Assembly
-	     R3 = 64                  	// [0:13361]  
-	     DS = seg(_G_Sensor_Status)	// [2:13361]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [3:13361]  G_Sensor_Status
-	     DS:[R4] = R3             	// [5:13361]  
-//13362                 
-//13363  			if(WaitAction(60*16,0)==C_MovSucess)//Mov_Detected
-
-LM774:
-	     .stabn 68,0,13363,LM774-_Test_Assembly
-	     SP = SP - 2              	// [7:13363]  
-	     R3 = 960                 	// [8:13363]  
-	     R4 = SP + 1              	// [10:13363]  
-	     [R4] = R3                	// [12:13363]  
-	     R3 = 0                   	// [14:13363]  
-	     R4 = SP + 2              	// [15:13363]  
-	     [R4] = R3                	// [17:13363]  
-	     call _WaitAction         	// [19:13363]  WaitAction
-BB32_PU52:	// 0x1218
-// BB:32 cycle count: 7
-	     SP = SP + 2              	// [0:13363]  
-	     cmp R1, 4096             	// [1:13363]  
-	     jne L_52_34              	// [3:13363]  
-BB33_PU52:	// 0x121c
-// BB:33 cycle count: 10
-//13364  			  {
-//13365  	              //BlinkFlag_Data =0;
-//13366  	              //Light_all_off();
-//13367  	              //Led_ON_Some(All_Led_data);
-//13368  	              Led_OFF_Some(LED1_R|LED2_R|LED3_R|LED4_R);//����
-
-LM775:
-	     .stabn 68,0,13368,LM775-_Test_Assembly
-	     SP = SP - 1              	// [0:13368]  
-	     R3 = 2340                	// [1:13368]  
-	     R4 = SP + 1              	// [3:13368]  
-	     [R4] = R3                	// [5:13368]  
-	     call _Led_OFF_Some       	// [7:13368]  Led_OFF_Some
-BB34_PU52:	// 0x1224
-// BB:34 cycle count: 4
-	     SP = SP + 1              	// [0:13368]  
-//13369  	              
-//13370  				  Motor_On();//*P_IOB_Buffer|=IO_Motor;
-
-LM776:
-	     .stabn 68,0,13370,LM776-_Test_Assembly
-	     call _Motor_On           	// [1:13370]  Motor_On
-BB35_PU52:	// 0x1227
-// BB:35 cycle count: 9
-//13371  				  delay_time(6);
-
-LM777:
-	     .stabn 68,0,13371,LM777-_Test_Assembly
-	     SP = SP - 1              	// [0:13371]  
-	     R3 = 6                   	// [1:13371]  
-	     R4 = SP + 1              	// [2:13371]  
-	     [R4] = R3                	// [4:13371]  
-	     call _delay_time         	// [6:13371]  delay_time
-BB36_PU52:	// 0x122e
-// BB:36 cycle count: 4
-	     SP = SP + 1              	// [0:13371]  
-//13372  				  Motor_Off();//*P_IOB_Buffer&=~IO_Motor;
-
-LM778:
-	     .stabn 68,0,13372,LM778-_Test_Assembly
-	     call _Motor_Off          	// [1:13372]  Motor_Off
-BB37_PU52:	// 0x1231
+	     .stabn 68,0,13495,LM772-_Test_Assembly
+	     call _Motor_Off          	// [1:13495]  Motor_Off
+BB37_PU52:	// 0x1254
 // BB:37 cycle count: 19
 	//;;
 	INT OFF
 	//;;
-//13374  				 // Light_all_off();
-//13375  				  
-//13376  				  
-//13377  				 __asm("INT OFF");
-//13378  	      	     *(P_INT_Ctrl) =0;
+//13497  				 // Light_all_off();
+//13498  				  
+//13499  				  
+//13500  				 __asm("INT OFF");
+//13501  	      	     *(P_INT_Ctrl) =0;
 
-LM779:
-	     .stabn 68,0,13378,LM779-_Test_Assembly
-	     R2 = 0                   	// [2:13378]  
-	     R3 = 12368               	// [3:13378]  
-	     R4 = 0                   	// [5:13378]  
-	     DS = R4                  	// [6:13378]  
-	     DS:[R3] = R2             	// [7:13378]  
-//13379  	      	     *(P_INT2_Ctrl) =0;
+LM773:
+	     .stabn 68,0,13501,LM773-_Test_Assembly
+	     R2 = 0                   	// [2:13501]  
+	     R3 = 12368               	// [3:13501]  
+	     R4 = 0                   	// [5:13501]  
+	     DS = R4                  	// [6:13501]  
+	     DS:[R3] = R2             	// [7:13501]  
+//13502  	      	     *(P_INT2_Ctrl) =0;
 
-LM780:
-	     .stabn 68,0,13379,LM780-_Test_Assembly
-	     R2 = 0                   	// [9:13379]  
-	     R3 = 12371               	// [10:13379]  
-	     R4 = 0                   	// [12:13379]  
-	     DS = R4                  	// [13:13379]  
-	     DS:[R3] = R2             	// [14:13379]  
-//13380                   //CheckSum_SPIFlash();	   //�������ȷ��һֱbeepbeep��
-//13381  	      	      Time_init();
+LM774:
+	     .stabn 68,0,13502,LM774-_Test_Assembly
+	     R2 = 0                   	// [9:13502]  
+	     R3 = 12371               	// [10:13502]  
+	     R4 = 0                   	// [12:13502]  
+	     DS = R4                  	// [13:13502]  
+	     DS:[R3] = R2             	// [14:13502]  
+//13503                   //CheckSum_SPIFlash();	   //�������ȷ��һֱbeepbeep��
+//13504  	      	      Time_init();
 
-LM781:
-	     .stabn 68,0,13381,LM781-_Test_Assembly
-	     call _Time_init          	// [16:13381]  Time_init
-BB38_PU52:	// 0x1242
+LM775:
+	     .stabn 68,0,13504,LM775-_Test_Assembly
+	     call _Time_init          	// [16:13504]  Time_init
+BB38_PU52:	// 0x1265
 // BB:38 cycle count: 12
 	//;;
 	IRQ ON
 	//;;
-//13382  	      	      
-//13383  	      	     __asm("IRQ ON");  
-//13384  	      	     delay_time(16*4);//ʱ�����checksum
+//13505  	      	      
+//13506  	      	     __asm("IRQ ON");  
+//13507  	      	     delay_time(16*4);//ʱ�����checksum
 
-LM782:
-	     .stabn 68,0,13384,LM782-_Test_Assembly
-	     SP = SP - 1              	// [2:13384]  
-	     R3 = 64                  	// [3:13384]  
-	     R4 = SP + 1              	// [5:13384]  
-	     [R4] = R3                	// [7:13384]  
-	     call _delay_time         	// [9:13384]  delay_time
-BB39_PU52:	// 0x124d
+LM776:
+	     .stabn 68,0,13507,LM776-_Test_Assembly
+	     SP = SP - 1              	// [2:13507]  
+	     R3 = 64                  	// [3:13507]  
+	     R4 = SP + 1              	// [5:13507]  
+	     [R4] = R3                	// [7:13507]  
+	     call _delay_time         	// [9:13507]  delay_time
+BB39_PU52:	// 0x1270
 // BB:39 cycle count: 1
-	     SP = SP + 1              	// [0:13384]  
-L_52_34:	// 0x124e
+	     SP = SP + 1              	// [0:13507]  
+L_52_34:	// 0x1271
 // BB:40 cycle count: 15
-//13385  	      	      
-//13386  			  }
-//13387  			      Key_Event =0;
+//13508  	      	      
+//13509  			  }
+//13510  			      Key_Event =0;
 
-LM783:
-	     .stabn 68,0,13387,LM783-_Test_Assembly
-	     R3 = 0                   	// [0:13387]  
-	     DS = seg(_Key_Event)     	// [1:13387]  Key_Event
-	     R4 = (_Key_Event)        	// [2:13387]  Key_Event
-	     DS:[R4] = R3             	// [4:13387]  
-//13388  	        	  TwoKeyflag =1;
+LM777:
+	     .stabn 68,0,13510,LM777-_Test_Assembly
+	     R3 = 0                   	// [0:13510]  
+	     DS = seg(_Key_Event)     	// [1:13510]  Key_Event
+	     R4 = (_Key_Event)        	// [2:13510]  Key_Event
+	     DS:[R4] = R3             	// [4:13510]  
+//13511  	        	  TwoKeyflag =1;
 
-LM784:
-	     .stabn 68,0,13388,LM784-_Test_Assembly
-	     R3 = 1                   	// [6:13388]  
-	     DS = seg(_TwoKeyflag)    	// [7:13388]  TwoKeyflag
-	     R4 = (_TwoKeyflag)       	// [8:13388]  TwoKeyflag
-	     DS:[R4] = R3             	// [10:13388]  
-//13389  	        	  Light_all_off();	      	
+LM778:
+	     .stabn 68,0,13511,LM778-_Test_Assembly
+	     R3 = 1                   	// [6:13511]  
+	     DS = seg(_TwoKeyflag)    	// [7:13511]  TwoKeyflag
+	     R4 = (_TwoKeyflag)       	// [8:13511]  TwoKeyflag
+	     DS:[R4] = R3             	// [10:13511]  
+//13512  	        	  Light_all_off();	      	
 
-LM785:
-	     .stabn 68,0,13389,LM785-_Test_Assembly
-	     call _Light_all_off      	// [12:13389]  Light_all_off
-BB41_PU52:	// 0x125a
+LM779:
+	     .stabn 68,0,13512,LM779-_Test_Assembly
+	     call _Light_all_off      	// [12:13512]  Light_all_off
+BB41_PU52:	// 0x127d
 // BB:41 cycle count: 7
-//13392  	      	
-//13393  	      }
-//13394            
-//13395  
-//13396  	 return 0;
+//13515  	      	
+//13516  	      }
+//13517            
+//13518  
+//13519  	 return 0;
 
-LM786:
-	     .stabn 68,0,13396,LM786-_Test_Assembly
-	     R1 = 0                   	// [0:13396]  
-	     SP = SP + 4              	// [1:13396]  
-	     pop BP, PC from [SP]     	// [2:13396]  
-LBE45:
+LM780:
+	     .stabn 68,0,13519,LM780-_Test_Assembly
+	     R1 = 0                   	// [0:13519]  
+	     SP = SP + 4              	// [1:13519]  
+	     pop BP, PC from [SP]     	// [2:13519]  
+LBE44:
 	.endp	
-	     .stabn 192,0,0,LBB45-_Test_Assembly
+	     .stabn 192,0,0,LBB44-_Test_Assembly
 	     .stabs "i:4",128,0,0,3
 	     .stabs "Nb_InCollection:4",128,0,0,0
 	     .stabs "key_step:4",128,0,0,1
 	     .stabs "temp:4",128,0,0,2
-	     .stabn 224,0,0,LBE45-_Test_Assembly
+	     .stabn 224,0,0,LBE44-_Test_Assembly
 LME53:
 	     .stabf LME53-_Test_Assembly
 .code
@@ -10890,280 +10847,280 @@ _Play_Seq_Test: .proc
 	// temp = 3
 	// old_frame_pointer = 6
 	// return_address = 7
-//13402  
-//13403  //****************************************************************
-//13404  //*******************************************************************
-//13405  unsigned int Play_Seq_Test(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
-//13406  {
+//13525  
+//13526  //****************************************************************
+//13527  //*******************************************************************
+//13528  unsigned int Play_Seq_Test(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
+//13529  {
+
+LM781:
+	     .stabn 68,0,13529,LM781-_Play_Seq_Test
+BB1_PU53:	// 0x127a
+// BB:1 cycle count: 24
+	     push BP to [SP]          	// [0:13529]  
+	     SP = SP - 6              	// [2:13529]  
+	     BP = SP + 1              	// [3:13529]  
+LBB45:
+//13530  	unsigned long Addr;
+//13531  	unsigned int i=0;
+
+LM782:
+	     .stabn 68,0,13531,LM782-_Play_Seq_Test
+	     R4 = 0                   	// [5:13531]  
+	     [BP + 0] = R4            	// [6:13531]  i
+//13532  	unsigned int Num =4;
+
+LM783:
+	     .stabn 68,0,13532,LM783-_Play_Seq_Test
+	     R4 = 4                   	// [7:13532]  
+	     [BP + 1] = R4            	// [8:13532]  Num
+//13533  	unsigned int entertesting =0;
+
+LM784:
+	     .stabn 68,0,13533,LM784-_Play_Seq_Test
+	     R4 = 0                   	// [9:13533]  
+	     [BP + 2] = R4            	// [10:13533]  entertesting
+//13534  	int temp =0;
+
+LM785:
+	     .stabn 68,0,13534,LM785-_Play_Seq_Test
+	     R4 = 0                   	// [11:13534]  
+	     [BP + 3] = R4            	// [12:13534]  temp
+//13535  	
+//13536  
+//13537  	Addr = Index * Num * 2 + T_TableH ;//Table; Num
+
+LM786:
+	     .stabn 68,0,13537,LM786-_Play_Seq_Test
+	     R3 = [BP + 9]            	// [13:13537]  Index
+	     R4 = [BP + 1]            	// [15:13537]  Num
+	     MR = R3 * R4, uu         	// [17:13537]  
+	     R4 = R3 lsl 1            	// [18:13537]  
+	     R4 = R4 + [BP + 10]      	// [19:13537]  T_TableH
+	     R3 = 0                   	// [21:13537]  
+	     [BP + 4] = R4            	// [22:13537]  Addr
+	     [BP + 5] = R3            	// [23:13537]  Addr+1
+L_53_17:	// 0x128e
+// BB:2 cycle count: 9
+//13538  
+//13539  	
+//13540      while(i<Num )//Num
 
 LM787:
-	     .stabn 68,0,13406,LM787-_Play_Seq_Test
-BB1_PU53:	// 0x1257
-// BB:1 cycle count: 24
-	     push BP to [SP]          	// [0:13406]  
-	     SP = SP - 6              	// [2:13406]  
-	     BP = SP + 1              	// [3:13406]  
-LBB46:
-//13407  	unsigned long Addr;
-//13408  	unsigned int i=0;
-
-LM788:
-	     .stabn 68,0,13408,LM788-_Play_Seq_Test
-	     R4 = 0                   	// [5:13408]  
-	     [BP + 0] = R4            	// [6:13408]  i
-//13409  	unsigned int Num =4;
-
-LM789:
-	     .stabn 68,0,13409,LM789-_Play_Seq_Test
-	     R4 = 4                   	// [7:13409]  
-	     [BP + 1] = R4            	// [8:13409]  Num
-//13410  	unsigned int entertesting =0;
-
-LM790:
-	     .stabn 68,0,13410,LM790-_Play_Seq_Test
-	     R4 = 0                   	// [9:13410]  
-	     [BP + 2] = R4            	// [10:13410]  entertesting
-//13411  	int temp =0;
-
-LM791:
-	     .stabn 68,0,13411,LM791-_Play_Seq_Test
-	     R4 = 0                   	// [11:13411]  
-	     [BP + 3] = R4            	// [12:13411]  temp
-//13412  	
-//13413  
-//13414  	Addr = Index * Num * 2 + T_TableH ;//Table; Num
-
-LM792:
-	     .stabn 68,0,13414,LM792-_Play_Seq_Test
-	     R3 = [BP + 9]            	// [13:13414]  Index
-	     R4 = [BP + 1]            	// [15:13414]  Num
-	     MR = R3 * R4, uu         	// [17:13414]  
-	     R4 = R3 lsl 1            	// [18:13414]  
-	     R4 = R4 + [BP + 10]      	// [19:13414]  T_TableH
-	     R3 = 0                   	// [21:13414]  
-	     [BP + 4] = R4            	// [22:13414]  Addr
-	     [BP + 5] = R3            	// [23:13414]  Addr+1
-L_53_17:	// 0x126b
-// BB:2 cycle count: 9
-//13415  
-//13416  	
-//13417      while(i<Num )//Num
-
-LM793:
-	     .stabn 68,0,13417,LM793-_Play_Seq_Test
-	     R3 = [BP + 0]            	// [0:13417]  i
-	     R4 = [BP + 1]            	// [2:13417]  Num
-	     cmp R3, R4               	// [4:13417]  
-	     jb BB3_PU53              	// [5:13417]  
-BB21_PU53:	// 0x126f
+	     .stabn 68,0,13540,LM787-_Play_Seq_Test
+	     R3 = [BP + 0]            	// [0:13540]  i
+	     R4 = [BP + 1]            	// [2:13540]  Num
+	     cmp R3, R4               	// [4:13540]  
+	     jb BB3_PU53              	// [5:13540]  
+BB21_PU53:	// 0x1292
 // BB:21 cycle count: 3
 	     goto L_53_18             	// [0:0]  
-BB3_PU53:	// 0x1271
+BB3_PU53:	// 0x1294
 // BB:3 cycle count: 18
-//13418  	{
-//13419  		temp = SPI_ReadAWord_Big(Addr+i*2);
+//13541  	{
+//13542  		temp = SPI_ReadAWord_Big(Addr+i*2);
+
+LM788:
+	     .stabn 68,0,13542,LM788-_Play_Seq_Test
+	     SP = SP - 2              	// [0:13542]  
+	     R4 = [BP + 0]            	// [1:13542]  i
+	     R3 = R4 lsl 1            	// [3:13542]  
+	     R4 = 0                   	// [4:13542]  
+	     R3 = R3 + [BP + 4]       	// [5:13542]  Addr
+	     R4 = R4 + [BP + 5], Carry	// [7:13542]  Addr+1
+	     R2 = SP + 1              	// [9:13542]  
+	     [R2++] = R3              	// [11:13542]  
+	     [R2] = R4                	// [13:13542]  
+	     call _SPI_ReadAWord_Big  	// [15:13542]  SPI_ReadAWord_Big
+BB4_PU53:	// 0x12a0
+// BB:4 cycle count: 10
+	     SP = SP + 2              	// [0:13542]  
+	     [BP + 3] = R1            	// [1:13542]  temp
+//13543  	
+//13544  	 if(temp == 9999)
+
+LM789:
+	     .stabn 68,0,13544,LM789-_Play_Seq_Test
+	     R4 = [BP + 3]            	// [2:13544]  temp
+	     cmp R4, 9999             	// [4:13544]  
+	     jne L_53_19              	// [6:13544]  
+BB5_PU53:	// 0x12a6
+// BB:5 cycle count: 4
+//13545  	   {
+//13546  	 	   break;
+
+LM790:
+	     .stabn 68,0,13546,LM790-_Play_Seq_Test
+	     jmp Lt_53_1              	// [0:13546]  
+L_53_19:	// 0x12a7
+// BB:6 cycle count: 10
+//13564  //  	  	  }
+//13565  //  	  	
+//13566  //  	  }
+//13567  //  	  else
+//13568  	    PlayA1800_ElementsInit(temp);	 
+
+LM791:
+	     .stabn 68,0,13568,LM791-_Play_Seq_Test
+	     SP = SP - 1              	// [0:13568]  
+	     R3 = [BP + 3]            	// [1:13568]  temp
+	     R4 = SP + 1              	// [3:13568]  
+	     [R4] = R3                	// [5:13568]  
+	     call _PlayA1800_ElementsInit	// [7:13568]  PlayA1800_ElementsInit
+BB7_PU53:	// 0x12ae
+// BB:7 cycle count: 1
+	     SP = SP + 1              	// [0:13568]  
+Lt_53_11:	// 0x12af
+// BB:8 cycle count: 3
+//13569  	    while((SACM_A1800_Status() & 0x0001) != 0)
+
+LM792:
+	     .stabn 68,0,13569,LM792-_Play_Seq_Test
+	     call _SACM_A1800_Status  	// [0:13569]  SACM_A1800_Status
+BB9_PU53:	// 0x12b1
+// BB:9 cycle count: 7
+	     R4 = R1 & 1              	// [0:13569]  
+	     cmp R4, 0                	// [2:13569]  
+	     je Lt_53_12              	// [3:13569]  
+BB10_PU53:	// 0x12b5
+// BB:10 cycle count: 3
+//13570  			{
+//13571  				SACM_A1800_ServiceLoop();
+
+LM793:
+	     .stabn 68,0,13571,LM793-_Play_Seq_Test
+	     call _SACM_A1800_ServiceLoop	// [0:13571]  SACM_A1800_ServiceLoop
+BB11_PU53:	// 0x12b7
+// BB:11 cycle count: 3
+//13572  				WatchdogClear();
 
 LM794:
-	     .stabn 68,0,13419,LM794-_Play_Seq_Test
-	     SP = SP - 2              	// [0:13419]  
-	     R4 = [BP + 0]            	// [1:13419]  i
-	     R3 = R4 lsl 1            	// [3:13419]  
-	     R4 = 0                   	// [4:13419]  
-	     R3 = R3 + [BP + 4]       	// [5:13419]  Addr
-	     R4 = R4 + [BP + 5], Carry	// [7:13419]  Addr+1
-	     R2 = SP + 1              	// [9:13419]  
-	     [R2++] = R3              	// [11:13419]  
-	     [R2] = R4                	// [13:13419]  
-	     call _SPI_ReadAWord_Big  	// [15:13419]  SPI_ReadAWord_Big
-BB4_PU53:	// 0x127d
-// BB:4 cycle count: 10
-	     SP = SP + 2              	// [0:13419]  
-	     [BP + 3] = R1            	// [1:13419]  temp
-//13420  	
-//13421  	 if(temp == 9999)
+	     .stabn 68,0,13572,LM794-_Play_Seq_Test
+	     call _WatchdogClear      	// [0:13572]  WatchdogClear
+BB12_PU53:	// 0x12b9
+// BB:12 cycle count: 11
+//13573  
+//13574              
+//13575  		        if(Pressflag & 0x01)
 
 LM795:
-	     .stabn 68,0,13421,LM795-_Play_Seq_Test
-	     R4 = [BP + 3]            	// [2:13421]  temp
-	     cmp R4, 9999             	// [4:13421]  
-	     jne L_53_19              	// [6:13421]  
-BB5_PU53:	// 0x1283
-// BB:5 cycle count: 4
-//13422  	   {
-//13423  	 	   break;
+	     .stabn 68,0,13575,LM795-_Play_Seq_Test
+	     DS = seg(_Pressflag)     	// [0:13575]  Pressflag
+	     R4 = (_Pressflag)        	// [1:13575]  Pressflag
+	     R4 = DS:[R4]             	// [3:13575]  
+	     R4 = R4 & 1              	// [5:13575]  
+	     cmp R4, 0                	// [6:13575]  
+	     je L_53_20               	// [7:13575]  
+BB13_PU53:	// 0x12c0
+// BB:13 cycle count: 11
+//13576  		        {
+//13577  		        	if(Key_Debounce>600)
 
 LM796:
-	     .stabn 68,0,13423,LM796-_Play_Seq_Test
-	     jmp Lt_53_1              	// [0:13423]  
-L_53_19:	// 0x1284
-// BB:6 cycle count: 10
-//13441  //  	  	  }
-//13442  //  	  	
-//13443  //  	  }
-//13444  //  	  else
-//13445  	    PlayA1800_ElementsInit(temp);	 
+	     .stabn 68,0,13577,LM796-_Play_Seq_Test
+	     DS = seg(_Key_Debounce)  	// [0:13577]  Key_Debounce
+	     R4 = (_Key_Debounce)     	// [1:13577]  Key_Debounce
+	     R4 = DS:[R4]             	// [3:13577]  
+	     cmp R4, 600              	// [5:13577]  
+	     jbe L_53_21              	// [7:13577]  
+BB14_PU53:	// 0x12c7
+// BB:14 cycle count: 6
+//13578  		        	{
+//13579  		        		entertesting =1;
 
 LM797:
-	     .stabn 68,0,13445,LM797-_Play_Seq_Test
-	     SP = SP - 1              	// [0:13445]  
-	     R3 = [BP + 3]            	// [1:13445]  temp
-	     R4 = SP + 1              	// [3:13445]  
-	     [R4] = R3                	// [5:13445]  
-	     call _PlayA1800_ElementsInit	// [7:13445]  PlayA1800_ElementsInit
-BB7_PU53:	// 0x128b
-// BB:7 cycle count: 1
-	     SP = SP + 1              	// [0:13445]  
-Lt_53_11:	// 0x128c
-// BB:8 cycle count: 3
-//13446  	    while((SACM_A1800_Status() & 0x0001) != 0)
+	     .stabn 68,0,13579,LM797-_Play_Seq_Test
+	     R4 = 1                   	// [0:13579]  
+	     [BP + 2] = R4            	// [1:13579]  entertesting
+//13580  		        		break;
 
 LM798:
-	     .stabn 68,0,13446,LM798-_Play_Seq_Test
-	     call _SACM_A1800_Status  	// [0:13446]  SACM_A1800_Status
-BB9_PU53:	// 0x128e
-// BB:9 cycle count: 7
-	     R4 = R1 & 1              	// [0:13446]  
-	     cmp R4, 0                	// [2:13446]  
-	     je Lt_53_12              	// [3:13446]  
-BB10_PU53:	// 0x1292
-// BB:10 cycle count: 3
-//13447  			{
-//13448  				SACM_A1800_ServiceLoop();
-
-LM799:
-	     .stabn 68,0,13448,LM799-_Play_Seq_Test
-	     call _SACM_A1800_ServiceLoop	// [0:13448]  SACM_A1800_ServiceLoop
-BB11_PU53:	// 0x1294
-// BB:11 cycle count: 3
-//13449  				WatchdogClear();
-
-LM800:
-	     .stabn 68,0,13449,LM800-_Play_Seq_Test
-	     call _WatchdogClear      	// [0:13449]  WatchdogClear
-BB12_PU53:	// 0x1296
-// BB:12 cycle count: 11
-//13450  
-//13451              
-//13452  		        if(Pressflag & 0x01)
-
-LM801:
-	     .stabn 68,0,13452,LM801-_Play_Seq_Test
-	     DS = seg(_Pressflag)     	// [0:13452]  Pressflag
-	     R4 = (_Pressflag)        	// [1:13452]  Pressflag
-	     R4 = DS:[R4]             	// [3:13452]  
-	     R4 = R4 & 1              	// [5:13452]  
-	     cmp R4, 0                	// [6:13452]  
-	     je L_53_20               	// [7:13452]  
-BB13_PU53:	// 0x129d
-// BB:13 cycle count: 11
-//13453  		        {
-//13454  		        	if(Key_Debounce>600)
-
-LM802:
-	     .stabn 68,0,13454,LM802-_Play_Seq_Test
-	     DS = seg(_Key_Debounce)  	// [0:13454]  Key_Debounce
-	     R4 = (_Key_Debounce)     	// [1:13454]  Key_Debounce
-	     R4 = DS:[R4]             	// [3:13454]  
-	     cmp R4, 600              	// [5:13454]  
-	     jbe L_53_21              	// [7:13454]  
-BB14_PU53:	// 0x12a4
-// BB:14 cycle count: 6
-//13455  		        	{
-//13456  		        		entertesting =1;
-
-LM803:
-	     .stabn 68,0,13456,LM803-_Play_Seq_Test
-	     R4 = 1                   	// [0:13456]  
-	     [BP + 2] = R4            	// [1:13456]  entertesting
-//13457  		        		break;
-
-LM804:
-	     .stabn 68,0,13457,LM804-_Play_Seq_Test
-	     jmp Lt_53_2              	// [2:13457]  
-L_53_21:	// 0x12a7
-L_53_20:	// 0x12a7
+	     .stabn 68,0,13580,LM798-_Play_Seq_Test
+	     jmp Lt_53_2              	// [2:13580]  
+L_53_21:	// 0x12ca
+L_53_20:	// 0x12ca
 // BB:15 cycle count: 4
 
-LM805:
-	     .stabn 68,0,13446,LM805-_Play_Seq_Test
-	     jmp Lt_53_11             	// [0:13446]  
-Lt_53_12:	// 0x12a8
-Lt_53_2:	// 0x12a8
+LM799:
+	     .stabn 68,0,13569,LM799-_Play_Seq_Test
+	     jmp Lt_53_11             	// [0:13569]  
+Lt_53_12:	// 0x12cb
+Lt_53_2:	// 0x12cb
 // BB:16 cycle count: 3
-//13460  
-//13461  
-//13462  
-//13463  			}
-//13464  			SACM_A1800_Stop();
+//13583  
+//13584  
+//13585  
+//13586  			}
+//13587  			SACM_A1800_Stop();
 
-LM806:
-	     .stabn 68,0,13464,LM806-_Play_Seq_Test
-	     call _SACM_A1800_Stop    	// [0:13464]  SACM_A1800_Stop
-BB17_PU53:	// 0x12aa
+LM800:
+	     .stabn 68,0,13587,LM800-_Play_Seq_Test
+	     call _SACM_A1800_Stop    	// [0:13587]  SACM_A1800_Stop
+BB17_PU53:	// 0x12cd
 // BB:17 cycle count: 17
-//13465  			A1800_Flag = 0;
+//13588  			A1800_Flag = 0;
 
-LM807:
-	     .stabn 68,0,13465,LM807-_Play_Seq_Test
-	     R3 = 0                   	// [0:13465]  
-	     DS = seg(_A1800_Flag)    	// [1:13465]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:13465]  A1800_Flag
-	     DS:[R4] = R3             	// [4:13465]  
-//13466  		
-//13467  	     	i++;
+LM801:
+	     .stabn 68,0,13588,LM801-_Play_Seq_Test
+	     R3 = 0                   	// [0:13588]  
+	     DS = seg(_A1800_Flag)    	// [1:13588]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:13588]  A1800_Flag
+	     DS:[R4] = R3             	// [4:13588]  
+//13589  		
+//13590  	     	i++;
 
-LM808:
-	     .stabn 68,0,13467,LM808-_Play_Seq_Test
-	     R4 = [BP + 0]            	// [6:13467]  i
-	     R4 = R4 + 1              	// [8:13467]  
-	     [BP + 0] = R4            	// [9:13467]  i
-//13468  	     	
-//13469  	      if(entertesting)	
+LM802:
+	     .stabn 68,0,13590,LM802-_Play_Seq_Test
+	     R4 = [BP + 0]            	// [6:13590]  i
+	     R4 = R4 + 1              	// [8:13590]  
+	     [BP + 0] = R4            	// [9:13590]  i
+//13591  	     	
+//13592  	      if(entertesting)	
 
-LM809:
-	     .stabn 68,0,13469,LM809-_Play_Seq_Test
-	     R4 = [BP + 2]            	// [10:13469]  entertesting
-	     cmp R4, 0                	// [12:13469]  
-	     je L_53_22               	// [13:13469]  
-BB18_PU53:	// 0x12b5
+LM803:
+	     .stabn 68,0,13592,LM803-_Play_Seq_Test
+	     R4 = [BP + 2]            	// [10:13592]  entertesting
+	     cmp R4, 0                	// [12:13592]  
+	     je L_53_22               	// [13:13592]  
+BB18_PU53:	// 0x12d8
 // BB:18 cycle count: 7
-//13470  	         return 1;
+//13593  	         return 1;
 
-LM810:
-	     .stabn 68,0,13470,LM810-_Play_Seq_Test
-	     R1 = 1                   	// [0:13470]  
-	     SP = SP + 6              	// [1:13470]  
-	     pop BP, PC from [SP]     	// [2:13470]  
-L_53_22:	// 0x12b8
+LM804:
+	     .stabn 68,0,13593,LM804-_Play_Seq_Test
+	     R1 = 1                   	// [0:13593]  
+	     SP = SP + 6              	// [1:13593]  
+	     pop BP, PC from [SP]     	// [2:13593]  
+L_53_22:	// 0x12db
 // BB:19 cycle count: 3
 
-LM811:
-	     .stabn 68,0,13469,LM811-_Play_Seq_Test
-	     goto L_53_17             	// [0:13469]  
-L_53_18:	// 0x12ba
-Lt_53_1:	// 0x12ba
+LM805:
+	     .stabn 68,0,13592,LM805-_Play_Seq_Test
+	     goto L_53_17             	// [0:13592]  
+L_53_18:	// 0x12dd
+Lt_53_1:	// 0x12dd
 // BB:20 cycle count: 7
-//13471  				
-//13472  	}
-//13473  	
-//13474      return 0;
+//13594  				
+//13595  	}
+//13596  	
+//13597      return 0;
 
-LM812:
-	     .stabn 68,0,13474,LM812-_Play_Seq_Test
-	     R1 = 0                   	// [0:13474]  
-	     SP = SP + 6              	// [1:13474]  
-	     pop BP, PC from [SP]     	// [2:13474]  
-LBE46:
+LM806:
+	     .stabn 68,0,13597,LM806-_Play_Seq_Test
+	     R1 = 0                   	// [0:13597]  
+	     SP = SP + 6              	// [1:13597]  
+	     pop BP, PC from [SP]     	// [2:13597]  
+LBE45:
 	.endp	
 	     .stabs "Index:p4",160,0,0,9
 	     .stabs "T_TableH:p4",160,0,0,10
-	     .stabn 192,0,0,LBB46-_Play_Seq_Test
+	     .stabn 192,0,0,LBB45-_Play_Seq_Test
 	     .stabs "Addr:5",128,0,0,4
 	     .stabs "i:4",128,0,0,0
 	     .stabs "Num:4",128,0,0,1
 	     .stabs "entertesting:4",128,0,0,2
 	     .stabs "temp:1",128,0,0,3
-	     .stabn 224,0,0,LBE46-_Play_Seq_Test
+	     .stabn 224,0,0,LBE45-_Play_Seq_Test
 LME54:
 	     .stabf LME54-_Play_Seq_Test
 .code
@@ -11176,389 +11133,389 @@ _TestBonding: .proc
 	// i = 0
 	// old_frame_pointer = 1
 	// return_address = 2
-//13476  
-//13477  } 
-//13478  
-//13479  void TestBonding()
-//13480  {
+//13599  
+//13600  } 
+//13601  
+//13602  void TestBonding()
+//13603  {
+
+LM807:
+	     .stabn 68,0,13603,LM807-_TestBonding
+BB1_PU54:	// 0x12e0
+// BB:1 cycle count: 57
+	     push BP to [SP]          	// [0:13603]  
+	     SP = SP - 1              	// [2:13603]  
+	     BP = SP + 1              	// [3:13603]  
+LBB46:
+//13604  	unsigned i=0;
+
+LM808:
+	     .stabn 68,0,13604,LM808-_TestBonding
+	     R4 = 0                   	// [5:13604]  
+	     [BP + 0] = R4            	// [6:13604]  i
+//13605  		
+//13606  	*P_IOB_Buffer|=0x10;
+
+LM809:
+	     .stabn 68,0,13606,LM809-_TestBonding
+	     R3 = 12293               	// [7:13606]  
+	     R4 = 0                   	// [9:13606]  
+	     DS = R4                  	// [10:13606]  
+	     R4 = DS:[R3]             	// [11:13606]  
+	     R4 = R4 | 16             	// [13:13606]  
+	     R2 = 12293               	// [14:13606]  
+	     R3 = 0                   	// [16:13606]  
+	     DS = R3                  	// [17:13606]  
+	     DS:[R2] = R4             	// [18:13606]  
+//13607  	*P_IOB_Attrib&=~0x10;
+
+LM810:
+	     .stabn 68,0,13607,LM810-_TestBonding
+	     R3 = 12295               	// [20:13607]  
+	     R4 = 0                   	// [22:13607]  
+	     DS = R4                  	// [23:13607]  
+	     R4 = DS:[R3]             	// [24:13607]  
+	     R2 = R4 & 65519          	// [26:13607]  
+	     R3 = 12295               	// [28:13607]  
+	     R4 = 0                   	// [30:13607]  
+	     DS = R4                  	// [31:13607]  
+	     DS:[R3] = R2             	// [32:13607]  
+//13608  	*P_IOB_Dir&=~0x10;
+
+LM811:
+	     .stabn 68,0,13608,LM811-_TestBonding
+	     R3 = 12294               	// [34:13608]  
+	     R4 = 0                   	// [36:13608]  
+	     DS = R4                  	// [37:13608]  
+	     R4 = DS:[R3]             	// [38:13608]  
+	     R2 = R4 & 65519          	// [40:13608]  
+	     R3 = 12294               	// [42:13608]  
+	     R4 = 0                   	// [44:13608]  
+	     DS = R4                  	// [45:13608]  
+	     DS:[R3] = R2             	// [46:13608]  
+//13609  	 Delay_Xms_PowerOn(10);	
+
+LM812:
+	     .stabn 68,0,13609,LM812-_TestBonding
+	     SP = SP - 1              	// [48:13609]  
+	     R3 = 10                  	// [49:13609]  
+	     R4 = SP + 1              	// [50:13609]  
+	     [R4] = R3                	// [52:13609]  
+	     call _Delay_Xms_PowerOn  	// [54:13609]  Delay_Xms_PowerOn
+BB2_PU54:	// 0x1310
+// BB:2 cycle count: 13
+	     SP = SP + 1              	// [0:13609]  
+//13610  	 
+//13611  	if(*P_IOB_Data&0x10)
 
 LM813:
-	     .stabn 68,0,13480,LM813-_TestBonding
-BB1_PU54:	// 0x12bd
-// BB:1 cycle count: 57
-	     push BP to [SP]          	// [0:13480]  
-	     SP = SP - 1              	// [2:13480]  
-	     BP = SP + 1              	// [3:13480]  
-LBB47:
-//13481  	unsigned i=0;
+	     .stabn 68,0,13611,LM813-_TestBonding
+	     R3 = 12292               	// [1:13611]  
+	     R4 = 0                   	// [3:13611]  
+	     DS = R4                  	// [4:13611]  
+	     R4 = DS:[R3]             	// [5:13611]  
+	     R4 = R4 & 16             	// [7:13611]  
+	     cmp R4, 0                	// [8:13611]  
+	     je L_54_11               	// [9:13611]  
+BB3_PU54:	// 0x1319
+// BB:3 cycle count: 6
+//13612  	{
+//13613  		return 0;
 
 LM814:
-	     .stabn 68,0,13481,LM814-_TestBonding
-	     R4 = 0                   	// [5:13481]  
-	     [BP + 0] = R4            	// [6:13481]  i
-//13482  		
-//13483  	*P_IOB_Buffer|=0x10;
+	     .stabn 68,0,13613,LM814-_TestBonding
+	     SP = SP + 1              	// [0:13613]  
+	     pop BP, PC from [SP]     	// [1:13613]  
+L_54_11:	// 0x131b
+// BB:4 cycle count: 3
+//13614  	}
+//13615  	
+//13616  	i = 0xb00;
 
 LM815:
-	     .stabn 68,0,13483,LM815-_TestBonding
-	     R3 = 12293               	// [7:13483]  
-	     R4 = 0                   	// [9:13483]  
-	     DS = R4                  	// [10:13483]  
-	     R4 = DS:[R3]             	// [11:13483]  
-	     R4 = R4 | 16             	// [13:13483]  
-	     R2 = 12293               	// [14:13483]  
-	     R3 = 0                   	// [16:13483]  
-	     DS = R3                  	// [17:13483]  
-	     DS:[R2] = R4             	// [18:13483]  
-//13484  	*P_IOB_Attrib&=~0x10;
+	     .stabn 68,0,13616,LM815-_TestBonding
+	     R4 = 2816                	// [0:13616]  
+	     [BP + 0] = R4            	// [2:13616]  i
+L_54_12:	// 0x131e
+// BB:5 cycle count: 7
+//13617  	while(i)
 
 LM816:
-	     .stabn 68,0,13484,LM816-_TestBonding
-	     R3 = 12295               	// [20:13484]  
-	     R4 = 0                   	// [22:13484]  
-	     DS = R4                  	// [23:13484]  
-	     R4 = DS:[R3]             	// [24:13484]  
-	     R2 = R4 & 65519          	// [26:13484]  
-	     R3 = 12295               	// [28:13484]  
-	     R4 = 0                   	// [30:13484]  
-	     DS = R4                  	// [31:13484]  
-	     DS:[R3] = R2             	// [32:13484]  
-//13485  	*P_IOB_Dir&=~0x10;
+	     .stabn 68,0,13617,LM816-_TestBonding
+	     R4 = [BP + 0]            	// [0:13617]  i
+	     cmp R4, 0                	// [2:13617]  
+	     je L_54_13               	// [3:13617]  
+BB6_PU54:	// 0x1321
+// BB:6 cycle count: 12
+//13618  	{
+//13619  		if(*P_IOB_Data&0x10)
 
 LM817:
-	     .stabn 68,0,13485,LM817-_TestBonding
-	     R3 = 12294               	// [34:13485]  
-	     R4 = 0                   	// [36:13485]  
-	     DS = R4                  	// [37:13485]  
-	     R4 = DS:[R3]             	// [38:13485]  
-	     R2 = R4 & 65519          	// [40:13485]  
-	     R3 = 12294               	// [42:13485]  
-	     R4 = 0                   	// [44:13485]  
-	     DS = R4                  	// [45:13485]  
-	     DS:[R3] = R2             	// [46:13485]  
-//13486  	 Delay_Xms_PowerOn(10);	
+	     .stabn 68,0,13619,LM817-_TestBonding
+	     R3 = 12292               	// [0:13619]  
+	     R4 = 0                   	// [2:13619]  
+	     DS = R4                  	// [3:13619]  
+	     R4 = DS:[R3]             	// [4:13619]  
+	     R4 = R4 & 16             	// [6:13619]  
+	     cmp R4, 0                	// [7:13619]  
+	     je L_54_15               	// [8:13619]  
+BB7_PU54:	// 0x1329
+// BB:7 cycle count: 6
+//13620  		{
+//13621  			return 0;
 
 LM818:
-	     .stabn 68,0,13486,LM818-_TestBonding
-	     SP = SP - 1              	// [48:13486]  
-	     R3 = 10                  	// [49:13486]  
-	     R4 = SP + 1              	// [50:13486]  
-	     [R4] = R3                	// [52:13486]  
-	     call _Delay_Xms_PowerOn  	// [54:13486]  Delay_Xms_PowerOn
-BB2_PU54:	// 0x12ed
-// BB:2 cycle count: 13
-	     SP = SP + 1              	// [0:13486]  
-//13487  	 
-//13488  	if(*P_IOB_Data&0x10)
+	     .stabn 68,0,13621,LM818-_TestBonding
+	     SP = SP + 1              	// [0:13621]  
+	     pop BP, PC from [SP]     	// [1:13621]  
+L_54_15:	// 0x132b
+// BB:8 cycle count: 4
+//13622  		}
+//13623  		else
+//13624  		{
+//13625  			i--;
 
 LM819:
-	     .stabn 68,0,13488,LM819-_TestBonding
-	     R3 = 12292               	// [1:13488]  
-	     R4 = 0                   	// [3:13488]  
-	     DS = R4                  	// [4:13488]  
-	     R4 = DS:[R3]             	// [5:13488]  
-	     R4 = R4 & 16             	// [7:13488]  
-	     cmp R4, 0                	// [8:13488]  
-	     je L_54_11               	// [9:13488]  
-BB3_PU54:	// 0x12f6
-// BB:3 cycle count: 6
-//13489  	{
-//13490  		return 0;
+	     .stabn 68,0,13625,LM819-_TestBonding
+	     R4 = [BP + 0]            	// [0:13625]  i
+	     R4 = R4 - 1              	// [2:13625]  
+	     [BP + 0] = R4            	// [3:13625]  i
+L_54_14:	// 0x132e
+// BB:9 cycle count: 3
+//13626  		}
+//13627  		WatchdogClear();
 
 LM820:
-	     .stabn 68,0,13490,LM820-_TestBonding
-	     SP = SP + 1              	// [0:13490]  
-	     pop BP, PC from [SP]     	// [1:13490]  
-L_54_11:	// 0x12f8
-// BB:4 cycle count: 3
-//13491  	}
-//13492  	
-//13493  	i = 0xb00;
+	     .stabn 68,0,13627,LM820-_TestBonding
+	     call _WatchdogClear      	// [0:13627]  WatchdogClear
+BB10_PU54:	// 0x1330
+// BB:10 cycle count: 9
+//13628  		Delay_Xms_PowerOn(10);
 
 LM821:
-	     .stabn 68,0,13493,LM821-_TestBonding
-	     R4 = 2816                	// [0:13493]  
-	     [BP + 0] = R4            	// [2:13493]  i
-L_54_12:	// 0x12fb
-// BB:5 cycle count: 7
-//13494  	while(i)
+	     .stabn 68,0,13628,LM821-_TestBonding
+	     SP = SP - 1              	// [0:13628]  
+	     R3 = 10                  	// [1:13628]  
+	     R4 = SP + 1              	// [2:13628]  
+	     [R4] = R3                	// [4:13628]  
+	     call _Delay_Xms_PowerOn  	// [6:13628]  Delay_Xms_PowerOn
+BB11_PU54:	// 0x1337
+// BB:11 cycle count: 5
+	     SP = SP + 1              	// [0:13628]  
+	     jmp L_54_12              	// [1:13628]  
+L_54_13:	// 0x1339
+// BB:12 cycle count: 3
+//13629  	}		
+//13630  	
+//13631  	
+//13632  	    //IIC_MasterInit();
+//13633  	    Time_init();
 
 LM822:
-	     .stabn 68,0,13494,LM822-_TestBonding
-	     R4 = [BP + 0]            	// [0:13494]  i
-	     cmp R4, 0                	// [2:13494]  
-	     je L_54_13               	// [3:13494]  
-BB6_PU54:	// 0x12fe
-// BB:6 cycle count: 12
-//13495  	{
-//13496  		if(*P_IOB_Data&0x10)
+	     .stabn 68,0,13633,LM822-_TestBonding
+	     call _Time_init          	// [0:13633]  Time_init
+L_54_16:	// 0x133b
+// BB:13 cycle count: 8
+//13634  		while(i!=0xa0)
 
 LM823:
-	     .stabn 68,0,13496,LM823-_TestBonding
-	     R3 = 12292               	// [0:13496]  
-	     R4 = 0                   	// [2:13496]  
-	     DS = R4                  	// [3:13496]  
-	     R4 = DS:[R3]             	// [4:13496]  
-	     R4 = R4 & 16             	// [6:13496]  
-	     cmp R4, 0                	// [7:13496]  
-	     je L_54_15               	// [8:13496]  
-BB7_PU54:	// 0x1306
-// BB:7 cycle count: 6
-//13497  		{
-//13498  			return 0;
+	     .stabn 68,0,13634,LM823-_TestBonding
+	     R4 = [BP + 0]            	// [0:13634]  i
+	     cmp R4, 160              	// [2:13634]  
+	     je L_54_17               	// [4:13634]  
+BB14_PU54:	// 0x133f
+// BB:14 cycle count: 3
+//13635  	    {
+//13636  	    	  WatchdogClear();
 
 LM824:
-	     .stabn 68,0,13498,LM824-_TestBonding
-	     SP = SP + 1              	// [0:13498]  
-	     pop BP, PC from [SP]     	// [1:13498]  
-L_54_15:	// 0x1308
-// BB:8 cycle count: 4
-//13499  		}
-//13500  		else
-//13501  		{
-//13502  			i--;
+	     .stabn 68,0,13636,LM824-_TestBonding
+	     call _WatchdogClear      	// [0:13636]  WatchdogClear
+BB15_PU54:	// 0x1341
+// BB:15 cycle count: 9
+//13637  		      i=i2c_read_byte(0x18);
 
 LM825:
-	     .stabn 68,0,13502,LM825-_TestBonding
-	     R4 = [BP + 0]            	// [0:13502]  i
-	     R4 = R4 - 1              	// [2:13502]  
-	     [BP + 0] = R4            	// [3:13502]  i
-L_54_14:	// 0x130b
-// BB:9 cycle count: 3
-//13503  		}
-//13504  		WatchdogClear();
+	     .stabn 68,0,13637,LM825-_TestBonding
+	     SP = SP - 1              	// [0:13637]  
+	     R3 = 24                  	// [1:13637]  
+	     R4 = SP + 1              	// [2:13637]  
+	     [R4] = R3                	// [4:13637]  
+	     call _i2c_read_byte      	// [6:13637]  i2c_read_byte
+BB16_PU54:	// 0x1348
+// BB:16 cycle count: 10
+	     SP = SP + 1              	// [0:13637]  
+	     [BP + 0] = R1            	// [1:13637]  i
+//13638  		      //call F_SACM_A1800_StartPlay
+//13639  		      //call _BeepBeep_Along;
+//13640  		     if(i!=0xa0)
 
 LM826:
-	     .stabn 68,0,13504,LM826-_TestBonding
-	     call _WatchdogClear      	// [0:13504]  WatchdogClear
-BB10_PU54:	// 0x130d
-// BB:10 cycle count: 9
-//13505  		Delay_Xms_PowerOn(10);
+	     .stabn 68,0,13640,LM826-_TestBonding
+	     R4 = [BP + 0]            	// [2:13640]  i
+	     cmp R4, 160              	// [4:13640]  
+	     je L_54_18               	// [6:13640]  
+BB17_PU54:	// 0x134e
+// BB:17 cycle count: 3
+//13641  		     {
+//13642  		       TestMic0();
 
 LM827:
-	     .stabn 68,0,13505,LM827-_TestBonding
-	     SP = SP - 1              	// [0:13505]  
-	     R3 = 10                  	// [1:13505]  
-	     R4 = SP + 1              	// [2:13505]  
-	     [R4] = R3                	// [4:13505]  
-	     call _Delay_Xms_PowerOn  	// [6:13505]  Delay_Xms_PowerOn
-BB11_PU54:	// 0x1314
-// BB:11 cycle count: 5
-	     SP = SP + 1              	// [0:13505]  
-	     jmp L_54_12              	// [1:13505]  
-L_54_13:	// 0x1316
-// BB:12 cycle count: 3
-//13506  	}		
-//13507  	
-//13508  	
-//13509  	    //IIC_MasterInit();
-//13510  	    Time_init();
+	     .stabn 68,0,13642,LM827-_TestBonding
+	     call _TestMic0           	// [0:13642]  TestMic0
+BB18_PU54:	// 0x1350
+// BB:18 cycle count: 3
+//13643  		       SP_RampDnDAC1();
 
 LM828:
-	     .stabn 68,0,13510,LM828-_TestBonding
-	     call _Time_init          	// [0:13510]  Time_init
-L_54_16:	// 0x1318
-// BB:13 cycle count: 8
-//13511  		while(i!=0xa0)
-
-LM829:
-	     .stabn 68,0,13511,LM829-_TestBonding
-	     R4 = [BP + 0]            	// [0:13511]  i
-	     cmp R4, 160              	// [2:13511]  
-	     je L_54_17               	// [4:13511]  
-BB14_PU54:	// 0x131c
-// BB:14 cycle count: 3
-//13512  	    {
-//13513  	    	  WatchdogClear();
-
-LM830:
-	     .stabn 68,0,13513,LM830-_TestBonding
-	     call _WatchdogClear      	// [0:13513]  WatchdogClear
-BB15_PU54:	// 0x131e
-// BB:15 cycle count: 9
-//13514  		      i=i2c_read_byte(0x18);
-
-LM831:
-	     .stabn 68,0,13514,LM831-_TestBonding
-	     SP = SP - 1              	// [0:13514]  
-	     R3 = 24                  	// [1:13514]  
-	     R4 = SP + 1              	// [2:13514]  
-	     [R4] = R3                	// [4:13514]  
-	     call _i2c_read_byte      	// [6:13514]  i2c_read_byte
-BB16_PU54:	// 0x1325
-// BB:16 cycle count: 10
-	     SP = SP + 1              	// [0:13514]  
-	     [BP + 0] = R1            	// [1:13514]  i
-//13515  		      //call F_SACM_A1800_StartPlay
-//13516  		      //call _BeepBeep_Along;
-//13517  		     if(i!=0xa0)
-
-LM832:
-	     .stabn 68,0,13517,LM832-_TestBonding
-	     R4 = [BP + 0]            	// [2:13517]  i
-	     cmp R4, 160              	// [4:13517]  
-	     je L_54_18               	// [6:13517]  
-BB17_PU54:	// 0x132b
-// BB:17 cycle count: 3
-//13518  		     {
-//13519  		       TestMic0();
-
-LM833:
-	     .stabn 68,0,13519,LM833-_TestBonding
-	     call _TestMic0           	// [0:13519]  TestMic0
-BB18_PU54:	// 0x132d
-// BB:18 cycle count: 3
-//13520  		       SP_RampDnDAC1();
-
-LM834:
-	     .stabn 68,0,13520,LM834-_TestBonding
-	     call _SP_RampDnDAC1      	// [0:13520]  SP_RampDnDAC1
-L_54_18:	// 0x132f
+	     .stabn 68,0,13643,LM828-_TestBonding
+	     call _SP_RampDnDAC1      	// [0:13643]  SP_RampDnDAC1
+L_54_18:	// 0x1352
 // BB:19 cycle count: 4
 
-LM835:
-	     .stabn 68,0,13517,LM835-_TestBonding
-	     jmp L_54_16              	// [0:13517]  
-L_54_17:	// 0x1330
+LM829:
+	     .stabn 68,0,13640,LM829-_TestBonding
+	     jmp L_54_16              	// [0:13640]  
+L_54_17:	// 0x1353
 // BB:20 cycle count: 3
-//13521  		     }
-//13522  	    }
-//13523  	
-//13524  	      IO_init_Wakeup();
+//13644  		     }
+//13645  	    }
+//13646  	
+//13647  	      IO_init_Wakeup();
 
-LM836:
-	     .stabn 68,0,13524,LM836-_TestBonding
-	     call _IO_init_Wakeup     	// [0:13524]  IO_init_Wakeup
-BB21_PU54:	// 0x1332
+LM830:
+	     .stabn 68,0,13647,LM830-_TestBonding
+	     call _IO_init_Wakeup     	// [0:13647]  IO_init_Wakeup
+BB21_PU54:	// 0x1355
 // BB:21 cycle count: 23
-//13525  	      *P_IOA_Buffer|=0x15;
+//13648  	      *P_IOA_Buffer|=0x15;
 
-LM837:
-	     .stabn 68,0,13525,LM837-_TestBonding
-	     R3 = 12289               	// [0:13525]  
-	     R4 = 0                   	// [2:13525]  
-	     DS = R4                  	// [3:13525]  
-	     R4 = DS:[R3]             	// [4:13525]  
-	     R4 = R4 | 21             	// [6:13525]  
-	     R2 = 12289               	// [7:13525]  
-	     R3 = 0                   	// [9:13525]  
-	     DS = R3                  	// [10:13525]  
-	     DS:[R2] = R4             	// [11:13525]  
-//13526  	      Delay1xms(800);
+LM831:
+	     .stabn 68,0,13648,LM831-_TestBonding
+	     R3 = 12289               	// [0:13648]  
+	     R4 = 0                   	// [2:13648]  
+	     DS = R4                  	// [3:13648]  
+	     R4 = DS:[R3]             	// [4:13648]  
+	     R4 = R4 | 21             	// [6:13648]  
+	     R2 = 12289               	// [7:13648]  
+	     R3 = 0                   	// [9:13648]  
+	     DS = R3                  	// [10:13648]  
+	     DS:[R2] = R4             	// [11:13648]  
+//13649  	      Delay1xms(800);
 
-LM838:
-	     .stabn 68,0,13526,LM838-_TestBonding
-	     SP = SP - 1              	// [13:13526]  
-	     R3 = 800                 	// [14:13526]  
-	     R4 = SP + 1              	// [16:13526]  
-	     [R4] = R3                	// [18:13526]  
-	     call _Delay1xms          	// [20:13526]  Delay1xms
-BB22_PU54:	// 0x1345
+LM832:
+	     .stabn 68,0,13649,LM832-_TestBonding
+	     SP = SP - 1              	// [13:13649]  
+	     R3 = 800                 	// [14:13649]  
+	     R4 = SP + 1              	// [16:13649]  
+	     [R4] = R3                	// [18:13649]  
+	     call _Delay1xms          	// [20:13649]  Delay1xms
+BB22_PU54:	// 0x1368
 // BB:22 cycle count: 47
-	     SP = SP + 1              	// [0:13526]  
-//13527  	      *P_IOA_Buffer&=~0x15;
+	     SP = SP + 1              	// [0:13649]  
+//13650  	      *P_IOA_Buffer&=~0x15;
 
-LM839:
-	     .stabn 68,0,13527,LM839-_TestBonding
-	     R3 = 12289               	// [1:13527]  
-	     R4 = 0                   	// [3:13527]  
-	     DS = R4                  	// [4:13527]  
-	     R4 = DS:[R3]             	// [5:13527]  
-	     R2 = R4 & 65514          	// [7:13527]  
-	     R3 = 12289               	// [9:13527]  
-	     R4 = 0                   	// [11:13527]  
-	     DS = R4                  	// [12:13527]  
-	     DS:[R3] = R2             	// [13:13527]  
-//13528  	      
-//13529  	     *P_IOA_Buffer|=0x0a;
+LM833:
+	     .stabn 68,0,13650,LM833-_TestBonding
+	     R3 = 12289               	// [1:13650]  
+	     R4 = 0                   	// [3:13650]  
+	     DS = R4                  	// [4:13650]  
+	     R4 = DS:[R3]             	// [5:13650]  
+	     R2 = R4 & 65514          	// [7:13650]  
+	     R3 = 12289               	// [9:13650]  
+	     R4 = 0                   	// [11:13650]  
+	     DS = R4                  	// [12:13650]  
+	     DS:[R3] = R2             	// [13:13650]  
+//13651  	      
+//13652  	     *P_IOA_Buffer|=0x0a;
 
-LM840:
-	     .stabn 68,0,13529,LM840-_TestBonding
-	     R3 = 12289               	// [15:13529]  
-	     R4 = 0                   	// [17:13529]  
-	     DS = R4                  	// [18:13529]  
-	     R4 = DS:[R3]             	// [19:13529]  
-	     R4 = R4 | 10             	// [21:13529]  
-	     R2 = 12289               	// [22:13529]  
-	     R3 = 0                   	// [24:13529]  
-	     DS = R3                  	// [25:13529]  
-	     DS:[R2] = R4             	// [26:13529]  
+LM834:
+	     .stabn 68,0,13652,LM834-_TestBonding
+	     R3 = 12289               	// [15:13652]  
+	     R4 = 0                   	// [17:13652]  
+	     DS = R4                  	// [18:13652]  
+	     R4 = DS:[R3]             	// [19:13652]  
+	     R4 = R4 | 10             	// [21:13652]  
+	     R2 = 12289               	// [22:13652]  
+	     R3 = 0                   	// [24:13652]  
+	     DS = R3                  	// [25:13652]  
+	     DS:[R2] = R4             	// [26:13652]  
 	//;;
 	INT OFF
 	//;;
-//13530  	     // Delay1xms(500);
-//13531  	     
-//13532   		 __asm("INT OFF");
-//13533    	     *(P_INT_Ctrl) =0;
+//13653  	     // Delay1xms(500);
+//13654  	     
+//13655   		 __asm("INT OFF");
+//13656    	     *(P_INT_Ctrl) =0;
 
-LM841:
-	     .stabn 68,0,13533,LM841-_TestBonding
-	     R2 = 0                   	// [30:13533]  
-	     R3 = 12368               	// [31:13533]  
-	     R4 = 0                   	// [33:13533]  
-	     DS = R4                  	// [34:13533]  
-	     DS:[R3] = R2             	// [35:13533]  
-//13534    	     *(P_INT2_Ctrl) =0;
+LM835:
+	     .stabn 68,0,13656,LM835-_TestBonding
+	     R2 = 0                   	// [30:13656]  
+	     R3 = 12368               	// [31:13656]  
+	     R4 = 0                   	// [33:13656]  
+	     DS = R4                  	// [34:13656]  
+	     DS:[R3] = R2             	// [35:13656]  
+//13657    	     *(P_INT2_Ctrl) =0;
 
-LM842:
-	     .stabn 68,0,13534,LM842-_TestBonding
-	     R2 = 0                   	// [37:13534]  
-	     R3 = 12371               	// [38:13534]  
-	     R4 = 0                   	// [40:13534]  
-	     DS = R4                  	// [41:13534]  
-	     DS:[R3] = R2             	// [42:13534]  
-//13535            CheckSum_SPIFlash();	   //�������ȷ��һֱbeepbeep��
+LM836:
+	     .stabn 68,0,13657,LM836-_TestBonding
+	     R2 = 0                   	// [37:13657]  
+	     R3 = 12371               	// [38:13657]  
+	     R4 = 0                   	// [40:13657]  
+	     DS = R4                  	// [41:13657]  
+	     DS:[R3] = R2             	// [42:13657]  
+//13658            CheckSum_SPIFlash();	   //�������ȷ��һֱbeepbeep��
 
-LM843:
-	     .stabn 68,0,13535,LM843-_TestBonding
-	     call _CheckSum_SPIFlash  	// [44:13535]  CheckSum_SPIFlash
-BB23_PU54:	// 0x136e
+LM837:
+	     .stabn 68,0,13658,LM837-_TestBonding
+	     call _CheckSum_SPIFlash  	// [44:13658]  CheckSum_SPIFlash
+BB23_PU54:	// 0x1391
 // BB:23 cycle count: 17
-//13536    	     // Time_init();	     
-//13537  	      *P_IOA_Buffer&=~0x0a;        
+//13659    	     // Time_init();	     
+//13660  	      *P_IOA_Buffer&=~0x0a;        
 
-LM844:
-	     .stabn 68,0,13537,LM844-_TestBonding
-	     R3 = 12289               	// [0:13537]  
-	     R4 = 0                   	// [2:13537]  
-	     DS = R4                  	// [3:13537]  
-	     R4 = DS:[R3]             	// [4:13537]  
-	     R2 = R4 & 65525          	// [6:13537]  
-	     R3 = 12289               	// [8:13537]  
-	     R4 = 0                   	// [10:13537]  
-	     DS = R4                  	// [11:13537]  
-	     DS:[R3] = R2             	// [12:13537]  
-//13538  	      Sleeping();
+LM838:
+	     .stabn 68,0,13660,LM838-_TestBonding
+	     R3 = 12289               	// [0:13660]  
+	     R4 = 0                   	// [2:13660]  
+	     DS = R4                  	// [3:13660]  
+	     R4 = DS:[R3]             	// [4:13660]  
+	     R2 = R4 & 65525          	// [6:13660]  
+	     R3 = 12289               	// [8:13660]  
+	     R4 = 0                   	// [10:13660]  
+	     DS = R4                  	// [11:13660]  
+	     DS:[R3] = R2             	// [12:13660]  
+//13661  	      Sleeping();
 
-LM845:
-	     .stabn 68,0,13538,LM845-_TestBonding
-	     call _Sleeping           	// [14:13538]  Sleeping
-BB24_PU54:	// 0x137c
+LM839:
+	     .stabn 68,0,13661,LM839-_TestBonding
+	     call _Sleeping           	// [14:13661]  Sleeping
+BB24_PU54:	// 0x139f
 // BB:24 cycle count: 6
-	     SP = SP + 1              	// [0:13538]  
-	     pop BP, PC from [SP]     	// [1:13538]  
-LBE47:
+	     SP = SP + 1              	// [0:13661]  
+	     pop BP, PC from [SP]     	// [1:13661]  
+LBE46:
 	.endp	
-	     .stabn 192,0,0,LBB47-_TestBonding
+	     .stabn 192,0,0,LBB46-_TestBonding
 	     .stabs "i:4",128,0,0,0
-	     .stabn 224,0,0,LBE47-_TestBonding
+	     .stabn 224,0,0,LBE46-_TestBonding
 LME55:
 	     .stabf LME55-_TestBonding
 
 .iram
-	     .stabs "Pokenm_LQ:G28=ar3;0;9;4",32,0,0,_Pokenm_LQ
+	     .stabs "Pokenm_LQ:G31=ar3;0;9;4",32,0,0,_Pokenm_LQ
 .public	_Pokenm_LQ
 _Pokenm_LQ:	// 0x8
 	.dw 10 dup(0)
-	     .stabs "InCollection_Pok:G28",32,0,0,_InCollection_Pok
+	     .stabs "InCollection_Pok:G31",32,0,0,_InCollection_Pok
 .public	_InCollection_Pok
 _InCollection_Pok:	// 0x12
 	.dw 10 dup(0)
-	     .stabs "Pokecatch_Pok:G28",32,0,0,_Pokecatch_Pok
+	     .stabs "Pokecatch_Pok:G31",32,0,0,_Pokecatch_Pok
 .public	_Pokecatch_Pok
 _Pokecatch_Pok:	// 0x1c
 	.dw 10 dup(0)
-	     .stabs "Mission_Success:G29=ar3;0;4;4",32,0,0,_Mission_Success
+	     .stabs "Mission_Success:G32=ar3;0;4;4",32,0,0,_Mission_Success
 .public	_Mission_Success
 _Mission_Success:	// 0x26
 	.dw 5 dup(0)
@@ -11600,8 +11557,8 @@ _DetectionFlag:	// 0x5b
 .external _Key
 .external _Pressflag
 .external _TwoKeyflag
-.external _Pause_Process
 .external _A1800_Flag
+.external _Pause_Process
 .external _SACM_A1800_ServiceLoop
 .external _OtherSph_Random_Value
 .external _G_X_A

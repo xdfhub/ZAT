@@ -102,9 +102,6 @@ volatile unsigned int HZ_1K_flag =0;
 
 /***************************************************************
 *****************************************************************/
-
-
-
 int main()
 {
 	 Goto_Sleep();
@@ -116,8 +113,8 @@ int main()
 	 Key_Scan_Init_Wakeup();//Key_Scan_Init();
 	
 //	Delay_Xms(1000);
-     R_QuestionNum = SPI_ReadAWord_Big((unsigned long int)0x40);
-     Mission_Num  = SPI_ReadAWord_Big((unsigned long int)0x42);
+     R_QuestionNum = SPI_ReadAWord_Big(0x40);
+     Mission_Num  = SPI_ReadAWord_Big(0x42);
      Rest_LQA();
  ////////////////////////////////////////////////////////////////////    
     // Rest_MissionSuccess_InCollection();

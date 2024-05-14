@@ -1,4 +1,4 @@
-Saturday, May 11, 14:28:40, 2024
+Tuesday, May 14, 17:46:09, 2024
 
                     * Generalplus u'nSP Linker version 1.14.13.23
                     -------------------------------------------
@@ -6,16 +6,16 @@ Saturday, May 11, 14:28:40, 2024
 Global Symbol Name                                Global Value     Global Filename
 ***********************************************************************************************************************************************************************************************************************************************************************************************************
 _main                                                    204E98    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_Switch_Mode                                             5E7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_Switch_Mode_Pre                                         5E8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_IO_Buffer                                               5E9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_TimeCnt                                                 5EA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_R_DebounceCnt                                           5EB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_gTemp                                                   5EC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_gVolume                                                 5ED       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_TimeCnt_Total                                           5EE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_HZ_2K_flag                                              5EF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
-_HZ_1K_flag                                              5F0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_Switch_Mode                                             5B8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_Switch_Mode_Pre                                         5B9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_IO_Buffer                                               5BA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_TimeCnt                                                 5BB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_R_DebounceCnt                                           5BC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_gTemp                                                   5BD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_gVolume                                                 5BE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_TimeCnt_Total                                           5BF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_HZ_2K_flag                                              5C0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
+_HZ_1K_flag                                              5C1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\main.obj"
 _BREAK                                                   204BB2    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\isr.obj"
 _FIQ                                                     204BB7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\isr.obj"
 _IRQ0                                                    204BE8    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\isr.obj"
@@ -80,7 +80,7 @@ _A1800Stop                                               204E81    "D:\Prj_GPCE3
 F_DAC2RampDnISR                                          204E85    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\system.obj"
 _A3400ProStop                                            204E94    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\system.obj"
 F_SW_MuteControl                                         205000    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\system.obj"
-__sn_ram_end                                             83B       "Linker internal symbol"
+__sn_ram_end                                             80C       "Linker internal symbol"
 _SPI_ReadAWord                                           204A21    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\flash.obj"
 F_SPI_ReadAWord                                          204A25    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\flash.obj"
 _SPI_ReadNWords_LH                                       204A7C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\flash.obj"
@@ -102,84 +102,84 @@ _Led_Blink                                               204955    "D:\Prj_GPCE3
 _Motor_On                                                204991    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED_Drive.obj"
 _Motor_Off                                               2049A7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED_Drive.obj"
 _Set_RandomVL_Index                                      205C65    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_A1800_Flag                                              600       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_A3400_Flag                                              601       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_TwoKeyflag                                              602       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_PauseFlag                                               603       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_DAC1_Data_Temp                                          604       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_PlayQuestionflag                                        605       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_CheaterFlag                                             606       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Play_Con                                                607       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Pass_Key_temp                                           608       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Passing_Check                                           609       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_sp_offset                                               60A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Last_VL                                                 60B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_LFX_Led                                                 60C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_LFX_Led_Color                                           60E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_A1800_Flag                                              5D1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_A3400_Flag                                              5D2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_TwoKeyflag                                              5D3       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_PauseFlag                                               5D4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_DAC1_Data_Temp                                          5D5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_PlayQuestionflag                                        5D6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_CheaterFlag                                             5D7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Play_Con                                                5D8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Pass_Key_temp                                           5D9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Passing_Check                                           5DA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_sp_offset                                               5DB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Last_VL                                                 5DC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_LFX_Led                                                 5DD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_LFX_Led_Color                                           5DF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
 _PlayA1800_Other                                         205CAC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Pause_Process                                           205DB2    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_PlayA1800_ElementsInit                                  205EAC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_PlayA1800_Elements                                      205F27    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Change_idex                                             206061    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
-_Play_Seq                                                20607B    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Pause_Process                                           205DA4    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_PlayA1800_ElementsInit                                  205E9E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_PlayA1800_Elements                                      205F19    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Change_idex                                             206053    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
+_Play_Seq                                                20606D    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"
 _Key_Scan_ServiceLoop                                    204B4B    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
-_Key                                                     5D7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
-_Pressflag                                               5D9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
-_LongPressflag                                           5DA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
-_Key_Debounce                                            5D6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
+_Key                                                     5A8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
+_Pressflag                                               5AA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
+_LongPressflag                                           5AB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
+_Key_Debounce                                            5A7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
 _Key_Scan_Init                                           204B27    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
 _Key_Scan_Init_Wakeup                                    204B38    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Key_server.obj"
 _Delay_Xms_PowerOn                                       204835    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Sleep.obj"
 _Goto_Sleep                                              20484E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Sleep.obj"
 _Get_Standy                                              2083AC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_i_g                                                     677       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_Sensor_Status                                         678       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_Sum_X                                                   679       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_Sum_Y                                                   67B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_Sum_Z                                                   67D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_Sum_X_Standy                                            67F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_Sum_Y_Standy                                            693       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_Sum_Z_Standy                                            6A7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_V_Sum_X_Standy                                          6BB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_V_Sum_Y_Standy                                          6BD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_V_Sum_Z_Standy                                          6BF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_value                                                 6C1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_countx                                                  7ED       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_county                                                  7EE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_countz                                                  7EF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionX                                               7F0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionX_Max                                           7F4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionX_Min                                           7F6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionZ_Max                                           7F8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionZ_Min                                           7FA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_time_Max                                                7FC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_time_Min                                                7FD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_stepflag                                                7FE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_stepflag_Y                                              7FF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_stepflag_Z                                              800       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionY_Max                                           801       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionY_Min                                           803       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_time_Max_Y                                              805       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_time_Min_Y                                              806       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_time_Max_Z                                              807       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_time_Min_Z                                              808       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MAX_time_Max                                            809       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MAX_time_Min                                            80A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MAX_time_Max_Y                                          80B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MAX_time_Min_Y                                          80C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MAX_time_Max_Z                                          80D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MAX_time_Min_Z                                          80E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_FailV                                                   80F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_MoveOnflag                                              810       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_T_wavecnt                                               811       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_T_wavecnt_Y                                             812       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_T_wavecnt_Z                                             813       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_X_A                                                   814       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_X_M                                                   815       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_Y_A                                                   816       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_Y_M                                                   817       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_Z_A                                                   818       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_G_Z_M                                                   819       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_i_g                                                     648       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_Sensor_Status                                         649       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_Sum_X                                                   64A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_Sum_Y                                                   64C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_Sum_Z                                                   64E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_Sum_X_Standy                                            650       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_Sum_Y_Standy                                            664       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_Sum_Z_Standy                                            678       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_V_Sum_X_Standy                                          68C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_V_Sum_Y_Standy                                          68E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_V_Sum_Z_Standy                                          690       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_value                                                 692       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_countx                                                  7BE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_county                                                  7BF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_countz                                                  7C0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionX                                               7C1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionX_Max                                           7C5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionX_Min                                           7C7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionZ_Max                                           7C9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionZ_Min                                           7CB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_time_Max                                                7CD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_time_Min                                                7CE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_stepflag                                                7CF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_stepflag_Y                                              7D0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_stepflag_Z                                              7D1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionY_Max                                           7D2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionY_Min                                           7D4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_time_Max_Y                                              7D6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_time_Min_Y                                              7D7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_time_Max_Z                                              7D8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_time_Min_Z                                              7D9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MAX_time_Max                                            7DA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MAX_time_Min                                            7DB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MAX_time_Max_Y                                          7DC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MAX_time_Min_Y                                          7DD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MAX_time_Max_Z                                          7DE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MAX_time_Min_Z                                          7DF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_FailV                                                   7E0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_MoveOnflag                                              7E1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_T_wavecnt                                               7E2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_T_wavecnt_Y                                             7E3       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_T_wavecnt_Z                                             7E4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_X_A                                                   7E5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_X_M                                                   7E6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_Y_A                                                   7E7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_Y_M                                                   7E8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_Z_A                                                   7E9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_G_Z_M                                                   7EA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
 _save_Standy_X_Y                                         20848E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
 _movement_end_check                                      20881A    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
 _check_Standy_X                                          2088AA    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
@@ -192,21 +192,21 @@ _G_Sensor_Real                                           2089F0    "D:\Prj_GPCE3
 _G_Sensor_Check                                          209178    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
 _WaitAction                                              209BA9    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
 _Mov_Detected                                            209C5B    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_velocityx                                               81B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_velocityy                                               81F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_velocityz                                               823       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionY                                               827       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_positionZ                                               82B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_accelerationx                                           82F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_accelerationy                                           833       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
-_accelerationz                                           837       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_velocityx                                               7EC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_velocityy                                               7F0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_velocityz                                               7F4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionY                                               7F8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_positionZ                                               7FC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_accelerationx                                           800       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_accelerationy                                           804       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
+_accelerationz                                           808       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\G_Sensor.obj"
 _G_Sensor_Init                                           205168    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
-_R_ReadG_Flag                                            5E1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
-_R_IIC_BufferIndex                                       5E2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
-_ACC_X                                                   5E3       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
-_ACC_Y                                                   5E4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
-_ACC_Z                                                   5E5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
-_SR_Data                                                 5E6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+_R_ReadG_Flag                                            5B2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+_R_IIC_BufferIndex                                       5B3       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+_ACC_X                                                   5B4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+_ACC_Y                                                   5B5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+_ACC_Z                                                   5B6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
+_SR_Data                                                 5B7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
 _IIC_MasterInit                                          2051D3    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
 _SDA_InputHigh                                           20520C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
 _SDA_OutputLow                                           205233    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\IIC_Master.obj"
@@ -229,129 +229,129 @@ _i2c_write_byte                                          205B11    "D:\Prj_GPCE3
 _mc3416_init                                             205B38    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\MC3416_I2C.obj"
 _sensor_read_xyz                                         205BFC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\MC3416_I2C.obj"
 _mc3416_Standby                                          205C49    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\MC3416_I2C.obj"
-_GetSpeed                                                20647E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Sleep_IO_Temp                                           610       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Wakeup_IO_Temp                                          611       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Wakeup_IO_Temp_debouce                                  612       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_TimeCnt_Key                                             613       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_T_Countdowncnt                                          614       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_TimeCnt1                                                615       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_TimeTatleCnt                                            616       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_gQuestionIdx                                            617       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Mem0                                                    618       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_LED_Cnt                                                 620       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_R_QuestionNum                                           621       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Mission_Num                                             622       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Serie_Catch                                             623       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Serie_Catch2                                            624       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_MotorOnflag                                             625       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_FiveSec_cnt                                             626       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_temp_FiveSec_cnt                                        627       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_FiveSec_En                                              628       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Key_activeflag                                          629       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_TwoKey_temp                                             62A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_TwoKey_cnt                                              62B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Key_Event                                               62C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_BlinkFlag_Data                                          62D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_LedBlink                                                62E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Eventflag                                               62F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Key_Buffer                                              630       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Key_TrueFlase_Buffer                                    631       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Sleepflag                                               632       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Time_Countdown                                          633       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Time_Countdownflag                                      634       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Countdownflag                                           635       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_R_Envi                                                  636       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_BlinkStopFlag                                           637       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Medal_flag                                              638       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_FoundV                                                  639       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_MissionZFail                                            63A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_FailV2                                                  63B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Resumeflag                                              63C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_SpeedVar                                                63D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_MoveSucessFlag                                          63E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_IMMO_Flag                                               63F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_FillerCount                                             640       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Last_VL_Det                                             641       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_PlaySFX_Flag                                            642       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_CoMov                                                   643       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Serie_CorrectMov                                        644       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_OffText                                                 645       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Previous_Mov                                            646       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_temp_G_Sensor_Status                                    647       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_MCollection                                             648       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_OFF_Timeoutcnt                                          649       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_MoveText2_Right                                         64A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Arm                                                     64B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Led_Data_Play                                           64C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_PassFlag                                                652       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetSpeed                                                206474    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Sleep_IO_Temp                                           5E1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Wakeup_IO_Temp                                          5E2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Wakeup_IO_Temp_debouce                                  5E3       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TimeCnt_Key                                             5E4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_T_Countdowncnt                                          5E5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TimeCnt1                                                5E6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TimeTatleCnt                                            5E7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_gQuestionIdx                                            5E8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Mem0                                                    5E9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_LED_Cnt                                                 5F1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_R_QuestionNum                                           5F2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Mission_Num                                             5F3       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Serie_Catch                                             5F4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Serie_Catch2                                            5F5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_MotorOnflag                                             5F6       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_FiveSec_cnt                                             5F7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_temp_FiveSec_cnt                                        5F8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_FiveSec_En                                              5F9       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Key_activeflag                                          5FA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TwoKey_temp                                             5FB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TwoKey_cnt                                              5FC       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Key_Event                                               5FD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_BlinkFlag_Data                                          5FE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_LedBlink                                                5FF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Eventflag                                               600       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Key_Buffer                                              601       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Key_TrueFlase_Buffer                                    602       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Sleepflag                                               603       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Time_Countdown                                          604       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Time_Countdownflag                                      605       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Countdownflag                                           606       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_R_Envi                                                  607       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_BlinkStopFlag                                           608       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Medal_flag                                              609       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_FoundV                                                  60A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_MissionZFail                                            60B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_FailV2                                                  60C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Resumeflag                                              60D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_SpeedVar                                                60E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_MoveSucessFlag                                          60F       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_IMMO_Flag                                               610       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_FillerCount                                             611       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Last_VL_Det                                             612       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_PlaySFX_Flag                                            613       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_CoMov                                                   614       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Serie_CorrectMov                                        615       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_OffText                                                 616       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Previous_Mov                                            617       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_temp_G_Sensor_Status                                    618       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_MCollection                                             619       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_OFF_Timeoutcnt                                          61A       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_MoveText2_Right                                         61B       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TokenMission                                            61C       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Led_Data_Play                                           61D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_PassFlag                                                623       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
 _BitMap                                                  2043A7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
 _Intro_Table                                             2043B7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
 _Movetext_Table                                          2043C2    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
 _End_Table                                               2043F0    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetWalk                                                 206493    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetSize                                                 2064A9    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetSpecial                                              2064BF    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetPower                                                2064D5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetEnvir                                                2064EB    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetMission_Type                                         206501    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetElement_SP                                           206517    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetEnvir_Pok                                            20652E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GetMission_name                                         206544    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Move_data                                           206559    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_MoveText_data                                       206576    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_delay_time                                              2065A0    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Demo                                                    2065BA    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Led_ON_Some                                             2065D0    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Led_OFF_Some                                            2065DF    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_LQA                                                 2065F1    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_InCollection_Pok                                    206623    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_LQA_Mission                                         206655    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_PokecatchInMisson                                   206687    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_MissionPok_Same                                     2066D6    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Mission_SuccessNT                                   20671C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_GameTimeout                                             20674E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Read_Flash_info                                         2067AF    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Leader_Light                                            2067D0    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Registered_Player_Num                               2067D4    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_LedDate_From_Play                                   2067F5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Firstcnt_From_Play                                  20681E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Firstcolor_From_Play                                20683D    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_FirstBit_From_Play                                  20685C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Reset_OneMissionPokemon                                 206884    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Reset_OneMissionFiller                                  2068D6    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_CheckPokeCatchEquMission                                206928    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_SetCollectOfMission                                     206975    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_CheckPokemon_ifMission                                  2069F2    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_CheckCatch_ifMission                                    206A2D    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_CheckPok_InCollectiORNocatch                            206A81    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Mission                                             206AF4    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Select_Pokenmonrandom                                   206B4B    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_SelectPokemon                                           206B94    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Play_Activeplayer                                       206CED    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Rest_LQA                                                206D26    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Rest_Pokecatch_Pok                                      206D3F    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Rest_MissionSuccess_InCollectio                         206D81    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Get_Key                                                 206DAD    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Rest_Randm                                              20704B    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Step1                                                   2070A5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Select_Mission                                          207127    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_CheckIntro                                              20712F    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Mission                                                 20716E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Go_Rest                                                 20756E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Sleeping                                                207596    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Test_Assembly                                           2075F6    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Play_Seq_Test                                           2076E6    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_TestBonding                                             20774C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Pokenm_LQ                                               653       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_InCollection_Pok                                        65D       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Pokecatch_Pok                                           667       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_Mission_Success                                         671       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
-_DetectionFlag                                           676       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetWalk                                                 206489    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetSize                                                 20649F    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetSpecial                                              2064B5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetPower                                                2064CB    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetEnvir                                                2064E1    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetMission_Type                                         2064F7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetElement_SP                                           20650D    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetEnvir_Pok                                            206524    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GetMission_name                                         20653A    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Move_data                                           20654F    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_MoveText_data                                       20656C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_delay_time                                              206596    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Demo                                                    2065B0    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Led_ON_Some                                             2065C6    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Led_OFF_Some                                            2065D5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_LQA                                                 2065E7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_InCollection_Pok                                    206619    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_LQA_Mission                                         20664B    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_PokecatchInMisson                                   20667D    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_MissionPok_Same                                     2066CC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Mission_SuccessNT                                   206712    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_GameTimeout                                             206744    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Read_Flash_info                                         2067A7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Leader_Light                                            2067C8    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Registered_Player_Num                               2067CC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_LedDate_From_Play                                   2067ED    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Firstcnt_From_Play                                  206816    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Firstcolor_From_Play                                206835    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_FirstBit_From_Play                                  206854    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Reset_OneMissionPokemon                                 20687C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Reset_OneMissionFiller                                  2068CE    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_CheckPokeCatchEquMission                                206920    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_SetCollectOfMission                                     20696D    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_CheckPokemon_ifMission                                  2069EA    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_CheckCatch_ifMission                                    206A25    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_CheckPok_InCollectiORNocatch                            206A79    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Mission                                             206AEC    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Select_Pokenmonrandom                                   206B43    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Play_Activeplayer                                       206B8C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Rest_LQA                                                206BC5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Rest_Pokecatch_Pok                                      206BDE    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Rest_MissionSuccess_InCollectio                         206C20    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Get_Key                                                 206C4C    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Rest_Randm                                              206EF0    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Intro                                                   206F8E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Step1                                                   207039    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Select_Mission                                          2070BD    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_CheckIntro                                              2070C5    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Mission                                                 207117    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Go_Rest                                                 207589    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Sleeping                                                2075B1    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Test_Assembly                                           207611    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Play_Seq_Test                                           207701    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_TestBonding                                             207767    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Pokenm_LQ                                               624       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_InCollection_Pok                                        62E       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Pokecatch_Pok                                           638       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_Mission_Success                                         642       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
+_DetectionFlag                                           647       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"
 _AntiCrackFun                                            2048B1    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\AntiCrack.obj"
 _T_Scr                                                   20187E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\AntiCrack.obj"
 _T_Szjt_enc                                              20187F    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\AntiCrack.obj"
-_R_WrongICflag                                           5E0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\AntiCrack.obj"
+_R_WrongICflag                                           5B1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\AntiCrack.obj"
 _SPI_Flash_ReadAWord                                     77        "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\SPI_Flash_CE3.obj"
 F_SPI_Flash_ReadAWord                                    7B        "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\SPI_Flash_CE3.obj"
 _SPI_Flash_ReadNWords                                    B8        "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\SPI_Flash_CE3.obj"
@@ -387,13 +387,13 @@ _LED1_RGB_IO                                             20439B    "D:\Prj_GPCE3
 _LED2_RGB_IO                                             20439E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 _LED3_RGB_IO                                             2043A1    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 _LED4_RGB_IO                                             2043A4    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_LED1_RGB                                                5F1       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_LED2_RGB                                                5F4       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_LED3_RGB                                                5F7       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_LED4_RGB                                                5FA       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_R_PWM_Cnt                                               5FD       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_LFX_Led_cnt                                             5FE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
-_Color_SetFlag                                           5FF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_LED1_RGB                                                5C2       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_LED2_RGB                                                5C5       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_LED3_RGB                                                5C8       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_LED4_RGB                                                5CB       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_R_PWM_Cnt                                               5CE       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_LFX_Led_cnt                                             5CF       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
+_Color_SetFlag                                           5D0       "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 _Clean_LFX_Color                                         20549E    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 _Clean_Led_Color                                         2054B7    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 _ChangeColor                                             2054EE    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
@@ -402,7 +402,7 @@ _Set_Led_RGB                                             2056F7    "D:\Prj_GPCE3
 _Led_On                                                  2057F9    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 _Led_Off                                                 205810    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\LED.obj"
 __RES_ROM_ZAT001A_V_BIN_sa                               209D18    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\ROM_ZAT001A_V_bin.res"
-__RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\ROM_ZAT001A_V_bin.res"
+__RES_ROM_ZAT001A_V_BIN_ea                               4C0687    "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\ROM_ZAT001A_V_bin.res"
 ***********************************************************************************************************************************************************************************************************************************************************************************************************
 
 ***********************************************************************************************************************************************************************************************************************************************************************************************************
@@ -415,7 +415,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    _CODE_SPI_SEC(CODE)                                 204E98              204FE0              149                                                                                                                                                                                                      *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                20387F(5E7)         203888(5F0)         A                                                                                                                                                                                                        *
+*    IRAM                                                20387F(5B8)         203888(5C1)         A                                                                                                                                                                                                        *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -592,7 +592,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
 *    IRAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
-*    RAM                                                 59F                 5D4                 36                                                                                                                                                                                                       *
+*    RAM                                                 59F                 5A5                 7                                                                                                                                                                                                        *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    ORAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    OSRAM                                               ----                ----                ----                                                                                                                                                                                                     *
@@ -630,10 +630,10 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    ORAM_BANK0                                          ----                ----                ----                                                                                                                                                                                                     *
 * "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Play_Speech.obj"                                                                                                                                                                                                                        *
 *    DEBUG                                               ----                ----                ----                                                                                                                                                                                                     *
-*    _CODE_SPI_SEC(CODE)                                 205C65              20647D              819                                                                                                                                                                                                      *
+*    _CODE_SPI_SEC(CODE)                                 205C65              206473              80F                                                                                                                                                                                                      *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                203898(600)         2038A7(60F)         10                                                                                                                                                                                                       *
+*    IRAM                                                203898(5D1)         2038A7(5E0)         10                                                                                                                                                                                                       *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -656,7 +656,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
 *    IRAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
-*    RAM                                                 5D5                 5DA                 6                                                                                                                                                                                                        *
+*    RAM                                                 5A6                 5AB                 6                                                                                                                                                                                                        *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    ORAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    OSRAM                                               ----                ----                ----                                                                                                                                                                                                     *
@@ -696,7 +696,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    _CODE_SPI_SEC(CODE)                                 2083AC              209D17              196C                                                                                                                                                                                                     *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                20390F(677)         203AD2(83A)         1C4                                                                                                                                                                                                      *
+*    IRAM                                                20390F(648)         203AD2(80B)         1C4                                                                                                                                                                                                      *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -717,7 +717,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    _CODE_SPI_SEC(CODE)                                 205168              205484              31D                                                                                                                                                                                                      *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                203879(5E1)         20387E(5E6)         6                                                                                                                                                                                                        *
+*    IRAM                                                203879(5B2)         20387E(5B7)         6                                                                                                                                                                                                        *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -756,10 +756,10 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    ORAM_BANK0                                          ----                ----                ----                                                                                                                                                                                                     *
 * "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\Algorithm.obj"                                                                                                                                                                                                                          *
 *    DEBUG                                               ----                ----                ----                                                                                                                                                                                                     *
-*    _CODE_SPI_SEC(CODE)                                 20647E              20780A              138D                                                                                                                                                                                                     *
+*    _CODE_SPI_SEC(CODE)                                 206474              207825              13B2                                                                                                                                                                                                     *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                2038A8(610)         20390E(676)         67                                                                                                                                                                                                       *
+*    IRAM                                                2038A8(5E1)         20390E(647)         67                                                                                                                                                                                                       *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -780,7 +780,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    _CODE_SPI_SEC(CODE)                                 2048B1              2048F5              45                                                                                                                                                                                                       *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                203878(5E0)         203878(5E0)         1                                                                                                                                                                                                        *
+*    IRAM                                                203878(5B1)         203878(5B1)         1                                                                                                                                                                                                        *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -803,7 +803,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
 *    IRAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
-*    RAM                                                 5DB                 5DF                 5                                                                                                                                                                                                        *
+*    RAM                                                 5AC                 5B0                 5                                                                                                                                                                                                        *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    ORAM                                                ----                ----                ----                                                                                                                                                                                                     *
 *    OSRAM                                               ----                ----                ----                                                                                                                                                                                                     *
@@ -865,7 +865,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *    _CODE_SPI_SEC(CODE)                                 205485              20581E              39A                                                                                                                                                                                                      *
 *    _DATA_SPI_SEC(DATA)                                 ----                ----                ----                                                                                                                                                                                                     *
 *    TEXT                                                ----                ----                ----                                                                                                                                                                                                     *
-*    IRAM                                                203889(5F1)         203897(5FF)         F                                                                                                                                                                                                        *
+*    IRAM                                                203889(5C2)         203897(5D0)         F                                                                                                                                                                                                        *
 *    ISRAM                                               ----                ----                ----                                                                                                                                                                                                     *
 *    RAM                                                 ----                ----                ----                                                                                                                                                                                                     *
 *    SRAM                                                ----                ----                ----                                                                                                                                                                                                     *
@@ -884,7 +884,7 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 * "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\RomCodeOBJ_GPCE1_CE3.obj"                                                                                                                                                                                                               *
 *    ROMCODE_SPI_Data(CODE)                              201940              20385A              1F1B                                                                                                                                                                                                     *
 * "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\ROM_ZAT001A_V_bin.res"                                                                                                                                                                                                                  *
-*    __sn_section_RES_ROM_ZAT001A_V_BIN(DATA)            209D18              4C05CA              2B68B3                                                                                                                                                                                                   *
+*    __sn_section_RES_ROM_ZAT001A_V_BIN(DATA)            209D18              4C0686              2B696F                                                                                                                                                                                                   *
 * "modu1" "CMacro1232.lib"                                                                                                                                                                                                                                                                                *
 *    DEBUG                                               ----                ----                ----                                                                                                                                                                                                     *
 *    CODE                                                203EF5              203F51              5D                                                                                                                                                                                                       *
@@ -1398,9 +1398,9 @@ __RES_ROM_ZAT001A_V_BIN_ea                               4C05CB    "D:\Prj_GPCE3
 *     Type                          Total               Using        Remain                                                                                                                                                                                                                               *
 ***********************************************************************************************************************************************************************************************************************************************************************************************************
 * "SRam/OSRam/ISRam"                40                   30           10                                                                                                                                                                                                                                  *
-* "Ram"                             BF0                  82B          3C5                                                                                                                                                                                                                                 *
+* "Ram"                             BF0                  7FC          3F4                                                                                                                                                                                                                                 *
 * "First Bank Rom"                  0                    0            0                                                                                                                                                                                                                                   *
-* "Other Banks Rom"                 1FFE800              2BE11D       1D406E3                                                                                                                                                                                                                             *
+* "Other Banks Rom"                 1FFE800              2BE1F4       1D4060C                                                                                                                                                                                                                             *
 ***********************************************************************************************************************************************************************************************************************************************************************************************************
 
 Linker Output Filename : D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Debug\GPCE3400A_Demo.TSK
@@ -1410,4 +1410,4 @@ Format :                 Microtek
 
 Linker Errors :          0
 Output Format :          TSK
-Max Used Address :       0x4C05CA
+Max Used Address :       0x4C0686

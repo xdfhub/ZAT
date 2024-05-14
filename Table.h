@@ -12,9 +12,9 @@
 #define T_Mission_name                   1000
 #define T_Intro1                         1100
 #define T_Intro2                         1400
-#define T_Intro3                         4450
-#define T_Intro4                         4650
-#define T_Intro5                         4850
+#define T_Intro3                         1800
+#define T_Intro4                         2200
+#define T_Intro5                         2600
 #define T_Intro6                         5050
 #define T_Intro7                         5250
 #define T_Intro8                         5450

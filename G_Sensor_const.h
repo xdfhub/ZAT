@@ -17,21 +17,23 @@
 #define C_StartMove_Dif  1200 //400比基准差值 认为Move启动
 
 
-#define V_X_A   300000//32 X           //#define       360000//32  V_Right
-#define V_X_M   -350000//28 X           //#define    -320000//28   V_Left
+#define V_X_A   280000//30 X           //#define       360000//32  V_Right
+#define V_X_M   -300000//35 X           //#define    -320000//28   V_Left
 
-#define V_Y_A    350000//28  Y           //#define    280000//25   V_Hit
+#define V_Y_A    280000//35  Y           //#define    280000//25   V_Hit
 #define V_Y_M   -250000//28 Y          //#define     -280000//26  V_Back
 
 #define V_Z_A   280000 //32 Z           //#define       360000//32  V_Up
 #define V_Z_M   -300000//28 Z          //#define    -320000//28    V_Down
-                                        //
-#define V_Position_Min  -280000//22     //#define V_Position_Min  -220000//20
-#define V_Position_Max   280000//25     //#define V_Position_Max   250000
+   
+   
+//反向运动值，过滤反向运动，                                        //
+#define V_Position_Min  -220000//22  小于   //#define V_Position_Min  -220000//20  
+#define V_Position_Max   220000//25     //#define V_Position_Max   250000
                                         //
                                         //
 #define V_Position_Min_Y  -180000//20   //#define V_Position_Min_Y  -200000
-#define V_Position_Max_Y   280000//22   //#define V_Position_Max_Y   220000//25
+#define V_Position_Max_Y   220000//22   //#define V_Position_Max_Y   220000//25
 
 #define V_Position_Min_Z  -180000//20   
 #define V_Position_Max_Z   180000//22  
