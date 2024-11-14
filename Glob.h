@@ -159,20 +159,6 @@
 #define B_Joey      0x10
 #define B_Ross      0x20
 
-      
-//Roundingfalg 
-#define Rounding1 1
-#define Rounding2 2
-#define Rounding3 3
-
-
-
-
-
-/////////////////////////////
-#define Round2 0
-#define Round3 1
-
 ///////////////////////////
 #define Final_Score 1
 
@@ -182,20 +168,11 @@
 #define True 1
 #define False 0
 
-#define D_A 0x02
-#define D_B 0x02
-
-
-
-
 
 
 //G_Sensor
 
- #define Up_rate 0
- #define Down_rate 1
- #define Right_rate   2
- #define Left_rate  3
+
 
 #define G_UP     0x01
 #define G_Down   0x02
@@ -302,23 +279,6 @@
 
 
 
-
-#define T_Beginner 0x01
-#define T_Expert   0x02
-#define T_Advanced 0x04
-
-
-
-
-
-        
-
-
-
-
-
-
-
 //////////////////////////////////////////////////////////////无效
 
 #define C_TableQuetionAddr				900
@@ -345,7 +305,7 @@
 #define C_Gone					0xF002                
 #define C_StartGame             0xF003 
 #define C_Step1	   	                   0xF004            
-#define C_SelectQuestion_Round1        0xF005  
+//#define C_SelectQuestion_Round1        0xF005  
 //#define C_SelectQuestion_Round2        0xF006  
 #define C_SelectQuestion_Round3        0xF007  
 #define C_KeyOFF				       			  0xF008  	   
@@ -361,12 +321,14 @@
 #define C_Mission     0xF013//mission
 #define C_CheckCn        0xF014
 #define C_SelectMission  0xF015
-#define C_TurnSolo   0xF016
-#define C_NewGame      0xF017
+#define C_TurnSolo      0xF016
+#define C_NewGame       0xF017
 #define C_TimeoutF   0xF018
 #define C_EndGame    0xF019
 #define C_MissinZer0 0xF020
 #define C_Inmission  0xF021
+#define C_Ga01       0xF022
+#define C_Misson_Mi03 0xF023
 
                                              
 
@@ -408,47 +370,47 @@
 
 
 
-#define Serie_Fail  0
+#define Serie_Wrong  0
 #define Serie_Hello 1
-#define Serie_Start 2
-#define Serie_NewMission 3
-#define Serie_Shake 4
-#define Serie_Found  5
-#define Serie_BACKWARD  6//注意后面排序
-#define Serie_ForWard   7
-#define Serie_Up        8
-
-#define Serie_TurnAround      13
-#define Serie_Cave_Mov   14
-#define Serie_special_Mov 20
-#define Serie_Walk_CRAWL 21
-#define Serie_Speed_1    24
-#define Serie_Speed_Tr1  26//trf3
-#define Serie_Speed_2    27
-#define Serie_Speed_3    30
-
-                                  
-#define Serie_Congrat             33 
-#define Serie_Great               34 
-//#define Serie_MZ_Fail             35 
-//#define Serie_Immo                36 
-#define Serie_Jump                37 
-#define Serie_Wrong               38 
-#define Serie_Detect              39 
-#define Serie_Silent              40 
-#define Serie_Escape              41 
-#define Serie_EndM                42 
-#define Serie_Wrong2              43 
-#define Serie_Speed               44
-#define Serie_Upf3                45
-
-#define Serie_Rightf3             47
-#define Serie_Leftf3              48
-#define Serie_Worng3              49
-#define Serie_Map_Intro           50
-#define Serie_PostFiller          51
-#define Serie_InFront             52
-#define Serie_Intro07             53
+//#define Serie_Start 2
+//#define Serie_NewMission 3
+//#define Serie_Shake 4
+//#define Serie_Found  5
+//#define Serie_BACKWARD  6//注意后面排序
+//#define Serie_ForWard   7
+//#define Serie_Up        8
+//
+//#define Serie_TurnAround      13
+//#define Serie_Cave_Mov   14
+//#define Serie_special_Mov 20
+//#define Serie_Walk_CRAWL 21
+//#define Serie_Speed_1    24
+//#define Serie_Speed_Tr1  26//trf3
+//#define Serie_Speed_2    27
+//#define Serie_Speed_3    30
+//
+//                                  
+//#define Serie_Congrat             33 
+//#define Serie_Great               34 
+////#define Serie_MZ_Fail             35 
+////#define Serie_Immo                36 
+//#define Serie_Jump                37 
+////#define Serie_Wrong               38 
+//#define Serie_Detect              39 
+//#define Serie_Silent              40 
+//#define Serie_Escape              41 
+//#define Serie_EndM                42 
+//#define Serie_Wrong2              43 
+//#define Serie_Speed               44
+//#define Serie_Upf3                45
+//
+//#define Serie_Rightf3             47
+//#define Serie_Leftf3              48
+//#define Serie_Worng3              49
+//#define Serie_Map_Intro           50
+//#define Serie_PostFiller          51
+//#define Serie_InFront             52
+//#define Serie_Intro07             53
 
 
 

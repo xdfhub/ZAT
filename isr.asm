@@ -39,8 +39,8 @@
 .external _TwokeyCntl
 .external _FiveSec_cnt
 .external _PassTimeCnt
-.external _TimeCnt_Speed
-.external _TimeCnt_Testingmode
+//.external _TimeCnt_Speed
+//.external _TimeCnt_Testingmode
 .external _TimeCnt_Key
 .external _T_wavecnt
 .external _T_wavecnt_Y
@@ -455,9 +455,9 @@ _IRQ7:
     [_TimeCnt_Key] =r1
 
 
-    r1 =[_FiveSec_cnt]
-    r1+=1
-    [_FiveSec_cnt] =r1
+//    r1 =[_FiveSec_cnt]
+//    r1+=1
+//    [_FiveSec_cnt] =r1
 //   
 //   r1 =[_PassTimeCnt]
 //   r1+=1

@@ -47,7 +47,7 @@
 typedef struct{
 
      unsigned int TokenText           : 1;
-     unsigned int OSC_AUDIO           : 1;
+     unsigned int PowerON             : 1;
      unsigned int OSC_CORE            : 1;
      unsigned int EXT_CLK             : 1;
      unsigned int RESERVED0           : 1;
@@ -73,9 +73,10 @@ typedef  struct
 {
 	unsigned int Mission_Cur ;//=0;//实际编号从1开始
 	unsigned int Mission_Pok_Same;//=0;
-	BitDef_f firstFlag_23b ;//=0;
 	unsigned int Arm_Mode;//=0;
 	unsigned int MissionZ_flag;
+	unsigned int Reserve;
+	BitDef_f firstFlag_23b ;//=0;
 	unsigned int X;//不用写入flash
 	unsigned int Y;//不用写入flash
 	unsigned int Z;//不用写入flash
@@ -95,7 +96,7 @@ MediumBlue         ,
 DarkSlateBlue      ,
 SaddleBrow         ,
 OliveDrab       ,   
-
+OrangeRed,
 Color_NULL}LED_Color;
 
 

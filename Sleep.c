@@ -96,13 +96,11 @@ void Goto_Sleep()
 //    GetMode();
     
      Test_Assembly(); 
-    // TestBonding();
+     Reset_Action();
+     TestBonding();
      Time_init();
     
-   
-    
-  
-  
+ 
 //	asm("FIQ ON");
 //	asm("IRQ ON");
 //	SPI_Initial();

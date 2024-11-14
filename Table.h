@@ -74,8 +74,9 @@
 #define T_End4                           32000   
 #define T_End5                           33000   
 #define T_End6                           34000   
-#define T_End7                           35000	 
-#define T_Movecolor                      36000
+#define T_End7                           35000	
+#define T_Misson_Que                     36000
+#define T_Movecolor                      36200
 
 //#define C_T_EndMission                 4500
 //#define C_T_Inbetween                  8500

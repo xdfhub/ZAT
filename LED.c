@@ -12,9 +12,9 @@ extern unsigned LED_Cnt;
 extern  const unsigned BitMap[];
 //unsigned  int ChangeColorFlag =0;
 
-#define C_Color_NULL 22
+#define C_Color_NULL 23
 //enum LED_Color{Red,Orange,Yellow,Green,Cyan,Blue,Purple,Grey,White,Pink};
-const Color_Table[23][3]=
+const Color_Table[24][3]=
 {
 
 	{255/C_NumHz,0,0},	    //{255,0,0},	    //Red
@@ -39,18 +39,19 @@ const Color_Table[23][3]=
 	{72/C_NumHz,61/C_NumHz,139/C_NumHz}, 
 	{139/C_NumHz,69/C_NumHz,19/C_NumHz}, 
 	{85/C_NumHz,107/C_NumHz,47/C_NumHz}, 
+	{255/C_NumHz,69/C_NumHz,0/C_NumHz}, 
 	{0,0,0}//нчи╚	   C_Color_NULL  		
 };
 
 
+
+
+
+//unsigned int **P_LED_RGB[4]={LED1_RGB,LED2_RGB,LED3_RGB,LED4_RGB};
 unsigned int LED1_RGB[3]={0,0,0};
 unsigned int LED2_RGB[3]={0,0,0};
 unsigned int LED3_RGB[3]={0,0,0};
 unsigned int LED4_RGB[3]={0,0,0};
-
-
-//unsigned int **P_LED_RGB[4]={LED1_RGB,LED2_RGB,LED3_RGB,LED4_RGB};
-
 const unsigned int  LED1_RGB_IO[]={LED1_R,LED1_G,LED1_B};
 const unsigned int  LED2_RGB_IO[]={LED2_R,LED2_G,LED2_B};
 const unsigned int  LED3_RGB_IO[]={LED3_R,LED3_G,LED3_B};

@@ -75,6 +75,7 @@ extern unsigned int gVolume1;
 extern unsigned Eventflag;
 extern unsigned int BlinkFlag_Data;
 extern unsigned int T_Countdowncnt;
+extern unsigned TimeTatleCnt;
 extern unsigned int Time_Countdownflag;
 extern unsigned int BlinkStopFlag;
 
@@ -158,6 +159,7 @@ extern  Mem_data Mem0;
 extern const unsigned int Led_Data_Play[];
 extern const unsigned int BitMap[];
 extern unsigned int MoveText2_Right;
+extern unsigned int MotorOnflag;
 
 
 //extern unsigned Led_offset;
@@ -255,7 +257,7 @@ unsigned int  PlayA1800_Other(unsigned SpeechIndex)
    temp1+= temp2;
     
    
-   if((SpeechIndex>=Serie_Cave_Mov)&&(SpeechIndex<=Serie_special_Mov))
+/*    if((SpeechIndex>=Serie_Cave_Mov)&&(SpeechIndex<=Serie_special_Mov))
    {
    	   sp_offset = temp1;//xiang
    	   //Play_Seq(temp1,T_Serie_EnviMov);
@@ -287,7 +289,7 @@ unsigned int  PlayA1800_Other(unsigned SpeechIndex)
    }  
    	else if(SpeechIndex==Serie_Congrat)
    		 Play_Seq(temp1,T_Serie_Mov);
-   	else
+   	else */
         PlayA1800_Elements(temp1);
    
    return temp2;
@@ -379,25 +381,52 @@ unsigned int Pause_Process()
 
 				      	unsigned int Play_Con_temp=0;
 						unsigned int Blink_data_temp=0;
+						unsigned int temp_LedBlink =0;
 						unsigned int temp;
-		                 
-		            //    unsigned int  Key_True_False_Temp =0;
-
-						unsigned int out_pauseflag =0;
-		                
-		      			unsigned int time_temp = TimeCnt;						
-						//unsigned int temp_timeCnt_Speed = TimeCnt_Speed;     
+						unsigned int MotorOnflag_temp =MotorOnflag;		                
+		      			unsigned int time_temp = TimeCnt;						  
 						unsigned int temp_T_Countdowncnt =T_Countdowncnt;   
+						unsigned int temp_TimeTatleCnt=TimeTatleCnt;
+						unsigned int LFX_temp0=0;
+					    unsigned int LFX_temp1=0;
+					
+						unsigned int LED1_RGB_temp[3];
+					    unsigned int LED2_RGB_temp[3];
+					    unsigned int LED3_RGB_temp[3];
+					    unsigned int LED4_RGB_temp[3];						
+						
+						
 						
 //						 Key_buffer_First_temp=Key_buffer_First;
-						
-						
-						temp_FiveSec_cnt = FiveSec_cnt;
+	                          temp_LedBlink=LedBlink;
+                              Blink_data_temp=BlinkFlag_Data;
+								
 
-                         Blink_data_temp = BlinkFlag_Data;
-						 BlinkFlag_Data =0;
-                        
-					
+						       BlinkFlag_Data=0;
+						       Light_all_off();	
+
+                       
+                               Motor_Off();
+
+                               for(temp=0;temp<3;temp++)
+                               	{
+                                    LED1_RGB_temp[temp] =LED1_RGB[temp];
+                                    LED2_RGB_temp[temp] =LED2_RGB[temp];
+									LED3_RGB_temp[temp] =LED3_RGB[temp];
+									LED4_RGB_temp[temp] =LED4_RGB[temp];
+                               	}
+
+							   
+
+						  		Set_Led_RGB(White,Led1|Led2|Led3|Led4);                             
+                                LFX_temp0=LFX_Led[0];
+                                LFX_temp1=LFX_Led[1];								 
+								Clean_LFX_Led();
+								 
+								LedBlink= All_Led_data;
+							    BlinkFlag_Data =All_Led_data;						
+						
+					        //	temp_FiveSec_cnt = FiveSec_cnt;
                    	    Key_Event =0;
                    	    Resumeflag =0; //第一次按下已暂停声音
                    	  if(A1800_Flag)
@@ -423,14 +452,15 @@ unsigned int Pause_Process()
 										  {
 										  	Key_TrueFlase_Buffer =0;  
 									        Key_Event = LongPressflag;	//20160215 xiang
-											 return Key_Event;
+									        break;
+											// return Key_Event;
 										  	
 										  	
 										  }	     
 
 			                              if(Sleepflag) 
 			                              {                                	 	
-					                           return 1;
+					                           break;//return 1;
 			                              }
 										 
 										  if(Key)
@@ -447,105 +477,36 @@ unsigned int Pause_Process()
 														 	    Key_TrueFlase_Buffer =0;  
 																TimeCnt_Key =0;
 																
-																 out_pauseflag =1;
+																 //out_pauseflag =1;
 																 
 																 Key =0;
 													             break;
 										                  	}
-
-//
-//														  if(Key&Key_True_False_Temp)
-//														  	{
-//			                                                   Key_True_False_Temp =0;
-//															   TimeCnt_Key =0;
-//
-//														  	}
 										
 										        	}
 				  	                             
 				  	                              Key =0;	 
 
-//												 if(TimeCnt_Key<C_1s_Pause)
-//												 	{
-//			                                           if((Key_TrueFlase_Buffer + temp) == (Key_True+Key_False))
-//			                                           	{
-//
-//			                                                  temp =0;
-//			                                                  out_pauseflag =1;
-//															  break;
-//
-//
-//			                                           	}
-//
-//
-//												 	}
 			                                  if(temp&(Key_True|Key_False))//有按下
 			                                  	{
 			                                      Key_TrueFlase_Buffer = temp;
 												  TimeCnt_Key =0;
 
-			                                  	}
-//											  else if(temp&(Key_Blue|Key_Orange|Key_Pink|Key_Purple|Key_Yellow))							
-//											  	{
-//
-//												        Key_Buffer&=~temp;
-//			                                            out_pauseflag =1;
-//														break;
-//
-//											  	}
-			                                  
-												
-
+			                                  	}										
 										  	}
-
-
-//								            if(Key_TrueFlase_Buffer)
-//								        	{
-//
-//								                 if(TimeCnt_Key>=C_1s_Pause)
-//								                 	{
-//								                 		Pressflag&=~Key_TrueFlase_Buffer;//抬起无效
-//								                 	   out_pauseflag =1;
-//													   break;
-//
-//								                 	}
-//
-//								        	}
-
-//										   if((Key_True_False_Temp)&&(TimeCnt_Key>=C_2S))
-//										   	{
-//
-//
-//											    
-//											    if(!PlayScoresFlag)
-//											    {
-//											    	 SACM_A1800_Stop();
-//											         A1800_Flag = 0;							    	
-//											    	//PauseFlag =1;
-//											    	
-//											    	 BlinkFlag_Data = Blink_data_temp;
-//											        return 0;// Key_TellScores();//Tell_Scores(0);
-//											    }
-//
-//										   	}
-
-
-										
-//										if(TimeCnt>180*16)
-//										{
-//											Key_TrueFlase_Buffer =0;
-//											//TimeCnt =0;
-//											//SACM_A1800_Stop();
-//											//PlayA1800_Elements(VLFZEN7020);
-//											Sleepflag |= C_GameTimeout;							
-//											return 1;
-//										}
-																		
-
+										  	
+										  	
+										  	
+									if(TimeCnt>10*60*16)
+									{	  	
+										Key_Event =1;
+										return 1;//off  
+									}	
+										  	
 						 	}
 
 
-               if(out_pauseflag)
+               //if(out_pauseflag)
                   {
 
 
@@ -581,17 +542,35 @@ unsigned int Pause_Process()
 						   //if(PlayScoresFlag)
 							//	 Play_Con =2;
 							Play_Con = Play_Con_temp;
-					
-							BlinkFlag_Data = Blink_data_temp ;
+									
 						}
 					   
 					
 					 TimeCnt =  time_temp;
-					// TimeCnt_Speed = temp_timeCnt_Speed;
 					 T_Countdowncnt = temp_T_Countdowncnt;
+					 TimeTatleCnt =temp_TimeTatleCnt;
 					 
-					 FiveSec_cnt = temp_FiveSec_cnt;
-//					 Key_buffer_First = Key_buffer_First_temp;
+				      BlinkFlag_Data=0;
+					  Light_all_off();
+
+                     if(MotorOnflag_temp)
+                     	Motor_On();
+
+                      LFX_Led[0]=LFX_temp0;
+                      LFX_Led[1]=LFX_temp1;
+
+
+					for(temp=0;temp<3;temp++)
+                   	{
+                        LED1_RGB[temp] =LED1_RGB_temp[temp];
+                        LED2_RGB[temp] =LED2_RGB_temp[temp];
+						LED3_RGB[temp] =LED3_RGB_temp[temp];
+						LED4_RGB[temp] =LED4_RGB_temp[temp];
+                   	}
+					  
+				      LedBlink =temp_LedBlink;
+				      BlinkFlag_Data= Blink_data_temp;
+					  LED_Cnt = Blink_Fr;
 					
 					  return 0;
 
@@ -764,7 +743,7 @@ void  PlayA1800_ElementsInit(unsigned ElementsIndex)
    // if(Play_Con < 2)
   
 	    SACM_A1800_Initial();
-	    A1800_Flag = 1;
+	    A1800_Flag = 2;
 	
 	 	 A1800Stop();
 	     while(DAC1_RampDnFlag)
@@ -935,7 +914,7 @@ void  PlayA1800_Elements(unsigned ElementsIndex)
 
 
         if((ElementsIndex==SFX_Explosion)||(ElementsIndex==SFX_Smash)||(ElementsIndex==SFX_Jet)
-            ||(ElementsIndex==SFX_Shockwave))
+            ||(ElementsIndex==SFX_Shockwave)||(ElementsIndex==SFX_Bifrost)||(ElementsIndex==SFX_Landslide)||(ElementsIndex==SFX_Hulk))
             {
             	   motorflag =1;
             	   Motor_On();
@@ -1101,7 +1080,7 @@ void  PlayA1800_Elements(unsigned ElementsIndex)
    	
    	  Key_Event=0;     
       BlinkFlag_Data=0;
-      LedBlink=0;
+  //    LedBlink=0;
       Light_all_off();	
       
       Led_OFF_Some(Led1_white|Led2_white|Led3_white|Led4_white);//低推
@@ -1158,7 +1137,10 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 //	 
     if((T_TableH>=T_Intro1)&&(T_TableH<=T_Intro11))
     {
-       if((T_TableH==T_Intro2)||(T_TableH==T_Intro1)||(T_TableH==T_Intro4))
+       if(T_TableH==T_Intro2)
+            Num =6;
+       
+       else if((T_TableH==T_Intro1)||(T_TableH==T_Intro4))
            Num =4;
        else
            Num =3;
@@ -1167,8 +1149,10 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
     }
     else if((T_TableH>=T_Move1Text1)&&(T_TableH<=T_Move23Text2))
     {
-    	if((T_TableH==T_Move5Text1)||(T_TableH==T_Move4Text1))
+    	if((T_TableH==T_Move1Text1)||(T_TableH==T_Move5Text1)||(T_TableH==T_Move3Text1)||(T_TableH==T_Move4Text1)||(T_TableH==T_Move7Text1))
     		 Num =4;
+    	else if(T_TableH==T_Move6Text1)
+    	     Num =5;
         else
            Num =3;
     

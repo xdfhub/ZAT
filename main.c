@@ -108,7 +108,6 @@ int main()
 	 
  //    IIC_MasterInit();
  
- 
      mc3416_init();		
 	 Key_Scan_Init_Wakeup();//Key_Scan_Init();
 	
@@ -124,14 +123,6 @@ int main()
 
      Rest_Randm();
          
-   //  R_Envi = C_Special;
-    //  Mission_Cur =-1;
-     
-//  		gVolume = SPI_ReadAByte(24);
-//		if (!((gVolume>3)&&(gVolume<15)))
-//		{
-//			gVolume = 9;
-//		}
 
    	 asm("FIQ ON");
 	 asm("IRQ ON");
@@ -211,7 +202,15 @@ int main()
 			 
 			       gTemp  = C_Off_Mode;
 			        break;
-				   
+			        
+			 case C_Ga01:
+			         gTemp  = Ga01();
+			         break;  
+			         
+			  case C_Misson_Mi03:
+			               
+				     gTemp  = Misson_Mi03();
+			         break;  
 			default:
 			         
 
@@ -236,8 +235,8 @@ int main()
         if(Key_Event==0x88)
          {
             Key_Event =0;	
-           Mem0.Mission_Cur++;	
-		   gTemp = C_SelectMission;
+ //          Mem0.Mission_Cur++;	
+		   gTemp = C_Ga01;//C_SelectMission;
          }               
 	    else // if(Key_Event!=0x88)
 	      {

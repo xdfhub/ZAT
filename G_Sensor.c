@@ -441,7 +441,7 @@ void check_Standy_X()
 		#endif
 
 		Time_Maxinit();  
-//        time_Max =0;
+//      time_Max =0;
 //		time_Min =0;
 //		MAX_time_Max =0;
 //		MAX_time_Min =0;
@@ -453,9 +453,7 @@ void check_Standy_X()
 
 //		positionX_Staty = positionX[1];
 		
-
-
-		
+	
 
 	}
 
@@ -492,7 +490,7 @@ void check_Standy_Y()
 //		MAX_time_Min_Y =0; 
 		
 		R_Position_init();
-	   stepflag_Y =0;  //20230904
+	    stepflag_Y =0;  //20230904
 //	   positionY_Min =0;
 //	   positionY_Max =0;
 
@@ -536,10 +534,6 @@ void check_Standy_Z()
 
 
 //	   positionZ_Staty = positionZ[1];
-	
-	
-
-
 		
 	}
 
@@ -697,12 +691,6 @@ void  G_Sensor_Real()
 
 							  save_Standy_X_Y();
 
-
-//							 	G_value[y++]=Sum_X;							 	  	 
-//	
-//							 	  	if(y>199)
-//							 	       y=199;
-
                       accelerationx[1] = Sum_X;
                       accelerationy[1] = Sum_Y;
                       accelerationz[1] = Sum_Z;
@@ -714,10 +702,6 @@ void  G_Sensor_Real()
 					 if ((accelerationx[1] <=600)&&(accelerationx[1] >= -600)) //400 Discrimination window applied
 					 {accelerationx[1] = 0;} // to the X axis acceleration
 
-                   //  if(accelerationx[1]>=0)
-				   //	      timeX_Up++;
-					// else
-					 //	  timeX_Down++;
 					 
 					 //variable
 					 if ((accelerationy[1] <=600)&&(accelerationy[1] >= -600))//300
@@ -1145,27 +1129,6 @@ void  G_Sensor_Real()
                      movement_end_check();
 	
  
-
-
-//
-
-
-
-
-
-
- 
-
-
-
-
-
-
-//	                else if(positionX[1]<0)
-	                  
-	                
-	             
-	
 	
 }
 
@@ -1383,15 +1346,7 @@ unsigned int G_Sensor_Check()
 			 
 										    //if((G_Sensor_Status&0x8000)==0)
 											   {
-												//	 asm("nop");
-
-
-												//temp_long= positionZ[1]-positionZ_Staty;
-												//if ((temp_long <=500)&&(temp_long >= -500))
-												//    TimeCnt_Total =0;
-
-												
-			 
+	
 													 if((TimeCnt_Total>512*0.5))//0.6 (X_cnt>8)&&												  
 														 {
 			  
@@ -2018,7 +1973,7 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 		     	if((SACM_A1800_Status() & 0x0001) == 0)
 		   	   {  
 		   		
-                     PlayA1800_ElementsInit(SFX_Shake);
+                     return C_MovSucess;//PlayA1800_ElementsInit(SFX_Charge);//SFX_Shake
 				
 		   	   }
 		   	
@@ -2042,7 +1997,7 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 //                    stepflag_Y =0;
 //                    stepflag =0;
                     
-	                  if(A1800_Flag)
+	                  if(A1800_Flag==1)
 	                  {  
 	                     SACM_A1800_Stop();
 		                 A1800_Flag = 0;  		
@@ -2103,12 +2058,12 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 	unsigned int BlinkFlag_Data_temp =0;
     unsigned int Led_IO_temp =0;
 	
-//	if(timeoutplay ==2)
-//	  {
-//
-//		   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
-//           DetectionFlag =1; 
-//	  }
+	 if(temp_G_Sensor_Status == G_IMMO)
+	  {
+
+		   PlayA1800_ElementsInit(SFX_Wait);
+          // DetectionFlag =1; 
+	  }
 
       
  	   TimeCnt=0;
@@ -2140,21 +2095,21 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 		          }
 	     
 
-//           if(timeoutplay ==2)
-//           {
-//		   	if((SACM_A1800_Status() & 0x0001) == 0)
-//		   	{
-//		   		
-//				//if(timeoutplay ==2)
-//				  {
-//					   PlayA1800_ElementsInit(A_SFX00_Cave+R_Envi);
-//				  }
-//
-//				
-//		   	}
-//		   	
-//		   	    SACM_A1800_ServiceLoop();
-//           }
+           if(temp_G_Sensor_Status == G_IMMO)
+           {
+		   	if((SACM_A1800_Status() & 0x0001) == 0)
+		   	{
+		   		
+				//if(timeoutplay ==2)
+				  {
+					    PlayA1800_ElementsInit(SFX_Wait);
+				  }
+
+				
+		   	}
+		   	
+		   	    SACM_A1800_ServiceLoop();
+           }
 	       
 		    Get_Key(0,0);		   	
 		   	if(Key_Event)

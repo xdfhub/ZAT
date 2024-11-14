@@ -1,6 +1,6 @@
 #####################################################################
 #																	 
-#	Created by u'nSP IDE V4.0.6		17:46:02	05/14/24
+#	Created by u'nSP IDE V4.0.6		17:17:55	11/14/24
 #
 #####################################################################
 
@@ -199,7 +199,7 @@ OBJFILES	= \
 "$(OUTDIR)\MC3416_I2C.obj": "$(OUTDIR)\MC3416_I2C.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\MC3416_I2C.obj" "$(OUTDIR)\MC3416_I2C.asm" 
 
-"$(OUTDIR)\Algorithm.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Algorithm.c" ".\Glob.h" ".\voice_A18.h" ".\GPCE1_CE3.h" ".\datatype.h" ".\G_Sensor_const.h" ".\Table.h" ".\Color.h" ".\GPCE1_CE3_BODY.h" 
+"$(OUTDIR)\Algorithm.asm": "D:\Prj_GPCE3400\ZAT001A\soft\V07_95_newmove_sleep_NewPCB\Algorithm.c" ".\Glob.h" ".\voice_A18.h" ".\GPCE1_CE3.h" ".\datatype.h" ".\G_Sensor_const.h" ".\Enable.h" ".\Table.h" ".\Color.h" ".\GPCE1_CE3_BODY.h" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)\Algorithm.asm" "D:/Prj_GPCE3400/ZAT001A/soft/V07_95_newmove_sleep_NewPCB/Algorithm.c" 
 	$(ASMPATCHER) $(ASMPATCHERFLAGS) "$(OUTDIR)\Algorithm.asm" 
