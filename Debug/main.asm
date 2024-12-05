@@ -205,7 +205,7 @@ LM14:
 BB12_PU0:	// 0x4b
 // BB:12 cycle count: 1
 	     SP = SP + 1              	// [0:148]  
-L_0_33:	// 0x4c
+L_0_39:	// 0x4c
 // BB:13 cycle count: 10
 // 149  	
 // 150  	while(1)
@@ -219,7 +219,7 @@ LM15:
 	     R4 = (_Sleepflag)        	// [1:153]  Sleepflag
 	     R4 = DS:[R4]             	// [3:153]  
 	     cmp R4, 0                	// [5:153]  
-	     je L_0_35                	// [6:153]  
+	     je L_0_41                	// [6:153]  
 BB14_PU0:	// 0x52
 // BB:14 cycle count: 7
 // 154  	      {
@@ -231,7 +231,7 @@ LM16:
 	     DS = seg(_gTemp)         	// [2:155]  gTemp
 	     R4 = (_gTemp)            	// [3:155]  gTemp
 	     DS:[R4] = R3             	// [5:155]  
-L_0_35:	// 0x58
+L_0_41:	// 0x58
 // BB:15 cycle count: 11
 // 156  	      }
 // 157  		
@@ -243,144 +243,194 @@ LM17:
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61459            	// [5:159]  
-	     jb Lt_0_17               	// [7:159]  
+	     cmp R4, 61472            	// [5:159]  
+	     jb Lt_0_20               	// [7:159]  
 BB16_PU0:	// 0x5f
 // BB:16 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61459            	// [5:159]  
-	     ja Lt_0_18               	// [7:159]  
-BB17_PU0:	// 0x66
+	     cmp R4, 61472            	// [5:159]  
+	     jbe BB17_PU0             	// [7:159]  
+BB100_PU0:	// 0x66
+// BB:100 cycle count: 3
+	     goto Lt_0_21             	// [0:0]  
+BB17_PU0:	// 0x68
 // BB:17 cycle count: 3
-	     goto Lt_0_5              	// [0:159]  
-Lt_0_17:	// 0x68
+	     goto Lt_0_6              	// [0:159]  
+Lt_0_20:	// 0x6a
 // BB:18 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61444            	// [5:159]  
-	     jb Lt_0_19               	// [7:159]  
-BB19_PU0:	// 0x6f
+	     cmp R4, 61457            	// [5:159]  
+	     jb Lt_0_22               	// [7:159]  
+BB19_PU0:	// 0x71
 // BB:19 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61444            	// [5:159]  
-	     ja Lt_0_20               	// [7:159]  
-BB20_PU0:	// 0x76
+	     cmp R4, 61457            	// [5:159]  
+	     ja Lt_0_23               	// [7:159]  
+BB20_PU0:	// 0x78
 // BB:20 cycle count: 3
-	     goto Lt_0_2              	// [0:159]  
-Lt_0_19:	// 0x78
+	     goto Lt_0_7              	// [0:159]  
+Lt_0_22:	// 0x7a
 // BB:21 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
 	     cmp R4, 61443            	// [5:159]  
-	     jb Lt_0_21               	// [7:159]  
-BB22_PU0:	// 0x7f
+	     jb Lt_0_24               	// [7:159]  
+BB22_PU0:	// 0x81
 // BB:22 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
 	     cmp R4, 61443            	// [5:159]  
-	     jbe BB23_PU0             	// [7:159]  
-BB68_PU0:	// 0x86
-// BB:68 cycle count: 3
-	     goto Lt_0_11             	// [0:0]  
+	     ja Lt_0_25               	// [7:159]  
 BB23_PU0:	// 0x88
 // BB:23 cycle count: 3
 	     goto Lt_0_1              	// [0:159]  
-Lt_0_21:	// 0x8a
+Lt_0_24:	// 0x8a
 // BB:24 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
 	     cmp R4, 32768            	// [5:159]  
 	     je BB25_PU0              	// [7:159]  
-BB69_PU0:	// 0x91
-// BB:69 cycle count: 3
-	     goto Lt_0_11             	// [0:0]  
+BB83_PU0:	// 0x91
+// BB:83 cycle count: 3
+	     goto Lt_0_14             	// [0:0]  
 BB25_PU0:	// 0x93
 // BB:25 cycle count: 3
-	     goto Lt_0_8              	// [0:159]  
-Lt_0_20:	// 0x95
+	     goto Lt_0_9              	// [0:159]  
+Lt_0_25:	// 0x95
 // BB:26 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61457            	// [5:159]  
+	     cmp R4, 61444            	// [5:159]  
 	     je BB27_PU0              	// [7:159]  
-BB70_PU0:	// 0x9c
-// BB:70 cycle count: 3
-	     goto Lt_0_11             	// [0:0]  
+BB84_PU0:	// 0x9c
+// BB:84 cycle count: 3
+	     goto Lt_0_14             	// [0:0]  
 BB27_PU0:	// 0x9e
 // BB:27 cycle count: 3
-	     goto Lt_0_7              	// [0:159]  
-Lt_0_18:	// 0xa0
+	     goto Lt_0_2              	// [0:159]  
+Lt_0_23:	// 0xa0
 // BB:28 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61474            	// [5:159]  
-	     jb Lt_0_22               	// [7:159]  
+	     cmp R4, 61461            	// [5:159]  
+	     jb Lt_0_26               	// [7:159]  
 BB29_PU0:	// 0xa7
 // BB:29 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61474            	// [5:159]  
-	     ja Lt_0_23               	// [7:159]  
-BB30_PU0:	// 0xae
+	     cmp R4, 61461            	// [5:159]  
+	     jbe BB30_PU0             	// [7:159]  
+BB85_PU0:	// 0xae
+// BB:85 cycle count: 3
+	     goto Lt_0_14             	// [0:0]  
+BB30_PU0:	// 0xb0
 // BB:30 cycle count: 3
-	     goto Lt_0_9              	// [0:159]  
-Lt_0_22:	// 0xb0
+	     goto Lt_0_4              	// [0:159]  
+Lt_0_26:	// 0xb2
 // BB:31 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61472            	// [5:159]  
-	     jb Lt_0_24               	// [7:159]  
-BB32_PU0:	// 0xb7
-// BB:32 cycle count: 11
+	     cmp R4, 61459            	// [5:159]  
+	     je BB32_PU0              	// [7:159]  
+BB86_PU0:	// 0xb9
+// BB:86 cycle count: 3
+	     goto Lt_0_14             	// [0:0]  
+BB32_PU0:	// 0xbb
+// BB:32 cycle count: 3
+	     goto Lt_0_5              	// [0:159]  
+Lt_0_21:	// 0xbd
+// BB:33 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61472            	// [5:159]  
-	     jbe BB33_PU0             	// [7:159]  
-BB71_PU0:	// 0xbe
-// BB:71 cycle count: 3
-	     goto Lt_0_11             	// [0:0]  
-BB33_PU0:	// 0xc0
-// BB:33 cycle count: 4
-	     jmp Lt_0_6               	// [0:159]  
-Lt_0_24:	// 0xc1
+	     cmp R4, 61476            	// [5:159]  
+	     jb Lt_0_27               	// [7:159]  
+BB34_PU0:	// 0xc4
 // BB:34 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
-	     cmp R4, 61461            	// [5:159]  
-	     je BB35_PU0              	// [7:159]  
-BB72_PU0:	// 0xc8
-// BB:72 cycle count: 3
-	     goto Lt_0_11             	// [0:0]  
-BB35_PU0:	// 0xca
-// BB:35 cycle count: 4
-	     jmp Lt_0_4               	// [0:159]  
-Lt_0_23:	// 0xcb
+	     cmp R4, 61476            	// [5:159]  
+	     ja Lt_0_28               	// [7:159]  
+BB35_PU0:	// 0xcb
+// BB:35 cycle count: 3
+	     goto Lt_0_8              	// [0:159]  
+Lt_0_27:	// 0xcd
 // BB:36 cycle count: 11
 	     DS = seg(_gTemp)         	// [0:159]  gTemp
 	     R4 = (_gTemp)            	// [1:159]  gTemp
 	     R4 = DS:[R4]             	// [3:159]  
 	     cmp R4, 61475            	// [5:159]  
-	     jne Lt_0_11              	// [7:159]  
-BB37_PU0:	// 0xd2
-// BB:37 cycle count: 4
-	     jmp Lt_0_10              	// [0:159]  
-Lt_0_1:	// 0xd3
-Lt_0_2:	// 0xd3
+	     jb Lt_0_29               	// [7:159]  
+BB37_PU0:	// 0xd4
+// BB:37 cycle count: 11
+	     DS = seg(_gTemp)         	// [0:159]  gTemp
+	     R4 = (_gTemp)            	// [1:159]  gTemp
+	     R4 = DS:[R4]             	// [3:159]  
+	     cmp R4, 61475            	// [5:159]  
+	     jbe BB38_PU0             	// [7:159]  
+BB87_PU0:	// 0xdb
+// BB:87 cycle count: 3
+	     goto Lt_0_14             	// [0:0]  
+BB38_PU0:	// 0xdd
 // BB:38 cycle count: 3
+	     goto Lt_0_11             	// [0:159]  
+Lt_0_29:	// 0xdf
+// BB:39 cycle count: 11
+	     DS = seg(_gTemp)         	// [0:159]  gTemp
+	     R4 = (_gTemp)            	// [1:159]  gTemp
+	     R4 = DS:[R4]             	// [3:159]  
+	     cmp R4, 61474            	// [5:159]  
+	     jne BB87_PU0             	// [7:159]  
+BB40_PU0:	// 0xe6
+// BB:40 cycle count: 3
+	     goto Lt_0_10             	// [0:159]  
+Lt_0_28:	// 0xe8
+// BB:41 cycle count: 11
+	     DS = seg(_gTemp)         	// [0:159]  gTemp
+	     R4 = (_gTemp)            	// [1:159]  gTemp
+	     R4 = DS:[R4]             	// [3:159]  
+	     cmp R4, 61478            	// [5:159]  
+	     jb Lt_0_30               	// [7:159]  
+BB42_PU0:	// 0xef
+// BB:42 cycle count: 11
+	     DS = seg(_gTemp)         	// [0:159]  gTemp
+	     R4 = (_gTemp)            	// [1:159]  gTemp
+	     R4 = DS:[R4]             	// [3:159]  
+	     cmp R4, 61478            	// [5:159]  
+	     jbe BB43_PU0             	// [7:159]  
+BB88_PU0:	// 0xf6
+// BB:88 cycle count: 3
+	     goto Lt_0_14             	// [0:0]  
+BB43_PU0:	// 0xf8
+// BB:43 cycle count: 3
+	     goto Lt_0_13             	// [0:159]  
+Lt_0_30:	// 0xfa
+// BB:44 cycle count: 11
+	     DS = seg(_gTemp)         	// [0:159]  gTemp
+	     R4 = (_gTemp)            	// [1:159]  gTemp
+	     R4 = DS:[R4]             	// [3:159]  
+	     cmp R4, 61477            	// [5:159]  
+	     jne BB88_PU0             	// [7:159]  
+BB45_PU0:	// 0x101
+// BB:45 cycle count: 4
+	     jmp Lt_0_12              	// [0:159]  
+Lt_0_1:	// 0x102
+Lt_0_2:	// 0x102
+// BB:46 cycle count: 3
 // 169  			   #if C_Movetest
 // 170  			   	          
 // 171                         Movetest();
@@ -390,8 +440,8 @@ Lt_0_2:	// 0xd3
 LM18:
 	     .stabn 68,0,173,LM18-_main
 	     call _Step1              	// [0:173]  Step1
-BB39_PU0:	// 0xd5
-// BB:39 cycle count: 9
+BB47_PU0:	// 0x104
+// BB:47 cycle count: 8
 	     DS = seg(_gTemp)         	// [0:173]  gTemp
 	     R4 = (_gTemp)            	// [1:173]  gTemp
 	     DS:[R4] = R1             	// [3:173]  
@@ -401,17 +451,17 @@ BB39_PU0:	// 0xd5
 
 LM19:
 	     .stabn 68,0,176,LM19-_main
-	     jmp Lt_0_3               	// [5:176]  
-Lt_0_4:	// 0xda
-// BB:40 cycle count: 3
+	     goto Lt_0_3              	// [5:176]  
+Lt_0_4:	// 0x10a
+// BB:48 cycle count: 3
 // 177  		   case  C_SelectMission:
 // 178  		        gTemp = Select_Mission();	        
 
 LM20:
 	     .stabn 68,0,178,LM20-_main
 	     call _Select_Mission     	// [0:178]  Select_Mission
-BB41_PU0:	// 0xdc
-// BB:41 cycle count: 9
+BB49_PU0:	// 0x10c
+// BB:49 cycle count: 8
 	     DS = seg(_gTemp)         	// [0:178]  gTemp
 	     R4 = (_gTemp)            	// [1:178]  gTemp
 	     DS:[R4] = R1             	// [3:178]  
@@ -419,9 +469,9 @@ BB41_PU0:	// 0xdc
 
 LM21:
 	     .stabn 68,0,179,LM21-_main
-	     jmp Lt_0_3               	// [5:179]  
-Lt_0_5:	// 0xe1
-// BB:42 cycle count: 3
+	     goto Lt_0_3              	// [5:179]  
+Lt_0_5:	// 0x112
+// BB:50 cycle count: 3
 // 180  			       
 // 181  			case C_Mission:		
 // 182  							    			    
@@ -430,8 +480,8 @@ Lt_0_5:	// 0xe1
 LM22:
 	     .stabn 68,0,183,LM22-_main
 	     call _Mission            	// [0:183]  Mission
-BB43_PU0:	// 0xe3
-// BB:43 cycle count: 9
+BB51_PU0:	// 0x114
+// BB:51 cycle count: 9
 	     DS = seg(_gTemp)         	// [0:183]  gTemp
 	     R4 = (_gTemp)            	// [1:183]  gTemp
 	     DS:[R4] = R1             	// [3:183]  
@@ -441,8 +491,8 @@ BB43_PU0:	// 0xe3
 LM23:
 	     .stabn 68,0,185,LM23-_main
 	     jmp Lt_0_3               	// [5:185]  
-Lt_0_6:	// 0xe8
-// BB:44 cycle count: 4
+Lt_0_6:	// 0x119
+// BB:52 cycle count: 4
 // 186  			case C_MissinZer0:
 // 187  			
 // 188  			      //  gTemp = MissinZer0();
@@ -451,328 +501,375 @@ Lt_0_6:	// 0xe8
 LM24:
 	     .stabn 68,0,189,LM24-_main
 	     jmp Lt_0_3               	// [0:189]  
-Lt_0_7:	// 0xe9
-// BB:45 cycle count: 3
-// 190  			case  C_Off_Mode:
-// 191  			
-// 192     	               Sleeping();
+Lt_0_7:	// 0x11a
+// BB:53 cycle count: 3
+// 190  			case  C_Off_Mode://唤醒后mission不变
+// 191  						
+// 192  			       Reset_Reserve();
 
 LM25:
 	     .stabn 68,0,192,LM25-_main
-	     call _Sleeping           	// [0:192]  Sleeping
-BB46_PU0:	// 0xeb
-// BB:46 cycle count: 11
-// 193     	              gTemp  = C_Step1;
+	     call _Reset_Reserve      	// [0:192]  Reset_Reserve
+Lt_0_8:	// 0x11c
+// BB:54 cycle count: 3
+// 193  		    case C_Off_Mode_allmission://唤醒后mission更新为下一个
+// 194  		    	       
+// 195     	               Sleeping();
 
 LM26:
-	     .stabn 68,0,193,LM26-_main
-	     R3 = - 4092              	// [0:193]  
-	     DS = seg(_gTemp)         	// [2:193]  gTemp
-	     R4 = (_gTemp)            	// [3:193]  gTemp
-	     DS:[R4] = R3             	// [5:193]  
-// 194  			        break;	
+	     .stabn 68,0,195,LM26-_main
+	     call _Sleeping           	// [0:195]  Sleeping
+BB55_PU0:	// 0x11e
+// BB:55 cycle count: 11
+// 196     	               gTemp  = C_Step1;
 
 LM27:
-	     .stabn 68,0,194,LM27-_main
-	     jmp Lt_0_3               	// [7:194]  
-Lt_0_8:	// 0xf2
-// BB:47 cycle count: 3
-// 197  //			     gTemp  =  Inmission();	  
-// 198  //			     break; 
-// 199  			
-// 200  			 case C_GameTimeout:
-// 201  			       gTemp  = GameTimeout();
+	     .stabn 68,0,196,LM27-_main
+	     R3 = - 4092              	// [0:196]  
+	     DS = seg(_gTemp)         	// [2:196]  gTemp
+	     R4 = (_gTemp)            	// [3:196]  gTemp
+	     DS:[R4] = R3             	// [5:196]  
+// 197  			        break;	
 
 LM28:
-	     .stabn 68,0,201,LM28-_main
-	     call _GameTimeout        	// [0:201]  GameTimeout
-BB48_PU0:	// 0xf4
-// BB:48 cycle count: 16
-	     DS = seg(_gTemp)         	// [0:201]  gTemp
-	     R4 = (_gTemp)            	// [1:201]  gTemp
-	     DS:[R4] = R1             	// [3:201]  
-// 202  			 
-// 203  			       gTemp  = C_Off_Mode;
+	     .stabn 68,0,197,LM28-_main
+	     jmp Lt_0_3               	// [7:197]  
+Lt_0_9:	// 0x125
+// BB:56 cycle count: 3
+// 200  //			     gTemp  =  Inmission();	  
+// 201  //			     break; 
+// 202  			
+// 203  			 case C_GameTimeout:
+// 204  			       gTemp  = GameTimeout();
 
 LM29:
-	     .stabn 68,0,203,LM29-_main
-	     R3 = - 4079              	// [5:203]  
-	     DS = seg(_gTemp)         	// [7:203]  gTemp
-	     R4 = (_gTemp)            	// [8:203]  gTemp
-	     DS:[R4] = R3             	// [10:203]  
-// 204  			        break;
+	     .stabn 68,0,204,LM29-_main
+	     call _GameTimeout        	// [0:204]  GameTimeout
+BB57_PU0:	// 0x127
+// BB:57 cycle count: 16
+	     DS = seg(_gTemp)         	// [0:204]  gTemp
+	     R4 = (_gTemp)            	// [1:204]  gTemp
+	     DS:[R4] = R1             	// [3:204]  
+// 205  			 
+// 206  			       gTemp  = C_Off_Mode;
 
 LM30:
-	     .stabn 68,0,204,LM30-_main
-	     jmp Lt_0_3               	// [12:204]  
-Lt_0_9:	// 0xff
-// BB:49 cycle count: 3
-// 205  			        
-// 206  			 case C_Ga01:
-// 207  			         gTemp  = Ga01();
+	     .stabn 68,0,206,LM30-_main
+	     R3 = - 4079              	// [5:206]  
+	     DS = seg(_gTemp)         	// [7:206]  gTemp
+	     R4 = (_gTemp)            	// [8:206]  gTemp
+	     DS:[R4] = R3             	// [10:206]  
+// 207  			        break;
 
 LM31:
 	     .stabn 68,0,207,LM31-_main
-	     call _Ga01               	// [0:207]  Ga01
-BB50_PU0:	// 0x101
-// BB:50 cycle count: 9
-	     DS = seg(_gTemp)         	// [0:207]  gTemp
-	     R4 = (_gTemp)            	// [1:207]  gTemp
-	     DS:[R4] = R1             	// [3:207]  
-// 208  			         break;  
+	     jmp Lt_0_3               	// [12:207]  
+Lt_0_10:	// 0x132
+// BB:58 cycle count: 3
+// 208  			        
+// 209  			 case C_Ga01:
+// 210  			         gTemp  = Ga01();
 
 LM32:
-	     .stabn 68,0,208,LM32-_main
-	     jmp Lt_0_3               	// [5:208]  
-Lt_0_10:	// 0x106
-// BB:51 cycle count: 3
-// 209  			         
-// 210  			  case C_Misson_Mi03:
-// 211  			               
-// 212  				     gTemp  = Misson_Mi03();
+	     .stabn 68,0,210,LM32-_main
+	     call _Ga01               	// [0:210]  Ga01
+BB59_PU0:	// 0x134
+// BB:59 cycle count: 9
+	     DS = seg(_gTemp)         	// [0:210]  gTemp
+	     R4 = (_gTemp)            	// [1:210]  gTemp
+	     DS:[R4] = R1             	// [3:210]  
+// 211  			         break;  
 
 LM33:
-	     .stabn 68,0,212,LM33-_main
-	     call _Misson_Mi03        	// [0:212]  Misson_Mi03
-BB52_PU0:	// 0x108
-// BB:52 cycle count: 9
-	     DS = seg(_gTemp)         	// [0:212]  gTemp
-	     R4 = (_gTemp)            	// [1:212]  gTemp
-	     DS:[R4] = R1             	// [3:212]  
-// 213  			         break;  
+	     .stabn 68,0,211,LM33-_main
+	     jmp Lt_0_3               	// [5:211]  
+Lt_0_11:	// 0x139
+// BB:60 cycle count: 3
+// 212  			         
+// 213  			  case C_Misson_Mi03:
+// 214  			               
+// 215  				     gTemp  = Misson_Mi03();
 
 LM34:
-	     .stabn 68,0,213,LM34-_main
-	     jmp Lt_0_3               	// [5:213]  
-Lt_0_11:	// 0x10d
-// BB:53 cycle count: 11
-// 214  			default:
-// 215  			         
-// 216  
-// 217  		        
-// 218                    gTemp  = C_Step1;
+	     .stabn 68,0,215,LM34-_main
+	     call _Misson_Mi03        	// [0:215]  Misson_Mi03
+BB61_PU0:	// 0x13b
+// BB:61 cycle count: 9
+	     DS = seg(_gTemp)         	// [0:215]  gTemp
+	     R4 = (_gTemp)            	// [1:215]  gTemp
+	     DS:[R4] = R1             	// [3:215]  
+// 216  			         break;  
 
 LM35:
-	     .stabn 68,0,218,LM35-_main
-	     R3 = - 4092              	// [0:218]  
-	     DS = seg(_gTemp)         	// [2:218]  gTemp
-	     R4 = (_gTemp)            	// [3:218]  gTemp
-	     DS:[R4] = R3             	// [5:218]  
-// 219  				break;
+	     .stabn 68,0,216,LM35-_main
+	     jmp Lt_0_3               	// [5:216]  
+Lt_0_12:	// 0x140
+// BB:62 cycle count: 3
+// 217  			   
+// 218  			   case C_Restart:
+// 219  					 gTemp  = Restart();
 
 LM36:
 	     .stabn 68,0,219,LM36-_main
-	     jmp Lt_0_3               	// [7:219]  
-Lt_0_3:	// 0x114
-Lt_0_12:	// 0x114
-Lt_0_13:	// 0x114
-Lt_0_14:	// 0x114
-// BB:54 cycle count: 3
-// 220  		}
-// 221  		
-// 222  		WatchdogClear();
+	     call _Restart            	// [0:219]  Restart
+BB63_PU0:	// 0x142
+// BB:63 cycle count: 9
+	     DS = seg(_gTemp)         	// [0:219]  gTemp
+	     R4 = (_gTemp)            	// [1:219]  gTemp
+	     DS:[R4] = R1             	// [3:219]  
+// 220  			         break;  
 
 LM37:
-	     .stabn 68,0,222,LM37-_main
-	     call _WatchdogClear      	// [0:222]  WatchdogClear
-BB55_PU0:	// 0x116
-// BB:55 cycle count: 15
-// 223  		
-// 224  		
-// 225  		PauseFlag =0;
+	     .stabn 68,0,220,LM37-_main
+	     jmp Lt_0_3               	// [5:220]  
+Lt_0_13:	// 0x147
+// BB:64 cycle count: 3
+// 221  			         		         
+// 222  			   case C_Combat:
+// 223  			        gTemp  = Combat();
 
 LM38:
-	     .stabn 68,0,225,LM38-_main
-	     R3 = 0                   	// [0:225]  
-	     DS = seg(_PauseFlag)     	// [1:225]  PauseFlag
-	     R4 = (_PauseFlag)        	// [2:225]  PauseFlag
-	     DS:[R4] = R3             	// [4:225]  
-// 226  		Countdownflag =0;
+	     .stabn 68,0,223,LM38-_main
+	     call _Combat             	// [0:223]  Combat
+BB65_PU0:	// 0x149
+// BB:65 cycle count: 9
+	     DS = seg(_gTemp)         	// [0:223]  gTemp
+	     R4 = (_gTemp)            	// [1:223]  gTemp
+	     DS:[R4] = R1             	// [3:223]  
+// 224  			        break;           
 
 LM39:
-	     .stabn 68,0,226,LM39-_main
-	     R3 = 0                   	// [6:226]  
-	     DS = seg(_Countdownflag) 	// [7:226]  Countdownflag
-	     R4 = (_Countdownflag)    	// [8:226]  Countdownflag
-	     DS:[R4] = R3             	// [10:226]  
-// 227  		WatchdogClear();
+	     .stabn 68,0,224,LM39-_main
+	     jmp Lt_0_3               	// [5:224]  
+Lt_0_14:	// 0x14e
+// BB:66 cycle count: 11
+// 225  			default:
+// 226  			         
+// 227  
+// 228  		        
+// 229                    gTemp  = C_Step1;
 
 LM40:
-	     .stabn 68,0,227,LM40-_main
-	     call _WatchdogClear      	// [12:227]  WatchdogClear
-BB56_PU0:	// 0x122
-// BB:56 cycle count: 9
-// 228  		BlinkFlag_Data =0;
+	     .stabn 68,0,229,LM40-_main
+	     R3 = - 4092              	// [0:229]  
+	     DS = seg(_gTemp)         	// [2:229]  gTemp
+	     R4 = (_gTemp)            	// [3:229]  gTemp
+	     DS:[R4] = R3             	// [5:229]  
+// 230  				break;
 
 LM41:
-	     .stabn 68,0,228,LM41-_main
-	     R3 = 0                   	// [0:228]  
-	     DS = seg(_BlinkFlag_Data)	// [1:228]  BlinkFlag_Data
-	     R4 = (_BlinkFlag_Data)   	// [2:228]  BlinkFlag_Data
-	     DS:[R4] = R3             	// [4:228]  
-// 229  		Light_all_off();		
+	     .stabn 68,0,230,LM41-_main
+	     jmp Lt_0_3               	// [7:230]  
+Lt_0_3:	// 0x155
+Lt_0_15:	// 0x155
+Lt_0_16:	// 0x155
+Lt_0_17:	// 0x155
+// BB:67 cycle count: 3
+// 231  		}
+// 232  		
+// 233  		WatchdogClear();
 
 LM42:
-	     .stabn 68,0,229,LM42-_main
-	     call _Light_all_off      	// [6:229]  Light_all_off
-BB57_PU0:	// 0x129
-// BB:57 cycle count: 10
-// 230  	  	  
-// 231  		
-// 232  	  if(Key_Event)
+	     .stabn 68,0,233,LM42-_main
+	     call _WatchdogClear      	// [0:233]  WatchdogClear
+BB68_PU0:	// 0x157
+// BB:68 cycle count: 15
+// 234  		
+// 235  		
+// 236  		PauseFlag =0;
 
 LM43:
-	     .stabn 68,0,232,LM43-_main
-	     DS = seg(_Key_Event)     	// [0:232]  Key_Event
-	     R4 = (_Key_Event)        	// [1:232]  Key_Event
-	     R4 = DS:[R4]             	// [3:232]  
-	     cmp R4, 0                	// [5:232]  
-	     jne BB58_PU0             	// [6:232]  
-BB67_PU0:	// 0x12f
-// BB:67 cycle count: 3
-	     goto L_0_36              	// [0:0]  
-BB58_PU0:	// 0x131
-// BB:58 cycle count: 17
-// 233  	  {
-// 234  	  	 Resumeflag =0;   
+	     .stabn 68,0,236,LM43-_main
+	     R3 = 0                   	// [0:236]  
+	     DS = seg(_PauseFlag)     	// [1:236]  PauseFlag
+	     R4 = (_PauseFlag)        	// [2:236]  PauseFlag
+	     DS:[R4] = R3             	// [4:236]  
+// 237  		Countdownflag =0;
 
 LM44:
-	     .stabn 68,0,234,LM44-_main
-	     R3 = 0                   	// [0:234]  
-	     DS = seg(_Resumeflag)    	// [1:234]  Resumeflag
-	     R4 = (_Resumeflag)       	// [2:234]  Resumeflag
-	     DS:[R4] = R3             	// [4:234]  
-// 235          if(Key_Event==0x88)
+	     .stabn 68,0,237,LM44-_main
+	     R3 = 0                   	// [6:237]  
+	     DS = seg(_Countdownflag) 	// [7:237]  Countdownflag
+	     R4 = (_Countdownflag)    	// [8:237]  Countdownflag
+	     DS:[R4] = R3             	// [10:237]  
+// 238  		WatchdogClear();
 
 LM45:
-	     .stabn 68,0,235,LM45-_main
-	     DS = seg(_Key_Event)     	// [6:235]  Key_Event
-	     R4 = (_Key_Event)        	// [7:235]  Key_Event
-	     R4 = DS:[R4]             	// [9:235]  
-	     cmp R4, 136              	// [11:235]  
-	     jne L_0_38               	// [13:235]  
-BB59_PU0:	// 0x13d
-// BB:59 cycle count: 17
-// 236           {
-// 237              Key_Event =0;	
+	     .stabn 68,0,238,LM45-_main
+	     call _WatchdogClear      	// [12:238]  WatchdogClear
+BB69_PU0:	// 0x163
+// BB:69 cycle count: 9
+// 239  		BlinkFlag_Data =0;
 
 LM46:
-	     .stabn 68,0,237,LM46-_main
-	     R3 = 0                   	// [0:237]  
-	     DS = seg(_Key_Event)     	// [1:237]  Key_Event
-	     R4 = (_Key_Event)        	// [2:237]  Key_Event
-	     DS:[R4] = R3             	// [4:237]  
-// 238   //          Mem0.Mission_Cur++;	
-// 239  		   gTemp = C_Ga01;//C_SelectMission;
+	     .stabn 68,0,239,LM46-_main
+	     R3 = 0                   	// [0:239]  
+	     DS = seg(_BlinkFlag_Data)	// [1:239]  BlinkFlag_Data
+	     R4 = (_BlinkFlag_Data)   	// [2:239]  BlinkFlag_Data
+	     DS:[R4] = R3             	// [4:239]  
+// 240  		Light_all_off();		
 
 LM47:
-	     .stabn 68,0,239,LM47-_main
-	     R3 = - 4062              	// [6:239]  
-	     DS = seg(_gTemp)         	// [8:239]  gTemp
-	     R4 = (_gTemp)            	// [9:239]  gTemp
-	     DS:[R4] = R3             	// [11:239]  
-	     jmp L_0_37               	// [13:239]  
-L_0_38:	// 0x149
-// BB:60 cycle count: 16
-// 240           }               
-// 241  	    else // if(Key_Event!=0x88)
-// 242  	      {
-// 243  	  	    
-// 244  		  	  Key_Event =0;
+	     .stabn 68,0,240,LM47-_main
+	     call _Light_all_off      	// [6:240]  Light_all_off
+BB70_PU0:	// 0x16a
+// BB:70 cycle count: 10
+// 241  	  	  
+// 242  		
+// 243  	  if(Key_Event)
 
 LM48:
-	     .stabn 68,0,244,LM48-_main
-	     R3 = 0                   	// [0:244]  
-	     DS = seg(_Key_Event)     	// [1:244]  Key_Event
-	     R4 = (_Key_Event)        	// [2:244]  Key_Event
-	     DS:[R4] = R3             	// [4:244]  
-// 245  		  	 
-// 246  			   if(LongPressflag)
+	     .stabn 68,0,243,LM48-_main
+	     DS = seg(_Key_Event)     	// [0:243]  Key_Event
+	     R4 = (_Key_Event)        	// [1:243]  Key_Event
+	     R4 = DS:[R4]             	// [3:243]  
+	     cmp R4, 0                	// [5:243]  
+	     jne BB71_PU0             	// [6:243]  
+BB80_PU0:	// 0x170
+// BB:80 cycle count: 3
+	     goto L_0_42              	// [0:0]  
+BB71_PU0:	// 0x172
+// BB:71 cycle count: 17
+// 244  	  {
+// 245  	  	 Resumeflag =0;   
 
 LM49:
-	     .stabn 68,0,246,LM49-_main
-	     DS = seg(_LongPressflag) 	// [6:246]  LongPressflag
-	     R4 = (_LongPressflag)    	// [7:246]  LongPressflag
-	     R4 = DS:[R4]             	// [9:246]  
-	     cmp R4, 0                	// [11:246]  
-	     je L_0_40                	// [12:246]  
-BB61_PU0:	// 0x154
-// BB:61 cycle count: 15
-// 247  			   {
-// 248  				   	   LongPressflag =0;
+	     .stabn 68,0,245,LM49-_main
+	     R3 = 0                   	// [0:245]  
+	     DS = seg(_Resumeflag)    	// [1:245]  Resumeflag
+	     R4 = (_Resumeflag)       	// [2:245]  Resumeflag
+	     DS:[R4] = R3             	// [4:245]  
+// 246          if(Key_Event==0x88)
 
 LM50:
-	     .stabn 68,0,248,LM50-_main
-	     R3 = 0                   	// [0:248]  
-	     DS = seg(_LongPressflag) 	// [1:248]  LongPressflag
-	     R4 = (_LongPressflag)    	// [2:248]  LongPressflag
-	     DS:[R4] = R3             	// [4:248]  
-// 249                         PlayA1800_Elements(SFX_Off);
+	     .stabn 68,0,246,LM50-_main
+	     DS = seg(_Key_Event)     	// [6:246]  Key_Event
+	     R4 = (_Key_Event)        	// [7:246]  Key_Event
+	     R4 = DS:[R4]             	// [9:246]  
+	     cmp R4, 136              	// [11:246]  
+	     jne L_0_44               	// [13:246]  
+BB72_PU0:	// 0x17e
+// BB:72 cycle count: 17
+// 247           {
+// 248              Key_Event =0;	
 
 LM51:
-	     .stabn 68,0,249,LM51-_main
-	     SP = SP - 1              	// [6:249]  
-	     R3 = 38                  	// [7:249]  
-	     R4 = SP + 1              	// [8:249]  
-	     [R4] = R3                	// [10:249]  
-	     call _PlayA1800_Elements 	// [12:249]  PlayA1800_Elements
-BB62_PU0:	// 0x160
-// BB:62 cycle count: 12
-	     SP = SP + 1              	// [0:249]  
-// 250  				  	   gTemp  = C_Off_Mode;
+	     .stabn 68,0,248,LM51-_main
+	     R3 = 0                   	// [0:248]  
+	     DS = seg(_Key_Event)     	// [1:248]  Key_Event
+	     R4 = (_Key_Event)        	// [2:248]  Key_Event
+	     DS:[R4] = R3             	// [4:248]  
+// 249            //  Get_Mission();//Mem0.Mission_Cur++;	
+// 250  		    gTemp = C_Ga01;//C_SelectMission;
 
 LM52:
 	     .stabn 68,0,250,LM52-_main
-	     R3 = - 4079              	// [1:250]  
-	     DS = seg(_gTemp)         	// [3:250]  gTemp
-	     R4 = (_gTemp)            	// [4:250]  gTemp
-	     DS:[R4] = R3             	// [6:250]  
-	     jmp L_0_39               	// [8:250]  
-L_0_40:	// 0x168
-// BB:63 cycle count: 9
-// 251  				  }
-// 252  				   else	  
-// 253  				   {
-// 254  				   	  PlayA1800_Elements(SFX_Off);
+	     R3 = - 4062              	// [6:250]  
+	     DS = seg(_gTemp)         	// [8:250]  gTemp
+	     R4 = (_gTemp)            	// [9:250]  gTemp
+	     DS:[R4] = R3             	// [11:250]  
+	     jmp L_0_43               	// [13:250]  
+L_0_44:	// 0x18a
+// BB:73 cycle count: 16
+// 251           }               
+// 252  	    else // if(Key_Event!=0x88)
+// 253  	      {
+// 254  	  	    
+// 255  		  	  Key_Event =0;
 
 LM53:
-	     .stabn 68,0,254,LM53-_main
-	     SP = SP - 1              	// [0:254]  
-	     R3 = 38                  	// [1:254]  
-	     R4 = SP + 1              	// [2:254]  
-	     [R4] = R3                	// [4:254]  
-	     call _PlayA1800_Elements 	// [6:254]  PlayA1800_Elements
-BB64_PU0:	// 0x16f
-// BB:64 cycle count: 8
-	     SP = SP + 1              	// [0:254]  
-// 255  				  	  gTemp  = C_Off_Mode;
+	     .stabn 68,0,255,LM53-_main
+	     R3 = 0                   	// [0:255]  
+	     DS = seg(_Key_Event)     	// [1:255]  Key_Event
+	     R4 = (_Key_Event)        	// [2:255]  Key_Event
+	     DS:[R4] = R3             	// [4:255]  
+// 256  		  	  
+// 257  			   if(LongPressflag)
 
 LM54:
-	     .stabn 68,0,255,LM54-_main
-	     R3 = - 4079              	// [1:255]  
-	     DS = seg(_gTemp)         	// [3:255]  gTemp
-	     R4 = (_gTemp)            	// [4:255]  gTemp
-	     DS:[R4] = R3             	// [6:255]  
-L_0_39:	// 0x176
-L_0_37:	// 0x176
-L_0_36:	// 0x176
-// BB:65 cycle count: 3
+	     .stabn 68,0,257,LM54-_main
+	     DS = seg(_LongPressflag) 	// [6:257]  LongPressflag
+	     R4 = (_LongPressflag)    	// [7:257]  LongPressflag
+	     R4 = DS:[R4]             	// [9:257]  
+	     cmp R4, 0                	// [11:257]  
+	     je L_0_46                	// [12:257]  
+BB74_PU0:	// 0x195
+// BB:74 cycle count: 16
+// 258  			   {
+// 259  				   	   LongPressflag =0;
 
 LM55:
-	     .stabn 68,0,232,LM55-_main
-	     goto L_0_33              	// [0:232]  
-L_0_34:	// 0x178
-// BB:66 cycle count: 6
-// 259  			  }	
-// 260  	      }
-// 261  				
-// 262  	  }
-// 263     	return 0;	
+	     .stabn 68,0,259,LM55-_main
+	     R3 = 0                   	// [0:259]  
+	     DS = seg(_LongPressflag) 	// [1:259]  LongPressflag
+	     R4 = (_LongPressflag)    	// [2:259]  LongPressflag
+	     DS:[R4] = R3             	// [4:259]  
+// 260                         PlayA1800_Elements(SFX_Off);
 
 LM56:
-	     .stabn 68,0,263,LM56-_main
-	     R1 = 0                   	// [0:263]  
-	     pop BP, PC from [SP]     	// [1:263]  
+	     .stabn 68,0,260,LM56-_main
+	     SP = SP - 1              	// [6:260]  
+	     R3 = 85                  	// [7:260]  
+	     R4 = SP + 1              	// [9:260]  
+	     [R4] = R3                	// [11:260]  
+	     call _PlayA1800_Elements 	// [13:260]  PlayA1800_Elements
+BB75_PU0:	// 0x1a2
+// BB:75 cycle count: 12
+	     SP = SP + 1              	// [0:260]  
+// 261  				  	   gTemp  = C_Off_Mode;
+
+LM57:
+	     .stabn 68,0,261,LM57-_main
+	     R3 = - 4079              	// [1:261]  
+	     DS = seg(_gTemp)         	// [3:261]  gTemp
+	     R4 = (_gTemp)            	// [4:261]  gTemp
+	     DS:[R4] = R3             	// [6:261]  
+	     jmp L_0_45               	// [8:261]  
+L_0_46:	// 0x1aa
+// BB:76 cycle count: 10
+// 262  				 }
+// 263  				 else	  
+// 264  				   {
+// 265  				   	  PlayA1800_Elements(SFX_Off);
+
+LM58:
+	     .stabn 68,0,265,LM58-_main
+	     SP = SP - 1              	// [0:265]  
+	     R3 = 85                  	// [1:265]  
+	     R4 = SP + 1              	// [3:265]  
+	     [R4] = R3                	// [5:265]  
+	     call _PlayA1800_Elements 	// [7:265]  PlayA1800_Elements
+BB77_PU0:	// 0x1b2
+// BB:77 cycle count: 8
+	     SP = SP + 1              	// [0:265]  
+// 266  				  	  gTemp  = C_Off_Mode;
+
+LM59:
+	     .stabn 68,0,266,LM59-_main
+	     R3 = - 4079              	// [1:266]  
+	     DS = seg(_gTemp)         	// [3:266]  gTemp
+	     R4 = (_gTemp)            	// [4:266]  gTemp
+	     DS:[R4] = R3             	// [6:266]  
+L_0_45:	// 0x1b9
+L_0_43:	// 0x1b9
+L_0_42:	// 0x1b9
+// BB:78 cycle count: 3
+
+LM60:
+	     .stabn 68,0,243,LM60-_main
+	     goto L_0_39              	// [0:243]  
+L_0_40:	// 0x1bb
+// BB:79 cycle count: 6
+// 270  			  }	
+// 271  	      }
+// 272  				
+// 273  	  }
+// 274     	return 0;	
+
+LM61:
+	     .stabn 68,0,274,LM61-_main
+	     R1 = 0                   	// [0:274]  
+	     pop BP, PC from [SP]     	// [1:274]  
 	.endp	
 LME1:
 	     .stabf LME1-_main
@@ -844,10 +941,13 @@ _HZ_1K_flag:	// 0x9
 .external _Step1
 .external _Select_Mission
 .external _Mission
+.external _Reset_Reserve
 .external _Sleeping
 .external _GameTimeout
 .external _Ga01
 .external _Misson_Mi03
+.external _Restart
+.external _Combat
 .external _WatchdogClear
 .external _PauseFlag
 .external _Countdownflag

@@ -140,6 +140,8 @@ unsigned int temp_G_Sensor_Status =0;
 //unsigned int OFF_Timeoutcnt =0;
 unsigned int MoveText2_Right =0;
 unsigned int TokenMission =0;
+unsigned int timeovercnt=0;
+
 typedef enum {A_Right,A_Left}Arm_T;
 
 //Arm_T Arm=A_Right;
@@ -549,7 +551,26 @@ unsigned GetElement_SP(unsigned ElementsIdx)
 }
 
 
+unsigned GetElement_CombatSP(unsigned ElementsIdx)
+{
+	unsigned long Addr;
+	Addr = ElementsIdx*2 + T_Combat_SP ;
+	return SPI_ReadAWord_Big(Addr);
+}
 
+unsigned Get_Combat_Mov(unsigned ElementsIdx)
+{
+	unsigned long Addr;
+	Addr = ElementsIdx*2 + T_Combat_Mov ;
+	return SPI_ReadAWord_Big(Addr);
+}
+
+unsigned Get_Combat_Gr(unsigned lQuestionIdx)
+{
+	unsigned long Addr;
+	Addr = lQuestionIdx + T_Combat_Group;
+	return SPI_ReadAByte(Addr);
+}
 
 
 unsigned GetEnvir_Pok(unsigned lQuestionIdx)
@@ -862,7 +883,7 @@ unsigned Get_PokecatchInMisson(void)
 }
 
 /*************************************************************************************
-************************************************************************************/
+************************************************************************************
 void Get_MissionPok_Same(void)
 {
 	
@@ -1645,6 +1666,7 @@ void Read_Flash_info()
 
      __asm("INT FIQ,IRQ");
 
+     Mem0.Reserve=0;
 }
 
 
@@ -1684,7 +1706,7 @@ unsigned  Get_Registered_Player_Num(unsigned int temp)
 	
 	unsigned j = 0;
 	unsigned i = 0;
-	while(i<C_Player_Num)//C_Player_Num <16
+	while(i<16)//C_Player_Num <16
 	{
 		 if (BitMap[i]&temp) //Registered_Play_Status
 		    {
@@ -1822,22 +1844,22 @@ unsigned Get_FirstBit_From_Play(unsigned temp_Player)
 
 
 /*************************************************************
-*************************************************************
+*************************************************************/
 unsigned  Select_Registered_Player_Random(unsigned int Index,unsigned register_status)
 {
   	unsigned i= 0;
 	unsigned j= 0;
 	unsigned temp;
 
-	while(i<C_Player_Num)//C_Player_Num <16
+	while(i<16)//C_Player_Num <16
 	{
 		 temp = BitMap[i]&register_status;//Registered_Play_Status;
 		 if (temp)
 		 {
 		 	if (j == Index) 
 		 	   {
-		 	   	Player_Activing_Cnt = i;
-		 	    return BitMap[i];//i;
+		 	 //  	Player_Activing_Cnt = i;
+		 	    return i;//BitMap[i];//i;
 		 	    
 		 	   }
 		 	    j++;
@@ -2180,22 +2202,23 @@ unsigned int  CheckPok_InCollectiORNocatch(unsigned int  Incollectfalg)
 
 void Get_Mission()
 {
-     unsigned int i=0,Mission_Que=0;
+     unsigned int i=0;//,Mission_Que=0;
      
-     
+       if(GetMission_Que( Mem0.Mission_Que)!=(Mem0.Mission_Cur+1))
+       {
 
- 	 while(i<30)  
-	 	{
-             if(GetMission_Que(i)==(Mem0.Mission_Cur+1))
-             {
-             	Mission_Que=i;
-			 	break;
-             }
-
-			 	i++;			 	
-	 	}
-
-
+	  	 while(i<30)  
+		 	{
+	             if(GetMission_Que(i)==(Mem0.Mission_Cur+1))
+	             {
+	             	Mem0.Mission_Que=i;
+				 	break;
+	             }
+	
+				 	i++;			 	
+		 	} 
+        }
+   
 
 
 //       if(Mem0.Mission_Cur>=30)
@@ -2207,12 +2230,12 @@ void Get_Mission()
        		Mem0.Reserve=1;
        	}
        else
-            Mission_Que++;
+            Mem0.Mission_Que++;
 
-       if(Mission_Que>=30)
-	   	  Mission_Que =0;
+       if(Mem0.Mission_Que>=30)
+	   	  Mem0.Mission_Que =0;
        
-         Mem0.Mission_Cur=GetMission_Que(Mission_Que)-1;
+         Mem0.Mission_Cur=GetMission_Que(Mem0.Mission_Que)-1;
        
 //	 while(Mem0.Mission_Cur<30)  
 //	 	{
@@ -6687,7 +6710,7 @@ unsigned Key_TellScores()
 
 
 /***********************************************************
-*********************************************************
+*********************************************************/
 
 unsigned Select_Player_Random(unsigned int temp)
 {  
@@ -6712,10 +6735,12 @@ unsigned Select_Player_Random(unsigned int temp)
 	    }
 	  else
 	   {
-	   	  if(Player_Activing_Bit ==0) //Ö»ï¿½ï¿½Ò»ï¿½ï¿½playerÊ±,Player_Activing_Bitï¿½ï¿½ï¿½ï¿½
-		      return Go_Rest();
-		  else
-		  	 return Player_Activing_Bit;
+//	   	  if(Player_Activing_Bit ==0) //Ö»ï¿½ï¿½Ò»ï¿½ï¿½playerÊ±,Player_Activing_Bitï¿½ï¿½ï¿½ï¿½
+//		      return Go_Rest();
+//		  else
+//		  	 return Player_Activing_Bit;
+
+         return 0;
 	   
 	   }
 
@@ -6937,9 +6962,24 @@ void Rest_Pokecatch_Pok()
            __asm("INT FIQ,IRQ");
 
 }
+/**********************************************************
+*************************************************************/
 
-
-
+void Reset_Reserve()
+{
+	
+	
+	   Mem0.Reserve=0;//²»¸üÐÂ
+	
+	   	  	   __asm("INT OFF");
+           MoveSPIDriverToRAM();
+       	      
+       	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
+          SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H);  
+            __asm("INT FIQ,IRQ"); 
+	
+	
+}
 
 /**********************************************************
 *************************************************************/
@@ -8541,14 +8581,16 @@ unsigned int Get_Key(Countdown_E,G_checkflag)
 
                         temp =0;
 //                        FiveSec_cnt_temp = FiveSec_cnt;
-                        
-					   if(Pause_Process())
-					   {
-					   	
-//					   	   FiveSec_cnt = FiveSec_cnt_temp;
-					   	   return 0xffff;
-					   }
-					   
+
+                      if(gTemp  !=C_Restart)
+                      	{
+						   if(Pause_Process())
+						   {
+						   	
+	//					   	   FiveSec_cnt = FiveSec_cnt_temp;
+						   	   return 0xffff;
+						   }
+                      	}
 //                       FiveSec_cnt = FiveSec_cnt_temp;
 	
                  	}
@@ -9685,8 +9727,8 @@ void Rest_Randm()
 {
 	unsigned int i=0;
 	
-	  if(Mem0.Mission_Cur>=30)
-	   	   Mem0.Mission_Cur =0;
+//	  if(Mem0.Mission_Cur>=30)
+//	   	   Mem0.Mission_Cur =0;
 	
 	
 
@@ -9931,7 +9973,164 @@ void ModeChange()
 
 /******************************************************************
 *****************************************************************/
-void  Intro()
+unsigned int Restart()
+{
+
+	   unsigned int  temp_twokey= TwoKeyflag;
+	   unsigned int  R=0;
+	   unsigned int  cnt =0;
+	   unsigned int  temp =0;
+	   TwoKeyflag =0;
+
+
+	   Clean_LFX_Led();
+       Clean_LFX_Color();
+       Clean_Led_Color();
+    
+    
+        Set_Led_RGB(White,Led1|Led2|Led3|Led4);//White                             
+		LED_Cnt =Blink_Fr; 
+		LedBlink= All_Led_data;
+		BlinkFlag_Data= All_Led_data;
+
+
+//        Led_On(All_Led_data);
+
+        while(1)
+     	{
+
+			 PlayA1800_Elements(A_VLMHTEN_End1);	
+			 G_Sensor_Status=G_Shake;
+
+		
+	 
+			if(WaitAction(10*16,0)&C_MovSucessStatus)// Ö»¼ì²âshake ÓÃC_MovSucess
+			   {
+
+
+			      while(1)
+			      {
+
+                      if(Get_Key(0,0))
+		                    {
+			 	               return C_Off_Mode;
+		                    } 
+				  
+			            R=0;
+	    
+						PlayA1800_Elements(A_VLMHTEN_End2);
+						PlayA1800_Elements(VLMHTEN_18Intro4);
+
+
+	                   while(1)
+	                   	{
+                           if(Get_Key(0,0))
+		                    {
+			 	               return C_Off_Mode;
+		                    } 
+
+						
+							PlayA1800_Elements(A_VLMHTEN_M01+R);
+							 G_Sensor_Status=G_Shake;
+
+		                     if(WaitAction(2*16,0)&C_MovSucessStatus)  
+							   {
+
+									BlinkFlag_Data=0;
+									Light_all_off(); 
+
+									Led_OFF_Some(LED1_G|LED2_G|LED3_G|LED4_G);
+
+									PlayA1800_Elements(SFX_Good);
+									Light_all_off(); 
+
+									Mem0.Mission_Cur=R;
+
+									Mission();
+									Misson_Mi03();
+
+
+									Clean_LFX_Led();
+									Clean_LFX_Color();
+									Clean_Led_Color();
+
+
+									Set_Led_RGB(White,Led1|Led2|Led3|Led4);//White                             
+									LED_Cnt =Blink_Fr; 
+									LedBlink= All_Led_data;
+									BlinkFlag_Data= All_Led_data;
+									break;
+
+							    }
+                                Key_Event =0;
+								R++;
+
+								if(R==29)
+									{
+                                       if(cnt==1)
+                                       	{
+										    temp = GameTimeout();//C_GameTimeout;
+											if(C_Off_Mode==temp)
+												return C_Off_Mode;
+
+											
+                                             cnt=0;
+											 break;
+
+                                       	}
+
+
+									   cnt++;
+									   break;
+
+									}
+									
+							 
+
+	                   	}
+			      }
+					
+							
+			   }
+
+
+			 if(Key_Event)
+			 	{
+                    Key_Event=0;
+					PlayA1800_Elements(A_VLMHTEN_End3);
+
+                    G_Sensor_Status=G_Shake;
+					WaitAction(10*16,0);
+
+					 if(Key_Event)
+					 	{
+
+                              Key_Event=0;
+                              PlayA1800_Elements(SFX_Off);
+							  delay_time(16);
+							  Reset_Memory(1);
+							  return C_StartGame;
+					 	}
+
+			 	}
+
+	   }
+
+
+	    BlinkFlag_Data=0;
+        Light_all_off();   
+	   TwoKeyflag = temp_twokey;
+	
+	
+}
+
+
+
+
+
+/******************************************************************
+*****************************************************************/
+unsigned int   Intro()
 {
 	unsigned int Sfx_flag =0;
 	
@@ -9947,6 +10146,9 @@ void  Intro()
 	    PlayA1800_Other(Serie_Hello);
         delay_time(1*16);
 	 }
+	
+	 if(Mem0.Mission_Cur>=29)
+	 	 return C_Restart;
 	
 	if(Mem0.firstFlag_23b.BitCTL_f.TokenText==1)
 	{
@@ -10007,7 +10209,7 @@ void  Intro()
                }
 		    PlayA1800_Elements(A_VLMHTEN_Intro4);
 		        break;
-	    case 23:
+	    case 21:
                if(Sfx_flag ==0)
                {
 				Set_Led_RGB(White,Led1|Led2|Led3|Led4);								 
@@ -10019,6 +10221,30 @@ void  Intro()
                }
 		    PlayA1800_Elements(A_VLMHTEN_Intro5);
 		        break;
+       	 case 23:
+               if(Sfx_flag ==0)
+               {
+				Set_Led_RGB(White,Led1|Led2|Led3|Led4);								 
+				Clean_LFX_Led();
+			    LED_Cnt = Blink_Fr;	 
+				LedBlink= All_Led_data;
+			    BlinkFlag_Data =All_Led_data;
+			    Sfx_flag =1;	
+               }
+		        PlayA1800_Elements(A_VLMHTEN_Intro6);
+		        break;
+	    case 26:
+               if(Sfx_flag ==0)
+               {
+				Set_Led_RGB(White,Led1|Led2|Led3|Led4);								 
+				Clean_LFX_Led();
+			    LED_Cnt = Blink_Fr;	 
+				LedBlink= All_Led_data;
+			    BlinkFlag_Data =All_Led_data;
+			    Sfx_flag =1;	
+               }
+		    PlayA1800_Elements(A_VLMHTEN_Intro7);
+		        break;				
 		case 28:
                if(Sfx_flag ==0)
                {
@@ -10029,7 +10255,7 @@ void  Intro()
 			    BlinkFlag_Data =All_Led_data;
 			    Sfx_flag =1;	
                }
-		    PlayA1800_Elements(A_VLMHTEN_Intro6);
+		    PlayA1800_Elements(A_VLMHTEN_Intro8);
 		       break;
 		default:
 			break;
@@ -10082,7 +10308,8 @@ void  Intro()
 		   Light_all_off();	  
 		   Clean_Led_Color();
            Clean_LFX_Led();  
-	    
+           
+	       return C_SelectMission;
 	    
 }  
 
@@ -10152,8 +10379,8 @@ unsigned  Step1()
 //	 }
 
 
-     Intro();
-     return C_SelectMission;
+     return Intro();
+     
 
       
 
@@ -11942,112 +12169,23 @@ unsigned int Mission()
        return C_Misson_Mi03;
 }
 
-unsigned int Misson_Mi03()
+
+unsigned int  Mission_Movecheck(unsigned int Mvmt)
 {
-     
-	unsigned int Mvmt =0;
-    unsigned int temp_MoveText2_Right=0;
-    unsigned int status=0;
-    unsigned int timeovercnt=0;
-    unsigned int temp=0;
-    unsigned int Movetime=0;
-    
-    unsigned int temp_LedBlink=0;//LedBlink;
-    unsigned int temp_BlinkFlag_Data=0;//=BlinkFlag_Data;
-    
-    unsigned int LED1_RGB_temp[3];
-    unsigned int LED2_RGB_temp[3];
-    unsigned int LED3_RGB_temp[3];
-    unsigned int LED4_RGB_temp[3];
-    
-    unsigned int LFX_temp0=0;
-    unsigned int LFX_temp1=0;
-    
-      Mem0.Y =0;
-                
-      FailV =0;
-      FailV2 =0;
-   while (1)
-   {   
-        WatchdogClear();
 
-       BlinkFlag_Data =0;
-	   Light_all_off();	  
-	   Clean_Led_Color();
-       Clean_LFX_Led();
-       G_Sensor_Status =0;
-      if(Mem0.Y>22) 
-          break;
-          	
-  	  Mvmt = Get_Move_data(Mem0.Y);
-      temp_MoveText2_Right =0;     
-      
-	 if((Mvmt==0x0ff))
-			break;
-	 
-	 	if((Mvmt==0))
-	 	{
-	 		Mem0.Y++;
-	 		continue;
-	 	}	 	
-	 
-	       
-		    if(Get_Key(0,0))
-			 	  return C_Off_Mode;  
-	 
-	 
-
-		if(G_TurnAround == Mvmt)
-		{
-
-			Mvmt = G_Left<<(*P_TimerB_CNTR%2);
-			
-			 if(Mvmt == G_Right)
-			 {
-		 	//	MoveText2_Right =1;
-		 		temp_MoveText2_Right =1;
-			 }
-			
-		}
-
-
-		// Get_MoveText_data(Mem0.Y,M_Text1);
-			Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text1]); 
-			BlinkFlag_Data=0;
-            Light_all_off();
-			Clean_LFX_Led();
-            Clean_Led_Color();
-
-
-          timeovercnt =0;
-		 while (1)
-		 {
-		 	
-		      WatchdogClear();
-		       
-			    if(Get_Key(0,0))
-				 	  return C_Off_Mode;  
-				 	    
-			  G_Sensor_Status = Mvmt;	 	    
-				 	    
-			  MoveText2_Right =  temp_MoveText2_Right;	  
-			  Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text2]); 
-			  MoveText2_Right=0;
-
-//				Set_Led_RGB(Red,Led1);
-//			    Set_Led_RGB(Red,Led2);
-//			    Set_Led_RGB(Red,Led3);
-//			    Set_Led_RGB(Red,Led4);
-
-
-
-			if((Mvmt==0)||(Mvmt==0x0ff))
-				break;
-		    else		
-			{
-
-                   G_Sensor_Status = Mvmt;
-                 
+        unsigned int temp_LedBlink=0;//LedBlink;
+	    unsigned int temp_BlinkFlag_Data=0;//=BlinkFlag_Data;
+	    
+	    unsigned int LED1_RGB_temp[3];
+	    unsigned int LED2_RGB_temp[3];
+	    unsigned int LED3_RGB_temp[3];
+	    unsigned int LED4_RGB_temp[3];
+	    
+	    unsigned int LFX_temp0=0;
+	    unsigned int LFX_temp1=0;
+        unsigned int status=0;
+        unsigned int temp=0;
+         unsigned int Movetime=0;
                     TimeCnt1 =0;
 				   if(G_Sensor_Status == G_BHIT)	
 					{
@@ -12121,7 +12259,7 @@ unsigned int Misson_Mi03()
                        	{
 						   timeovercnt =0;
 					       PlayA1800_Elements(SFX_Shockwave);
-						   break;
+						   return C_break;
 
                        	}
 															 
@@ -12176,7 +12314,7 @@ unsigned int Misson_Mi03()
 				   {
 					   timeovercnt =0;
 					 
-					   if(Mvmt!=G_Hit)  
+					   if(Mvmt!=G_Anymove)  //G_Hit
 					   {
 					   	
 					    temp_LedBlink=LedBlink;
@@ -12197,7 +12335,7 @@ unsigned int Misson_Mi03()
 				           
 					   }
 				           
-					   break;
+					   return C_break;
 				   }
 				   else if(temp == TimeOver)
 				   {
@@ -12243,7 +12381,7 @@ unsigned int Misson_Mi03()
 						    {
                                FailV =0;
                                
-                               if(Mvmt!=G_Anymove)  
+                               if(Mvmt!=G_Anymove)  //G_Anymove
                                {
                                	
 								    temp_LedBlink=LedBlink;
@@ -12265,7 +12403,7 @@ unsigned int Misson_Mi03()
 				                  
                                }
           
-					             break;                      
+					             return C_break;                      
                                
 							}
 						  else
@@ -12380,12 +12518,137 @@ unsigned int Misson_Mi03()
 				   }
 
 
+                return 0;
+	
+
+}
+
+
+
+
+
+unsigned int Misson_Mi03()
+{
+     
+	unsigned int Mvmt =0;
+    unsigned int temp_MoveText2_Right=0;
+    
+
+//    unsigned int temp=0;
+	unsigned int temp_Movecheck=0;
+   
+    
+
+    
+      Mem0.Y =0;
+                
+      FailV =0;
+      FailV2 =0;
+   while (1)
+   {   
+        WatchdogClear();
+
+       BlinkFlag_Data =0;
+	   Light_all_off();	  
+	   Clean_Led_Color();
+       Clean_LFX_Led();
+       G_Sensor_Status =0;
+      if(Mem0.Y>22) 
+          break;
+          	
+  	  Mvmt = Get_Move_data(Mem0.Y);
+      temp_MoveText2_Right =0;     
+      
+	 if((Mvmt==0x0ff))
+			break;
+	 
+	 	if((Mvmt==0))
+	 	{
+	 		//Mem0.Y++;
+	 		//continue;
+	 	}	 	
+	 
+	       
+		    if(Get_Key(0,0))
+			 	  return C_Off_Mode;  
+	 
+	 
+
+		if(G_TurnAround == Mvmt)
+		{
+
+			Mvmt = G_Left<<(*P_TimerB_CNTR%2);
+			
+			 if(Mvmt == G_Right)
+			 {
+		 	//	MoveText2_Right =1;
+		 		temp_MoveText2_Right =1;
+			 }
+			
+		}
+
+
+		// Get_MoveText_data(Mem0.Y,M_Text1);
+			Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text1]); 
+			BlinkFlag_Data=0;
+            Light_all_off();
+			Clean_LFX_Led();
+            Clean_Led_Color();
+
+
+          timeovercnt =0;
+		 while (1)
+		 {
+		 	
+		      WatchdogClear();
+		       
+			    if(Get_Key(0,0))
+				 	  return C_Off_Mode;  
+				 	    
+			  G_Sensor_Status = Mvmt;	 	    
+				 	    
+			  MoveText2_Right =  temp_MoveText2_Right;	  
+			  Play_Seq(Mem0.Mission_Cur,Movetext_Table[Mem0.Y][M_Text2]); 
+			  MoveText2_Right=0;
+
+//				Set_Led_RGB(Red,Led1);
+//			    Set_Led_RGB(Red,Led2);
+//			    Set_Led_RGB(Red,Led3);
+//			    Set_Led_RGB(Red,Led4);
+
+
+
+			if((Mvmt==0)||(Mvmt==0x0ff))
+				break;
+		    else		
+			{
+
+                   G_Sensor_Status = Mvmt;
+
+			        temp_Movecheck=Mission_Movecheck(Mvmt);
+
+					if(temp_Movecheck==C_break)
+						break;
+					else if(temp_Movecheck)
+						return  temp_Movecheck;
+                 
+  
+
+
 
 			}
 		 }
 
        Mem0.Y++;
     }
+	
+	
+	 if((Mem0.Mission_Cur==2)||(Mem0.Mission_Cur==4)||(Mem0.Mission_Cur==5)||(Mem0.Mission_Cur==11)
+	 ||(Mem0.Mission_Cur==14)||(Mem0.Mission_Cur==17)||(Mem0.Mission_Cur==22)||(Mem0.Mission_Cur==28)||(Mem0.Mission_Cur==29))
+	 {
+	 	 return C_Combat;
+	 }
+	
 	
       while(Mem0.Z<7)     
 	  {
@@ -12470,6 +12733,188 @@ unsigned int Misson_Mi03()
 	
 }
 
+void supperss_combat(unsigned int *Sequence,unsigned int group, unsigned Equor)
+{
+
+//		unsigned j = 0;
+		unsigned i = 0;
+		while(i<16)//C_Player_Num <16
+		{
+			 if (BitMap[i]&(*Sequence)) //Registered_Play_Status
+				{
+
+                    if(Equor==equ_F)
+                    	{
+                           if(Get_Combat_Gr(i)==group)
+                               *Sequence&=~BitMap[i];
+                    	}
+					 else
+					 	{
+
+                              if(Get_Combat_Gr(i)!=group)
+                                  *Sequence&=~BitMap[i];
+
+					 	}
+		
+				}
+			   i++;
+		}
+		
+
+}
+
+
+
+unsigned int  Combat()
+{
+
+         unsigned int L=4+*P_TimerB_CNTR%5;
+		 unsigned int C=0;
+		 unsigned int Sequence =0;
+		 unsigned int c_mvm =0;
+		 unsigned int temp =0;
+		 unsigned int timeovercnt =0;
+
+		 unsigned int temp_Movecheck =0;
+		 unsigned int length =0;
+		 unsigned int all_combat =0x7fff;
+		 unsigned int Sequence_T[8]={0,0,0,0,0,0,0,0};
+         unsigned int Sequence_T_cnt =0;
+	
+	   Clean_LFX_Led();
+       Clean_LFX_Color();
+       Clean_Led_Color();
+    
+    
+        Set_Led_RGB(White,Led1|Led2|Led3|Led4);//White                             
+		LED_Cnt =Blink_Fr; 
+		LedBlink= All_Led_data;
+		BlinkFlag_Data= All_Led_data;
+
+		PlayA1800_Other(Serie_CombatStart);
+
+		BlinkFlag_Data =0;
+		Light_all_off();
+
+		while((length=Get_Registered_Player_Num(Sequence))<L)
+			{
+               	WatchdogClear();
+               	
+                 if(length==0)
+				 	supperss_combat(&all_combat,Any,equ_F);
+                 else if(length<(L-2))
+				 	supperss_combat(&all_combat,SuperPunch,equ_F);
+				 else if(length<(L-1))
+				 	supperss_combat(&all_combat,SuperPunch,Unequ_F);
+
+				 
+                  if(Sequence_T_cnt>=2)
+                  	{
+
+                        if((Get_Combat_Gr(Sequence_T[Sequence_T_cnt-1])==Dodge)&&(Get_Combat_Gr(Sequence_T[Sequence_T_cnt-2])==Dodge))
+                                supperss_combat(&all_combat,Dodge,equ_F);
+                                
+                  	}
+
+                 if(all_combat==0)
+                  {
+                 	 break;
+                  }
+
+                 temp = Select_Player_Random(all_combat);
+			     Sequence|=BitMap[temp];
+
+
+				 Sequence_T[Sequence_T_cnt++]=temp;
+               
+				 
+			}
+
+      while(1)
+     {
+
+
+
+       while (1)
+	   {   
+		        WatchdogClear();
+
+			   if(Get_Key(0,0))
+				  return C_Off_Mode;  
+
+	        Clean_LFX_Led();
+	        Clean_LFX_Color();
+	        Clean_Led_Color();
+			
+
+			c_mvm= Get_Combat_Mov(C);
+			
+			if(c_mvm==0)
+			{
+				 if(C)
+				 	c_mvm= Get_Combat_Mov(C-1);
+				// else
+			}
+			
+			
+		  if((c_mvm)&&((c_mvm&(~G_SixDir))==0)) 
+		  {	
+			temp = Get_Firstcolor_From_Play(c_mvm);//G_Sensor_Status
+
+	        
+	        Set_Led_RGB(White,Led_Data_Play[temp]);
+			LedBlink= Led_Data_Play[temp];
+			BlinkFlag_Data= LedBlink;
+		  }
+		 else 
+			{
+				 Led_On(All_Led_data);// LFX_Led[0]|LFX_Led[1]:0
+				 BlinkFlag_Data =All_Led_data;
+							
+			 } 	
+            PlayA1800_Elements(GetElement_CombatSP(C));
+
+			
+			
+	          G_Sensor_Status = c_mvm;
+
+
+						
+		        temp_Movecheck=Mission_Movecheck(c_mvm);
+
+				if(temp_Movecheck==C_break)
+					break;
+				else if(temp_Movecheck)
+					return  temp_Movecheck;
+
+		   
+	    }
+
+
+	    C++;
+
+       if(C>=length)
+	   	   break;
+		
+      }
+
+
+			while(Mem0.Z<7) 	
+			{
+			 Play_Seq(Mem0.Mission_Cur,End_Table[Mem0.Z]); 
+			 Mem0.Z++;
+			}
+
+	    BlinkFlag_Data=0;
+	    Light_all_off();   
+		
+        return C_Ga01;  
+		
+}
+
+
+
+
 unsigned int Ga01()
 {
 	
@@ -12515,7 +12960,7 @@ unsigned int Ga01()
    	    
    	     Key_Event=0;//²»Ö´ÐÐÆäËû¶¯×÷
    	     LongPressflag=0;
-   	     return C_Off_Mode;
+   	     return C_Off_Mode;//C_Off_Mode_allmission;
    } 
   else
   {    
@@ -12530,7 +12975,7 @@ unsigned int Ga01()
       delay_time(2*16);
 
      if((Mem0.Mission_Cur==1)||(Mem0.Mission_Cur==6)||(Mem0.Mission_Cur==12)
-	 ||(Mem0.Mission_Cur==17)||(Mem0.Mission_Cur==23)||(Mem0.Mission_Cur==28))
+	 ||(Mem0.Mission_Cur==17)||(Mem0.Mission_Cur==21)||(Mem0.Mission_Cur==26)||(Mem0.Mission_Cur==28))
 	 {
 	  Mem0.firstFlag_23b.BitCTL_f.TokenText=1;
 	  TokenMission=Mem0.Mission_Cur; 
@@ -13813,6 +14258,44 @@ void PlaySerie_Mov(unsigned int mov,unsigned int f3_flag)
 }
 /***********************************
 ***********************************/
+void Reset_Memory(unsigned int Irq_Onflag)
+{
+
+
+        Mem0.Mission_Cur =0;
+		Mem0.Mission_Que =0;
+		Mem0.Arm_Mode =0;
+		Mem0.MissionZ_flag =0;  
+		Mem0.Reserve=0;  	   
+       	  __asm("INT OFF");
+	     MoveSPIDriverToRAM();
+  
+  		//SPI_Flash_Sector_Erase(T_MissionSucess_L,T_MissionSucess_H);
+        //SPI_Flash_SendNWords(Mission_Success,C_MissionRAM,T_MissionSucess_L,T_MissionSucess_H);
+  
+
+        // SPI_Flash_Sector_Erase(T_PokLQInColl_L,T_PokLQInColl_H);
+        // SPI_Flash_SendNWords(InCollection_Pok,C_QuestionRAM,T_PokLQInColl_L,T_PokLQInColl_H);
+  
+        // SPI_Flash_Sector_Erase(T_PokCatch_L,T_PokCatch_H);
+        // SPI_Flash_SendNWords(Pokecatch_Pok,C_QuestionRAM,T_PokCatch_L,T_PokCatch_H);
+         
+       	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
+          SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H); 
+         
+         if(Irq_Onflag)
+             __asm("INT FIQ,IRQ");	
+		
+	
+	
+	
+	
+}
+
+
+
+/***********************************
+***********************************/
 
 void Reset_Action()
 {
@@ -13838,27 +14321,7 @@ void Reset_Action()
 		Delay_Xms_PowerOn(10);
 	}	
 	
-        Mem0.Mission_Cur =0;
-		Mem0.Mission_Pok_Same =0;
-		Mem0.Arm_Mode =0;
-		Mem0.MissionZ_flag =0;    
-		
-		   
-       	  __asm("INT OFF");
-	     MoveSPIDriverToRAM();
-  
-  		//SPI_Flash_Sector_Erase(T_MissionSucess_L,T_MissionSucess_H);
-        //SPI_Flash_SendNWords(Mission_Success,C_MissionRAM,T_MissionSucess_L,T_MissionSucess_H);
-  
-
-        // SPI_Flash_Sector_Erase(T_PokLQInColl_L,T_PokLQInColl_H);
-        // SPI_Flash_SendNWords(InCollection_Pok,C_QuestionRAM,T_PokLQInColl_L,T_PokLQInColl_H);
-  
-        // SPI_Flash_Sector_Erase(T_PokCatch_L,T_PokCatch_H);
-        // SPI_Flash_SendNWords(Pokecatch_Pok,C_QuestionRAM,T_PokCatch_L,T_PokCatch_H);
-         
-       	  SPI_Flash_Sector_Erase(T_Mem_data_L,T_Mem_data_H);
-          SPI_Flash_SendNWords(&Mem0,5,T_Mem_data_L,T_Mem_data_H); 
+       Reset_Memory(0);
          
           // __asm("INT FIQ,IRQ");	
 	

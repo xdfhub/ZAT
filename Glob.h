@@ -210,7 +210,14 @@
 #define M_Text2 1
 
 
-//Key
+//combat group
+#define Any  0
+#define Dodge  1
+#define Attack  2
+#define SuperPunch  3
+
+#define  equ_F 1//==
+#define Unequ_F 0//²»µÈÓÚ
 
 
  #define ALL_Key_Enable  0x001
@@ -329,9 +336,10 @@
 #define C_Inmission  0xF021
 #define C_Ga01       0xF022
 #define C_Misson_Mi03 0xF023
-
-                                             
-
+#define C_Off_Mode_allmission     0xf024
+#define C_Restart      0xf025
+#define C_Combat       0xf026                                             
+#define C_break        0xf027
 
 
 #define C_GameTimeout  0x8000
@@ -372,7 +380,7 @@
 
 #define Serie_Wrong  0
 #define Serie_Hello 1
-//#define Serie_Start 2
+#define Serie_CombatStart 2
 //#define Serie_NewMission 3
 //#define Serie_Shake 4
 //#define Serie_Found  5

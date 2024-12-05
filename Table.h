@@ -77,7 +77,9 @@
 #define T_End7                           35000	
 #define T_Misson_Que                     36000
 #define T_Movecolor                      36200
-
+#define T_Combat_SP                      36600
+#define T_Combat_Mov                     36700
+#define T_Combat_Group                   36800
 //#define C_T_EndMission                 4500
 //#define C_T_Inbetween                  8500
 //#define C_T_IntroM                     12500

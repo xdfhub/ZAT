@@ -72,7 +72,7 @@ typedef struct{
 typedef  struct
 {
 	unsigned int Mission_Cur ;//=0;//实际编号从1开始
-	unsigned int Mission_Pok_Same;//=0;
+	unsigned int Mission_Que;//=0;
 	unsigned int Arm_Mode;//=0;
 	unsigned int MissionZ_flag;
 	unsigned int Reserve;

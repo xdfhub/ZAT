@@ -187,10 +187,13 @@ int main()
 			
 			      //  gTemp = MissinZer0();
 			       break;	   
-			case  C_Off_Mode:
-			
+			case  C_Off_Mode://唤醒后mission不变
+						
+			       Reset_Reserve();
+		    case C_Off_Mode_allmission://唤醒后mission更新为下一个
+		    	       
    	               Sleeping();
-   	              gTemp  = C_Step1;
+   	               gTemp  = C_Step1;
 			        break;	
 			        	   
 //			case C_Inmission:			
@@ -211,6 +214,14 @@ int main()
 			               
 				     gTemp  = Misson_Mi03();
 			         break;  
+			   
+			   case C_Restart:
+					 gTemp  = Restart();
+			         break;  
+			         		         
+			   case C_Combat:
+			        gTemp  = Combat();
+			        break;           
 			default:
 			         
 
@@ -235,21 +246,21 @@ int main()
         if(Key_Event==0x88)
          {
             Key_Event =0;	
- //          Mem0.Mission_Cur++;	
-		   gTemp = C_Ga01;//C_SelectMission;
+          //  Get_Mission();//Mem0.Mission_Cur++;	
+		    gTemp = C_Ga01;//C_SelectMission;
          }               
 	    else // if(Key_Event!=0x88)
 	      {
 	  	    
 		  	  Key_Event =0;
-		  	 
+		  	  
 			   if(LongPressflag)
 			   {
 				   	   LongPressflag =0;
                        PlayA1800_Elements(SFX_Off);
 				  	   gTemp  = C_Off_Mode;
-				  }
-				   else	  
+				 }
+				 else	  
 				   {
 				   	  PlayA1800_Elements(SFX_Off);
 				  	  gTemp  = C_Off_Mode;

@@ -113,7 +113,7 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: IRAM in "main.obj" with 0 
 ;Locate: IRAM in "Play_Speech.obj" at 203898  linkat 5D1 
 ;Align: IRAM in "Play_Speech.obj" with 0 
-;Locate: IRAM in "G_Sensor.obj" at 203900  linkat 639 
+;Locate: IRAM in "G_Sensor.obj" at 203901  linkat 63A 
 ;Align: IRAM in "G_Sensor.obj" with 0 
 ;Locate: IRAM in "IIC_Master.obj" at 203879  linkat 5B2 
 ;Align: IRAM in "IIC_Master.obj" with 0 
@@ -137,65 +137,65 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Locate: OVERLAP_A1800_BLOCK in "ORAM_Arrangement.obj" at 2A 
 ;Locate: BootCode_SEC in "BootCode_User.obj" at 200100 
 ;Align: BootCode_SEC in "BootCode_User.obj" with 0 
-;Locate: NB_DATA in "Play_Speech.obj" at 2043DC 
+;Locate: NB_DATA in "Play_Speech.obj" at 204420 
 ;Align: NB_DATA in "Play_Speech.obj" with 0 
-;Locate: NB_DATA in "MC3416_I2C.obj" at 2043EC 
+;Locate: NB_DATA in "MC3416_I2C.obj" at 204430 
 ;Align: NB_DATA in "MC3416_I2C.obj" with 0 
-;Locate: NB_DATA in "Algorithm.obj" at 20438C 
+;Locate: NB_DATA in "Algorithm.obj" at 20433A 
 ;Align: NB_DATA in "Algorithm.obj" with 0 
 ;Locate: NB_DATA in "AntiCrack.obj" at 20187E 
 ;Align: NB_DATA in "AntiCrack.obj" with 0 
-;Locate: NB_DATA in "LED.obj" at 204338 
+;Locate: NB_DATA in "LED.obj" at 2043CC 
 ;Align: NB_DATA in "LED.obj" with 0 
-;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 209D34 
+;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 20BBC4 
 ;Align: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" with 0 
-;Locate: CODE in "modu1" of "CMacro1232.lib"  at 203EE6 
+;Locate: CODE in "modu1" of "CMacro1232.lib"  at 203EE7 
 ;Align: CODE in "modu1" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "divi2" of "CMacro1232.lib"  at 203C53 
+;Locate: CODE in "divi2" of "CMacro1232.lib"  at 203C54 
 ;Align: CODE in "divi2" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "cvu1d4" of "CMacro1232.lib"  at 204063 
+;Locate: CODE in "cvu1d4" of "CMacro1232.lib"  at 204064 
 ;Align: CODE in "cvu1d4" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "gtsf2" of "CMacro1232.lib"  at 203E06 
+;Locate: CODE in "gtsf2" of "CMacro1232.lib"  at 203E07 
 ;Align: CODE in "gtsf2" of "CMacro1232.lib"  with 0 
 ;Locate: CODE in "cvi2f2" of "CMacro1232.lib"  at 201800 
 ;Align: CODE in "cvi2f2" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "lthf2" of "CMacro1232.lib"  at 203E87 
+;Locate: CODE in "lthf2" of "CMacro1232.lib"  at 203E88 
 ;Align: CODE in "lthf2" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "cvi2d4" of "CMacro1232.lib"  at 203F43 
+;Locate: CODE in "cvi2d4" of "CMacro1232.lib"  at 203F44 
 ;Align: CODE in "cvi2d4" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "cvf2d4" of "CMacro1232.lib"  at 203F93 
+;Locate: CODE in "cvf2d4" of "CMacro1232.lib"  at 203F94 
 ;Align: CODE in "cvf2d4" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "muld4" of "CMacro1232.lib"  at 203AC4 
+;Locate: CODE in "muld4" of "CMacro1232.lib"  at 203AC5 
 ;Align: CODE in "muld4" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "ltsf2" of "CMacro1232.lib"  at 203D85 
+;Locate: CODE in "ltsf2" of "CMacro1232.lib"  at 203D86 
 ;Align: CODE in "ltsf2" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "muliu2" of "CMacro1232.lib"  at 2040AE 
+;Locate: CODE in "muliu2" of "CMacro1232.lib"  at 2040AF 
 ;Align: CODE in "muliu2" of "CMacro1232.lib"  with 0 
 ;Locate: CODE in "__clz16" of "CMacro1232.lib"  at 201873 
 ;Align: CODE in "__clz16" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "__divi16_n" of "CMacro1232.lib"  at 2040CA 
+;Locate: CODE in "__divi16_n" of "CMacro1232.lib"  at 2040CB 
 ;Align: CODE in "__divi16_n" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "lshiu1" of "CMacro1232.lib"  at 2040D4 
+;Locate: CODE in "lshiu1" of "CMacro1232.lib"  at 2040D5 
 ;Align: CODE in "lshiu1" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "rshu1" of "CMacro1232.lib"  at 2040DC 
+;Locate: CODE in "rshu1" of "CMacro1232.lib"  at 2040DD 
 ;Align: CODE in "rshu1" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "__clz32" of "CMacro1232.lib"  at 204086 
+;Locate: CODE in "__clz32" of "CMacro1232.lib"  at 204087 
 ;Align: CODE in "__clz32" of "CMacro1232.lib"  with 0 
 ;Locate: CODE in "__divi32_n" of "CMacro1232.lib"  at 2018F2 
 ;Align: CODE in "__divi32_n" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "lshiu2" of "CMacro1232.lib"  at 2040C0 
+;Locate: CODE in "lshiu2" of "CMacro1232.lib"  at 2040C1 
 ;Align: CODE in "lshiu2" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "__rshu2_r" of "CMacro1232.lib"  at 20409A 
+;Locate: CODE in "__rshu2_r" of "CMacro1232.lib"  at 20409B 
 ;Align: CODE in "__rshu2_r" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "lshiu4" of "CMacro1232.lib"  at 20402A 
+;Locate: CODE in "lshiu4" of "CMacro1232.lib"  at 20402B 
 ;Align: CODE in "lshiu4" of "CMacro1232.lib"  with 0 
 ;Locate: CODE in "__u2fd1bit" of "CMacro1232.lib"  at 201928 
 ;Align: CODE in "__u2fd1bit" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "__rshu4_r" of "CMacro1232.lib"  at 203FE1 
+;Locate: CODE in "__rshu4_r" of "CMacro1232.lib"  at 203FE2 
 ;Align: CODE in "__rshu4_r" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "__mul_u32_u128" of "CMacro1232.lib"  at 203CF2 
+;Locate: CODE in "__mul_u32_u128" of "CMacro1232.lib"  at 203CF3 
 ;Align: CODE in "__mul_u32_u128" of "CMacro1232.lib"  with 0 
-;Locate: CODE in "_GPTag" of "CMacro1232.lib"  at 2040E4 
+;Locate: CODE in "_GPTag" of "CMacro1232.lib"  at 2040E5 
 ;Align: CODE in "_GPTag" of "CMacro1232.lib"  with 0 
 ;Locate: ROMCODE_SPI_Data in "RomCodeOBJ_GPCE1_CE3.obj" at 201940 
 ;Align: ROMCODE_SPI_Data in "RomCodeOBJ_GPCE1_CE3.obj" with 0 
@@ -231,15 +231,15 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: _CODE_SPI_SEC in "system.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "main.obj" at 205168 
 ;Align: _CODE_SPI_SEC in "main.obj" with 0 
-;Locate: _CODE_SPI_SEC in "IIC_Master.obj" at 2052DE 
+;Locate: _CODE_SPI_SEC in "IIC_Master.obj" at 205321 
 ;Align: _CODE_SPI_SEC in "IIC_Master.obj" with 0 
-;Locate: _CODE_SPI_SEC in "LED.obj" at 2055FB 
+;Locate: _CODE_SPI_SEC in "LED.obj" at 20563E 
 ;Align: _CODE_SPI_SEC in "LED.obj" with 0 
-;Locate: _CODE_SPI_SEC in "MC3416_I2C.obj" at 205995 
+;Locate: _CODE_SPI_SEC in "MC3416_I2C.obj" at 2059D8 
 ;Align: _CODE_SPI_SEC in "MC3416_I2C.obj" with 0 
-;Locate: _CODE_SPI_SEC in "Play_Speech.obj" at 205DDB 
+;Locate: _CODE_SPI_SEC in "Play_Speech.obj" at 205E1E 
 ;Align: _CODE_SPI_SEC in "Play_Speech.obj" with 0 
-;Locate: _CODE_SPI_SEC in "Algorithm.obj" at 20668C 
-;Align: _CODE_SPI_SEC in "Algorithm.obj" with 0 
 ;Locate: _CODE_SPI_SEC in "G_Sensor.obj" at 2083AC 
 ;Align: _CODE_SPI_SEC in "G_Sensor.obj" with 0 
+;Locate: _CODE_SPI_SEC in "Algorithm.obj" at 209D37 
+;Align: _CODE_SPI_SEC in "Algorithm.obj" with 0 

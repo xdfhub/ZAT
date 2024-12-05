@@ -10364,18 +10364,18 @@ LM589:
 	     cmp R4, 383              	// [2:2006]  
 	     jne L_11_34              	// [4:2006]  
 BB22_PU11:	// 0x1879
-// BB:22 cycle count: 9
+// BB:22 cycle count: 10
 //2007  	                 {
 //2008  	                	 PlayA1800_Elements(SFX_No);
 
 LM590:
 	     .stabn 68,0,2008,LM590-_WaitAction
 	     SP = SP - 1              	// [0:2008]  
-	     R3 = 37                  	// [1:2008]  
-	     R4 = SP + 1              	// [2:2008]  
-	     [R4] = R3                	// [4:2008]  
-	     call _PlayA1800_Elements 	// [6:2008]  PlayA1800_Elements
-BB23_PU11:	// 0x1880
+	     R3 = 84                  	// [1:2008]  
+	     R4 = SP + 1              	// [3:2008]  
+	     [R4] = R3                	// [5:2008]  
+	     call _PlayA1800_Elements 	// [7:2008]  PlayA1800_Elements
+BB23_PU11:	// 0x1881
 // BB:23 cycle count: 11
 	     SP = SP + 1              	// [0:2008]  
 //2009  	                	 TimeCnt=0;
@@ -10387,7 +10387,7 @@ LM591:
 	     R4 = (_TimeCnt)          	// [3:2009]  TimeCnt
 	     DS:[R4] = R3             	// [5:2009]  
 	     jmp L_11_33              	// [7:2009]  
-L_11_34:	// 0x1887
+L_11_34:	// 0x1888
 // BB:24 cycle count: 8
 //2010  	                	
 //2011  
@@ -10400,13 +10400,13 @@ LM592:
 	     R1 = [BP + 0]            	// [0:2014]  temp
 	     SP = SP + 2              	// [2:2014]  
 	     pop BP, PC from [SP]     	// [3:2014]  
-L_11_33:	// 0x188a
+L_11_33:	// 0x188b
 // BB:25 cycle count: 4
 
 LM593:
 	     .stabn 68,0,2006,LM593-_WaitAction
 	     jmp L_11_30              	// [0:2006]  
-L_11_31:	// 0x188b
+L_11_31:	// 0x188c
 // BB:26 cycle count: 8
 //2015  					
 //2016  			    }
@@ -10417,7 +10417,7 @@ LM594:
 	     R4 = [BP + 0]            	// [0:2017]  temp
 	     cmp R4, 8192             	// [2:2017]  
 	     jne L_11_35              	// [4:2017]  
-BB27_PU11:	// 0x188f
+BB27_PU11:	// 0x1890
 // BB:27 cycle count: 19
 //2023  //	                	    G_Sensor_Status&=~0xE000;//20210722 	
 //2024  //	                	     MoveSucessFlag=0;
@@ -10441,15 +10441,15 @@ LM596:
 	     R1 = 0                   	// [12:2028]  
 	     SP = SP + 2              	// [13:2028]  
 	     pop BP, PC from [SP]     	// [14:2028]  
-L_11_35:	// 0x189c
-L_11_30:	// 0x189c
-L_11_29:	// 0x189c
+L_11_35:	// 0x189d
+L_11_30:	// 0x189d
+L_11_29:	// 0x189d
 // BB:28 cycle count: 3
 
 LM597:
 	     .stabn 68,0,1989,LM597-_WaitAction
 	     goto L_11_23             	// [0:1989]  
-L_11_24:	// 0x189e
+L_11_24:	// 0x189f
 // BB:29 cycle count: 8
 //2034  			}
 //2035  			
@@ -10462,7 +10462,7 @@ LM598:
 	     R4 = [BP + 1]            	// [0:2038]  temp_G_Sensor_Status
 	     cmp R4, 383              	// [2:2038]  
 	     jne L_11_37              	// [4:2038]  
-BB30_PU11:	// 0x18a2
+BB30_PU11:	// 0x18a3
 // BB:30 cycle count: 8
 //2039  	         return C_MovSucess;
 
@@ -10471,7 +10471,7 @@ LM599:
 	     R1 = 4096                	// [0:2039]  
 	     SP = SP + 2              	// [2:2039]  
 	     pop BP, PC from [SP]     	// [3:2039]  
-L_11_37:	// 0x18a6
+L_11_37:	// 0x18a7
 // BB:31 cycle count: 7
 //2040  	    else
 //2041  	        return 0;	
@@ -10481,7 +10481,7 @@ LM600:
 	     R1 = 0                   	// [0:2041]  
 	     SP = SP + 2              	// [1:2041]  
 	     pop BP, PC from [SP]     	// [2:2041]  
-L_11_36:	// 0x18a9
+L_11_36:	// 0x18aa
 // BB:32 cycle count: 6
 	     SP = SP + 2              	// [0:2041]  
 	     pop BP, PC from [SP]     	// [1:2041]  
@@ -10517,7 +10517,7 @@ _Mov_Detected: .proc
 
 LM601:
 	     .stabn 68,0,2053,LM601-_Mov_Detected
-BB1_PU12:	// 0x18ab
+BB1_PU12:	// 0x18ac
 // BB:1 cycle count: 29
 	     push BP to [SP]          	// [0:2053]  
 	     SP = SP - 5              	// [2:2053]  
@@ -10565,8 +10565,8 @@ LM607:
 	     R4 = [BP + 2]            	// [21:2061]  temp_G_Sensor_Status
 	     cmp R4, 383              	// [23:2061]  
 	     jne L_12_28              	// [25:2061]  
-BB2_PU12:	// 0x18c2
-// BB:2 cycle count: 9
+BB2_PU12:	// 0x18c3
+// BB:2 cycle count: 10
 //2062  	  {
 //2063  
 //2064  		   PlayA1800_ElementsInit(SFX_Wait);
@@ -10574,14 +10574,14 @@ BB2_PU12:	// 0x18c2
 LM608:
 	     .stabn 68,0,2064,LM608-_Mov_Detected
 	     SP = SP - 1              	// [0:2064]  
-	     R3 = 51                  	// [1:2064]  
-	     R4 = SP + 1              	// [2:2064]  
-	     [R4] = R3                	// [4:2064]  
-	     call _PlayA1800_ElementsInit	// [6:2064]  PlayA1800_ElementsInit
-BB3_PU12:	// 0x18c9
+	     R3 = 98                  	// [1:2064]  
+	     R4 = SP + 1              	// [3:2064]  
+	     [R4] = R3                	// [5:2064]  
+	     call _PlayA1800_ElementsInit	// [7:2064]  PlayA1800_ElementsInit
+BB3_PU12:	// 0x18cb
 // BB:3 cycle count: 1
 	     SP = SP + 1              	// [0:2064]  
-L_12_28:	// 0x18ca
+L_12_28:	// 0x18cc
 // BB:4 cycle count: 12
 //2065            // DetectionFlag =1; 
 //2066  	  }
@@ -10603,7 +10603,7 @@ LM610:
 	     DS = seg(_TimeCnt1)      	// [7:2070]  TimeCnt1
 	     R4 = (_TimeCnt1)         	// [8:2070]  TimeCnt1
 	     DS:[R4] = R3             	// [10:2070]  
-L_12_29:	// 0x18d4
+L_12_29:	// 0x18d6
 // BB:5 cycle count: 12
 //2071  		 
 //2072  		 	
@@ -10617,10 +10617,10 @@ LM611:
 	     R4 = DS:[R4]             	// [5:2073]  
 	     cmp R3, R4               	// [7:2073]  
 	     ja BB6_PU12              	// [8:2073]  
-BB38_PU12:	// 0x18db
+BB38_PU12:	// 0x18dd
 // BB:38 cycle count: 3
 	     goto L_12_30             	// [0:0]  
-BB6_PU12:	// 0x18dd
+BB6_PU12:	// 0x18df
 // BB:6 cycle count: 3
 //2074         {
 //2075  
@@ -10629,7 +10629,7 @@ BB6_PU12:	// 0x18dd
 LM612:
 	     .stabn 68,0,2076,LM612-_Mov_Detected
 	     call _WatchdogClear      	// [0:2076]  WatchdogClear
-BB7_PU12:	// 0x18df
+BB7_PU12:	// 0x18e1
 // BB:7 cycle count: 10
 //2077  	     
 //2078  	     
@@ -10642,7 +10642,7 @@ LM613:
 	     R4 = DS:[R4]             	// [3:2079]  
 	     cmp R4, 0                	// [5:2079]  
 	     je L_12_31               	// [6:2079]  
-BB8_PU12:	// 0x18e5
+BB8_PU12:	// 0x18e7
 // BB:8 cycle count: 32
 //2080  		          {
 //2081  		          	     MoveSucessFlag=0;
@@ -10685,7 +10685,7 @@ LM617:
 	     R4 = [BP + 2]            	// [24:2090]  temp_G_Sensor_Status
 	     cmp R4, 383              	// [26:2090]  
 	     jne L_12_33              	// [28:2090]  
-BB9_PU12:	// 0x18fd
+BB9_PU12:	// 0x18ff
 // BB:9 cycle count: 7
 //2091                           return 0;
 
@@ -10694,7 +10694,7 @@ LM618:
 	     R1 = 0                   	// [0:2091]  
 	     SP = SP + 5              	// [1:2091]  
 	     pop BP, PC from [SP]     	// [2:2091]  
-L_12_33:	// 0x1900
+L_12_33:	// 0x1902
 // BB:10 cycle count: 8
 //2092                        else    
 //2093  					  	 return C_MovSucess;	
@@ -10704,8 +10704,8 @@ LM619:
 	     R1 = 4096                	// [0:2093]  
 	     SP = SP + 5              	// [2:2093]  
 	     pop BP, PC from [SP]     	// [3:2093]  
-L_12_32:	// 0x1904
-L_12_31:	// 0x1904
+L_12_32:	// 0x1906
+L_12_31:	// 0x1906
 // BB:11 cycle count: 8
 //2094  		          	
 //2095  		          }
@@ -10718,7 +10718,7 @@ LM620:
 	     R4 = [BP + 2]            	// [0:2098]  temp_G_Sensor_Status
 	     cmp R4, 383              	// [2:2098]  
 	     jne L_12_34              	// [4:2098]  
-BB12_PU12:	// 0x1908
+BB12_PU12:	// 0x190a
 // BB:12 cycle count: 3
 //2099             {
 //2100  		   	if((SACM_A1800_Status() & 0x0001) == 0)
@@ -10726,13 +10726,13 @@ BB12_PU12:	// 0x1908
 LM621:
 	     .stabn 68,0,2100,LM621-_Mov_Detected
 	     call _SACM_A1800_Status  	// [0:2100]  SACM_A1800_Status
-BB13_PU12:	// 0x190a
+BB13_PU12:	// 0x190c
 // BB:13 cycle count: 7
 	     R4 = R1 & 1              	// [0:2100]  
 	     cmp R4, 0                	// [2:2100]  
 	     jne L_12_35              	// [3:2100]  
-BB14_PU12:	// 0x190e
-// BB:14 cycle count: 9
+BB14_PU12:	// 0x1910
+// BB:14 cycle count: 10
 //2101  		   	{
 //2102  		   		
 //2103  				//if(timeoutplay ==2)
@@ -10742,14 +10742,14 @@ BB14_PU12:	// 0x190e
 LM622:
 	     .stabn 68,0,2105,LM622-_Mov_Detected
 	     SP = SP - 1              	// [0:2105]  
-	     R3 = 51                  	// [1:2105]  
-	     R4 = SP + 1              	// [2:2105]  
-	     [R4] = R3                	// [4:2105]  
-	     call _PlayA1800_ElementsInit	// [6:2105]  PlayA1800_ElementsInit
-BB15_PU12:	// 0x1915
+	     R3 = 98                  	// [1:2105]  
+	     R4 = SP + 1              	// [3:2105]  
+	     [R4] = R3                	// [5:2105]  
+	     call _PlayA1800_ElementsInit	// [7:2105]  PlayA1800_ElementsInit
+BB15_PU12:	// 0x1918
 // BB:15 cycle count: 1
 	     SP = SP + 1              	// [0:2105]  
-L_12_35:	// 0x1916
+L_12_35:	// 0x1919
 // BB:16 cycle count: 3
 //2107  
 //2108  				
@@ -10760,7 +10760,7 @@ L_12_35:	// 0x1916
 LM623:
 	     .stabn 68,0,2111,LM623-_Mov_Detected
 	     call _SACM_A1800_ServiceLoop	// [0:2111]  SACM_A1800_ServiceLoop
-L_12_34:	// 0x1918
+L_12_34:	// 0x191b
 // BB:17 cycle count: 14
 //2112             }
 //2113  	       
@@ -10776,7 +10776,7 @@ LM624:
 	     R4 = SP + 2              	// [7:2114]  
 	     [R4] = R3                	// [9:2114]  
 	     call _Get_Key            	// [11:2114]  Get_Key
-BB18_PU12:	// 0x1923
+BB18_PU12:	// 0x1926
 // BB:18 cycle count: 11
 	     SP = SP + 2              	// [0:2114]  
 //2115  		   	if(Key_Event)
@@ -10788,7 +10788,7 @@ LM625:
 	     R4 = DS:[R4]             	// [4:2115]  
 	     cmp R4, 0                	// [6:2115]  
 	     je L_12_36               	// [7:2115]  
-BB19_PU12:	// 0x192a
+BB19_PU12:	// 0x192d
 // BB:19 cycle count: 3
 //2116  		   	{			       
 //2117  		   	    SACM_A1800_Stop();
@@ -10796,7 +10796,7 @@ BB19_PU12:	// 0x192a
 LM626:
 	     .stabn 68,0,2117,LM626-_Mov_Detected
 	     call _SACM_A1800_Stop    	// [0:2117]  SACM_A1800_Stop
-BB20_PU12:	// 0x192c
+BB20_PU12:	// 0x192f
 // BB:20 cycle count: 13
 //2118  	            A1800_Flag = 0;  		   	 
 
@@ -10813,7 +10813,7 @@ LM628:
 	     R1 = 0                   	// [6:2119]  
 	     SP = SP + 5              	// [7:2119]  
 	     pop BP, PC from [SP]     	// [8:2119]  
-L_12_36:	// 0x1934
+L_12_36:	// 0x1937
 // BB:21 cycle count: 10
 //2120  
 //2121  		   	}
@@ -10827,7 +10827,7 @@ LM629:
 	     R4 = DS:[R4]             	// [3:2123]  
 	     cmp R4, 2                	// [5:2123]  
 	     jbe L_12_37              	// [6:2123]  
-BB22_PU12:	// 0x193a
+BB22_PU12:	// 0x193d
 // BB:22 cycle count: 9
 //2124  			{
 //2125  			    HZ_1K_flag=0;//HZ_64_flag =0;
@@ -10843,14 +10843,14 @@ LM630:
 LM631:
 	     .stabn 68,0,2126,LM631-_Mov_Detected
 	     call _sensor_read_xyz    	// [6:2126]  sensor_read_xyz
-BB23_PU12:	// 0x1941
+BB23_PU12:	// 0x1944
 // BB:23 cycle count: 3
 //2127  				temp = G_Sensor_Check();
 
 LM632:
 	     .stabn 68,0,2127,LM632-_Mov_Detected
 	     call _G_Sensor_Check     	// [0:2127]  G_Sensor_Check
-BB24_PU12:	// 0x1943
+BB24_PU12:	// 0x1946
 // BB:24 cycle count: 10
 	     [BP + 0] = R1            	// [0:2127]  temp
 //2128  				
@@ -10862,7 +10862,7 @@ LM633:
 	     R4 = R4 & 8191           	// [3:2129]  
 	     cmp R4, 0                	// [5:2129]  
 	     je L_12_38               	// [6:2129]  
-BB25_PU12:	// 0x1949
+BB25_PU12:	// 0x194c
 // BB:25 cycle count: 12
 //2130  				{
 //2131  				   G_Sensor_Status&=~0xE000;//20210722  
@@ -10876,7 +10876,7 @@ LM634:
 	     DS = seg(_G_Sensor_Status)	// [7:2131]  G_Sensor_Status
 	     R4 = (_G_Sensor_Status)  	// [8:2131]  G_Sensor_Status
 	     DS:[R4] = R3             	// [10:2131]  
-L_12_38:	// 0x1953
+L_12_38:	// 0x1956
 // BB:26 cycle count: 9
 //2132                     //stepflag_Y =0;
 //2133                     //stepflag =0;				   
@@ -10890,12 +10890,12 @@ LM635:
 	     R4 = R4 & 8191           	// [2:2136]  
 	     cmp R4, 0                	// [4:2136]  
 	     je L_12_39               	// [5:2136]  
-BB27_PU12:	// 0x1958
+BB27_PU12:	// 0x195b
 // BB:27 cycle count: 8
 	     R4 = [BP + 2]            	// [0:2136]  temp_G_Sensor_Status
 	     cmp R4, 383              	// [2:2136]  
 	     jne L_12_39              	// [4:2136]  
-L_12_40:	// 0x195c
+L_12_40:	// 0x195f
 // BB:28 cycle count: 3
 //2137  				            temp=C_MovFail;
 
@@ -10903,7 +10903,7 @@ LM636:
 	     .stabn 68,0,2137,LM636-_Mov_Detected
 	     R4 = 8192                	// [0:2137]  
 	     [BP + 0] = R4            	// [2:2137]  temp
-L_12_39:	// 0x195f
+L_12_39:	// 0x1962
 // BB:29 cycle count: 9
 //2138  				
 //2139  			    if(temp&C_MovSucessStatus )//==C_MovSucess
@@ -10914,7 +10914,7 @@ LM637:
 	     R4 = R4 & 8191           	// [2:2139]  
 	     cmp R4, 0                	// [4:2139]  
 	     je L_12_42               	// [5:2139]  
-BB30_PU12:	// 0x1964
+BB30_PU12:	// 0x1967
 // BB:30 cycle count: 14
 //2140  			    {
 //2141  			      	//if(temp_G_Sensor_Status != G_IMMO)	
@@ -10937,7 +10937,7 @@ LM639:
 	     R1 = [BP + 0]            	// [6:2148]  temp
 	     SP = SP + 5              	// [8:2148]  
 	     pop BP, PC from [SP]     	// [9:2148]  
-L_12_42:	// 0x196c
+L_12_42:	// 0x196f
 // BB:31 cycle count: 8
 //2149  					
 //2150  			    }
@@ -10948,7 +10948,7 @@ LM640:
 	     R4 = [BP + 0]            	// [0:2151]  temp
 	     cmp R4, 8192             	// [2:2151]  
 	     jne L_12_43              	// [4:2151]  
-BB32_PU12:	// 0x1970
+BB32_PU12:	// 0x1973
 // BB:32 cycle count: 13
 //2153  			       	 // OFF_Timeoutcnt =0;
 //2154  			         // temp_timecnt = TimeCnt;				  
@@ -10969,15 +10969,15 @@ LM642:
 	     R1 = 0                   	// [6:2158]  
 	     SP = SP + 5              	// [7:2158]  
 	     pop BP, PC from [SP]     	// [8:2158]  
-L_12_43:	// 0x1978
-L_12_41:	// 0x1978
-L_12_37:	// 0x1978
+L_12_43:	// 0x197b
+L_12_41:	// 0x197b
+L_12_37:	// 0x197b
 // BB:33 cycle count: 3
 
 LM643:
 	     .stabn 68,0,2123,LM643-_Mov_Detected
 	     goto L_12_29             	// [0:2123]  
-L_12_30:	// 0x197a
+L_12_30:	// 0x197d
 // BB:34 cycle count: 8
 //2161  			                      												   
 //2162  			}
@@ -10990,7 +10990,7 @@ LM644:
 	     R4 = [BP + 2]            	// [0:2165]  temp_G_Sensor_Status
 	     cmp R4, 383              	// [2:2165]  
 	     jne L_12_45              	// [4:2165]  
-BB35_PU12:	// 0x197e
+BB35_PU12:	// 0x1981
 // BB:35 cycle count: 8
 //2166  	         return C_MovSucess;
 
@@ -10999,7 +10999,7 @@ LM645:
 	     R1 = 4096                	// [0:2166]  
 	     SP = SP + 5              	// [2:2166]  
 	     pop BP, PC from [SP]     	// [3:2166]  
-L_12_45:	// 0x1982
+L_12_45:	// 0x1985
 // BB:36 cycle count: 8
 //2167  	    else
 //2168  	        return TimeOver;
@@ -11009,7 +11009,7 @@ LM646:
 	     R1 = - 32768             	// [0:2168]  
 	     SP = SP + 5              	// [2:2168]  
 	     pop BP, PC from [SP]     	// [3:2168]  
-L_12_44:	// 0x1986
+L_12_44:	// 0x1989
 // BB:37 cycle count: 6
 	     SP = SP + 5              	// [0:2168]  
 	     pop BP, PC from [SP]     	// [1:2168]  
