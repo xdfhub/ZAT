@@ -147,7 +147,7 @@ Locate: SPIFC_RAMCode_SEC in "SPI_Flash_CE3.obj" at 208000 linkat 10
 ;Align: NB_DATA in "AntiCrack.obj" with 0 
 ;Locate: NB_DATA in "LED.obj" at 2043CC 
 ;Align: NB_DATA in "LED.obj" with 0 
-;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 20BBC4 
+;Locate: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" at 20BBEF 
 ;Align: __sn_section_RES_ROM_ZAT001A_V_BIN in "ROM_ZAT001A_V_bin.res" with 0 
 ;Locate: CODE in "modu1" of "CMacro1232.lib"  at 203EE7 
 ;Align: CODE in "modu1" of "CMacro1232.lib"  with 0 

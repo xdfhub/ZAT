@@ -12447,7 +12447,8 @@ unsigned int  Mission_Movecheck(unsigned int Mvmt)
                                 //PlayA1800_Elements(SFX_Dizzy);
                                 PlayA1800_Elements(A_VLMHTEN_Fail1);
                                 PlayA1800_Elements(SFX_Lose);
-                                PlayA1800_Elements(A_VLMHTEN_Fail2); 							    
+                                PlayA1800_Elements(A_VLMHTEN_Fail2); 
+                                PlayA1800_Elements(A_VLMHTEN_Fail3); 							    
 							    
 								 G_Sensor_Status=G_Shake;
 								 
@@ -12463,6 +12464,7 @@ unsigned int  Mission_Movecheck(unsigned int Mvmt)
 								  else
 								   {
 								  	      PlayA1800_Elements(A_VLMHTEN_Fail2); 
+								  	      PlayA1800_Elements(A_VLMHTEN_Fail3);
 										  if(WaitAction(10*16,0)==C_MovSucess)// ÷ªºÏ≤‚shake ”√C_MovSucess
 										   {
 										   	   PlayA1800_Elements(SFX_Start); 
@@ -12800,11 +12802,14 @@ unsigned int  Combat()
 			{
                	WatchdogClear();
                	
+               	all_combat =0x7fff;
+               	all_combat&=~Sequence;
+               	
                  if(length==0)
 				 	supperss_combat(&all_combat,Any,equ_F);
-                 else if(length<(L-2))
+                 if(length<(L-1))
 				 	supperss_combat(&all_combat,SuperPunch,equ_F);
-				 else if(length<(L-1))
+				 else if(length==(L-1))
 				 	supperss_combat(&all_combat,SuperPunch,Unequ_F);
 
 				 
@@ -12847,12 +12852,12 @@ unsigned int  Combat()
 	        Clean_Led_Color();
 			
 
-			c_mvm= Get_Combat_Mov(C);
+			c_mvm= Get_Combat_Mov(Sequence_T[C]);
 			
 			if(c_mvm==0)
 			{
 				 if(C)
-				 	c_mvm= Get_Combat_Mov(C-1);
+				 	c_mvm= Get_Combat_Mov(Sequence_T[C-1]);
 				// else
 			}
 			
@@ -12872,7 +12877,7 @@ unsigned int  Combat()
 				 BlinkFlag_Data =All_Led_data;
 							
 			 } 	
-            PlayA1800_Elements(GetElement_CombatSP(C));
+            PlayA1800_Elements(GetElement_CombatSP(Sequence_T[C]));
 
 			
 			
