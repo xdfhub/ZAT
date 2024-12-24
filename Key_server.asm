@@ -23,8 +23,8 @@
 
 
 
-.define IO_BuffMask   0x011//0x034//
-.define IO_Buffinit   0x011
+.define IO_BuffMask   0x001//0x011//
+.define IO_Buffinit   0x001
 
 
 

@@ -75,6 +75,7 @@ extern unsigned int gVolume1;
 extern unsigned Eventflag;
 extern unsigned int BlinkFlag_Data;
 extern unsigned int T_Countdowncnt;
+extern unsigned TimeTatleCnt;
 extern unsigned int Time_Countdownflag;
 extern unsigned int BlinkStopFlag;
 
@@ -158,6 +159,7 @@ extern  Mem_data Mem0;
 extern const unsigned int Led_Data_Play[];
 extern const unsigned int BitMap[];
 extern unsigned int MoveText2_Right;
+extern unsigned int MotorOnflag;
 
 
 //extern unsigned Led_offset;
@@ -174,7 +176,7 @@ unsigned Set_RandomVL_Index(unsigned SphIndex)
 {
 	unsigned temp1,temp2;
 	unsigned long Addr;
-	if ((SphIndex>=0)&&(SphIndex<52))
+	if ((SphIndex>=0)&&(SphIndex<5))
 	{
 //	     if(Mem0.Mode == Classic_M)		
 //            Addr = SphIndex * 4 + C_TableOtherSpeechAddr;
@@ -212,29 +214,29 @@ unsigned int  PlayA1800_Other(unsigned SpeechIndex)
 
 	#ifdef C_debug
 			 if(PassFlag)
-			 	 return;
+			 	 return 0;
 	#endif
 		
 		if(Sleepflag) 
-		      return ;
+		      return 0;
 		
 		if(PauseFlag)
-		  	 return;
+		  	 return 0;
 		
 		
 	   if(CheaterFlag)
-		  	 return;
+		  	 return 0;
 
 
        if(Key_Event)
-   	      return;    
+   	      return 0;    
    	     
        if(Resumeflag)
-       	    return;
+       	    return 0;
    
    
    		 if(MoveSucessFlag)
-		    	return ;
+		    	return 0;
  	//LED_Ser_Init();
  	
 // if(Mem0.Mode == Classic_M)		
@@ -255,16 +257,16 @@ unsigned int  PlayA1800_Other(unsigned SpeechIndex)
    temp1+= temp2;
     
    
-   if((SpeechIndex>=Serie_Cave_Mov)&&(SpeechIndex<=Serie_special_Mov))
+/*    if((SpeechIndex>=Serie_Cave_Mov)&&(SpeechIndex<=Serie_special_Mov))
    {
    	   sp_offset = temp1;//xiang
    	   //Play_Seq(temp1,T_Serie_EnviMov);
 //   	   Serie_Envi=temp2;
 
-     if(Mem0.Mode ==Classic_M)
+ //    if(Mem0.Mode ==Classic_M)
    	    Addr = temp1 * 4 * 2 + T_Serie_EnviMov; 
-   	  else
-   	     Addr = temp1 * 4 * 2 + T_Serie_EnviMovAccessible; 
+//   	  else
+//   	     Addr = temp1 * 4 * 2 + T_Serie_EnviMovAccessible; 
    	     
    	   Addr+=3*2;//最后一个word
    	   temp2 = SPI_ReadAWord_Big(Addr);
@@ -287,7 +289,7 @@ unsigned int  PlayA1800_Other(unsigned SpeechIndex)
    }  
    	else if(SpeechIndex==Serie_Congrat)
    		 Play_Seq(temp1,T_Serie_Mov);
-   	else
+   	else */
         PlayA1800_Elements(temp1);
    
    return temp2;
@@ -379,25 +381,52 @@ unsigned int Pause_Process()
 
 				      	unsigned int Play_Con_temp=0;
 						unsigned int Blink_data_temp=0;
+						unsigned int temp_LedBlink =0;
 						unsigned int temp;
-		                 
-		            //    unsigned int  Key_True_False_Temp =0;
-
-						unsigned int out_pauseflag =0;
-		                
-		      			unsigned int time_temp = TimeCnt;						
-						//unsigned int temp_timeCnt_Speed = TimeCnt_Speed;     
+						unsigned int MotorOnflag_temp =MotorOnflag;		                
+		      			unsigned int time_temp = TimeCnt;						  
 						unsigned int temp_T_Countdowncnt =T_Countdowncnt;   
+						unsigned int temp_TimeTatleCnt=TimeTatleCnt;
+						unsigned int LFX_temp0=0;
+					    unsigned int LFX_temp1=0;
+					
+						unsigned int LED1_RGB_temp[3];
+					    unsigned int LED2_RGB_temp[3];
+					    unsigned int LED3_RGB_temp[3];
+					    unsigned int LED4_RGB_temp[3];						
+						
+						
 						
 //						 Key_buffer_First_temp=Key_buffer_First;
-						
-						
-						temp_FiveSec_cnt = FiveSec_cnt;
+	                          temp_LedBlink=LedBlink;
+                              Blink_data_temp=BlinkFlag_Data;
+								
 
-                         Blink_data_temp = BlinkFlag_Data;
-						 BlinkFlag_Data =0;
-                        
-					
+						       BlinkFlag_Data=0;
+						       Light_all_off();	
+
+                       
+                               Motor_Off();
+
+                               for(temp=0;temp<3;temp++)
+                               	{
+                                    LED1_RGB_temp[temp] =LED1_RGB[temp];
+                                    LED2_RGB_temp[temp] =LED2_RGB[temp];
+									LED3_RGB_temp[temp] =LED3_RGB[temp];
+									LED4_RGB_temp[temp] =LED4_RGB[temp];
+                               	}
+
+							   
+
+						  		Set_Led_RGB(White,Led1|Led2|Led3|Led4);                             
+                                LFX_temp0=LFX_Led[0];
+                                LFX_temp1=LFX_Led[1];								 
+								Clean_LFX_Led();
+								 
+								LedBlink= All_Led_data;
+							    BlinkFlag_Data =All_Led_data;						
+						
+					        //	temp_FiveSec_cnt = FiveSec_cnt;
                    	    Key_Event =0;
                    	    Resumeflag =0; //第一次按下已暂停声音
                    	  if(A1800_Flag)
@@ -423,14 +452,15 @@ unsigned int Pause_Process()
 										  {
 										  	Key_TrueFlase_Buffer =0;  
 									        Key_Event = LongPressflag;	//20160215 xiang
-											 return Key_Event;
+									        break;
+											// return Key_Event;
 										  	
 										  	
 										  }	     
 
 			                              if(Sleepflag) 
 			                              {                                	 	
-					                           return 1;
+					                           break;//return 1;
 			                              }
 										 
 										  if(Key)
@@ -447,105 +477,36 @@ unsigned int Pause_Process()
 														 	    Key_TrueFlase_Buffer =0;  
 																TimeCnt_Key =0;
 																
-																 out_pauseflag =1;
+																 //out_pauseflag =1;
 																 
 																 Key =0;
 													             break;
 										                  	}
-
-//
-//														  if(Key&Key_True_False_Temp)
-//														  	{
-//			                                                   Key_True_False_Temp =0;
-//															   TimeCnt_Key =0;
-//
-//														  	}
 										
 										        	}
 				  	                             
 				  	                              Key =0;	 
 
-//												 if(TimeCnt_Key<C_1s_Pause)
-//												 	{
-//			                                           if((Key_TrueFlase_Buffer + temp) == (Key_True+Key_False))
-//			                                           	{
-//
-//			                                                  temp =0;
-//			                                                  out_pauseflag =1;
-//															  break;
-//
-//
-//			                                           	}
-//
-//
-//												 	}
 			                                  if(temp&(Key_True|Key_False))//有按下
 			                                  	{
 			                                      Key_TrueFlase_Buffer = temp;
 												  TimeCnt_Key =0;
 
-			                                  	}
-//											  else if(temp&(Key_Blue|Key_Orange|Key_Pink|Key_Purple|Key_Yellow))							
-//											  	{
-//
-//												        Key_Buffer&=~temp;
-//			                                            out_pauseflag =1;
-//														break;
-//
-//											  	}
-			                                  
-												
-
+			                                  	}										
 										  	}
-
-
-//								            if(Key_TrueFlase_Buffer)
-//								        	{
-//
-//								                 if(TimeCnt_Key>=C_1s_Pause)
-//								                 	{
-//								                 		Pressflag&=~Key_TrueFlase_Buffer;//抬起无效
-//								                 	   out_pauseflag =1;
-//													   break;
-//
-//								                 	}
-//
-//								        	}
-
-//										   if((Key_True_False_Temp)&&(TimeCnt_Key>=C_2S))
-//										   	{
-//
-//
-//											    
-//											    if(!PlayScoresFlag)
-//											    {
-//											    	 SACM_A1800_Stop();
-//											         A1800_Flag = 0;							    	
-//											    	//PauseFlag =1;
-//											    	
-//											    	 BlinkFlag_Data = Blink_data_temp;
-//											        return 0;// Key_TellScores();//Tell_Scores(0);
-//											    }
-//
-//										   	}
-
-
-										
-//										if(TimeCnt>180*16)
-//										{
-//											Key_TrueFlase_Buffer =0;
-//											//TimeCnt =0;
-//											//SACM_A1800_Stop();
-//											//PlayA1800_Elements(VLFZEN7020);
-//											Sleepflag |= C_GameTimeout;							
-//											return 1;
-//										}
-																		
-
+										  	
+										  	
+										  	
+									if(TimeCnt>10*60*16)
+									{	  	
+										Key_Event =1;
+										return 1;//off  
+									}	
+										  	
 						 	}
 
 
-               if(out_pauseflag)
+               //if(out_pauseflag)
                   {
 
 
@@ -581,18 +542,37 @@ unsigned int Pause_Process()
 						   //if(PlayScoresFlag)
 							//	 Play_Con =2;
 							Play_Con = Play_Con_temp;
-					
-							BlinkFlag_Data = Blink_data_temp ;
+									
 						}
 					   
 					
 					 TimeCnt =  time_temp;
-					// TimeCnt_Speed = temp_timeCnt_Speed;
 					 T_Countdowncnt = temp_T_Countdowncnt;
+					 TimeTatleCnt =temp_TimeTatleCnt;
 					 
-					 FiveSec_cnt = temp_FiveSec_cnt;
-//					 Key_buffer_First = Key_buffer_First_temp;
+				      BlinkFlag_Data=0;
+					  Light_all_off();
+
+                     if(MotorOnflag_temp)
+                     	Motor_On();
+
+                      LFX_Led[0]=LFX_temp0;
+                      LFX_Led[1]=LFX_temp1;
+
+
+					for(temp=0;temp<3;temp++)
+                   	{
+                        LED1_RGB[temp] =LED1_RGB_temp[temp];
+                        LED2_RGB[temp] =LED2_RGB_temp[temp];
+						LED3_RGB[temp] =LED3_RGB_temp[temp];
+						LED4_RGB[temp] =LED4_RGB_temp[temp];
+                   	}
+					  
+				      LedBlink =temp_LedBlink;
+				      BlinkFlag_Data= Blink_data_temp;
+					  LED_Cnt = Blink_Fr;
 					
+					  PauseFlag=1;
 					  return 0;
 
                  	}
@@ -764,7 +744,7 @@ void  PlayA1800_ElementsInit(unsigned ElementsIndex)
    // if(Play_Con < 2)
   
 	    SACM_A1800_Initial();
-	    A1800_Flag = 1;
+	    A1800_Flag = 2;
 	
 	 	 A1800Stop();
 	     while(DAC1_RampDnFlag)
@@ -864,10 +844,10 @@ void  PlayA1800_Elements(unsigned ElementsIndex)
 	
 //	unsigned int FiveSec_cnt_temp;
 	unsigned int motorflag =0;
-    unsigned int led_step =1;
+//    unsigned int led_step =1;
     
-    unsigned long int file_Size =0;
-    unsigned long addr =0;
+//    unsigned long int file_Size =0;
+//    unsigned long addr =0;
 	//unsigned int temp_Key_TrueFlase_Buffer =0;
 	
 	
@@ -935,7 +915,7 @@ void  PlayA1800_Elements(unsigned ElementsIndex)
 
 
         if((ElementsIndex==SFX_Explosion)||(ElementsIndex==SFX_Smash)||(ElementsIndex==SFX_Jet)
-            ||(ElementsIndex==SFX_Shockwave))
+            ||(ElementsIndex==SFX_Shockwave)||(ElementsIndex==SFX_Bifrost)||(ElementsIndex==SFX_Landslide)||(ElementsIndex==SFX_Hulk))
             {
             	   motorflag =1;
             	   Motor_On();
@@ -1096,21 +1076,20 @@ void  PlayA1800_Elements(unsigned ElementsIndex)
    if(motorflag)	
        Motor_Off();
 
-   if(Key_Event ==Key_False)
+   if(PauseFlag)//(Key_Event ==Key_False)
    {
-   	
-   	  Key_Event=0;
-      LedBlink=0;
-      BlinkFlag_Data=0;
-      Light_all_off();	
-      
-      Led_OFF_Some(Led1_white|Led2_white|Led3_white|Led4_white);//低推
-      delay_time(8);
-      
-      LedBlink =temp_LedBlink;
-      BlinkFlag_Data= temp_BlinkFlag_Data;
-	  LED_Cnt = Blink_Fr;
-	  Key_Event&=~Key_False;//
+   	  PauseFlag =0;
+   	  Key_Event=0;     
+//      BlinkFlag_Data=0;
+//      Light_all_off();	
+//      
+//      Led_OFF_Some(Led1_white|Led2_white|Led3_white|Led4_white);//低推
+//      delay_time(8);
+//      Light_all_off();
+//      LedBlink =temp_LedBlink;
+//      BlinkFlag_Data= temp_BlinkFlag_Data;
+//	  LED_Cnt = Blink_Fr;
+//	  Key_Event&=~Key_False;//
 	  return PlayA1800_Elements(ElementsIndex);
 
    }
@@ -1119,6 +1098,24 @@ void  PlayA1800_Elements(unsigned ElementsIndex)
 //	TimeCnt = 1;		//start time count
 //	return temp;
 }
+
+//转换序号 上，下，左，右，->上，左，右，下
+unsigned int Change_idex(unsigned idex)
+{
+
+	
+	switch(idex)
+	{
+		case 0: return 0; break;
+		case 1: return 3; break;
+		case 2: return 1; break;
+		case 3: return 2; break;
+		
+	}
+	
+	return  0;
+}
+
 
 //****************************************************************
 //*******************************************************************
@@ -1132,7 +1129,7 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 	unsigned int temp =0;
 	unsigned int temp1 =0;
 	unsigned int buffer[12]={0};
-	
+	unsigned int buffer_color4[4]={0};
 //	Keystopflag =0;
 	
 //	Play_Con =1;
@@ -1140,7 +1137,10 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 //	 
     if((T_TableH>=T_Intro1)&&(T_TableH<=T_Intro11))
     {
-       if((T_TableH==T_Intro2)||(T_TableH==T_Intro1))
+       if(T_TableH==T_Intro2)
+            Num =6;
+       
+       else if((T_TableH==T_Intro1)||(T_TableH==T_Intro4))
            Num =4;
        else
            Num =3;
@@ -1149,8 +1149,11 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
     }
     else if((T_TableH>=T_Move1Text1)&&(T_TableH<=T_Move23Text2))
     {
-    	if((T_TableH==T_Move5Text1)||(T_TableH==T_Move4Text1))
+    	if((T_TableH==T_Move1Text1)||(T_TableH==T_Move5Text1)||(T_TableH==T_Move3Text1)||(T_TableH==T_Move4Text1)
+    		||(T_TableH==T_Move7Text1)||(T_TableH==T_Move12Text2))
     		 Num =4;
+    	else if(T_TableH==T_Move6Text1)
+    	     Num =5;
         else
            Num =3;
     
@@ -1233,8 +1236,74 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
      	    temp=buffer[i]&0xfff;
      	    if(temp<0xfff)	
      	    {	
-     	       if(buffer[i]>=0x2000)//4个灯亮4个不同颜色
-     	       
+     	       if(buffer[i]>=0x2000)//read 4个不同颜色 上，左，右，下
+     	       	{
+     	       		
+     	       		 Addr = (buffer[i]&0xfff) * 4 * 2 + T_Movecolor ;//Table; Num
+     	       		 SPI_ReadNWords_LH(buffer_color4,4,Addr);
+     	       		 
+					     for(i=0;i<4;i++)
+					      {
+					      	  temp1 = buffer_color4[i]>>8;
+					      	  buffer_color4[i] =buffer_color4[i]<<8;
+					      	  buffer_color4[i]|=temp1; 
+					      	
+					      }  
+					      
+					      Set_Led_RGB(buffer_color4[0],Led_Data_Play[0]);
+					      Set_Led_RGB(buffer_color4[1],Led_Data_Play[2]);
+					      Set_Led_RGB(buffer_color4[2],Led_Data_Play[3]);
+					      Set_Led_RGB(buffer_color4[3],Led_Data_Play[1]);
+					      
+					 if(G_Sensor_Status==G_SixDir)   
+					 	{
+					 		 Led_On(All_Led_data);// LFX_Led[0]|LFX_Led[1]:0 add 20241210
+							 BlinkFlag_Data =All_Led_data;
+					 	}   
+					      
+					  else if((G_Sensor_Status)&&((G_Sensor_Status&(~G_SixDir))==0)) 
+					   {
+						    led_temp = Get_Firstcolor_From_Play(G_Sensor_Status);// G_Sensor_Status为0，则指向UP LED
+						    LFX_Led_Color[j%2] =buffer_color4[Change_idex(led_temp)];
+						    LFX_Led[(j++)%2] =Led_Data_Play[led_temp];
+						    
+					   }      
+					  else
+					    {
+					         Led_On(All_Led_data);// LFX_Led[0]|LFX_Led[1]:0
+							 BlinkFlag_Data =All_Led_data;
+							
+					    }      
+					        
+					  if((G_Sensor_Status == G_SPIN)||(G_Sensor_Status == G_TurnAround))
+						{
+						  // if(LFX_Led[0])		
+						//	LFX_Led[0]= Led_Data_Play[2]| Led_Data_Play[3];//LED_Left|LED_Right;
+							
+                         //  if(LFX_Led[1])		
+						//	LFX_Led[1]=Led_Data_Play[2]| Led_Data_Play[3];//LED_Left|LED_Right;		
+											
+                            Light_all_off();//上一步有Led_On(All_Led_data);/
+                            Led_On(Led_Data_Play[2]|Led_Data_Play[3]);
+							BlinkFlag_Data =Led_Data_Play[2]| Led_Data_Play[3];//LED_Left|LED_Right;//All_Led_data;
+						} 
+					 else  if((G_Sensor_Status == G_Jump))
+					 {
+					 	    Light_all_off();//上一步有Led_On(All_Led_data);/
+                            Led_On(Led_Data_Play[0]|Led_Data_Play[1]);
+							BlinkFlag_Data =Led_Data_Play[0]| Led_Data_Play[1];//LED_Left|LED_Right;//All_Led_data;
+					 }	
+						      
+					   else
+					   {
+					   	    Led_On(LFX_Led[0]|LFX_Led[1]);//LFX_Led[0]|LFX_Led[1]为0时，不置位
+							BlinkFlag_Data |=LFX_Led[0]|LFX_Led[1];
+					   }     
+					        
+					        
+     	       	}
+     	       else
+     	       	{
      	        
 	     	     while(temp!=0)
 	     	     { 
@@ -1288,6 +1357,19 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
                             Led_On(LFX_Led[0]|LFX_Led[1]);
 							BlinkFlag_Data =Led_Data_Play[2]| Led_Data_Play[3];//LED_Left|LED_Right;//All_Led_data;
 						}
+					   else  if((G_Sensor_Status == G_Jump))
+						 {
+						  if(LFX_Led[0])		
+							LFX_Led[0]= Led_Data_Play[0]| Led_Data_Play[1];//LED_Left|LED_Right;
+							
+                           if(LFX_Led[1])		
+							LFX_Led[1]=Led_Data_Play[0]| Led_Data_Play[1];//LED_Left|LED_Right;							
+//						    LFX_Led[1]=LED_Right;
+//							LFX_Led_Color[1]= LFX_Led_Color[0];	
+                            Led_On(LFX_Led[0]|LFX_Led[1]);
+							BlinkFlag_Data =Led_Data_Play[0]| Led_Data_Play[1];//LED_Left|LED_Right;//All_Led_data;			
+							 	
+					     }
 						else 
 						  {		     	         		     	     		     	    		     	    
 
@@ -1296,7 +1378,7 @@ void Play_Seq(unsigned int Index,unsigned int T_TableH)//unsigned int Table,
 				     	       BlinkFlag_Data=LFX_Led[0]|LFX_Led[1];//BitMap[j++];//All_Led_data;	
 
 						  }	     	        		     	       
-	     	     
+	     	     }
  
      	    }
      	    

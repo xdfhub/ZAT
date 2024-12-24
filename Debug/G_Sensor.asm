@@ -10125,7 +10125,7 @@ LM568:
 	     DS = seg(_TimeCnt)       	// [16:1955]  TimeCnt
 	     R4 = (_TimeCnt)          	// [17:1955]  TimeCnt
 	     DS:[R4] = R3             	// [19:1955]  
-L_11_23:	// 0x180f
+L_11_25:	// 0x180f
 // BB:2 cycle count: 12
 //1956  		 	
 //1957      while(TimeCnt<Time_T)
@@ -10138,9 +10138,9 @@ LM569:
 	     R4 = DS:[R4]             	// [5:1957]  
 	     cmp R3, R4               	// [7:1957]  
 	     ja BB3_PU11              	// [8:1957]  
-BB33_PU11:	// 0x1816
-// BB:33 cycle count: 3
-	     goto L_11_24             	// [0:0]  
+BB35_PU11:	// 0x1816
+// BB:35 cycle count: 3
+	     goto L_11_26             	// [0:0]  
 BB3_PU11:	// 0x1818
 // BB:3 cycle count: 3
 //1958      	{
@@ -10169,322 +10169,345 @@ BB5_PU11:	// 0x1825
 // BB:5 cycle count: 6
 	     SP = SP + 2              	// [0:1962]  
 	     cmp R1, 0                	// [1:1962]  
-	     je L_11_25               	// [2:1962]  
+	     je L_11_27               	// [2:1962]  
 BB6_PU11:	// 0x1828
-// BB:6 cycle count: 3
-//1963  		   	{			   	   
-//1964  		   	    SACM_A1800_Stop();
+// BB:6 cycle count: 10
+//1963  		   	{	
+//1964  		   		
+//1965  		   	  if(!PauseFlag)
 
 LM572:
-	     .stabn 68,0,1964,LM572-_WaitAction
-	     call _SACM_A1800_Stop    	// [0:1964]  SACM_A1800_Stop
-BB7_PU11:	// 0x182a
-// BB:7 cycle count: 13
-//1965  	            A1800_Flag = 0; 		       		   	 
+	     .stabn 68,0,1965,LM572-_WaitAction
+	     DS = seg(_PauseFlag)     	// [0:1965]  PauseFlag
+	     R4 = (_PauseFlag)        	// [1:1965]  PauseFlag
+	     R4 = DS:[R4]             	// [3:1965]  
+	     cmp R4, 0                	// [5:1965]  
+	     jne L_11_28              	// [6:1965]  
+BB7_PU11:	// 0x182e
+// BB:7 cycle count: 3
+//1966  		   	  {			   	   
+//1967  		   	    SACM_A1800_Stop();
 
 LM573:
-	     .stabn 68,0,1965,LM573-_WaitAction
-	     R3 = 0                   	// [0:1965]  
-	     DS = seg(_A1800_Flag)    	// [1:1965]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:1965]  A1800_Flag
-	     DS:[R4] = R3             	// [4:1965]  
-//1966  			 	 return 0;
+	     .stabn 68,0,1967,LM573-_WaitAction
+	     call _SACM_A1800_Stop    	// [0:1967]  SACM_A1800_Stop
+BB8_PU11:	// 0x1830
+// BB:8 cycle count: 13
+//1968  	            A1800_Flag = 0; 		       		   	 
 
 LM574:
-	     .stabn 68,0,1966,LM574-_WaitAction
-	     R1 = 0                   	// [6:1966]  
-	     SP = SP + 2              	// [7:1966]  
-	     pop BP, PC from [SP]     	// [8:1966]  
-L_11_25:	// 0x1832
-// BB:8 cycle count: 7
-//1967  
-//1968  		   	}
-//1969  		   	
-//1970  		   	
-//1971         if(timeoutplay ==2)
+	     .stabn 68,0,1968,LM574-_WaitAction
+	     R3 = 0                   	// [0:1968]  
+	     DS = seg(_A1800_Flag)    	// [1:1968]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:1968]  A1800_Flag
+	     DS:[R4] = R3             	// [4:1968]  
+//1969  			 	 return 0;
 
 LM575:
-	     .stabn 68,0,1971,LM575-_WaitAction
-	     R4 = [BP + 6]            	// [0:1971]  timeoutplay
-	     cmp R4, 2                	// [2:1971]  
-	     jne L_11_26              	// [3:1971]  
-BB9_PU11:	// 0x1835
-// BB:9 cycle count: 3
-//1972             {
-//1973  		     	if((SACM_A1800_Status() & 0x0001) == 0)
+	     .stabn 68,0,1969,LM575-_WaitAction
+	     R1 = 0                   	// [6:1969]  
+	     SP = SP + 2              	// [7:1969]  
+	     pop BP, PC from [SP]     	// [8:1969]  
+L_11_28:	// 0x1838
+// BB:9 cycle count: 6
+//1970  		   	  }
+//1971                PauseFlag=0;
 
 LM576:
-	     .stabn 68,0,1973,LM576-_WaitAction
-	     call _SACM_A1800_Status  	// [0:1973]  SACM_A1800_Status
-BB10_PU11:	// 0x1837
+	     .stabn 68,0,1971,LM576-_WaitAction
+	     R3 = 0                   	// [0:1971]  
+	     DS = seg(_PauseFlag)     	// [1:1971]  PauseFlag
+	     R4 = (_PauseFlag)        	// [2:1971]  PauseFlag
+	     DS:[R4] = R3             	// [4:1971]  
+L_11_27:	// 0x183d
 // BB:10 cycle count: 7
-	     R4 = R1 & 1              	// [0:1973]  
-	     cmp R4, 0                	// [2:1973]  
-	     jne L_11_27              	// [3:1973]  
-BB11_PU11:	// 0x183b
-// BB:11 cycle count: 8
-//1974  		   	   {  
-//1975  		   		
-//1976                       return C_MovSucess;//PlayA1800_ElementsInit(SFX_Charge);//SFX_Shake
+//1972  		   	}
+//1973  		   	
+//1974  		   	
+//1975         if(timeoutplay ==2)
 
 LM577:
-	     .stabn 68,0,1976,LM577-_WaitAction
-	     R1 = 4096                	// [0:1976]  
-	     SP = SP + 2              	// [2:1976]  
-	     pop BP, PC from [SP]     	// [3:1976]  
-L_11_27:	// 0x183f
-L_11_26:	// 0x183f
-// BB:12 cycle count: 10
-//1978  		   	   }
-//1979  		   	
-//1980  		   	   // SACM_A1800_ServiceLoop();
-//1981             }	   	
-//1982  	         if(A1800_Flag )//catch
+	     .stabn 68,0,1975,LM577-_WaitAction
+	     R4 = [BP + 6]            	// [0:1975]  timeoutplay
+	     cmp R4, 2                	// [2:1975]  
+	     jne L_11_29              	// [3:1975]  
+BB11_PU11:	// 0x1840
+// BB:11 cycle count: 3
+//1976             {
+//1977  		     	if((SACM_A1800_Status() & 0x0001) == 0)
 
 LM578:
-	     .stabn 68,0,1982,LM578-_WaitAction
-	     DS = seg(_A1800_Flag)    	// [0:1982]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [1:1982]  A1800_Flag
-	     R4 = DS:[R4]             	// [3:1982]  
-	     cmp R4, 0                	// [5:1982]  
-	     je L_11_28               	// [6:1982]  
-BB13_PU11:	// 0x1845
-// BB:13 cycle count: 3
-//1983                {   	
-//1984  		   	    SACM_A1800_ServiceLoop();
+	     .stabn 68,0,1977,LM578-_WaitAction
+	     call _SACM_A1800_Status  	// [0:1977]  SACM_A1800_Status
+BB12_PU11:	// 0x1842
+// BB:12 cycle count: 7
+	     R4 = R1 & 1              	// [0:1977]  
+	     cmp R4, 0                	// [2:1977]  
+	     jne L_11_30              	// [3:1977]  
+BB13_PU11:	// 0x1846
+// BB:13 cycle count: 8
+//1978  		   	   {  
+//1979  		   		
+//1980                       return C_MovSucess;//PlayA1800_ElementsInit(SFX_Charge);//SFX_Shake
 
 LM579:
-	     .stabn 68,0,1984,LM579-_WaitAction
-	     call _SACM_A1800_ServiceLoop	// [0:1984]  SACM_A1800_ServiceLoop
-L_11_28:	// 0x1847
+	     .stabn 68,0,1980,LM579-_WaitAction
+	     R1 = 4096                	// [0:1980]  
+	     SP = SP + 2              	// [2:1980]  
+	     pop BP, PC from [SP]     	// [3:1980]  
+L_11_30:	// 0x184a
+L_11_29:	// 0x184a
 // BB:14 cycle count: 10
-//1985                }		   	
-//1986  		   	
-//1987  		   	
-//1988  
-//1989  		   if(HZ_1K_flag>=C_HZ_Num)
+//1982  		   	   }
+//1983  		   	
+//1984  		   	   // SACM_A1800_ServiceLoop();
+//1985             }	   	
+//1986  	         if(A1800_Flag )//catch
 
 LM580:
-	     .stabn 68,0,1989,LM580-_WaitAction
-	     DS = seg(_HZ_1K_flag)    	// [0:1989]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [1:1989]  HZ_1K_flag
-	     R4 = DS:[R4]             	// [3:1989]  
-	     cmp R4, 2                	// [5:1989]  
-	     ja BB15_PU11             	// [6:1989]  
-BB34_PU11:	// 0x184d
-// BB:34 cycle count: 3
-	     goto L_11_29             	// [0:0]  
-BB15_PU11:	// 0x184f
-// BB:15 cycle count: 9
-//1990  			{
-//1991  			    HZ_1K_flag=0;//HZ_64_flag =0;
+	     .stabn 68,0,1986,LM580-_WaitAction
+	     DS = seg(_A1800_Flag)    	// [0:1986]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [1:1986]  A1800_Flag
+	     R4 = DS:[R4]             	// [3:1986]  
+	     cmp R4, 0                	// [5:1986]  
+	     je L_11_31               	// [6:1986]  
+BB15_PU11:	// 0x1850
+// BB:15 cycle count: 3
+//1987                {   	
+//1988  		   	    SACM_A1800_ServiceLoop();
 
 LM581:
-	     .stabn 68,0,1991,LM581-_WaitAction
-	     R3 = 0                   	// [0:1991]  
-	     DS = seg(_HZ_1K_flag)    	// [1:1991]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [2:1991]  HZ_1K_flag
-	     DS:[R4] = R3             	// [4:1991]  
-//1992  			    sensor_read_xyz();
+	     .stabn 68,0,1988,LM581-_WaitAction
+	     call _SACM_A1800_ServiceLoop	// [0:1988]  SACM_A1800_ServiceLoop
+L_11_31:	// 0x1852
+// BB:16 cycle count: 10
+//1989                }		   	
+//1990  		   	
+//1991  		   	
+//1992  
+//1993  		   if(HZ_1K_flag>=C_HZ_Num)
 
 LM582:
-	     .stabn 68,0,1992,LM582-_WaitAction
-	     call _sensor_read_xyz    	// [6:1992]  sensor_read_xyz
-BB16_PU11:	// 0x1856
-// BB:16 cycle count: 3
-//1993  				temp = G_Sensor_Check();
+	     .stabn 68,0,1993,LM582-_WaitAction
+	     DS = seg(_HZ_1K_flag)    	// [0:1993]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [1:1993]  HZ_1K_flag
+	     R4 = DS:[R4]             	// [3:1993]  
+	     cmp R4, 2                	// [5:1993]  
+	     ja BB17_PU11             	// [6:1993]  
+BB36_PU11:	// 0x1858
+// BB:36 cycle count: 3
+	     goto L_11_32             	// [0:0]  
+BB17_PU11:	// 0x185a
+// BB:17 cycle count: 9
+//1994  			{
+//1995  			    HZ_1K_flag=0;//HZ_64_flag =0;
 
 LM583:
-	     .stabn 68,0,1993,LM583-_WaitAction
-	     call _G_Sensor_Check     	// [0:1993]  G_Sensor_Check
-BB17_PU11:	// 0x1858
-// BB:17 cycle count: 10
-	     [BP + 0] = R1            	// [0:1993]  temp
-//1994  			    if(temp&C_MovSucessStatus)//C_MovSucess
+	     .stabn 68,0,1995,LM583-_WaitAction
+	     R3 = 0                   	// [0:1995]  
+	     DS = seg(_HZ_1K_flag)    	// [1:1995]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [2:1995]  HZ_1K_flag
+	     DS:[R4] = R3             	// [4:1995]  
+//1996  			    sensor_read_xyz();
 
 LM584:
-	     .stabn 68,0,1994,LM584-_WaitAction
-	     R4 = [BP + 0]            	// [1:1994]  temp
-	     R4 = R4 & 8191           	// [3:1994]  
-	     cmp R4, 0                	// [5:1994]  
-	     je L_11_31               	// [6:1994]  
-BB18_PU11:	// 0x185e
-// BB:18 cycle count: 22
-//1995  			    {   
-//1996  			    	G_Sensor_Status&=~0xE000;//20210722  
+	     .stabn 68,0,1996,LM584-_WaitAction
+	     call _sensor_read_xyz    	// [6:1996]  sensor_read_xyz
+BB18_PU11:	// 0x1861
+// BB:18 cycle count: 3
+//1997  				temp = G_Sensor_Check();
 
 LM585:
-	     .stabn 68,0,1996,LM585-_WaitAction
-	     DS = seg(_G_Sensor_Status)	// [0:1996]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:1996]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:1996]  
-	     R3 = R4 & 8191           	// [5:1996]  
-	     DS = seg(_G_Sensor_Status)	// [7:1996]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:1996]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:1996]  
-//1997  //                    stepflag_Y =0;
-//1998  //                    stepflag =0;
-//1999                      
-//2000  	                  if(A1800_Flag==1)
+	     .stabn 68,0,1997,LM585-_WaitAction
+	     call _G_Sensor_Check     	// [0:1997]  G_Sensor_Check
+BB19_PU11:	// 0x1863
+// BB:19 cycle count: 10
+	     [BP + 0] = R1            	// [0:1997]  temp
+//1998  			    if(temp&C_MovSucessStatus)//C_MovSucess
 
 LM586:
-	     .stabn 68,0,2000,LM586-_WaitAction
-	     DS = seg(_A1800_Flag)    	// [12:2000]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [13:2000]  A1800_Flag
-	     R4 = DS:[R4]             	// [15:2000]  
-	     cmp R4, 1                	// [17:2000]  
-	     jne L_11_32              	// [18:2000]  
-BB19_PU11:	// 0x186e
-// BB:19 cycle count: 3
-//2001  	                  {  
-//2002  	                     SACM_A1800_Stop();
+	     .stabn 68,0,1998,LM586-_WaitAction
+	     R4 = [BP + 0]            	// [1:1998]  temp
+	     R4 = R4 & 8191           	// [3:1998]  
+	     cmp R4, 0                	// [5:1998]  
+	     je L_11_34               	// [6:1998]  
+BB20_PU11:	// 0x1869
+// BB:20 cycle count: 22
+//1999  			    {   
+//2000  			    	G_Sensor_Status&=~0xE000;//20210722  
 
 LM587:
-	     .stabn 68,0,2002,LM587-_WaitAction
-	     call _SACM_A1800_Stop    	// [0:2002]  SACM_A1800_Stop
-BB20_PU11:	// 0x1870
-// BB:20 cycle count: 6
-//2003  		                 A1800_Flag = 0;  		
+	     .stabn 68,0,2000,LM587-_WaitAction
+	     DS = seg(_G_Sensor_Status)	// [0:2000]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:2000]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:2000]  
+	     R3 = R4 & 8191           	// [5:2000]  
+	     DS = seg(_G_Sensor_Status)	// [7:2000]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:2000]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:2000]  
+//2001  //                    stepflag_Y =0;
+//2002  //                    stepflag =0;
+//2003                      
+//2004  	                  if(A1800_Flag==1)
 
 LM588:
-	     .stabn 68,0,2003,LM588-_WaitAction
-	     R3 = 0                   	// [0:2003]  
-	     DS = seg(_A1800_Flag)    	// [1:2003]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:2003]  A1800_Flag
-	     DS:[R4] = R3             	// [4:2003]  
-L_11_32:	// 0x1875
-// BB:21 cycle count: 8
-//2004  	                  }	
-//2005  	                  
-//2006  	           	 if	(temp_G_Sensor_Status == G_IMMO)    
+	     .stabn 68,0,2004,LM588-_WaitAction
+	     DS = seg(_A1800_Flag)    	// [12:2004]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [13:2004]  A1800_Flag
+	     R4 = DS:[R4]             	// [15:2004]  
+	     cmp R4, 1                	// [17:2004]  
+	     jne L_11_35              	// [18:2004]  
+BB21_PU11:	// 0x1879
+// BB:21 cycle count: 3
+//2005  	                  {  
+//2006  	                     SACM_A1800_Stop();
 
 LM589:
 	     .stabn 68,0,2006,LM589-_WaitAction
-	     R4 = [BP + 1]            	// [0:2006]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2006]  
-	     jne L_11_34              	// [4:2006]  
-BB22_PU11:	// 0x1879
-// BB:22 cycle count: 10
-//2007  	                 {
-//2008  	                	 PlayA1800_Elements(SFX_No);
+	     call _SACM_A1800_Stop    	// [0:2006]  SACM_A1800_Stop
+BB22_PU11:	// 0x187b
+// BB:22 cycle count: 6
+//2007  		                 A1800_Flag = 0;  		
 
 LM590:
-	     .stabn 68,0,2008,LM590-_WaitAction
-	     SP = SP - 1              	// [0:2008]  
-	     R3 = 84                  	// [1:2008]  
-	     R4 = SP + 1              	// [3:2008]  
-	     [R4] = R3                	// [5:2008]  
-	     call _PlayA1800_Elements 	// [7:2008]  PlayA1800_Elements
-BB23_PU11:	// 0x1881
-// BB:23 cycle count: 11
-	     SP = SP + 1              	// [0:2008]  
-//2009  	                	 TimeCnt=0;
+	     .stabn 68,0,2007,LM590-_WaitAction
+	     R3 = 0                   	// [0:2007]  
+	     DS = seg(_A1800_Flag)    	// [1:2007]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:2007]  A1800_Flag
+	     DS:[R4] = R3             	// [4:2007]  
+L_11_35:	// 0x1880
+// BB:23 cycle count: 8
+//2008  	                  }	
+//2009  	                  
+//2010  	           	 if	(temp_G_Sensor_Status == G_IMMO)    
 
 LM591:
-	     .stabn 68,0,2009,LM591-_WaitAction
-	     R3 = 0                   	// [1:2009]  
-	     DS = seg(_TimeCnt)       	// [2:2009]  TimeCnt
-	     R4 = (_TimeCnt)          	// [3:2009]  TimeCnt
-	     DS:[R4] = R3             	// [5:2009]  
-	     jmp L_11_33              	// [7:2009]  
-L_11_34:	// 0x1888
-// BB:24 cycle count: 8
-//2010  	                	
-//2011  
-//2012  	                 }
-//2013  	             else             	
-//2014  					return temp;
+	     .stabn 68,0,2010,LM591-_WaitAction
+	     R4 = [BP + 1]            	// [0:2010]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2010]  
+	     jne L_11_37              	// [4:2010]  
+BB24_PU11:	// 0x1884
+// BB:24 cycle count: 10
+//2011  	                 {
+//2012  	                	 PlayA1800_Elements(SFX_No);
 
 LM592:
-	     .stabn 68,0,2014,LM592-_WaitAction
-	     R1 = [BP + 0]            	// [0:2014]  temp
-	     SP = SP + 2              	// [2:2014]  
-	     pop BP, PC from [SP]     	// [3:2014]  
-L_11_33:	// 0x188b
-// BB:25 cycle count: 4
+	     .stabn 68,0,2012,LM592-_WaitAction
+	     SP = SP - 1              	// [0:2012]  
+	     R3 = 92                  	// [1:2012]  
+	     R4 = SP + 1              	// [3:2012]  
+	     [R4] = R3                	// [5:2012]  
+	     call _PlayA1800_Elements 	// [7:2012]  PlayA1800_Elements
+BB25_PU11:	// 0x188c
+// BB:25 cycle count: 11
+	     SP = SP + 1              	// [0:2012]  
+//2013  	                	 TimeCnt=0;
 
 LM593:
-	     .stabn 68,0,2006,LM593-_WaitAction
-	     jmp L_11_30              	// [0:2006]  
-L_11_31:	// 0x188c
+	     .stabn 68,0,2013,LM593-_WaitAction
+	     R3 = 0                   	// [1:2013]  
+	     DS = seg(_TimeCnt)       	// [2:2013]  TimeCnt
+	     R4 = (_TimeCnt)          	// [3:2013]  TimeCnt
+	     DS:[R4] = R3             	// [5:2013]  
+	     jmp L_11_36              	// [7:2013]  
+L_11_37:	// 0x1893
 // BB:26 cycle count: 8
-//2015  					
-//2016  			    }
-//2017  			   else if(temp==C_MovFail)
+//2014  	                	
+//2015  
+//2016  	                 }
+//2017  	             else             	
+//2018  					return temp;
 
 LM594:
-	     .stabn 68,0,2017,LM594-_WaitAction
-	     R4 = [BP + 0]            	// [0:2017]  temp
-	     cmp R4, 8192             	// [2:2017]  
-	     jne L_11_35              	// [4:2017]  
-BB27_PU11:	// 0x1890
-// BB:27 cycle count: 19
-//2023  //	                	    G_Sensor_Status&=~0xE000;//20210722 	
-//2024  //	                	     MoveSucessFlag=0;
-//2025  //	                		return 1;
-//2026  //	                	}
-//2027                     G_Sensor_Status&=~0xE000;//20210722 
+	     .stabn 68,0,2018,LM594-_WaitAction
+	     R1 = [BP + 0]            	// [0:2018]  temp
+	     SP = SP + 2              	// [2:2018]  
+	     pop BP, PC from [SP]     	// [3:2018]  
+L_11_36:	// 0x1896
+// BB:27 cycle count: 4
 
 LM595:
-	     .stabn 68,0,2027,LM595-_WaitAction
-	     DS = seg(_G_Sensor_Status)	// [0:2027]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:2027]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:2027]  
-	     R3 = R4 & 8191           	// [5:2027]  
-	     DS = seg(_G_Sensor_Status)	// [7:2027]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:2027]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:2027]  
-//2028                     return 0;	
+	     .stabn 68,0,2010,LM595-_WaitAction
+	     jmp L_11_33              	// [0:2010]  
+L_11_34:	// 0x1897
+// BB:28 cycle count: 8
+//2019  					
+//2020  			    }
+//2021  			   else if(temp==C_MovFail)
 
 LM596:
-	     .stabn 68,0,2028,LM596-_WaitAction
-	     R1 = 0                   	// [12:2028]  
-	     SP = SP + 2              	// [13:2028]  
-	     pop BP, PC from [SP]     	// [14:2028]  
-L_11_35:	// 0x189d
-L_11_30:	// 0x189d
-L_11_29:	// 0x189d
-// BB:28 cycle count: 3
+	     .stabn 68,0,2021,LM596-_WaitAction
+	     R4 = [BP + 0]            	// [0:2021]  temp
+	     cmp R4, 8192             	// [2:2021]  
+	     jne L_11_38              	// [4:2021]  
+BB29_PU11:	// 0x189b
+// BB:29 cycle count: 19
+//2027  //	                	    G_Sensor_Status&=~0xE000;//20210722 	
+//2028  //	                	     MoveSucessFlag=0;
+//2029  //	                		return 1;
+//2030  //	                	}
+//2031                     G_Sensor_Status&=~0xE000;//20210722 
 
 LM597:
-	     .stabn 68,0,1989,LM597-_WaitAction
-	     goto L_11_23             	// [0:1989]  
-L_11_24:	// 0x189f
-// BB:29 cycle count: 8
-//2034  			}
-//2035  			
-//2036      	}
-//2037      	
-//2038      	 if	(temp_G_Sensor_Status == G_IMMO)  
+	     .stabn 68,0,2031,LM597-_WaitAction
+	     DS = seg(_G_Sensor_Status)	// [0:2031]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:2031]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:2031]  
+	     R3 = R4 & 8191           	// [5:2031]  
+	     DS = seg(_G_Sensor_Status)	// [7:2031]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:2031]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:2031]  
+//2032                     return 0;	
 
 LM598:
-	     .stabn 68,0,2038,LM598-_WaitAction
-	     R4 = [BP + 1]            	// [0:2038]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2038]  
-	     jne L_11_37              	// [4:2038]  
-BB30_PU11:	// 0x18a3
-// BB:30 cycle count: 8
-//2039  	         return C_MovSucess;
+	     .stabn 68,0,2032,LM598-_WaitAction
+	     R1 = 0                   	// [12:2032]  
+	     SP = SP + 2              	// [13:2032]  
+	     pop BP, PC from [SP]     	// [14:2032]  
+L_11_38:	// 0x18a8
+L_11_33:	// 0x18a8
+L_11_32:	// 0x18a8
+// BB:30 cycle count: 3
 
 LM599:
-	     .stabn 68,0,2039,LM599-_WaitAction
-	     R1 = 4096                	// [0:2039]  
-	     SP = SP + 2              	// [2:2039]  
-	     pop BP, PC from [SP]     	// [3:2039]  
-L_11_37:	// 0x18a7
-// BB:31 cycle count: 7
-//2040  	    else
-//2041  	        return 0;	
+	     .stabn 68,0,1993,LM599-_WaitAction
+	     goto L_11_25             	// [0:1993]  
+L_11_26:	// 0x18aa
+// BB:31 cycle count: 8
+//2038  			}
+//2039  			
+//2040      	}
+//2041      	
+//2042      	 if	(temp_G_Sensor_Status == G_IMMO)  
 
 LM600:
-	     .stabn 68,0,2041,LM600-_WaitAction
-	     R1 = 0                   	// [0:2041]  
-	     SP = SP + 2              	// [1:2041]  
-	     pop BP, PC from [SP]     	// [2:2041]  
-L_11_36:	// 0x18aa
-// BB:32 cycle count: 6
-	     SP = SP + 2              	// [0:2041]  
-	     pop BP, PC from [SP]     	// [1:2041]  
+	     .stabn 68,0,2042,LM600-_WaitAction
+	     R4 = [BP + 1]            	// [0:2042]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2042]  
+	     jne L_11_40              	// [4:2042]  
+BB32_PU11:	// 0x18ae
+// BB:32 cycle count: 8
+//2043  	         return C_MovSucess;
+
+LM601:
+	     .stabn 68,0,2043,LM601-_WaitAction
+	     R1 = 4096                	// [0:2043]  
+	     SP = SP + 2              	// [2:2043]  
+	     pop BP, PC from [SP]     	// [3:2043]  
+L_11_40:	// 0x18b2
+// BB:33 cycle count: 7
+//2044  	    else
+//2045  	        return 0;	
+
+LM602:
+	     .stabn 68,0,2045,LM602-_WaitAction
+	     R1 = 0                   	// [0:2045]  
+	     SP = SP + 2              	// [1:2045]  
+	     pop BP, PC from [SP]     	// [2:2045]  
+L_11_39:	// 0x18b5
+// BB:34 cycle count: 6
+	     SP = SP + 2              	// [0:2045]  
+	     pop BP, PC from [SP]     	// [1:2045]  
 LBE5:
 	.endp	
 	     .stabs "Time_T:p4",160,0,0,5
@@ -10509,510 +10532,506 @@ _Mov_Detected: .proc
 	// Led_IO_temp = 4
 	// old_frame_pointer = 5
 	// return_address = 6
-//2049  
-//2050  
-//2051  
-//2052  unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
-//2053  {
-
-LM601:
-	     .stabn 68,0,2053,LM601-_Mov_Detected
-BB1_PU12:	// 0x18ac
-// BB:1 cycle count: 29
-	     push BP to [SP]          	// [0:2053]  
-	     SP = SP - 5              	// [2:2053]  
-	     BP = SP + 1              	// [3:2053]  
-LBB6:
-//2054      unsigned int temp =0;
-
-LM602:
-	     .stabn 68,0,2054,LM602-_Mov_Detected
-	     R4 = 0                   	// [5:2054]  
-	     [BP + 0] = R4            	// [6:2054]  temp
-//2055  	unsigned int temp_timecnt =0;
+//2053  
+//2054  
+//2055  
+//2056  unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
+//2057  {
 
 LM603:
-	     .stabn 68,0,2055,LM603-_Mov_Detected
-	     R4 = 0                   	// [7:2055]  
-	     [BP + 1] = R4            	// [8:2055]  temp_timecnt
-//2056  	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
+	     .stabn 68,0,2057,LM603-_Mov_Detected
+BB1_PU12:	// 0x18b7
+// BB:1 cycle count: 29
+	     push BP to [SP]          	// [0:2057]  
+	     SP = SP - 5              	// [2:2057]  
+	     BP = SP + 1              	// [3:2057]  
+LBB6:
+//2058      unsigned int temp =0;
 
 LM604:
-	     .stabn 68,0,2056,LM604-_Mov_Detected
-	     DS = seg(_G_Sensor_Status)	// [9:2056]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [10:2056]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [12:2056]  
-	     R4 = R4 & 4479           	// [14:2056]  
-	     [BP + 2] = R4            	// [16:2056]  temp_G_Sensor_Status
-//2057  	
-//2058  	unsigned int BlinkFlag_Data_temp =0;
+	     .stabn 68,0,2058,LM604-_Mov_Detected
+	     R4 = 0                   	// [5:2058]  
+	     [BP + 0] = R4            	// [6:2058]  temp
+//2059  	unsigned int temp_timecnt =0;
 
 LM605:
-	     .stabn 68,0,2058,LM605-_Mov_Detected
-	     R4 = 0                   	// [17:2058]  
-	     [BP + 3] = R4            	// [18:2058]  BlinkFlag_Data_temp
-//2059      unsigned int Led_IO_temp =0;
+	     .stabn 68,0,2059,LM605-_Mov_Detected
+	     R4 = 0                   	// [7:2059]  
+	     [BP + 1] = R4            	// [8:2059]  temp_timecnt
+//2060  	unsigned int temp_G_Sensor_Status =G_Sensor_Status&G_BHIT; 
 
 LM606:
-	     .stabn 68,0,2059,LM606-_Mov_Detected
-	     R4 = 0                   	// [19:2059]  
-	     [BP + 4] = R4            	// [20:2059]  Led_IO_temp
-//2060  	
-//2061  	 if(temp_G_Sensor_Status == G_IMMO)
+	     .stabn 68,0,2060,LM606-_Mov_Detected
+	     DS = seg(_G_Sensor_Status)	// [9:2060]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [10:2060]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [12:2060]  
+	     R4 = R4 & 4479           	// [14:2060]  
+	     [BP + 2] = R4            	// [16:2060]  temp_G_Sensor_Status
+//2061  	
+//2062  	unsigned int BlinkFlag_Data_temp =0;
 
 LM607:
-	     .stabn 68,0,2061,LM607-_Mov_Detected
-	     R4 = [BP + 2]            	// [21:2061]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [23:2061]  
-	     jne L_12_28              	// [25:2061]  
-BB2_PU12:	// 0x18c3
-// BB:2 cycle count: 10
-//2062  	  {
-//2063  
-//2064  		   PlayA1800_ElementsInit(SFX_Wait);
+	     .stabn 68,0,2062,LM607-_Mov_Detected
+	     R4 = 0                   	// [17:2062]  
+	     [BP + 3] = R4            	// [18:2062]  BlinkFlag_Data_temp
+//2063      unsigned int Led_IO_temp =0;
 
 LM608:
-	     .stabn 68,0,2064,LM608-_Mov_Detected
-	     SP = SP - 1              	// [0:2064]  
-	     R3 = 98                  	// [1:2064]  
-	     R4 = SP + 1              	// [3:2064]  
-	     [R4] = R3                	// [5:2064]  
-	     call _PlayA1800_ElementsInit	// [7:2064]  PlayA1800_ElementsInit
-BB3_PU12:	// 0x18cb
-// BB:3 cycle count: 1
-	     SP = SP + 1              	// [0:2064]  
-L_12_28:	// 0x18cc
-// BB:4 cycle count: 12
-//2065            // DetectionFlag =1; 
-//2066  	  }
-//2067  
-//2068        
-//2069   	   TimeCnt=0;
+	     .stabn 68,0,2063,LM608-_Mov_Detected
+	     R4 = 0                   	// [19:2063]  
+	     [BP + 4] = R4            	// [20:2063]  Led_IO_temp
+//2064  	
+//2065  	 if(temp_G_Sensor_Status == G_IMMO)
 
 LM609:
-	     .stabn 68,0,2069,LM609-_Mov_Detected
-	     R3 = 0                   	// [0:2069]  
-	     DS = seg(_TimeCnt)       	// [1:2069]  TimeCnt
-	     R4 = (_TimeCnt)          	// [2:2069]  TimeCnt
-	     DS:[R4] = R3             	// [4:2069]  
-//2070         TimeCnt1 =0;
+	     .stabn 68,0,2065,LM609-_Mov_Detected
+	     R4 = [BP + 2]            	// [21:2065]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [23:2065]  
+	     jne L_12_29              	// [25:2065]  
+BB2_PU12:	// 0x18ce
+// BB:2 cycle count: 10
+//2066  	  {
+//2067  
+//2068  		   PlayA1800_ElementsInit(SFX_Wait);
 
 LM610:
-	     .stabn 68,0,2070,LM610-_Mov_Detected
-	     R3 = 0                   	// [6:2070]  
-	     DS = seg(_TimeCnt1)      	// [7:2070]  TimeCnt1
-	     R4 = (_TimeCnt1)         	// [8:2070]  TimeCnt1
-	     DS:[R4] = R3             	// [10:2070]  
-L_12_29:	// 0x18d6
-// BB:5 cycle count: 12
-//2071  		 
-//2072  		 	
-//2073         while(TimeCnt<Time_T)
+	     .stabn 68,0,2068,LM610-_Mov_Detected
+	     SP = SP - 1              	// [0:2068]  
+	     R3 = 107                 	// [1:2068]  
+	     R4 = SP + 1              	// [3:2068]  
+	     [R4] = R3                	// [5:2068]  
+	     call _PlayA1800_ElementsInit	// [7:2068]  PlayA1800_ElementsInit
+BB3_PU12:	// 0x18d6
+// BB:3 cycle count: 1
+	     SP = SP + 1              	// [0:2068]  
+L_12_29:	// 0x18d7
+// BB:4 cycle count: 12
+//2069            // DetectionFlag =1; 
+//2070  	  }
+//2071  
+//2072        
+//2073   	   TimeCnt=0;
 
 LM611:
 	     .stabn 68,0,2073,LM611-_Mov_Detected
-	     R3 = [BP + 8]            	// [0:2073]  Time_T
-	     DS = seg(_TimeCnt)       	// [2:2073]  TimeCnt
-	     R4 = (_TimeCnt)          	// [3:2073]  TimeCnt
-	     R4 = DS:[R4]             	// [5:2073]  
-	     cmp R3, R4               	// [7:2073]  
-	     ja BB6_PU12              	// [8:2073]  
-BB38_PU12:	// 0x18dd
-// BB:38 cycle count: 3
-	     goto L_12_30             	// [0:0]  
-BB6_PU12:	// 0x18df
-// BB:6 cycle count: 3
-//2074         {
-//2075  
-//2076  	       WatchdogClear();
+	     R3 = 0                   	// [0:2073]  
+	     DS = seg(_TimeCnt)       	// [1:2073]  TimeCnt
+	     R4 = (_TimeCnt)          	// [2:2073]  TimeCnt
+	     DS:[R4] = R3             	// [4:2073]  
+//2074         TimeCnt1 =0;
 
 LM612:
-	     .stabn 68,0,2076,LM612-_Mov_Detected
-	     call _WatchdogClear      	// [0:2076]  WatchdogClear
-BB7_PU12:	// 0x18e1
-// BB:7 cycle count: 10
-//2077  	     
-//2078  	     
-//2079  	           if(MoveSucessFlag)		          
+	     .stabn 68,0,2074,LM612-_Mov_Detected
+	     R3 = 0                   	// [6:2074]  
+	     DS = seg(_TimeCnt1)      	// [7:2074]  TimeCnt1
+	     R4 = (_TimeCnt1)         	// [8:2074]  TimeCnt1
+	     DS:[R4] = R3             	// [10:2074]  
+L_12_30:	// 0x18e1
+// BB:5 cycle count: 12
+//2075  		 
+//2076  		 	
+//2077         while(TimeCnt<Time_T)
 
 LM613:
-	     .stabn 68,0,2079,LM613-_Mov_Detected
-	     DS = seg(_MoveSucessFlag)	// [0:2079]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [1:2079]  MoveSucessFlag
-	     R4 = DS:[R4]             	// [3:2079]  
-	     cmp R4, 0                	// [5:2079]  
-	     je L_12_31               	// [6:2079]  
-BB8_PU12:	// 0x18e7
-// BB:8 cycle count: 32
-//2080  		          {
-//2081  		          	     MoveSucessFlag=0;
+	     .stabn 68,0,2077,LM613-_Mov_Detected
+	     R3 = [BP + 8]            	// [0:2077]  Time_T
+	     DS = seg(_TimeCnt)       	// [2:2077]  TimeCnt
+	     R4 = (_TimeCnt)          	// [3:2077]  TimeCnt
+	     R4 = DS:[R4]             	// [5:2077]  
+	     cmp R3, R4               	// [7:2077]  
+	     ja BB6_PU12              	// [8:2077]  
+BB35_PU12:	// 0x18e8
+// BB:35 cycle count: 3
+	     goto L_12_31             	// [0:0]  
+BB6_PU12:	// 0x18ea
+// BB:6 cycle count: 3
+//2078         {
+//2079  
+//2080  	       WatchdogClear();
 
 LM614:
-	     .stabn 68,0,2081,LM614-_Mov_Detected
-	     R3 = 0                   	// [0:2081]  
-	     DS = seg(_MoveSucessFlag)	// [1:2081]  MoveSucessFlag
-	     R4 = (_MoveSucessFlag)   	// [2:2081]  MoveSucessFlag
-	     DS:[R4] = R3             	// [4:2081]  
-//2082  			             FailV =0;
+	     .stabn 68,0,2080,LM614-_Mov_Detected
+	     call _WatchdogClear      	// [0:2080]  WatchdogClear
+BB7_PU12:	// 0x18ec
+// BB:7 cycle count: 10
+//2081  	     
+//2082  	     
+//2083  	           if(MoveSucessFlag)		          
 
 LM615:
-	     .stabn 68,0,2082,LM615-_Mov_Detected
-	     R3 = 0                   	// [6:2082]  
-	     DS = seg(_FailV)         	// [7:2082]  FailV
-	     R4 = (_FailV)            	// [8:2082]  FailV
-	     DS:[R4] = R3             	// [10:2082]  
-//2083  				          
-//2084  				        //SACM_A1800_Stop();
-//2085  		                //A1800_Flag = 0; 
-//2086  		                
-//2087  		                G_Sensor_Status&=~0xE000;//20210722
+	     .stabn 68,0,2083,LM615-_Mov_Detected
+	     DS = seg(_MoveSucessFlag)	// [0:2083]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [1:2083]  MoveSucessFlag
+	     R4 = DS:[R4]             	// [3:2083]  
+	     cmp R4, 0                	// [5:2083]  
+	     je L_12_32               	// [6:2083]  
+BB8_PU12:	// 0x18f2
+// BB:8 cycle count: 32
+//2084  		          {
+//2085  		          	     MoveSucessFlag=0;
 
 LM616:
-	     .stabn 68,0,2087,LM616-_Mov_Detected
-	     DS = seg(_G_Sensor_Status)	// [12:2087]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [13:2087]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [15:2087]  
-	     R3 = R4 & 8191           	// [17:2087]  
-	     DS = seg(_G_Sensor_Status)	// [19:2087]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [20:2087]  G_Sensor_Status
-	     DS:[R4] = R3             	// [22:2087]  
-//2088  //                        stepflag_Y =0;
-//2089  //                        stepflag =0;
-//2090                       if(temp_G_Sensor_Status == G_IMMO)
+	     .stabn 68,0,2085,LM616-_Mov_Detected
+	     R3 = 0                   	// [0:2085]  
+	     DS = seg(_MoveSucessFlag)	// [1:2085]  MoveSucessFlag
+	     R4 = (_MoveSucessFlag)   	// [2:2085]  MoveSucessFlag
+	     DS:[R4] = R3             	// [4:2085]  
+//2086  			             FailV =0;
 
 LM617:
-	     .stabn 68,0,2090,LM617-_Mov_Detected
-	     R4 = [BP + 2]            	// [24:2090]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [26:2090]  
-	     jne L_12_33              	// [28:2090]  
-BB9_PU12:	// 0x18ff
-// BB:9 cycle count: 7
-//2091                           return 0;
+	     .stabn 68,0,2086,LM617-_Mov_Detected
+	     R3 = 0                   	// [6:2086]  
+	     DS = seg(_FailV)         	// [7:2086]  FailV
+	     R4 = (_FailV)            	// [8:2086]  FailV
+	     DS:[R4] = R3             	// [10:2086]  
+//2087  				          
+//2088  				        //SACM_A1800_Stop();
+//2089  		                //A1800_Flag = 0; 
+//2090  		                
+//2091  		                G_Sensor_Status&=~0xE000;//20210722
 
 LM618:
 	     .stabn 68,0,2091,LM618-_Mov_Detected
-	     R1 = 0                   	// [0:2091]  
-	     SP = SP + 5              	// [1:2091]  
-	     pop BP, PC from [SP]     	// [2:2091]  
-L_12_33:	// 0x1902
-// BB:10 cycle count: 8
-//2092                        else    
-//2093  					  	 return C_MovSucess;	
+	     DS = seg(_G_Sensor_Status)	// [12:2091]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [13:2091]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [15:2091]  
+	     R3 = R4 & 8191           	// [17:2091]  
+	     DS = seg(_G_Sensor_Status)	// [19:2091]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [20:2091]  G_Sensor_Status
+	     DS:[R4] = R3             	// [22:2091]  
+//2092  //                        stepflag_Y =0;
+//2093  //                        stepflag =0;
+//2094                       if(temp_G_Sensor_Status == G_IMMO)
 
 LM619:
-	     .stabn 68,0,2093,LM619-_Mov_Detected
-	     R1 = 4096                	// [0:2093]  
-	     SP = SP + 5              	// [2:2093]  
-	     pop BP, PC from [SP]     	// [3:2093]  
-L_12_32:	// 0x1906
-L_12_31:	// 0x1906
-// BB:11 cycle count: 8
-//2094  		          	
-//2095  		          }
-//2096  	     
-//2097  
-//2098             if(temp_G_Sensor_Status == G_IMMO)
+	     .stabn 68,0,2094,LM619-_Mov_Detected
+	     R4 = [BP + 2]            	// [24:2094]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [26:2094]  
+	     jne L_12_34              	// [28:2094]  
+BB9_PU12:	// 0x190a
+// BB:9 cycle count: 7
+//2095                       {
+//2096  //                     	if(Mem0.firstFlag_23b.BitCTL_f.MissionFailed==1)
+//2097  //                     	  return C_MovSucess;
+//2098  //                     	else
+//2099                           return 0;
 
 LM620:
-	     .stabn 68,0,2098,LM620-_Mov_Detected
-	     R4 = [BP + 2]            	// [0:2098]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2098]  
-	     jne L_12_34              	// [4:2098]  
-BB12_PU12:	// 0x190a
-// BB:12 cycle count: 3
-//2099             {
-//2100  		   	if((SACM_A1800_Status() & 0x0001) == 0)
+	     .stabn 68,0,2099,LM620-_Mov_Detected
+	     R1 = 0                   	// [0:2099]  
+	     SP = SP + 5              	// [1:2099]  
+	     pop BP, PC from [SP]     	// [2:2099]  
+L_12_34:	// 0x190d
+// BB:10 cycle count: 8
+//2100                           
+//2101                       }
+//2102                        else    
+//2103  					  	 return C_MovSucess;	
 
 LM621:
-	     .stabn 68,0,2100,LM621-_Mov_Detected
-	     call _SACM_A1800_Status  	// [0:2100]  SACM_A1800_Status
-BB13_PU12:	// 0x190c
-// BB:13 cycle count: 7
-	     R4 = R1 & 1              	// [0:2100]  
-	     cmp R4, 0                	// [2:2100]  
-	     jne L_12_35              	// [3:2100]  
-BB14_PU12:	// 0x1910
-// BB:14 cycle count: 10
-//2101  		   	{
-//2102  		   		
-//2103  				//if(timeoutplay ==2)
-//2104  				  {
-//2105  					    PlayA1800_ElementsInit(SFX_Wait);
+	     .stabn 68,0,2103,LM621-_Mov_Detected
+	     R1 = 4096                	// [0:2103]  
+	     SP = SP + 5              	// [2:2103]  
+	     pop BP, PC from [SP]     	// [3:2103]  
+L_12_33:	// 0x1911
+L_12_32:	// 0x1911
+// BB:11 cycle count: 8
+//2104  		          	
+//2105  		          }
+//2106  	     
+//2107  
+//2108             if(temp_G_Sensor_Status == G_IMMO)
 
 LM622:
-	     .stabn 68,0,2105,LM622-_Mov_Detected
-	     SP = SP - 1              	// [0:2105]  
-	     R3 = 98                  	// [1:2105]  
-	     R4 = SP + 1              	// [3:2105]  
-	     [R4] = R3                	// [5:2105]  
-	     call _PlayA1800_ElementsInit	// [7:2105]  PlayA1800_ElementsInit
-BB15_PU12:	// 0x1918
-// BB:15 cycle count: 1
-	     SP = SP + 1              	// [0:2105]  
-L_12_35:	// 0x1919
-// BB:16 cycle count: 3
-//2107  
-//2108  				
-//2109  		   	}
-//2110  		   	
-//2111  		   	    SACM_A1800_ServiceLoop();
+	     .stabn 68,0,2108,LM622-_Mov_Detected
+	     R4 = [BP + 2]            	// [0:2108]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2108]  
+	     jne L_12_35              	// [4:2108]  
+BB12_PU12:	// 0x1915
+// BB:12 cycle count: 3
+//2109             {
+//2110  		   	if((SACM_A1800_Status() & 0x0001) == 0)
 
 LM623:
-	     .stabn 68,0,2111,LM623-_Mov_Detected
-	     call _SACM_A1800_ServiceLoop	// [0:2111]  SACM_A1800_ServiceLoop
-L_12_34:	// 0x191b
-// BB:17 cycle count: 14
-//2112             }
-//2113  	       
-//2114  		    Get_Key(0,0);		   	
+	     .stabn 68,0,2110,LM623-_Mov_Detected
+	     call _SACM_A1800_Status  	// [0:2110]  SACM_A1800_Status
+BB13_PU12:	// 0x1917
+// BB:13 cycle count: 3
+//2117  
+//2118  				
+//2119  		   	}
+//2120  		   	
+//2121  		   	    SACM_A1800_ServiceLoop();
 
 LM624:
-	     .stabn 68,0,2114,LM624-_Mov_Detected
-	     SP = SP - 2              	// [0:2114]  
-	     R3 = 0                   	// [1:2114]  
-	     R4 = SP + 1              	// [2:2114]  
-	     [R4] = R3                	// [4:2114]  
-	     R3 = 0                   	// [6:2114]  
-	     R4 = SP + 2              	// [7:2114]  
-	     [R4] = R3                	// [9:2114]  
-	     call _Get_Key            	// [11:2114]  Get_Key
-BB18_PU12:	// 0x1926
-// BB:18 cycle count: 11
-	     SP = SP + 2              	// [0:2114]  
-//2115  		   	if(Key_Event)
+	     .stabn 68,0,2121,LM624-_Mov_Detected
+	     call _SACM_A1800_ServiceLoop	// [0:2121]  SACM_A1800_ServiceLoop
+L_12_35:	// 0x1919
+// BB:14 cycle count: 14
+//2122             }
+//2123  	       
+//2124  		   // Get_Key(0,0);	
+//2125  		    if(Get_Key(0,0))
 
 LM625:
-	     .stabn 68,0,2115,LM625-_Mov_Detected
-	     DS = seg(_Key_Event)     	// [1:2115]  Key_Event
-	     R4 = (_Key_Event)        	// [2:2115]  Key_Event
-	     R4 = DS:[R4]             	// [4:2115]  
-	     cmp R4, 0                	// [6:2115]  
-	     je L_12_36               	// [7:2115]  
-BB19_PU12:	// 0x192d
-// BB:19 cycle count: 3
-//2116  		   	{			       
-//2117  		   	    SACM_A1800_Stop();
+	     .stabn 68,0,2125,LM625-_Mov_Detected
+	     SP = SP - 2              	// [0:2125]  
+	     R3 = 0                   	// [1:2125]  
+	     R4 = SP + 1              	// [2:2125]  
+	     [R4] = R3                	// [4:2125]  
+	     R3 = 0                   	// [6:2125]  
+	     R4 = SP + 2              	// [7:2125]  
+	     [R4] = R3                	// [9:2125]  
+	     call _Get_Key            	// [11:2125]  Get_Key
+BB15_PU12:	// 0x1924
+// BB:15 cycle count: 6
+	     SP = SP + 2              	// [0:2125]  
+	     cmp R1, 0                	// [1:2125]  
+	     je L_12_37               	// [2:2125]  
+BB16_PU12:	// 0x1927
+// BB:16 cycle count: 10
+//2126  		   	{	
+//2127  		   		
+//2128  		   	  if(!PauseFlag)
 
 LM626:
-	     .stabn 68,0,2117,LM626-_Mov_Detected
-	     call _SACM_A1800_Stop    	// [0:2117]  SACM_A1800_Stop
-BB20_PU12:	// 0x192f
-// BB:20 cycle count: 13
-//2118  	            A1800_Flag = 0;  		   	 
+	     .stabn 68,0,2128,LM626-_Mov_Detected
+	     DS = seg(_PauseFlag)     	// [0:2128]  PauseFlag
+	     R4 = (_PauseFlag)        	// [1:2128]  PauseFlag
+	     R4 = DS:[R4]             	// [3:2128]  
+	     cmp R4, 0                	// [5:2128]  
+	     jne L_12_38              	// [6:2128]  
+BB17_PU12:	// 0x192d
+// BB:17 cycle count: 3
+//2129  		   	  {			   	   
+//2130  		   	    SACM_A1800_Stop();
 
 LM627:
-	     .stabn 68,0,2118,LM627-_Mov_Detected
-	     R3 = 0                   	// [0:2118]  
-	     DS = seg(_A1800_Flag)    	// [1:2118]  A1800_Flag
-	     R4 = (_A1800_Flag)       	// [2:2118]  A1800_Flag
-	     DS:[R4] = R3             	// [4:2118]  
-//2119  			 	 return 0;
+	     .stabn 68,0,2130,LM627-_Mov_Detected
+	     call _SACM_A1800_Stop    	// [0:2130]  SACM_A1800_Stop
+BB18_PU12:	// 0x192f
+// BB:18 cycle count: 13
+//2131  	            A1800_Flag = 0; 		       		   	 
 
 LM628:
-	     .stabn 68,0,2119,LM628-_Mov_Detected
-	     R1 = 0                   	// [6:2119]  
-	     SP = SP + 5              	// [7:2119]  
-	     pop BP, PC from [SP]     	// [8:2119]  
-L_12_36:	// 0x1937
-// BB:21 cycle count: 10
-//2120  
-//2121  		   	}
-//2122  
-//2123  		   if(HZ_1K_flag>=C_HZ_Num)
+	     .stabn 68,0,2131,LM628-_Mov_Detected
+	     R3 = 0                   	// [0:2131]  
+	     DS = seg(_A1800_Flag)    	// [1:2131]  A1800_Flag
+	     R4 = (_A1800_Flag)       	// [2:2131]  A1800_Flag
+	     DS:[R4] = R3             	// [4:2131]  
+//2132  			 	 return 0;
 
 LM629:
-	     .stabn 68,0,2123,LM629-_Mov_Detected
-	     DS = seg(_HZ_1K_flag)    	// [0:2123]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [1:2123]  HZ_1K_flag
-	     R4 = DS:[R4]             	// [3:2123]  
-	     cmp R4, 2                	// [5:2123]  
-	     jbe L_12_37              	// [6:2123]  
-BB22_PU12:	// 0x193d
-// BB:22 cycle count: 9
-//2124  			{
-//2125  			    HZ_1K_flag=0;//HZ_64_flag =0;
+	     .stabn 68,0,2132,LM629-_Mov_Detected
+	     R1 = 0                   	// [6:2132]  
+	     SP = SP + 5              	// [7:2132]  
+	     pop BP, PC from [SP]     	// [8:2132]  
+L_12_38:	// 0x1937
+// BB:19 cycle count: 6
+//2133  		   	  }
+//2134                PauseFlag=0;
 
 LM630:
-	     .stabn 68,0,2125,LM630-_Mov_Detected
-	     R3 = 0                   	// [0:2125]  
-	     DS = seg(_HZ_1K_flag)    	// [1:2125]  HZ_1K_flag
-	     R4 = (_HZ_1K_flag)       	// [2:2125]  HZ_1K_flag
-	     DS:[R4] = R3             	// [4:2125]  
-//2126  			    sensor_read_xyz();
+	     .stabn 68,0,2134,LM630-_Mov_Detected
+	     R3 = 0                   	// [0:2134]  
+	     DS = seg(_PauseFlag)     	// [1:2134]  PauseFlag
+	     R4 = (_PauseFlag)        	// [2:2134]  PauseFlag
+	     DS:[R4] = R3             	// [4:2134]  
+L_12_37:	// 0x193c
+// BB:20 cycle count: 10
+//2141  //			 	 return 0;
+//2142  //
+//2143  //		   	}
+//2144  
+//2145  		   if(HZ_1K_flag>=C_HZ_Num)
 
 LM631:
-	     .stabn 68,0,2126,LM631-_Mov_Detected
-	     call _sensor_read_xyz    	// [6:2126]  sensor_read_xyz
-BB23_PU12:	// 0x1944
-// BB:23 cycle count: 3
-//2127  				temp = G_Sensor_Check();
+	     .stabn 68,0,2145,LM631-_Mov_Detected
+	     DS = seg(_HZ_1K_flag)    	// [0:2145]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [1:2145]  HZ_1K_flag
+	     R4 = DS:[R4]             	// [3:2145]  
+	     cmp R4, 2                	// [5:2145]  
+	     jbe L_12_39              	// [6:2145]  
+BB21_PU12:	// 0x1942
+// BB:21 cycle count: 9
+//2146  			{
+//2147  			    HZ_1K_flag=0;//HZ_64_flag =0;
 
 LM632:
-	     .stabn 68,0,2127,LM632-_Mov_Detected
-	     call _G_Sensor_Check     	// [0:2127]  G_Sensor_Check
-BB24_PU12:	// 0x1946
-// BB:24 cycle count: 10
-	     [BP + 0] = R1            	// [0:2127]  temp
-//2128  				
-//2129  				if(temp&C_MovSucessStatus)//C_MovSucess
+	     .stabn 68,0,2147,LM632-_Mov_Detected
+	     R3 = 0                   	// [0:2147]  
+	     DS = seg(_HZ_1K_flag)    	// [1:2147]  HZ_1K_flag
+	     R4 = (_HZ_1K_flag)       	// [2:2147]  HZ_1K_flag
+	     DS:[R4] = R3             	// [4:2147]  
+//2148  			    sensor_read_xyz();
 
 LM633:
-	     .stabn 68,0,2129,LM633-_Mov_Detected
-	     R4 = [BP + 0]            	// [1:2129]  temp
-	     R4 = R4 & 8191           	// [3:2129]  
-	     cmp R4, 0                	// [5:2129]  
-	     je L_12_38               	// [6:2129]  
-BB25_PU12:	// 0x194c
-// BB:25 cycle count: 12
-//2130  				{
-//2131  				   G_Sensor_Status&=~0xE000;//20210722  
+	     .stabn 68,0,2148,LM633-_Mov_Detected
+	     call _sensor_read_xyz    	// [6:2148]  sensor_read_xyz
+BB22_PU12:	// 0x1949
+// BB:22 cycle count: 3
+//2149  				temp = G_Sensor_Check();
 
 LM634:
-	     .stabn 68,0,2131,LM634-_Mov_Detected
-	     DS = seg(_G_Sensor_Status)	// [0:2131]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [1:2131]  G_Sensor_Status
-	     R4 = DS:[R4]             	// [3:2131]  
-	     R3 = R4 & 8191           	// [5:2131]  
-	     DS = seg(_G_Sensor_Status)	// [7:2131]  G_Sensor_Status
-	     R4 = (_G_Sensor_Status)  	// [8:2131]  G_Sensor_Status
-	     DS:[R4] = R3             	// [10:2131]  
-L_12_38:	// 0x1956
-// BB:26 cycle count: 9
-//2132                     //stepflag_Y =0;
-//2133                     //stepflag =0;				   
-//2134  				   
-//2135  				}
-//2136  				if((temp&C_MovSucessStatus)&&(temp_G_Sensor_Status == G_IMMO))
+	     .stabn 68,0,2149,LM634-_Mov_Detected
+	     call _G_Sensor_Check     	// [0:2149]  G_Sensor_Check
+BB23_PU12:	// 0x194b
+// BB:23 cycle count: 10
+	     [BP + 0] = R1            	// [0:2149]  temp
+//2150  				
+//2151  				if(temp&C_MovSucessStatus)//C_MovSucess
 
 LM635:
-	     .stabn 68,0,2136,LM635-_Mov_Detected
-	     R4 = [BP + 0]            	// [0:2136]  temp
-	     R4 = R4 & 8191           	// [2:2136]  
-	     cmp R4, 0                	// [4:2136]  
-	     je L_12_39               	// [5:2136]  
-BB27_PU12:	// 0x195b
-// BB:27 cycle count: 8
-	     R4 = [BP + 2]            	// [0:2136]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2136]  
-	     jne L_12_39              	// [4:2136]  
-L_12_40:	// 0x195f
-// BB:28 cycle count: 3
-//2137  				            temp=C_MovFail;
+	     .stabn 68,0,2151,LM635-_Mov_Detected
+	     R4 = [BP + 0]            	// [1:2151]  temp
+	     R4 = R4 & 8191           	// [3:2151]  
+	     cmp R4, 0                	// [5:2151]  
+	     je L_12_40               	// [6:2151]  
+BB24_PU12:	// 0x1951
+// BB:24 cycle count: 20
+//2152  				{
+//2153  				   G_Sensor_Status&=~0xE000;//20210722  
 
 LM636:
-	     .stabn 68,0,2137,LM636-_Mov_Detected
-	     R4 = 8192                	// [0:2137]  
-	     [BP + 0] = R4            	// [2:2137]  temp
-L_12_39:	// 0x1962
-// BB:29 cycle count: 9
-//2138  				
-//2139  			    if(temp&C_MovSucessStatus )//==C_MovSucess
+	     .stabn 68,0,2153,LM636-_Mov_Detected
+	     DS = seg(_G_Sensor_Status)	// [0:2153]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [1:2153]  G_Sensor_Status
+	     R4 = DS:[R4]             	// [3:2153]  
+	     R3 = R4 & 8191           	// [5:2153]  
+	     DS = seg(_G_Sensor_Status)	// [7:2153]  G_Sensor_Status
+	     R4 = (_G_Sensor_Status)  	// [8:2153]  G_Sensor_Status
+	     DS:[R4] = R3             	// [10:2153]  
+//2154                     //stepflag_Y =0;
+//2155                     //stepflag =0;				   
+//2156  				   
+//2157  				
+//2158  				  if((temp_G_Sensor_Status == G_IMMO))//&&(Mem0.firstFlag_23b.BitCTL_f.MissionFailed==0))//(temp&C_MovSucessStatus)&&
 
 LM637:
-	     .stabn 68,0,2139,LM637-_Mov_Detected
-	     R4 = [BP + 0]            	// [0:2139]  temp
-	     R4 = R4 & 8191           	// [2:2139]  
-	     cmp R4, 0                	// [4:2139]  
-	     je L_12_42               	// [5:2139]  
-BB30_PU12:	// 0x1967
-// BB:30 cycle count: 14
-//2140  			    {
-//2141  			      	//if(temp_G_Sensor_Status != G_IMMO)	
-//2142  			              FailV =0;
+	     .stabn 68,0,2158,LM637-_Mov_Detected
+	     R4 = [BP + 2]            	// [12:2158]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [14:2158]  
+	     jne L_12_41              	// [16:2158]  
+BB25_PU12:	// 0x195f
+// BB:25 cycle count: 3
+//2159  				            temp=C_MovFail;
 
 LM638:
-	     .stabn 68,0,2142,LM638-_Mov_Detected
-	     R3 = 0                   	// [0:2142]  
-	     DS = seg(_FailV)         	// [1:2142]  FailV
-	     R4 = (_FailV)            	// [2:2142]  FailV
-	     DS:[R4] = R3             	// [4:2142]  
-//2144  			       // SACM_A1800_Stop();
-//2145  	               // A1800_Flag = 0;    
-//2146  	                
-//2147  	               
-//2148  					return temp;//1
+	     .stabn 68,0,2159,LM638-_Mov_Detected
+	     R4 = 8192                	// [0:2159]  
+	     [BP + 0] = R4            	// [2:2159]  temp
+L_12_41:	// 0x1962
+L_12_40:	// 0x1962
+// BB:26 cycle count: 9
+//2160  				}
+//2161  				
+//2162  			    if(temp&C_MovSucessStatus )//==C_MovSucess
 
 LM639:
-	     .stabn 68,0,2148,LM639-_Mov_Detected
-	     R1 = [BP + 0]            	// [6:2148]  temp
-	     SP = SP + 5              	// [8:2148]  
-	     pop BP, PC from [SP]     	// [9:2148]  
-L_12_42:	// 0x196f
-// BB:31 cycle count: 8
-//2149  					
-//2150  			    }
-//2151  			    else if(temp==C_MovFail)
+	     .stabn 68,0,2162,LM639-_Mov_Detected
+	     R4 = [BP + 0]            	// [0:2162]  temp
+	     R4 = R4 & 8191           	// [2:2162]  
+	     cmp R4, 0                	// [4:2162]  
+	     je L_12_43               	// [5:2162]  
+BB27_PU12:	// 0x1967
+// BB:27 cycle count: 14
+//2163  			    {
+//2164  			      	//if(temp_G_Sensor_Status != G_IMMO)	
+//2165  			              FailV =0;
 
 LM640:
-	     .stabn 68,0,2151,LM640-_Mov_Detected
-	     R4 = [BP + 0]            	// [0:2151]  temp
-	     cmp R4, 8192             	// [2:2151]  
-	     jne L_12_43              	// [4:2151]  
-BB32_PU12:	// 0x1973
-// BB:32 cycle count: 13
-//2153  			       	 // OFF_Timeoutcnt =0;
-//2154  			         // temp_timecnt = TimeCnt;				  
-//2155                       // TimeCnt =temp_timecnt;
-//2156  					 // if(temp_G_Sensor_Status == G_IMMO)
-//2157  					    TimeCnt=0;
+	     .stabn 68,0,2165,LM640-_Mov_Detected
+	     R3 = 0                   	// [0:2165]  
+	     DS = seg(_FailV)         	// [1:2165]  FailV
+	     R4 = (_FailV)            	// [2:2165]  FailV
+	     DS:[R4] = R3             	// [4:2165]  
+//2167  			       // SACM_A1800_Stop();
+//2168  	               // A1800_Flag = 0;    
+//2169  	                
+//2170  	               
+//2171  					return temp;//1
 
 LM641:
-	     .stabn 68,0,2157,LM641-_Mov_Detected
-	     R3 = 0                   	// [0:2157]  
-	     DS = seg(_TimeCnt)       	// [1:2157]  TimeCnt
-	     R4 = (_TimeCnt)          	// [2:2157]  TimeCnt
-	     DS:[R4] = R3             	// [4:2157]  
-//2158  					    return 0;
+	     .stabn 68,0,2171,LM641-_Mov_Detected
+	     R1 = [BP + 0]            	// [6:2171]  temp
+	     SP = SP + 5              	// [8:2171]  
+	     pop BP, PC from [SP]     	// [9:2171]  
+L_12_43:	// 0x196f
+// BB:28 cycle count: 8
+//2172  					
+//2173  			    }
+//2174  			    else if(temp==C_MovFail)
 
 LM642:
-	     .stabn 68,0,2158,LM642-_Mov_Detected
-	     R1 = 0                   	// [6:2158]  
-	     SP = SP + 5              	// [7:2158]  
-	     pop BP, PC from [SP]     	// [8:2158]  
-L_12_43:	// 0x197b
-L_12_41:	// 0x197b
-L_12_37:	// 0x197b
-// BB:33 cycle count: 3
+	     .stabn 68,0,2174,LM642-_Mov_Detected
+	     R4 = [BP + 0]            	// [0:2174]  temp
+	     cmp R4, 8192             	// [2:2174]  
+	     jne L_12_44              	// [4:2174]  
+BB29_PU12:	// 0x1973
+// BB:29 cycle count: 13
+//2176  			       	 // OFF_Timeoutcnt =0;
+//2177  			         // temp_timecnt = TimeCnt;				  
+//2178                       // TimeCnt =temp_timecnt;
+//2179  					 // if(temp_G_Sensor_Status == G_IMMO)
+//2180  					    TimeCnt=0;
 
 LM643:
-	     .stabn 68,0,2123,LM643-_Mov_Detected
-	     goto L_12_29             	// [0:2123]  
-L_12_30:	// 0x197d
-// BB:34 cycle count: 8
-//2161  			                      												   
-//2162  			}
-//2163      	}
-//2164  					
-//2165      	 if	(temp_G_Sensor_Status == G_IMMO)  
+	     .stabn 68,0,2180,LM643-_Mov_Detected
+	     R3 = 0                   	// [0:2180]  
+	     DS = seg(_TimeCnt)       	// [1:2180]  TimeCnt
+	     R4 = (_TimeCnt)          	// [2:2180]  TimeCnt
+	     DS:[R4] = R3             	// [4:2180]  
+//2181  					    return 0;
 
 LM644:
-	     .stabn 68,0,2165,LM644-_Mov_Detected
-	     R4 = [BP + 2]            	// [0:2165]  temp_G_Sensor_Status
-	     cmp R4, 383              	// [2:2165]  
-	     jne L_12_45              	// [4:2165]  
-BB35_PU12:	// 0x1981
-// BB:35 cycle count: 8
-//2166  	         return C_MovSucess;
+	     .stabn 68,0,2181,LM644-_Mov_Detected
+	     R1 = 0                   	// [6:2181]  
+	     SP = SP + 5              	// [7:2181]  
+	     pop BP, PC from [SP]     	// [8:2181]  
+L_12_44:	// 0x197b
+L_12_42:	// 0x197b
+L_12_39:	// 0x197b
+// BB:30 cycle count: 3
 
 LM645:
-	     .stabn 68,0,2166,LM645-_Mov_Detected
-	     R1 = 4096                	// [0:2166]  
-	     SP = SP + 5              	// [2:2166]  
-	     pop BP, PC from [SP]     	// [3:2166]  
-L_12_45:	// 0x1985
-// BB:36 cycle count: 8
-//2167  	    else
-//2168  	        return TimeOver;
+	     .stabn 68,0,2145,LM645-_Mov_Detected
+	     goto L_12_30             	// [0:2145]  
+L_12_31:	// 0x197d
+// BB:31 cycle count: 8
+//2184  			                      												   
+//2185  			}
+//2186      	}
+//2187  					
+//2188      	 if	(temp_G_Sensor_Status == G_IMMO)  
 
 LM646:
-	     .stabn 68,0,2168,LM646-_Mov_Detected
-	     R1 = - 32768             	// [0:2168]  
-	     SP = SP + 5              	// [2:2168]  
-	     pop BP, PC from [SP]     	// [3:2168]  
-L_12_44:	// 0x1989
-// BB:37 cycle count: 6
-	     SP = SP + 5              	// [0:2168]  
-	     pop BP, PC from [SP]     	// [1:2168]  
+	     .stabn 68,0,2188,LM646-_Mov_Detected
+	     R4 = [BP + 2]            	// [0:2188]  temp_G_Sensor_Status
+	     cmp R4, 383              	// [2:2188]  
+	     jne L_12_46              	// [4:2188]  
+BB32_PU12:	// 0x1981
+// BB:32 cycle count: 8
+//2189  	         return C_MovSucess;
+
+LM647:
+	     .stabn 68,0,2189,LM647-_Mov_Detected
+	     R1 = 4096                	// [0:2189]  
+	     SP = SP + 5              	// [2:2189]  
+	     pop BP, PC from [SP]     	// [3:2189]  
+L_12_46:	// 0x1985
+// BB:33 cycle count: 8
+//2190  	    else
+//2191  	        return TimeOver;
+
+LM648:
+	     .stabn 68,0,2191,LM648-_Mov_Detected
+	     R1 = - 32768             	// [0:2191]  
+	     SP = SP + 5              	// [2:2191]  
+	     pop BP, PC from [SP]     	// [3:2191]  
+L_12_45:	// 0x1989
+// BB:34 cycle count: 6
+	     SP = SP + 5              	// [0:2191]  
+	     pop BP, PC from [SP]     	// [1:2191]  
 LBE6:
 	.endp	
 	     .stabs "Time_T:p4",160,0,0,8
@@ -11069,6 +11088,7 @@ _accelerationz:	// 0x1b5
 .external _TimeCnt_Total
 .external _TimeCnt
 .external _Get_Key
+.external _PauseFlag
 .external _SACM_A1800_Stop
 .external _A1800_Flag
 .external _SACM_A1800_Status
@@ -11077,7 +11097,6 @@ _accelerationz:	// 0x1b5
 .external _PlayA1800_ElementsInit
 .external _TimeCnt1
 .external _MoveSucessFlag
-.external _Key_Event
 .external __divi2
 .external __cvu1d4
 .external ___gtsf2

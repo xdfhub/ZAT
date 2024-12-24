@@ -179,7 +179,7 @@ _IO_init:.proc
 	R1 = 0x0000;
 	[P_ADC_LineIn_BitCtrl] = R1;
 
-	R1 = 0xfffe;
+	R1 = 0xffee;
 	[P_IOB_WakeUp_Mask] = R1;
 
 	R1 = 0xFFFF;
@@ -677,7 +677,7 @@ _Set_Sleep_IO:.proc
 	[P_IOA_Dir] = R1;
 
 	
-	r1 = 0x0F//0x0000 20130701 xiang
+	r1 = 0x01F//0x0000 20130701 xiang
 	[P_IOB_Buffer] = r1
 		
 	r1 = 0x00 //0x0010  20130701 xiang
@@ -727,7 +727,7 @@ _Sleep: .proc
 
 L_Sleep:		
 
-     r1 =0xfffe   // ~(1<<9)//
+     r1 =0xffee   // ~(1<<9)//
 	[P_IOB_WakeUp_Mask] = r1
 	
 	 r1 =0xffff
@@ -795,11 +795,11 @@ F_GotoSleep:
 //	jnz ?L_WakeupIODelay
 ////
 
-    r5 =20////  给Wakeup_IO_Temp 初始值
+    r5 =200////20  给Wakeup_IO_Temp 初始值
     
 L_CheckWakeupIOSet:    
 	r4 = 0
-	r2 = 0xf000//4000
+	r2 = 5000//4000 0xf000
 L_CheckWakeupIO:
 	r1 = C_Watchdog_Clear
 	[P_Watchdog_Clear] = r1
@@ -812,9 +812,9 @@ L_CheckWakeupIO:
 	
 	
 	r3 =[_Sleep_IO_Temp]
-	r3&=0x01
+	r3&=0x011
 	r1 = [P_IOB_Data]
-	r1&=0x01
+	r1&=0x011
 
 	cmp r1,r3//0x300
 	je ?L_NotPress
@@ -836,12 +836,17 @@ L_CheckWakeupIO:
 	jmp L_CheckWakeupIO
 
 ?L_CheckIO:
-	cmp r4,0xa000//1500
+
+  	cmp r4,2500//0xa000 1500
 	ja  cmptime //wakeupsucess
 	pc = L_Sleep
-	
+			
 cmptime:
-      r5-=1
+
+     test r1,0x010
+     jz  ?wakeupsucess
+     
+     r5-=1
  	jz  ?wakeupsucess
 	jmp L_CheckWakeupIOSet    	
 //?L_ReWait1:
@@ -1133,7 +1138,7 @@ F_SleepCodeRAMStr:	.proc
 		//end
 		
 		
-	r1 =0xfffe   // ~(1<<9)//
+	r1 =0xffee   // ~(1<<9)//
 	[P_IOB_WakeUp_Mask] = r1
 	
 	 r1 =0xffff

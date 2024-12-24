@@ -159,9 +159,10 @@ int main()
 		switch (gTemp)
 		{
 			
-//			case C_ModeChange:
-//			     gTemp =ModeChange();
-//			     break;
+			case C_Demo_Mode:
+			     Demo();
+			     Sleeping();
+			     break;
 			     
 			case C_StartGame:			      			      			           
 			case C_Step1:
@@ -189,11 +190,11 @@ int main()
 			       break;	   
 			case  C_Off_Mode://唤醒后mission不变
 						
-			       Reset_Reserve();
+			      // Reset_Reserve();
 		    case C_Off_Mode_allmission://唤醒后mission更新为下一个
 		    	       
    	               Sleeping();
-   	               gTemp  = C_Step1;
+   	               
 			        break;	
 			        	   
 //			case C_Inmission:			

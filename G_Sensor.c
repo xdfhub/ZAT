@@ -43,7 +43,7 @@ extern unsigned int DetectionFlag;
 extern unsigned int Key_Event;
 extern  Mem_data Mem0;
 extern unsigned int OFF_Timeoutcnt;
-
+extern unsigned int PauseFlag;
 volatile unsigned int i_g=0;
 //unsigned int firsttime =0;
 //unsigned int Act_cnt =0;
@@ -1960,11 +1960,15 @@ unsigned int WaitAction(unsigned int Time_T,unsigned int timeoutplay)
 	       WatchdogClear();
 	       
 		   if(Get_Key(0,0))
-		   	{			   	   
+		   	{	
+		   		
+		   	  if(!PauseFlag)
+		   	  {			   	   
 		   	    SACM_A1800_Stop();
 	            A1800_Flag = 0; 		       		   	 
 			 	 return 0;
-
+		   	  }
+              PauseFlag=0;
 		   	}
 		   	
 		   	
@@ -2088,7 +2092,13 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 //                        stepflag_Y =0;
 //                        stepflag =0;
                      if(temp_G_Sensor_Status == G_IMMO)
+                     {
+//                     	if(Mem0.firstFlag_23b.BitCTL_f.MissionFailed==1)
+//                     	  return C_MovSucess;
+//                     	else
                          return 0;
+                         
+                     }
                       else    
 					  	 return C_MovSucess;	
 		          	
@@ -2102,7 +2112,7 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 		   		
 				//if(timeoutplay ==2)
 				  {
-					    PlayA1800_ElementsInit(SFX_Wait);
+//					    PlayA1800_ElementsInit(SFX_Wait);
 				  }
 
 				
@@ -2111,14 +2121,26 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
 		   	    SACM_A1800_ServiceLoop();
            }
 	       
-		    Get_Key(0,0);		   	
-		   	if(Key_Event)
-		   	{			       
+		   // Get_Key(0,0);	
+		    if(Get_Key(0,0))
+		   	{	
+		   		
+		   	  if(!PauseFlag)
+		   	  {			   	   
 		   	    SACM_A1800_Stop();
-	            A1800_Flag = 0;  		   	 
+	            A1800_Flag = 0; 		       		   	 
 			 	 return 0;
-
+		   	  }
+              PauseFlag=0;
 		   	}
+		    	   	
+//		   	if(Key_Event)
+//		   	{			       
+//		   	    SACM_A1800_Stop();
+//	            A1800_Flag = 0;  		   	 
+//			 	 return 0;
+//
+//		   	}
 
 		   if(HZ_1K_flag>=C_HZ_Num)
 			{
@@ -2132,9 +2154,10 @@ unsigned int Mov_Detected(unsigned int Time_T,unsigned int timeoutplay)
                    //stepflag_Y =0;
                    //stepflag =0;				   
 				   
-				}
-				if((temp&C_MovSucessStatus)&&(temp_G_Sensor_Status == G_IMMO))
+				
+				  if((temp_G_Sensor_Status == G_IMMO))//&&(Mem0.firstFlag_23b.BitCTL_f.MissionFailed==0))//(temp&C_MovSucessStatus)&&
 				            temp=C_MovFail;
+				}
 				
 			    if(temp&C_MovSucessStatus )//==C_MovSucess
 			    {

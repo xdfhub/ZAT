@@ -47,11 +47,11 @@
 typedef struct{
 
      unsigned int TokenText           : 1;
-     unsigned int PowerON             : 1;
-     unsigned int OSC_CORE            : 1;
-     unsigned int EXT_CLK             : 1;
-     unsigned int RESERVED0           : 1;
-     unsigned int TEST_EN             : 1;
+     unsigned int PowerONxx           : 1;
+     unsigned int combat_line         : 1;
+     unsigned int combat_line2        : 1;
+     unsigned int Endflag             : 1;
+     unsigned int MissionFailed       : 1;
      unsigned int RESERVED1           : 10;
 }BitCTL_Field;
 
@@ -75,7 +75,7 @@ typedef  struct
 	unsigned int Mission_Que;//=0;
 	unsigned int Arm_Mode;//=0;
 	unsigned int MissionZ_flag;
-	unsigned int Reserve;
+//	unsigned int Reserve;
 	BitDef_f firstFlag_23b ;//=0;
 	unsigned int X;//不用写入flash
 	unsigned int Y;//不用写入flash

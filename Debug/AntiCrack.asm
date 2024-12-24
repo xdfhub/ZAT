@@ -108,7 +108,7 @@ LM5:
 	     R4 = [BP + 0]            	// [9:76]  paddr32
 	     R4 = R4 & 32768          	// [11:76]  
 	     cmp R4, 0                	// [13:76]  
-	     je L_0_7                 	// [14:76]  
+	     je L_0_5                 	// [14:76]  
 BB3_PU0:	// 0x16
 // BB:3 cycle count: 4
 //  77  	{
@@ -119,7 +119,7 @@ LM6:
 	     R4 = [BP + 1]            	// [0:78]  paddr32+1
 	     R4 = R4 + 1              	// [2:78]  
 	     [BP + 1] = R4            	// [3:78]  paddr32+1
-L_0_7:	// 0x19
+L_0_5:	// 0x19
 // BB:4 cycle count: 20
 //  79  	}
 //  80  	paddr32.prt.low*=2;
@@ -155,60 +155,39 @@ LM9:
 	     DS = seg(_R_WrongICflag) 	// [3:84]  R_WrongICflag
 	     R4 = (_R_WrongICflag)    	// [4:84]  R_WrongICflag
 	     DS:[R4] = R3             	// [6:84]  
-//  85  	#if normalIC_enable
-//  86  	if(temp1==T_Scr[0])
-
-LM10:
-	     .stabn 68,0,86,LM10-_AntiCrackFun
-	     DS = seg(_T_Scr)         	// [8:86]  T_Scr
-	     R4 = (_T_Scr)            	// [9:86]  T_Scr
-	     R3 = DS:[R4]             	// [11:86]  
-	     R4 = [BP + 2]            	// [13:86]  temp1
-	     cmp R3, R4               	// [15:86]  
-	     jne L_0_8                	// [16:86]  
-BB6_PU0:	// 0x35
-// BB:6 cycle count: 6
-//  87  	{
 //  88  		return;
-
-LM11:
-	     .stabn 68,0,88,LM11-_AntiCrackFun
-	     SP = SP + 3              	// [0:88]  
-	     pop BP, PC from [SP]     	// [1:88]  
-L_0_8:	// 0x37
-// BB:7 cycle count: 12
 //  89  	}
 //  90  	#endif
 //  91  	#if SzjtIC_enable
 //  92  	if(temp1==T_Szjt_enc[0])
 
-LM12:
-	     .stabn 68,0,92,LM12-_AntiCrackFun
-	     DS = seg(_T_Szjt_enc)    	// [0:92]  T_Szjt_enc
-	     R4 = (_T_Szjt_enc)       	// [1:92]  T_Szjt_enc
-	     R3 = DS:[R4]             	// [3:92]  
-	     R4 = [BP + 2]            	// [5:92]  temp1
-	     cmp R3, R4               	// [7:92]  
-	     jne L_0_9                	// [8:92]  
-BB8_PU0:	// 0x3e
-// BB:8 cycle count: 6
+LM10:
+	     .stabn 68,0,92,LM10-_AntiCrackFun
+	     DS = seg(_T_Szjt_enc)    	// [8:92]  T_Szjt_enc
+	     R4 = (_T_Szjt_enc)       	// [9:92]  T_Szjt_enc
+	     R3 = DS:[R4]             	// [11:92]  
+	     R4 = [BP + 2]            	// [13:92]  temp1
+	     cmp R3, R4               	// [15:92]  
+	     jne L_0_6                	// [16:92]  
+BB6_PU0:	// 0x35
+// BB:6 cycle count: 6
 //  93  	{
 //  94  		return;
 
-LM13:
-	     .stabn 68,0,94,LM13-_AntiCrackFun
+LM11:
+	     .stabn 68,0,94,LM11-_AntiCrackFun
 	     SP = SP + 3              	// [0:94]  
 	     pop BP, PC from [SP]     	// [1:94]  
-L_0_9:	// 0x40
-// BB:9 cycle count: 12
+L_0_6:	// 0x37
+// BB:7 cycle count: 12
 //  99  	{
 // 100  		return;
 // 101  	}
 // 102  	#endif
 // 103  	R_WrongICflag=1;//Ð¾Æ¬´íÎó¡£
 
-LM14:
-	     .stabn 68,0,103,LM14-_AntiCrackFun
+LM12:
+	     .stabn 68,0,103,LM12-_AntiCrackFun
 	     R3 = 1                   	// [0:103]  
 	     DS = seg(_R_WrongICflag) 	// [1:103]  R_WrongICflag
 	     R4 = (_R_WrongICflag)    	// [2:103]  R_WrongICflag
